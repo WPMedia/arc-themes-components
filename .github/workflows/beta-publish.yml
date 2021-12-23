@@ -1,13 +1,13 @@
-name: Test Publish
+name: Beta Publish
 
 on:
   push:
     branches:
-      - TMEDIA-569-publish-tags
+      - beta
 
 jobs:
   publish:
-    name: test build publish
+    name: Beta build publish
     runs-on: ubuntu-latest
 
     steps:
@@ -29,7 +29,6 @@ jobs:
           path: node_modules
           key: node-modules-${{ hashFiles('package-lock.json') }}
 
-      # Sets up Node v12
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
@@ -51,17 +50,18 @@ jobs:
         id: get-datetime
         run: echo "::set-output name=date::$(date +'%Y%m%d%H%M%S')"
 
-      - name: Prerelease with tag, eg (`0.0.2-test.{hash of commit}.{current-date-time}`)
-        run: npm version prerelease --preid=test.$(git rev-parse --short HEAD).${{ steps.get-datetime.outputs.date }}
+      - name: Prerelease with tag, eg (`0.0.2-beta.{hash of commit}.{current-date-time}`)
+        run: npm version prerelease --preid=beta.$(git rev-parse --short HEAD).${{ steps.get-datetime.outputs.date }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish with the tag test specified 
-        run: npm publish --tag test
+      # publishing above version and tagging that version to this tag
+      - name: Publish with the tag beta specified 
+        run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Push tag of test
-        run: git push origin TMEDIA-569-publish-tags -f
+      - name: Push tag of beta
+        run: git push origin beta -f
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
