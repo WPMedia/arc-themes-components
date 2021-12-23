@@ -47,8 +47,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
 
-      - name: Prerelease with tag, eg (`0.0.2-test.0`)
-        run: npm version prerelease --preid=test
+      - name: Prerelease with tag, eg (`0.0.2-test.{hash of commit}.{workflow run num}`)
+        run: npm version prerelease --preid=test.$(git rev-parse --short HEAD).${GITHUB_RUN_NUMBER}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
