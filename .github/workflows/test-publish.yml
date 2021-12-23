@@ -47,8 +47,12 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
 
-      - name: Prerelease with tag, eg (`0.0.2-test.{hash of commit}.{workflow run num}`)
-        run: npm version prerelease --preid=test.$(git rev-parse --short HEAD).${GITHUB_RUN_NUMBER}
+      - name: Get current datetime for re-running publish if necessary
+        id: get-datetime
+        run: echo "::set-output name=date::$(date +'%Y%m%d%H%M%S')"
+
+      - name: Prerelease with tag, eg (`0.0.2-test.{hash of commit}.{current-date-time}`)
+        run: npm version prerelease --preid=test.$(git rev-parse --short HEAD).${{ steps.get-datetime.outputs.date }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
