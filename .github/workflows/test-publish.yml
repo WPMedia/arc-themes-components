@@ -1,27 +1,19 @@
-name: test build
+name: Test Publish
 
-# Controls when the action will run. Triggers the workflow on push
-# events but only for the test branch
 on:
   push:
     branches:
       - TMEDIA-569-publish-tags
 
-# Publishes test builds with the dist tag of "test"
 jobs:
-  # This workflow contains a single job called "publish"
   publish:
     name: test build publish
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      # Caches NPM files
       - name: Cache NPM files
         uses: actions/cache@v2
         with:
@@ -50,22 +42,22 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Git config
-      - run: git config --global user.email "jack.howard@washpost.com" && git config --global user.name "jackhowa"
+      - name: Set git config with NPM token
+        run: git config --global user.email "jack.howard@washpost.com" && git config --global user.name "jackhowa"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
 
-      # Prerelease (tests and lint)
-      - run: npm version prerelease --preid=test
+      - name: Prerelease with tag, eg (`0.0.2-test.0`)
+        run: npm version prerelease --preid=test
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Publish
-      - run: npm publish --tag test
+      - name: Publish with the tag test specified 
+        run: npm publish --tag test
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Push tag
-      - run: git push origin TMEDIA-569-publish-tags -f
+      - name: Push tag of test
+        run: git push origin TMEDIA-569-publish-tags -f
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
