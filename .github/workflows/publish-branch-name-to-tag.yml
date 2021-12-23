@@ -1,14 +1,18 @@
 name: Publish branch name to tag
-on: push
-  branches: 
-    - stable
-    - beta
-    - canary 
-    - rc
-    # todo: remove test branch
-    - TMEDIA-569-publish-tags 
+on:
+  push:
+    branches:
+      - stable
+      - beta
+      - canary 
+      - rc
+      # todo: remove test branch
+      - TMEDIA-569-publish-tags 
 
 jobs: 
   checkout: 
+    name: Checkout the repo
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout repo
         uses: actions/checkout@v2
