@@ -35,6 +35,7 @@ module.exports = {
 		'react/forbid-prop-types': 'off',
 		'react/function-component-definition': [2, { "namedComponents": "arrow-function" }],
 		'react/prop-types': 'off', // We will want to be more granular with this I assume.
+		'react/react-in-jsx-scope': 'off',
 		'react/require-default-props': 'off', // We will also want to have some rules around this. Whitelisting certain props for example
 		'react/no-danger': 'off',
 		'react/jsx-props-no-spreading': 'off',
