@@ -34,5 +34,6 @@ module.exports = {
 		'!**/coverage/**',
 		'!**/jest/**',
 		'!index.js',
+		'!.*.js',
 	],
 };
