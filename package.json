@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/arc-themes-components",
-  "version": "0.0.3-canary.e6ed65c.20220119121900.0",
+  "version": "0.0.3-arc-themes-release-version-1-19.0",
   "description": "The arc-themes-components will be the basis for presentational components and reusable utility functions workflow of themes and client devs. A core tenet of Themes is composability for developers.",
   "main": "index.js",
   "scripts": {
