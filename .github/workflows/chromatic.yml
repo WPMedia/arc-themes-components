@@ -29,7 +29,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ic
+        run: npm ci
 
         # 👇 Adds Chromatic as a step in the workflow
       - name: Publish to Chromatic
