@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --coverage",
     "test:watch": "npm run test -- --watch -o --coverage",
-    "lint": "eslint --ext js --ext jsx src",
+    "lint": "eslint --ext js --ext jsx src index.js",
     "lint:fix": "npm run lint -- --fix",
     "storybook": "start-storybook -p 60003",
     "storybook:build": "build-storybook"
