@@ -7,7 +7,9 @@
     "test": "jest --coverage",
     "test:watch": "npm run test -- --watch -o --coverage",
     "lint": "eslint --ext js --ext jsx src",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "storybook": "start-storybook -p 60003",
+    "storybook:build": "build-storybook"
   },
   "repository": {
     "type": "git",
@@ -31,6 +33,12 @@
     "@babel/eslint-parser": "^7.16.5",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "@storybook/addon-a11y": "^6.4.14",
+    "@storybook/addon-actions": "^6.4.14",
+    "@storybook/addon-essentials": "^6.4.14",
+    "@storybook/addon-links": "^6.4.14",
+    "@storybook/react": "^6.4.14",
+    "@storybook/theming": "^6.4.14",
     "@testing-library/dom": "^8.11.2",
     "@testing-library/react": "^12.1.2",
     "babel-jest": "^27.4.6",
@@ -45,6 +53,7 @@
     "prop-types": "^15.8.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-test-renderer": "^17.0.2"
+    "react-test-renderer": "^17.0.2",
+    "storybook": "^6.4.14"
   }
 }
