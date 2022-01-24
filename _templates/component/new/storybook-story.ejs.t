@@ -3,7 +3,7 @@ to: src/components/<%= h.inflection.dasherize(component_name) %>/index.stories.m
 ---
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs';
 
-import <%= h.changeCase.pascal(component_name) %> from './';
+import <%= h.changeCase.pascal(component_name) %> from '.';
 
 <Meta title="Components/<%= h.changeCase.title( component_name ) %>" component={<%= h.changeCase.pascal(component_name) %>} />
 
