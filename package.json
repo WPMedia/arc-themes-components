@@ -7,7 +7,8 @@
     "test": "jest --coverage",
     "test:watch": "npm run test -- --watch -o --coverage",
     "lint": "eslint --ext js --ext jsx src",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "generate:component": "hygen component new"
   },
   "repository": {
     "type": "git",
@@ -41,6 +42,7 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "hygen": "^6.1.0",
     "jest": "^27.4.7",
     "prop-types": "^15.8.0",
     "react": "^17.0.2",
