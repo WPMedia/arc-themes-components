@@ -31,6 +31,8 @@ jobs:
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         # 👇 Adds Chromatic as a step in the workflow
       - name: Publish to Chromatic
