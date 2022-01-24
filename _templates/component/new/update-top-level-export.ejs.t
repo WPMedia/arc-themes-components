@@ -1,6 +1,6 @@
 ---
 inject: true
 to: index.js
-after: export
+after: export {
 ---
 	<%= h.changeCase.pascal(component_name) %>,
