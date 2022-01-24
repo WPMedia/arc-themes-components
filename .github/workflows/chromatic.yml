@@ -1,21 +1,34 @@
 # .github/workflows/chromatic.yml
 
-# Workflow name
 name: 'Chromatic'
 
-# Event for the workflow
 on: push
 
-# List of jobs
 jobs:
   chromatic-deployment:
-    # Operating System
     runs-on: ubuntu-latest
-    # Job steps
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+          registry-url: "https://npm.pkg.github.com"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            restore-keys: npm-
+
       - name: Install dependencies
-        run: yarn
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ic
+
         # 👇 Adds Chromatic as a step in the workflow
       - name: Publish to Chromatic
         uses: chromaui/action@v1
