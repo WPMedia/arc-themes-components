@@ -24,9 +24,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: npm-${{ hashFiles('**/package-lock.json') }}
+          key: node-modules-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            restore-keys: npm-
+            restore-keys: node-modules-
 
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
