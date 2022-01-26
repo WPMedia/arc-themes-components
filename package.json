@@ -8,6 +8,7 @@
     "test:watch": "npm run test -- --watch -o --coverage",
     "lint": "eslint --ext js --ext jsx src index.js",
     "lint:fix": "npm run lint -- --fix",
+    "prepare": "husky install",
     "storybook": "start-storybook -p 60003",
     "storybook:build": "build-storybook"
   },
@@ -49,6 +50,7 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^7.0.4",
     "jest": "^27.4.7",
     "prop-types": "^15.8.0",
     "react": "^17.0.2",
