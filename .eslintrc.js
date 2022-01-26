@@ -23,6 +23,7 @@ module.exports = {
 		'jest',
 		'jsx-a11y',
 		'react-hooks',
+		'sort-exports'
 	],
 	rules: {
 		'global-require': 'off',
@@ -79,5 +80,9 @@ module.exports = {
 		'jsx-a11y/tabindex-no-positive': 2,
 		'react-hooks/rules-of-hooks': 'error',
 		'react-hooks/exhaustive-deps': 'error',
+		"sort-exports/sort-exports": [
+			"error",
+			{ sortDir: "asc", ignoreCase: true, sortExportKindFirst: "type" }
+		]
 	},
 };
