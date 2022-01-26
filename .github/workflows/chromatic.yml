@@ -23,7 +23,7 @@ jobs:
         id: cache
         uses: actions/cache@v2
         with:
-          path: ~/.npm
+          path: node-modules
           key: node-modules-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             restore-keys: node-modules-
