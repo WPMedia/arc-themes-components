@@ -35,8 +35,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
-      - name: Run tests on changed since parent branch with coverage
-        run: npm run test:changed-feature-branch
+      - name: Run tests on changed since base branch with coverage
+        run: npm run test -- --changedSince=${{ github.event.pull_request.base.ref }}
 
-      - name: Check linting on all files
-        run: npm run lint
+      # - name: Check linting on all files
+      #   run: npm run lint
