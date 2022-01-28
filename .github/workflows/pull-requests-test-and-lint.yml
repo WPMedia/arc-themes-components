@@ -36,7 +36,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Run tests on changed since parent branch with coverage
-        run: npm run test -- --changedSince=${{ github.head_ref }}
+        run: npm run test -- --changedSince=origin/${{ github.base_ref }}
 
       - name: Check linting on all files
         run: npm run lint
