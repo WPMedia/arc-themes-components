@@ -1,5 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# git fetch -a --depth 100 && npm run lint:changed-feature-branch && npm run test:changed-feature-branch
-npm run lint && npm run test
+git fetch -a --depth 100 && npm run lint:changed-feature-branch && npm run test:changed-feature-branch
