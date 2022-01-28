@@ -54,12 +54,9 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
-<<<<<<< HEAD
     "eslint-plugin-sort-exports": "^0.6.0",
     "hygen": "^6.1.0",
-=======
     "husky": "^7.0.4",
->>>>>>> First commit - hooks
     "jest": "^27.4.7",
     "prop-types": "^15.8.0",
     "react": "^17.0.2",
