@@ -47,7 +47,7 @@ $tokens: () !default;
 	@return var(--b-#{$block}-#{$item});
 }
 
-/* stylelint-disable max-nesting-depth, no-invalid-position-at-import-rule */
+// stylelint-disable max-nesting-depth, no-invalid-position-at-import-rule
 :root {
 	@each $name, $value in $global {
 		--global-#{$name}: #{$value};
@@ -95,7 +95,7 @@ $tokens: () !default;
 		}
 	}
 }
-/* stylelint-enable max-nesting-depth */
+// stylelint-enable max-nesting-depth
 
 body {
 	@include component-properties('body');
