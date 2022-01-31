@@ -35,5 +35,6 @@ module.exports = {
 		'!**/jest/**',
 		'!index.js',
 		'!.*.js',
+		'!__tests__/scss.test.js',
 	],
 };
