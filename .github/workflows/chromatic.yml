@@ -23,7 +23,7 @@ jobs:
         id: cache
         uses: actions/cache@v2
         with:
-          path: node-modules
+          path: node_modules
           key: node-modules-${{ hashFiles('package-lock.json') }}
 
       - name: Install dependencies
