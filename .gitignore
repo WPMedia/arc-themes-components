@@ -1,4 +1,5 @@
 node_modules
 coverage
 .npmrc
+.DS_Store
 storybook-static
