@@ -23,7 +23,8 @@
   },
   "files": [
     "index.js",
-    "src/*"
+    "src/*",
+    "scss.scss"
   ],
   "keywords": [
     "themes"
