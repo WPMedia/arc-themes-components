@@ -19,14 +19,13 @@ jobs:
           node-version: "12"
           registry-url: "https://npm.pkg.github.com"
 
-      - name: Cache dependencies
-        id: cache
+      - name: Cache Node files
         uses: actions/cache@v2
         with:
-          path: node_modules
+          path: ~/.npm
           key: node-modules-${{ hashFiles('package-lock.json') }}
 
-      - name: Install dependencies
+      - name: Clean install (CI) dependencies if lockfile (above) changed
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
         env:
