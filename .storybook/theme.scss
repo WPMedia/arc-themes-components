@@ -1,1 +1,102 @@
-@use '../scss.scss';
+@use '../scss.scss' with (
+	$global: (
+		'blue-0': #EBEFFF,
+		'blue-1': #B0C3F2,
+		'blue-2': #7AA2E5,
+		'blue-3': #4A89D8,
+		'blue-4': #1E78CB,
+		'blue-5': #1458A9,
+		'blue-6': #0C3D87,
+		'blue-7': #062665,
+		'blue-8': #021443,
+		'blue-9': #000721,
+
+		'red-0': #FF8A8A,
+		'red-1': #E65555,
+		'red-2': #CE2929,
+		'red-3': #B50505,
+		'red-4': #9C0000,
+		'red-5': #840000,
+		'red-6': #6B0000,
+		'red-7': #520000,
+		'red-8': #3A0000,
+		'red-9': #210000,
+
+		'orange-0': #FA714B,
+		'orange-1': #E24F23,
+		'orange-2': #C93302,
+		'orange-3': #B12E00,
+		'orange-4': #982A00,
+		'orange-5': #802500,
+		'orange-6': #682000,
+		'orange-7': #4F1900,
+		'orange-8': #371200,
+		'orange-9': #1F0B00,
+
+		'green-0': #80D971,
+		'green-1': #57C244,
+		'green-2': #34AB1F,
+		'green-3': #189402,
+		'green-4': #137D00,
+		'green-5': #0F6600,
+		'green-6': #0C4F00,
+		'green-7': #083800,
+		'green-8': #052100,
+		'green-9': #020A00,
+
+		'neutral-0': #E6EFFF,
+		'neutral-1': #C3CFE3,
+		'neutral-2': #A3B0C6,
+		'neutral-3': #8593AA,
+		'neutral-4': #69778E,
+		'neutral-5': #4F5C71,
+		'neutral-6': #384355,
+		'neutral-7': #232B39,
+		'neutral-8': #10151C,
+		'neutral-9': #000000,
+
+		'spacing-0': 0.25rem, // 4px
+		'spacing-1': 0.5rem, // 8px
+		'spacing-2': 1rem, // 16px
+		'spacing-3': 1.5rem, // 24px
+		'spacing-4': 2rem, // 32px
+		'spacing-5': 2.5rem, // 40px
+		'spacing-6': 3rem, // 48px
+		'spacing-7': 3.5rem, // 56px
+		'spacing-8': 4rem, // 64px
+		'spacing-9': 4.5rem, // 72px
+		'spacing-10': 5rem, // 80px
+		'spacing-11': 5.5rem, // 88px
+		'spacing-12': 6rem, // 96px
+		'spacing-13': 6.5rem, // 104px
+		'spacing-14': 7rem, // 112px
+		'spacing-15': 7.5rem, // 120px
+
+		'font-weight-1': 100,
+		'font-weight-2': 200,
+		'font-weight-3': 300,
+		'font-weight-4': 400,
+		'font-weight-5': 500,
+		'font-weight-6': 600,
+		'font-weight-7': 700,
+		'font-weight-8': 800,
+		'font-weight-9': 900,
+
+		'font-size-0': 0.75rem, // 12px
+		'font-size-1': 0.875rem, // 14px
+		'font-size-2': 1rem, // 16px
+		'font-size-3': 1.125rem, // 18px
+		'font-size-4': 1.1875rem, // 19px
+		'font-size-5': 1.375rem, // 22px
+		'font-size-6': 1.5rem, // 24px
+		'font-size-7': 1.75rem, // 28px
+		'font-size-8': 2.25rem, // 36px
+
+		'line-height-0': 1rem, // 16px
+		'line-height-1': 1.5rem, // 24px
+		'line-height-2': 2rem, // 32px
+		'line-height-3': 2.5rem , // 40px
+
+		'elevation-0': 0px 0px 16px rgba(25, 25, 25, 0.4),
+	)
+);
