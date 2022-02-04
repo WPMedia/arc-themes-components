@@ -4,11 +4,26 @@
 @use 'reset';
 @use 'a11y';
 
+//
+// Variables
+//
 $alias: () !default;
-$breakpoints: () !default;
+$breakpoints: ( default: 'min-width: 0' ) !default;
+// $breakpoints: () !default;
 $global: () !default;
 $tokens: () !default;
 
+//
+// Always warn if $breakpoints is passed in empty
+//
+@if list.length($breakpoints) == 0 {
+	@warn 'No breakpoints set, using default mobile first approach';
+}
+
+
+//
+// Mixins
+//
 @mixin block-components($blockName) {
 	@if list.length(map.get($tokens, 'default', 'blocks', $blockName, 'components')) >= 0 {
 		@each $name, $value in map.get($tokens, 'default', 'blocks', $blockName, 'components') {
@@ -39,6 +54,58 @@ $tokens: () !default;
 	}
 }
 
+//
+// token-map-to-css-variable
+// mixin to output CSS Variable from a token map
+//
+// $tokens - A map of tokens key values
+// $name - The name of the sub map in which to output from
+// $prefix - The prefix value to add to the CSS Variable name
+//
+@mixin token-map-to-css-variable($tokens, $name, $prefix: '') {
+	@each $componentName, $componentItem in map.get($tokens, $name) {
+		@if list.length($componentItem) == 0 {
+			@warn '#{$name} "#{$componentName}" is configured with no options';
+		} @else {
+			@if type-of($componentItem) == map {
+				@each $componentProperty, $componentValue in $componentItem {
+					@if type-of($componentValue) != map {
+						--#{$prefix}-#{$componentName}-#{$componentProperty}: #{$componentValue};
+					}
+				}
+			}
+		}
+	}
+}
+
+//
+// root-tokens
+// mixin to output a set of alias, components and block tokens from a given map
+//
+// $tokens - A map of tokens that contains the alias, components and blocks maps
+//
+@mixin root-tokens($tokens: ()) {
+	@if list.length($tokens) != 0 {
+		:root {
+			// Alias Tokens
+			@if map.has-key($tokens, 'alias') {
+				@each $name, $value in map.get($tokens, 'alias') {
+					--#{$name}: #{$value};
+				}
+			}
+
+			// Component Tokens
+			@include token-map-to-css-variable($tokens, 'components', 'c');
+
+			// Block Tokens
+			@include token-map-to-css-variable($tokens, 'blocks', 'b');
+		}
+	}
+}
+
+//
+// Functions
+//
 @function component-var($component, $item) {
 	@return var(--c-#{$component}-#{$item});
 }
@@ -47,7 +114,9 @@ $tokens: () !default;
 	@return var(--b-#{$block}-#{$item});
 }
 
-// stylelint-disable max-nesting-depth, no-invalid-position-at-import-rule
+//
+// Start of output of CSS Variables
+//
 :root {
 	@each $name, $value in $global {
 		--global-#{$name}: #{$value};
@@ -57,45 +126,13 @@ $tokens: () !default;
 	}
 }
 
-@each $breakpoint, $breakpointValue in $breakpoints {
-	@media only screen and ($breakpointValue) {
-		:root {
-			// Alias Tokens
-			@each $name, $value in map.get($tokens, $breakpoint, 'alias') {
-				--#{$name}: #{$value};
-			}
-			// Component Tokens
-			@each $componentName, $componentItem in map.get($tokens, $breakpoint, 'components') {
-				@if list.length($componentItem) == 0 {
-					@warn 'Component "#{$componentName}" is configured with no options';
-				} @else {
-					@if type-of($componentItem) == map {
-						@each $componentProperty, $componentValue in $componentItem {
-							@if type-of($componentValue) != map {
-								--c-#{$componentName}-#{$componentProperty}: #{$componentValue};
-							}
-						}
-					}
-				}
-			}
-			// Block Tokens
-			@each $blockName, $blockItem in map.get($tokens, $breakpoint, 'blocks') {
-				@if list.length($blockItem) == 0 {
-					@warn 'Block "#{$blockName}" is configured with no options';
-				} @else {
-					@if type-of($blockItem) == map {
-						@each $bProperty, $bValue in $blockItem {
-							@if type-of($bValue) != map {
-								--b-#{$blockName}-#{$bProperty}: #{$bValue};
-							}
-						}
-					}
-				}
-			}
+@if list.length($tokens) != 0 {
+	@each $breakpoint, $breakpointValue in $breakpoints {
+		@media only screen and ($breakpointValue) {
+			@include root-tokens(map.get($tokens, $breakpoint));
 		}
 	}
 }
-// stylelint-enable max-nesting-depth
 
 body {
 	@include component-properties('body');
