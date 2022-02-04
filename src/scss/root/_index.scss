@@ -127,7 +127,7 @@ $tokens: () !default;
 
 @if list.length($tokens) != 0 {
 	@each $breakpoint, $breakpointValue in $breakpoints {
-		@media only screen and ($breakpointValue) {
+		@media ($breakpointValue) {
 			@include root-tokens(map.get($tokens, $breakpoint));
 		}
 	}
