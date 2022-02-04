@@ -47,6 +47,7 @@
     "@storybook/react": "^6.4.14",
     "@storybook/theming": "^6.4.14",
     "@testing-library/dom": "^8.11.2",
+    "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "babel-jest": "^27.4.6",
     "chromatic": "^6.4.1",
