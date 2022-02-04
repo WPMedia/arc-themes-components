@@ -2,4 +2,16 @@
 
 .c-link {
 	@include scss.component-properties('link');
+
+	&:hover {
+		@include scss.component-properties('link-hover');
+	}
+
+	&:active {
+		@include scss.component-properties('link-active');
+	}
+
+	&:visited {
+		@include scss.component-properties('link-visited');
+	}
 }
