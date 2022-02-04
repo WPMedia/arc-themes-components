@@ -35,9 +35,70 @@
 			alias: (),
 			components: (),
 			blocks: ()
-		)		
+		)
 	)
 );
+
+@include describe('root-tokens') {
+	@include it('it returns nothing if no tokens') {
+		@include assert {
+			@include output {
+				@include root.root-tokens();
+			}
+			@include expect {
+				// nothing
+			}
+		}
+
+		@include assert {
+			@include output {
+				@include root.root-tokens(());
+			}
+			@include expect {
+				// nothing
+			}
+		}
+	}
+
+	@include it('it returns only alias tokens') {
+		@include assert {
+			@include output {
+				@include root.root-tokens(( alias: ( color: #f00) ));
+			}
+			@include expect {
+				:root {
+					--color: #f00;
+				}
+			}
+		}
+	}
+
+	@include it('it returns only component tokens') {
+		@include assert {
+			@include output {
+				@include root.root-tokens(( components: ( 'component-name': ( color: #008000) ) ));
+			}
+			@include expect {
+				:root {
+					--c-component-name-color: #008000;
+				}
+			}
+		}
+	}
+
+	@include it('it returns only blocks tokens') {
+		@include assert {
+			@include output {
+				@include root.root-tokens(( blocks: ( 'block-name': ( color: #ffa500) ) ));
+			}
+			@include expect {
+				:root {
+					--b-block-name-color: #ffa500;
+				}
+			}
+		}
+	}
+}
 
 @include describe('block-components') {
 	@include it('returns nothing if definition does not exist') {
