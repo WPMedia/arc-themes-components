@@ -1,0 +1,29 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs';
+
+import Link from '.';
+
+<Meta title="Components/Link" component={Link} />
+
+# Link
+
+<Props of={Link} />
+
+## Usage
+
+Link
+
+## Stories
+
+** External Link **
+<Preview>
+	<Story name="External Link">
+		<Link href="https://www.arcxp.com/" isExternal>External Link to Arc XP</Link>
+	</Story>
+</Preview>
+
+** Internal Link **
+<Preview>
+	<Story name="Internal Link">
+		<Link href="/">Internal Link to Home</Link>
+	</Story>
+</Preview>
