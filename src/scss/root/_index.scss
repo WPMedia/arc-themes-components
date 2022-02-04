@@ -61,7 +61,7 @@ $tokens: () !default;
 // $name - The name of the sub map in which to output from
 // $prefix - The prefix value to add to the CSS Variable name
 //
-@mixin token-map-to-css-variable($tokens, $name, $prefix: '') {
+@mixin token-map-to-css-variable($tokens, $name, $prefix: 't') {
 	@each $componentName, $componentItem in map.get($tokens, $name) {
 		@if list.length($componentItem) == 0 {
 			@warn '#{$name} "#{$componentName}" is configured with no options';
