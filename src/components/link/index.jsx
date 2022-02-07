@@ -2,31 +2,50 @@ import PropTypes from 'prop-types';
 
 const COMPONENT_CLASS_NAME = 'c-link';
 
-const ExternalLink = ({ children, href }) => (
+const LinkOpeningInNewTab = ({
+	children,
+	className,
+	href,
+	openNewTabLinkHiddenText,
+}) => (
 	<a
-		className={COMPONENT_CLASS_NAME}
+		className={className}
 		href={href}
 		rel="noreferrer"
 		target="_blank"
 	>
-		<span className="visually-hidden">Opens in new window</span>
 		{children}
+		<span className="visually-hidden">{openNewTabLinkHiddenText}</span>
 	</a>
 );
 
-const Link = ({ children, href, isExternal }) => {
-	// internal link by default
-	if (isExternal) {
+const Link = ({
+	additionalClassNames,
+	children,
+	href,
+	openInNewTab,
+	openNewTabLinkHiddenText,
+}) => {
+	// openInNewTab is undefined by default
+	// http or https link or openInNewTab can be either true or undefined for opening in new tab
+	const opensInNewTab = (href.startsWith('http') && openInNewTab !== false) || openInNewTab === true;
+	const defaultAndAdditionalClassnames = `${COMPONENT_CLASS_NAME}${additionalClassNames ? ` ${additionalClassNames}` : ''}`;
+
+	if (opensInNewTab) {
 		return (
-			<ExternalLink href={href}>
+			<LinkOpeningInNewTab
+				className={defaultAndAdditionalClassnames}
+				href={href}
+				openNewTabLinkHiddenText={openNewTabLinkHiddenText}
+			>
 				{children}
-			</ExternalLink>
+			</LinkOpeningInNewTab>
 		);
 	}
 
 	return (
 		<a
-			className={COMPONENT_CLASS_NAME}
+			className={defaultAndAdditionalClassnames}
 			href={href}
 		>
 			{children}
@@ -35,13 +54,17 @@ const Link = ({ children, href, isExternal }) => {
 };
 
 Link.propTypes = {
+	additionalClassNames: PropTypes.string,
 	children: PropTypes.node.isRequired,
 	href: PropTypes.string.isRequired,
-	isExternal: PropTypes.bool,
+	openInNewTab: PropTypes.bool,
+	openNewTabLinkHiddenText: PropTypes.string,
 };
 
 Link.defaultProps = {
-	isExternal: false,
+	additionalClassNames: '',
+	openInNewTab: undefined,
+	openNewTabLinkHiddenText: 'Opens in new window',
 };
 
 export default Link;
