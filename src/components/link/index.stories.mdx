@@ -12,7 +12,7 @@ import Link from '.';
 
 By default, the Link component is secure and accessible. The link is for enclosing all contents with a link. There are security considerations made here by opting into using "rel=noreferrer" when opening the link in a new tab. In terms of accessibility, there is visually hidden text indicating to the user of the link behavior.
 
-In addition, the Link component is customizable. That accessible text can be customized or translated by passing in a prop `openNewTabLinkHiddenText`.
+In addition, the Link component is customizable. That accessible text can be customized or translated by passing in a prop `openNewTabLinkVisuallyHiddenText`.
 
 By default, the link will open in a new tab if the `href` property starts with http or https. Yet this can be overridden with the `opensInNewTab` prop.
 
@@ -43,5 +43,18 @@ By default, the link will open in a new tab if the `href` property starts with h
 <Preview>
 	<Story name="External Link Due To Opting Into New Tab">
 		<Link href="/" openInNewTab={true}>Open "/" in a new tab</Link>
+	</Story>
+</Preview>
+
+** Custom accessible text ** 
+<Preview>
+	<Story name="Custom accessible text">
+		<Link 
+			href="https://www.arcxp.com/"
+			openNewTabLinkVisuallyHiddenText="Go to that page"
+			supplementalText="This link will give you new insight into the Arc XP company"
+		>
+			Arc XP
+		</Link>
 	</Story>
 </Preview>

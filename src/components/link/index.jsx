@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 const Link = ({
 	additionalClassNames,
-	additionalHiddenText,
 	assistiveHidden,
 	children,
 	href,
 	openInNewTab,
-	openNewTabLinkHiddenText,
+	openNewTabLinkVisuallyHiddenText,
+	supplementalText,
 }) => {
 	// openInNewTab is undefined by default
 	// http or https link or openInNewTab can be either true or undefined for opening in new tab
@@ -25,28 +25,28 @@ const Link = ({
 			target={opensInNewTab ? '_blank' : undefined}
 		>
 			{children}
-			{opensInNewTab ? (<span className="visually-hidden">{openNewTabLinkHiddenText}</span>) : null}
-			{additionalHiddenText ? (<span className="visually-hidden">{additionalHiddenText}</span>) : null}
+			{opensInNewTab ? (<span className="visually-hidden">{openNewTabLinkVisuallyHiddenText}</span>) : null}
+			{supplementalText ? (<span className="visually-hidden">{supplementalText}</span>) : null}
 		</a>
 	);
 };
 
 Link.propTypes = {
 	additionalClassNames: PropTypes.string,
-	additionalHiddenText: PropTypes.string,
 	assistiveHidden: PropTypes.bool,
 	children: PropTypes.node.isRequired,
 	href: PropTypes.string.isRequired,
 	openInNewTab: PropTypes.bool,
-	openNewTabLinkHiddenText: PropTypes.string,
+	openNewTabLinkVisuallyHiddenText: PropTypes.string,
+	supplementalText: PropTypes.string,
 };
 
 Link.defaultProps = {
 	additionalClassNames: '',
-	additionalHiddenText: '',
 	assistiveHidden: false,
 	openInNewTab: undefined,
-	openNewTabLinkHiddenText: 'Opens in new window',
+	openNewTabLinkVisuallyHiddenText: 'Opens in new window',
+	supplementalText: '',
 };
 
 export default Link;

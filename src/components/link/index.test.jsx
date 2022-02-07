@@ -68,7 +68,7 @@ describe('Link', () => {
 		expect(linkOutput).not.toHaveAttribute('tabIndex');
 	});
 	it('should render hidden text with visually-hidden class', () => {
-		render(<Link href={EXTERNAL_LINK_DESTINATION} additionalHiddenText="RSS Link">{LINK_TEXT}</Link>);
+		render(<Link href={EXTERNAL_LINK_DESTINATION} supplementalText="RSS Link">{LINK_TEXT}</Link>);
 
 		const additionalHiddenText = screen.queryByText('RSS Link');
 		const newTabDefaultText = screen.queryByText('Opens in new window');
