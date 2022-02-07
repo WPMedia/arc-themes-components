@@ -32,7 +32,7 @@ const Link = ({
 };
 
 Link.propTypes = {
-	/** Classnames that get appended to default c-link classname */
+	/** Class name(s) that get appended to default class name of the component */
 	additionalClassNames: PropTypes.string,
 	/** Remove the link from the accessibility tree with aria-hidden, tabindex=-1 */
 	assistiveHidden: PropTypes.bool,
