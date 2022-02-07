@@ -1,19 +1,32 @@
 /* eslint-disable react/jsx-no-target-blank */
 import PropTypes from 'prop-types';
 
+function determineVisuallyHiddenText(supplementalText, opensInNewTab) {
+	if (supplementalText) {
+		return supplementalText;
+	}
+
+	if (opensInNewTab) {
+		return 'Opens in new window';
+	}
+
+	return '';
+}
+
 const Link = ({
 	additionalClassNames,
 	assistiveHidden,
 	children,
 	href,
 	openInNewTab,
-	openNewTabLinkVisuallyHiddenText,
 	supplementalText,
 }) => {
 	// openInNewTab is undefined by default
 	// http or https link or openInNewTab can be either true or undefined for opening in new tab
 	const opensInNewTab = (href.startsWith('http') && openInNewTab !== false) || openInNewTab === true;
 	const defaultAndAdditionalClassnames = `c-link${additionalClassNames ? ` ${additionalClassNames}` : ''}`;
+
+	const visuallyHiddenText = determineVisuallyHiddenText(supplementalText, opensInNewTab);
 
 	return (
 		<a
@@ -25,8 +38,7 @@ const Link = ({
 			target={opensInNewTab ? '_blank' : undefined}
 		>
 			{children}
-			{opensInNewTab ? (<span className="visually-hidden">{openNewTabLinkVisuallyHiddenText}</span>) : null}
-			{supplementalText ? (<span className="visually-hidden">{supplementalText}</span>) : null}
+			{visuallyHiddenText ? (<span className="visually-hidden">{visuallyHiddenText}</span>) : null}
 		</a>
 	);
 };
@@ -42,11 +54,9 @@ Link.propTypes = {
 	href: PropTypes.string.isRequired,
 	/** Opt to open the link in a new tab */
 	openInNewTab: PropTypes.bool,
-	/** Text to make the link's purpose more clear to screen readers indicating a new tab */
-	openNewTabLinkVisuallyHiddenText: PropTypes.string,
 	/**
-	 	Text to make the link's purpose more clear to screen readers.
-		(Do not use in conjunction with `openNewTabLinkVisuallyHiddenText`.)
+	 Text to make the link's purpose more clear to screen readers
+	 indicating a new tab in English by default if external link or opting into a new tab
 	*/
 	supplementalText: PropTypes.string,
 };
@@ -55,7 +65,6 @@ Link.defaultProps = {
 	additionalClassNames: '',
 	assistiveHidden: false,
 	openInNewTab: undefined,
-	openNewTabLinkVisuallyHiddenText: 'Opens in new window',
 	supplementalText: '',
 };
 
