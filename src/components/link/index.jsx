@@ -44,7 +44,7 @@ Link.propTypes = {
 	openInNewTab: PropTypes.bool,
 	/** Text to make the link's purpose more clear to screen readers indicating a new tab */
 	openNewTabLinkVisuallyHiddenText: PropTypes.string,
-	/** Text to make the link's purpose more clear to screen readers */
+	/** Text to make the link's purpose more clear to screen readers, do not use in conjunction with `openNewTabLinkVisuallyHiddenText` */
 	supplementalText: PropTypes.string,
 };
 
