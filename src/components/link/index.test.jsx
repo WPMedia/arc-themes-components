@@ -83,18 +83,4 @@ describe('Link', () => {
 		expect(linkOutput).not.toHaveAttribute('aria-hidden');
 		expect(linkOutput).not.toHaveAttribute('tabIndex');
 	});
-	it('takes in a title', () => {
-		render(<Link href={EXTERNAL_LINK_DESTINATION} title="test-title">{LINK_TEXT}</Link>);
-
-		const linkOutput = screen.queryByText(LINK_TEXT);
-
-		expect(linkOutput).toHaveAttribute('title', 'test-title');
-	});
-	it('does not render a title by default', () => {
-		render(<Link href={EXTERNAL_LINK_DESTINATION}>{LINK_TEXT}</Link>);
-
-		const linkOutput = screen.queryByText(LINK_TEXT);
-
-		expect(linkOutput).not.toHaveAttribute('title');
-	});
 });
