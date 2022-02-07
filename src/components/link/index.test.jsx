@@ -67,20 +67,13 @@ describe('Link', () => {
 		expect(linkOutput).not.toHaveAttribute('aria-hidden');
 		expect(linkOutput).not.toHaveAttribute('tabIndex');
 	});
-	it('should respond to assistiveHidden and show tab index -1 and aria-hidden as internal link', () => {
-		render(<Link href={INTERNAL_LINK_DESTINATION} assistiveHidden>{LINK_TEXT}</Link>);
+	it('should render hidden text with visually-hidden class', () => {
+		render(<Link href={EXTERNAL_LINK_DESTINATION} additionalHiddenText="RSS Link">{LINK_TEXT}</Link>);
 
-		const linkOutput = screen.queryByText(LINK_TEXT);
+		const additionalHiddenText = screen.queryByText('RSS Link');
+		const newTabDefaultText = screen.queryByText('Opens in new window');
 
-		expect(linkOutput).toHaveAttribute('aria-hidden', 'true');
-		expect(linkOutput).toHaveAttribute('tabIndex', '-1');
-	});
-	it('should not show assistive hidden properties if false as internal link', () => {
-		render(<Link href={INTERNAL_LINK_DESTINATION} assistiveHidden={false}>{LINK_TEXT}</Link>);
-
-		const linkOutput = screen.queryByText(LINK_TEXT);
-
-		expect(linkOutput).not.toHaveAttribute('aria-hidden');
-		expect(linkOutput).not.toHaveAttribute('tabIndex');
+		expect(additionalHiddenText).toHaveClass('visually-hidden');
+		expect(newTabDefaultText).toHaveClass('visually-hidden');
 	});
 });
