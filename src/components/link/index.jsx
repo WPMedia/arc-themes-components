@@ -34,7 +34,7 @@ const Link = ({
 Link.propTypes = {
 	/** Classnames that get appended to default c-link classname */
 	additionalClassNames: PropTypes.string,
-	/** Remove the link from the accessibility tree with aria-hidden, tab-index=-1 */
+	/** Remove the link from the accessibility tree with aria-hidden, tabindex=-1 */
 	assistiveHidden: PropTypes.bool,
 	/** The text, images or any node that will be displayed within the link */
 	children: PropTypes.node.isRequired,
