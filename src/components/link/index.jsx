@@ -80,7 +80,7 @@ Link.defaultProps = {
 	assistiveHidden: false,
 	openInNewTab: undefined,
 	openNewTabLinkHiddenText: 'Opens in new window',
-	title: undefined,
+	title: '',
 };
 
 export default Link;
