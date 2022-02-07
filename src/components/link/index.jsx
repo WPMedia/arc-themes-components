@@ -8,6 +8,7 @@ const LinkOpeningInNewTab = ({
 	className,
 	href,
 	openNewTabLinkHiddenText,
+	title,
 }) => (
 	<a
 		aria-hidden={assistiveHidden ? 'true' : undefined}
@@ -16,6 +17,7 @@ const LinkOpeningInNewTab = ({
 		href={href}
 		rel="noreferrer"
 		target="_blank"
+		title={title || undefined}
 	>
 		{children}
 		<span className="visually-hidden">{openNewTabLinkHiddenText}</span>
@@ -29,6 +31,7 @@ const Link = ({
 	href,
 	openInNewTab,
 	openNewTabLinkHiddenText,
+	title,
 }) => {
 	// openInNewTab is undefined by default
 	// http or https link or openInNewTab can be either true or undefined for opening in new tab
@@ -42,6 +45,7 @@ const Link = ({
 				className={defaultAndAdditionalClassnames}
 				href={href}
 				openNewTabLinkHiddenText={openNewTabLinkHiddenText}
+				title={title}
 			>
 				{children}
 			</LinkOpeningInNewTab>
@@ -50,10 +54,11 @@ const Link = ({
 
 	return (
 		<a
+			aria-hidden={assistiveHidden ? 'true' : undefined}
 			className={defaultAndAdditionalClassnames}
 			href={href}
-			aria-hidden={assistiveHidden ? 'true' : undefined}
 			tabIndex={assistiveHidden ? '-1' : undefined}
+			title={title || undefined}
 		>
 			{children}
 		</a>
@@ -67,6 +72,7 @@ Link.propTypes = {
 	href: PropTypes.string.isRequired,
 	openInNewTab: PropTypes.bool,
 	openNewTabLinkHiddenText: PropTypes.string,
+	title: PropTypes.string,
 };
 
 Link.defaultProps = {
@@ -74,6 +80,7 @@ Link.defaultProps = {
 	assistiveHidden: false,
 	openInNewTab: undefined,
 	openNewTabLinkHiddenText: 'Opens in new window',
+	title: undefined,
 };
 
 export default Link;
