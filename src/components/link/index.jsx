@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 const COMPONENT_CLASS_NAME = 'c-link';
 
 const LinkOpeningInNewTab = ({
+	assistiveHidden,
 	children,
 	className,
 	href,
 	openNewTabLinkHiddenText,
 }) => (
 	<a
+		aria-hidden={assistiveHidden ? 'true' : undefined}
+		tabIndex={assistiveHidden ? '-1' : undefined}
 		className={className}
 		href={href}
 		rel="noreferrer"
@@ -21,6 +24,7 @@ const LinkOpeningInNewTab = ({
 
 const Link = ({
 	additionalClassNames,
+	assistiveHidden,
 	children,
 	href,
 	openInNewTab,
@@ -34,6 +38,7 @@ const Link = ({
 	if (opensInNewTab) {
 		return (
 			<LinkOpeningInNewTab
+				assistiveHidden={assistiveHidden}
 				className={defaultAndAdditionalClassnames}
 				href={href}
 				openNewTabLinkHiddenText={openNewTabLinkHiddenText}
@@ -47,6 +52,8 @@ const Link = ({
 		<a
 			className={defaultAndAdditionalClassnames}
 			href={href}
+			aria-hidden={assistiveHidden ? 'true' : undefined}
+			tabIndex={assistiveHidden ? '-1' : undefined}
 		>
 			{children}
 		</a>
@@ -55,6 +62,7 @@ const Link = ({
 
 Link.propTypes = {
 	additionalClassNames: PropTypes.string,
+	assistiveHidden: PropTypes.bool,
 	children: PropTypes.node.isRequired,
 	href: PropTypes.string.isRequired,
 	openInNewTab: PropTypes.bool,
@@ -63,6 +71,7 @@ Link.propTypes = {
 
 Link.defaultProps = {
 	additionalClassNames: '',
+	assistiveHidden: false,
 	openInNewTab: undefined,
 	openNewTabLinkHiddenText: 'Opens in new window',
 };

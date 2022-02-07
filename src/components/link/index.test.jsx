@@ -51,4 +51,36 @@ describe('Link', () => {
 
 		expect(linkOutput).toHaveClass('test-class');
 	});
+	it('should respond to assistiveHidden and show tab index -1 and aria-hidden', () => {
+		render(<Link href={EXTERNAL_LINK_DESTINATION} assistiveHidden>{LINK_TEXT}</Link>);
+
+		const linkOutput = screen.queryByText(LINK_TEXT);
+
+		expect(linkOutput).toHaveAttribute('aria-hidden', 'true');
+		expect(linkOutput).toHaveAttribute('tabIndex', '-1');
+	});
+	it('should not show assistive hidden properties if false', () => {
+		render(<Link href={EXTERNAL_LINK_DESTINATION} assistiveHidden={false}>{LINK_TEXT}</Link>);
+
+		const linkOutput = screen.queryByText(LINK_TEXT);
+
+		expect(linkOutput).not.toHaveAttribute('aria-hidden');
+		expect(linkOutput).not.toHaveAttribute('tabIndex');
+	});
+	it('should respond to assistiveHidden and show tab index -1 and aria-hidden as internal link', () => {
+		render(<Link href={INTERNAL_LINK_DESTINATION} assistiveHidden>{LINK_TEXT}</Link>);
+
+		const linkOutput = screen.queryByText(LINK_TEXT);
+
+		expect(linkOutput).toHaveAttribute('aria-hidden', 'true');
+		expect(linkOutput).toHaveAttribute('tabIndex', '-1');
+	});
+	it('should not show assistive hidden properties if false as internal link', () => {
+		render(<Link href={INTERNAL_LINK_DESTINATION} assistiveHidden={false}>{LINK_TEXT}</Link>);
+
+		const linkOutput = screen.queryByText(LINK_TEXT);
+
+		expect(linkOutput).not.toHaveAttribute('aria-hidden');
+		expect(linkOutput).not.toHaveAttribute('tabIndex');
+	});
 });
