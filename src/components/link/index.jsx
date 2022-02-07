@@ -32,12 +32,19 @@ const Link = ({
 };
 
 Link.propTypes = {
+	/** Classnames that get appended to default c-link classname */
 	additionalClassNames: PropTypes.string,
+	/** Remove the link from the accessibility tree with aria-hidden, tab-index=-1 */
 	assistiveHidden: PropTypes.bool,
+	/** The text, images or any node that will be displayed within the link */
 	children: PropTypes.node.isRequired,
+	/** The destination of the link */
 	href: PropTypes.string.isRequired,
+	/** Opt to open the link in a new tab */
 	openInNewTab: PropTypes.bool,
+	/** Text to make the link's purpose more clear to screen readers indicating a new tab */
 	openNewTabLinkVisuallyHiddenText: PropTypes.string,
+	/** Text to make the link's purpose more clear to screen readers */
 	supplementalText: PropTypes.string,
 };
 
