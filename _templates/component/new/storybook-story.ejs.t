@@ -9,11 +9,20 @@ import <%= h.changeCase.pascal(component_name) %> from '.';
 
 # <%= h.changeCase.pascal(component_name) %>
 
-<Props of={<%= h.changeCase.pascal(component_name) %>} />
+--- Add a description of the component here ---
 
 ## Usage
 
-<%= h.changeCase.pascal(component_name) %>
+```
+import { <%= h.changeCase.pascal(component_name) %> } from '@wpmedia/arc-themes-components';
+
+
+<<%= h.changeCase.pascal(component_name) %>>Component Children</<%= h.changeCase.pascal(component_name) %>>
+```
+
+## Properties
+
+<Props of={<%= h.changeCase.pascal(component_name) %>} />
 
 ## Stories
 

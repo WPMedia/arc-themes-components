@@ -12,8 +12,10 @@ const <%= h.changeCase.pascal(component_name) %> = ({ children, additionalClassN
 );
 
 <%= h.changeCase.pascal(component_name) %>.propTypes = {
-	children: PropTypes.node.isRequired,
+	/** Class name(s) that get appended to default class name of the component */
 	additionalClassNames: PropTypes.string,
+	/** The text, images or any node that will be displayed within the component */
+	children: PropTypes.node.isRequired,
 };
 
 export default <%= h.changeCase.pascal(component_name) %>;
