@@ -1,102 +1,108 @@
 @use '../scss.scss' with (
 	$global: (
-		'blue-0': #EBEFFF,
-		'blue-1': #B0C3F2,
-		'blue-2': #7AA2E5,
-		'blue-3': #4A89D8,
-		'blue-4': #1E78CB,
-		'blue-5': #1458A9,
-		'blue-6': #0C3D87,
-		'blue-7': #062665,
-		'blue-8': #021443,
-		'blue-9': #000721,
+		'blue-1': #EBEFFF,
+		'blue-2': #B0C3F2,
+		'blue-3': #7AA2E5,
+		'blue-4': #4A89D8,
+		'blue-5': #1E78CB,
+		'blue-6': #1458A9,
+		'blue-7': #0C3D87,
+		'blue-8': #062665,
+		'blue-9': #021443,
+		'blue-10': #000721,
 
-		'red-0': #FF8A8A,
-		'red-1': #E65555,
-		'red-2': #CE2929,
-		'red-3': #B50505,
-		'red-4': #9C0000,
-		'red-5': #840000,
-		'red-6': #6B0000,
-		'red-7': #520000,
-		'red-8': #3A0000,
-		'red-9': #210000,
+		'red-1': #FF8A8A,
+		'red-2': #E65555,
+		'red-3': #CE2929,
+		'red-4': #B50505,
+		'red-5': #9C0000,
+		'red-6': #840000,
+		'red-7': #6B0000,
+		'red-8': #520000,
+		'red-9': #3A0000,
+		'red-10': #210000,
 
-		'orange-0': #FA714B,
-		'orange-1': #E24F23,
-		'orange-2': #C93302,
-		'orange-3': #B12E00,
-		'orange-4': #982A00,
-		'orange-5': #802500,
-		'orange-6': #682000,
-		'orange-7': #4F1900,
-		'orange-8': #371200,
-		'orange-9': #1F0B00,
+		'orange-1': #FA714B,
+		'orange-2': #E24F23,
+		'orange-3': #C93302,
+		'orange-4': #B12E00,
+		'orange-5': #982A00,
+		'orange-6': #802500,
+		'orange-7': #682000,
+		'orange-8': #4F1900,
+		'orange-9': #371200,
+		'orange-10': #1F0B00,
 
-		'green-0': #80D971,
-		'green-1': #57C244,
-		'green-2': #34AB1F,
-		'green-3': #189402,
-		'green-4': #137D00,
-		'green-5': #0F6600,
-		'green-6': #0C4F00,
-		'green-7': #083800,
-		'green-8': #052100,
-		'green-9': #020A00,
+		'green-1': #80D971,
+		'green-2': #57C244,
+		'green-3': #34AB1F,
+		'green-4': #189402,
+		'green-5': #137D00,
+		'green-6': #0F6600,
+		'green-7': #0C4F00,
+		'green-8': #083800,
+		'green-9': #052100,
+		'green-10': #020A00,
 
-		'neutral-0': #E6EFFF,
-		'neutral-1': #C3CFE3,
-		'neutral-2': #A3B0C6,
-		'neutral-3': #8593AA,
-		'neutral-4': #69778E,
-		'neutral-5': #4F5C71,
-		'neutral-6': #384355,
-		'neutral-7': #232B39,
-		'neutral-8': #10151C,
-		'neutral-9': #000000,
+		'neutral-1': #E6EFFF,
+		'neutral-2': #C3CFE3,
+		'neutral-3': #A3B0C6,
+		'neutral-4': #8593AA,
+		'neutral-5': #69778E,
+		'neutral-6': #4F5C71,
+		'neutral-7': #384355,
+		'neutral-8': #232B39,
+		'neutral-9': #10151C,
+		'neutral-10': #000000,
 
-		'spacing-0': 0.25em, // 4px
-		'spacing-1': 0.5em, // 8px
-		'spacing-2': 1em, // 16px
-		'spacing-3': 1.5em, // 24px
-		'spacing-4': 2em, // 32px
-		'spacing-5': 2.5em, // 40px
-		'spacing-6': 3em, // 48px
-		'spacing-7': 3.5em, // 56px
-		'spacing-8': 4em, // 64px
-		'spacing-9': 4.5em, // 72px
-		'spacing-10': 5em, // 80px
-		'spacing-11': 5.5em, // 88px
-		'spacing-12': 6em, // 96px
-		'spacing-13': 6.5em, // 104px
-		'spacing-14': 7em, // 112px
-		'spacing-15': 7.5em, // 120px
+		'spacing-1': 0.25em, // 4px
+		'spacing-2': 0.5em, // 8px
+		'spacing-3': 1em, // 16px
+		'spacing-4': 1.5em, // 24px
+		'spacing-5': 2em, // 32px
+		'spacing-6': 2.5em, // 40px
+		'spacing-7': 3em, // 48px
+		'spacing-8': 3.5em, // 56px
+		'spacing-9': 4em, // 64px
+		'spacing-10': 4.5em, // 72px
+		'spacing-11': 5em, // 80px
+		'spacing-12': 5.5em, // 88px
+		'spacing-13': 6em, // 96px
+		'spacing-14': 6.5em, // 104px
+		'spacing-15': 7em, // 112px
+		'spacing-16': 7.5em, // 120px
 
 		'font-weight-1': 100,
 		'font-weight-2': 200,
-		'font-weight-3': 300,
-		'font-weight-4': 400,
-		'font-weight-5': 500,
-		'font-weight-6': 600,
-		'font-weight-7': 700,
-		'font-weight-8': 800,
-		'font-weight-9': 900,
+		'font-weight-4': 300,
+		'font-weight-5': 400,
+		'font-weight-6': 500,
+		'font-weight-7': 600,
+		'font-weight-8': 700,
+		'font-weight-9': 800,
+		'font-weight-10': 900,
 
-		'font-size-0': 0.75rem, // 12px
-		'font-size-1': 0.875rem, // 14px
-		'font-size-2': 1rem, // 16px
-		'font-size-3': 1.125rem, // 18px
-		'font-size-4': 1.1875rem, // 19px
-		'font-size-5': 1.375rem, // 22px
-		'font-size-6': 1.5rem, // 24px
-		'font-size-7': 1.75rem, // 28px
-		'font-size-8': 2.25rem, // 36px
+		'font-size-1': 0.75rem, // 12px
+		'font-size-2': 0.875rem, // 14px
+		'font-size-3': 1rem, // 16px
+		'font-size-4': 1.125rem, // 18px
+		'font-size-5': 1.1875rem, // 19px
+		'font-size-6': 1.375rem, // 22px
+		'font-size-7': 1.5rem, // 24px
+		'font-size-8': 1.75rem, // 28px
+		'font-size-9': 2.25rem, // 36px
 
-		'line-height-0': 1rem, // 16px
-		'line-height-1': 1.5rem, // 24px
-		'line-height-2': 2rem, // 32px
-		'line-height-3': 2.5rem , // 40px
+		'line-height-1': 1rem, // 16px
+		'line-height-2': 1.5rem, // 24px
+		'line-height-3': 2rem, // 32px
+		'line-height-4': 2.5rem , // 40px
 
-		'elevation-0': 0px 0px 16px rgba(25, 25, 25, 0.4),
-	)
-);
+		'box-shadow-1': 0px 0px 16px rgba(25, 25, 25, 0.4),
+
+		'z-index-1': 1,
+		'z-index-2': 10,
+		'z-index-3': 50,
+		'z-index-4': 100,
+		'z-index-5': 500,
+
+)
