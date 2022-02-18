@@ -15,19 +15,17 @@ Headings should always:
 * be used in order
 * never skip levels when inceasing in numeric value
 
+Always use the `<Heading>` component in a block that you wish to make an HTML heading. The component will use the correct heading element from 1 to 6 depending on location.
+
+By default, this will output as `<h1>` if used on its own within a page. To ensure corrent hierarchy, please use `<HeadingSection>`.
+
+The `<HeadingSection>` component should be used to wrap all `<Heading>` components that should not be the page title. The `<HeadingSection>` component will increase the heading element value each time it is used. If you are making a feature that has a heading to be output as a title for a group of stories, then using the `<HeadingSection>` will increase the `<Heading>` items for you providing you correct hierarchy output of headings.
+
+In addition, the `<Heading>` component is customizable because custom classes can be passed in via `additionalClassNames` prop.
+
 ## Usage
 
 ### Heading
-
-<Props of={Heading} />
-
-Always use the `<Heading>` component in a block that you wish to make an HTML heading.
-
-The component will use the correct heading element from 1 to 6 depending on location.
-
-By default, this will output as `<h1>` if used on its own within a page. To ensure corrent hierarchy ensure the use of `<HeadingSection>` is used.
-
-In addition, the Heading component is customizable because custom classes can be passed in via `additionalClassNames` prop.
 
 ```jsx
 import { Heading } from '@wpmedia/arc-themes-components';
@@ -37,13 +35,7 @@ const BlockFeature = () => (
 )
 ```
 
-### HeadingSection
-
-<Props of={HeadingSection} />
-
-The `<HeadingSection>` component should be used to wrap all `<Heading>` components that should not be the page title.
-
-The `<HeadingSection>` component will increase the heading element value each time it is used. If you are making a feature that has a heading to be output as a title for a group of stories then using the `<HeadingSection>` will increase the `<Heading>` items for you providing you correct hierarchy output of headings.
+### Heading Section
 
 ```jsx
 import { Heading, HeadingSection } from '@wpmedia/arc-themes-components';
@@ -63,7 +55,13 @@ const SectionBlockFeature = () => (
 
 ## Properties
 
+### Heading
+
 <Props of={Heading} />
+
+### Heading Section
+
+<Props of={HeadingSection} />
 
 ## Stories
 
