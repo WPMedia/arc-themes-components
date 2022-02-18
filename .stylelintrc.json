@@ -1,10 +1,9 @@
 {
-	"plugins": [
-		"stylelint-no-unsupported-browser-features"
-	],
+	"plugins": ["stylelint-no-unsupported-browser-features"],
 	"extends": [
 		"stylelint-config-recommended",
-		"stylelint-config-sass-guidelines"
+		"stylelint-config-sass-guidelines",
+		"stylelint-config-prettier"
 	],
 	"rules": {
 		"indentation": "tab",
@@ -13,7 +12,7 @@
 			true,
 			{
 				"browsers": ["> 1%", "Last 2 versions", "not IE 11"],
-				"ignore": ["css-sticky","multicolumn"],
+				"ignore": ["css-sticky", "multicolumn"],
 				"ignorePartialSupport": true,
 				"severity": "warning"
 			}
@@ -22,17 +21,13 @@
 		"order/properties-alphabetical-order": null,
 		"declaration-property-value-disallowed-list": [
 			{
-				"border": [
-					"none"
-				]
+				"border": ["none"]
 			}
 		],
 		"property-no-vendor-prefix": [
 			true,
 			{
-				"ignoreProperties": [
-					"box-orient"
-				]
+				"ignoreProperties": ["box-orient"]
 			}
 		]
 	}
