@@ -1,0 +1,5 @@
+@use "../../scss";
+
+.c-heading {
+	@include scss.component-properties("heading");
+}
