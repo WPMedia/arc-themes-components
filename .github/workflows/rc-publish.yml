@@ -48,7 +48,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # publishing above version and tagging that version to this tag
-      - name: Publish with the tag rc specified 
+      - name: Publish with the tag rc specified
         run: npm publish --tag rc
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

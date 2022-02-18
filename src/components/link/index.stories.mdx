@@ -1,6 +1,6 @@
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs';
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
 
-import Link from '.';
+import Link from ".";
 
 <Meta title="Components/Link" component={Link} />
 
@@ -18,8 +18,8 @@ By default, the link will open in a new tab if the `href` property starts with h
 import { Link } from '@wpmedia/arc-themes-components';
 
 
-<Link 
-	href="https://www.arcxp.com/" 
+<Link
+	href="https://www.arcxp.com/"
 	supplementalText="The Arc XP page will open in a new window"
 >
 	See Arc XP Homepage
@@ -33,6 +33,7 @@ import { Link } from '@wpmedia/arc-themes-components';
 ## Stories
 
 ** External Link Due To Link Contents **
+
 <Preview>
 	<Story name="External Link Due To Link Contents">
 		<Link href="https://www.arcxp.com/">External Link to Arc XP</Link>
@@ -40,6 +41,7 @@ import { Link } from '@wpmedia/arc-themes-components';
 </Preview>
 
 ** Internal Link Due To Link Contents **
+
 <Preview>
 	<Story name="Internal Link Due To Link Contents">
 		<Link href="/">Internal Link to Home</Link>
@@ -47,23 +49,30 @@ import { Link } from '@wpmedia/arc-themes-components';
 </Preview>
 
 ** Internal Link Due To Opting Into Same Tab **
+
 <Preview>
 	<Story name="Internal Link Due To Opting Into Same Tab">
-		<Link href="https://www.arcxp.com/" openInNewTab={false}>Go to Arc XP without going to a new tab</Link>
+		<Link href="https://www.arcxp.com/" openInNewTab={false}>
+			Go to Arc XP without going to a new tab
+		</Link>
 	</Story>
 </Preview>
 
 ** External Link Due To Opting Into New Tab **
+
 <Preview>
 	<Story name="External Link Due To Opting Into New Tab">
-		<Link href="/" openInNewTab={true}>Open "/" in a new tab</Link>
+		<Link href="/" openInNewTab={true}>
+			Open "/" in a new tab
+		</Link>
 	</Story>
 </Preview>
 
-** Custom accessible text ** 
+** Custom accessible text **
+
 <Preview>
 	<Story name="Custom accessible text">
-		<Link 
+		<Link
 			href="https://www.arcxp.com/"
 			openNewTabLinkVisuallyHiddenText="Go to that page"
 			supplementalText="This link will give you new insight into the Arc XP company"

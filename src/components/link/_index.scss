@@ -1,17 +1,17 @@
-@use '../../scss';
+@use "../../scss";
 
 .c-link {
-	@include scss.component-properties('link');
+	@include scss.component-properties("link");
 
 	&:hover {
-		@include scss.component-properties('link-hover');
+		@include scss.component-properties("link-hover");
 	}
 
 	&:active {
-		@include scss.component-properties('link-active');
+		@include scss.component-properties("link-active");
 	}
 
 	&:visited {
-		@include scss.component-properties('link-visited');
+		@include scss.component-properties("link-visited");
 	}
 }

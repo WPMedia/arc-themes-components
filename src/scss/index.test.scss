@@ -1,6 +1,6 @@
-@use 'true' as *;
+@use "true" as *;
 
-@use 'root' with (
+@use "root" with (
 	$alias: (),
 	$breakpoints: (),
 	$global: (),
@@ -8,39 +8,39 @@
 		default: (
 			alias: (),
 			components: (
-				'block1': (
-					'font-size': var(--font-size-tiny),
+				"block1": (
+					"font-size": var(--font-size-tiny),
 				),
-				'component1': (
-					'font-size': var(--font-size-small)
-				)
+				"component1": (
+					"font-size": var(--font-size-small),
+				),
 			),
 			blocks: (
-				'block1': (
-					'font-size': var(--font-size-small),
+				"block1": (
+					"font-size": var(--font-size-small),
 					components: (
-						'component1': (
-							'font-size': var(--font-size-small)
-						)
-					)
-				)
-			)
+						"component1": (
+							"font-size": var(--font-size-small),
+						),
+					),
+				),
+			),
 		),
 		tablet: (
 			alias: (),
 			components: (),
-			blocks: ()
+			blocks: (),
 		),
 		desktop: (
 			alias: (),
 			components: (),
-			blocks: ()
-		)
+			blocks: (),
+		),
 	)
 );
 
-@include describe('root-tokens') {
-	@include it('it returns nothing if no tokens') {
+@include describe("root-tokens") {
+	@include it("it returns nothing if no tokens") {
 		@include assert {
 			@include output {
 				@include root.root-tokens();
@@ -60,10 +60,16 @@
 		}
 	}
 
-	@include it('it returns only alias tokens') {
+	@include it("it returns only alias tokens") {
 		@include assert {
 			@include output {
-				@include root.root-tokens(( alias: ( color: #f00) ));
+				@include root.root-tokens(
+					(
+						alias: (
+							color: #f00,
+						),
+					)
+				);
 			}
 			@include expect {
 				:root {
@@ -73,10 +79,18 @@
 		}
 	}
 
-	@include it('it returns only component tokens') {
+	@include it("it returns only component tokens") {
 		@include assert {
 			@include output {
-				@include root.root-tokens(( components: ( 'component-name': ( color: #008000) ) ));
+				@include root.root-tokens(
+					(
+						components: (
+							"component-name": (
+								color: #008000,
+							),
+						),
+					)
+				);
 			}
 			@include expect {
 				:root {
@@ -86,10 +100,18 @@
 		}
 	}
 
-	@include it('it returns only blocks tokens') {
+	@include it("it returns only blocks tokens") {
 		@include assert {
 			@include output {
-				@include root.root-tokens(( blocks: ( 'block-name': ( color: #ffa500) ) ));
+				@include root.root-tokens(
+					(
+						blocks: (
+							"block-name": (
+								color: #ffa500,
+							),
+						),
+					)
+				);
 			}
 			@include expect {
 				:root {
@@ -100,11 +122,11 @@
 	}
 }
 
-@include describe('block-components') {
-	@include it('returns nothing if definition does not exist') {
+@include describe("block-components") {
+	@include it("returns nothing if definition does not exist") {
 		@include assert {
 			@include output {
-				@include root.block-components('missing');
+				@include root.block-components("missing");
 			}
 			@include expect {
 				// nothing
@@ -112,10 +134,10 @@
 		}
 	}
 
-	@include it('returns appropriate value for definition that does exist') {
+	@include it("returns appropriate value for definition that does exist") {
 		@include assert {
 			@include output {
-				@include root.block-components('block1');
+				@include root.block-components("block1");
 			}
 			@include expect {
 				--c-component1-font-size: var(--font-size-small);
@@ -124,11 +146,11 @@
 	}
 }
 
-@include describe('block-properties') {
-	@include it('returns nothing if definition does not exist') {
+@include describe("block-properties") {
+	@include it("returns nothing if definition does not exist") {
 		@include assert {
 			@include output {
-				@include root.block-properties('missing');
+				@include root.block-properties("missing");
 			}
 			@include expect {
 				// nothing
@@ -136,10 +158,10 @@
 		}
 	}
 
-	@include it('returns appropriate value for definition that does exist') {
+	@include it("returns appropriate value for definition that does exist") {
 		@include assert {
 			@include output {
-				@include root.block-properties('block1');
+				@include root.block-properties("block1");
 			}
 			@include expect {
 				font-size: var(--b-block1-font-size);
@@ -148,11 +170,11 @@
 	}
 }
 
-@include describe('component-properties') {
-	@include it('returns nothing if definition does not exist') {
+@include describe("component-properties") {
+	@include it("returns nothing if definition does not exist") {
 		@include assert {
 			@include output {
-				@include root.component-properties('missing');
+				@include root.component-properties("missing");
 			}
 			@include expect {
 				// nothing
@@ -160,10 +182,10 @@
 		}
 	}
 
-	@include it('returns appropriate value for definition that does exist') {
+	@include it("returns appropriate value for definition that does exist") {
 		@include assert {
 			@include output {
-				@include root.component-properties('component1');
+				@include root.component-properties("component1");
 			}
 			@include expect {
 				font-size: var(--c-component1-font-size);
@@ -172,14 +194,20 @@
 	}
 }
 
-@include describe('component-var') {
-	@include it('returns appropriate value for definition that does exist') {
-		@include assert-equal(root.component-var('component1', 'font-size'), 'var(--c-component1-font-size)');
+@include describe("component-var") {
+	@include it("returns appropriate value for definition that does exist") {
+		@include assert-equal(
+			root.component-var("component1", "font-size"),
+			"var(--c-component1-font-size)"
+		);
 	}
 }
 
-@include describe('block-var') {
-	@include it('returns appropriate value for definition that does exist') {
-		@include assert-equal(root.block-var('block1', 'font-size'), 'var(--b-block1-font-size)');
+@include describe("block-var") {
+	@include it("returns appropriate value for definition that does exist") {
+		@include assert-equal(
+			root.block-var("block1", "font-size"),
+			"var(--b-block1-font-size)"
+		);
 	}
 }

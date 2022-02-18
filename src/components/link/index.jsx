@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-target-blank */
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 function determineVisuallyHiddenText(supplementalText, opensInNewTab) {
 	if (supplementalText) {
@@ -7,10 +7,10 @@ function determineVisuallyHiddenText(supplementalText, opensInNewTab) {
 	}
 
 	if (opensInNewTab) {
-		return 'Opens in new window';
+		return "Opens in new window";
 	}
 
-	return '';
+	return "";
 }
 
 const Link = ({
@@ -23,22 +23,31 @@ const Link = ({
 }) => {
 	// openInNewTab is undefined by default
 	// http or https link or openInNewTab can be either true or undefined for opening in new tab
-	const opensInNewTab = (href.startsWith('http') && openInNewTab !== false) || openInNewTab === true;
-	const defaultAndAdditionalClassnames = `c-link${additionalClassNames ? ` ${additionalClassNames}` : ''}`;
+	const opensInNewTab =
+		(href.startsWith("http") && openInNewTab !== false) ||
+		openInNewTab === true;
+	const defaultAndAdditionalClassnames = `c-link${
+		additionalClassNames ? ` ${additionalClassNames}` : ""
+	}`;
 
-	const visuallyHiddenText = determineVisuallyHiddenText(supplementalText, opensInNewTab);
+	const visuallyHiddenText = determineVisuallyHiddenText(
+		supplementalText,
+		opensInNewTab
+	);
 
 	return (
 		<a
 			className={defaultAndAdditionalClassnames}
 			href={href}
-			aria-hidden={assistiveHidden ? 'true' : undefined}
-			tabIndex={assistiveHidden ? '-1' : undefined}
-			rel={opensInNewTab ? 'noreferrer' : undefined}
-			target={opensInNewTab ? '_blank' : undefined}
+			aria-hidden={assistiveHidden ? "true" : undefined}
+			tabIndex={assistiveHidden ? "-1" : undefined}
+			rel={opensInNewTab ? "noreferrer" : undefined}
+			target={opensInNewTab ? "_blank" : undefined}
 		>
 			{children}
-			{visuallyHiddenText ? (<span className="visually-hidden">{visuallyHiddenText}</span>) : null}
+			{visuallyHiddenText ? (
+				<span className="visually-hidden">{visuallyHiddenText}</span>
+			) : null}
 		</a>
 	);
 };
@@ -62,10 +71,10 @@ Link.propTypes = {
 };
 
 Link.defaultProps = {
-	additionalClassNames: '',
+	additionalClassNames: "",
 	assistiveHidden: false,
 	openInNewTab: undefined,
-	supplementalText: '',
+	supplementalText: "",
 };
 
 export default Link;

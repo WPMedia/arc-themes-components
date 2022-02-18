@@ -1,14 +1,16 @@
-@use 'sass:list';
-@use 'sass:map';
+@use "sass:list";
+@use "sass:map";
 
-@use 'reset';
-@use 'a11y';
+@use "reset";
+@use "a11y";
 
 //
 // Variables
 //
 $alias: () !default;
-$breakpoints: ( default: 'min-width: 0' ) !default;
+$breakpoints: (
+	default: "min-width: 0",
+) !default;
 $global: () !default;
 $tokens: () !default;
 
@@ -19,13 +21,18 @@ $tokens: () !default;
 	@warn 'No breakpoints set, using default mobile first approach';
 }
 
-
 //
 // Mixins
 //
 @mixin block-components($blockName) {
-	@if list.length(map.get($tokens, 'default', 'blocks', $blockName, 'components')) >= 0 {
-		@each $name, $value in map.get($tokens, 'default', 'blocks', $blockName, 'components') {
+	@if list.length(
+			map.get($tokens, "default", "blocks", $blockName, "components")
+		) >=
+		0
+	{
+		@each $name,
+			$value in map.get($tokens, "default", "blocks", $blockName, "components")
+		{
 			@if type-of($value) == map {
 				@each $a, $b in $value {
 					--c-#{$name}-#{$a}: #{$b};
@@ -36,8 +43,8 @@ $tokens: () !default;
 }
 
 @mixin block-properties($blockName) {
-	@each $name, $value in map.get($tokens, 'default', 'blocks', $blockName) {
-		@if map.has-key($tokens, 'default', 'blocks', $blockName) {
+	@each $name, $value in map.get($tokens, "default", "blocks", $blockName) {
+		@if map.has-key($tokens, "default", "blocks", $blockName) {
 			@if type-of($value) != map {
 				#{$name}: block-var($blockName, $name);
 			}
@@ -46,8 +53,9 @@ $tokens: () !default;
 }
 
 @mixin component-properties($component) {
-	@if map.has-key($tokens, 'default', 'components', $component) {
-		@each $name, $value in map.get($tokens, 'default', 'components', $component) {
+	@if map.has-key($tokens, "default", "components", $component) {
+		@each $name, $value in map.get($tokens, "default", "components", $component)
+		{
 			#{$name}: component-var($component, $name);
 		}
 	}
@@ -61,7 +69,7 @@ $tokens: () !default;
 // $name - The name of the sub map in which to output from
 // $prefix - The prefix value to add to the CSS Variable name
 //
-@mixin token-map-to-css-variable($tokens, $name, $prefix: 't') {
+@mixin token-map-to-css-variable($tokens, $name, $prefix: "t") {
 	@each $componentName, $componentItem in map.get($tokens, $name) {
 		@if list.length($componentItem) == 0 {
 			@warn '#{$name} "#{$componentName}" is configured with no options';
@@ -87,17 +95,17 @@ $tokens: () !default;
 	@if list.length($tokens) != 0 {
 		:root {
 			// Alias Tokens
-			@if map.has-key($tokens, 'alias') {
-				@each $name, $value in map.get($tokens, 'alias') {
+			@if map.has-key($tokens, "alias") {
+				@each $name, $value in map.get($tokens, "alias") {
 					--#{$name}: #{$value};
 				}
 			}
 
 			// Component Tokens
-			@include token-map-to-css-variable($tokens, 'components', 'c');
+			@include token-map-to-css-variable($tokens, "components", "c");
 
 			// Block Tokens
-			@include token-map-to-css-variable($tokens, 'blocks', 'b');
+			@include token-map-to-css-variable($tokens, "blocks", "b");
 		}
 	}
 }
@@ -134,5 +142,5 @@ $tokens: () !default;
 }
 
 body {
-	@include component-properties('body');
+	@include component-properties("body");
 }

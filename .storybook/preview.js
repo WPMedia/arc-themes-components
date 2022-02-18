@@ -1,8 +1,8 @@
-import './theme.scss';
+import "./theme.scss";
 
 export const parameters = {
 	actions: { argTypesRegex: "^on[A-Z].*" },
-	layout: 'fullscreen',
+	layout: "fullscreen",
 	controls: {
 		matchers: {
 			color: /(background|color)$/i,
