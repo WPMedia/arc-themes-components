@@ -1,1 +1,11 @@
-@use '../scss.scss';
+@use '../scss.scss' with (
+	$tokens: (
+		default: (
+			components: (
+				stack: (
+					gap: 1rem
+				)
+			)
+		)
+	)
+);

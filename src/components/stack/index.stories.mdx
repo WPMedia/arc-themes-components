@@ -1,0 +1,129 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs';
+
+import Stack from '.';
+
+<Meta title="Components/Stack" component={Stack} />
+
+# Stack
+
+The Stack component is a wrapper around the HTML Flex element.
+It allows for a both a column or row layout.  In addition,
+the Stack component allows for alignment of the items in the layout
+axis as well over-riding the default gap (also also know by the term "gutter") size.
+
+## Usage
+
+```
+import { Stack } from '@wpmedia/arc-themes-components';
+
+
+<Stack>Component Children</Stack>
+```
+
+## Properties
+
+<Props of={Stack} />
+
+## Stories
+
+** Default **
+<Preview>
+	<Story name="Default">
+		<Stack>Stack Text</Stack>
+	</Story>
+</Preview>
+
+
+** Vertical **
+<Preview>
+	<Story name="Vertical">
+		<Stack>
+			<div style={{ height: '100px', width: '200px' }}>
+			    <img alt="image 1" src="https://picsum.photos/200/100" />
+			</div>
+			<div style={{ height: '100px', width: '200px' }}>
+			    <img alt="image 2" src="https://loremflickr.com/200/100" />
+			</div>
+		</Stack>
+	</Story>
+</Preview>
+
+** Horizontal **
+<Preview>
+	<Story name="Horizontal">
+		<Stack direction="horizontal">
+			<div style={{ height: '100px', width: '200px' }}>
+			    <img alt="image 1" src="https://picsum.photos/200/100" />
+			</div>
+			<div style={{ height: '100px', width: '200px' }}>
+			    <img alt="image 2" src="https://loremflickr.com/200/100" />
+			</div>
+		</Stack>
+	</Story>
+</Preview>
+
+** Alignment **
+
+Note: The top row has a start alignment. The second row has a center alignment. The third row has an end alignment.
+<Preview>
+	<Story name="Alignment">
+		<Stack direction="horizontal" alignment="start">
+			<div style={{ height: '100px', width: '200px' }}>
+			    <img alt="image 1" src="https://picsum.photos/200/100" />
+			</div>
+			<div style={{ height: '100px', width: '200px' }}>
+			    <img alt="image 2" src="https://loremflickr.com/200/100" />
+			</div>
+		</Stack>
+		<Stack direction="horizontal" alignment="center">
+			<div style={{ height: '100px', width: '200px' }}>
+			    <img alt="image 1" src="https://picsum.photos/200/100" />
+			</div>
+			<div style={{ height: '100px', width: '200px' }}>
+			    <img alt="image 2" src="https://loremflickr.com/200/100" />
+			</div>
+		</Stack>
+		<Stack direction="horizontal" alignment="end">
+			<div style={{ height: '100px', width: '200px' }}>
+			    <img alt="image 1" src="https://picsum.photos/200/100" />
+			</div>
+			<div style={{ height: '100px', width: '200px' }}>
+			    <img alt="image 2" src="https://loremflickr.com/200/100" />
+			</div>
+		</Stack>
+	</Story>
+</Preview>
+
+** Custom Gap **
+
+Note: the custom gap can be a hardcoded string (ex: `5px`) or reference a CSS token (ex: `var(--global-spacing-200)`)
+<Preview>
+	<Story name="Custom Gap">
+		<Stack>
+			<Stack direction="horizontal" gap="5px">
+                <div style={{ height: '100px', width: '200px' }}>
+                    <img alt="image 1" src="https://picsum.photos/200/100" />
+                </div>
+                <div style={{ height: '100px', width: '200px' }}>
+                    <img alt="image 2" src="https://loremflickr.com/200/100" />
+                </div>
+			</Stack>
+			<Stack direction="horizontal" gap="var(--global-spacing-200)">
+                <div style={{ height: '100px', width: '200px' }}>
+                    <img alt="image 1" src="https://picsum.photos/200/100" />
+                </div>
+                <div style={{ height: '100px', width: '200px' }}>
+                    <img alt="image 2" src="https://loremflickr.com/200/100" />
+                </div>
+			</Stack>
+			<Stack direction="horizontal" gap="4rem">
+                <div style={{ height: '100px', width: '200px' }}>
+                    <img alt="image 1" src="https://picsum.photos/200/100" />
+                </div>
+                <div style={{ height: '100px', width: '200px' }}>
+                    <img alt="image 2" src="https://loremflickr.com/200/100" />
+                </div>
+			</Stack>
+		</Stack>
+	</Story>
+</Preview>

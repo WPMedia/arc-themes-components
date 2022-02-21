@@ -1,0 +1,27 @@
+@use '../../scss';
+
+.c-stack {
+	@include scss.component-properties('stack');
+	display: flex;
+}
+
+.c-stack[data-direction='vertical'] {
+	flex-flow: column wrap;
+}
+
+.c-stack[data-direction='horizontal'] {
+	flex-direction: row;
+}
+
+.c-stack[data-alignment='start'] {
+	justify-content: flex-start;
+}
+
+.c-stack[data-alignment='center'] {
+	justify-content: center;
+}
+
+.c-stack[data-alignment='end'] {
+	justify-content: flex-end;
+}
+
