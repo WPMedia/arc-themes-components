@@ -16,7 +16,7 @@ describe('Stack', () => {
 			</Stack>,
 		);
 		expect(container.querySelector('.c-stack')
-			.getAttribute('data-direction'))
+			.getAttribute('data-style-direction'))
 			.toBe('vertical');
 	});
 
@@ -32,7 +32,7 @@ describe('Stack', () => {
 			</Stack>,
 		);
 		expect(container.querySelector('.c-stack')
-			.getAttribute('data-direction'))
+			.getAttribute('data-style-direction'))
 			.toBe('vertical');
 	});
 
@@ -48,8 +48,28 @@ describe('Stack', () => {
 			</Stack>,
 		);
 		expect(container.querySelector('.c-stack')
-			.getAttribute('data-direction'))
+			.getAttribute('data-style-direction'))
 			.toBe('horizontal');
+	});
+
+	it('should render horizontal layout with wrapping when both explicitly specified', () => {
+		const { container } = render(
+			<Stack direction="horizontal" wrap="wrap">
+				<div style={{ height: '100px', width: '200px' }}>
+					<img alt="image 1" src="https://picsum.photos/200/100" />
+				</div>
+				<div style={{ height: '100px', width: '200px' }}>
+					<img alt="image 2" src="https://loremflickr.com/200/100" />
+				</div>
+			</Stack>,
+		);
+		expect(container.querySelector('.c-stack')
+			.getAttribute('data-style-direction'))
+			.toBe('horizontal');
+
+		expect(container.querySelector('.c-stack')
+			.getAttribute('data-style-wrap'))
+			.toBe('wrap');
 	});
 
 	it('should render start alignment by default', () => {
@@ -64,7 +84,7 @@ describe('Stack', () => {
 			</Stack>,
 		);
 		expect(container.querySelector('.c-stack')
-			.getAttribute('data-alignment'))
+			.getAttribute('data-style-alignment'))
 			.toBe('start');
 	});
 
@@ -80,7 +100,7 @@ describe('Stack', () => {
 			</Stack>,
 		);
 		expect(container.querySelector('.c-stack')
-			.getAttribute('data-alignment'))
+			.getAttribute('data-style-alignment'))
 			.toBe('start');
 	});
 
@@ -96,7 +116,7 @@ describe('Stack', () => {
 			</Stack>,
 		);
 		expect(container.querySelector('.c-stack')
-			.getAttribute('data-alignment'))
+			.getAttribute('data-style-alignment'))
 			.toBe('center');
 	});
 
@@ -112,7 +132,7 @@ describe('Stack', () => {
 			</Stack>,
 		);
 		expect(container.querySelector('.c-stack')
-			.getAttribute('data-alignment'))
+			.getAttribute('data-style-alignment'))
 			.toBe('end');
 	});
 
