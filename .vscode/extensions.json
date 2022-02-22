@@ -1,0 +1,7 @@
+{
+	"recommendations": [
+		"VisualStudioExptTeam.vscodeintellicode",
+		"esbenp.prettier-vscode",
+		"dbaeumer.vscode-eslint"
+	]
+}
