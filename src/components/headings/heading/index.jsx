@@ -3,6 +3,8 @@ import LevelContext from "../context";
 
 const COMPONENT_CLASS_NAME = "c-heading";
 
+// adding a lot of space below that should be removed on commit
+
 const Heading = ({ additionalClassNames = "", children }) => (
 	<LevelContext.Consumer>
 		{(level) => {
