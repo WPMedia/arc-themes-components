@@ -24,6 +24,7 @@ const Stack = ({
 };
 
 Stack.defaultProps = {
+	additionalClassNames: '',
 	direction: 'vertical',
 	alignment: 'start',
 	wrap: 'nowrap',
@@ -31,7 +32,7 @@ Stack.defaultProps = {
 
 Stack.propTypes = {
 	/** Class name(s) that get appended to default class name of the component */
-	additionalClassNames: '',
+	additionalClassNames: PropTypes.string,
 	/** Elements that will be displayed within the component */
 	children: PropTypes.any.isRequired,
 	/** The flow of the elements within the component */
