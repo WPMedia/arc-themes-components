@@ -20,6 +20,22 @@ describe('Stack', () => {
 			.toBe('vertical');
 	});
 
+	it('should apply custom classes in the class attribute', () => {
+		const { container } = render(
+			<Stack additionalClassNames="test-class">
+				<div style={{ height: '100px', width: '200px' }}>
+					<img alt="image 1" src="https://picsum.photos/200/100" />
+				</div>
+				<div style={{ height: '100px', width: '200px' }}>
+					<img alt="image 2" src="https://loremflickr.com/200/100" />
+				</div>
+			</Stack>,
+		);
+		expect(container.querySelector('.c-stack')
+			.getAttribute('class'))
+			.toContain('test-class');
+	});
+
 	it('should render vertical layout when explicitly specified', () => {
 		const { container } = render(
 			<Stack direction="vertical">
