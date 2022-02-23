@@ -22,8 +22,8 @@
 .c-stack[data-style-direction='vertical'] > *:before {
 	content:"";
 	position:absolute;
-	bottom:-0.5rem;
-	left:0; /* Half the gap */
+	bottom:-0.5rem; /* Half the gap */
+	left:0;
 	height:1px;
 	width:100%;
 	background:#000;
