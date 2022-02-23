@@ -24,16 +24,12 @@ const Link = ({
 	// openInNewTab is undefined by default
 	// http or https link or openInNewTab can be either true or undefined for opening in new tab
 	const opensInNewTab =
-		(href.startsWith("http") && openInNewTab !== false) ||
-		openInNewTab === true;
+		(href.startsWith("http") && openInNewTab !== false) || openInNewTab === true;
 	const defaultAndAdditionalClassnames = `c-link${
 		additionalClassNames ? ` ${additionalClassNames}` : ""
 	}`;
 
-	const visuallyHiddenText = determineVisuallyHiddenText(
-		supplementalText,
-		opensInNewTab
-	);
+	const visuallyHiddenText = determineVisuallyHiddenText(supplementalText, opensInNewTab);
 
 	return (
 		<a
@@ -45,9 +41,7 @@ const Link = ({
 			target={opensInNewTab ? "_blank" : undefined}
 		>
 			{children}
-			{visuallyHiddenText ? (
-				<span className="visually-hidden">{visuallyHiddenText}</span>
-			) : null}
+			{visuallyHiddenText ? <span className="visually-hidden">{visuallyHiddenText}</span> : null}
 		</a>
 	);
 };

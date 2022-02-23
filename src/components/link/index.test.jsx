@@ -117,11 +117,7 @@ describe("Link", () => {
 	});
 	it("should render supplemental text regardless of new tab behavior", () => {
 		render(
-			<Link
-				href={EXTERNAL_LINK_DESTINATION}
-				openInNewTab
-				supplementalText="RSS Link"
-			>
+			<Link href={EXTERNAL_LINK_DESTINATION} openInNewTab supplementalText="RSS Link">
 				{LINK_TEXT}
 			</Link>
 		);

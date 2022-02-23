@@ -205,9 +205,6 @@
 
 @include describe("block-var") {
 	@include it("returns appropriate value for definition that does exist") {
-		@include assert-equal(
-			root.block-var("block1", "font-size"),
-			"var(--b-block1-font-size)"
-		);
+		@include assert-equal(root.block-var("block1", "font-size"), "var(--b-block1-font-size)");
 	}
 }

@@ -28,10 +28,7 @@ module.exports = {
 		"no-underscore-dangle": ["error", { allow: ["_website", "_id"] }],
 		"import/no-extraneous-dependencies": "off", // This might be fine. It's worth looking into at the very least.
 		"react/forbid-prop-types": "off",
-		"react/function-component-definition": [
-			2,
-			{ namedComponents: "arrow-function" },
-		],
+		"react/function-component-definition": [2, { namedComponents: "arrow-function" }],
 		"react/prop-types": "off", // We will want to be more granular with this I assume.
 		"react/react-in-jsx-scope": "off",
 		"react/require-default-props": "off", // We will also want to have some rules around this. Whitelisting certain props for example

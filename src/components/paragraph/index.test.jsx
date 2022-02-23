@@ -4,9 +4,7 @@ import Paragraph from ".";
 
 describe("Paragraph", () => {
 	it("should render", () => {
-		const tree = renderer
-			.create(<Paragraph>Paragraph Text</Paragraph>)
-			.toJSON();
+		const tree = renderer.create(<Paragraph>Paragraph Text</Paragraph>).toJSON();
 
 		expect(tree).toMatchInlineSnapshot(`
 <p
