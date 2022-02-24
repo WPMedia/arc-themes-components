@@ -3,12 +3,10 @@ import LevelContext from "../context";
 
 const COMPONENT_CLASS_NAME = "c-heading";
 
-const Heading = ({ additionalClassNames = "", children }) => (
+const Heading = ({ className, children }) => (
 	<LevelContext.Consumer>
 		{(level) => {
-			const allClasses = `${COMPONENT_CLASS_NAME}${
-				additionalClassNames ? ` ${additionalClassNames}` : ""
-			}`;
+			const allClasses = `${COMPONENT_CLASS_NAME}${className ? ` ${className}` : ""}`;
 			// max heading level is 6
 			const HeadingTag = `h${Math.min(level, 6)}`;
 
@@ -19,7 +17,7 @@ const Heading = ({ additionalClassNames = "", children }) => (
 
 Heading.propTypes = {
 	/** Class name(s) that get appended to default class name of the component */
-	additionalClassNames: PropTypes.string,
+	className: PropTypes.string,
 	/** The text, images or any node that will be displayed within the component */
 	children: PropTypes.node.isRequired,
 };
