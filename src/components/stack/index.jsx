@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 const Stack = ({
@@ -25,10 +25,10 @@ const Stack = ({
 		>
 			{ Array.isArray(children)
 				? children.map((child) => (
-					<>
+					<Fragment key={child.key}>
 						{ child }
 						{divider && <hr aria-hidden="true" />}
-					</>
+					</Fragment>
 				)) : (
 					<>
 						{children}
@@ -56,7 +56,8 @@ Stack.propTypes = {
 	 Relates to CSS Flex's `align-items`
 	 Note: When using the divider in a horizontal configuration, alignment should be set to 'unset' */
 	alignment: PropTypes.oneOf(['unset', 'start', 'center', 'end']),
-	/** Elements that will be displayed within the component */
+	/** Elements that will be displayed within the component. It is recommended that
+	 	each child element have a unique React key attribute */
 	children: PropTypes.any.isRequired,
 	/** The flow of the elements within the component */
 	direction: PropTypes.oneOf(['vertical', 'horizontal']),

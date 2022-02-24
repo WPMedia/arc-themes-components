@@ -11,13 +11,17 @@ It allows for a both a column or row layout.  In addition,
 the Stack component allows for alignment of the items in the layout
 axis as well over-riding the default gap (also known by the term "gutter") size.
 
+Note: It is recommended that Child elements specify a unique key.
+
 ## Usage
 
 ```
 import { Stack } from '@wpmedia/arc-themes-components';
 
 
-<Stack>Component Children</Stack>
+<Stack>
+    <element key="key-id">Child Element</element>
+</Stack>
 ```
 
 ## Properties
