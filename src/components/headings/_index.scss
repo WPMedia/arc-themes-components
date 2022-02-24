@@ -1,5 +1,5 @@
-@use '../../scss';
+@use "../../scss";
 
 .c-heading {
-	@include scss.component-properties('heading');
+	@include scss.component-properties("heading");
 }

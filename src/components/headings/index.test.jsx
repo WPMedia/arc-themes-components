@@ -1,33 +1,39 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from "@testing-library/react";
 
-import Heading from './heading';
-import HeadingSection from './section';
+import Heading from "./heading";
+import HeadingSection from "./section";
 
-describe('Heading', () => {
-	it('should render as an h1 by default', () => {
+describe("Heading", () => {
+	it("should render as an h1 by default", () => {
 		render(<Heading>Hello World</Heading>);
-		const headingOutput = screen.getByRole('heading', { level: 1, name: 'Hello World' });
-		expect(headingOutput).toHaveClass('c-heading');
+		const headingOutput = screen.getByRole("heading", {
+			level: 1,
+			name: "Hello World",
+		});
+		expect(headingOutput).toHaveClass("c-heading");
 	});
-	it('should render additional classes', () => {
+	it("should render additional classes", () => {
 		render(<Heading additionalClassNames="test-class">Hello World</Heading>);
-		const headingOutput = screen.getByRole('heading', { level: 1, name: 'Hello World' });
-		expect(headingOutput).toHaveClass('c-heading test-class');
+		const headingOutput = screen.getByRole("heading", {
+			level: 1,
+			name: "Hello World",
+		});
+		expect(headingOutput).toHaveClass("c-heading test-class");
 	});
 });
 
-describe('HeadingSection', () => {
-	it('should render as a h2 when wrapping heading', () => {
+describe("HeadingSection", () => {
+	it("should render as a h2 when wrapping heading", () => {
 		render(
 			<HeadingSection>
 				<Heading />
-			</HeadingSection>,
+			</HeadingSection>
 		);
 
-		const headingOutput = screen.getByRole('heading', { level: 2 });
+		const headingOutput = screen.getByRole("heading", { level: 2 });
 		expect(headingOutput).not.toBeNull();
 	});
-	it('increases the heading level for each HeadingSection until level 6', () => {
+	it("increases the heading level for each HeadingSection until level 6", () => {
 		render(
 			<div>
 				<Heading>h1 text</Heading>
@@ -50,28 +56,49 @@ describe('HeadingSection', () => {
 						</HeadingSection>
 					</HeadingSection>
 				</HeadingSection>
-			</div>,
+			</div>
 		);
 
-		const headingOutputLevelOne = screen.getByRole('heading', { level: 1, name: 'h1 text' });
+		const headingOutputLevelOne = screen.getByRole("heading", {
+			level: 1,
+			name: "h1 text",
+		});
 		expect(headingOutputLevelOne).not.toBeNull();
 
-		const headingOutputLevelTwo = screen.getByRole('heading', { level: 2, name: 'h2 text' });
+		const headingOutputLevelTwo = screen.getByRole("heading", {
+			level: 2,
+			name: "h2 text",
+		});
 		expect(headingOutputLevelTwo).not.toBeNull();
 
-		const headingOutputLevelThree = screen.getByRole('heading', { level: 3, name: 'h3 text' });
+		const headingOutputLevelThree = screen.getByRole("heading", {
+			level: 3,
+			name: "h3 text",
+		});
 		expect(headingOutputLevelThree).not.toBeNull();
 
-		const headingOutputLevelFour = screen.getByRole('heading', { level: 4, name: 'h4 text' });
+		const headingOutputLevelFour = screen.getByRole("heading", {
+			level: 4,
+			name: "h4 text",
+		});
 		expect(headingOutputLevelFour).not.toBeNull();
 
-		const headingOutputLevelFive = screen.getByRole('heading', { level: 5, name: 'h5 text' });
+		const headingOutputLevelFive = screen.getByRole("heading", {
+			level: 5,
+			name: "h5 text",
+		});
 		expect(headingOutputLevelFive).not.toBeNull();
 
-		const headingOutputLevelSix = screen.getByRole('heading', { level: 6, name: 'h6 text' });
+		const headingOutputLevelSix = screen.getByRole("heading", {
+			level: 6,
+			name: "h6 text",
+		});
 		expect(headingOutputLevelSix).not.toBeNull();
 
-		const headingOutputLevelSeven = screen.getByRole('heading', { level: 6, name: 'h6 text level 7' });
+		const headingOutputLevelSeven = screen.getByRole("heading", {
+			level: 6,
+			name: "h6 text level 7",
+		});
 		expect(headingOutputLevelSeven).not.toBeNull();
 	});
 });

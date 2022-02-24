@@ -48,7 +48,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # publishing above version and tagging that version to this tag
-      - name: Publish with the tag beta specified 
+      - name: Publish with the tag beta specified
         run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

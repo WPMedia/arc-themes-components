@@ -1,12 +1,14 @@
-import PropTypes from 'prop-types';
-import LevelContext from '../context';
+import PropTypes from "prop-types";
+import LevelContext from "../context";
 
-const COMPONENT_CLASS_NAME = 'c-heading';
+const COMPONENT_CLASS_NAME = "c-heading";
 
-const Heading = ({ additionalClassNames = '', children }) => (
+const Heading = ({ additionalClassNames = "", children }) => (
 	<LevelContext.Consumer>
 		{(level) => {
-			const allClasses = `${COMPONENT_CLASS_NAME}${additionalClassNames ? ` ${additionalClassNames}` : ''}`;
+			const allClasses = `${COMPONENT_CLASS_NAME}${
+				additionalClassNames ? ` ${additionalClassNames}` : ""
+			}`;
 			// max heading level is 6
 			const HeadingTag = `h${Math.min(level, 6)}`;
 

@@ -5,12 +5,24 @@
 	font-size: 1em;
 	vertical-align: baseline;
 
-	&, &::before, &::after {
+	&,
+	&::before,
+	&::after {
 		font: inherit;
 		box-sizing: border-box;
 	}
 }
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
 	display: block;
 }
 html {
@@ -22,33 +34,46 @@ html {
 		}
 	}
 }
-html, body {
+html,
+body {
 	height: 100%;
 	line-height: 1.5;
 }
-blockquote, q {
+blockquote,
+q {
 	quotes: none;
 }
-blockquote:before, blockquote:after, q:before, q:after {
-	content: '';
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: "";
 	content: none;
 }
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
 	display: block;
 	min-width: 0;
 	max-width: 100%;
 	vertical-align: middle;
 }
-ul[role='list'], ol[role='list'] {
+ul[role="list"],
+ol[role="list"] {
 	list-style: none;
 }
 a {
 	text-decoration-skip-ink: auto;
 }
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
 	font: inherit;
 }
