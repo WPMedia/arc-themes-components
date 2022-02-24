@@ -48,7 +48,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # publishing above version and tagging that version to this tag
-      - name: Publish with the tag canary specified 
+      - name: Publish with the tag canary specified
         run: npm publish --tag canary
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,13 +1,13 @@
 {
   "name": "@wpmedia/arc-themes-components",
-  "version": "0.0.4-arc-themes-release-version-1-20.1",
+  "version": "0.0.4-arc-themes-release-version-1-20.2",
   "description": "The arc-themes-components will be the basis for presentational components and reusable utility functions workflow of themes and client devs. A core tenet of Themes is composability for developers.",
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage",
     "test:watch": "npm run test -- --watch -o --coverage",
     "test:changed-feature-branch": "jest --changedSince=origin/arc-themes-release-version-1.20 --coverage --passWithNoTests",
-    "lint": "eslint --ext js --ext jsx src index.js",
+    "lint": "eslint --ext js --ext jsx src .storybook index.js",
     "lint:changed-feature-branch": "eslint --max-warnings 0 --no-error-on-unmatched-pattern $(git diff --name-only origin/arc-themes-release-version-1.20 | grep -E \"(.js$|.jsx$)\" || echo \"no js/jsx files changed\")",
     "lint:fix": "npm run lint -- --fix",
     "lint:styles": "stylelint '**/*.scss' --formatter verbose",
@@ -15,7 +15,11 @@
     "generate:component": "hygen component new",
     "prepare": "husky install",
     "storybook": "start-storybook -p 60003",
-    "storybook:build": "build-storybook"
+    "storybook:build": "build-storybook",
+    "format": "prettier --write ."
+  },
+  "lint-staged": {
+    "*": "prettier --write --ignore-unknown"
   },
   "repository": {
     "type": "git",
@@ -54,6 +58,7 @@
     "css-loader": "^5.2.7",
     "eslint": "^8.7.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jest": "^25.7.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
@@ -63,6 +68,8 @@
     "husky": "^7.0.4",
     "hygen": "^6.1.0",
     "jest": "^27.4.7",
+    "lint-staged": "^12.3.4",
+    "prettier": "2.5.1",
     "prop-types": "^15.8.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -73,6 +80,7 @@
     "storybook": "^6.4.14",
     "style-loader": "^2.0.0",
     "stylelint": "^14.2.0",
+    "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-recommended": "^6.0.0",
     "stylelint-config-sass-guidelines": "^9.0.1",
     "stylelint-no-unsupported-browser-features": "^5.0.2"

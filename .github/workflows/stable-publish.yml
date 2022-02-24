@@ -44,7 +44,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # publishing above version and tagging that version to this tag
-      - name: Publish with the tag stable specified 
+      - name: Publish with the tag stable specified
         run: npm publish --tag stable
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,13 +1,13 @@
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs';
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
 
-import Stack from '.';
+import Stack from ".";
 
 <Meta title="Components/Stack" component={Stack} />
 
 # Stack
 
 The Stack component is a wrapper around the HTML Flex element.
-It allows for a both a column or row layout.  In addition,
+It allows for a both a column or row layout. In addition,
 the Stack component allows for alignment of the items in the layout
 axis as well over-riding the default gap (also known by the term "gutter") size.
 
@@ -31,132 +31,184 @@ import { Stack } from '@wpmedia/arc-themes-components';
 ## Stories
 
 ** Default **
+
 <Preview>
 	<Story name="Default">
 		<Stack>Stack Text</Stack>
 	</Story>
 </Preview>
 
-
 ** Vertical **
+
 <Preview>
 	<Story name="Vertical">
 		<Stack>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'brown'}} > </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
 		</Stack>
 	</Story>
 </Preview>
 
 ** Vertical centered**
+
 <Preview>
 	<Story name="Vertical centered">
 		<Stack alignment="center">
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'brown'}} > </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
 		</Stack>
 	</Story>
 </Preview>
 
 ** Vertical end alignment**
+
 <Preview>
 	<Story name="Vertical end alignment">
 		<Stack alignment="end">
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'brown'}} > </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
 		</Stack>
 	</Story>
 </Preview>
 
 ** Vertical with divider**
+
 <Preview>
 	<Story name="Vertical with divider">
 		<Stack divider>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'brown'}} > </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
 		</Stack>
 	</Story>
 </Preview>
 
 ** Vertical with divider and inline-flex**
+
 <Preview>
 	<Story name="Vertical with divider and inline-flex">
 		<Stack divider flexType="inline-flex">
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'brown'}} > </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
 		</Stack>
 	</Story>
 </Preview>
 
 ** Horizontal **
+
 <Preview>
 	<Story name="Horizontal">
 		<Stack direction="horizontal">
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'green'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'brown'}} > </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "green" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
 		</Stack>
 	</Story>
 </Preview>
 
 ** Horizontal with divider**
+
 <Preview>
 	<Story name="Horizontal with divider">
 		<Stack direction="horizontal" divider>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'green'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'brown'}} > </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "green" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
 		</Stack>
 	</Story>
 </Preview>
 
 ** Horizontal with divider and centered justification**
+
 <Preview>
 	<Story name="Horizontal with divider and centered justification">
 		<Stack direction="horizontal" divider justification="center">
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'green'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'brown'}} > </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "green" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
 		</Stack>
 	</Story>
 </Preview>
 
 ** Horizontal with divider and end justification**
+
 <Preview>
 	<Story name="Horizontal with divider and end justification">
-		<Stack direction="horizontal" justification="end">
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'green'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'brown'}} > </div>
+		<Stack direction="horizontal" divider justification="end">
+			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "green" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
 		</Stack>
 	</Story>
 </Preview>
 
 ** Horizontal with wrap applied**
+
 <Preview>
 	<Story name="Horizontal with wrap applied">
 		<Stack direction="horizontal" wrap="wrap">
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'violet'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'orange'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'green'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'gold'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'pink'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'brown'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "violet" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "orange" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "green" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "gold" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "pink" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
+		</Stack>
+	</Story>
+</Preview>
+
+** Horizontal with no wrap**
+
+<Preview>
+	<Story name="Horizontal with no wrap">
+		<Stack direction="horizontal" wrap="nowrap">
+			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "violet" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "orange" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "green" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "gold" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "pink" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
+		</Stack>
+	</Story>
+</Preview>
+
+** Horizontal with no wrap and inline flex**
+
+<Preview>
+	<Story name="Horizontal with no wrap and inline flex">
+		<Stack direction="horizontal" wrap="nowrap" flexType="inline-flex">
+			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "violet" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "orange" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "green" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "gold" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "pink" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
 		</Stack>
 	</Story>
 </Preview>
@@ -164,20 +216,21 @@ import { Stack } from '@wpmedia/arc-themes-components';
 ** Custom Gap **
 
 Note: the custom gap can be a hardcoded string (ex: `5px`) or reference a CSS token (ex: `var(--global-spacing-200)`)
+
 <Preview>
 	<Story name="Custom Gap">
 		<Stack>
 			<Stack direction="horizontal" gap="5px">
-                <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}}> </div>
-                <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
+				<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+				<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
 			</Stack>
 			<Stack direction="horizontal" gap="var(--global-spacing-200)">
-                <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
-                <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
+				<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+				<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
 			</Stack>
 			<Stack direction="horizontal" gap="4rem">
-                <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
-                <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
+				<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
+				<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
 			</Stack>
 		</Stack>
 	</Story>

@@ -1,7 +1,7 @@
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs';
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
 
-import Heading from './heading';
-import HeadingSection from './section';
+import Heading from "./heading";
+import HeadingSection from "./section";
 
 <Meta title="Components/Heading" component={Heading} />
 
@@ -12,8 +12,9 @@ A set of components (`<Heading>` and `<HeadingSection>`) to allow control of hea
 Headings (`<h1>` -> `<h6>`) are not to be used to achieve styling goals. They are to be used to provide semantic meaning and structure to a web page. Heading level maxes out at level 6.
 
 Headings should always:
-* be used in order
-* never skip levels when inceasing in numeric value
+
+- be used in order
+- never skip levels when inceasing in numeric value
 
 Always use the `<Heading>` component in a block that you wish to make an HTML heading. The component will use the correct heading element from 1 to 6 depending on location.
 
@@ -28,17 +29,15 @@ In addition, the `<Heading>` component is customizable because custom classes ca
 ### Heading
 
 ```jsx
-import { Heading } from '@wpmedia/arc-themes-components';
+import { Heading } from "@wpmedia/arc-themes-components";
 
-const BlockFeature = () => (
-	<Heading>Heading Children</Heading>
-)
+const BlockFeature = () => <Heading>Heading Children</Heading>;
 ```
 
 ### Heading Section
 
 ```jsx
-import { Heading, HeadingSection } from '@wpmedia/arc-themes-components';
+import { Heading, HeadingSection } from "@wpmedia/arc-themes-components";
 
 const SectionBlockFeature = () => (
 	<HeadingSection>
@@ -50,7 +49,7 @@ const SectionBlockFeature = () => (
 			<p>...</p>
 		</HeadingSection>
 	</HeadingSection>
-)
+);
 ```
 
 ## Properties
@@ -66,6 +65,7 @@ const SectionBlockFeature = () => (
 ## Stories
 
 ** Heading **
+
 <Preview>
 	<Story name="Heading">
 		<Heading>Heading Level 1</Heading>
@@ -73,6 +73,7 @@ const SectionBlockFeature = () => (
 </Preview>
 
 ** Heading With Custom Additional Classes **
+
 <Preview>
 	<Story name="Heading With Custom Additional Classes">
 		<Heading additionalClassNames="test-class test-class-1">Heading Level 1</Heading>
@@ -80,6 +81,7 @@ const SectionBlockFeature = () => (
 </Preview>
 
 ** Nested Headings **
+
 <Preview>
 	<Story name="Nested Headings">
 		<Heading>Heading Level 1</Heading>

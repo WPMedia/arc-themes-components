@@ -1,6 +1,6 @@
 import { addons } from "@storybook/addons";
-import { addParameters } from '@storybook/react';
-import theme from './theme';
+import { addParameters } from "@storybook/react";
+import theme from "./theme";
 
 // Sort stories alphabetically
 addParameters({
