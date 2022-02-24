@@ -113,10 +113,10 @@ describe('Stack', () => {
 	it('should render wrap=nowrap when by default', () => {
 		const { container } = render(
 			<Stack direction="horizontal">
-				<div key="1" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>
-				<div key="2" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 2" src="https://loremflickr.com/200/100" />
 				</div>
 			</Stack>,
@@ -130,10 +130,10 @@ describe('Stack', () => {
 	it('should render  wrap=wrap when by specified', () => {
 		const { container } = render(
 			<Stack direction="horizontal" wrap="wrap">
-				<div key="1" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>
-				<div key="2" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 2" src="https://loremflickr.com/200/100" />
 				</div>
 			</Stack>,
@@ -147,10 +147,10 @@ describe('Stack', () => {
 	it('should render  wrap=wrap-reverse when by specified', () => {
 		const { container } = render(
 			<Stack direction="horizontal" wrap="wrap-reverse">
-				<div key="1" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>
-				<div key="2" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 2" src="https://loremflickr.com/200/100" />
 				</div>
 			</Stack>,
@@ -164,10 +164,10 @@ describe('Stack', () => {
 	it('should render unset alignment by default', () => {
 		const { container } = render(
 			<Stack>
-				<div key="1" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>
-				<div key="2" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 2" src="https://loremflickr.com/200/100" />
 				</div>
 			</Stack>,
@@ -180,10 +180,10 @@ describe('Stack', () => {
 	it('should render start alignment when explicitly specified', () => {
 		const { container } = render(
 			<Stack alignment="start">
-				<div key="1" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>
-				<div key="2" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 2" src="https://loremflickr.com/200/100" />
 				</div>
 			</Stack>,
@@ -196,10 +196,10 @@ describe('Stack', () => {
 	it('should render center alignment when explicitly specified', () => {
 		const { container } = render(
 			<Stack alignment="center">
-				<div key="1" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>
-				<div key="2" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 2" src="https://loremflickr.com/200/100" />
 				</div>
 			</Stack>,
@@ -212,10 +212,10 @@ describe('Stack', () => {
 	it('should render end alignment when explicitly specified', () => {
 		const { container } = render(
 			<Stack alignment="end">
-				<div key="1" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>
-				<div key="2" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 2" src="https://loremflickr.com/200/100" />
 				</div>
 			</Stack>,
@@ -228,10 +228,10 @@ describe('Stack', () => {
 	it('should render start justification when explicitly specified', () => {
 		const { container } = render(
 			<Stack justification="start">
-				<div key="1" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>
-				<div key="2" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 2" src="https://loremflickr.com/200/100" />
 				</div>
 			</Stack>,
@@ -244,10 +244,10 @@ describe('Stack', () => {
 	it('should render center justification when explicitly specified', () => {
 		const { container } = render(
 			<Stack justification="center">
-				<div key="1" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>
-				<div key="2" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 2" src="https://loremflickr.com/200/100" />
 				</div>
 			</Stack>,
@@ -260,10 +260,10 @@ describe('Stack', () => {
 	it('should render end justification when explicitly specified', () => {
 		const { container } = render(
 			<Stack justification="end">
-				<div key="1" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>
-				<div key="2" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 2" src="https://loremflickr.com/200/100" />
 				</div>
 			</Stack>,
@@ -276,10 +276,10 @@ describe('Stack', () => {
 	it('should render custom gap when explicitly specified', () => {
 		const { container } = render(
 			<Stack gap="15px">
-				<div key="1" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>
-				<div key="2" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 2" src="https://loremflickr.com/200/100" />
 				</div>
 			</Stack>,
@@ -292,10 +292,10 @@ describe('Stack', () => {
 	it('should not render dividers when not specified', () => {
 		const { container } = render(
 			<Stack>
-				<div key="1" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>
-				<div key="2" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 2" src="https://loremflickr.com/200/100" />
 				</div>
 			</Stack>,
@@ -307,10 +307,10 @@ describe('Stack', () => {
 	it('should render dividers when explicitly specified', () => {
 		const { container } = render(
 			<Stack divider>
-				<div key="1" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>
-				<div key="2" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 2" src="https://loremflickr.com/200/100" />
 				</div>
 			</Stack>,
@@ -322,10 +322,10 @@ describe('Stack', () => {
 	it('should render a flex flextype by default', () => {
 		const { container } = render(
 			<Stack>
-				<div key="1" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>
-				<div key="2" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 2" src="https://loremflickr.com/200/100" />
 				</div>
 			</Stack>,
@@ -338,10 +338,10 @@ describe('Stack', () => {
 	it('should render a inline-flex flextype when specified', () => {
 		const { container } = render(
 			<Stack flexType="inline-flex">
-				<div key="1" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>
-				<div key="2" style={{ height: '100px', width: '200px' }}>
+				<div style={{ height: '100px', width: '200px' }}>
 					<img alt="image 2" src="https://loremflickr.com/200/100" />
 				</div>
 			</Stack>,
