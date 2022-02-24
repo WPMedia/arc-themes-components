@@ -45,6 +45,50 @@ import { Stack } from '@wpmedia/arc-themes-components';
 	</Story>
 </Preview>
 
+** Vertical centered**
+<Preview>
+	<Story name="Vertical centered">
+		<Stack alignment="center">
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'brown'}} > </div>
+		</Stack>
+	</Story>
+</Preview>
+
+** Vertical end alignment**
+<Preview>
+	<Story name="Vertical end alignment">
+		<Stack alignment="end">
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'brown'}} > </div>
+		</Stack>
+	</Story>
+</Preview>
+
+** Vertical with divider**
+<Preview>
+	<Story name="Vertical with divider">
+		<Stack divider>
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'brown'}} > </div>
+		</Stack>
+	</Story>
+</Preview>
+
+** Vertical with divider and inline-flex**
+<Preview>
+	<Story name="Vertical with divider and inline-flex">
+		<Stack divider flexType="inline-flex">
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'brown'}} > </div>
+		</Stack>
+	</Story>
+</Preview>
+
 ** Horizontal **
 <Preview>
 	<Story name="Horizontal">
@@ -57,9 +101,45 @@ import { Stack } from '@wpmedia/arc-themes-components';
 	</Story>
 </Preview>
 
-** Horizontal with Wrap applied**
+** Horizontal with divider**
 <Preview>
-	<Story name="Horizontal Wrap">
+	<Story name="Horizontal with divider">
+		<Stack direction="horizontal" divider>
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'green'}} > </div>
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'brown'}} > </div>
+		</Stack>
+	</Story>
+</Preview>
+
+** Horizontal with divider and centered justification**
+<Preview>
+	<Story name="Horizontal with divider and centered justification">
+		<Stack direction="horizontal" divider justification="center">
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'green'}} > </div>
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'brown'}} > </div>
+		</Stack>
+	</Story>
+</Preview>
+
+** Horizontal with divider and end justification**
+<Preview>
+	<Story name="Horizontal with divider and end justification">
+		<Stack direction="horizontal" justification="end">
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'green'}} > </div>
+            <div style={{ height: '250px', width: '250px', backgroundColor: 'brown'}} > </div>
+		</Stack>
+	</Story>
+</Preview>
+
+** Horizontal with wrap applied**
+<Preview>
+	<Story name="Horizontal with wrap applied">
 		<Stack direction="horizontal" wrap="wrap">
             <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
             <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
@@ -71,26 +151,6 @@ import { Stack } from '@wpmedia/arc-themes-components';
             <div style={{ height: '250px', width: '250px', backgroundColor: 'pink'}} > </div>
             <div style={{ height: '250px', width: '250px', backgroundColor: 'brown'}} > </div>
             <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
-		</Stack>
-	</Story>
-</Preview>
-
-** Alignment **
-
-Note: The top row has a start alignment. The second row has a center alignment. The third row has an end alignment.
-<Preview>
-	<Story name="Alignment">
-		<Stack direction="horizontal" alignment="start">
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
-		</Stack>
-		<Stack direction="horizontal" alignment="center">
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
-            <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
-		</Stack>
-		<Stack direction="horizontal" alignment="end">
             <div style={{ height: '250px', width: '250px', backgroundColor: 'blue'}} > </div>
             <div style={{ height: '250px', width: '250px', backgroundColor: 'red'}} > </div>
 		</Stack>

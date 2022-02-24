@@ -88,7 +88,7 @@ describe('Stack', () => {
 			.toBe('wrap');
 	});
 
-	it('should render start alignment by default', () => {
+	it('should render unset alignment by default', () => {
 		const { container } = render(
 			<Stack>
 				<div style={{ height: '100px', width: '200px' }}>
@@ -101,7 +101,7 @@ describe('Stack', () => {
 		);
 		expect(container.querySelector('.c-stack')
 			.getAttribute('data-style-alignment'))
-			.toBe('start');
+			.toBe('unset');
 	});
 
 	it('should render start alignment when explicitly specified', () => {
@@ -152,6 +152,54 @@ describe('Stack', () => {
 			.toBe('end');
 	});
 
+	it('should render start justification when explicitly specified', () => {
+		const { container } = render(
+			<Stack justification="start">
+				<div style={{ height: '100px', width: '200px' }}>
+					<img alt="image 1" src="https://picsum.photos/200/100" />
+				</div>
+				<div style={{ height: '100px', width: '200px' }}>
+					<img alt="image 2" src="https://loremflickr.com/200/100" />
+				</div>
+			</Stack>,
+		);
+		expect(container.querySelector('.c-stack')
+			.getAttribute('data-style-justification'))
+			.toBe('start');
+	});
+
+	it('should render center justification when explicitly specified', () => {
+		const { container } = render(
+			<Stack justification="center">
+				<div style={{ height: '100px', width: '200px' }}>
+					<img alt="image 1" src="https://picsum.photos/200/100" />
+				</div>
+				<div style={{ height: '100px', width: '200px' }}>
+					<img alt="image 2" src="https://loremflickr.com/200/100" />
+				</div>
+			</Stack>,
+		);
+		expect(container.querySelector('.c-stack')
+			.getAttribute('data-style-justification'))
+			.toBe('center');
+	});
+
+	it('should render end justification when explicitly specified', () => {
+		const { container } = render(
+			<Stack justification="end">
+				<div style={{ height: '100px', width: '200px' }}>
+					<img alt="image 1" src="https://picsum.photos/200/100" />
+				</div>
+				<div style={{ height: '100px', width: '200px' }}>
+					<img alt="image 2" src="https://loremflickr.com/200/100" />
+				</div>
+			</Stack>,
+		);
+		expect(container.querySelector('.c-stack')
+			.getAttribute('data-style-justification'))
+			.toBe('end');
+	});
+
 	it('should render custom gap when explicitly specified', () => {
 		const { container } = render(
 			<Stack gap="15px">
@@ -166,5 +214,35 @@ describe('Stack', () => {
 		expect(container.querySelector('.c-stack')
 			.getAttribute('style'))
 			.toBe('--c-stack-gap: 15px;');
+	});
+
+	it('should not render dividers when not specified', () => {
+		const { container } = render(
+			<Stack>
+				<div style={{ height: '100px', width: '200px' }}>
+					<img alt="image 1" src="https://picsum.photos/200/100" />
+				</div>
+				<div style={{ height: '100px', width: '200px' }}>
+					<img alt="image 2" src="https://loremflickr.com/200/100" />
+				</div>
+			</Stack>,
+		);
+		expect(container.querySelectorAll('.c-stack hr'))
+			.toHaveLength(0);
+	});
+
+	it('should render dividers when explicitly specified', () => {
+		const { container } = render(
+			<Stack divider>
+				<div style={{ height: '100px', width: '200px' }}>
+					<img alt="image 1" src="https://picsum.photos/200/100" />
+				</div>
+				<div style={{ height: '100px', width: '200px' }}>
+					<img alt="image 2" src="https://loremflickr.com/200/100" />
+				</div>
+			</Stack>,
+		);
+		expect(container.querySelectorAll('.c-stack hr'))
+			.toHaveLength(2);
 	});
 });
