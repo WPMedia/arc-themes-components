@@ -6,11 +6,16 @@ const COMPONENT_CLASS_NAME = "c-heading";
 const Heading = ({ className, children }) => (
 	<LevelContext.Consumer>
 		{(level) => {
-			const allClasses = `${COMPONENT_CLASS_NAME}${className ? ` ${className}` : ""}`;
 			// max heading level is 6
 			const HeadingTag = `h${Math.min(level, 6)}`;
 
-			return <HeadingTag className={allClasses}>{children}</HeadingTag>;
+			return (
+				<HeadingTag
+					className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
+				>
+					{children}
+				</HeadingTag>
+			);
 		}}
 	</LevelContext.Consumer>
 );

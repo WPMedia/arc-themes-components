@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-no-target-blank */
 import PropTypes from "prop-types";
 
+const COMPONENT_CLASS_NAME = "c-link";
+
 function determineVisuallyHiddenText(supplementalText, opensInNewTab) {
 	if (supplementalText) {
 		return supplementalText;
@@ -23,7 +25,7 @@ const Link = ({ assistiveHidden, children, className, href, openInNewTab, supple
 
 	return (
 		<a
-			className={`c-link${className ? ` ${className}` : ""}`}
+			className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
 			href={href}
 			aria-hidden={assistiveHidden ? "true" : undefined}
 			tabIndex={assistiveHidden ? "-1" : undefined}

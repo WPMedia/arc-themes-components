@@ -26,7 +26,7 @@ describe("HeadingSection", () => {
 	it("should render as a h2 when wrapping heading", () => {
 		render(
 			<HeadingSection>
-				<Heading />
+				<Heading>Heading Text</Heading>
 			</HeadingSection>
 		);
 
