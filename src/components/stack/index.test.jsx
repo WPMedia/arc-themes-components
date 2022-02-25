@@ -123,9 +123,9 @@ describe("Stack", () => {
 		expect(container.querySelector(".c-stack").getAttribute("data-style-wrap")).toBe("wrap");
 	});
 
-	it("should render  wrap=wrap-reverse when by specified", () => {
+	it("should render a reverse wrap when by specified", () => {
 		const { container } = render(
-			<Stack direction="horizontal" wrap="wrap-reverse">
+			<Stack direction="horizontal" wrap="reverse">
 				<div style={{ height: "100px", width: "200px" }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>
@@ -135,9 +135,7 @@ describe("Stack", () => {
 			</Stack>
 		);
 
-		expect(container.querySelector(".c-stack").getAttribute("data-style-wrap")).toBe(
-			"wrap-reverse"
-		);
+		expect(container.querySelector(".c-stack").getAttribute("data-style-wrap")).toBe("reverse");
 	});
 
 	it("should render unset alignment by default", () => {

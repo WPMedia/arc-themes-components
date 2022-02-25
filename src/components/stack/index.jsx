@@ -69,7 +69,7 @@ Stack.propTypes = {
 	    Example: `'5px'`,  `'1.5rem'`, etc. */
 	gap: PropTypes.string,
 	/** Wrapping of the elements within the component */
-	wrap: PropTypes.oneOf(["nowrap", "wrap", "wrap-reverse"]),
+	wrap: PropTypes.oneOf(["nowrap", "wrap", "reverse"]),
 };
 
 export default Stack;
