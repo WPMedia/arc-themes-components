@@ -58,7 +58,7 @@ describe("Link", () => {
 	});
 	it("should take in additional classnames", () => {
 		render(
-			<Link href={EXTERNAL_LINK_DESTINATION} additionalClassNames="test-class">
+			<Link href={EXTERNAL_LINK_DESTINATION} className="test-class">
 				{LINK_TEXT}
 			</Link>
 		);

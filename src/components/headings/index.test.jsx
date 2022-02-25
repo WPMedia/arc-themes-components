@@ -13,7 +13,7 @@ describe("Heading", () => {
 		expect(headingOutput).toHaveClass("c-heading");
 	});
 	it("should render additional classes", () => {
-		render(<Heading additionalClassNames="test-class">Hello World</Heading>);
+		render(<Heading className="test-class">Hello World</Heading>);
 		const headingOutput = screen.getByRole("heading", {
 			level: 1,
 			name: "Hello World",
@@ -26,7 +26,7 @@ describe("HeadingSection", () => {
 	it("should render as a h2 when wrapping heading", () => {
 		render(
 			<HeadingSection>
-				<Heading />
+				<Heading>Heading Text</Heading>
 			</HeadingSection>
 		);
 
