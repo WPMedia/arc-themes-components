@@ -1,28 +1,25 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 const Stack = ({
-	additionalClassNames,
+	className,
 	alignment,
 	children,
 	direction,
 	divider,
-	flexType,
+	inline,
 	justification,
 	gap,
 	wrap,
 }) => {
-	const defaultAndAdditionalClassnames = `c-stack${
-		additionalClassNames ? ` ${additionalClassNames}` : ""
-	}`;
 	const childCount = React.Children.count(children);
 	return (
 		<div
-			className={defaultAndAdditionalClassnames}
+			className={className ? `c-stack ${className}` : "c-stack"}
 			data-style-direction={direction}
 			data-style-justification={justification}
 			data-style-alignment={alignment}
-			data-style-flextype={flexType}
+			data-style-inline={inline}
 			data-style-wrap={wrap}
 			style={{ "--c-stack-gap": gap }}
 		>
@@ -37,18 +34,18 @@ const Stack = ({
 };
 
 Stack.defaultProps = {
-	additionalClassNames: "",
+	className: "",
 	alignment: "unset",
 	direction: "vertical",
 	divider: false,
-	flexType: "flex",
+	inline: false,
 	justification: "start",
 	wrap: "nowrap",
 };
 
 Stack.propTypes = {
 	/** Class name(s) that get appended to default class name of the component */
-	additionalClassNames: PropTypes.string,
+	className: PropTypes.string,
 	/** The alignment of the elements within the component.
 	 Relates to CSS Flex's `align-items`
 	 Note: When using the divider in a horizontal configuration, alignment should be set to 'unset' */
@@ -63,8 +60,8 @@ Stack.propTypes = {
 	 	and effectively doubles the gap applied. Dividers are hidden from screen readers.
 	 	See alignment property when deciding to use the divider. */
 	divider: PropTypes.bool,
-	/** The flex container type */
-	flexType: PropTypes.oneOf(["flex", "inline-flex"]),
+	/** The container type. */
+	inline: PropTypes.bool,
 	/** The justification of the elements within the component.
 	    Relates to CSS Flex's `justify-content` */
 	justification: PropTypes.oneOf(["start", "center", "end"]),

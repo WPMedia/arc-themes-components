@@ -1,63 +1,62 @@
-@use '../../scss';
+@use "../../scss";
 
 .c-stack {
-	@include scss.component-properties('stack');
+	@include scss.component-properties("stack");
 	display: flex;
 }
 
-.c-stack[data-style-flextype='inline-flex'] {
+.c-stack[data-style-inline="true"] {
 	display: inline-flex;
 }
 
-.c-stack[data-style-direction='vertical'] {
+.c-stack[data-style-direction="vertical"] {
 	flex-flow: column;
 }
 
-.c-stack[data-style-direction='horizontal'] {
+.c-stack[data-style-direction="horizontal"] {
 	flex-direction: row;
 }
 
-.c-stack[data-style-direction='vertical'] > hr {
-	@include scss.component-properties('stack-divider-vertical');
+.c-stack[data-style-direction="vertical"] > hr {
+	@include scss.component-properties("stack-divider-vertical");
 }
 
-.c-stack[data-style-direction='horizontal'] > hr {
-	@include scss.component-properties('stack-divider-horizontal');
+.c-stack[data-style-direction="horizontal"] > hr {
+	@include scss.component-properties("stack-divider-horizontal");
 }
 
-.c-stack[data-style-justification='start'] {
+.c-stack[data-style-justification="start"] {
 	justify-content: flex-start;
 }
 
-.c-stack[data-style-justification='center'] {
+.c-stack[data-style-justification="center"] {
 	justify-content: center;
 }
 
-.c-stack[data-style-justification='end'] {
+.c-stack[data-style-justification="end"] {
 	justify-content: flex-end;
 }
 
-.c-stack[data-style-alignment='start'] {
+.c-stack[data-style-alignment="start"] {
 	align-items: flex-start;
 }
 
-.c-stack[data-style-alignment='center'] {
+.c-stack[data-style-alignment="center"] {
 	align-items: center;
 }
 
-.c-stack[data-style-alignment='end'] {
+.c-stack[data-style-alignment="end"] {
 	align-items: flex-end;
 }
 
-.c-stack[data-style-wrap='nowrap'] {
+.c-stack[data-style-wrap="nowrap"] {
 	flex-wrap: nowrap;
 }
 
-.c-stack[data-style-wrap='wrap'] {
+.c-stack[data-style-wrap="wrap"] {
 	flex-wrap: wrap;
 }
 
-.c-stack[data-style-wrap='wrap-reverse'] {
+.c-stack[data-style-wrap="wrap-reverse"] {
 	flex-wrap: wrap-reverse;
 }
-

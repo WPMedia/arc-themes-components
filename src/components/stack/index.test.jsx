@@ -47,7 +47,7 @@ describe("Stack", () => {
 
 	it("should apply custom classes in the class attribute", () => {
 		const { container } = render(
-			<Stack additionalClassNames="test-class">
+			<Stack className="test-class, test-class-2">
 				<div style={{ height: "100px", width: "200px" }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>
@@ -56,7 +56,9 @@ describe("Stack", () => {
 				</div>
 			</Stack>
 		);
-		expect(container.querySelector(".c-stack").getAttribute("class")).toContain("test-class");
+		expect(container.querySelector(".c-stack").getAttribute("class")).toContain(
+			"test-class, test-class-2"
+		);
 	});
 
 	it("should render vertical layout when explicitly specified", () => {
@@ -284,7 +286,7 @@ describe("Stack", () => {
 		expect(container.querySelectorAll(".c-stack hr")).toHaveLength(1);
 	});
 
-	it("should render a flex flextype by default", () => {
+	it("should render not render inline by default", () => {
 		const { container } = render(
 			<Stack>
 				<div style={{ height: "100px", width: "200px" }}>
@@ -295,12 +297,12 @@ describe("Stack", () => {
 				</div>
 			</Stack>
 		);
-		expect(container.querySelector(".c-stack").getAttribute("data-style-flextype")).toBe("flex");
+		expect(container.querySelector(".c-stack").getAttribute("data-style-inline")).toBe("false");
 	});
 
-	it("should render a inline-flex flextype when specified", () => {
+	it("should render an inline container when specified", () => {
 		const { container } = render(
-			<Stack flexType="inline-flex">
+			<Stack inline="true">
 				<div style={{ height: "100px", width: "200px" }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>
@@ -309,8 +311,6 @@ describe("Stack", () => {
 				</div>
 			</Stack>
 		);
-		expect(container.querySelector(".c-stack").getAttribute("data-style-flextype")).toBe(
-			"inline-flex"
-		);
+		expect(container.querySelector(".c-stack").getAttribute("data-style-inline")).toBe("true");
 	});
 });
