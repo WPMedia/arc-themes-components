@@ -6,15 +6,14 @@ import Date from ".";
 
 # Date
 
---- Add a description of the component here ---
+The `<Date>` component is used to display a date string (human-readable format) and datetime (machine-readable).
 
 ## Usage
 
-```
-import { Date } from '@wpmedia/arc-themes-components';
+```jsx
+import { Date } from "@wpmedia/arc-themes-components";
 
-
-<Date>Component Children</Date>
+const DateFeature = () => <Date dateTime="2018-07-07" dateString="July 7" />;
 ```
 
 ## Properties
@@ -27,6 +26,6 @@ import { Date } from '@wpmedia/arc-themes-components';
 
 <Preview>
 	<Story name="Default">
-		<Date>Date Text</Date>
+		<Date dateTime="2018-07-07" dateString="July 7" />
 	</Story>
 </Preview>
