@@ -1,1 +1,27 @@
-@use "../scss.scss";
+@use "../scss.scss" with (
+	$tokens: (
+		default: (
+			components: (
+				stack: (
+					gap: 1rem,
+				),
+				stack-divider-vertical: (
+					border: none,
+					border-bottom-width: 1px,
+					border-bottom-style: solid,
+					border-bottom-color: #000000,
+					height: 1px,
+					width: 100%,
+				),
+				stack-divider-horizontal: (
+					border: none,
+					border-left-width: 1px,
+					border-left-style: solid,
+					border-left-color: #000000,
+					height: auto,
+					width: 1px,
+				),
+			),
+		),
+	)
+);
