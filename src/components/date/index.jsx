@@ -16,7 +16,10 @@ Date.propTypes = {
 	className: PropTypes.string,
 	/** The human-readable text that will be displayed within the component */
 	dateString: PropTypes.string.isRequired,
-	/** The date and time of the dateString passed in. This must be a valid machine-readable datetime value */
+	/**
+	 * The date and time of the dateString passed in. This must be a valid machine-readable datetime value
+	 * This value should be in an ISO 8601 format.
+	 */
 	dateTime: PropTypes.string.isRequired,
 };
 

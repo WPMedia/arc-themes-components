@@ -6,14 +6,16 @@ import Date from ".";
 
 # Date
 
-The `<Date>` component is used to display a date string (human-readable format) and datetime (machine-readable).
+The `<Date>` component is used to display a date string (human-readable format) and datetime (machine-readable). The `datetime` property can be used in alignment with browsers and other tools to integrate date and time.
+
+The datetime should be a valid ISO 8601 date string. In this way, the date and time can be handled in a uniform way across timezones. For more information on valid datetime values, [see MDN doc](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time#valid_datetime_values).
 
 ## Usage
 
 ```jsx
 import { Date } from "@wpmedia/arc-themes-components";
 
-const DateFeature = () => <Date dateTime="2018-07-07" dateString="July 7" />;
+const DateFeature = () => <Date dateTime="2018-03-05" dateString="March 5" />;
 ```
 
 ## Properties
@@ -22,10 +24,21 @@ const DateFeature = () => <Date dateTime="2018-07-07" dateString="July 7" />;
 
 ## Stories
 
-** Default **
+** Date **
 
 <Preview>
-	<Story name="Default">
-		<Date dateTime="2018-07-07" dateString="July 7" />
+	<Story name="Date">
+		<Date dateTime="2018-03-05" dateString="March 5" />
+	</Story>
+</Preview>
+
+** Date and Time **
+
+<Preview>
+	<Story name="Date and Time">
+		<p>
+			The concert starts at{" "}
+			<Date datetime="2018-03-05T20:00:00" dateString="March 5 at 8 at night" />.
+		</p>
 	</Story>
 </Preview>
