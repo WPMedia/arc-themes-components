@@ -1,0 +1,76 @@
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
+
+import Caption from ".";
+
+<Meta title="Components/Caption" component={Caption} />
+
+# Caption
+
+--- Add a description of the component here ---
+
+## Usage
+
+```
+import { Caption } from '@wpmedia/arc-themes-components';
+
+
+<Caption>Component Children</Caption>
+```
+
+## Properties
+
+<Props of={Caption} />
+
+## Stories
+
+** Default **
+
+<Preview>
+	<Story name="Default">
+		<Caption
+			caption={"There is a man on the loose who seems to be biting dogs"}
+			credit={"(John Doe/Death to Stock Photo)"}
+			title={"Man Bites Dog"}
+		/>
+	</Story>
+</Preview>
+
+** No caption **
+
+<Preview>
+	<Story name="No caption">
+		<Caption caption="" credit={"(John Doe/Death to Stock Photo)"} title={"Man Bites Dog"} />
+	</Story>
+</Preview>
+
+** No credit **
+
+<Preview>
+	<Story name="No credit">
+		<Caption
+			caption={"There is a man on the loose who seems to be biting dogs"}
+			credit={""}
+			title={"Man Bites Dog"}
+		/>
+	</Story>
+</Preview>
+
+** No title **
+
+<Preview>
+	<Story name="No title">
+		<Caption
+			caption={"There is a man on the loose who seems to be biting dogs"}
+			credit={"(John Doe/Death to Stock Photo)"}
+			title={""}
+		/>
+	</Story>
+</Preview>
+
+** No title, caption, nor credit **
+
+<Preview>
+	<Story name="No title, caption, nor credit">
+		<Caption caption={""} credit={""} title={""} />
+	</Story>
+</Preview>
