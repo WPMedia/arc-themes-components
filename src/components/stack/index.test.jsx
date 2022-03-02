@@ -299,7 +299,7 @@ describe("Stack", () => {
 
 	it("should render an inline container when specified", () => {
 		const { container } = render(
-			<Stack inline="true">
+			<Stack inline>
 				<div style={{ height: "100px", width: "200px" }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>
