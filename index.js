@@ -4,7 +4,8 @@ import Date from "./src/components/date";
 import Heading from "./src/components/headings/heading";
 import HeadingSection from "./src/components/headings/section";
 import Link from "./src/components/link";
+import Overline from "./src/components/overline";
 import Paragraph from "./src/components/paragraph";
 import Stack from "./src/components/stack";
 
-export { Date, Heading, HeadingSection, Link, Paragraph, Stack };
+export { Date, Heading, HeadingSection, Link, Overline, Paragraph, Stack };

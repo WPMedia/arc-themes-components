@@ -1,3 +1,4 @@
+import withAnchorWrapper from "./withAnchorWrapper";
 import withComponentClassName from "./withComponentClassName";
 
-export { withComponentClassName };
+export { withAnchorWrapper, withComponentClassName };
