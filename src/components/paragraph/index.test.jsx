@@ -12,7 +12,7 @@ describe("Paragraph", () => {
         className="c-paragraph"
         style={
           Object {
-            "--paragraph-truncation": "none",
+            "--paragraph-truncation": null,
           }
         }
       >
@@ -23,9 +23,7 @@ describe("Paragraph", () => {
 
 	it("should not apply truncation by default", () => {
 		const { container } = render(<Paragraph>Paragraph Text</Paragraph>);
-		expect(container.querySelector(".c-paragraph").getAttribute("style")).toContain(
-			"--paragraph-truncation: none;"
-		);
+		expect(container.querySelector(".c-paragraph").getAttribute("style")).toBe(null);
 	});
 
 	it("should apply truncation when specified", () => {

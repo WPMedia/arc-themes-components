@@ -4,7 +4,7 @@ const COMPONENT_CLASS_NAME = "c-paragraph";
 
 const Paragraph = ({ children, className, truncationLines }) => (
 	<p
-		style={{ "--paragraph-truncation": truncationLines > 0 ? truncationLines : "none" }}
+		style={{ "--paragraph-truncation": truncationLines > 0 ? truncationLines : null }}
 		className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
 	>
 		{children}
