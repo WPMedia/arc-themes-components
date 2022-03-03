@@ -5,9 +5,7 @@ const COMPONENT_CLASS_NAME = "c-paragraph";
 const Paragraph = ({ children, className, truncationLines }) => (
 	<p
 		data-style-truncation-lines={truncationLines > 0 ? "true" : "false"}
-		style={{
-			WebkitLineClamp: truncationLines > 0 ? truncationLines : "none",
-		}}
+		style={{ "--c-paragraph--webkit-line-clamp": truncationLines > 0 ? truncationLines : "none" }}
 		className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
 	>
 		{children}

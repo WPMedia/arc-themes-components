@@ -13,7 +13,7 @@ describe("Paragraph", () => {
         data-style-truncation-lines="false"
         style={
           Object {
-            "WebkitLineClamp": "none",
+            "--c-paragraph--webkit-line-clamp": "none",
           }
         }
       >
