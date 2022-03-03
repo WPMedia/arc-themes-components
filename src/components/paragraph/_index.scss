@@ -1,14 +1,16 @@
 @use "../../scss";
 
 .c-paragraph {
-	@include scss.component-properties("paragraph");
-}
+	--paragraph-truncation: var(--c-pargraph--webkit-line-clamp, "none");
 
-.c-paragraph[data-style-truncation-lines="true"] {
 	overflow: hidden;
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	-moz-box-oriented: vertical;
 	/* opera */
 	text-overflow: -o-ellipsis-lastline;
+
+	@include scss.component-properties("paragraph");
+
+	-webkit-line-clamp: var(--paragraph-truncation);
 }

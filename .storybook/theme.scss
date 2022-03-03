@@ -1,10 +1,4 @@
 @use "../scss.scss" with (
-	$global: (
-		"truncation-lines": "none",
-	),
-	$alias: (
-		"paragraph-truncation-lines": var(--global-truncation-lines),
-	),
 	$tokens: (
 		default: (
 			components: (
@@ -27,9 +21,7 @@
 					height: auto,
 					width: 1px,
 				),
-				paragraph: (
-					-webkit-line-clamp: var(--alias-paragraph-truncation-lines),
-				),
+				paragraph: (),
 			),
 		),
 	)

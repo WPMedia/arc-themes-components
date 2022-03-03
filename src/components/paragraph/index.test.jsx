@@ -10,10 +10,9 @@ describe("Paragraph", () => {
 		expect(tree).toMatchInlineSnapshot(`
       <p
         className="c-paragraph"
-        data-style-truncation-lines="false"
         style={
           Object {
-            "--c-paragraph--webkit-line-clamp": "none",
+            "--paragraph-truncation": "none",
           }
         }
       >
@@ -24,16 +23,16 @@ describe("Paragraph", () => {
 
 	it("should not apply truncation by default", () => {
 		const { container } = render(<Paragraph>Paragraph Text</Paragraph>);
-		expect(
-			container.querySelector(".c-paragraph").getAttribute("data-style-truncation-lines")
-		).toBe("false");
+		expect(container.querySelector(".c-paragraph").getAttribute("style")).toContain(
+			"--paragraph-truncation: none;"
+		);
 	});
 
 	it("should apply truncation when specified", () => {
 		const { container } = render(<Paragraph truncationLines={3}>Paragraph Text</Paragraph>);
-		expect(
-			container.querySelector(".c-paragraph").getAttribute("data-style-truncation-lines")
-		).toBe("true");
+		expect(container.querySelector(".c-paragraph").getAttribute("style")).toContain(
+			"--paragraph-truncation: 3;"
+		);
 	});
 
 	it("should apply custom classes in the class attribute", () => {
