@@ -16,7 +16,11 @@ const HeadingOutput = withComponentClassName(
 
 const Heading = ({ children, className }) => (
 	<LevelContext.Consumer>
-		{(level) => <HeadingOutput children={children} className={className} level={level} />}
+		{(level) => (
+			<HeadingOutput className={className} level={level}>
+				{children}
+			</HeadingOutput>
+		)}
 	</LevelContext.Consumer>
 );
 

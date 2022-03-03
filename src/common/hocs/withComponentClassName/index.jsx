@@ -8,7 +8,7 @@ const withClassNameMerge = (Component, options = {}) => {
 		const mergedClassList = Array.from(
 			new Set([...className.split(" "), ...componentClassName.split(" ")])
 		)
-			.filter((className) => className != "")
+			.filter((name) => name !== "")
 			.join(" ");
 
 		return mergedClassList.length ? (

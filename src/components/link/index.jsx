@@ -1,11 +1,10 @@
-/* eslint-disable react/jsx-no-target-blank */
 import PropTypes from "prop-types";
 
 import { withAnchorWrapper, withComponentClassName } from "../../common/hocs";
 
 const COMPONENT_CLASS_NAME = "c-link";
 
-const Link = withComponentClassName(({ children }) => <>{children}</>, {
+const Link = withComponentClassName(({ children }) => children, {
 	componentClassName: COMPONENT_CLASS_NAME,
 });
 

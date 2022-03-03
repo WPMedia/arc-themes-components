@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import PropTypes from "prop-types";
 
 const determineVisuallyHiddenText = (supplementalText, opensInNewTab) => {
@@ -10,7 +11,7 @@ const determineVisuallyHiddenText = (supplementalText, opensInNewTab) => {
 	return "";
 };
 
-const withAnchorWrapper = (Component, options = {}) => {
+const withAnchorWrapper = (Component) => {
 	const AnchorWrappedComponent = (props) => {
 		const { className, ...propsWithoutClassName } = props;
 		const { assistiveHidden, href, openInNewTab, supplementalText } = props;
