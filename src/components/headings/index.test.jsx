@@ -12,14 +12,6 @@ describe("Heading", () => {
 		});
 		expect(headingOutput).toHaveClass("c-heading");
 	});
-	it("should render additional classes", () => {
-		render(<Heading className="test-class">Hello World</Heading>);
-		const headingOutput = screen.getByRole("heading", {
-			level: 1,
-			name: "Hello World",
-		});
-		expect(headingOutput).toHaveClass("c-heading test-class");
-	});
 });
 
 describe("HeadingSection", () => {

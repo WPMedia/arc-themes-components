@@ -1,40 +1,36 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Stack = ({
-	className,
-	alignment,
-	children,
-	direction,
-	divider,
-	inline,
-	justification,
-	gap,
-	wrap,
-}) => {
-	const childCount = React.Children.count(children);
-	return (
-		<div
-			className={className ? `c-stack ${className}` : "c-stack"}
-			data-style-direction={direction}
-			data-style-justification={justification}
-			data-style-alignment={alignment}
-			data-style-inline={inline}
-			data-style-wrap={wrap}
-			style={{ "--c-stack-gap": gap }}
-		>
-			{React.Children.map(children, (child, index) => (
-				<>
-					{child}
-					{divider && index !== childCount - 1 ? <hr aria-hidden="true" /> : null}
-				</>
-			))}
-		</div>
-	);
-};
+import { withComponentClassName } from "../../common/hocs";
+
+const COMPONENT_CLASS_NAME = "c-stack";
+
+const Stack = withComponentClassName(
+	({ alignment, children, className, direction, divider, inline, justification, gap, wrap }) => {
+		const childCount = React.Children.count(children);
+		return (
+			<div
+				className={className}
+				data-style-direction={direction}
+				data-style-justification={justification}
+				data-style-alignment={alignment}
+				data-style-inline={inline}
+				data-style-wrap={wrap}
+				style={{ "--c-stack-gap": gap }}
+			>
+				{React.Children.map(children, (child, index) => (
+					<>
+						{child}
+						{divider && index !== childCount - 1 ? <hr aria-hidden="true" /> : null}
+					</>
+				))}
+			</div>
+		);
+	},
+	{ componentClassName: COMPONENT_CLASS_NAME }
+);
 
 Stack.defaultProps = {
-	className: "",
 	alignment: "unset",
 	direction: "vertical",
 	divider: false,
@@ -44,8 +40,6 @@ Stack.defaultProps = {
 };
 
 Stack.propTypes = {
-	/** Class name(s) that get appended to default class name of the component */
-	className: PropTypes.string,
 	/** The alignment of the elements within the component.
 	 Relates to CSS Flex's `align-items`
 	 Note: When using the divider in a horizontal configuration, alignment should be set to 'unset' */

@@ -44,22 +44,6 @@ describe("Stack", () => {
 		);
 	});
 
-	it("should apply custom classes in the class attribute", () => {
-		const { container } = render(
-			<Stack className="test-class, test-class-2">
-				<div style={{ height: "100px", width: "200px" }}>
-					<img alt="image 1" src="https://picsum.photos/200/100" />
-				</div>
-				<div style={{ height: "100px", width: "200px" }}>
-					<img alt="image 2" src="https://loremflickr.com/200/100" />
-				</div>
-			</Stack>
-		);
-		expect(container.querySelector(".c-stack").getAttribute("class")).toContain(
-			"test-class, test-class-2"
-		);
-	});
-
 	it("should render vertical layout when explicitly specified", () => {
 		const { container } = render(
 			<Stack direction="vertical">
@@ -299,7 +283,7 @@ describe("Stack", () => {
 
 	it("should render an inline container when specified", () => {
 		const { container } = render(
-			<Stack inline="true">
+			<Stack inline>
 				<div style={{ height: "100px", width: "200px" }}>
 					<img alt="image 1" src="https://picsum.photos/200/100" />
 				</div>

@@ -1,19 +1,19 @@
 import PropTypes from "prop-types";
 
+import { withComponentClassName } from "../../common/hocs";
+
 const COMPONENT_CLASS_NAME = "c-date";
 
-const Date = ({ className, dateString, dateTime }) => (
-	<time
-		className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
-		dateTime={dateTime}
-	>
-		{dateString}
-	</time>
+const Date = withComponentClassName(
+	({ className, dateString, dateTime }) => (
+		<time className={className} dateTime={dateTime}>
+			{dateString}
+		</time>
+	),
+	{ componentClassName: COMPONENT_CLASS_NAME }
 );
 
 Date.propTypes = {
-	/** Class name(s) that get appended to default class name of the component */
-	className: PropTypes.string,
 	/** The human-readable text that will be displayed within the component */
 	dateString: PropTypes.string.isRequired,
 	/**

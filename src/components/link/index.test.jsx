@@ -56,17 +56,6 @@ describe("Link", () => {
 		expect(linkOutput).not.toHaveAttribute("rel");
 		expect(linkOutput).not.toHaveAttribute("target");
 	});
-	it("should take in additional classnames", () => {
-		render(
-			<Link href={EXTERNAL_LINK_DESTINATION} className="test-class">
-				{LINK_TEXT}
-			</Link>
-		);
-
-		const linkOutput = screen.queryByText(LINK_TEXT);
-
-		expect(linkOutput).toHaveClass("test-class");
-	});
 	it("should respond to assistiveHidden and show tab index -1 and aria-hidden", () => {
 		render(
 			<Link href={EXTERNAL_LINK_DESTINATION} assistiveHidden>

@@ -11,18 +11,4 @@ describe("Date", () => {
 		expect(foundDate).toHaveClass("c-date");
 		expect(foundDate).toHaveAttribute("datetime", "2018-03-05T20:00:00");
 	});
-	it("should have additional classes", () => {
-		render(
-			<Date
-				dateTime="2018-03-05T20:00:00"
-				dateString="March 5 at 8 at night"
-				className="test-class"
-			/>
-		);
-		const foundDate = screen.queryByText("March 5 at 8 at night");
-
-		expect(foundDate).not.toBeNull();
-		expect(foundDate).toHaveClass("c-date test-class");
-		expect(foundDate).toHaveAttribute("datetime", "2018-03-05T20:00:00");
-	});
 });

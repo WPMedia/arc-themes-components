@@ -1,6 +1,13 @@
 import PropTypes from "prop-types";
 
-const Paragraph = ({ children }) => <p className="c-paragraph">{children}</p>;
+import { withComponentClassName } from "../../common/hocs";
+
+const COMPONENT_CLASS_NAME = "c-paragraph";
+
+const Paragraph = withComponentClassName(
+	({ children, className }) => <p className={className}>{children}</p>,
+	{ componentClassName: COMPONENT_CLASS_NAME }
+);
 
 Paragraph.propTypes = {
 	children: PropTypes.string.isRequired,

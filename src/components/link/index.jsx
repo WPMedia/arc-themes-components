@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-no-target-blank */
 import PropTypes from "prop-types";
 
+import { withComponentClassName } from "../../common/hocs";
+
 const COMPONENT_CLASS_NAME = "c-link";
 
 function determineVisuallyHiddenText(supplementalText, opensInNewTab) {
@@ -15,32 +17,33 @@ function determineVisuallyHiddenText(supplementalText, opensInNewTab) {
 	return "";
 }
 
-const Link = ({ assistiveHidden, children, className, href, openInNewTab, supplementalText }) => {
-	// openInNewTab is undefined by default
-	// http or https link or openInNewTab can be either true or undefined for opening in new tab
-	const opensInNewTab =
-		(href.startsWith("http") && openInNewTab !== false) || openInNewTab === true;
+const Link = withComponentClassName(
+	({ assistiveHidden, children, className, href, openInNewTab, supplementalText }) => {
+		// openInNewTab is undefined by default
+		// http or https link or openInNewTab can be either true or undefined for opening in new tab
+		const opensInNewTab =
+			(href.startsWith("http") && openInNewTab !== false) || openInNewTab === true;
 
-	const visuallyHiddenText = determineVisuallyHiddenText(supplementalText, opensInNewTab);
+		const visuallyHiddenText = determineVisuallyHiddenText(supplementalText, opensInNewTab);
 
-	return (
-		<a
-			className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
-			href={href}
-			aria-hidden={assistiveHidden ? "true" : undefined}
-			tabIndex={assistiveHidden ? "-1" : undefined}
-			rel={opensInNewTab ? "noreferrer" : undefined}
-			target={opensInNewTab ? "_blank" : undefined}
-		>
-			{children}
-			{visuallyHiddenText ? <span className="visually-hidden">{visuallyHiddenText}</span> : null}
-		</a>
-	);
-};
+		return (
+			<a
+				className={className}
+				href={href}
+				aria-hidden={assistiveHidden ? "true" : undefined}
+				tabIndex={assistiveHidden ? "-1" : undefined}
+				rel={opensInNewTab ? "noreferrer" : undefined}
+				target={opensInNewTab ? "_blank" : undefined}
+			>
+				{children}
+				{visuallyHiddenText ? <span className="visually-hidden">{visuallyHiddenText}</span> : null}
+			</a>
+		);
+	},
+	{ componentClassName: COMPONENT_CLASS_NAME }
+);
 
 Link.propTypes = {
-	/** Class name(s) that get appended to default class name of the component */
-	className: PropTypes.string,
 	/** Remove the link from the accessibility tree with aria-hidden, tabindex=-1 */
 	assistiveHidden: PropTypes.bool,
 	/** The text, images or any node that will be displayed within the link */
