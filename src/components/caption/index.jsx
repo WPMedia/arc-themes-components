@@ -8,7 +8,7 @@ const Caption = ({ caption, className, credit, title }) =>
 			className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
 		>
 			{title ? (
-				<span dangerouslySetInnerHTML={{ __html: `${title} ` }} className="c-caption__title" />
+				<span dangerouslySetInnerHTML={{ __html: `${title} ` }} className=`${COMPONENT_CLASS_NAME}__title` />
 			) : null}
 			{caption ? (
 				<span dangerouslySetInnerHTML={{ __html: `${caption} ` }} className=`${COMPONENT_CLASS_NAME}__caption` />
