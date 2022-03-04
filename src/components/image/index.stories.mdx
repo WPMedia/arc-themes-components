@@ -1,0 +1,54 @@
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
+
+import Image from ".";
+
+<Meta title="Components/Image" component={Image} />
+
+# Image
+
+Image provide a vital part of story telling for websites. Images are used to complement text, or provide supporting information.
+Images can be used as informationaly or for decoration. This component will provide the means to display images in a variety of different ways.
+
+## Usage
+
+```
+import { Image } from '@wpmedia/arc-themes-components';
+
+
+<Image src="cat.jpg" alt="A cat jumping up to a ball" />
+```
+
+## Properties
+
+<Props of={Image} />
+
+## Stories
+
+** Default **
+
+<Preview>
+	<Story name="Default">
+		<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+	</Story>
+</Preview>
+
+** Image not found **
+
+<Preview>
+	<Story name="Image not found">
+		<Image src="cat.jpg" alt="A cat jumping up to a ball" />
+	</Story>
+</Preview>
+
+** Width and Height **
+
+<Preview>
+	<Story name="Width and Height">
+		<Image
+			src="/computer-user.jpeg"
+			alt="A person sat down using a laptop computer"
+			width="200"
+			height="147"
+		/>
+	</Story>
+</Preview>
