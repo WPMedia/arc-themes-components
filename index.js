@@ -8,4 +8,4 @@ import Link from "./src/components/link";
 import Paragraph from "./src/components/paragraph";
 import Stack from "./src/components/stack";
 
-export { Date, Heading, HeadingSection, Link, Paragraph, Stack, Icon };
+export { Date, Heading, HeadingSection, Icon, Link, Paragraph, Stack };
