@@ -12,8 +12,6 @@ describe("Caption", () => {
 	});
 	it("should render string child with additional classes", () => {
 		const { container } = render(<Caption title="Hello World" className="test-class" />);
-		// not quite best practice with rtl's methodology of not testing for classes
-		// couldn't find a way to test for className without using its role or text
 		expect(container.querySelector(".test-class")).not.toBeNull();
 		expect(container.querySelector(".c-caption")).not.toBeNull();
 	});
