@@ -1,0 +1,17 @@
+@use "../../scss";
+
+.c-overline {
+	@include scss.component-properties("overline");
+
+	&:hover {
+		@include scss.component-properties("overline-hover");
+	}
+
+	&:active {
+		@include scss.component-properties("overline-active");
+	}
+
+	&:visited {
+		@include scss.component-properties("overline-visited");
+	}
+}

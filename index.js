@@ -6,7 +6,8 @@ import HeadingSection from "./src/components/headings/section";
 import Icon from "./src/components/icon";
 import Image from "./src/components/image";
 import Link from "./src/components/link";
+import Overline from "./src/components/overline";
 import Paragraph from "./src/components/paragraph";
 import Stack from "./src/components/stack";
 
-export { Date, Heading, HeadingSection, Icon, Image, Link, Paragraph, Stack };
+export { Date, Heading, HeadingSection, Icon, Image, Link, Overline, Paragraph, Stack };
