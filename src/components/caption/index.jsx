@@ -11,7 +11,7 @@ const Caption = ({ caption, className, credit, title }) =>
 				<span dangerouslySetInnerHTML={{ __html: `${title} ` }} className="c-caption__title" />
 			) : null}
 			{caption ? (
-				<span dangerouslySetInnerHTML={{ __html: `${caption} ` }} className="c-caption__caption" />
+				<span dangerouslySetInnerHTML={{ __html: `${caption} ` }} className=`${COMPONENT_CLASS_NAME}__caption` />
 			) : null}
 			{credit ? (
 				<span dangerouslySetInnerHTML={{ __html: `${credit} ` }} className="c-caption__credit" />
