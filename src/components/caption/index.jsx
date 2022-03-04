@@ -7,9 +7,15 @@ const Caption = ({ caption, className, credit, title }) =>
 		<figcaption
 			className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
 		>
-			{title ? <span className="c-caption__title">{title} </span> : null}
-			{caption ? <span className="c-caption__caption">{caption} </span> : null}
-			{credit ? <span className="c-caption__credit">{credit}</span> : null}
+			{title ? (
+				<span dangerouslySetInnerHTML={{ __html: title }} className="c-caption__title" />
+			) : null}
+			{caption ? (
+				<span dangerouslySetInnerHTML={{ __html: caption }} className="c-caption__caption" />
+			) : null}
+			{credit ? (
+				<span dangerouslySetInnerHTML={{ __html: credit }} className="c-caption__credit" />
+			) : null}
 		</figcaption>
 	) : null;
 
