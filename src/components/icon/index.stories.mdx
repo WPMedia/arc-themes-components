@@ -1,0 +1,45 @@
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
+
+import * as Icons from "./icons";
+import Stack from "../stack";
+
+import Icon from ".";
+
+<Meta title="Components/Icon" component={Icon} />
+
+# Icon
+
+--- Add a description of the component here ---
+
+## Usage
+
+```
+import { Icon } from '@wpmedia/arc-themes-components';
+
+
+<Icon name="User" />
+```
+
+## Properties
+
+<Props of={Icon} />
+
+## Stories
+
+** Default **
+
+<Preview>
+	<Story name="Default">
+		<Icon name="User" />
+	</Story>
+</Preview>
+
+<Preview>
+	<Story name="All">
+		<Stack direction="horizontal" wrap="wrap">
+			{Object.keys(Icons).map((key) => (
+				<Icon name={key} />
+			))}
+		</Stack>
+	</Story>
+</Preview>
