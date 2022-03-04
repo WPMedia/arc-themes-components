@@ -7,5 +7,6 @@ import HeadingSection from "./src/components/headings/section";
 import Link from "./src/components/link";
 import Paragraph from "./src/components/paragraph";
 import Stack from "./src/components/stack";
+import formatCredits from "./src/utils/format-credits";
 
-export { Caption, Date, Heading, HeadingSection, Link, Paragraph, Stack };
+export { Caption, Date, formatCredits, Heading, HeadingSection, Link, Paragraph, Stack };

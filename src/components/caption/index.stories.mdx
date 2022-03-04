@@ -21,7 +21,7 @@ const CaptionFeature = () => (
 		<Caption
 			title="Important Alert"
 			caption="<div>There is man on the loose biting dogs</div><div>All dogs should evacuate the area</div>"
-			credit={{ by: [{ name: "John Doe" }], affiliation: [{ name: "Stock Photo" }] }}
+			credit="John Doe (Stock Photo)"
 		/>
 	</figure>
 );
@@ -39,7 +39,7 @@ const CaptionFeature = () => (
 	<Story name="Default">
 		<Caption
 			caption={"There is a man on the loose who seems to be biting dogs"}
-			credit={{ by: [{ name: "John Doe" }], affiliation: [{ name: "Stock Photo" }] }}
+			credit="John Doe (Stock Photo)"
 			title={"Man Bites Dog"}
 		/>
 	</Story>
@@ -49,11 +49,7 @@ const CaptionFeature = () => (
 
 <Preview>
 	<Story name="No caption">
-		<Caption
-			caption=""
-			credit={{ by: [{ name: "John Doe" }], affiliation: [{ name: "Stock Photo" }] }}
-			title={"Man Bites Dog"}
-		/>
+		<Caption caption="" credit="John Doe (Stock Photo)" title={"Man Bites Dog"} />
 	</Story>
 </Preview>
 
@@ -63,7 +59,7 @@ const CaptionFeature = () => (
 	<Story name="No credit">
 		<Caption
 			caption={"There is a man on the loose who seems to be biting dogs"}
-			credit={{}}
+			credit=""
 			title={"Man Bites Dog"}
 		/>
 	</Story>
@@ -75,7 +71,7 @@ const CaptionFeature = () => (
 	<Story name="No title">
 		<Caption
 			caption={"There is a man on the loose who seems to be biting dogs"}
-			credit={{ by: [{ name: "John Doe" }], affiliation: [{ name: "Stock Photo" }] }}
+			credit="John Doe (Stock Photo)"
 			title={""}
 		/>
 	</Story>
@@ -85,84 +81,18 @@ const CaptionFeature = () => (
 
 <Preview>
 	<Story name="No title, caption, nor credit">
-		<Caption caption={""} credit={{}} title={""} />
+		<Caption caption={""} credit="" title={""} />
 	</Story>
 </Preview>
 
-** Renders html passed into title or caption **
+** Renders html passed into title or caption or credit **
 
 <Preview>
 	<Story name="Renders html passed into title or caption">
 		<Caption
 			title="<p>Important Alert</p>"
-			caption="<div>There is man on the loose biting dogs</div><div>All dogs should evacuate the area</div>"
-			credit={{ by: [{ name: "John Doe" }], affiliation: [{ name: "Stock Photo" }] }}
-		/>
-	</Story>
-</Preview>
-
-** With many name credits **
-
-<Preview>
-	<Story name="With many name credits">
-		<Caption
-			title="Important Alert"
-			caption={"There is a man on the loose who seems to be biting dogs"}
-			credit={{
-				by: [{ name: "John Doe" }, { name: "Jane Doe" }],
-				affiliation: [{ name: "Stock Photo" }],
-			}}
-		/>
-	</Story>
-</Preview>
-
-** With many affiliations **
-
-<Preview>
-	<Story name="With many affiliations">
-		<Caption
-			title="Important Alert"
-			caption={"There is a man on the loose who seems to be biting dogs"}
-			credit={{
-				by: [{ name: "John Doe" }],
-				affiliation: [
-					{ name: "Stock Photo" },
-					{ name: "Another Stock Photo" },
-					{ name: "Yet Another Stock Photo" },
-				],
-			}}
-		/>
-	</Story>
-</Preview>
-
-** With only affiliations **
-
-<Preview>
-	<Story name="With only affiliations">
-		<Caption
-			title="Important Alert"
-			caption={"There is a man on the loose who seems to be biting dogs"}
-			credit={{
-				affiliation: [
-					{ name: "Stock Photo" },
-					{ name: "Another Stock Photo" },
-					{ name: "Yet Another Stock Photo" },
-				],
-			}}
-		/>
-	</Story>
-</Preview>
-
-** With only names **
-
-<Preview>
-	<Story name="With only names">
-		<Caption
-			title="Important Alert"
-			caption={"There is a man on the loose who seems to be biting dogs"}
-			credit={{
-				by: [{ name: "John Doe" }, { name: "Jane Doe" }],
-			}}
+			caption="<div><p>There is man on the loose biting dogs</p></div><div><p>All dogs should evacuate the area</p></div>"
+			credit={"<div><p>John Doe (<i>Stock Photo</i>)</p></div>"}
 		/>
 	</Story>
 </Preview>

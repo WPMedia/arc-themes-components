@@ -1,12 +1,9 @@
 import PropTypes from "prop-types";
-import formatCredits from "../../utils/format-credits";
 
 const COMPONENT_CLASS_NAME = "c-caption";
 
-const Caption = ({ caption, className, credit, title }) => {
-	const formattedCredit = formatCredits(credit);
-
-	return title || caption || formattedCredit ? (
+const Caption = ({ caption, className, credit, title }) =>
+	title || caption || credit ? (
 		<figcaption
 			className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
 		>
@@ -16,10 +13,11 @@ const Caption = ({ caption, className, credit, title }) => {
 			{caption ? (
 				<span dangerouslySetInnerHTML={{ __html: `${caption} ` }} className="c-caption__caption" />
 			) : null}
-			{formattedCredit ? <span className="c-caption__credit">{formattedCredit}</span> : null}
+			{credit ? (
+				<span dangerouslySetInnerHTML={{ __html: `${credit} ` }} className="c-caption__credit" />
+			) : null}
 		</figcaption>
 	) : null;
-};
 
 Caption.propTypes = {
 	/** Class name(s) that get appended to default class name of the component */
@@ -28,8 +26,8 @@ Caption.propTypes = {
 	title: PropTypes.node,
 	/** Caption is the second area in the component, if present */
 	caption: PropTypes.node,
-	/** Credit is the third area in the component, if the object contains by and affiliation */
-	credit: PropTypes.object,
+	/** Credit is the third area in the component, if present */
+	credit: PropTypes.node,
 };
 
 export default Caption;
