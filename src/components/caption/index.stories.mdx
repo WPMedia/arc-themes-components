@@ -1,4 +1,4 @@
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 
 import Caption from ".";
 
@@ -29,13 +29,13 @@ const CaptionFeature = () => (
 
 ## Properties
 
-<Props of={Caption} />
+<ArgsTable of={Caption} />
 
 ## Stories
 
 ** Default **
 
-<Preview>
+<Canvas>
 	<Story name="Default">
 		<Caption
 			caption={"There is a man on the loose who seems to be biting dogs"}
@@ -43,19 +43,19 @@ const CaptionFeature = () => (
 			title={"Man Bites Dog"}
 		/>
 	</Story>
-</Preview>
+</Canvas>
 
 ** No caption **
 
-<Preview>
+<Canvas>
 	<Story name="No caption">
 		<Caption caption="" credit="John Doe (Stock Photo)" title={"Man Bites Dog"} />
 	</Story>
-</Preview>
+</Canvas>
 
 ** No credit **
 
-<Preview>
+<Canvas>
 	<Story name="No credit">
 		<Caption
 			caption={"There is a man on the loose who seems to be biting dogs"}
@@ -63,11 +63,11 @@ const CaptionFeature = () => (
 			title={"Man Bites Dog"}
 		/>
 	</Story>
-</Preview>
+</Canvas>
 
 ** No title **
 
-<Preview>
+<Canvas>
 	<Story name="No title">
 		<Caption
 			caption={"There is a man on the loose who seems to be biting dogs"}
@@ -75,19 +75,19 @@ const CaptionFeature = () => (
 			title={""}
 		/>
 	</Story>
-</Preview>
+</Canvas>
 
 ** No title, caption, nor credit **
 
-<Preview>
+<Canvas>
 	<Story name="No title, caption, nor credit">
 		<Caption caption={""} credit="" title={""} />
 	</Story>
-</Preview>
+</Canvas>
 
 ** Renders html passed into title or caption or credit **
 
-<Preview>
+<Canvas>
 	<Story name="Renders html passed into title or caption">
 		<Caption
 			title="<p>Important Alert</p>"
@@ -95,4 +95,4 @@ const CaptionFeature = () => (
 			credit={"<div><p>John Doe (<i>Stock Photo</i>)</p></div>"}
 		/>
 	</Story>
-</Preview>
+</Canvas>
