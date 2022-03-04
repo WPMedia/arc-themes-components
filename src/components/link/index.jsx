@@ -17,6 +17,6 @@ Link.defaultProps = {};
 
 export { Link as RawLink };
 
-export default withAnchorWrapper(withComponentClassName(Link), {
-	componentClassName: COMPONENT_CLASS_NAME,
-});
+export default withAnchorWrapper(
+	withComponentClassName(Link, { componentClassName: COMPONENT_CLASS_NAME })
+);
