@@ -9,7 +9,11 @@ import Icon from ".";
 
 # Icon
 
---- Add a description of the component here ---
+Icons are used to provide additional meaning via a visual means in place where
+a text label doesn't fit or work for design. The Icon component has the ability
+to be rendered in the context of an Image if needed. By default the Icon is
+presentatioanl and should be not be used in this context as a standalone item. If
+using an Icon as a action (Button) ensure accessibility considerations are addressed.
 
 ## Usage
 
@@ -29,17 +33,23 @@ import { Icon } from '@wpmedia/arc-themes-components';
 ** Default **
 
 <Preview>
-	<Story name="Default">
-		<Icon name="User" />
-	</Story>
-</Preview>
-
-<Preview>
-	<Story name="All">
+	<Story name="All Icons">
 		<Stack direction="horizontal" wrap="wrap">
 			{Object.keys(Icons).map((key) => (
 				<Icon name={key} />
 			))}
 		</Stack>
+	</Story>
+</Preview>
+
+<Preview>
+	<Story name="Single Icon">
+		<Icon name="User" />
+	</Story>
+</Preview>
+
+<Preview>
+	<Story name="Single Icon with fill">
+		<Icon name="User" fill="#bfacc2" />
 	</Story>
 </Preview>

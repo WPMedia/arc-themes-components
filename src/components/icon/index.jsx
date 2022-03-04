@@ -38,13 +38,19 @@ Icon.defaultProps = {
 Icon.propTypes = {
 	/** Class name(s) that get appended to default class name of the component */
 	className: PropTypes.string,
-	/**  */
+	/** Context control how an Icon is to be rendered. By default icons are
+	 * "presentational" meaning they are removed from the accessibility tree.
+	 * If an icon should be treated as an image set the context to be "image"
+	 * and ensure at minimum a title is also provided
+	 */
 	context: PropTypes.oneOf(["presentational", "image"]),
-	/**  */
+	/** Additional text that can be used when using the image context to
+	 * proivde a description to the icon
+	 */
 	description: PropTypes.string,
-	/** */
+	/** By passing in a color value the icon would be filled in with the color value */
 	fill: PropTypes.string,
-	/** */
+	/** Control the heigt of the Icon output */
 	height: PropTypes.number,
 	/** Name of the Icon to render */
 	name: PropTypes.oneOf([
@@ -87,9 +93,10 @@ Icon.propTypes = {
 		"ZoomIn",
 		"ZoomOut",
 	]).isRequired,
-	/** */
+	/** An accessible label for the icon, used with the "context" property
+	 */
 	title: PropTypes.string,
-	/** */
+	/** Control the width of the Icon output */
 	width: PropTypes.number,
 };
 
