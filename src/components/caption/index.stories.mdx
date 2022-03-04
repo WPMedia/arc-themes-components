@@ -6,15 +6,25 @@ import Caption from ".";
 
 # Caption
 
---- Add a description of the component here ---
+The `<Caption>` component is used to display a caption for its parent element. This is using the [`<figcaption>` HTML element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figcaption).
+
+The component can take in HTML to render `title`, `caption`, and `credit`.
 
 ## Usage
 
-```
-import { Caption } from '@wpmedia/arc-themes-components';
+```jsx
+import { Caption } from "@wpmedia/arc-themes-components";
 
-
-<Caption>Component Children</Caption>
+const CaptionFeature = () => (
+	<figure>
+		<img src="/man-bites-dog" alt="Man biting dog" />
+		<Caption
+			title="Important Alert"
+			caption="<div>There is man on the loose biting dogs</div><div>All dogs should evacuate the area</div>"
+			credit="(John Doe/Death to Stock Photo)"
+		/>
+	</figure>
+);
 ```
 
 ## Properties
@@ -72,5 +82,17 @@ import { Caption } from '@wpmedia/arc-themes-components';
 <Preview>
 	<Story name="No title, caption, nor credit">
 		<Caption caption={""} credit={""} title={""} />
+	</Story>
+</Preview>
+
+** Takes in html **
+
+<Preview>
+	<Story name="Takes in html">
+		<Caption
+			title="<p>Important Alert</p>"
+			caption="<div>There is man on the loose biting dogs</div><div>All dogs should evacuate the area</div>"
+			credit="(John Doe/Death to Stock Photo)"
+		/>
 	</Story>
 </Preview>
