@@ -18,7 +18,7 @@ module.exports = {
 		ecmaVersion: 2020,
 		sourceType: "module",
 	},
-	plugins: ["react", "jest", "jsx-a11y", "react-hooks", "sort-exports"],
+	plugins: ["react", "jest", "jsx-a11y", "react-hooks", "sort-exports", "risxss"],
 	rules: {
 		"global-require": "off",
 		indent: ["error", "tab"],
@@ -81,5 +81,6 @@ module.exports = {
 			"error",
 			{ sortDir: "asc", ignoreCase: true, sortExportKindFirst: "type" },
 		],
+		"risxss/catch-potential-xss-react": "error",
 	},
 };
