@@ -4,9 +4,22 @@ import Caption from "./src/components/caption";
 import Date from "./src/components/date";
 import Heading from "./src/components/headings/heading";
 import HeadingSection from "./src/components/headings/section";
+import Icon from "./src/components/icon";
+import Image from "./src/components/image";
 import Link from "./src/components/link";
 import Paragraph from "./src/components/paragraph";
 import Stack from "./src/components/stack";
 import formatCredits from "./src/utils/format-credits";
 
-export { Caption, Date, formatCredits, Heading, HeadingSection, Link, Paragraph, Stack };
+export {
+	Caption,
+	Date,
+	formatCredits,
+	Heading,
+	HeadingSection,
+	Icon,
+	Image,
+	Link,
+	Paragraph,
+	Stack,
+};
