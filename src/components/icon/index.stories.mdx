@@ -1,4 +1,4 @@
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 
 import * as Icons from "./icons";
 import Stack from "../stack";
@@ -26,13 +26,13 @@ import { Icon } from '@wpmedia/arc-themes-components';
 
 ## Properties
 
-<Props of={Icon} />
+<ArgsTable of={Icon} />
 
 ## Stories
 
 ** Default **
 
-<Preview>
+<Canvas>
 	<Story name="All Icons">
 		<Stack direction="horizontal" wrap="wrap">
 			{Object.keys(Icons).map((key) => (
@@ -40,16 +40,16 @@ import { Icon } from '@wpmedia/arc-themes-components';
 			))}
 		</Stack>
 	</Story>
-</Preview>
+</Canvas>
 
-<Preview>
+<Canvas>
 	<Story name="Single Icon">
 		<Icon name="User" />
 	</Story>
-</Preview>
+</Canvas>
 
-<Preview>
+<Canvas>
 	<Story name="Single Icon with fill">
 		<Icon name="User" fill="#bfacc2" />
 	</Story>
-</Preview>
+</Canvas>
