@@ -7,13 +7,10 @@ import { withComponentClassName } from '../../common/hocs';
 
 const COMPONENT_CLASS_NAME = 'c-<%= h.inflection.dasherize(component_name) %>';
 
-const <%= h.changeCase.pascal(component_name) %> = withComponentClassName(
-	({ children, className }) => (
-		<div className={className}>
-			{children}
-		</div>
-	),
-	{componentClassName: COMPONENT_CLASS_NAME}
+const <%= h.changeCase.pascal(component_name) %> = ({ children, className }) => (
+	<div className={className}>
+		{children}
+	</div>
 );
 
 <%= h.changeCase.pascal(component_name) %>.propTypes = {
@@ -21,4 +18,9 @@ const <%= h.changeCase.pascal(component_name) %> = withComponentClassName(
 	children: PropTypes.node.isRequired,
 };
 
-export default <%= h.changeCase.pascal(component_name) %>;
+export { <%= h.changeCase.pascal(component_name) %> as Raw<%= h.changeCase.pascal(component_name) %> };
+
+export default withComponentClassName(
+	<%= h.changeCase.pascal(component_name) %>,
+	{ componentClassName: COMPONENT_CLASS_NAME },
+);

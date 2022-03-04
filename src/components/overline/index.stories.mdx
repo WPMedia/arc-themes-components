@@ -1,6 +1,6 @@
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 
-import Overline from ".";
+import Overline, { RawOverline } from ".";
 
 <Meta title="Components/Overline" component={Overline} />
 
@@ -19,14 +19,14 @@ import { Overline } from '@wpmedia/arc-themes-components';
 
 ## Properties
 
-<Props of={Overline} />
+<ArgsTable of={RawOverline} />
 
 ## Stories
 
 ** Default **
 
-<Preview>
+<Canvas>
 	<Story name="Default">
 		<Overline>Overline Text</Overline>
 	</Story>
-</Preview>
+</Canvas>

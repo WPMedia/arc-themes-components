@@ -12,7 +12,7 @@ const determineVisuallyHiddenText = (supplementalText, opensInNewTab) => {
 };
 
 const withAnchorWrapper = (Component) => {
-	const AnchorWrappedComponent = (props) => {
+	const Composite = (props) => {
 		const { className, ...propsWithoutClassName } = props;
 		const { assistiveHidden, href, openInNewTab, supplementalText } = props;
 		// openInNewTab is undefined by default
@@ -38,7 +38,7 @@ const withAnchorWrapper = (Component) => {
 		);
 	};
 
-	AnchorWrappedComponent.propTypes = {
+	Composite.propTypes = {
 		/** Remove the link from the accessibility tree with aria-hidden, tabindex=-1 */
 		assistiveHidden: PropTypes.bool,
 		/** The destination of the link */
@@ -53,14 +53,16 @@ const withAnchorWrapper = (Component) => {
 		...Component.propTypes,
 	};
 
-	AnchorWrappedComponent.defaultProps = {
+	Composite.defaultProps = {
 		assistiveHidden: false,
 		openInNewTab: undefined,
 		supplementalText: "",
 		...Component.defaultProps,
 	};
 
-	return AnchorWrappedComponent;
+	Composite.displayName = Component.displayName;
+
+	return Composite;
 };
 
 export default withAnchorWrapper;

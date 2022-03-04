@@ -4,9 +4,7 @@ import { withAnchorWrapper, withComponentClassName } from "../../common/hocs";
 
 const COMPONENT_CLASS_NAME = "c-link";
 
-const Link = withComponentClassName(({ children }) => children, {
-	componentClassName: COMPONENT_CLASS_NAME,
-});
+const Link = ({ children }) => children;
 
 Link.propTypes = {
 	/** The text, images or any node that will be displayed within the link */
@@ -17,4 +15,8 @@ Link.propTypes = {
 
 Link.defaultProps = {};
 
-export default withAnchorWrapper(Link);
+export { Link as RawLink };
+
+export default withAnchorWrapper(withComponentClassName(Link), {
+	componentClassName: COMPONENT_CLASS_NAME,
+});

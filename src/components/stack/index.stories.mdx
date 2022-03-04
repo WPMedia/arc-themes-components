@@ -1,6 +1,6 @@
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 
-import Stack from ".";
+import Stack, { RawStack } from ".";
 
 <Meta title="Components/Stack" component={Stack} />
 
@@ -25,21 +25,21 @@ import { Stack } from '@wpmedia/arc-themes-components';
 
 ## Properties
 
-<Props of={Stack} />
+<ArgsTable of={RawStack} />
 
 ## Stories
 
 ** Default **
 
-<Preview>
+<Canvas>
 	<Story name="Default">
 		<Stack>Stack Text</Stack>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Vertical **
 
-<Preview>
+<Canvas>
 	<Story name="Vertical">
 		<Stack>
 			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
@@ -47,11 +47,11 @@ import { Stack } from '@wpmedia/arc-themes-components';
 			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
 		</Stack>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Vertical centered**
 
-<Preview>
+<Canvas>
 	<Story name="Vertical centered">
 		<Stack alignment="center">
 			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
@@ -59,11 +59,11 @@ import { Stack } from '@wpmedia/arc-themes-components';
 			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
 		</Stack>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Vertical end alignment**
 
-<Preview>
+<Canvas>
 	<Story name="Vertical end alignment">
 		<Stack alignment="end">
 			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
@@ -71,11 +71,11 @@ import { Stack } from '@wpmedia/arc-themes-components';
 			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
 		</Stack>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Vertical with divider**
 
-<Preview>
+<Canvas>
 	<Story name="Vertical with divider">
 		<Stack divider>
 			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
@@ -83,23 +83,23 @@ import { Stack } from '@wpmedia/arc-themes-components';
 			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
 		</Stack>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Vertical with divider and inline-flex**
 
-<Preview>
+<Canvas>
 	<Story name="Vertical with divider and inlined">
-		<Stack divider inline="true">
+		<Stack divider inline>
 			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
 			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
 			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
 		</Stack>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Horizontal **
 
-<Preview>
+<Canvas>
 	<Story name="Horizontal">
 		<Stack direction="horizontal">
 			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
@@ -108,11 +108,11 @@ import { Stack } from '@wpmedia/arc-themes-components';
 			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
 		</Stack>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Horizontal with divider**
 
-<Preview>
+<Canvas>
 	<Story name="Horizontal with divider">
 		<Stack direction="horizontal" divider>
 			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
@@ -121,11 +121,11 @@ import { Stack } from '@wpmedia/arc-themes-components';
 			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
 		</Stack>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Horizontal with divider and centered justification**
 
-<Preview>
+<Canvas>
 	<Story name="Horizontal with divider and centered justification">
 		<Stack direction="horizontal" divider justification="center">
 			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
@@ -134,11 +134,11 @@ import { Stack } from '@wpmedia/arc-themes-components';
 			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
 		</Stack>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Horizontal with divider and end justification**
 
-<Preview>
+<Canvas>
 	<Story name="Horizontal with divider and end justification">
 		<Stack direction="horizontal" divider justification="end">
 			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
@@ -147,11 +147,11 @@ import { Stack } from '@wpmedia/arc-themes-components';
 			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
 		</Stack>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Horizontal with wrap applied**
 
-<Preview>
+<Canvas>
 	<Story name="Horizontal with wrap applied">
 		<Stack direction="horizontal" wrap="wrap">
 			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
@@ -168,11 +168,11 @@ import { Stack } from '@wpmedia/arc-themes-components';
 			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
 		</Stack>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Horizontal with no wrap**
 
-<Preview>
+<Canvas>
 	<Story name="Horizontal with no wrap">
 		<Stack direction="horizontal" wrap="nowrap">
 			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
@@ -189,11 +189,11 @@ import { Stack } from '@wpmedia/arc-themes-components';
 			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
 		</Stack>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Horizontal with reverse wrap**
 
-<Preview>
+<Canvas>
 	<Story name="Horizontal with reverse wrap">
 		<Stack direction="horizontal" wrap="reverse">
 			<div style={{ height: "250px", width: "250px", backgroundColor: "black", color: "white" }}>
@@ -225,13 +225,13 @@ import { Stack } from '@wpmedia/arc-themes-components';
 			</div>
 		</Stack>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Horizontal with no wrap and inline flex**
 
-<Preview>
+<Canvas>
 	<Story name="Horizontal with no wrap and inlined">
-		<Stack direction="horizontal" wrap="nowrap" inline="true">
+		<Stack direction="horizontal" wrap="nowrap" inline>
 			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
 			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
 			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}> </div>
@@ -246,13 +246,13 @@ import { Stack } from '@wpmedia/arc-themes-components';
 			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
 		</Stack>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Custom Gap **
 
 Note: the custom gap can be a hardcoded string (ex: `5px`) or reference a CSS token (ex: `var(--global-spacing-200)`)
 
-<Preview>
+<Canvas>
 	<Story name="Custom Gap">
 		<Stack>
 			<Stack direction="horizontal" gap="5px">
@@ -269,4 +269,4 @@ Note: the custom gap can be a hardcoded string (ex: `5px`) or reference a CSS to
 			</Stack>
 		</Stack>
 	</Story>
-</Preview>
+</Canvas>

@@ -29,4 +29,6 @@ Heading.propTypes = {
 	children: PropTypes.node.isRequired,
 };
 
+export { Heading as RawHeading };
+
 export default Heading;

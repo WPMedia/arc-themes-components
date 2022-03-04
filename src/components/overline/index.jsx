@@ -13,6 +13,8 @@ Overline.propTypes = {
 
 Overline.defaultProps = {};
 
+export { Overline as RawOverline };
+
 export default withComponentClassName(withAnchorWrapper(Overline), {
 	componentClassName: COMPONENT_CLASS_NAME,
 });

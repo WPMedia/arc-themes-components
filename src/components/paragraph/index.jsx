@@ -4,13 +4,28 @@ import { withComponentClassName } from "../../common/hocs";
 
 const COMPONENT_CLASS_NAME = "c-paragraph";
 
-const Paragraph = withComponentClassName(
-	({ children, className }) => <p className={className}>{children}</p>,
-	{ componentClassName: COMPONENT_CLASS_NAME }
+const Paragraph = ({ children, className, truncationLines }) => (
+	<p
+		style={{ "--paragraph-truncation": truncationLines > 0 ? truncationLines : null }}
+		className={className}
+	>
+		{children}
+	</p>
 );
 
-Paragraph.propTypes = {
-	children: PropTypes.string.isRequired,
+Paragraph.defaultProps = {
+	truncationLines: 0,
 };
 
-export default Paragraph;
+Paragraph.propTypes = {
+	/** Elements that will be displayed within the component. */
+	children: PropTypes.any.isRequired,
+	/** Number of lines to show before being truncated and augmented with ellipses.
+	 	Default value is `0` and results in no truncation of content.
+	 */
+	truncationLines: PropTypes.number,
+};
+
+export { Paragraph as RawParagraph };
+
+export default withComponentClassName(Paragraph, { componentClassName: COMPONENT_CLASS_NAME });

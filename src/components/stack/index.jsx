@@ -5,30 +5,37 @@ import { withComponentClassName } from "../../common/hocs";
 
 const COMPONENT_CLASS_NAME = "c-stack";
 
-const Stack = withComponentClassName(
-	({ alignment, children, className, direction, divider, inline, justification, gap, wrap }) => {
-		const childCount = React.Children.count(children);
-		return (
-			<div
-				className={className}
-				data-style-direction={direction}
-				data-style-justification={justification}
-				data-style-alignment={alignment}
-				data-style-inline={inline}
-				data-style-wrap={wrap}
-				style={{ "--c-stack-gap": gap }}
-			>
-				{React.Children.map(children, (child, index) => (
-					<>
-						{child}
-						{divider && index !== childCount - 1 ? <hr aria-hidden="true" /> : null}
-					</>
-				))}
-			</div>
-		);
-	},
-	{ componentClassName: COMPONENT_CLASS_NAME }
-);
+const Stack = ({
+	alignment,
+	children,
+	className,
+	direction,
+	divider,
+	inline,
+	justification,
+	gap,
+	wrap,
+}) => {
+	const childCount = React.Children.count(children);
+	return (
+		<div
+			className={className}
+			data-style-direction={direction}
+			data-style-justification={justification}
+			data-style-alignment={alignment}
+			data-style-inline={inline}
+			data-style-wrap={wrap}
+			style={{ "--c-stack-gap": gap }}
+		>
+			{React.Children.map(children, (child, index) => (
+				<>
+					{child}
+					{divider && index !== childCount - 1 ? <hr aria-hidden="true" /> : null}
+				</>
+			))}
+		</div>
+	);
+};
 
 Stack.defaultProps = {
 	alignment: "unset",
@@ -65,4 +72,6 @@ Stack.propTypes = {
 	wrap: PropTypes.oneOf(["nowrap", "wrap", "reverse"]),
 };
 
-export default Stack;
+export { Stack as RawStack };
+
+export default withComponentClassName(Stack, { componentClassName: COMPONENT_CLASS_NAME });

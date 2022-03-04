@@ -1,6 +1,6 @@
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 
-import Heading from "./heading";
+import Heading, { RawHeading } from "./heading";
 import HeadingSection from "./section";
 
 <Meta title="Components/Heading" component={Heading} />
@@ -56,33 +56,33 @@ const SectionBlockFeature = () => (
 
 ### Heading
 
-<Props of={Heading} />
+<ArgsTable of={RawHeading} />
 
 ### Heading Section
 
-<Props of={HeadingSection} />
+<ArgsTable of={HeadingSection} />
 
 ## Stories
 
 ** Heading **
 
-<Preview>
+<Canvas>
 	<Story name="Heading">
 		<Heading>Heading Level 1</Heading>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Heading With Custom Additional Classes **
 
-<Preview>
+<Canvas>
 	<Story name="Heading With Custom Additional Classes">
 		<Heading additionalClassNames="test-class test-class-1">Heading Level 1</Heading>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Nested Headings **
 
-<Preview>
+<Canvas>
 	<Story name="Nested Headings">
 		<Heading>Heading Level 1</Heading>
 		<HeadingSection>
@@ -104,4 +104,4 @@ const SectionBlockFeature = () => (
 			</HeadingSection>
 		</HeadingSection>
 	</Story>
-</Preview>
+</Canvas>

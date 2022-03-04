@@ -4,13 +4,10 @@ import { withComponentClassName } from "../../common/hocs";
 
 const COMPONENT_CLASS_NAME = "c-date";
 
-const Date = withComponentClassName(
-	({ className, dateString, dateTime }) => (
-		<time className={className} dateTime={dateTime}>
-			{dateString}
-		</time>
-	),
-	{ componentClassName: COMPONENT_CLASS_NAME }
+const Date = ({ className, dateString, dateTime }) => (
+	<time className={className} dateTime={dateTime}>
+		{dateString}
+	</time>
 );
 
 Date.propTypes = {
@@ -23,4 +20,6 @@ Date.propTypes = {
 	dateTime: PropTypes.string.isRequired,
 };
 
-export default Date;
+export { Date as RawDate };
+
+export default withComponentClassName(Date, { componentClassName: COMPONENT_CLASS_NAME });

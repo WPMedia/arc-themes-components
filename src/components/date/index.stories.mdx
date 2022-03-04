@@ -1,6 +1,6 @@
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 
-import Date from ".";
+import Date, { RawDate } from ".";
 
 <Meta title="Components/Date" component={Date} />
 
@@ -20,46 +20,46 @@ const DateFeature = () => <Date dateTime="2018-03-05" dateString="March 5" />;
 
 ## Properties
 
-<Props of={Date} />
+<ArgsTable of={RawDate} />
 
 ## Stories
 
 ** Date **
 
-<Preview>
+<Canvas>
 	<Story name="Date">
 		<Date dateTime="2018-03-05" dateString="March 5" />
 	</Story>
-</Preview>
+</Canvas>
 
 ** Date and Time **
 
-<Preview>
+<Canvas>
 	<Story name="Date and Time">
 		<p>
 			The concert starts at{" "}
 			<Date dateTime="2018-03-05T20:00:00" dateString="March 5 at 8 at night" />.
 		</p>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Time Only **
 
-<Preview>
+<Canvas>
 	<Story name="Time Only">
 		<p>
 			Every day at <Date dateTime="20:00:00" dateString="8" />, the show will be on.
 		</p>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Date and Time with no timezone **
 
-<Preview>
+<Canvas>
 	<Story name="Date and Time with no timezone">
 		<p>
 			Last Christmas <Date dateTime="2018-12-25T07:00:00" dateString="December 25 at 7 am" />,
 			presents were opened in many places across the world!
 		</p>
 	</Story>
-</Preview>
+</Canvas>

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
-const withClassNameMerge = (Component, options = {}) => {
-	const ClassNameModifiedComponent = (props) => {
+const withComponentClassName = (Component, options = {}) => {
+	const Composite = (props) => {
 		const { className = "" } = props;
 		const { componentClassName = "" } = options;
 
@@ -18,15 +18,15 @@ const withClassNameMerge = (Component, options = {}) => {
 		);
 	};
 
-	ClassNameModifiedComponent.propTypes = {
+	Composite.propTypes = {
 		/** Class name(s) that get appended to default class name of the component */
 		className: PropTypes.string,
 		...Component.propTypes,
 	};
 
-	ClassNameModifiedComponent.defaultProps = Component.defaultProps;
+	Composite.defaultProps = Component.defaultProps;
 
-	return ClassNameModifiedComponent;
+	return Composite;
 };
 
-export default withClassNameMerge;
+export default withComponentClassName;
