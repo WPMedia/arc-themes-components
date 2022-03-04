@@ -8,13 +8,22 @@ const Caption = ({ caption, className, credit, title }) =>
 			className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
 		>
 			{title ? (
-				<span dangerouslySetInnerHTML={{ __html: `${title} ` }} className=`${COMPONENT_CLASS_NAME}__title` />
+				<span
+					dangerouslySetInnerHTML={{ __html: `${title} ` }}
+					className={`${COMPONENT_CLASS_NAME}__title`}
+				/>
 			) : null}
 			{caption ? (
-				<span dangerouslySetInnerHTML={{ __html: `${caption} ` }} className=`${COMPONENT_CLASS_NAME}__caption` />
+				<span
+					dangerouslySetInnerHTML={{ __html: `${caption} ` }}
+					className={`${COMPONENT_CLASS_NAME}__caption`}
+				/>
 			) : null}
 			{credit ? (
-				<span dangerouslySetInnerHTML={{ __html: `${credit} ` }} className="c-caption__credit" />
+				<span
+					dangerouslySetInnerHTML={{ __html: `${credit} ` }}
+					className={`${COMPONENT_CLASS_NAME}__credit`}
+				/>
 			) : null}
 		</figcaption>
 	) : null;
