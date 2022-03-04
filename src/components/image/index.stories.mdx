@@ -1,4 +1,4 @@
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 
 import Image from ".";
 
@@ -20,29 +20,29 @@ import { Image } from '@wpmedia/arc-themes-components';
 
 ## Properties
 
-<Props of={Image} />
+<ArgsTable of={Image} />
 
 ## Stories
 
 ** Default **
 
-<Preview>
+<Canvas>
 	<Story name="Default">
 		<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
 	</Story>
-</Preview>
+</Canvas>
 
 ** Image not found **
 
-<Preview>
+<Canvas>
 	<Story name="Image not found">
 		<Image src="cat.jpg" alt="A cat jumping up to a ball" />
 	</Story>
-</Preview>
+</Canvas>
 
 ** Width and Height **
 
-<Preview>
+<Canvas>
 	<Story name="Width and Height">
 		<Image
 			src="/computer-user.jpeg"
@@ -51,4 +51,4 @@ import { Image } from '@wpmedia/arc-themes-components';
 			height="147"
 		/>
 	</Story>
-</Preview>
+</Canvas>
