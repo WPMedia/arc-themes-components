@@ -60,8 +60,6 @@ const withAnchorWrapper = (Component) => {
 		...Component.defaultProps,
 	};
 
-	Composite.displayName = Component.displayName;
-
 	return Composite;
 };
 
