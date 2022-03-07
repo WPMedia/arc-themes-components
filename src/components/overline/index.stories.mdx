@@ -10,11 +10,32 @@ By default, the Overline component will render an overline span for use above he
 
 ## Usage
 
+```jsx
+import { Overline } from "@wpmedia/arc-themes-components";
+
+const Feature = () => {
+	return (
+		<>
+			<Overline>Sports</Overline>
+			<h2>Local Team Wins Finals</h2>
+			/* ... */
+		</>
+	);
+};
 ```
-import { Overline } from '@wpmedia/arc-themes-components';
 
+```jsx
+import { Overline } from "@wpmedia/arc-themes-components";
 
-<Overline>Component Children</Overline>
+const Feature = () => {
+	return (
+		<>
+			<Overline href="./sports">Sports</Overline>
+			<h2>Local Team Wins Finals</h2>
+			/* ... */
+		</>
+	);
+};
 ```
 
 ## Properties
