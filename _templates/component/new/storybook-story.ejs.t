@@ -1,7 +1,7 @@
 ---
 to: src/components/<%= h.inflection.dasherize(component_name) %>/index.stories.mdx
 ---
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
 
 import <%= h.changeCase.pascal(component_name) %> from '.';
 
@@ -22,13 +22,13 @@ import { <%= h.changeCase.pascal(component_name) %> } from '@wpmedia/arc-themes-
 
 ## Properties
 
-<Props of={<%= h.changeCase.pascal(component_name) %>} />
+<ArgsTable of={<%= h.changeCase.pascal(component_name) %>} />
 
 ## Stories
 
-** Default **
-<Preview>
-	<Story name="Default">
+** <%= h.changeCase.pascal(component_name) %> **
+<Canvas>
+	<Story name="<%= h.changeCase.pascal(component_name) %>">
 		<<%= h.changeCase.pascal(component_name) %>><%= h.changeCase.pascal(component_name) %> Text</<%= h.changeCase.pascal(component_name) %>>
 	</Story>
-</Preview>
+</Canvas>

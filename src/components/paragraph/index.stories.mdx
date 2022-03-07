@@ -1,4 +1,4 @@
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 
 import Paragraph from "./";
 
@@ -19,13 +19,13 @@ import { Paragraph } from '@wpmedia/arc-themes-components';
 
 ## Properties
 
-<Props of={Paragraph} />
+<ArgsTable of={Paragraph} />
 
 ## Stories
 
 ** Default **
 
-<Preview>
+<Canvas>
 	<Story name="Default">
 		<Paragraph>
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
@@ -41,11 +41,11 @@ import { Paragraph } from '@wpmedia/arc-themes-components';
 			luctus venenatis lectus.
 		</Paragraph>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Output with embedded HTML**
 
-<Preview>
+<Canvas>
 	<Story name="Output with embedded HTML">
 		<Paragraph>
 			Lorem ipsum dolor sit amet,
@@ -63,11 +63,11 @@ import { Paragraph } from '@wpmedia/arc-themes-components';
 			aliquam ut porttitor leo a diam. Diam maecenas sed enim ut sem. Sit amet luctus venenatis lectus.
 		</Paragraph>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Truncation at two lines**
 
-<Preview>
+<Canvas>
 	<Story name="Truncation at two lines">
 		<div style={{ width: "200px" }}>
 			<Paragraph truncationLines={2}>
@@ -85,11 +85,11 @@ import { Paragraph } from '@wpmedia/arc-themes-components';
 			</Paragraph>
 		</div>
 	</Story>
-</Preview>
+</Canvas>
 
 ** Truncation at three lines**
 
-<Preview>
+<Canvas>
 	<Story name="Truncation at three lines">
 		<div style={{ width: "200px" }}>
 			<Paragraph truncationLines={3}>
@@ -107,4 +107,4 @@ import { Paragraph } from '@wpmedia/arc-themes-components';
 			</Paragraph>
 		</div>
 	</Story>
-</Preview>
+</Canvas>
