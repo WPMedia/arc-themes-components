@@ -22,13 +22,13 @@ import { <%= h.changeCase.pascal(component_name) %> } from '@wpmedia/arc-themes-
 
 ## Properties
 
-<ArgsTable of={Raw<%= h.changeCase.pascal(component_name) %>} />
+<ArgsTable of={<%= h.changeCase.pascal(component_name) %>} />
 
 ## Stories
 
-** Default **
+** <%= h.changeCase.pascal(component_name) %> **
 <Canvas>
-	<Story name="Default">
+	<Story name="<%= h.changeCase.pascal(component_name) %>">
 		<<%= h.changeCase.pascal(component_name) %>><%= h.changeCase.pascal(component_name) %> Text</<%= h.changeCase.pascal(component_name) %>>
 	</Story>
 </Canvas>

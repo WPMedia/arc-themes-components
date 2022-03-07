@@ -1,0 +1,8 @@
+@use "../../scss";
+
+.c-image {
+	color: red;
+	font-style: italic;
+
+	@include scss.component-properties("image");
+}
