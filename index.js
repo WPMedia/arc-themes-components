@@ -21,7 +21,7 @@ export {
 	Icon,
 	Image,
 	Link,
-  Overline,
+	Overline,
 	Paragraph,
 	Stack,
 };
