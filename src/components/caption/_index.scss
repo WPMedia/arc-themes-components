@@ -1,0 +1,17 @@
+@use "../../scss";
+
+.c-caption {
+	@include scss.component-properties("caption");
+
+	.c-caption__title {
+		@include scss.component-properties("caption-title");
+	}
+
+	.c-caption__caption {
+		@include scss.component-properties("caption-caption");
+	}
+
+	.c-caption__credit {
+		@include scss.component-properties("caption-credit");
+	}
+}
