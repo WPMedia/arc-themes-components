@@ -6,15 +6,34 @@ import Overline, { RawOverline } from ".";
 
 # Overline
 
---- Add a description of the component here ---
+By default, the Overline component will render an overline span for use above headlines or headers. If an href is passed as a property, the Overline will instead render as a simple hyperlink for internal navigation. This is not intended for use for external navigation. If you desire this functionality, please utilize the &lt;Link /&gt; component as a wrap to the Overline.
 
 ## Usage
 
+```jsx
+import { Overline } from "@wpmedia/arc-themes-components";
+
+const Feature = () => {
+	return (
+		<>
+			<Overline>Sports</Overline>
+			/* ... */
+		</>
+	);
+};
 ```
-import { Overline } from '@wpmedia/arc-themes-components';
 
+```jsx
+import { Overline } from "@wpmedia/arc-themes-components";
 
-<Overline>Component Children</Overline>
+const Feature = () => {
+	return (
+		<>
+			<Overline href="./sports">Sports</Overline>
+			/* ... */
+		</>
+	);
+};
 ```
 
 ## Properties
@@ -23,10 +42,18 @@ import { Overline } from '@wpmedia/arc-themes-components';
 
 ## Stories
 
-** Default **
+** Overline **
 
 <Canvas>
-	<Story name="Default">
+	<Story name="Overline">
 		<Overline>Overline Text</Overline>
+	</Story>
+</Canvas>
+
+** Overline as a Hyperlink **
+
+<Canvas>
+	<Story name="Overline Hyperlink">
+		<Overline href="./">Overline Text as a Hyperlink</Overline>
 	</Story>
 </Canvas>

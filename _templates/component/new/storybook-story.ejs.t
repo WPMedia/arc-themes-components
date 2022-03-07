@@ -13,7 +13,7 @@ import <%= h.changeCase.pascal(component_name) %>, { Raw<%= h.changeCase.pascal(
 
 ## Usage
 
-```
+```jsx
 import { <%= h.changeCase.pascal(component_name) %> } from '@wpmedia/arc-themes-components';
 
 
