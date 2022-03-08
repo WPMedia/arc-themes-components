@@ -24,6 +24,7 @@ _The author of the PR should fill out the following sections to ensure this PR i
 - [ ] Confirmed all the test steps a reviewer will follow above are working.
 - [ ] Ran this code locally and checked that there are not any unintended side effects. For example, that a CSS selector is scoped only to a particular block.
 - [ ] Confirmed relevant documentation has been updated/added.
+- [ ] Add label - **ready for review** when the pull request is ready for someone to begin reviewing
 
 ## Reviewer Checklist
 
