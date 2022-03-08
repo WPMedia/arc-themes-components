@@ -1,7 +1,7 @@
 /* eslint-disable react/button-has-type */
 /*
 	Disabled ESLint rule as the type attribute is using oneOf propType with a default
-	value - whihch ESLint is unable to parse as acceptable when in the use case below
+	value - which ESLint is unable to parse as acceptable when in the use case below
 	is valid as there is a default and the use of oneOf PropType validation
 */
 import { forwardRef } from "react";
