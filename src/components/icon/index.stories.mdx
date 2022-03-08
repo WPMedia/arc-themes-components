@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { Meta, Story, Canvas, ArgsTable, IconGallery, IconItem } from "@storybook/addon-docs";
 
 import * as Icons from "./icons";
 import Stack from "../stack";
@@ -17,16 +17,25 @@ using an Icon as a action (Button) ensure accessibility considerations are addre
 
 ## Usage
 
-```
-import { Icon } from '@wpmedia/arc-themes-components';
+```jsx
+import { Icon } from "@wpmedia/arc-themes-components";
 
-
-<Icon name="User" />
+const Feature = () => <Icon name="User" />;
 ```
 
 ## Properties
 
 <ArgsTable of={Icon} />
+
+## Icons
+
+<IconGallery>
+	{Object.keys(Icons).map((key) => (
+		<IconItem name={key}>
+			<Icon name={key} />
+		</IconItem>
+	))}
+</IconGallery>
 
 ## Stories
 

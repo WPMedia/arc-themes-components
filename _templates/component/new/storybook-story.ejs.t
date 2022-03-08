@@ -17,7 +17,7 @@ import <%= h.changeCase.pascal(component_name) %> from '.';
 import { <%= h.changeCase.pascal(component_name) %> } from '@wpmedia/arc-themes-components';
 
 
-<<%= h.changeCase.pascal(component_name) %>>Component Children</<%= h.changeCase.pascal(component_name) %>>
+const Feature = () => <<%= h.changeCase.pascal(component_name) %>>Component Children</<%= h.changeCase.pascal(component_name) %>>;
 ```
 
 ## Properties

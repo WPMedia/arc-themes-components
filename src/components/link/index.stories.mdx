@@ -14,16 +14,14 @@ By default, the link will open in a new tab if the `href` property starts with h
 
 ## Usage
 
-```
-import { Link } from '@wpmedia/arc-themes-components';
+```jsx
+import { Link } from "@wpmedia/arc-themes-components";
 
-
-<Link
-	href="https://www.arcxp.com/"
-	supplementalText="The Arc XP page will open in a new window"
->
-	See Arc XP Homepage
-</Link>
+const Feature = () => (
+	<Link href="https://www.arcxp.com/" supplementalText="The Arc XP page will open in a new window">
+		See Arc XP Homepage
+	</Link>
+);
 ```
 
 ## Properties
