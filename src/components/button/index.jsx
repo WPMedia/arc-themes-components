@@ -84,8 +84,6 @@ Button.propTypes = {
 	iconLeft: PropTypes.node,
 	/** Icon to be placed on the right side */
 	iconRight: PropTypes.node,
-	/** A React ref - pass in a variable defined from React.createRef() */
-	ref: PropTypes.ref,
 	/** Ability to have three different size buttons, allowing control via styles */
 	size: PropTypes.oneOf(["small", "medium", "large"]),
 	/** Style of button that matches with the styling set up within your theme */
