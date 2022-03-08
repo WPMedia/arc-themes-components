@@ -54,6 +54,18 @@ $tokens: () !default;
 	}
 }
 
+@mixin component-with-states($name, $states: []) {
+	@include component-properties("#{$name}");
+
+	@if list.length($states) > 0 {
+		@each $state in $states {
+			&:#{$state} {
+				@include component-properties("#{$name}-#{$state}");
+			}
+		}
+	}
+}
+
 //
 // token-map-to-css-variable
 // mixin to output CSS Variable from a token map
