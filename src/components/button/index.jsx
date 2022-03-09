@@ -20,8 +20,8 @@ const Button = forwardRef((props, ref) => {
 		iconLeft,
 		iconRight,
 		size,
-		style,
 		type,
+		variant,
 		...rest
 	} = props;
 
@@ -34,11 +34,11 @@ const Button = forwardRef((props, ref) => {
 			href && `${COMPONENT_CLASS_NAME}--link`,
 			fullWidth && `${COMPONENT_CLASS_NAME}--full-width`,
 			size && `${COMPONENT_CLASS_NAME}--${size}`,
-			style && `${COMPONENT_CLASS_NAME}--${style}`,
+			variant && `${COMPONENT_CLASS_NAME}--${variant}`,
 			className,
 		]
 			.filter((i) => i)
-			.join(" "),
+			.join("  "),
 	};
 
 	const buttonContents = (
@@ -66,6 +66,7 @@ const Button = forwardRef((props, ref) => {
 Button.defaultProps = {
 	type: "button",
 	size: "medium",
+	fullWidth: false,
 };
 
 Button.propTypes = {
@@ -87,8 +88,8 @@ Button.propTypes = {
 	iconRight: PropTypes.node,
 	/** Ability to have three different size buttons, allowing control via styles */
 	size: PropTypes.oneOf(["small", "medium", "large"]),
-	/** Style of button that matches with the styling set up within your theme */
-	style: PropTypes.oneOf([
+	/** Variant style of button that matches with the styling set up within your theme */
+	variant: PropTypes.oneOf([
 		"primary",
 		"primary-reverse",
 		"secondary",
