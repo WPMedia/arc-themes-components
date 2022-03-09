@@ -6,7 +6,6 @@
 */
 import { forwardRef } from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
 
 const COMPONENT_CLASS_NAME = "c-button";
 
@@ -30,14 +29,16 @@ const Button = forwardRef((props, ref) => {
 		...rest,
 		ref,
 		"aria-label": accessibilityLabel,
-		className: classnames({
-			[`${COMPONENT_CLASS_NAME}`]: true,
-			[`${COMPONENT_CLASS_NAME}--link`]: href,
-			[`${COMPONENT_CLASS_NAME}--full-width`]: fullWidth,
-			[`${COMPONENT_CLASS_NAME}--${size}`]: size,
-			[`${COMPONENT_CLASS_NAME}--${style}`]: style,
-			[`${className}`]: className,
-		}),
+		className: [
+			COMPONENT_CLASS_NAME,
+			href && `${COMPONENT_CLASS_NAME}--link`,
+			fullWidth && `${COMPONENT_CLASS_NAME}--full-width`,
+			size && `${COMPONENT_CLASS_NAME}--${size}`,
+			style && `${COMPONENT_CLASS_NAME}--${style}`,
+			className,
+		]
+			.filter((i) => i)
+			.join(" "),
 	};
 
 	const buttonContents = (

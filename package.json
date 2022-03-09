@@ -84,8 +84,5 @@
     "stylelint-config-recommended": "^6.0.0",
     "stylelint-config-sass-guidelines": "^9.0.1",
     "stylelint-no-unsupported-browser-features": "^5.0.2"
-  },
-  "dependencies": {
-    "classnames": "^2.3.1"
   }
 }
