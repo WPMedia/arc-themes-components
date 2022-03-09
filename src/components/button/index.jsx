@@ -38,7 +38,7 @@ const Button = forwardRef((props, ref) => {
 			className,
 		]
 			.filter((i) => i)
-			.join("  "),
+			.join(" "),
 	};
 
 	const buttonContents = (
