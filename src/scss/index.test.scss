@@ -14,6 +14,15 @@
 				"component1": (
 					"font-size": var(--font-size-small),
 				),
+				"with-state": (
+					"font-size": var(--font-size-small),
+				),
+				"with-state-hover": (
+					"font-size": var(--font-size-tiny),
+				),
+				"with-state-active": (
+					"font-size": var(--font-size-tiny),
+				),
 			),
 			blocks: (
 				"block1": (
@@ -189,6 +198,64 @@
 			}
 			@include expect {
 				font-size: var(--c-component1-font-size);
+			}
+		}
+	}
+}
+
+@include describe("component-with-states") {
+	@include it("returns nothing if definition does not exist") {
+		@include assert {
+			@include output {
+				@include root.component-with-states("missing");
+			}
+			@include expect {
+				// nothing
+			}
+		}
+	}
+
+	@include it("returns default if no states") {
+		@include assert {
+			@include output {
+				@include root.component-with-states("with-state");
+			}
+			@include expect {
+				font-size: var(--c-with-state-font-size);
+			}
+		}
+	}
+
+	@include it("returns definition for each state") {
+		@include assert {
+			@include output {
+				@include root.component-with-states("with-state", [hover]);
+			}
+			@include expect {
+				font-size: var(--c-with-state-font-size);
+
+				&:hover {
+					font-size: var(--c-with-state-hover-font-size);
+				}
+			}
+		}
+	}
+
+	@include it("returns definition for each state") {
+		@include assert {
+			@include output {
+				@include root.component-with-states("with-state", [hover, active]);
+			}
+			@include expect {
+				font-size: var(--c-with-state-font-size);
+
+				&:hover {
+					font-size: var(--c-with-state-hover-font-size);
+				}
+
+				&:active {
+					font-size: var(--c-with-state-active-font-size);
+				}
 			}
 		}
 	}

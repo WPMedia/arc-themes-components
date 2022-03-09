@@ -1,5 +1,6 @@
 /* eslint import/order: ["error", {"alphabetize": {"order": "asc", "caseInsensitive": true}}] */
 // inject imports after this comment and alphabetize them
+import Button from "./src/components/button";
 import Caption from "./src/components/caption";
 import Date from "./src/components/date";
 import Heading from "./src/components/headings/heading";
@@ -13,6 +14,7 @@ import Stack from "./src/components/stack";
 import formatCredits from "./src/utils/format-credits";
 
 export {
+	Button,
 	Caption,
 	Date,
 	formatCredits,
