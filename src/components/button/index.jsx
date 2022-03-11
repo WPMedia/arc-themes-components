@@ -64,9 +64,10 @@ const Button = forwardRef((props, ref) => {
 });
 
 Button.defaultProps = {
-	type: "button",
-	size: "medium",
 	fullWidth: false,
+	size: "medium",
+	type: "button",
+	variant: "default",
 };
 
 Button.propTypes = {
