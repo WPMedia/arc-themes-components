@@ -4,6 +4,7 @@
 	-webkit-appearance: none;
 	align-items: center;
 	display: inline-flex;
+	height: max-content;
 
 	@include scss.component-properties("button");
 
@@ -46,8 +47,8 @@
 		@include scss.component-with-states("button-primary-reverse", [hover, active]);
 	}
 
-	&--secondary-reverse {
-		@include scss.component-with-states("button-secondary-reverse", [hover, active]);
+	&--secondary {
+		@include scss.component-with-states("button-secondary", [hover, active]);
 	}
 
 	&--secondary-reverse {
@@ -56,6 +57,10 @@
 
 	&--small {
 		@include scss.component-with-states("button-small", [hover, active]);
+	}
+
+	&--medium {
+		@include scss.component-with-states("button-medium", [hover, active]);
 	}
 
 	&--large {
