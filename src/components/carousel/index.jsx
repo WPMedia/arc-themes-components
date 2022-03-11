@@ -41,7 +41,6 @@ const Carousel = ({ children, className, title }) => {
 	return (
 		<div className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}>
 			<link rel="stylesheet" type="text/css" charset="UTF-8" href="index.css" />
-			<h2>{title}</h2>
 			<div
 				style={{
 					marginLeft: "10%",
@@ -111,8 +110,6 @@ Carousel.propTypes = {
 	className: PropTypes.string,
 	/** The text, images or any node that will be displayed within the component */
 	children: PropTypes.node.isRequired,
-	/** The title displayed just above the carousel. */
-	title: PropTypes.string.isRequired,
 };
 
 export default Carousel;
