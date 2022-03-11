@@ -4,6 +4,30 @@ import Slider from "react-slick";
 
 const COMPONENT_CLASS_NAME = "c-carousel";
 
+const SampleNextArrow = (props) => {
+	const { className, style, onClick } = props;
+	return (
+		// eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
+		<div
+			className={className}
+			style={{ ...style, display: "block", background: "red" }}
+			onClick={onClick}
+		/>
+	);
+};
+
+const SamplePrevArrow = (props) => {
+	const { className, style, onClick } = props;
+	return (
+		// eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
+		<div
+			className={className}
+			style={{ ...style, display: "block", background: "green" }}
+			onClick={onClick}
+		/>
+	);
+};
+
 const Carousel = ({ children, className, title }) => {
 	const settings = {
 		dots: true,
@@ -11,6 +35,8 @@ const Carousel = ({ children, className, title }) => {
 		speed: 500,
 		slidesToShow: 4,
 		slidesToScroll: 4,
+		nextArrow: <SampleNextArrow />,
+		prevArrow: <SamplePrevArrow />,
 	};
 	return (
 		<div className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}>
@@ -18,9 +44,7 @@ const Carousel = ({ children, className, title }) => {
 			<h2>{title}</h2>
 			<div
 				style={{
-					display: "flex",
-					alignItems: "center",
-					justifyContent: "center",
+					marginLeft: "10%",
 					width: "75%",
 				}}
 			>
