@@ -1,0 +1,55 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+
+import Separator from ".";
+
+<Meta title="Components/Separator" component={Separator} />
+
+# Separator
+
+The `<Separator />` component is used to break up content. The `content` property can be set via `separatorString` prop.
+
+The component is using a `<span>` that can be customized as a whole. The pseudo-element `::after` be also be customized using Enhanced Styles with the `separator--after` hook. The pseudo-element uses `attr()` and a custom data attribute to pass in data via React `props`. The `content` property renders the `separatorString` prop, in this way.
+
+## Usage
+
+```jsx
+import { Separator } from "@wpmedia/arc-themes-components";
+
+const Feature = () => (
+	<p>
+		Everything needed: news <Separator /> Features <Separator separatorString="🚨" /> Breaking news.
+	</p>
+);
+```
+
+## Properties
+
+<ArgsTable of={Separator} />
+
+## Stories
+
+** Default **
+
+<Canvas>
+	<Story name="Default">
+		<p>
+			My name
+			<Separator />
+			Your name here
+		</p>
+	</Story>
+</Canvas>
+
+** Custom String **
+
+<Canvas>
+	<Story name="Custom String">
+		<p>
+			<Separator separatorString="🚨" />
+			alert
+			<Separator separatorString="🚨" /> alert
+			<Separator separatorString="🚨" /> alert
+			<Separator separatorString="🚨" />
+		</p>
+	</Story>
+</Canvas>

@@ -1,0 +1,10 @@
+@use "../../scss";
+
+.c-separator {
+	@include scss.component-properties("separator");
+}
+
+.c-separator[data-separator-string]::after {
+	@include scss.component-properties("separator--after");
+	content: attr(data-separator-string);
+}

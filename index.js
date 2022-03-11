@@ -10,6 +10,7 @@ import Image from "./src/components/image";
 import Link from "./src/components/link";
 import Overline from "./src/components/overline";
 import Paragraph from "./src/components/paragraph";
+import Separator from "./src/components/separator";
 import Stack from "./src/components/stack";
 import formatCredits from "./src/utils/format-credits";
 
@@ -25,5 +26,6 @@ export {
 	Link,
 	Overline,
 	Paragraph,
+	Separator,
 	Stack,
 };
