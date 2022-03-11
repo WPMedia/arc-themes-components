@@ -5,7 +5,7 @@ import { NextArrow, PrevArrow } from "./children/arrows";
 
 const COMPONENT_CLASS_NAME = "c-carousel";
 
-const Carousel = ({ children, className, title }) => {
+const Carousel = ({ children, className }) => {
 	const settings = {
 		speed: 500,
 		slidesToShow: 4,
@@ -17,8 +17,6 @@ const Carousel = ({ children, className, title }) => {
 	};
 	return (
 		<div className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}>
-			<link rel="stylesheet" type="text/css" charset="UTF-8" href="index.css" />
-			<h2>{title}</h2>
 			<Slider {...settings}>{children}</Slider>
 		</div>
 	);
