@@ -1,51 +1,94 @@
+import PropTypes from "prop-types";
 // import { useState } from 'react';
 import Slider from "react-slick";
 
-const Carousel = () => {
+const COMPONENT_CLASS_NAME = "c-carousel";
+
+const Carousel = ({ children, className, title }) => {
 	const settings = {
-		dots: false,
+		dots: true,
 		infinite: false,
 		speed: 500,
 		slidesToShow: 4,
 		slidesToScroll: 4,
 	};
 	return (
-		<div>
-			<h2>Carousel</h2>
-			<Slider {...settings}>
-				<div>
-					<h3>1</h3>
-				</div>
-				<div>
-					<h3>2</h3>
-				</div>
-				<div>
-					<h3>3</h3>
-				</div>
-				<div>
-					<h3>4</h3>
-				</div>
-				<div>
-					<h3>5</h3>
-				</div>
-				<div>
-					<h3>6</h3>
-				</div>
-				<div>
-					<h3>7</h3>
-				</div>
-				<div>
-					<h3>8</h3>
-				</div>
-				<div>
-					<h3>9</h3>
-				</div>
-				<div>
-					<h3>10</h3>
-				</div>
-			</Slider>
+		<div className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}>
+			<link rel="stylesheet" type="text/css" charset="UTF-8" href="index.css" />
+			<h2>{title}</h2>
+			<div
+				style={{
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+					width: "75%",
+				}}
+			>
+				<Slider {...settings}>
+					<div>
+						<h3>
+							<img src="http://placekitten.com/g/200/300" alt="meow" />
+						</h3>
+					</div>
+					<div>
+						<h3>
+							<img src="http://placekitten.com/g/200/300" alt="meow" />
+						</h3>
+					</div>
+					<div>
+						<h3>
+							<img src="http://placekitten.com/g/200/300" alt="meow" />
+						</h3>
+					</div>
+					<div>
+						<h3>
+							<img src="http://placekitten.com/g/200/300" alt="meow" />
+						</h3>
+					</div>
+					<div>
+						<h3>
+							<img src="http://placekitten.com/g/200/300" alt="meow" />
+						</h3>
+					</div>
+					<div>
+						<h3>
+							<img src="http://placekitten.com/g/200/300" alt="meow" />
+						</h3>
+					</div>
+					<div>
+						<h3>
+							<img src="http://placekitten.com/g/200/300" alt="meow" />
+						</h3>
+					</div>
+					<div>
+						<h3>
+							<img src="http://placekitten.com/g/200/300" alt="meow" />
+						</h3>
+					</div>
+					<div>
+						<h3>
+							<img src="http://placekitten.com/g/200/300" alt="meow" />
+						</h3>
+					</div>
+					<div>
+						<h3>
+							<img src="http://placekitten.com/g/200/300" alt="meow" />
+						</h3>
+					</div>
+				</Slider>
+			</div>
+			{children}
 		</div>
 	);
 };
 
-export default Carousel();
+Carousel.propTypes = {
+	/** Class name(s) that get appended to default class name of the component */
+	className: PropTypes.string,
+	/** The text, images or any node that will be displayed within the component */
+	children: PropTypes.node.isRequired,
+	/** The title displayed just above the carousel. */
+	title: PropTypes.string.isRequired,
+};
+
+export default Carousel;

@@ -2,6 +2,7 @@
 // inject imports after this comment and alphabetize them
 import Button from "./src/components/button";
 import Caption from "./src/components/caption";
+import Carousel from "./src/components/carousel";
 import Date from "./src/components/date";
 import Heading from "./src/components/headings/heading";
 import HeadingSection from "./src/components/headings/section";
@@ -16,6 +17,7 @@ import formatCredits from "./src/utils/format-credits";
 export {
 	Button,
 	Caption,
+	Carousel,
 	Date,
 	formatCredits,
 	Heading,
