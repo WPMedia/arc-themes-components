@@ -1,7 +1,12 @@
 @use "../../scss";
 
+// in-lining the css variable on the actual element, not pseudo-element
+.c-separator {
+	--separator-content: var(--c-separator-content, "●");
+}
+
 .c-separator::after {
 	@include scss.component-properties("separator");
 
-	content: var(--content);
+	content: var(--separator-content);
 }
