@@ -1,0 +1,17 @@
+@use "../../scss";
+
+.c-pill {
+	@include scss.component-properties("pill");
+
+	&:hover {
+		@include scss.component-properties("pill-hover");
+	}
+
+	&:active {
+		@include scss.component-properties("pill-active");
+	}
+
+	&:visited {
+		@include scss.component-properties("pill-visited");
+	}
+}
