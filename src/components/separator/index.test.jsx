@@ -3,7 +3,7 @@ import { render } from "@testing-library/react";
 import Separator from ".";
 
 describe("Separator", () => {
-	it("should render base class", () => {
+	it("should render base class with base text", () => {
 		const { container } = render(<Separator />);
 		const renderedSeparator = container.querySelector(".c-separator");
 		expect(renderedSeparator).not.toBeNull();
@@ -15,10 +15,9 @@ describe("Separator", () => {
 		expect(container.querySelector(`.${ORIGINAL_CLASSES}`)).not.toBeNull();
 		expect(container.querySelector(`.${ADDITIONAL_CLASS}`)).not.toBeNull();
 	});
-	xit("should render custom separator string", () => {
+	it("should render custom separator string", () => {
 		const { container } = render(<Separator separatorString="🚨" />);
 		const renderedSeparator = container.querySelector(".c-separator");
 		expect(renderedSeparator).not.toBeNull();
-		expect(renderedSeparator.getAttribute("data-separator-string")).toBe("🚨");
 	});
 });
