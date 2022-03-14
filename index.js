@@ -8,6 +8,7 @@ import Heading from "./src/components/headings/heading";
 import HeadingSection from "./src/components/headings/section";
 import Icon from "./src/components/icon";
 import Image from "./src/components/image";
+import Input from "./src/components/input";
 import Link from "./src/components/link";
 import Overline from "./src/components/overline";
 import Paragraph from "./src/components/paragraph";
@@ -25,6 +26,7 @@ export {
 	HeadingSection,
 	Icon,
 	Image,
+	Input,
 	Link,
 	Overline,
 	Paragraph,
