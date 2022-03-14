@@ -3,11 +3,10 @@ import { render } from "@testing-library/react";
 import Separator from ".";
 
 describe("Separator", () => {
-	it("should render base class with base text", () => {
+	it("should render base class", () => {
 		const { container } = render(<Separator />);
 		const renderedSeparator = container.querySelector(".c-separator");
 		expect(renderedSeparator).not.toBeNull();
-		expect(renderedSeparator.getAttribute("data-separator-string")).toBe("●");
 	});
 	it("should render additional class", () => {
 		const ORIGINAL_CLASSES = "c-separator";
