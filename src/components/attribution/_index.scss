@@ -1,0 +1,21 @@
+@use "../../scss";
+
+.c-attribution {
+	@include scss.component-properties("attribution");
+
+	a {
+		@include scss.component-properties("attribution-link");
+
+		&:hover {
+			@include scss.component-properties("attribution-link-hover");
+		}
+
+		&:active {
+			@include scss.component-properties("attribution-link-active");
+		}
+
+		&:visited {
+			@include scss.component-properties("attribution-link-visited");
+		}
+	}
+}
