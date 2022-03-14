@@ -1,12 +1,6 @@
 @use "../../scss";
 
-.c-separator {
-	@include scss.component-properties("separator");
-}
-
 .c-separator::after {
-	--content: var(--c-separator-content, "|fallback global divider|");
-
 	@include scss.component-properties("separator");
 
 	content: var(--content);

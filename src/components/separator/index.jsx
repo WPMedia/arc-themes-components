@@ -13,8 +13,8 @@ const Separator = ({ className, separatorString }) => {
 			className={classNames}
 			style={{
 				// ensuring emoji within are rendered as strings so that they count as tokens
-				// fallback of null so that variable content is not set at all
-				"--content": isCustomSeparator ? `"${separatorString}"` : null,
+				// fallback is using the default separator string from theme settings defaults
+				"--content": isCustomSeparator ? `"${separatorString}"` : "var(--c-separator-content)",
 			}}
 		/>
 	);

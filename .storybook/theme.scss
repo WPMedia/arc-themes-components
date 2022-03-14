@@ -21,9 +21,11 @@
 					height: auto,
 					width: 1px,
 				),
-				separator: (
-					content: "|global divider|",
-				),
+				// see inheritance of divider in separator
+				// separator:
+				// 	(
+				// 		content: "'|global divider|'",
+				// 	),,,
 			),
 		),
 	)
