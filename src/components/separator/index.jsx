@@ -6,9 +6,11 @@ const Separator = ({ className, separatorString }) => {
 	const isCustomSeparator = separatorString !== "";
 	const classNames = [
 		COMPONENT_CLASS_NAME,
-		isCustomSeparator && "c-spearator--custom-string",
+		isCustomSeparator ? "c-spearator--custom-string" : "",
 		className,
-	].join(" ");
+	]
+		.filter((classString) => classString)
+		.join(" ");
 
 	if (isCustomSeparator) {
 		return (
