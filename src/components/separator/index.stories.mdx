@@ -8,7 +8,7 @@ import Separator from ".";
 
 The `<Separator />` component is used to break up content. The `content` property can be set via `separatorString` prop.
 
-The component is using a `<span>` that can be customized as a whole. The pseudo-element `::after` be also be customized using Enhanced Styles with the `separator--after` hook. The pseudo-element uses `attr()` and a custom data attribute to pass in data via React `props`. The `content` property renders the `separatorString` prop, in this way. The default separator is set in Theme Settings.
+The component is using a `<span>` that can be customized as a whole. The `content` property renders the `separatorString` prop, in this way. The default separator is set in Theme Settings.
 
 ## Usage
 
@@ -40,10 +40,21 @@ const Feature = () => (
 	</Story>
 </Canvas>
 
-** Custom String **
+** Custom string **
 
 <Canvas>
-	<Story name="Custom String">
+	<Story name="Custom string">
+		<p>
+			<Separator separatorString="||" /> this <Separator separatorString="||" /> or{" "}
+			<Separator separatorString="||" /> that <Separator separatorString="||" />
+		</p>
+	</Story>
+</Canvas>
+
+** Custom string with emoji **
+
+<Canvas>
+	<Story name="Custom string with emoji">
 		<p>
 			<Separator separatorString="🚨" />
 			alert

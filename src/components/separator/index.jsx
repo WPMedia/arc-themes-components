@@ -4,25 +4,20 @@ const COMPONENT_CLASS_NAME = "c-separator";
 
 const Separator = ({ className, separatorString }) => {
 	const isCustomSeparator = separatorString !== "";
-	const classNames = [
-		COMPONENT_CLASS_NAME,
-		isCustomSeparator ? "c-separator--custom-string" : "",
-		className,
-	]
+	const classNames = [COMPONENT_CLASS_NAME, className]
 		.filter((classString) => classString)
 		.join(" ");
 
-	if (isCustomSeparator) {
-		return (
-			<span
-				className={classNames}
-				// passes in the separator string to show as the content property using attr()
-				data-separator-string={separatorString}
-			/>
-		);
-	}
-
-	return <span className={classNames} />;
+	return (
+		<span
+			className={classNames}
+			style={{
+				// ensuring emoji within are rendered as strings so that they count as tokens
+				// fallback of null so that variable content is not set at all
+				"--content": isCustomSeparator ? `"${separatorString}"` : null,
+			}}
+		/>
+	);
 };
 
 Separator.propTypes = {

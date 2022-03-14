@@ -5,9 +5,9 @@
 }
 
 .c-separator::after {
-	@include scss.component-properties("separator--after");
-}
+	--content: var(--c-separator-content, "|fallback global divider|");
 
-.c-separator--custom-string[data-separator-string]::after {
-	content: attr(data-separator-string);
+	@include scss.component-properties("separator");
+
+	content: var(--content);
 }
