@@ -1,7 +1,7 @@
 @use "../../scss";
 
 .c-paragraph {
-	--paragraph-truncation: var(--c-pargraph--webkit-line-clamp, "none");
+	--paragraph-truncation: var(--c-paragraph--webkit-line-clamp, "none");
 
 	overflow: hidden;
 	display: -webkit-box;
