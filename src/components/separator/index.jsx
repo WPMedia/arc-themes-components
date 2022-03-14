@@ -2,13 +2,26 @@ import PropTypes from "prop-types";
 
 const COMPONENT_CLASS_NAME = "c-separator";
 
-const Separator = ({ className, separatorString }) => (
-	<span
-		className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
-		// passes in the separator string to show as the content property using attr()
-		data-separator-string={separatorString}
-	/>
-);
+const Separator = ({ className, separatorString }) => {
+	const isCustomSeparator = separatorString !== "";
+	const classNames = [
+		COMPONENT_CLASS_NAME,
+		isCustomSeparator && "c-spearator--custom-string",
+		className,
+	].join(" ");
+
+	if (isCustomSeparator) {
+		return (
+			<span
+				className={classNames}
+				// passes in the separator string to show as the content property using attr()
+				data-separator-string={separatorString}
+			/>
+		);
+	}
+
+	return <span className={classNames} />;
+};
 
 Separator.propTypes = {
 	/** Class name(s) that get appended to default class name of the component */
@@ -18,7 +31,7 @@ Separator.propTypes = {
 };
 
 Separator.defaultProps = {
-	separatorString: "●",
+	separatorString: "",
 };
 
 export default Separator;

@@ -4,7 +4,10 @@
 	@include scss.component-properties("separator");
 }
 
-.c-separator[data-separator-string]::after {
+.c-separator::after {
 	@include scss.component-properties("separator--after");
+}
+
+.c-spearator--custom-string[data-separator-string]::after {
 	content: attr(data-separator-string);
 }
