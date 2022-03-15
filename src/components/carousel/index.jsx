@@ -3,9 +3,7 @@ import Slider from "react-slick";
 
 const Carousel = (props) => {
 	const { children, className } = props;
-
 	const COMPONENT_CLASS_NAME = "c-carousel";
-
 	return (
 		<div className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}>
 			<Slider {...props}>{children}</Slider>
