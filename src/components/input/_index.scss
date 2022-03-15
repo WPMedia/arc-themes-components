@@ -4,7 +4,6 @@
 	@include scss.component-properties("input");
 }
 
-// modifiers
 .c-input--hidden {
 	@include scss.component-properties("input-hidden");
 }
