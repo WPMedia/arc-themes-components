@@ -10,6 +10,23 @@ export const FIELD_TYPES = {
 	TEXT: "text",
 };
 
+const INPUT_STATUS = {
+	DEFAULT: "default",
+	ERROR: "error",
+	SUCCESS: "success",
+	WARNING: "warning",
+};
+
+const getDerivedInputState = ({ valid, inputState }) => {
+	// regex input validation overrides props input state
+	if (!valid) {
+		return INPUT_STATUS.ERROR;
+	}
+
+	// falls back to default if no props input state
+	return inputState || INPUT_STATUS.DEFAULT;
+};
+
 const Input = ({
 	autoComplete,
 	className,
@@ -25,6 +42,7 @@ const Input = ({
 	type = FIELD_TYPES.TEXT,
 	validationErrorMessage,
 	validationPattern,
+	inputState,
 }) => {
 	const [valid, setValid] = useState(true);
 	const [value, setValue] = useState(defaultValue);
@@ -66,10 +84,13 @@ const Input = ({
 		...(!valid ? { "aria-invalid": true } : {}),
 	};
 
+	// derive input state
+	const derivedInputState = getDerivedInputState({ valid, inputState });
+
 	return (
 		<div className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}>
 			<label
-				className={`${COMPONENT_CLASS_NAME}__label ${
+				className={`${COMPONENT_CLASS_NAME}__label--${derivedInputState} ${
 					hidden ? ` ${COMPONENT_CLASS_NAME}--hidden` : ""
 				}`}
 				htmlFor={inputId}
@@ -78,9 +99,8 @@ const Input = ({
 			</label>
 			<input
 				className={[
-					`${COMPONENT_CLASS_NAME}__input`,
+					`${COMPONENT_CLASS_NAME}__input--${derivedInputState}`,
 					...(hidden ? [`${COMPONENT_CLASS_NAME}-hidden`] : []),
-					...(!valid ? [`${COMPONENT_CLASS_NAME}__input--error`] : []),
 				].join(" ")}
 				id={inputId}
 				name={name}
@@ -92,10 +112,7 @@ const Input = ({
 			/>
 			{tip || !valid ? (
 				<div
-					className={[
-						`${COMPONENT_CLASS_NAME}__tip`,
-						...(!valid ? [`${COMPONENT_CLASS_NAME}__tip--error`] : []),
-					].join(" ")}
+					className={[`${COMPONENT_CLASS_NAME}__tip--${derivedInputState}`].join(" ")}
 					id={infoId}
 				>
 					{!valid && inputElement.current?.validationMessage ? (
@@ -137,6 +154,8 @@ Input.propTypes = {
 	className: PropTypes.string,
 	/** The text, images or any node that will be displayed within the component */
 	children: PropTypes.node.isRequired,
+	/** Status of the input passed down */
+	inputState: PropTypes.oneOf(Object.values(INPUT_STATUS)),
 };
 
 export default Input;
