@@ -23,7 +23,7 @@
 }
 
 .c-input__input--default {
-	@include scss.modifier-properties("input-warning");
+	@include scss.component-with-states("input-default", [placeholder]);
 }
 
 // input tip with input states
