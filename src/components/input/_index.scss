@@ -6,39 +6,41 @@
 
 // modifiers
 .c-input--hidden {
-	@include scss.modifier-properties("input-hidden");
+	@include scss.component-properties("input-hidden");
 }
 
 // input with input states
 .c-input__input--error {
-	@include scss.modifier-properties("input-error");
+	@include scss.component-properties("input-error");
 }
 
 .c-input__input--success {
-	@include scss.modifier-properties("input-success");
+	@include scss.component-properties("input-success");
 }
 
 .c-input__input--warning {
-	@include scss.modifier-properties("input-warning");
+	@include scss.component-properties("input-warning");
 }
 
+// added placeholder for default status
+// https://developer.mozilla.org/en-US/docs/Web/CSS/::placeholder
 .c-input__input--default {
 	@include scss.component-with-states("input-default", [placeholder]);
 }
 
 // input tip with input states
 .c-input__tip--error {
-	@include scss.modifier-properties("input-tip-error");
+	@include scss.component-properties("input-tip-error");
 }
 
 .c-input__tip--default {
-	@include scss.modifier-properties("input-tip-default");
+	@include scss.component-properties("input-tip-default");
 }
 
 .c-input__tip--warning {
-	@include scss.modifier-properties("input-tip-warning");
+	@include scss.component-properties("input-tip-warning");
 }
 
 .c-input__tip--success {
-	@include scss.modifier-properties("input-tip-success");
+	@include scss.component-properties("input-tip-success");
 }
