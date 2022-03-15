@@ -69,8 +69,8 @@ const Input = ({
 	return (
 		<div className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}>
 			<label
-				className={`${COMPONENT_CLASS_NAME}-label ${
-					hidden ? ` ${COMPONENT_CLASS_NAME}-hidden` : ""
+				className={`${COMPONENT_CLASS_NAME}__label ${
+					hidden ? ` ${COMPONENT_CLASS_NAME}--hidden` : ""
 				}`}
 				htmlFor={inputId}
 			>
@@ -78,9 +78,9 @@ const Input = ({
 			</label>
 			<input
 				className={[
-					`${COMPONENT_CLASS_NAME}-input`,
+					`${COMPONENT_CLASS_NAME}__input`,
 					...(hidden ? [`${COMPONENT_CLASS_NAME}-hidden`] : []),
-					...(!valid ? [`${COMPONENT_CLASS_NAME}-input--error`] : []),
+					...(!valid ? [`${COMPONENT_CLASS_NAME}__input--error`] : []),
 				].join(" ")}
 				id={inputId}
 				name={name}
@@ -93,8 +93,8 @@ const Input = ({
 			{tip || !valid ? (
 				<div
 					className={[
-						`${COMPONENT_CLASS_NAME}-tip`,
-						...(!valid ? [`${COMPONENT_CLASS_NAME}-tip--error`] : []),
+						`${COMPONENT_CLASS_NAME}__tip`,
+						...(!valid ? [`${COMPONENT_CLASS_NAME}__tip--error`] : []),
 					].join(" ")}
 					id={infoId}
 				>

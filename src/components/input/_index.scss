@@ -3,3 +3,30 @@
 .c-input {
 	@include scss.component-properties("input");
 }
+
+// modifiers
+.c-input--hidden {
+	@include scss.modifier-properties("input-hidden");
+}
+
+// elements
+.c-input__label {
+	@include scss.element-properties("input-label");
+}
+
+.c-input__input {
+	@include scss.element-properties("input-input");
+}
+
+.c-input__tip {
+	@include scss.element-properties("input-tip");
+}
+
+// element modifiers
+.c-input__input--error {
+	@include scss.modifier-properties("input-error");
+}
+
+.c-input__tip--error {
+	@include scss.modifier-properties("input-tip-error");
+}
