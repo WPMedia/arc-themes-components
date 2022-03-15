@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 // import { useState } from 'react';
 import Slider from "react-slick";
-import { NextArrow, PrevArrow } from "./children/arrows";
+// import { NextArrow, PrevArrow } from "./children/arrows";
 
 const COMPONENT_CLASS_NAME = "c-carousel";
 
@@ -12,8 +12,7 @@ const Carousel = ({ children, className }) => {
 		slidesToScroll: 4,
 		centerMode: false,
 		infinite: false,
-		nextArrow: <NextArrow />,
-		prevArrow: <PrevArrow />,
+		dots: true,
 	};
 	return (
 		<div className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}>
