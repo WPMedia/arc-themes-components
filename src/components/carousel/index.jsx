@@ -25,18 +25,14 @@ Carousel.defaultProps = {
 	accessibility: true,
 	adaptiveHeight: false,
 	afterChange: null,
-	appendDots: (dots) => {
-		<ul>{dots}</ul>;
-	},
+	appendDots: (dots) => <ul>{dots}</ul>,
 	asNavFor: undefined,
 	autoplay: false,
 	autoplaySpeed: 500,
 	beforeChange: null,
 	centerMode: false,
 	centerPadding: "50px",
-	customPaging: (i) => {
-		<button type="button">{i + 1}</button>;
-	},
+	customPaging: (i) => <button type="button">{i + 1}</button>,
 	dots: false,
 	dotsClass: "slick-dots",
 	draggable: true,
