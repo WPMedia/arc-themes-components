@@ -2,12 +2,56 @@ import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 
 import Carousel from ".";
 
+export const SampleCard = ({ src }) => (
+	<div>
+		<h3>
+			<img style={{ padding: "0 0.25rem" }} src={src} alt="meow" />
+		</h3>
+	</div>
+);
+
 <Meta title="Components/Carousel" component={Carousel} />
 
 # Carousel
 
 A `<Carousel>` is a container for child components that may be viewed in sequence,
-forward or backward.
+forward or backward. The container can take in markup of children div containers. Here is a simple example:
+
+```jsx
+<div>
+	<h3>
+		<img
+			style={{ padding: "0 0.25rem" }}
+			src="https://loremflickr.com/400/300"
+			alt="my image 1"
+		/>
+	</h3>
+</div>
+
+<div>
+	 <h3>
+		<img
+			style={{ padding: "0 0.25rem" }}
+			src="https://loremflickr.com/400/300"
+			alt="meow"
+		/>
+	 </h3>
+</div>
+```
+
+Or you can pass in a collection of react components that act as "slides" inside the carousel. Here is a simple example:
+
+```javascript
+const SampleCard = ({ src }) => (
+	<div>
+		<h3>
+			<img style={{ padding: "0 0.25rem" }} src={src} alt="meow" />
+		</h3>
+	</div>
+);
+```
+
+The examples used below will use the `SampleCard` component for brevity.
 
 ## Usage
 
@@ -36,51 +80,11 @@ const Feature = () => <Carousel>Component Children</Carousel>;
 			}}
 		>
 			<Carousel>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="https://loremflickr.com/400/300"
-							alt="meow"
-						/>
-					</h3>
-				</div>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="https://baconmockup.com/400/300"
-							alt="meow"
-						/>
-					</h3>
-				</div>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="https://www.placecage.com/400/300"
-							alt="meow"
-						/>
-					</h3>
-				</div>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="http://placeimg.com/400/300/any"
-							alt="meow"
-						/>
-					</h3>
-				</div>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="https://loremflickr.com/400/300"
-							alt="meow"
-						/>
-					</h3>
-				</div>
+				<SampleCard src="https://loremflickr.com/400/300" />
+				<SampleCard src="https://baconmockup.com/400/300" />
+				<SampleCard src="https://www.placecage.com/400/300" />
+				<SampleCard src="http://placeimg.com/400/300/any" />
+				<SampleCard src="https://loremflickr.com/400/300" />
 			</Carousel>
 		</div>
 	</Story>
@@ -98,157 +102,11 @@ const Feature = () => <Carousel>Component Children</Carousel>;
 			}}
 		>
 			<Carousel dots>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="https://loremflickr.com/400/300"
-							alt="meow"
-						/>
-					</h3>
-				</div>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="https://baconmockup.com/400/300"
-							alt="meow"
-						/>
-					</h3>
-				</div>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="https://www.placecage.com/400/300"
-							alt="meow"
-						/>
-					</h3>
-				</div>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="http://placeimg.com/400/300/any"
-							alt="meow"
-						/>
-					</h3>
-				</div>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="https://loremflickr.com/400/300"
-							alt="meow"
-						/>
-					</h3>
-				</div>
-			</Carousel>
-		</div>
-	</Story>
-</Canvas>
-
-** Mobile Carousel **
-
-<Canvas>
-	<Story name="Mobile Carousel">
-		<div
-			style={{
-				marginLeft: "10%",
-				maxWidth: "38rem",
-			}}
-		>
-			<Carousel>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="http://placekitten.com/g/400/300"
-							alt="meow"
-						/>
-					</h3>
-				</div>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="http://placekitten.com/g/400/300"
-							alt="meow"
-						/>
-					</h3>
-				</div>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="http://placekitten.com/g/400/300"
-							alt="meow"
-						/>
-					</h3>
-				</div>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="http://placekitten.com/g/400/300"
-							alt="meow"
-						/>
-					</h3>
-				</div>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="http://placekitten.com/g/400/300"
-							alt="meow"
-						/>
-					</h3>
-				</div>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="http://placekitten.com/g/400/300"
-							alt="meow"
-						/>
-					</h3>
-				</div>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="http://placekitten.com/g/400/300"
-							alt="meow"
-						/>
-					</h3>
-				</div>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="http://placekitten.com/g/400/300"
-							alt="meow"
-						/>
-					</h3>
-				</div>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="http://placekitten.com/g/400/300"
-							alt="meow"
-						/>
-					</h3>
-				</div>
-				<div>
-					<h3>
-						<img
-							style={{ padding: "0 0.25rem" }}
-							src="http://placekitten.com/g/400/300"
-							alt="meow"
-						/>
-					</h3>
-				</div>
+				<SampleCard src="https://loremflickr.com/400/300" />
+				<SampleCard src="https://baconmockup.com/400/300" />
+				<SampleCard src="https://www.placecage.com/400/300" />
+				<SampleCard src="http://placeimg.com/400/300/any" />
+				<SampleCard src="https://loremflickr.com/400/300" />
 			</Carousel>
 		</div>
 	</Story>
