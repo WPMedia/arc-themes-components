@@ -1,12 +1,22 @@
 import PropTypes from "prop-types";
 import Slider from "react-slick";
 
-const Carousel = (props) => {
-	const { children, className } = props;
-	const COMPONENT_CLASS_NAME = "c-carousel";
+const COMPONENT_CLASS_NAME = "c-carousel";
+
+// Removes any null or undefined properties for clarity
+const sanitizeSliderProps = (obj) => {
+	const tempProps = { ...obj };
+	return Object.entries(tempProps)
+		.filter(([, v]) => v != null)
+		.reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {});
+};
+
+const Carousel = ({ children, className, ...slick }) => {
+	const sliderProps = sanitizeSliderProps(slick);
+	// console.log('Here are the props: ', sliderProps);
 	return (
 		<div className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}>
-			<Slider {...props}>{children}</Slider>
+			<Slider {...sliderProps}>{children}</Slider>
 		</div>
 	);
 };
@@ -27,6 +37,7 @@ Carousel.defaultProps = {
 	customPaging: (i) => {
 		<button type="button">{i + 1}</button>;
 	},
+	dots: false,
 	dotsClass: "slick-dots",
 	draggable: true,
 	easing: "linear",
@@ -94,6 +105,8 @@ Carousel.propTypes = {
 	className: PropTypes.string,
 	/** Custom paging templates. */
 	customPaging: PropTypes.func,
+	/** Use paging dots * */
+	dots: PropTypes.bool,
 	/** CSS class for dots. */
 	dotsClass: PropTypes.string,
 	/** Enable scrollable via dragging on desktop. */
