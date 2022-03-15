@@ -14,4 +14,8 @@
 	&:visited {
 		@include scss.component-properties("pill-visited");
 	}
+
+	&:focus {
+		@include scss.component-properties("pill-focus");
+	}
 }
