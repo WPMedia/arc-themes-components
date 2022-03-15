@@ -152,8 +152,6 @@ Input.propTypes = {
 	validationPattern: PropTypes.string,
 	/** Class name(s) that get appended to default class name of the component */
 	className: PropTypes.string,
-	/** The text, images or any node that will be displayed within the component */
-	children: PropTypes.node.isRequired,
 	/** Status of the input passed down */
 	inputState: PropTypes.oneOf(Object.values(INPUT_STATUS)),
 };
