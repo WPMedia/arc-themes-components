@@ -14,4 +14,8 @@
 	&:visited {
 		@include scss.component-properties("overline-visited");
 	}
+
+	&:focus {
+		@include scss.component-properties("overline-focus");
+	}
 }
