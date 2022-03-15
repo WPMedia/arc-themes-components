@@ -76,6 +76,7 @@
 					(
 						alias: (
 							color: #f00,
+							font-family: "Inter",
 						),
 					)
 				);
@@ -83,6 +84,7 @@
 			@include expect {
 				:root {
 					--color: #f00;
+					--font-family: "Inter";
 				}
 			}
 		}
