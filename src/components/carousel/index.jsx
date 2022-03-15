@@ -5,15 +5,17 @@ const COMPONENT_CLASS_NAME = "c-carousel";
 
 // Removes any null or undefined properties for clarity
 const sanitizeSliderProps = (obj) => {
-	const tempProps = { ...obj };
-	return Object.entries(tempProps)
+	let tempProps = { ...obj };
+	tempProps = Object.entries(tempProps)
 		.filter(([, v]) => v != null)
 		.reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {});
+	tempProps.className = tempProps.sliderClassName;
+	delete tempProps.sliderClassName;
+	return tempProps;
 };
 
 const Carousel = ({ children, className, ...slick }) => {
 	const sliderProps = sanitizeSliderProps(slick);
-	// console.log('Here are the props: ', sliderProps);
 	return (
 		<div className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}>
 			<Slider {...sliderProps}>{children}</Slider>
@@ -99,6 +101,8 @@ Carousel.propTypes = {
 	children: PropTypes.node.isRequired,
 	/** Class name(s) that get appended to default class name of the component. */
 	className: PropTypes.string,
+	/** Class name(s) that get added to the internal React Slick control. */
+	sliderClassName: PropTypes.string,
 	/** Custom paging templates. */
 	customPaging: PropTypes.func,
 	/** Use paging dots * */
