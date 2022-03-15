@@ -26,8 +26,6 @@ Carousel.propTypes = {
 	className: PropTypes.string,
 	/** The text, images or any node that will be displayed within the component */
 	children: PropTypes.node.isRequired,
-	/** The title displayed just above the carousel. */
-	title: PropTypes.string.isRequired,
 };
 
 export default Carousel;
