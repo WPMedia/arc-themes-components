@@ -1,6 +1,6 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 
-import Input from ".";
+import Input, { FIELD_TYPES } from ".";
 
 <Meta title="Components/Input" component={Input} />
 
@@ -22,10 +22,148 @@ const Feature = () => <Input>Component Children</Input>;
 
 ## Stories
 
-** Input **
+** Default Text Input **
 
 <Canvas>
-	<Story name="Input">
-		<Input>Input Text</Input>
+	<Story name="Default Text Input">
+		<Input label="Plain Text Field" name="field1" />
+	</Story>
+</Canvas>
+
+** Text Input With Error **
+
+<Canvas>
+	<Story name="Text Input With Error">
+		<Input label="Plain Text Field" name="field3" required showDefaultError />
+	</Story>
+</Canvas>
+
+** Text Input With Placeholder **
+
+<Canvas>
+	<Story name="Text Input With Placeholder">
+		<Input label="Plain Text Field" name="field4" placeholder="Placeholder" />
+	</Story>
+</Canvas>
+
+** With Field Tip **
+
+<Canvas>
+	<Story name="With Field Tip">
+		<Input label="Plain Text Field" name="field5" tip="Enter some text." />
+	</Story>
+</Canvas>
+
+** With Field Tip and Error **
+
+<Canvas>
+	<Story name="With Field Tip and Error">
+		<Input
+			label="Plain Text Field"
+			name="field6"
+			tip="Enter some text."
+			required
+			showDefaultError
+		/>
+	</Story>
+</Canvas>
+
+** With Field Tip and Custom Error **
+
+<Canvas>
+	<Story name="With Field Tip and Custom Error">
+		<Input
+			label="Plain Text Field"
+			name="field7"
+			tip="Enter some text."
+			required
+			showDefaultError
+			validationErrorMessage="This is a custom error."
+		/>
+	</Story>
+</Canvas>
+
+** Email Field **
+
+<Canvas>
+	<Story name="Email Field">
+		<Input
+			defaultValue="my@valid.email"
+			name="field8"
+			type={FIELD_TYPES.EMAIL}
+			label="Email Address"
+		/>
+	</Story>
+</Canvas>
+
+** Email field With Error **
+
+<Canvas>
+	<Story name="Email field With Error">
+		<Input
+			defaultValue="my?invalid.email"
+			name="field9"
+			showDefaultError
+			type={FIELD_TYPES.EMAIL}
+			label="Email Address"
+		/>
+	</Story>
+</Canvas>
+
+** Password Field **
+
+<Canvas>
+	<Story name="Password Field">
+		<Input defaultValue="mypassword" name="field10" type={FIELD_TYPES.PASSWORD} label="Password" />
+	</Story>
+</Canvas>
+
+** Multiple Fields **
+
+<Canvas>
+	<Story name="Multiple Fields">
+		<form>
+			<FormInputField label="Blank field with tip" name="field13" tip="This is a tip." />
+			<FormInputField
+				defaultValue="my@valid.email"
+				name="field14"
+				type={FIELD_TYPES.EMAIL}
+				label="Email Address"
+			/>
+			<FormInputField
+				defaultValue="password"
+				name="field15"
+				type={FIELD_TYPES.PASSWORD}
+				label="Password"
+			/>
+		</form>
+	</Story>
+</Canvas>
+
+** Without Autocomplete **
+
+<Canvas>
+	<Story name="Without Autocomplete">
+		<Input
+			defaultValue=""
+			name="email"
+			type={FIELD_TYPES.EMAIL}
+			label="Email Address"
+			autoComplete="off"
+		/>
+	</Story>
+</Canvas>
+
+** Autocomplete New Password **
+
+<Canvas>
+	<Story name="Autocomplete New Password">
+		<Input
+			defaultValue=""
+			name="password-new-one"
+			type={FIELD_TYPES.PASSWORD}
+			label="Password"
+			autoComplete="new-password"
+		/>
 	</Story>
 </Canvas>
