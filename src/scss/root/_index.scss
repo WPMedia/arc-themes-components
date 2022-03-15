@@ -1,5 +1,6 @@
 @use "sass:list";
 @use "sass:map";
+@use "sass:meta";
 
 @use "reset";
 @use "a11y";
@@ -28,8 +29,8 @@ $tokens: () !default;
 	@if list.length(map.get($tokens, "default", "blocks", $blockName, "components")) >= 0 {
 		@each $name, $value in map.get($tokens, "default", "blocks", $blockName, "components") {
 			@if type-of($value) == map {
-				@each $a, $b in $value {
-					#{'--c-' + $name + '-' + $a}: $b;
+				@each $bName, $bValue in $value {
+					--c-#{$name}-#{$bName}: #{maintain-quotes($bValue)};
 				}
 			}
 		}
@@ -82,7 +83,9 @@ $tokens: () !default;
 			@if type-of($componentItem) == map {
 				@each $componentProperty, $componentValue in $componentItem {
 					@if type-of($componentValue) != map {
-						#{'--' + $prefix}-#{$componentName}-#{$componentProperty}: $componentValue;
+						--#{$prefix}-#{$componentName}-#{$componentProperty}: #{maintain-quotes(
+								$componentValue
+							)};
 					}
 				}
 			}
@@ -102,7 +105,7 @@ $tokens: () !default;
 			// Alias Tokens
 			@if map.has-key($tokens, "alias") {
 				@each $name, $value in map.get($tokens, "alias") {
-					#{'--' + $name}: $value;
+					--#{$name}: #{maintain-quotes($value)};
 				}
 			}
 
@@ -126,15 +129,19 @@ $tokens: () !default;
 	@return var(--b-#{$block}-#{$item});
 }
 
+@function maintain-quotes($item) {
+	@return #{meta.inspect($item)};
+}
+
 //
 // Start of output of CSS Variables
 //
 :root {
 	@each $name, $value in $global {
-		#{'--global-' + $name}: $value;
+		--global-#{$name}: #{maintain-quotes($value)};
 	}
 	@each $name, $value in $alias {
-		#{'--' + $name}: $value;
+		--#{$name}: #{maintain-quotes($value)};
 	}
 }
 
