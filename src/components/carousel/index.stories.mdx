@@ -57,7 +57,6 @@ The examples used below will use the `SampleCard` component for brevity.
 
 ```jsx
 import { Carousel } from "@wpmedia/arc-themes-components";
-import { Stack } from "@wpmedia/arc-themes-stack";
 
 const Feature = () => <Carousel>Component Children</Carousel>;
 ```
@@ -68,10 +67,10 @@ const Feature = () => <Carousel>Component Children</Carousel>;
 
 ## Stories
 
-** Carousel **
+** Multiple Items**
 
 <Canvas>
-	<Story name="Carousel">
+	<Story name="Multiple Items">
 		<div
 			style={{
 				marginLeft: "auto",
@@ -90,10 +89,10 @@ const Feature = () => <Carousel>Component Children</Carousel>;
 	</Story>
 </Canvas>
 
-** Carousel with Dots**
+** Multiple Items With Dots**
 
 <Canvas>
-	<Story name="Carousel with Dots">
+	<Story name="Multiple Items With Dots">
 		<div
 			style={{
 				marginLeft: "auto",
@@ -101,7 +100,41 @@ const Feature = () => <Carousel>Component Children</Carousel>;
 				maxWidth: "90rem",
 			}}
 		>
-			<Carousel dots>
+			<Carousel
+				sliderProps={{
+					dots: true,
+				}}
+			>
+				<SampleCard src="https://loremflickr.com/400/300" />
+				<SampleCard src="https://baconmockup.com/400/300" />
+				<SampleCard src="https://www.placecage.com/400/300" />
+				<SampleCard src="http://placeimg.com/400/300/any" />
+				<SampleCard src="https://loremflickr.com/400/300" />
+			</Carousel>
+		</div>
+	</Story>
+</Canvas>
+
+** Single Item With Dots**
+
+<Canvas>
+	<Story name="Single Item With Dots">
+		<div
+			style={{
+				marginLeft: "auto",
+				marginRight: "auto",
+				width: "350px",
+			}}
+		>
+			<Carousel
+				sliderProps={{
+					dots: true,
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					initialSlide: 0,
+					centerMode: false,
+				}}
+			>
 				<SampleCard src="https://loremflickr.com/400/300" />
 				<SampleCard src="https://baconmockup.com/400/300" />
 				<SampleCard src="https://www.placecage.com/400/300" />
