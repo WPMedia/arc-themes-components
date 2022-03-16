@@ -30,16 +30,16 @@ const getDerivedInputState = ({ valid, inputState }) => {
 const Input = ({
 	autoComplete,
 	className,
-	defaultValue = "",
-	hidden = false,
+	defaultValue,
+	hidden,
 	label,
 	name,
-	onChange = () => {},
+	onChange,
 	placeholder,
-	required = false,
-	showDefaultError = false,
+	required,
+	showDefaultError,
 	tip,
-	type = FIELD_TYPES.TEXT,
+	type,
 	validationErrorMessage,
 	validationPattern,
 	inputState,
@@ -157,6 +157,15 @@ Input.propTypes = {
 	className: PropTypes.string,
 	/** Status of the input passed down */
 	inputState: PropTypes.oneOf(Object.values(INPUT_STATUS)),
+};
+
+Input.defaultProps = {
+	defaultValue: "",
+	hidden: false,
+	onChange: () => {},
+	required: false,
+	showDefaultError: false,
+	type: FIELD_TYPES.TEXT,
 };
 
 export default Input;
