@@ -5,31 +5,31 @@
 }
 
 .c-input--hidden {
-	@include scss.component-properties("input-hidden");
+	@include scss.component-properties("input-input-hidden");
 }
 
 // input with input states
 .c-input__input--error {
-	@include scss.component-properties("input-error");
+	@include scss.component-properties("input-input-error");
 }
 
 .c-input__input--success {
-	@include scss.component-properties("input-success");
+	@include scss.component-properties("input-input-success");
 }
 
 .c-input__input--warning {
-	@include scss.component-properties("input-warning");
+	@include scss.component-properties("input-input-warning");
 }
 
 // added placeholder for default status
 // https://developer.mozilla.org/en-US/docs/Web/CSS/::placeholder
 .c-input__input--default {
-	@include scss.component-with-states("input-default", [placeholder]);
+	@include scss.component-with-states("input-input-default", [placeholder]);
 }
 
 // input tip with input states
 .c-input__tip--error {
-	@include scss.component-properties("input-tip-error");
+	@include scss.component-properties("input-input-tip-error");
 }
 
 .c-input__tip--default {
@@ -42,4 +42,21 @@
 
 .c-input__tip--success {
 	@include scss.component-properties("input-tip-success");
+}
+
+// label
+.c-input__label--error {
+	@include scss.component-properties("input-label-error");
+}
+
+.c-input_label--success {
+	@include scss.component-properties("input-label-success");
+}
+
+.c-input__label--warning {
+	@include scss.component-properties("input-label-warning");
+}
+
+.c-input__label--default {
+	@include scss.component-properties("input-label-default");
 }
