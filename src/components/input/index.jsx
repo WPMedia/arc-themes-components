@@ -91,20 +91,18 @@ const Input = ({
 	const containerClassNames = [
 		COMPONENT_CLASS_NAME,
 		className,
-		hidden && `${COMPONENT_CLASS_NAME}--hidden`,
+		// hidden overrides input state
+		hidden ? `${COMPONENT_CLASS_NAME}--hidden` : `${COMPONENT_CLASS_NAME}--${derivedInputState}`,
 	]
 		.filter((classString) => classString)
 		.join(" ");
 	return (
 		<div className={containerClassNames}>
-			<label
-				className={`${COMPONENT_CLASS_NAME}__label ${COMPONENT_CLASS_NAME}__label--${derivedInputState}`}
-				htmlFor={inputId}
-			>
+			<label className={`${COMPONENT_CLASS_NAME}__label`} htmlFor={inputId}>
 				{label}
 			</label>
 			<input
-				className={`${COMPONENT_CLASS_NAME}__input ${COMPONENT_CLASS_NAME}__input--${derivedInputState}`}
+				className={`${COMPONENT_CLASS_NAME}__input`}
 				id={inputId}
 				name={name}
 				type={type}
@@ -114,10 +112,7 @@ const Input = ({
 				{...fieldParameters}
 			/>
 			{tip || !valid ? (
-				<div
-					className={`${COMPONENT_CLASS_NAME}__tip ${COMPONENT_CLASS_NAME}__tip--${derivedInputState}`}
-					id={infoId}
-				>
+				<div className={`${COMPONENT_CLASS_NAME}__tip`} id={infoId}>
 					{!valid && inputElement.current?.validationMessage ? (
 						<span role="alert">{`${inputElement.current.validationMessage} `}</span>
 					) : null}
