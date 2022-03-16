@@ -1,62 +1,75 @@
 @use "../../scss";
 
+// input container div
 .c-input {
 	@include scss.component-properties("input");
+
+	&--hidden {
+		@include scss.component-properties("input-hidden");
+	}
 }
 
-.c-input--hidden {
-	@include scss.component-properties("input-input-hidden");
+// actual input element
+.c-input__input {
+	// added placeholder for default status
+	// https://developer.mozilla.org/en-US/docs/Web/CSS/::placeholder
+	// based on mocks, only input element is affected by focus state
+	@include scss.component-with-state("input-input", [focus, placeholder]);
+
+	&--error {
+		@include scss.component-properties("input-input-error");
+	}
+
+	&--success {
+		@include scss.component-properties("input-input-success");
+	}
+
+	&--warning {
+		@include scss.component-properties("input-input-warning");
+	}
+
+	&--default {
+		@include scss.component-properties("input-input-default");
+	}
 }
 
-// input with input states
-.c-input__input--error {
-	@include scss.component-properties("input-input-error");
+// label element
+.c-input__label {
+	@include scss.component-properties("input-label");
+
+	&--error {
+		@include scss.component-properties("input-label-error");
+	}
+
+	&--success {
+		@include scss.component-properties("input-label-success");
+	}
+
+	&--warning {
+		@include scss.component-properties("input-label-warning");
+	}
+
+	&--default {
+		@include scss.component-properties("input-label-default");
+	}
 }
 
-.c-input__input--success {
-	@include scss.component-properties("input-input-success");
-}
+.c-input__tip {
+	@include scss.component-properties("input-tip");
 
-.c-input__input--warning {
-	@include scss.component-properties("input-input-warning");
-}
+	&--error {
+		@include scss.component-properties("input-tip-error");
+	}
 
-// added placeholder for default status
-// https://developer.mozilla.org/en-US/docs/Web/CSS/::placeholder
-.c-input__input--default {
-	@include scss.component-with-states("input-input-default", [placeholder]);
-}
+	&--success {
+		@include scss.component-properties("input-tip-success");
+	}
 
-// input tip with input states
-.c-input__tip--error {
-	@include scss.component-properties("input-input-tip-error");
-}
+	&--warning {
+		@include scss.component-properties("input-tip-warning");
+	}
 
-.c-input__tip--default {
-	@include scss.component-properties("input-tip-default");
-}
-
-.c-input__tip--warning {
-	@include scss.component-properties("input-tip-warning");
-}
-
-.c-input__tip--success {
-	@include scss.component-properties("input-tip-success");
-}
-
-// label
-.c-input__label--error {
-	@include scss.component-properties("input-label-error");
-}
-
-.c-input_label--success {
-	@include scss.component-properties("input-label-success");
-}
-
-.c-input__label--warning {
-	@include scss.component-properties("input-label-warning");
-}
-
-.c-input__label--default {
-	@include scss.component-properties("input-label-default");
+	&--default {
+		@include scss.component-properties("input-tip-default");
+	}
 }

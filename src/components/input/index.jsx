@@ -84,24 +84,27 @@ const Input = ({
 		...(!valid ? { "aria-invalid": true } : {}),
 	};
 
-	// derive input state
+	// derive input state for determining variant class names
 	const derivedInputState = getDerivedInputState({ valid, inputState });
 
+	// todo: implement hidden in parent div rather than label, input, etc
+	const containerClassNames = [
+		COMPONENT_CLASS_NAME,
+		className,
+		hidden && `${COMPONENT_CLASS_NAME}--hidden`,
+	]
+		.filter((classString) => classString)
+		.join(" ");
 	return (
-		<div className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}>
+		<div className={containerClassNames}>
 			<label
-				className={`${COMPONENT_CLASS_NAME}__label--${derivedInputState} ${
-					hidden ? ` ${COMPONENT_CLASS_NAME}--hidden` : ""
-				}`}
+				className={`${COMPONENT_CLASS_NAME}__label ${COMPONENT_CLASS_NAME}__label--${derivedInputState}`}
 				htmlFor={inputId}
 			>
 				{label}
 			</label>
 			<input
-				className={[
-					`${COMPONENT_CLASS_NAME}__input--${derivedInputState}`,
-					...(hidden ? [`${COMPONENT_CLASS_NAME}-hidden`] : []),
-				].join(" ")}
+				className={`${COMPONENT_CLASS_NAME}__input ${COMPONENT_CLASS_NAME}__input--${derivedInputState}`}
 				id={inputId}
 				name={name}
 				type={type}
@@ -112,7 +115,7 @@ const Input = ({
 			/>
 			{tip || !valid ? (
 				<div
-					className={[`${COMPONENT_CLASS_NAME}__tip--${derivedInputState}`].join(" ")}
+					className={`${COMPONENT_CLASS_NAME}__tip ${COMPONENT_CLASS_NAME}__tip--${derivedInputState}`}
 					id={infoId}
 				>
 					{!valid && inputElement.current?.validationMessage ? (
@@ -138,7 +141,7 @@ Input.propTypes = {
 	placeholder: PropTypes.string,
 	/** Whether the input is required */
 	required: PropTypes.bool,
-	/** Whether the input is hidden */
+	/** Whether the input, label, and tip are hidden */
 	hidden: PropTypes.bool,
 	/** Whether to show the default error message */
 	showDefaultError: PropTypes.bool,
