@@ -54,6 +54,7 @@
 	}
 }
 
+// container of hint and error area text
 .c-input__tip {
 	@include scss.component-properties("input-tip");
 
