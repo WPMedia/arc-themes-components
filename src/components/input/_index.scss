@@ -10,25 +10,23 @@
 
 	// actual input element
 	&__input {
-		// added placeholder for default status
-		// https://developer.mozilla.org/en-US/docs/Web/CSS/::placeholder
 		// based on mocks, only input element is affected by focus state
 		@include scss.component-with-states("input-input", [focus, placeholder]);
 
 		&--error {
-			@include scss.component-properties("input-input-error");
+			@include scss.component-with-states("input-input-error", [placeholder]);
 		}
 
 		&--success {
-			@include scss.component-properties("input-input-success");
+			@include scss.component-with-states("input-input-success", [placeholder]);
 		}
 
 		&--warning {
-			@include scss.component-properties("input-input-warning");
+			@include scss.component-with-states("input-input-warning", [placeholder]);
 		}
 
 		&--default {
-			@include scss.component-properties("input-input-default");
+			@include scss.component-with-states("input-input-default", [placeholder]);
 		}
 	}
 
