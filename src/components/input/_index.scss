@@ -1,42 +1,81 @@
 @use "../../scss";
 
-// input container div
 .c-input {
 	@include scss.component-properties("input");
 
-	&--hidden {
-		@include scss.component-properties("input-hidden");
+	.c-input__input {
+		@include scss.component-properties("input-input");
 	}
 
-	&--error {
-		@include scss.component-with-states("input-error", [placeholder]);
-	}
-
-	&--success {
-		@include scss.component-with-states("input-success", [placeholder]);
-	}
-
-	&--warning {
-		@include scss.component-with-states("input-warning", [placeholder]);
-	}
-
-	&--default {
-		@include scss.component-with-states("input-default", [placeholder]);
-	}
-
-	// actual input element
-	&__input {
-		// based on mocks, only input element is affected by focus state
-		@include scss.component-with-states("input-input", [focus, placeholder]);
-	}
-
-	// label element
-	&__label {
+	.c-input__label {
 		@include scss.component-properties("input-label");
 	}
 
-	// container of hint and error area text
-	&__tip {
+	.c-input__tip {
 		@include scss.component-properties("input-tip");
+	}
+}
+
+.c-input--error {
+	@include scss.component-properties("input-error");
+
+	.c-input__input {
+		@include scss.component-properties("input-error-input");
+	}
+
+	.c-input__label {
+		@include scss.component-properties("input-error-label");
+	}
+
+	.c-input__tip {
+		@include scss.component-properties("input-error-tip");
+	}
+}
+
+.c-input--success {
+	@include scss.component-properties("input-success");
+
+	.c-input__input {
+		@include scss.component-properties("input-success-input");
+	}
+
+	.c-input__label {
+		@include scss.component-properties("input-success-label");
+	}
+
+	.c-input__tip {
+		@include scss.component-properties("input-success-tip");
+	}
+}
+
+.c-input--warning {
+	@include scss.component-properties("input-warning");
+
+	.c-input__input {
+		@include scss.component-properties("input-warning-input");
+	}
+
+	.c-input__label {
+		@include scss.component-properties("input-warning-label");
+	}
+
+	.c-input__tip {
+		@include scss.component-properties("input-warning-tip");
+	}
+}
+
+.c-input:focus {
+	@include scss.component-properties("input-focus");
+
+	.c-input__input {
+		@include scss.component-properties("input-focus-input");
+	}
+
+	.c-input__label {
+		@include scss.component-properties("input-focus-label");
+	}
+
+	.c-input__tip {
+		@include scss.component-properties("input-focus-tip");
 	}
 }
