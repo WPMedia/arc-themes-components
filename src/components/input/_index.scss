@@ -68,7 +68,7 @@
 	@include scss.component-properties("input-warning");
 
 	.c-input__input {
-		@include scss.component-properties("input-warning-input", [focus]);
+		@include scss.component-with-states("input-warning-input", [focus]);
 	}
 
 	.c-input__label {
