@@ -4,183 +4,148 @@
 .c-carousel {
 	@include scss.component-properties("carousel");
 
-	/******** Carousel Theme Settings *******/
-
-	/* Carousel Arrow Props  */
-	--carousel-arrow-button-width: var(--c-carousel-arrow-button-width, 48px);
-	--carousel-arrow-button-height: var(--c-carousel-arrow-button-height, 48px);
-	--carousel-arrow-button-border-radius: var(--c-carousel-arrow-button-border-radius, 4px);
-	// setting box shadow is proving to be difficult -- TBD
-	//--carousel-arrow-button-box-shadow-color: var(--c-carousel-arrow-button-box-shadow-color, rgba(25, 25, 25, 0.4));
-	//--carousel-arrow-button-box-shadow: var(--c-carousel-arrow-button-box-shadow, 0px 0px 16px var(--carousel-arrow-button-box-shadow-color));
-	--carousel-arrow-size: var(--c-carousel-arrow-size, 24px);
-	--carousel-arrow-left-offset: var(--c-carousel-arrow-left-offset, 15px);
-	--carousel-arrow-right-offset: var(--c-carousel-arrow-right-offset, 15px);
-	--carousel-arrow-button-background-color: var(
-		--c-carousel-arrow-button-background-color,
-		#ffffff
-	);
-	--carousel-arrow-color: var(--c-carousel-arrow-color, #000000);
-	--carousel-arrow-prev-character: var(--c-carousel-arrow-prev-character, "<");
-	--carousel-arrow-next-character: var(--c-carousel-arrow-next-character, ">");
-
-	/* Carousel Dot Props */
-	--carousel-dot-color: var(--c-carousel-dot-color, #000000);
-	--carousel-dot-color-active: var(--carousel-dot-color, #000000);
-	--carousel-dot-character: var(--c-carousel-dot-character, "⋅");
-	--carousel-dot-size: var(--c-carousel-dot-size, 80px);
-
-	/* Carousel shared props for arrows and dots */
-	--carousel-character-font: var(--c-carousel-character-font, "Arial");
-	--carousel-character-opacity-default: var(--c-carousel-character-opacity-default, 0.9);
-	--carousel-character-opacity-on-hover: var(--c-carousel-character-opacity-on-hover, 1);
-	--carousel-opacity-not-active: var(--c-carousel-opacity-not-active, 0.25);
-
-	/* TODO: Need something else here I think */
-	.slick-loading .slick-list {
-		background: #fff
-			url("data:image/gif;base64,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")
-			center center no-repeat;
-	}
-
 	/* Arrows */
 	.slick-prev,
 	.slick-next {
-		position: absolute;
-		display: block;
-		height: var(--carousel-arrow-button-height);
-		width: var(--carousel-arrow-button-width);
-		border-radius: var(--carousel-arrow-button-border-radius);
-		line-height: 0;
-		font-size: 0;
 		cursor: pointer;
-		background: var(--carousel-arrow-button-background-color);
-		box-shadow: 0 0 16px rgba(25, 25, 25, 0.4);
-		color: transparent;
+		font-size: 0;
+		line-height: 0;
+		position: absolute;
 		top: 50%;
-		-webkit-transform: translate(0, -50%);
-		-ms-transform: translate(0, -50%);
-		transform: translate(0, -50%);
-		padding: 0;
-		border: none;
-		outline: none;
-		opacity: var(--carousel-character-opacity-default);
-		&:hover,
-		&:focus {
-			outline: none;
-			opacity: var(--carousel-character-opacity-on-hover);
+		display: block;
+
+		&:hover {
 			color: transparent;
+			outline: none;
+			background: transparent;
+
 			&:before {
-				opacity: var(--carousel-character-opacity-on-hover);
+				opacity: 1;
 			}
 		}
-		&.slick-disabled:before {
-			opacity: var(--carousel-opacity-not-active);
+
+		&:focus {
+			color: transparent;
+			outline: none;
+			background: transparent;
+
+			&:before {
+				opacity: 1;
+			}
 		}
+
+		@include scss.component-properties("carousel-buttons");
+	}
+
+	.slick-next {
+		@include scss.component-properties("carousel-button-next");
+
 		&:before {
-			font-family: var(--carousel-character-font);
-			font-size: var(--carousel-arrow-size);
-			line-height: 1;
-			color: var(--carousel-arrow-color);
-			opacity: var(--carousel-character-opacity-default);
+			font-family: "Arial", serif;
+			content: ">";
 			-webkit-font-smoothing: antialiased;
 			-moz-osx-font-smoothing: grayscale;
+
+			@include scss.component-properties("carousel-button-next-before");
 		}
 	}
 
 	.slick-prev {
-		left: var(--carousel-arrow-left-offset);
-		z-index: 9;
-		[dir="rtl"] & {
-			left: auto;
-			right: var(--carousel-arrow-right-offset);
-			z-index: 9;
-		}
+		@include scss.component-properties("carousel-button-previous");
+
 		&:before {
-			content: var(--carousel-arrow-prev-character);
-			[dir="rtl"] & {
-				content: var(--carousel-arrow-next-character);
-			}
+			font-family: "Arial", serif;
+			content: "<";
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+
+			@include scss.component-properties("carousel-button-previous-before");
 		}
 	}
 
-	.slick-next {
-		right: var(--carousel-arrow-right-offset);
-		z-index: 9;
-		[dir="rtl"] & {
-			left: var(--carousel-arrow-left-offset);
-			z-index: 9;
-			right: auto;
-		}
+	.slick-prev.slick-disabled {
 		&:before {
-			content: var(--carousel-arrow-next-character);
-			[dir="rtl"] & {
-				content: var(--carousel-arrow-prev-character);
+			opacity: 0.25;
+		}
+	}
+
+	.slick-next.slick-disabled {
+		&:before {
+			opacity: 0.25;
+		}
+	}
+
+	[dir="rtl"] {
+		.slick-prev {
+			@include scss.component-properties("carousel-button-previous");
+			left: auto;
+
+			&:before {
+				content: ">";
+			}
+		}
+
+		.slick-next {
+			right: auto;
+			@include scss.component-properties("carousel-button-next");
+
+			&:before {
+				content: "<";
 			}
 		}
 	}
 
 	/* Dots */
 	.slick-dotted.slick-slider {
-		margin-bottom: 30px;
+		@include scss.component-properties("carousel-slider-bottom");
 	}
 
 	.slick-dots {
-		position: absolute;
-		bottom: -25px;
 		list-style: none;
 		display: block;
-		text-align: center;
-		padding: 0;
-		margin: 0;
-		width: 100%;
+
+		@include scss.component-properties("carousel-slider-dots");
+
 		li {
-			position: relative;
-			display: inline-block;
-			height: 20px;
-			width: 20px;
-			margin: 0 5px;
-			padding: 0;
 			cursor: pointer;
+
+			@include scss.component-properties("carousel-slider-dots-list");
+
 			button {
-				border: 0;
-				background: transparent;
-				display: block;
-				height: 20px;
-				width: 20px;
-				outline: none;
-				line-height: 0;
-				font-size: 0;
-				color: transparent;
-				padding: 5px;
-				cursor: pointer;
-				&:hover,
-				&:focus {
+				@include scss.component-properties("carousel-slider-dots-list-buttons");
+
+				&:hover {
 					outline: none;
+
 					&:before {
-						opacity: var(--carousel-character-opacity-on-hover);
+						opacity: 1;
 					}
 				}
+
+				&:focus {
+					outline: none;
+
+					&:before {
+						opacity: 1;
+					}
+				}
+
 				&:before {
-					position: absolute;
-					top: 0;
-					left: 0;
-					content: var(--carousel-dot-character);
-					width: 20px;
-					height: 20px;
-					font-family: var(--carousel-character-font);
-					font-size: var(--carousel-dot-size);
-					line-height: 20px;
-					text-align: center;
-					color: var(--carousel-dot-color);
-					opacity: var(--carousel-opacity-not-active);
+					font-family: "Arial", serif;
+					content: "⋅";
 					-webkit-font-smoothing: antialiased;
 					-moz-osx-font-smoothing: grayscale;
+
+					@include scss.component-properties("carousel-slider-dots-list-buttons-before");
 				}
 			}
-			&.slick-active button:before {
-				color: var(--carousel-dot-color-active);
-				opacity: var(--carousel-character-opacity-default);
+		}
+
+		li.slick-active {
+			button {
+				&:before {
+					opacity: 0.75;
+				}
 			}
 		}
 	}
