@@ -84,10 +84,42 @@ The Carousel component can accept all of React Slick properties through the slid
 		>
 			<Carousel
 				sliderProps={{
+					centerMode: false,
+					infinite: false,
+					centerPadding: "60px",
+					slidesToShow: 4,
+					speed: 500,
+					slidesToScroll: 1,
+					initialSlide: 0,
+				}}
+			>
+				<SampleCard src="https://loremflickr.com/400/300" />
+				<SampleCard src="https://baconmockup.com/400/300" />
+				<SampleCard src="https://www.placecage.com/400/300" />
+				<SampleCard src="http://placeimg.com/400/300/any" />
+				<SampleCard src="https://loremflickr.com/400/300" />
+			</Carousel>
+		</div>
+	</Story>
+</Canvas>
+
+** Multiple Items with Infinite**
+
+<Canvas>
+	<Story name="Multiple Items with Infinite">
+		<div
+			style={{
+				marginLeft: "auto",
+				marginRight: "auto",
+				maxWidth: "90rem",
+			}}
+		>
+			<Carousel
+				sliderProps={{
 					centerMode: true,
 					infinite: true,
 					centerPadding: "60px",
-					slidesToShow: 3,
+					slidesToShow: 4,
 					speed: 500,
 					slidesToScroll: 1,
 					initialSlide: 0,
@@ -154,6 +186,89 @@ The Carousel component can accept all of React Slick properties through the slid
 					slidesToScroll: 1,
 					initialSlide: 0,
 					centerMode: false,
+				}}
+			>
+				<SampleCard src="https://loremflickr.com/400/300" />
+				<SampleCard src="https://baconmockup.com/400/300" />
+				<SampleCard src="https://www.placecage.com/400/300" />
+				<SampleCard src="http://placeimg.com/400/300/any" />
+				<SampleCard src="https://loremflickr.com/400/300" />
+			</Carousel>
+		</div>
+	</Story>
+</Canvas>
+
+** Single Item With Dots and no Arrows**
+
+<Canvas>
+	<Story name="Single Item With Dots and no Arrows">
+		<div
+			style={{
+				marginLeft: "auto",
+				marginRight: "auto",
+				width: "350px",
+			}}
+		>
+			<Carousel
+				sliderProps={{
+					dots: true,
+					arrows: false,
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					initialSlide: 0,
+					centerMode: false,
+				}}
+			>
+				<SampleCard src="https://loremflickr.com/400/300" />
+				<SampleCard src="https://baconmockup.com/400/300" />
+				<SampleCard src="https://www.placecage.com/400/300" />
+				<SampleCard src="http://placeimg.com/400/300/any" />
+				<SampleCard src="https://loremflickr.com/400/300" />
+			</Carousel>
+		</div>
+	</Story>
+</Canvas>
+
+** Responsive configuration**
+
+<Canvas>
+	<Story name="Responsive configuration">
+		<div
+			style={{
+				marginLeft: "auto",
+				marginRight: "auto",
+				maxWidth: "90rem",
+			}}
+		>
+			<Carousel
+				sliderProps={{
+					centerMode: false,
+					infinite: false,
+					centerPadding: "60px",
+					slidesToShow: 3,
+					speed: 500,
+					slidesToScroll: 1,
+					initialSlide: 0,
+					responsive: [
+						{
+							breakpoint: 1024,
+							settings: {
+								slidesToShow: 3,
+								slidesToScroll: 3,
+								infinite: true,
+								centerMode: false,
+							},
+						},
+						{
+							breakpoint: 600,
+							settings: {
+								slidesToShow: 1,
+								slidesToScroll: 1,
+								initialSlide: 0,
+								centerMode: false,
+							},
+						},
+					],
 				}}
 			>
 				<SampleCard src="https://loremflickr.com/400/300" />
