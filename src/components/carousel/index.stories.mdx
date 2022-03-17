@@ -1,11 +1,11 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
-
 import Carousel from ".";
+import Image from "../image";
 
 export const SampleCard = ({ src }) => (
 	<div>
-		<h3>
-			<img style={{ padding: "0 0.25rem" }} src={src} alt="meow" />
+		<h3 style={{ padding: "0 0.25rem" }}>
+			<Image src={src} alt="{alt}" />
 		</h3>
 	</div>
 );
