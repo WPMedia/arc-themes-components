@@ -63,6 +63,11 @@ const Feature = () => <Carousel>Component Children</Carousel>;
 
 ## Properties
 
+The Carousel component internally uses a third party solution for the slider mechanism. That product is React-Slick.
+More information along with its API can be found here: https://react-slick.neostack.com/docs/api.
+The Carousel component exposes all the React Slick properties as well as two properties (`className` and `children`) that
+are explicitly for the Carousel component.
+
 <ArgsTable of={Carousel} />
 
 ## Stories
@@ -100,11 +105,7 @@ const Feature = () => <Carousel>Component Children</Carousel>;
 				maxWidth: "90rem",
 			}}
 		>
-			<Carousel
-				sliderProps={{
-					dots: true,
-				}}
-			>
+			<Carousel dots>
 				<SampleCard src="https://loremflickr.com/400/300" />
 				<SampleCard src="https://baconmockup.com/400/300" />
 				<SampleCard src="https://www.placecage.com/400/300" />
@@ -126,15 +127,7 @@ const Feature = () => <Carousel>Component Children</Carousel>;
 				width: "350px",
 			}}
 		>
-			<Carousel
-				sliderProps={{
-					dots: true,
-					slidesToShow: 1,
-					slidesToScroll: 1,
-					initialSlide: 0,
-					centerMode: false,
-				}}
-			>
+			<Carousel dots slidesToShow={1} slidesToScroll={1} initialSlide={0} centerMode={false}>
 				<SampleCard src="https://loremflickr.com/400/300" />
 				<SampleCard src="https://baconmockup.com/400/300" />
 				<SampleCard src="https://www.placecage.com/400/300" />
