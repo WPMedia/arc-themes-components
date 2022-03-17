@@ -1,11 +1,11 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
-
 import Carousel from ".";
+import Image from "../image";
 
 export const SampleCard = ({ src }) => (
 	<div>
-		<h3>
-			<img style={{ padding: "0 0.25rem" }} src={src} alt="meow" />
+		<h3 style={{ padding: "0 0.25rem" }}>
+			<Image src={src} />
 		</h3>
 	</div>
 );
@@ -22,8 +22,8 @@ forward or backward. The container can take in markup of children div containers
 	<h3>
 		<img
 			style={{ padding: "0 0.25rem" }}
-			src="https://loremflickr.com/400/300"
-			alt="my image 1"
+			src="//camera.jpg"
+			alt="A camera on a surface."
 		/>
 	</h3>
 </div>
@@ -32,8 +32,8 @@ forward or backward. The container can take in markup of children div containers
 	 <h3>
 		<img
 			style={{ padding: "0 0.25rem" }}
-			src="https://loremflickr.com/400/300"
-			alt="meow"
+			src="//canyon.jpg"
+			alt="A canyon vista."
 		/>
 	 </h3>
 </div>
@@ -45,7 +45,7 @@ Or you can pass in a collection of react components that act as "slides" inside 
 const SampleCard = ({ src }) => (
 	<div>
 		<h3>
-			<img style={{ padding: "0 0.25rem" }} src={src} alt="meow" />
+			<Image style={{ padding: "0 0.25rem" }} src={src} />
 		</h3>
 	</div>
 );
@@ -93,11 +93,16 @@ The Carousel component can accept all of React Slick properties through the slid
 					initialSlide: 0,
 				}}
 			>
-				<SampleCard src="https://loremflickr.com/400/300" />
-				<SampleCard src="https://baconmockup.com/400/300" />
-				<SampleCard src="https://www.placecage.com/400/300" />
-				<SampleCard src="http://placeimg.com/400/300/any" />
-				<SampleCard src="https://loremflickr.com/400/300" />
+				<SampleCard src="/camera.jpg" />
+				<SampleCard src="/canyon.jpg" />
+				<SampleCard src="/coffee.jpg" />
+				<SampleCard src="/iceberg.jpg" />
+				<SampleCard src="/keyboard.jpg" />
+				<SampleCard src="/moon.jpg" />
+				<SampleCard src="/sunflowers.jpg" />
+				<SampleCard src="/turtle.jpg" />
+				<SampleCard src="/waterfall.jpg" />
+				<SampleCard src="/wave.jpg" />
 			</Carousel>
 		</div>
 	</Story>
@@ -125,11 +130,16 @@ The Carousel component can accept all of React Slick properties through the slid
 					initialSlide: 0,
 				}}
 			>
-				<SampleCard src="https://loremflickr.com/400/300" />
-				<SampleCard src="https://baconmockup.com/400/300" />
-				<SampleCard src="https://www.placecage.com/400/300" />
-				<SampleCard src="http://placeimg.com/400/300/any" />
-				<SampleCard src="https://loremflickr.com/400/300" />
+				<SampleCard src="/camera.jpg" />
+				<SampleCard src="/canyon.jpg" />
+				<SampleCard src="/coffee.jpg" />
+				<SampleCard src="/iceberg.jpg" />
+				<SampleCard src="/keyboard.jpg" />
+				<SampleCard src="/moon.jpg" />
+				<SampleCard src="/sunflowers.jpg" />
+				<SampleCard src="/turtle.jpg" />
+				<SampleCard src="/waterfall.jpg" />
+				<SampleCard src="/wave.jpg" />
 			</Carousel>
 		</div>
 	</Story>
@@ -158,11 +168,16 @@ The Carousel component can accept all of React Slick properties through the slid
 					initialSlide: 0,
 				}}
 			>
-				<SampleCard src="https://loremflickr.com/400/300" />
-				<SampleCard src="https://baconmockup.com/400/300" />
-				<SampleCard src="https://www.placecage.com/400/300" />
-				<SampleCard src="http://placeimg.com/400/300/any" />
-				<SampleCard src="https://loremflickr.com/400/300" />
+				<SampleCard src="/camera.jpg" />
+				<SampleCard src="/canyon.jpg" />
+				<SampleCard src="/coffee.jpg" />
+				<SampleCard src="/iceberg.jpg" />
+				<SampleCard src="/keyboard.jpg" />
+				<SampleCard src="/moon.jpg" />
+				<SampleCard src="/sunflowers.jpg" />
+				<SampleCard src="/turtle.jpg" />
+				<SampleCard src="/waterfall.jpg" />
+				<SampleCard src="/wave.jpg" />
 			</Carousel>
 		</div>
 	</Story>
@@ -188,11 +203,11 @@ The Carousel component can accept all of React Slick properties through the slid
 					centerMode: false,
 				}}
 			>
-				<SampleCard src="https://loremflickr.com/400/300" />
-				<SampleCard src="https://baconmockup.com/400/300" />
-				<SampleCard src="https://www.placecage.com/400/300" />
-				<SampleCard src="http://placeimg.com/400/300/any" />
-				<SampleCard src="https://loremflickr.com/400/300" />
+				<SampleCard src="/camera.jpg" />
+				<SampleCard src="/canyon.jpg" />
+				<SampleCard src="/coffee.jpg" />
+				<SampleCard src="/iceberg.jpg" />
+				<SampleCard src="/keyboard.jpg" />
 			</Carousel>
 		</div>
 	</Story>
@@ -219,11 +234,11 @@ The Carousel component can accept all of React Slick properties through the slid
 					centerMode: false,
 				}}
 			>
-				<SampleCard src="https://loremflickr.com/400/300" />
-				<SampleCard src="https://baconmockup.com/400/300" />
-				<SampleCard src="https://www.placecage.com/400/300" />
-				<SampleCard src="http://placeimg.com/400/300/any" />
-				<SampleCard src="https://loremflickr.com/400/300" />
+				<SampleCard src="/camera.jpg" />
+				<SampleCard src="/canyon.jpg" />
+				<SampleCard src="/coffee.jpg" />
+				<SampleCard src="/iceberg.jpg" />
+				<SampleCard src="/keyboard.jpg" />
 			</Carousel>
 		</div>
 	</Story>
@@ -271,11 +286,16 @@ The Carousel component can accept all of React Slick properties through the slid
 					],
 				}}
 			>
-				<SampleCard src="https://loremflickr.com/400/300" />
-				<SampleCard src="https://baconmockup.com/400/300" />
-				<SampleCard src="https://www.placecage.com/400/300" />
-				<SampleCard src="http://placeimg.com/400/300/any" />
-				<SampleCard src="https://loremflickr.com/400/300" />
+				<SampleCard src="/camera.jpg" />
+				<SampleCard src="/canyon.jpg" />
+				<SampleCard src="/coffee.jpg" />
+				<SampleCard src="/iceberg.jpg" />
+				<SampleCard src="/keyboard.jpg" />
+				<SampleCard src="/moon.jpg" />
+				<SampleCard src="/sunflowers.jpg" />
+				<SampleCard src="/turtle.jpg" />
+				<SampleCard src="/waterfall.jpg" />
+				<SampleCard src="/wave.jpg" />
 			</Carousel>
 		</div>
 	</Story>
