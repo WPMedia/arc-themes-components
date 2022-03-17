@@ -65,8 +65,7 @@ const Feature = () => <Carousel>Component Children</Carousel>;
 
 The Carousel component internally uses a third party solution for the slider mechanism. That product is React-Slick.
 More information along with its API can be found here: https://react-slick.neostack.com/docs/api.
-The Carousel component exposes all the React Slick properties as well as two properties (`className` and `children`) that
-are explicitly for the Carousel component.
+The Carousel component can accept all of React Slick properties through the sliderProps object property.
 
 <ArgsTable of={Carousel} />
 
@@ -83,7 +82,17 @@ are explicitly for the Carousel component.
 				maxWidth: "90rem",
 			}}
 		>
-			<Carousel>
+			<Carousel
+				sliderProps={{
+					centerMode: true,
+					infinite: true,
+					centerPadding: "60px",
+					slidesToShow: 3,
+					speed: 500,
+					slidesToScroll: 1,
+					initialSlide: 0,
+				}}
+			>
 				<SampleCard src="https://loremflickr.com/400/300" />
 				<SampleCard src="https://baconmockup.com/400/300" />
 				<SampleCard src="https://www.placecage.com/400/300" />
@@ -105,7 +114,18 @@ are explicitly for the Carousel component.
 				maxWidth: "90rem",
 			}}
 		>
-			<Carousel dots>
+			<Carousel
+				sliderProps={{
+					dots: true,
+					centerMode: true,
+					infinite: true,
+					centerPadding: "60px",
+					slidesToShow: 3,
+					speed: 500,
+					slidesToScroll: 1,
+					initialSlide: 0,
+				}}
+			>
 				<SampleCard src="https://loremflickr.com/400/300" />
 				<SampleCard src="https://baconmockup.com/400/300" />
 				<SampleCard src="https://www.placecage.com/400/300" />
@@ -127,7 +147,15 @@ are explicitly for the Carousel component.
 				width: "350px",
 			}}
 		>
-			<Carousel dots slidesToShow={1} slidesToScroll={1} initialSlide={0} centerMode={false}>
+			<Carousel
+				sliderProps={{
+					dots: true,
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					initialSlide: 0,
+					centerMode: false,
+				}}
+			>
 				<SampleCard src="https://loremflickr.com/400/300" />
 				<SampleCard src="https://baconmockup.com/400/300" />
 				<SampleCard src="https://www.placecage.com/400/300" />
