@@ -4,7 +4,7 @@
 	@include scss.component-properties("input");
 
 	.c-input__input {
-		@include scss.component-properties("input-input");
+		@include scss.component-with-states("input-input", [focus]);
 	}
 
 	.c-input__label {
@@ -16,11 +16,27 @@
 	}
 }
 
+.c-input--default {
+	@include scss.component-properties("input-default");
+
+	.c-input__input {
+		@include scss.component-with-states("input-default-input", [focus]);
+	}
+
+	.c-input__label {
+		@include scss.component-properties("input-default-label");
+	}
+
+	.c-input__tip {
+		@include scss.component-properties("input-default-tip");
+	}
+}
+
 .c-input--error {
 	@include scss.component-properties("input-error");
 
 	.c-input__input {
-		@include scss.component-properties("input-error-input");
+		@include scss.component-with-states("input-error-input", [focus]);
 	}
 
 	.c-input__label {
@@ -36,7 +52,7 @@
 	@include scss.component-properties("input-success");
 
 	.c-input__input {
-		@include scss.component-properties("input-success-input");
+		@include scss.component-with-states("input-success-input", [focus]);
 	}
 
 	.c-input__label {
@@ -52,7 +68,7 @@
 	@include scss.component-properties("input-warning");
 
 	.c-input__input {
-		@include scss.component-properties("input-warning-input");
+		@include scss.component-properties("input-warning-input", [focus]);
 	}
 
 	.c-input__label {
@@ -61,21 +77,5 @@
 
 	.c-input__tip {
 		@include scss.component-properties("input-warning-tip");
-	}
-}
-
-.c-input:focus {
-	@include scss.component-properties("input-focus");
-
-	.c-input__input {
-		@include scss.component-properties("input-focus-input");
-	}
-
-	.c-input__label {
-		@include scss.component-properties("input-focus-label");
-	}
-
-	.c-input__tip {
-		@include scss.component-properties("input-focus-tip");
 	}
 }

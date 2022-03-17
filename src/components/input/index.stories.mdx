@@ -8,7 +8,7 @@ import Input, { FIELD_TYPES } from ".";
 
 The `Input` component is a wrapper for the `<input>` element. It is used to render a `text`, `email`, or `password` `type` input field.
 
-The variations available to the input that can modify the `<label>`, `<input>` and tip and error `<span>` elements are `error`, `success`, `focus` and `warning`. By default, they can be configured with merely `c-input` style hook. In this way, the elements can be styled with maximal or minimal customization.
+The variations available to the input that can modify the `<label>`, `<input>` and tip and error `<span>` elements are `error`, `success`, `focus`, `warning`, and `default`. The base style hook can be configured with merely `c-input` style hook. In this way, the elements can be styled with maximal or minimal customization.
 
 The `inputState` prop can be passed in and controls the state of the input. The `inputState` prop can be set to `error`, `success`, `focus` or `warning`. This will be overriden if the validation on the input is invalid. The `hidden` property can also override the `inputState` prop as it wouldn't make sense to change the visual state of the input if it is hidden.
 
