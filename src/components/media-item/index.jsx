@@ -2,44 +2,41 @@ import PropTypes from "prop-types";
 
 const COMPONENT_CLASS_NAME = "c-media-item";
 
-const MediaItem = ({ alt, caption, className, credit, title, height, loading, src, width }) => (
-	<>
-		{title || caption || credit || src ? (
-			<figcaption
-				className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
-			>
-				{src ? (
-					<img
-						alt={alt}
-						className={`${COMPONENT_CLASS_NAME}__image`}
-						height={height}
-						loading={loading}
-						src={src}
-						width={width}
-					/>
-				) : null}
-				{title ? (
-					<span
-						dangerouslySetInnerHTML={{ __html: `${title} ` }}
-						className={`${COMPONENT_CLASS_NAME}__title`}
-					/>
-				) : null}
-				{caption ? (
-					<span
-						dangerouslySetInnerHTML={{ __html: `${caption} ` }}
-						className={`${COMPONENT_CLASS_NAME}__caption`}
-					/>
-				) : null}
-				{credit ? (
-					<span
-						dangerouslySetInnerHTML={{ __html: `${credit} ` }}
-						className={`${COMPONENT_CLASS_NAME}__credit`}
-					/>
-				) : null}
-			</figcaption>
-		) : null}
-	</>
-);
+const MediaItem = ({ alt, caption, className, credit, title, height, loading, src, width }) =>
+	title || caption || credit || src ? (
+		<figcaption
+			className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
+		>
+			{src ? (
+				<img
+					alt={alt}
+					className={`${COMPONENT_CLASS_NAME}__image`}
+					height={height}
+					loading={loading}
+					src={src}
+					width={width}
+				/>
+			) : null}
+			{title ? (
+				<span
+					dangerouslySetInnerHTML={{ __html: `${title} ` }}
+					className={`${COMPONENT_CLASS_NAME}__title`}
+				/>
+			) : null}
+			{caption ? (
+				<span
+					dangerouslySetInnerHTML={{ __html: `${caption} ` }}
+					className={`${COMPONENT_CLASS_NAME}__caption`}
+				/>
+			) : null}
+			{credit ? (
+				<span
+					dangerouslySetInnerHTML={{ __html: `${credit} ` }}
+					className={`${COMPONENT_CLASS_NAME}__credit`}
+				/>
+			) : null}
+		</figcaption>
+	) : null;
 
 MediaItem.propTypes = {
 	/** Class name(s) that get appended to default class name of the component */
