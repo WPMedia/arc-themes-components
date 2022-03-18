@@ -1,18 +1,31 @@
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
 import Carousel from ".";
 
 describe("Carousel", () => {
-	it("should render string child", () => {
-		render(<Carousel>Hello World</Carousel>);
-		expect(screen.queryByText("Hello World")).not.toBeNull();
-	});
-	it("should render additional classes", () => {
-		const ORIGINAL_CLASSES = "c-carousel";
+	it("should apply custom classes in the class attribute", () => {
 		const ADDITIONAL_CLASSES = "additionalClass1 additionalClass2";
-		render(<Carousel className={ADDITIONAL_CLASSES}>Hello World</Carousel>);
-		const element = screen.queryByText("Hello World");
-		expect(element).toHaveClass(ADDITIONAL_CLASSES);
-		expect(element).toHaveClass(ORIGINAL_CLASSES);
+		const { container } = render(
+			<Carousel
+				className={ADDITIONAL_CLASSES}
+				sliderProps={{
+					centerMode: false,
+					infinite: false,
+					centerPadding: "60px",
+					slidesToShow: 4,
+					speed: 500,
+					slidesToScroll: 1,
+					initialSlide: 0,
+				}}
+			>
+				<div>Card One</div>
+				<div>Card Two</div>
+				<div>Card Three</div>
+			</Carousel>
+		);
+		expect(container.querySelector(".c-carousel").getAttribute("class")).toContain(
+			"additionalClass1 additionalClass2"
+		);
 	});
 });
