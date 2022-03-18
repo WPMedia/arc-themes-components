@@ -25,8 +25,8 @@ const MediaItemFeature = () => (
 			caption="<div>There is man on the loose biting dogs</div><div>All dogs should evacuate the area</div>"
 			credit="John Doe (Stock Photo)"
 			src="your-image-path.png"
-			height="20"
-			width="20"
+			height={20}
+			width={20}
 			alt="Man on the loose biting people"
 		/>
 	</div>
@@ -44,9 +44,13 @@ const MediaItemFeature = () => (
 <Canvas>
 	<Story name="Default">
 		<MediaItem
-			caption={"There is a man on the loose who seems to be biting dogs"}
 			credit="John Doe (Stock Photo)"
-			title={"Man Bites Dog"}
+			title={"Person Sitting"}
+			caption={"There is a person using a laptop"}
+			src="/computer-user.jpeg"
+			alt="A person sat down using a laptop computer"
+			height={200}
+			width={200}
 		/>
 	</Story>
 </Canvas>
@@ -83,11 +87,11 @@ const MediaItemFeature = () => (
 	</Story>
 </Canvas>
 
-** No title, caption, nor credit **
+** No title, caption, credit, nor src **
 
 <Canvas>
-	<Story name="No title, caption, nor credit">
-		<MediaItem caption={""} credit="" title={""} />
+	<Story name="No title, caption, nor credit, nor src">
+		<MediaItem caption={""} credit="" title={""} src={""} />
 	</Story>
 </Canvas>
 
@@ -99,6 +103,7 @@ const MediaItemFeature = () => (
 			title="<p>Important Alert</p>"
 			caption="<div><p>There is man on the loose biting dogs</p></div><div><p>All dogs should evacuate the area</p></div>"
 			credit={"<div><p>John Doe (<i>Stock Photo</i>)</p></div>"}
+			src=""
 		/>
 	</Story>
 </Canvas>
@@ -132,8 +137,8 @@ const MediaItemFeature = () => (
 		<MediaItem
 			src="/computer-user.jpeg"
 			alt="A person sat down using a laptop computer"
-			width="200"
-			height="147"
+			width={200}
+			height={147}
 		/>
 	</Story>
 </Canvas>
@@ -145,7 +150,7 @@ const MediaItemFeature = () => (
 		<MediaItem
 			src="/computer-user.jpeg"
 			alt="A person sat down using a laptop computer"
-			width="250"
+			width={250}
 		/>
 	</Story>
 </Canvas>
@@ -157,7 +162,7 @@ const MediaItemFeature = () => (
 		<MediaItem
 			src="/computer-user.jpeg"
 			alt="A person sat down using a laptop computer"
-			height="250"
+			height={250}
 		/>
 	</Story>
 </Canvas>
