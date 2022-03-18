@@ -1,6 +1,8 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import Carousel from ".";
 import Image from "../image";
+import Button from "../button";
+import Icon from "../icon";
 
 export const SampleCard = ({ src }) => (
 	<div>
@@ -8,6 +10,34 @@ export const SampleCard = ({ src }) => (
 			<Image src={src} />
 		</h3>
 	</div>
+);
+
+export const SampleNextArrow = ({ onClick }) => (
+	<Button
+		style={{
+			position: "absolute",
+			top: "50%",
+			right: "-25px",
+		}}
+		accessibilityLabel="Next"
+		onClick={onClick}
+	>
+		<Icon name="ArrowRight" width="24" height="24" />
+	</Button>
+);
+
+export const SamplePrevArrow = ({ onClick }) => (
+	<Button
+		style={{
+			position: "absolute",
+			top: "50%",
+			left: "-25px",
+		}}
+		accessibilityLabel="Previous"
+		onClick={onClick}
+	>
+		<Icon name="ArrowLeft" width="24" height="24" />
+	</Button>
 );
 
 <Meta title="Components/Carousel" component={Carousel} />
@@ -48,6 +78,39 @@ const SampleCard = ({ src }) => (
 			<Image style={{ padding: "0 0.25rem" }} src={src} />
 		</h3>
 	</div>
+);
+```
+
+Also, you can create your own Arrow and Dot components. Here are examples of custom arrow components that are used
+in the `Custom Arrows` story:
+
+```jsx
+const SampleNextArrow = ({ onClick }) => (
+	<Button
+		style={{
+			position: "absolute",
+			top: "50%",
+			right: "-25px",
+		}}
+		accessibilityLabel="Next"
+		onClick={onClick}
+	>
+		<Icon name="ArrowRight" width="24" height="24" />
+	</Button>
+);
+
+const SamplePrevArrow = ({ onClick }) => (
+	<Button
+		style={{
+			position: "absolute",
+			top: "50%",
+			left: "-25px",
+		}}
+		accessibilityLabel="Previous"
+		onClick={onClick}
+	>
+		<Icon name="ArrowLeft" width="24" height="24" />
+	</Button>
 );
 ```
 
@@ -284,6 +347,46 @@ The Carousel component can accept all of React Slick properties through the slid
 							},
 						},
 					],
+				}}
+			>
+				<SampleCard src="/camera.jpg" />
+				<SampleCard src="/canyon.jpg" />
+				<SampleCard src="/coffee.jpg" />
+				<SampleCard src="/iceberg.jpg" />
+				<SampleCard src="/keyboard.jpg" />
+				<SampleCard src="/moon.jpg" />
+				<SampleCard src="/sunflowers.jpg" />
+				<SampleCard src="/turtle.jpg" />
+				<SampleCard src="/waterfall.jpg" />
+				<SampleCard src="/wave.jpg" />
+			</Carousel>
+		</div>
+	</Story>
+</Canvas>
+
+** Custom Arrows**
+
+<Canvas>
+	<Story name="Custom Arrows">
+		<div
+			style={{
+				marginLeft: "auto",
+				marginRight: "auto",
+				maxWidth: "90rem",
+			}}
+		>
+			<Carousel
+				sliderProps={{
+					dots: true,
+					centerMode: true,
+					infinite: true,
+					centerPadding: "0",
+					slidesToShow: 3,
+					speed: 500,
+					slidesToScroll: 1,
+					initialSlide: 0,
+					nextArrow: <SampleNextArrow />,
+					prevArrow: <SamplePrevArrow />,
 				}}
 			>
 				<SampleCard src="/camera.jpg" />
