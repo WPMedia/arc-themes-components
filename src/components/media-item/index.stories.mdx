@@ -1,35 +1,35 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 
-import Caption from ".";
+import MediaItem from ".";
 
-<Meta title="Components/Caption" component={Caption} />
+<Meta title="Components/Media Item" component={MediaItem} />
 
-# Caption
+# Media Item
 
-The `<Caption>` component is used to display a caption for its parent element. This is using the [`<figcaption>` HTML element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figcaption).
+The `<MediaItem>` component is used to display a figure parent element along with a caption element and content. The caption element is using the [`<figcaption>` HTML element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figcaption).
 
 The component can take in HTML to render `title`, `caption`, and `credit`.
 
 ## Usage
 
 ```jsx
-import { Caption } from "@wpmedia/arc-themes-components";
+import { MediaItem } from "@wpmedia/arc-themes-components";
 
-const CaptionFeature = () => (
-	<figure>
-		<img src="/man-bites-dog" alt="Man biting dog" />
-		<Caption
+const MediaItemFeature = () => (
+	<div>
+		<h1>Media Item</h1>
+		<MediaItem
 			title="Important Alert"
 			caption="<div>There is man on the loose biting dogs</div><div>All dogs should evacuate the area</div>"
 			credit="John Doe (Stock Photo)"
 		/>
-	</figure>
+	</div>
 );
 ```
 
 ## Properties
 
-<ArgsTable of={Caption} />
+<ArgsTable of={MediaItem} />
 
 ## Stories
 
@@ -37,7 +37,7 @@ const CaptionFeature = () => (
 
 <Canvas>
 	<Story name="Default">
-		<Caption
+		<MediaItem
 			caption={"There is a man on the loose who seems to be biting dogs"}
 			credit="John Doe (Stock Photo)"
 			title={"Man Bites Dog"}
@@ -49,7 +49,7 @@ const CaptionFeature = () => (
 
 <Canvas>
 	<Story name="No caption">
-		<Caption caption="" credit="John Doe (Stock Photo)" title={"Man Bites Dog"} />
+		<MediaItem caption="" credit="John Doe (Stock Photo)" title={"Man Bites Dog"} />
 	</Story>
 </Canvas>
 
@@ -57,7 +57,7 @@ const CaptionFeature = () => (
 
 <Canvas>
 	<Story name="No credit">
-		<Caption
+		<MediaItem
 			caption={"There is a man on the loose who seems to be biting dogs"}
 			credit=""
 			title={"Man Bites Dog"}
@@ -69,7 +69,7 @@ const CaptionFeature = () => (
 
 <Canvas>
 	<Story name="No title">
-		<Caption
+		<MediaItem
 			caption={"There is a man on the loose who seems to be biting dogs"}
 			credit="John Doe (Stock Photo)"
 			title={""}
@@ -81,7 +81,7 @@ const CaptionFeature = () => (
 
 <Canvas>
 	<Story name="No title, caption, nor credit">
-		<Caption caption={""} credit="" title={""} />
+		<MediaItem caption={""} credit="" title={""} />
 	</Story>
 </Canvas>
 
@@ -89,7 +89,7 @@ const CaptionFeature = () => (
 
 <Canvas>
 	<Story name="Renders html passed into title or caption">
-		<Caption
+		<MediaItem
 			title="<p>Important Alert</p>"
 			caption="<div><p>There is man on the loose biting dogs</p></div><div><p>All dogs should evacuate the area</p></div>"
 			credit={"<div><p>John Doe (<i>Stock Photo</i>)</p></div>"}

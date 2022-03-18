@@ -2,7 +2,7 @@
 // inject imports after this comment and alphabetize them
 import Attribution from "./src/components/attribution";
 import Button from "./src/components/button";
-import Caption from "./src/components/caption";
+import MediaItem from "./src/components/media-item";
 import Date from "./src/components/date";
 import Heading from "./src/components/headings/heading";
 import HeadingSection from "./src/components/headings/section";
@@ -20,7 +20,6 @@ import formatCredits from "./src/utils/format-credits";
 export {
 	Attribution,
 	Button,
-	Caption,
 	Date,
 	formatCredits,
 	Heading,
@@ -29,6 +28,7 @@ export {
 	Image,
 	Input,
 	Link,
+	MediaItem,
 	Overline,
 	Paragraph,
 	Pill,

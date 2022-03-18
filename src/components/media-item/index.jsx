@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 
-const COMPONENT_CLASS_NAME = "c-caption";
+const COMPONENT_CLASS_NAME = "c-media-item";
 
-const Caption = ({ caption, className, credit, title }) =>
+const MediaItem = ({ caption, className, credit, title }) =>
 	title || caption || credit ? (
 		<figcaption
 			className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
@@ -28,7 +28,7 @@ const Caption = ({ caption, className, credit, title }) =>
 		</figcaption>
 	) : null;
 
-Caption.propTypes = {
+MediaItem.propTypes = {
 	/** Class name(s) that get appended to default class name of the component */
 	className: PropTypes.string,
 	/** Title is the first area in the component, if present */
@@ -39,4 +39,4 @@ Caption.propTypes = {
 	credit: PropTypes.node,
 };
 
-export default Caption;
+export default MediaItem;
