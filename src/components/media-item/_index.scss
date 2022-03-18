@@ -3,6 +3,10 @@
 .c-media-item {
 	@include scss.component-properties("media-item");
 
+	.c-media-item__image {
+		@include scss.component-properties("media-item-image");
+	}
+
 	.c-media-item__title {
 		@include scss.component-properties("media-item-title");
 	}
