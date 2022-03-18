@@ -4,6 +4,26 @@ import "@testing-library/jest-dom";
 import Carousel from ".";
 
 describe("Carousel", () => {
+	it("should render", () => {
+		const { container } = render(
+			<Carousel
+				sliderProps={{
+					centerMode: false,
+					infinite: false,
+					centerPadding: "60px",
+					slidesToShow: 4,
+					speed: 500,
+					slidesToScroll: 1,
+					initialSlide: 0,
+				}}
+			>
+				<div>Card One</div>
+				<div>Card Two</div>
+				<div>Card Three</div>
+			</Carousel>
+		);
+		expect(container.querySelectorAll(".c-carousel")).toHaveLength(1);
+	});
 	it("should apply custom classes in the class attribute", () => {
 		const ADDITIONAL_CLASSES = "additionalClass1 additionalClass2";
 		const { container } = render(
