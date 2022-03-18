@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const COMPONENT_CLASS_NAME = "c-media-item";
 
-const MediaItem = ({ caption, className, credit, title, height, loading, src, width }) => (
+const MediaItem = ({ alt, caption, className, credit, title, height, loading, src, width }) => (
 	<>
 		{title || caption || credit || src ? (
 			<figcaption
