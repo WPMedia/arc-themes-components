@@ -5,10 +5,8 @@ import Button from "../button";
 import Icon from "../icon";
 
 export const SampleCard = ({ src }) => (
-	<div>
-		<h3 style={{ padding: "0 0.25rem" }}>
-			<Image src={src} />
-		</h3>
+	<div style={{ padding: "0 0.25rem" }}>
+		<Image src={src} />
 	</div>
 );
 
@@ -22,7 +20,7 @@ export const SampleNextArrow = ({ onClick }) => (
 		accessibilityLabel="Next"
 		onClick={onClick}
 	>
-		<Icon name="ArrowRight" width="24" height="24" />
+		<Icon name="ArrowRight" width={24} height={24} />
 	</Button>
 );
 
@@ -36,7 +34,7 @@ export const SamplePrevArrow = ({ onClick }) => (
 		accessibilityLabel="Previous"
 		onClick={onClick}
 	>
-		<Icon name="ArrowLeft" width="24" height="24" />
+		<Icon name="ArrowLeft" width={24} height={24} />
 	</Button>
 );
 
