@@ -2,12 +2,12 @@ import PropTypes from "prop-types";
 
 const COMPONENT_CLASS_NAME = "c-media-item";
 
-const MediaItem = ({ caption, children, className, credit, title }) =>
-	title || caption || credit ? (
-		<figure
-			className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
-		>
-			{children}
+const MediaItem = ({ caption, children, className, credit, title }) => (
+	<figure
+		className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
+	>
+		{children}
+		{title || caption || credit ? (
 			<figcaption className={`${COMPONENT_CLASS_NAME}__fig-caption`}>
 				{title ? (
 					<span
@@ -28,8 +28,9 @@ const MediaItem = ({ caption, children, className, credit, title }) =>
 					/>
 				) : null}
 			</figcaption>
-		</figure>
-	) : null;
+		) : null}
+	</figure>
+);
 
 MediaItem.propTypes = {
 	/** Class name(s) that get appended to default class name of the component */

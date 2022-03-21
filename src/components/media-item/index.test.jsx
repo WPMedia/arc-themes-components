@@ -18,9 +18,10 @@ describe("MediaItem", () => {
 		expect(container.querySelector(".test-class")).not.toBeNull();
 		expect(container.querySelector(".c-media-item")).not.toBeNull();
 	});
-	it("should render null if falsy title, formatted credit, and caption", () => {
+	it("should render no figcaption if falsy title, formatted credit, and caption", () => {
 		const { container } = render(<MediaItem title="" credit="" caption="" />);
-		expect(container.querySelector(".c-media-item")).toBeNull();
+		expect(container.querySelector(".c-media-item")).not.toBeNull();
+		expect(container.querySelector(".c-media-item__fig-caption")).toBeNull();
 		expect(container.querySelector(".c-media-item__title")).toBeNull();
 		expect(container.querySelector(".c-media-item__caption")).toBeNull();
 		expect(container.querySelector(".c-media-item__credit")).toBeNull();
