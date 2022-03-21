@@ -73,5 +73,6 @@ describe("MediaItem", () => {
 			</MediaItem>
 		);
 		expect(container.querySelector("p")).not.toBeNull();
+		expect(container.querySelector("p").textContent).toBe("child");
 	});
 });
