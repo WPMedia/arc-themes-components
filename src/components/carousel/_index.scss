@@ -7,6 +7,18 @@
 	/* Arrows */
 	.slick-prev,
 	.slick-next {
+		cursor: pointer;
+		position: absolute;
+		top: 50%;
+		display: block;
+		width: 20px;
+		height: 20px;
+		padding: 0;
+		transform: translate(0, -50%);
+		color: transparent;
+		border: none;
+		background: transparent;
+
 		&:hover {
 			@include scss.component-with-states("carousel-buttons-hover", [before]);
 		}
@@ -19,10 +31,12 @@
 	}
 
 	.slick-next {
+		right: -25px;
 		@include scss.component-with-states("carousel-button-next", [before]);
 	}
 
 	.slick-prev {
+		left: -25px;
 		@include scss.component-with-states("carousel-button-previous", [before]);
 	}
 
