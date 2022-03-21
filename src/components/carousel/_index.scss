@@ -15,21 +15,21 @@
 		display: block;
 
 		&:hover {
-			color: transparent;
-			background: transparent;
-
 			&:before {
 				@include scss.component-properties("carousel-buttons-hover-before");
 			}
 		}
 
 		&:focus {
-			color: transparent;
-			background: transparent;
-
 			&:before {
 				@include scss.component-properties("carousel-buttons-focus-before");
 			}
+		}
+
+		&:focus,
+		&:hover {
+			color: transparent;
+			background: transparent;
 		}
 
 		@include scss.component-with-states("carousel-buttons", [hover, focus]);
