@@ -13,7 +13,6 @@
 		display: block;
 		width: 20px;
 		height: 20px;
-		padding: 0;
 		transform: translate(0, -50%);
 		color: transparent;
 		border: none;
@@ -73,12 +72,24 @@
 			@include scss.component-properties("carousel-slider-dots-list");
 
 			button {
+				&:before {
+					content: "\2022";
+					width: 20px;
+					height: 20px;
+					font-family: "Arial", serif;
+					font-size: 16px;
+					line-height: 16px;
+					text-align: center;
+					color: #000000;
+					opacity: 0.25;
+				}
 				&:hover {
 					@include scss.component-with-states("carousel-slider-dots-list-buttons-hover", [before]);
 				}
 				&:focus {
 					@include scss.component-with-states("carousel-slider-dots-list-buttons-focus", [before]);
 				}
+
 				@include scss.component-with-states("carousel-slider-dots-list-buttons", [before]);
 			}
 
