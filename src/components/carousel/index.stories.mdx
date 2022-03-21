@@ -183,21 +183,23 @@ The Carousel component can accept all of React Slick properties through the slid
 
 <Canvas>
 	<Story name="Single Item With Dots">
-		<Carousel
-			sliderProps={{
-				dots: true,
-				slidesToShow: 1,
-				slidesToScroll: 1,
-				initialSlide: 0,
-				centerMode: false,
-			}}
-		>
-			<SampleCard src="/camera.jpg" />
-			<SampleCard src="/canyon.jpg" />
-			<SampleCard src="/coffee.jpg" />
-			<SampleCard src="/iceberg.jpg" />
-			<SampleCard src="/keyboard.jpg" />
-		</Carousel>
+		<div className="confinedWidthContainer" style={{ width: 500 }}>
+			<Carousel
+				sliderProps={{
+					dots: true,
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					initialSlide: 0,
+					centerMode: false,
+				}}
+			>
+				<SampleCard src="/camera.jpg" />
+				<SampleCard src="/canyon.jpg" />
+				<SampleCard src="/coffee.jpg" />
+				<SampleCard src="/iceberg.jpg" />
+				<SampleCard src="/keyboard.jpg" />
+			</Carousel>
+		</div>
 	</Story>
 </Canvas>
 
@@ -205,22 +207,24 @@ The Carousel component can accept all of React Slick properties through the slid
 
 <Canvas>
 	<Story name="Single Item With Dots and no Arrows">
-		<Carousel
-			sliderProps={{
-				dots: true,
-				arrows: false,
-				slidesToShow: 1,
-				slidesToScroll: 1,
-				initialSlide: 0,
-				centerMode: false,
-			}}
-		>
-			<SampleCard src="/camera.jpg" />
-			<SampleCard src="/canyon.jpg" />
-			<SampleCard src="/coffee.jpg" />
-			<SampleCard src="/iceberg.jpg" />
-			<SampleCard src="/keyboard.jpg" />
-		</Carousel>
+		<div className="confinedWidthContainer" style={{ width: 500 }}>
+			<Carousel
+				sliderProps={{
+					dots: true,
+					arrows: false,
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					initialSlide: 0,
+					centerMode: false,
+				}}
+			>
+				<SampleCard src="/camera.jpg" />
+				<SampleCard src="/canyon.jpg" />
+				<SampleCard src="/coffee.jpg" />
+				<SampleCard src="/iceberg.jpg" />
+				<SampleCard src="/keyboard.jpg" />
+			</Carousel>
+		</div>
 	</Story>
 </Canvas>
 
