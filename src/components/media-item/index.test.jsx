@@ -66,4 +66,12 @@ describe("MediaItem", () => {
 		const exampleHtmlCreditProp = screen.getByTestId("html-example-as-props");
 		expect(exampleHtmlCreditProp).not.toBeNull();
 	});
+	it("should render children", () => {
+		const { container } = render(
+			<MediaItem title="title" credit="Credit" caption="caption">
+				<p>child</p>
+			</MediaItem>
+		);
+		expect(container.querySelector("p")).not.toBeNull();
+	});
 });
