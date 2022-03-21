@@ -16,7 +16,6 @@
 
 		&:hover {
 			color: transparent;
-			outline: none;
 			background: transparent;
 
 			&:before {
@@ -26,7 +25,6 @@
 
 		&:focus {
 			color: transparent;
-			outline: none;
 			background: transparent;
 
 			&:before {
@@ -116,16 +114,12 @@
 
 			button {
 				&:hover {
-					outline: none;
-
 					&:before {
 						opacity: 1;
 					}
 				}
 
 				&:focus {
-					outline: none;
-
 					&:before {
 						opacity: 1;
 					}
