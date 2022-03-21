@@ -35,12 +35,18 @@
 		@include scss.component-with-states("carousel-buttons", [hover, focus]);
 	}
 
+	.slick-prev,
 	.slick-next {
 		&:before {
 			font-family: "Arial", serif;
-			content: ">";
 			-webkit-font-smoothing: antialiased;
 			-moz-osx-font-smoothing: grayscale;
+		}
+	}
+
+	.slick-next {
+		&:before {
+			content: ">";
 		}
 
 		@include scss.component-with-states("carousel-button-next", [before]);
@@ -48,28 +54,24 @@
 
 	.slick-prev {
 		&:before {
-			font-family: "Arial", serif;
 			content: "<";
-			-webkit-font-smoothing: antialiased;
-			-moz-osx-font-smoothing: grayscale;
 		}
 
 		@include scss.component-with-states("carousel-button-previous", [before]);
 	}
 
-	.slick-prev.slick-disabled {
-		&:before {
-			opacity: 0.25;
-		}
-
-		@include scss.component-with-states("carousel-button-previous-disabled", [before]);
-	}
-
+	.slick-prev.slick-disabled,
 	.slick-next.slick-disabled {
 		&:before {
 			opacity: 0.25;
 		}
+	}
 
+	.slick-prev.slick-disabled {
+		@include scss.component-with-states("carousel-button-previous-disabled", [before]);
+	}
+
+	.slick-next.slick-disabled {
 		@include scss.component-with-states("carousel-button-next-disabled", [before]);
 	}
 
