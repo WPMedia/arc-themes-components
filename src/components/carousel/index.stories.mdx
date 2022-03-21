@@ -11,29 +11,13 @@ export const SampleCard = ({ src }) => (
 );
 
 export const SampleNextArrow = ({ onClick }) => (
-	<Button
-		style={{
-			position: "absolute",
-			top: "50%",
-			right: "-25px",
-		}}
-		accessibilityLabel="Next"
-		onClick={onClick}
-	>
+	<Button accessibilityLabel="Next" onClick={onClick}>
 		<Icon name="ArrowRight" width={24} height={24} />
 	</Button>
 );
 
 export const SamplePrevArrow = ({ onClick }) => (
-	<Button
-		style={{
-			position: "absolute",
-			top: "50%",
-			left: "-25px",
-		}}
-		accessibilityLabel="Previous"
-		onClick={onClick}
-	>
+	<Button accessibilityLabel="Previous" onClick={onClick}>
 		<Icon name="ArrowLeft" width={24} height={24} />
 	</Button>
 );
@@ -76,29 +60,13 @@ in the `Custom Arrows` story:
 
 ```jsx
 const SampleNextArrow = ({ onClick }) => (
-	<Button
-		style={{
-			position: "absolute",
-			top: "50%",
-			right: "-25px",
-		}}
-		accessibilityLabel="Next"
-		onClick={onClick}
-	>
+	<Button accessibilityLabel="Next" onClick={onClick}>
 		<Icon name="ArrowRight" width="24" height="24" />
 	</Button>
 );
 
 const SamplePrevArrow = ({ onClick }) => (
-	<Button
-		style={{
-			position: "absolute",
-			top: "50%",
-			left: "-25px",
-		}}
-		accessibilityLabel="Previous"
-		onClick={onClick}
-	>
+	<Button accessibilityLabel="Previous" onClick={onClick}>
 		<Icon name="ArrowLeft" width="24" height="24" />
 	</Button>
 );
@@ -128,35 +96,27 @@ The Carousel component can accept all of React Slick properties through the slid
 
 <Canvas>
 	<Story name="Multiple Items">
-		<div
-			style={{
-				marginLeft: "auto",
-				marginRight: "auto",
-				maxWidth: "90rem",
+		<Carousel
+			sliderProps={{
+				centerMode: false,
+				infinite: false,
+				slidesToShow: 4,
+				speed: 500,
+				slidesToScroll: 1,
+				initialSlide: 0,
 			}}
 		>
-			<Carousel
-				sliderProps={{
-					centerMode: false,
-					infinite: false,
-					slidesToShow: 4,
-					speed: 500,
-					slidesToScroll: 1,
-					initialSlide: 0,
-				}}
-			>
-				<SampleCard src="/camera.jpg" />
-				<SampleCard src="/canyon.jpg" />
-				<SampleCard src="/coffee.jpg" />
-				<SampleCard src="/iceberg.jpg" />
-				<SampleCard src="/keyboard.jpg" />
-				<SampleCard src="/moon.jpg" />
-				<SampleCard src="/sunflowers.jpg" />
-				<SampleCard src="/turtle.jpg" />
-				<SampleCard src="/waterfall.jpg" />
-				<SampleCard src="/wave.jpg" />
-			</Carousel>
-		</div>
+			<SampleCard src="/camera.jpg" />
+			<SampleCard src="/canyon.jpg" />
+			<SampleCard src="/coffee.jpg" />
+			<SampleCard src="/iceberg.jpg" />
+			<SampleCard src="/keyboard.jpg" />
+			<SampleCard src="/moon.jpg" />
+			<SampleCard src="/sunflowers.jpg" />
+			<SampleCard src="/turtle.jpg" />
+			<SampleCard src="/waterfall.jpg" />
+			<SampleCard src="/wave.jpg" />
+		</Carousel>
 	</Story>
 </Canvas>
 
@@ -164,36 +124,28 @@ The Carousel component can accept all of React Slick properties through the slid
 
 <Canvas>
 	<Story name="Multiple Items with Infinite">
-		<div
-			style={{
-				marginLeft: "auto",
-				marginRight: "auto",
-				maxWidth: "90rem",
+		<Carousel
+			sliderProps={{
+				centerMode: true,
+				infinite: true,
+				centerPadding: "60px",
+				slidesToShow: 4,
+				speed: 500,
+				slidesToScroll: 1,
+				initialSlide: 0,
 			}}
 		>
-			<Carousel
-				sliderProps={{
-					centerMode: true,
-					infinite: true,
-					centerPadding: "60px",
-					slidesToShow: 4,
-					speed: 500,
-					slidesToScroll: 1,
-					initialSlide: 0,
-				}}
-			>
-				<SampleCard src="/camera.jpg" />
-				<SampleCard src="/canyon.jpg" />
-				<SampleCard src="/coffee.jpg" />
-				<SampleCard src="/iceberg.jpg" />
-				<SampleCard src="/keyboard.jpg" />
-				<SampleCard src="/moon.jpg" />
-				<SampleCard src="/sunflowers.jpg" />
-				<SampleCard src="/turtle.jpg" />
-				<SampleCard src="/waterfall.jpg" />
-				<SampleCard src="/wave.jpg" />
-			</Carousel>
-		</div>
+			<SampleCard src="/camera.jpg" />
+			<SampleCard src="/canyon.jpg" />
+			<SampleCard src="/coffee.jpg" />
+			<SampleCard src="/iceberg.jpg" />
+			<SampleCard src="/keyboard.jpg" />
+			<SampleCard src="/moon.jpg" />
+			<SampleCard src="/sunflowers.jpg" />
+			<SampleCard src="/turtle.jpg" />
+			<SampleCard src="/waterfall.jpg" />
+			<SampleCard src="/wave.jpg" />
+		</Carousel>
 	</Story>
 </Canvas>
 
@@ -201,37 +153,29 @@ The Carousel component can accept all of React Slick properties through the slid
 
 <Canvas>
 	<Story name="Multiple Items With Dots">
-		<div
-			style={{
-				marginLeft: "auto",
-				marginRight: "auto",
-				maxWidth: "90rem",
+		<Carousel
+			sliderProps={{
+				dots: true,
+				centerMode: true,
+				infinite: true,
+				centerPadding: "60px",
+				slidesToShow: 3,
+				speed: 500,
+				slidesToScroll: 1,
+				initialSlide: 0,
 			}}
 		>
-			<Carousel
-				sliderProps={{
-					dots: true,
-					centerMode: true,
-					infinite: true,
-					centerPadding: "60px",
-					slidesToShow: 3,
-					speed: 500,
-					slidesToScroll: 1,
-					initialSlide: 0,
-				}}
-			>
-				<SampleCard src="/camera.jpg" />
-				<SampleCard src="/canyon.jpg" />
-				<SampleCard src="/coffee.jpg" />
-				<SampleCard src="/iceberg.jpg" />
-				<SampleCard src="/keyboard.jpg" />
-				<SampleCard src="/moon.jpg" />
-				<SampleCard src="/sunflowers.jpg" />
-				<SampleCard src="/turtle.jpg" />
-				<SampleCard src="/waterfall.jpg" />
-				<SampleCard src="/wave.jpg" />
-			</Carousel>
-		</div>
+			<SampleCard src="/camera.jpg" />
+			<SampleCard src="/canyon.jpg" />
+			<SampleCard src="/coffee.jpg" />
+			<SampleCard src="/iceberg.jpg" />
+			<SampleCard src="/keyboard.jpg" />
+			<SampleCard src="/moon.jpg" />
+			<SampleCard src="/sunflowers.jpg" />
+			<SampleCard src="/turtle.jpg" />
+			<SampleCard src="/waterfall.jpg" />
+			<SampleCard src="/wave.jpg" />
+		</Carousel>
 	</Story>
 </Canvas>
 
@@ -239,29 +183,21 @@ The Carousel component can accept all of React Slick properties through the slid
 
 <Canvas>
 	<Story name="Single Item With Dots">
-		<div
-			style={{
-				marginLeft: "auto",
-				marginRight: "auto",
-				width: "350px",
+		<Carousel
+			sliderProps={{
+				dots: true,
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				initialSlide: 0,
+				centerMode: false,
 			}}
 		>
-			<Carousel
-				sliderProps={{
-					dots: true,
-					slidesToShow: 1,
-					slidesToScroll: 1,
-					initialSlide: 0,
-					centerMode: false,
-				}}
-			>
-				<SampleCard src="/camera.jpg" />
-				<SampleCard src="/canyon.jpg" />
-				<SampleCard src="/coffee.jpg" />
-				<SampleCard src="/iceberg.jpg" />
-				<SampleCard src="/keyboard.jpg" />
-			</Carousel>
-		</div>
+			<SampleCard src="/camera.jpg" />
+			<SampleCard src="/canyon.jpg" />
+			<SampleCard src="/coffee.jpg" />
+			<SampleCard src="/iceberg.jpg" />
+			<SampleCard src="/keyboard.jpg" />
+		</Carousel>
 	</Story>
 </Canvas>
 
@@ -269,30 +205,22 @@ The Carousel component can accept all of React Slick properties through the slid
 
 <Canvas>
 	<Story name="Single Item With Dots and no Arrows">
-		<div
-			style={{
-				marginLeft: "auto",
-				marginRight: "auto",
-				width: "350px",
+		<Carousel
+			sliderProps={{
+				dots: true,
+				arrows: false,
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				initialSlide: 0,
+				centerMode: false,
 			}}
 		>
-			<Carousel
-				sliderProps={{
-					dots: true,
-					arrows: false,
-					slidesToShow: 1,
-					slidesToScroll: 1,
-					initialSlide: 0,
-					centerMode: false,
-				}}
-			>
-				<SampleCard src="/camera.jpg" />
-				<SampleCard src="/canyon.jpg" />
-				<SampleCard src="/coffee.jpg" />
-				<SampleCard src="/iceberg.jpg" />
-				<SampleCard src="/keyboard.jpg" />
-			</Carousel>
-		</div>
+			<SampleCard src="/camera.jpg" />
+			<SampleCard src="/canyon.jpg" />
+			<SampleCard src="/coffee.jpg" />
+			<SampleCard src="/iceberg.jpg" />
+			<SampleCard src="/keyboard.jpg" />
+		</Carousel>
 	</Story>
 </Canvas>
 
@@ -300,56 +228,48 @@ The Carousel component can accept all of React Slick properties through the slid
 
 <Canvas>
 	<Story name="Responsive configuration">
-		<div
-			style={{
-				marginLeft: "auto",
-				marginRight: "auto",
-				maxWidth: "90rem",
+		<Carousel
+			sliderProps={{
+				centerMode: false,
+				infinite: false,
+				centerPadding: "60px",
+				slidesToShow: 3,
+				speed: 500,
+				slidesToScroll: 1,
+				initialSlide: 0,
+				responsive: [
+					{
+						breakpoint: 1024,
+						settings: {
+							slidesToShow: 3,
+							slidesToScroll: 3,
+							infinite: true,
+							centerMode: false,
+						},
+					},
+					{
+						breakpoint: 600,
+						settings: {
+							slidesToShow: 1,
+							slidesToScroll: 1,
+							initialSlide: 0,
+							centerMode: false,
+						},
+					},
+				],
 			}}
 		>
-			<Carousel
-				sliderProps={{
-					centerMode: false,
-					infinite: false,
-					centerPadding: "60px",
-					slidesToShow: 3,
-					speed: 500,
-					slidesToScroll: 1,
-					initialSlide: 0,
-					responsive: [
-						{
-							breakpoint: 1024,
-							settings: {
-								slidesToShow: 3,
-								slidesToScroll: 3,
-								infinite: true,
-								centerMode: false,
-							},
-						},
-						{
-							breakpoint: 600,
-							settings: {
-								slidesToShow: 1,
-								slidesToScroll: 1,
-								initialSlide: 0,
-								centerMode: false,
-							},
-						},
-					],
-				}}
-			>
-				<SampleCard src="/camera.jpg" />
-				<SampleCard src="/canyon.jpg" />
-				<SampleCard src="/coffee.jpg" />
-				<SampleCard src="/iceberg.jpg" />
-				<SampleCard src="/keyboard.jpg" />
-				<SampleCard src="/moon.jpg" />
-				<SampleCard src="/sunflowers.jpg" />
-				<SampleCard src="/turtle.jpg" />
-				<SampleCard src="/waterfall.jpg" />
-				<SampleCard src="/wave.jpg" />
-			</Carousel>
-		</div>
+			<SampleCard src="/camera.jpg" />
+			<SampleCard src="/canyon.jpg" />
+			<SampleCard src="/coffee.jpg" />
+			<SampleCard src="/iceberg.jpg" />
+			<SampleCard src="/keyboard.jpg" />
+			<SampleCard src="/moon.jpg" />
+			<SampleCard src="/sunflowers.jpg" />
+			<SampleCard src="/turtle.jpg" />
+			<SampleCard src="/waterfall.jpg" />
+			<SampleCard src="/wave.jpg" />
+		</Carousel>
 	</Story>
 </Canvas>
 
@@ -357,38 +277,30 @@ The Carousel component can accept all of React Slick properties through the slid
 
 <Canvas>
 	<Story name="Custom Arrows">
-		<div
-			style={{
-				marginLeft: "auto",
-				marginRight: "auto",
-				maxWidth: "90rem",
+		<Carousel
+			sliderProps={{
+				dots: true,
+				centerMode: true,
+				infinite: true,
+				centerPadding: "0",
+				slidesToShow: 3,
+				speed: 500,
+				slidesToScroll: 1,
+				initialSlide: 0,
+				nextArrow: <SampleNextArrow />,
+				prevArrow: <SamplePrevArrow />,
 			}}
 		>
-			<Carousel
-				sliderProps={{
-					dots: true,
-					centerMode: true,
-					infinite: true,
-					centerPadding: "0",
-					slidesToShow: 3,
-					speed: 500,
-					slidesToScroll: 1,
-					initialSlide: 0,
-					nextArrow: <SampleNextArrow />,
-					prevArrow: <SamplePrevArrow />,
-				}}
-			>
-				<SampleCard src="/camera.jpg" />
-				<SampleCard src="/canyon.jpg" />
-				<SampleCard src="/coffee.jpg" />
-				<SampleCard src="/iceberg.jpg" />
-				<SampleCard src="/keyboard.jpg" />
-				<SampleCard src="/moon.jpg" />
-				<SampleCard src="/sunflowers.jpg" />
-				<SampleCard src="/turtle.jpg" />
-				<SampleCard src="/waterfall.jpg" />
-				<SampleCard src="/wave.jpg" />
-			</Carousel>
-		</div>
+			<SampleCard src="/camera.jpg" />
+			<SampleCard src="/canyon.jpg" />
+			<SampleCard src="/coffee.jpg" />
+			<SampleCard src="/iceberg.jpg" />
+			<SampleCard src="/keyboard.jpg" />
+			<SampleCard src="/moon.jpg" />
+			<SampleCard src="/sunflowers.jpg" />
+			<SampleCard src="/turtle.jpg" />
+			<SampleCard src="/waterfall.jpg" />
+			<SampleCard src="/wave.jpg" />
+		</Carousel>
 	</Story>
 </Canvas>

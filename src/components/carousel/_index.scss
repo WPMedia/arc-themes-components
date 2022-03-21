@@ -1,22 +1,50 @@
 @use "../../scss";
 @use "~slick-carousel/slick/slick";
 
+// stylelint-disable order/order
+
 .c-carousel {
-	@include scss.component-properties("carousel");
+	.slick-slider {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		grid-template-rows: 1fr auto;
+		align-content: center;
+		align-items: center;
+	}
 
 	/* Arrows */
 	.slick-prev,
+	button:first-of-type {
+		grid-column: 1;
+
+		// stylelint-disable-next-line selector-no-qualifying-type
+		&.slick-disabled {
+			@include scss.component-with-states("carousel-button-previous-disabled", [before]);
+		}
+
+		@include scss.component-with-states("carousel-button-previous", [before]);
+	}
+
+	.slick-next,
+	button:last-of-type {
+		grid-column: 3;
+
+		// stylelint-disable-next-line selector-no-qualifying-type
+		&.slick-disabled {
+			@include scss.component-with-states("carousel-button-next-disabled", [before]);
+		}
+
+		@include scss.component-with-states("carousel-button-next", [before]);
+	}
+
+	.slick-prev,
 	.slick-next {
 		cursor: pointer;
-		position: absolute;
-		top: 50%;
 		display: block;
-		width: 20px;
-		height: 20px;
-		transform: translate(0, -50%);
-		color: transparent;
-		border: none;
 		background: transparent;
+		grid-row: 1;
+
+		@include scss.component-with-states("carousel-buttons", [before]);
 
 		&:hover {
 			@include scss.component-with-states("carousel-buttons-hover", [before]);
@@ -26,76 +54,83 @@
 			@include scss.component-with-states("carousel-buttons-focus", [before]);
 		}
 
-		@include scss.component-with-states("carousel-buttons", [before]);
-	}
-
-	.slick-next {
-		right: -25px;
-		@include scss.component-with-states("carousel-button-next", [before]);
-	}
-
-	.slick-prev {
-		left: -25px;
-		@include scss.component-with-states("carousel-button-previous", [before]);
-	}
-
-	.slick-prev.slick-disabled,
-	.slick-next.slick-disabled {
-		&:before {
+		&.slick-disabled::before {
 			@include scss.component-with-states("carousel-buttons-disabled-before");
 		}
 	}
 
-	.slick-prev.slick-disabled {
-		@include scss.component-with-states("carousel-button-previous-disabled", [before]);
+	.slick-dots {
+		list-style: none;
+		text-align: center;
+		grid-column: 2;
+
+		li {
+			display: inline-block;
+			font-size: 0;
+			position: relative;
+
+			// stylelint-disable selector-max-compound-selectors
+			button {
+				background: transparent;
+				cursor: pointer;
+
+				&::before {
+					content: "\2022";
+					width: 1.5em;
+					height: 1.5em;
+					font-family: "Arial", serif;
+					font-size: 1rem;
+					line-height: 1;
+					margin: 0 0.25em;
+					text-align: center;
+					color: #000;
+					opacity: 0.25;
+				}
+
+				&:hover {
+					@include scss.component-with-states("carousel-slider-dot-button-hover", [before]);
+				}
+
+				&:focus {
+					@include scss.component-with-states("carousel-slider-dot-button-focus", [before]);
+				}
+
+				@include scss.component-with-states("carousel-slider-dot-button", [before]);
+			}
+
+			// stylelint-disable-next-line selector-no-qualifying-type
+			&.slick-active button::before {
+				opacity: 0.75;
+
+				@include scss.component-properties("carousel-slider-dot-button-active-before");
+			}
+
+			@include scss.component-properties("carousel-slider-dot");
+		}
+
+		@include scss.component-properties("carousel-slider-dots");
 	}
 
-	.slick-next.slick-disabled {
-		@include scss.component-with-states("carousel-button-next-disabled", [before]);
-	}
+	.slick-slider[dir="rtl"] {
+		.slick-prev,
+		> button:first-of-type {
+			grid-column: 3;
 
-	[dir="rtl"] {
-		.slick-prev {
 			@include scss.component-with-states("carousel-button-rtl-previous", [before]);
 		}
 
-		.slick-next {
+		.slick-next,
+		> button:last-of-type {
+			grid-column: 1;
+
 			@include scss.component-with-states("carousel-button-rtl-next", [before]);
 		}
 	}
 
-	/* Dots */
-	.slick-dots {
-		@include scss.component-properties("carousel-slider-dots");
-
-		li {
-			@include scss.component-properties("carousel-slider-dots-list");
-
-			button {
-				&:before {
-					content: "\2022";
-					width: 20px;
-					height: 20px;
-					font-family: "Arial", serif;
-					font-size: 16px;
-					line-height: 16px;
-					text-align: center;
-					color: #000000;
-					opacity: 0.25;
-				}
-				&:hover {
-					@include scss.component-with-states("carousel-slider-dots-list-buttons-hover", [before]);
-				}
-				&:focus {
-					@include scss.component-with-states("carousel-slider-dots-list-buttons-focus", [before]);
-				}
-
-				@include scss.component-with-states("carousel-slider-dots-list-buttons", [before]);
-			}
-
-			&.slick-active button:before {
-				@include scss.component-properties("carousel-slider-dots-list-buttons-active-before");
-			}
-		}
+	.slick-list {
+		grid-column: 2;
+		grid-row: 1;
 	}
+
+	@include scss.component-properties("carousel");
 }
