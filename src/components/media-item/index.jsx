@@ -2,21 +2,12 @@ import PropTypes from "prop-types";
 
 const COMPONENT_CLASS_NAME = "c-media-item";
 
-const MediaItem = ({ alt, caption, className, credit, title, height, loading, src, width }) =>
-	title || caption || credit || src ? (
+const MediaItem = ({ caption, children, className, credit, title }) =>
+	title || caption || credit ? (
 		<figcaption
 			className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
 		>
-			{src ? (
-				<img
-					alt={alt}
-					className={`${COMPONENT_CLASS_NAME}__image`}
-					height={height}
-					loading={loading}
-					src={src}
-					width={width}
-				/>
-			) : null}
+			{children}
 			{title ? (
 				<span
 					dangerouslySetInnerHTML={{ __html: `${title} ` }}
@@ -47,21 +38,8 @@ MediaItem.propTypes = {
 	caption: PropTypes.node,
 	/** Credit is the third area in the component, if present */
 	credit: PropTypes.node,
-	/** The intrinsic height of the image in pixels */
-	height: PropTypes.number,
-	/** Indication of how the browser should load the image, using the native loading attribute of an <img /> tag */
-	loading: PropTypes.oneOf(["lazy", "eager"]),
-	/** The URL to an image to load and display */
-	src: PropTypes.string.isRequired,
-	/** The intrinsic width of the image in pixels */
-	width: PropTypes.number,
-	/** Alt text for the image - if not set the image will be treated as decorative */
-	alt: PropTypes.string,
-};
-
-MediaItem.defaultProps = {
-	alt: "",
-	loading: "lazy",
+	/** The image, video, audio component or any node that will be displayed within the component */
+	children: PropTypes.node,
 };
 
 export default MediaItem;

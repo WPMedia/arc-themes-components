@@ -1,6 +1,7 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 
 import MediaItem from ".";
+import Image from "../image";
 
 <Meta title="Components/Media Item" component={MediaItem} />
 
@@ -10,12 +11,12 @@ The `<MediaItem>` component is used to display a figure parent element along wit
 
 The component can take in HTML to render `title`, `caption`, and `credit`.
 
-The component can take in a `src` prop to render an image. The `<img>` also allows for other image properties to be passed in.
+The component can also take in as children media, including images, videos, and audio. Specifically, with Themes Components, this can also take in the `<Image>` component.
 
 ## Usage
 
 ```jsx
-import { MediaItem } from "@wpmedia/arc-themes-components";
+import { MediaItem, Image } from "@wpmedia/arc-themes-components";
 
 const MediaItemFeature = () => (
 	<div>
@@ -24,11 +25,14 @@ const MediaItemFeature = () => (
 			title="Important Alert"
 			caption="<div>There is man on the loose biting dogs</div><div>All dogs should evacuate the area</div>"
 			credit="John Doe (Stock Photo)"
-			src="your-image-path.png"
-			height={20}
-			width={20}
-			alt="Man on the loose biting people"
-		/>
+		>
+			<Image
+				src="your-image-path.png"
+				height={20}
+				width={20}
+				alt="Man on the loose biting people"
+			/>
+		</MediaItem>
 	</div>
 );
 ```
@@ -47,10 +51,6 @@ const MediaItemFeature = () => (
 			credit="John Doe (Stock Photo)"
 			title={"Person Sitting"}
 			caption={"There is a person using a laptop"}
-			src="/computer-user.jpeg"
-			alt="A person sat down using a laptop computer"
-			height={200}
-			width={200}
 		/>
 	</Story>
 </Canvas>
@@ -87,11 +87,11 @@ const MediaItemFeature = () => (
 	</Story>
 </Canvas>
 
-** No title, caption, credit, nor src **
+** No title, caption, nor credit **
 
 <Canvas>
-	<Story name="No title, caption, nor credit, nor src">
-		<MediaItem caption={""} credit="" title={""} src={""} />
+	<Story name="No title, caption, nor credit">
+		<MediaItem caption={""} credit="" title={""} />
 	</Story>
 </Canvas>
 
@@ -103,7 +103,6 @@ const MediaItemFeature = () => (
 			title="<p>Important Alert</p>"
 			caption="<div><p>There is man on the loose biting dogs</p></div><div><p>All dogs should evacuate the area</p></div>"
 			credit={"<div><p>John Doe (<i>Stock Photo</i>)</p></div>"}
-			src=""
 		/>
 	</Story>
 </Canvas>
@@ -112,57 +111,12 @@ const MediaItemFeature = () => (
 
 <Canvas>
 	<Story name="With image">
-		<MediaItem
-			credit="John Doe (Stock Photo)"
-			title={"Person Sitting"}
-			caption={"There is a person using a laptop"}
-			src="/computer-user.jpeg"
-			alt="A person sat down using a laptop computer"
-		/>
-	</Story>
-</Canvas>
-
-** Image not found **
-
-<Canvas>
-	<Story name="Image not found">
-		<MediaItem src="cat.jpg" alt="A cat jumping up to a ball" />
-	</Story>
-</Canvas>
-
-** Width and Height **
-
-<Canvas>
-	<Story name="Width and Height">
-		<MediaItem
-			src="/computer-user.jpeg"
-			alt="A person sat down using a laptop computer"
-			width={200}
-			height={147}
-		/>
-	</Story>
-</Canvas>
-
-** Width only **
-
-<Canvas>
-	<Story name="Width only">
-		<MediaItem
-			src="/computer-user.jpeg"
-			alt="A person sat down using a laptop computer"
-			width={250}
-		/>
-	</Story>
-</Canvas>
-
-** Height only **
-
-<Canvas>
-	<Story name="Height only">
-		<MediaItem
-			src="/computer-user.jpeg"
-			alt="A person sat down using a laptop computer"
-			height={250}
-		/>
+		<MediaItem credit="John Doe (Stock Photo)" title={"Person Sitting"}>
+			<Image
+				caption={"There is a person using a laptop"}
+				src="/computer-user.jpeg"
+				alt="A person sat down using a laptop computer"
+			/>
+		</MediaItem>
 	</Story>
 </Canvas>
