@@ -8,18 +8,14 @@
 	.slick-prev,
 	.slick-next {
 		&:hover {
-			&:before {
-				@include scss.component-properties("carousel-buttons-hover-before");
-			}
+			@include scss.component-with-states("carousel-buttons-hover", [before]);
 		}
 
 		&:focus {
-			&:before {
-				@include scss.component-properties("carousel-buttons-focus-before");
-			}
+			@include scss.component-with-states("carousel-buttons-focus", [before]);
 		}
 
-		@include scss.component-with-states("carousel-buttons", [before, hover, focus]);
+		@include scss.component-with-states("carousel-buttons", [before]);
 	}
 
 	.slick-next {
@@ -63,17 +59,15 @@
 			@include scss.component-properties("carousel-slider-dots-list");
 
 			button {
-				@include scss.component-with-states("carousel-slider-dots-list-buttons", [before]);
-
-				&:hover,
-				&:focus {
-					&:before {
-						@include scss.component-properties(
-							"carousel-slider-dots-list-buttons-focus-hover-before"
-						);
-					}
+				&:hover {
+					@include scss.component-with-states("carousel-slider-dots-list-buttons-hover", [before]);
 				}
+				&:focus {
+					@include scss.component-with-states("carousel-slider-dots-list-buttons-focus", [before]);
+				}
+				@include scss.component-with-states("carousel-slider-dots-list-buttons", [before]);
 			}
+
 			&.slick-active button:before {
 				@include scss.component-properties("carousel-slider-dots-list-buttons-active-before");
 			}
