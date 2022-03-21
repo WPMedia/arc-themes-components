@@ -10,6 +10,8 @@
 		grid-template-rows: 1fr auto;
 		align-content: center;
 		align-items: center;
+
+		@include scss.component-properties("carousel-slider");
 	}
 
 	/* Arrows */
@@ -88,27 +90,27 @@
 				}
 
 				&:hover {
-					@include scss.component-with-states("carousel-slider-dot-button-hover", [before]);
+					@include scss.component-with-states("carousel-dot-button-hover", [before]);
 				}
 
 				&:focus {
-					@include scss.component-with-states("carousel-slider-dot-button-focus", [before]);
+					@include scss.component-with-states("carousel-dot-button-focus", [before]);
 				}
 
-				@include scss.component-with-states("carousel-slider-dot-button", [before]);
+				@include scss.component-with-states("carousel-dot-button", [before]);
 			}
 
 			// stylelint-disable-next-line selector-no-qualifying-type
 			&.slick-active button::before {
 				opacity: 0.75;
 
-				@include scss.component-properties("carousel-slider-dot-button-active-before");
+				@include scss.component-properties("carousel-dot-button-active-before");
 			}
 
-			@include scss.component-properties("carousel-slider-dot");
+			@include scss.component-properties("carousel-dot");
 		}
 
-		@include scss.component-properties("carousel-slider-dots");
+		@include scss.component-properties("carousel-dots");
 	}
 
 	.slick-slider[dir="rtl"] {
@@ -130,6 +132,8 @@
 	.slick-list {
 		grid-column: 2;
 		grid-row: 1;
+
+		@include scss.component-properties("carousel-list");
 	}
 
 	@include scss.component-properties("carousel");
