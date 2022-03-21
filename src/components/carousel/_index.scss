@@ -113,7 +113,7 @@
 		@include scss.component-properties("carousel-dots");
 	}
 
-	.slick-slider[dir="rtl"] {
+	[dir="rtl"] {
 		.slick-prev,
 		> button:first-of-type {
 			grid-column: 3;
