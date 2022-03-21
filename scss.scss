@@ -4,10 +4,14 @@
 @use "./src/components/headings";
 @use "./src/components/stack";
 @use "./src/components/date";
-@use "./src/components/caption";
+@use "./src/components/media-item";
 @use "./src/components/paragraph";
 @use "./src/components/icon";
 @use "./src/components/image";
 @use "./src/components/overline";
 @use "./src/components/button";
 @use "./src/components/carousel";
+@use "./src/components/separator";
+@use "./src/components/attribution";
+@use "./src/components/input";
+@use "./src/components/pill";

@@ -64,13 +64,14 @@ const Button = forwardRef((props, ref) => {
 });
 
 Button.defaultProps = {
-	type: "button",
-	size: "medium",
 	fullWidth: false,
+	size: "medium",
+	type: "button",
+	variant: "default",
 };
 
 Button.propTypes = {
-	/** Provide an accessbile name to the button - use only when the button itself does not have meaningful text content */
+	/** Provide an accessible name to the button - use only when the button itself does not have meaningful text content */
 	accessibilityLabel: PropTypes.string,
 	/** Class name(s) that get appended to default class name of the component */
 	className: PropTypes.string,
