@@ -10,17 +10,33 @@ export const SampleCard = ({ src }) => (
 	</div>
 );
 
-export const SampleNextArrow = ({ onClick }) => (
-	<Button accessibilityLabel="Next" onClick={onClick}>
-		<Icon name="ArrowRight" width={24} height={24} />
+export const SamplePrevArrow = ({ currentSlide, slideCount, ...props }) => (
+	<Button
+		{...props}
+		className={"slick-prev slick-arrow" + (currentSlide === 0 ? " slick-disabled" : "")}
+		disabled={currentSlide === 0}
+		accessibilityLabel="Previous"
+		type="button"
+	>
+		Previous
 	</Button>
 );
 
-export const SamplePrevArrow = ({ onClick }) => (
-	<Button accessibilityLabel="Previous" onClick={onClick}>
-		<Icon name="ArrowLeft" width={24} height={24} />
-	</Button>
-);
+export const SampleNextArrow = ({ currentSlide, slideCount, slidesToShow, ...props }) => {
+	const disabled =
+		slidesToShow > 1 ? slideCount === slidesToShow + currentSlide : currentSlide === slideCount - 1;
+	return (
+		<Button
+			{...props}
+			className={"slick-next slick-arrow" + (disabled ? " slick-disabled" : "")}
+			disabled={disabled}
+			accessibilityLabel="Next"
+			type="button"
+		>
+			Next
+		</Button>
+	);
+};
 
 <Meta title="Components/Carousel" component={Carousel} />
 
@@ -55,21 +71,38 @@ const SampleCard = ({ src }) => (
 );
 ```
 
-Also, you can create your own Arrow and Dot components. Here are examples of custom arrow components that are used
-in the `Custom Arrows` story:
+Also, you can create your own Arrow and Dot components. Here are examples of custom arrow components that are a11y compliant.
+They are used in the `Custom Arrows` story:
 
 ```jsx
-const SampleNextArrow = ({ onClick }) => (
-	<Button accessibilityLabel="Next" onClick={onClick}>
-		<Icon name="ArrowRight" width="24" height="24" />
+import Button from "./index";
+export const SamplePrevArrow = ({ currentSlide, slideCount, ...props }) => (
+	<Button
+		{...props}
+		className={"slick-prev slick-arrow" + (currentSlide === 0 ? " slick-disabled" : "")}
+		disabled={currentSlide === 0}
+		accessibilityLabel="Previous"
+		type="button"
+	>
+		Previous
 	</Button>
 );
 
-const SamplePrevArrow = ({ onClick }) => (
-	<Button accessibilityLabel="Previous" onClick={onClick}>
-		<Icon name="ArrowLeft" width="24" height="24" />
-	</Button>
-);
+export const SampleNextArrow = ({ currentSlide, slideCount, slidesToShow, ...props }) => {
+	const disabled =
+		slidesToShow > 1 ? slideCount === slidesToShow + currentSlide : currentSlide === slideCount - 1;
+	return (
+		<Button
+			{...props}
+			className={"slick-next slick-arrow" + (disabled ? " slick-disabled" : "")}
+			disabled={disabled}
+			accessibilityLabel="Next"
+			type="button"
+		>
+			Next
+		</Button>
+	);
+};
 ```
 
 The examples used below will use the `SampleCard` component for brevity.
@@ -98,6 +131,7 @@ The Carousel component can accept all of React Slick properties through the slid
 	<Story name="Multiple Items">
 		<Carousel
 			sliderProps={{
+				accessibility: true,
 				centerMode: false,
 				infinite: false,
 				slidesToShow: 4,
@@ -284,14 +318,14 @@ The Carousel component can accept all of React Slick properties through the slid
 		<Carousel
 			sliderProps={{
 				dots: true,
-				centerMode: true,
-				infinite: true,
+				centerMode: false,
+				infinite: false,
 				centerPadding: "0",
 				slidesToShow: 3,
 				speed: 500,
 				slidesToScroll: 1,
 				initialSlide: 0,
-				nextArrow: <SampleNextArrow />,
+				nextArrow: <SampleNextArrow slidesToShow={3} />,
 				prevArrow: <SamplePrevArrow />,
 			}}
 		>
