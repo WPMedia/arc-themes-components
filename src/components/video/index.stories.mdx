@@ -1,0 +1,47 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+
+import Video from ".";
+
+<Meta title="Components/Video" component={Video} />
+
+# Video
+
+--- Add a description of the component here ---
+
+## Usage
+
+```jsx
+import { Video } from "@wpmedia/arc-themes-components";
+
+const Feature = () => <Video>Component Children</Video>;
+```
+
+## Properties
+
+<ArgsTable of={Video} />
+
+## Stories
+
+** Video Half Vertical Viewport Loading **
+
+<Canvas>
+	<Story name="Video Half Vertical Viewport Loading">
+		<Video viewportPercentage={50} />
+	</Story>
+</Canvas>
+
+** Video Full Vertical Viewport Loading **
+
+<Canvas>
+	<Story name="Video Full Vertical Viewport Loading">
+		<Video viewportPercentage={100} />
+	</Story>
+</Canvas>
+
+** Video One Third Vertical Viewport Loading **
+
+<Canvas>
+	<Story name="Video One Third Vertical Viewport Loading">
+		<Video viewportPercentage={33.33} />
+	</Story>
+</Canvas>

@@ -1,0 +1,13 @@
+@use "../../scss";
+
+.c-video {
+	@include scss.component-properties("video");
+
+	&--not-loaded {
+		@include scss.component-properties("video-not-loaded");
+
+		// viewport percentage is listed as being for vertical percentage
+		// this is how big the video is in the viewport
+		padding-bottom: calc(calc(var(--viewport-percentage) / 100) * 100vh);
+	}
+}
