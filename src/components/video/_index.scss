@@ -8,6 +8,7 @@
 
 		// viewport percentage is listed as being for vertical percentage
 		// this is how big the video is in the viewport
+		// using multiplication with vh so that when the css var is evaluated, it has a unit
 		padding-bottom: calc(var(--viewport-percentage) * 1vh);
 
 		// using vh with width because the viewport percentage is based off of vertical percentage
