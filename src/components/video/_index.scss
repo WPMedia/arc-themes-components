@@ -8,6 +8,10 @@
 
 		// viewport percentage is listed as being for vertical percentage
 		// this is how big the video is in the viewport
-		padding-bottom: calc(calc(var(--viewport-percentage) / 100) * 100vh);
+		padding-bottom: calc(var(--viewport-percentage) * 1vh);
+
+		// using vh with width because the viewport percentage is based off of vertical percentage
+		// the aspect ratio is used so that the size respects the aspect ratio of the video
+		max-width: calc(var(--aspect-ratio) * var(--viewport-percentage) * 1vh);
 	}
 }

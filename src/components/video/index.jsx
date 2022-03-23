@@ -2,8 +2,9 @@ import PropTypes from "prop-types";
 
 const COMPONENT_CLASS_NAME = "c-video";
 
-const Video = ({ className, viewportPercentage }) => {
+const Video = ({ className, aspectRatio, viewportPercentage }) => {
 	const videoIsLoading = true;
+
 	const containerClassNames = [
 		COMPONENT_CLASS_NAME,
 		videoIsLoading && `${COMPONENT_CLASS_NAME}--not-loaded`,
@@ -16,6 +17,7 @@ const Video = ({ className, viewportPercentage }) => {
 		<div
 			className={containerClassNames}
 			style={{
+				"--aspect-ratio": aspectRatio,
 				"--viewport-percentage": viewportPercentage,
 			}}
 		/>
@@ -25,6 +27,10 @@ const Video = ({ className, viewportPercentage }) => {
 Video.propTypes = {
 	/** Class name(s) that get appended to default class name of the component */
 	className: PropTypes.string,
+	/** The aspect ratio of the video */
+	aspectRatio: PropTypes.number,
+	/* The vertical percentage of the viewport takes up */
+	viewportPercentage: PropTypes.number,
 };
 
 export default Video;
