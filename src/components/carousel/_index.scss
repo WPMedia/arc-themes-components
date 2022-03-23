@@ -100,6 +100,28 @@
 				@include scss.component-with-states("carousel-dot-button", [before]);
 			}
 
+			button.custom-pager {
+				background: transparent;
+				cursor: pointer;
+				color: black;
+				font-size: 40px;
+
+				&::before {
+					content: "";
+					display: none;
+				}
+
+				&:hover {
+					@include scss.component-with-states("carousel-dot-button-custom-pager-hover", [before]);
+				}
+
+				&:focus {
+					@include scss.component-with-states("carousel-dot-button-custom-pager-focus", [before]);
+				}
+
+				@include scss.component-with-states("carousel-dot-button-custom", [before]);
+			}
+
 			// stylelint-disable-next-line selector-no-qualifying-type
 			&.slick-active button::before {
 				opacity: 0.75;

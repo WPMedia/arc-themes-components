@@ -38,6 +38,15 @@ export const SampleNextArrow = ({ currentSlide, slideCount, slidesToShow, ...pro
 	);
 };
 
+export const SamplePagerButton = ({ index, onClick }) => {
+	return (
+		<Button type="button" className="custom-pager" onClick={onClick}>
+			<span aria-hidden="true">&bull;</span>
+			<span className="visually-hidden">Go to slide {index}</span>
+		</Button>
+	);
+};
+
 <Meta title="Components/Carousel" component={Carousel} />
 
 # Carousel
@@ -70,6 +79,8 @@ const SampleCard = ({ src }) => (
 	</div>
 );
 ```
+
+The examples used below will use the above `SampleCard` component for brevity.
 
 Also, you can create your own Arrow and Dot components. Here are examples of custom arrow components that are a11y compliant.
 They are used in the `Custom Arrows` story:
@@ -105,7 +116,19 @@ export const SampleNextArrow = ({ currentSlide, slideCount, slidesToShow, ...pro
 };
 ```
 
-The examples used below will use the `SampleCard` component for brevity.
+Here is an example of a custom pager component. It is used in the `Custom Paging` story:
+
+```jsx
+import Button from "./index";
+export const SamplePagerButton = ({ index, onClick }) => {
+	return (
+		<Button type="button" className="custom-pager" onClick={onClick}>
+			<span aria-hidden="true">&bull;</span>
+			<span className="visually-hidden">Go to slide {index}</span>
+		</Button>
+	);
+};
+```
 
 ## Usage
 
@@ -327,6 +350,37 @@ The Carousel component can accept all of React Slick properties through the slid
 				initialSlide: 0,
 				nextArrow: <SampleNextArrow slidesToShow={3} />,
 				prevArrow: <SamplePrevArrow />,
+			}}
+		>
+			<SampleCard src="/camera.jpg" />
+			<SampleCard src="/canyon.jpg" />
+			<SampleCard src="/coffee.jpg" />
+			<SampleCard src="/iceberg.jpg" />
+			<SampleCard src="/keyboard.jpg" />
+			<SampleCard src="/moon.jpg" />
+			<SampleCard src="/sunflowers.jpg" />
+			<SampleCard src="/turtle.jpg" />
+			<SampleCard src="/waterfall.jpg" />
+			<SampleCard src="/wave.jpg" />
+		</Carousel>
+	</Story>
+</Canvas>
+
+** Custom Paging**
+
+<Canvas>
+	<Story name="Custom Paging">
+		<Carousel
+			sliderProps={{
+				dots: true,
+				accessibility: true,
+				centerMode: false,
+				infinite: false,
+				slidesToShow: 4,
+				speed: 500,
+				slidesToScroll: 1,
+				initialSlide: 0,
+				customPaging: (i) => <SamplePagerButton index={i} />,
 			}}
 		>
 			<SampleCard src="/camera.jpg" />
