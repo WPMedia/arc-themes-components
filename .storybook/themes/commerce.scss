@@ -1,4 +1,4 @@
-@use "../scss.scss" with (
+@use "../../scss.scss" with (
 	$tokens: (
 		default: (
 			components: (
@@ -7,17 +7,17 @@
 				),
 				stack-divider-vertical: (
 					border: none,
-					border-bottom-width: 1px,
+					border-bottom-width: 2px,
 					border-bottom-style: solid,
-					border-bottom-color: #000000,
+					border-bottom-color: #712d2d,
 					height: 1px,
 					width: 100%,
 				),
 				stack-divider-horizontal: (
 					border: none,
-					border-left-width: 1px,
+					border-left-width: 2px,
 					border-left-style: solid,
-					border-left-color: #000000,
+					border-left-color: #712d2d,
 					height: auto,
 					width: 1px,
 				),
