@@ -13,7 +13,8 @@
 
 		// using vh with width because the viewport percentage is based off of vertical percentage
 		// the aspect ratio is used so that the size respects the aspect ratio of the video
-		// default of 16:9 based on video player previous defaults
+
+		// default of 16:9 and 65 based on video player previous defaults
 		max-width: calc(var(--aspect-ratio, 16 / 9) * var(--viewport-percentage, 65) * 1vh);
 	}
 }
