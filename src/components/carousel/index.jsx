@@ -9,8 +9,8 @@ const Carousel = ({ children, className, sliderProps }) => {
 	const { onReInit: sliderReInit } = sliderProps;
 
 	/**
-	 * This useEffect will enhance a11y:
-	 * 1) It will add role and aria-label to the carousel component
+	 * This useEffect will enhance a11y in the following:
+	 * 1) It will add the role and aria-label to the react-slick component
 	 * 2) It will add needed roles and labels to each slide.
 	 * 3) If paging is being used it will set the current pager container to aria-current=true
 	 */
@@ -32,7 +32,7 @@ const Carousel = ({ children, className, sliderProps }) => {
 	/**
 	 * The onReInit is a callback of the react-slider.
 	 * It is being used to update the aria-current attribute on the pager if its being used.
-	 * It also checked to see if the caller passed in their own onReInit and if so executes it.
+	 * It also checks to see if the caller passed in their own onReInit and if so executes it.
 	 */
 	const onReInit = () => {
 		const currentActive = sliderRef.current.querySelector(
