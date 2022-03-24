@@ -5,7 +5,7 @@ import Button from "../button";
 import Icon from "../icon";
 
 export const SampleCard = ({ src }) => (
-	<div style={{ padding: "0 0.25rem" }}>
+	<div>
 		<Image src={src} />
 	</div>
 );
@@ -52,17 +52,44 @@ export const SamplePagerButton = ({ index, onClick }) => {
 # Carousel
 
 A `<Carousel>` is a container for child components that may be viewed in sequence,
-forward or backward. The container can take in markup of children div containers. Here is a simple example:
+forward or backward. The container can take in markup of children div containers.
+
+## Usage
 
 ```jsx
-<div style={{ padding: "0 0.25rem" }}>
+import { Carousel, Image } from "@wpmedia/arc-themes-components";
+
+const Feature = () => (
+	<Carousel>
+		<Image src="my-image.jpg" alt="Image alt" />
+		<Image src="my-image.jpg" alt="Image alt" />
+		<Image src="my-image.jpg" alt="Image alt" />
+		<Image src="my-image.jpg" alt="Image alt" />
+	</Carousel>
+);
+```
+
+## Properties
+
+The Carousel component internally uses a third party solution for the slider mechanism. That product is React-Slick.
+More information along with its API can be found here: https://react-slick.neostack.com/docs/api.
+The Carousel component can accept all of React Slick properties through the sliderProps object property.
+
+<ArgsTable of={Carousel} />
+
+## Examples
+
+Here is a simple example:
+
+```jsx
+<div>
     <img
         src="//camera.jpg"
         alt="A camera on a surface."
     />
 </div>
 
-<div style={{ padding: "0 0.25rem" }}>
+<div>
     <img
         src="//canyon.jpg"
         alt="A canyon vista."
@@ -73,11 +100,7 @@ forward or backward. The container can take in markup of children div containers
 Or you can pass in a collection of react components that act as "slides" inside the carousel. Here is a simple example:
 
 ```jsx
-const SampleCard = ({ src }) => (
-	<div style={{ padding: "0 0.25rem" }}>
-		<Image src={src} />
-	</div>
-);
+const SampleCard = ({ src }) => <Image src={src} />;
 ```
 
 The examples used below will use the above `SampleCard` component for brevity.
@@ -129,22 +152,6 @@ export const SamplePagerButton = ({ index, onClick }) => {
 	);
 };
 ```
-
-## Usage
-
-```jsx
-import { Carousel } from "@wpmedia/arc-themes-components";
-
-const Feature = () => <Carousel>Component Children</Carousel>;
-```
-
-## Properties
-
-The Carousel component internally uses a third party solution for the slider mechanism. That product is React-Slick.
-More information along with its API can be found here: https://react-slick.neostack.com/docs/api.
-The Carousel component can accept all of React Slick properties through the sliderProps object property.
-
-<ArgsTable of={Carousel} />
 
 ## Stories
 
