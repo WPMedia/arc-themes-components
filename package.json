@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/arc-themes-components",
-  "version": "0.0.4-arc-themes-release-version-2-00.11",
+  "version": "0.0.4-arc-themes-release-version-2-00.13",
   "description": "The arc-themes-components will be the basis for presentational components and reusable utility functions workflow of themes and client devs. A core tenet of Themes is composability for developers.",
   "main": "index.js",
   "scripts": {
@@ -44,6 +44,7 @@
     "@babel/eslint-parser": "^7.16.5",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "@etchteam/storybook-addon-css-variables-theme": "^1.1.1",
     "@storybook/addon-a11y": "^6.4.19",
     "@storybook/addon-actions": "^6.4.19",
     "@storybook/addon-essentials": "^6.4.19",

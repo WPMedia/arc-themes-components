@@ -59,7 +59,7 @@ picture,
 video,
 canvas,
 svg {
-	display: block;
+	display: inline-block;
 	min-width: 0;
 	max-width: 100%;
 	vertical-align: middle;
@@ -76,4 +76,11 @@ button,
 textarea,
 select {
 	font: inherit;
+}
+strong {
+	font-weight: bold;
+}
+
+em {
+	font-style: italic;
 }
