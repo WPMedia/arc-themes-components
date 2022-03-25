@@ -1,20 +1,14 @@
 @use "../../scss";
 
 .c-video {
+	// first take in the default component aspect-ratio
+	// includes a fallback if no aspect ratio is specified
+	// default of 16:9 from engine-theme-sdk
+	--aspect-ratio: var(--c-video-aspect-ratio, 16 / 9);
+
 	@include scss.component-properties("video");
 
-	&--not-loaded {
-		@include scss.component-properties("video-not-loaded");
-
-		// viewport percentage is listed as being for vertical percentage
-		// this is how big the video is in the viewport
-		// using multiplication with vh so that when the css var is evaluated, it has a unit
-		padding-bottom: calc(var(--viewport-percentage, 65) * 1vh);
-
-		// using vh with width because the viewport percentage is based off of vertical percentage
-		// the aspect ratio is used so that the size respects the aspect ratio of the video
-
-		// default of 16:9 and 65 based on video player previous defaults
-		max-width: calc(var(--aspect-ratio, 16 / 9) * var(--viewport-percentage, 65) * 1vh);
-	}
+	aspect-ratio: var(--aspect-ratio);
+	// set default of 65 based on engine-theme-sdk
+	height: calc(var(--viewport-percentage, 65) * 1vh);
 }
