@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 import EmbedContainer from "react-oembed-container";
 
@@ -25,9 +26,16 @@ const getEmbedHTMLWithPlayStatus = (embedMarkup) => {
 };
 
 const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup }) => {
+	useEffect(() => {
+		// will only ever run client-side as window object not available on server
+		// if powaboot available, call it
+		if (window.powaBoot) {
+			window.powaBoot();
+		}
+	}, []);
+
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 
-	// todo: implement client-side only check
 	return (
 		<div
 			className={containerClassNames}
