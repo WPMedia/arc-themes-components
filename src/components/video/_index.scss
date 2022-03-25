@@ -6,9 +6,13 @@
 	// default of 16:9 from engine-theme-sdk
 	--aspect-ratio: var(--c-video-aspect-ratio, 16 / 9);
 
+	// height is used a percentage of the viewport per the requirements
+	// default of 65 from engine-theme-sdk
+	--height: var(--c-video-height, 65);
+
 	@include scss.component-properties("video");
 
 	aspect-ratio: var(--aspect-ratio);
-	// set default of 65 based on engine-theme-sdk
-	height: calc(var(--viewport-percentage, 65) * 1vh);
+	// convert to vh via * 1vh
+	height: calc(var(--height) * 1vh);
 }

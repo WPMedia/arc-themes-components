@@ -41,7 +41,7 @@ const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup }) => {
 			className={containerClassNames}
 			style={{
 				"--aspect-ratio": aspectRatio,
-				"--viewport-percentage": viewportPercentage,
+				"--height": viewportPercentage,
 			}}
 		>
 			<EmbedContainer markup={getEmbedHTMLWithPlayStatus(embedMarkup)}>
