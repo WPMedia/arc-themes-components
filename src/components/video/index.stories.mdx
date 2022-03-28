@@ -17,7 +17,12 @@ The `viewportPercentage` property can be used to set the percentage of the verti
 ```jsx
 import { Video } from "@wpmedia/arc-themes-components";
 
-const Feature = () => <Video>Component Children</Video>;
+const Feature = () => {
+	const embedMarkup =
+		'<div class="powa" id="powa-ezzy" data-org="corecomponents" data-env="prod" data-uuid="ezzy" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
+
+	return <Video embedMarkup={embedMarkup} aspectRatio={16 / 9} viewportPercentage={50} />;
+};
 ```
 
 ## Properties
