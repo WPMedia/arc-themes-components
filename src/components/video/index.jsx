@@ -26,13 +26,16 @@ const getEmbedHTMLWithPlayStatus = (embedMarkup) => {
 };
 
 const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup }) => {
+	// only render or call powaboot on client-side
+	const isClientSide = typeof window !== "undefined";
+
 	useEffect(() => {
 		// will only ever run client-side as window object not available on server
 		// if powaboot available, call it
-		if (window.powaBoot) {
+		if (isClientSide && window.powaBoot) {
 			window.powaBoot();
 		}
-	}, []);
+	}, [isClientSide]);
 
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 
@@ -44,9 +47,11 @@ const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup }) => {
 				"--height": viewportPercentage,
 			}}
 		>
-			<EmbedContainer markup={getEmbedHTMLWithPlayStatus(embedMarkup)}>
-				<div dangerouslySetInnerHTML={{ __html: getEmbedHTMLWithPlayStatus(embedMarkup) }} />
-			</EmbedContainer>
+			{isClientSide ? (
+				<EmbedContainer markup={getEmbedHTMLWithPlayStatus(embedMarkup)}>
+					<div dangerouslySetInnerHTML={{ __html: getEmbedHTMLWithPlayStatus(embedMarkup) }} />
+				</EmbedContainer>
+			) : null}
 		</div>
 	);
 };
