@@ -6,15 +6,15 @@ const COMPONENT_CLASS_NAME = "c-video";
 
 const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup }) => {
 	// only render or call powaboot on client-side
-	const isClientSide = typeof window !== "undefined";
+	const shouldRenderVideoContent = embedMarkup && typeof window !== "undefined";
 
 	useEffect(() => {
 		// will only ever run client-side as window object not available on server
 		// if powaboot available, call it
-		if (isClientSide && window.powaBoot) {
+		if (shouldRenderVideoContent && window.powaBoot) {
 			window.powaBoot();
 		}
-	}, [isClientSide]);
+	}, [shouldRenderVideoContent]);
 
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 
@@ -26,7 +26,7 @@ const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup }) => {
 				"--height": viewportPercentage,
 			}}
 		>
-			{isClientSide ? (
+			{shouldRenderVideoContent ? (
 				<EmbedContainer markup={embedMarkup}>
 					<div
 						dangerouslySetInnerHTML={{
