@@ -28,7 +28,7 @@ const Feature = () => <Video>Component Children</Video>;
 	<Story name="Video Half Vertical Viewport Loading">
 		<Video
 			viewportPercentage={50}
-			aspectRatio={1 / 0.562}
+			aspectRatio={4 / 3}
 			embedMarkup={
 				'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'
 			}
@@ -42,7 +42,7 @@ const Feature = () => <Video>Component Children</Video>;
 	<Story name="Video Full Vertical Viewport Loading">
 		<Video
 			viewportPercentage={100}
-			aspectRatio={1 / 0.562}
+			aspectRatio={4 / 3}
 			embedMarkup={
 				'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'
 			}
@@ -56,7 +56,7 @@ const Feature = () => <Video>Component Children</Video>;
 	<Story name="Video One Third Vertical Viewport Loading">
 		<Video
 			viewportPercentage={33.33}
-			aspectRatio={1 / 0.562}
+			aspectRatio={4 / 3}
 			embedMarkup={
 				'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'
 			}
@@ -64,23 +64,58 @@ const Feature = () => <Video>Component Children</Video>;
 	</Story>
 </Canvas>
 
-** Two videos **
+** Two videos, different aspect ratios **
 
 <Canvas>
-	<Story name="Two videos">
+	<Story name="Two videos, different aspect ratios">
 		<Video
 			viewportPercentage={33.33}
-			aspectRatio={1 / 0.562}
+			aspectRatio={4 / 3}
 			embedMarkup={
 				'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'
 			}
 		/>
 		<Video
 			viewportPercentage={33.33}
-			aspectRatio={1 / 0.562}
+			aspectRatio={16 / 9}
 			embedMarkup={
 				'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'
 			}
+		/>
+	</Story>
+</Canvas>
+
+** Set powa fields playthrough **
+
+<Canvas>
+	<Story name="Set powa fields playthrough">
+		<Video
+			viewportPercentage={33.33}
+			aspectRatio={4 / 3}
+			embedMarkup={
+				'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'
+			}
+			powaFields={{
+				playthrough: true,
+			}}
+		/>
+	</Story>
+</Canvas>
+
+** Set powa fields muted autoplay **
+
+<Canvas>
+	<Story name="Set powa fields muted autoplay">
+		<Video
+			viewportPercentage={33.33}
+			aspectRatio={4 / 3}
+			embedMarkup={
+				'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'
+			}
+			powaFields={{
+				autoplay: true,
+				muted: true,
+			}}
 		/>
 	</Story>
 </Canvas>

@@ -15,9 +15,23 @@ function convertStringToNode(string) {
 // taking in embed code
 // adding on any powa fields
 // todo: return the embed code with the correct statuses
-const getEmbedHTMLWithPlayStatus = (embedMarkup) => {
+const getEmbedHTMLWithPlayStatus = (embedMarkup, aspectRatio, powaFields = {}) => {
 	if (embedMarkup) {
 		const embedHTMLWithPlayStatus = convertStringToNode(embedMarkup);
+
+		// set the rest of powa fields, minus aspect ratio
+		// https://redirector.arcpublishing.com/alc/arc-products/videocenter/user-docs/video-center-player-settings/
+		const powaFieldEntries = Object.entries(powaFields);
+
+		// set aspect ratio
+		// flip the resolution to match implementation in powa height / width
+		embedHTMLWithPlayStatus
+			.querySelector(".powa")
+			.setAttribute("data-aspect-ratio", 1 / aspectRatio);
+
+		powaFieldEntries.forEach(([key, value]) => {
+			embedHTMLWithPlayStatus.querySelector(".powa").setAttribute(`data-${key}`, value);
+		});
 
 		// innerhtml ensures body tag not rendered
 		return embedHTMLWithPlayStatus.innerHTML;
@@ -25,7 +39,7 @@ const getEmbedHTMLWithPlayStatus = (embedMarkup) => {
 	return "";
 };
 
-const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup }) => {
+const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup, powaFields }) => {
 	// only render or call powaboot on client-side
 	const isClientSide = typeof window !== "undefined";
 
@@ -48,8 +62,12 @@ const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup }) => {
 			}}
 		>
 			{isClientSide ? (
-				<EmbedContainer markup={getEmbedHTMLWithPlayStatus(embedMarkup)}>
-					<div dangerouslySetInnerHTML={{ __html: getEmbedHTMLWithPlayStatus(embedMarkup) }} />
+				<EmbedContainer markup={getEmbedHTMLWithPlayStatus(embedMarkup, aspectRatio, powaFields)}>
+					<div
+						dangerouslySetInnerHTML={{
+							__html: getEmbedHTMLWithPlayStatus(embedMarkup, aspectRatio, powaFields),
+						}}
+					/>
 				</EmbedContainer>
 			) : null}
 		</div>
