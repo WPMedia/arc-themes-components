@@ -15,4 +15,6 @@
 	aspect-ratio: var(--aspect-ratio);
 	// convert to vh via * 1vh
 	height: calc(var(--height) * 1vh);
+
+	max-width: 100%;
 }
