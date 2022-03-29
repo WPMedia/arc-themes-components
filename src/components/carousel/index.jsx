@@ -21,8 +21,8 @@ const Carousel = ({ children, className, id, label, next, previous, slidesToShow
 	const carouselItems = childItems.map((child, index) =>
 		child.type.name === "Item"
 			? cloneElement(child, {
-					slideNumber: index + 1,
-					viewable: index + 1 > slide - slidesToShow && index + 1 <= slide,
+				slideNumber: index + 1,
+				viewable: index + 1 > slide - slidesToShow && index + 1 <= slide,
 			  })
 			: null
 	);
