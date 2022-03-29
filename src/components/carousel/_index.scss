@@ -1,0 +1,57 @@
+@use "../../scss";
+
+.c-carousel {
+	--slide-width: var(--carousel-slide-width, 25%);
+
+	display: grid;
+	grid-template: "carousel";
+	justify-content: center;
+
+	overflow: hidden;
+
+	@include scss.component-properties("carousel");
+
+	> * {
+		grid-area: carousel;
+	}
+
+	&__track {
+		display: flex;
+		// gap: 1rem; // Work out best way to account for gap
+
+		transition: transform 0.4s ease-in;
+		will-change: transform;
+
+		@include scss.component-properties("carousel-track");
+	}
+
+	&__slide {
+		flex: 0 0 var(--slide-width);
+
+		@include scss.component-properties("carousel-slide");
+	}
+
+	&__actions {
+		display: flex;
+		justify-content: space-between;
+		place-self: center;
+		width: 100%;
+		z-index: 1;
+
+		@include scss.component-properties("carousel-actions");
+	}
+
+	&__button {
+		@include scss.component-properties("carousel-button");
+
+		&--next {
+			margin-left: auto;
+
+			@include scss.component-properties("carousel-button-next");
+		}
+
+		&--previous {
+			@include scss.component-properties("carousel-button-previous");
+		}
+	}
+}
