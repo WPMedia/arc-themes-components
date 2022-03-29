@@ -12,9 +12,9 @@ const Carousel = ({ children, className, id, label, next, previous, slidesToShow
 	const [position, setPosition] = useState(0);
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 
-	let subComponents = Object.keys(Carousel).map((key) => {
-		return Children.map(children, (child) => (child?.type?.name === key ? child : null));
-	});
+	const subComponents = Object.keys(Carousel).map((key) =>
+		Children.map(children, (child) => (child?.type?.name === key ? child : null))
+	);
 
 	const childItems = Children.toArray(subComponents);
 
@@ -71,6 +71,7 @@ const Carousel = ({ children, className, id, label, next, previous, slidesToShow
 			<div className="c-carousel__actions">
 				{slide !== slidesToShow ? (
 					<button
+						type="button"
 						aria-label={previous.label}
 						onClick={() => previousSlide()}
 						className="c-carousel__button c-carousel__button--previous"
@@ -81,6 +82,7 @@ const Carousel = ({ children, className, id, label, next, previous, slidesToShow
 				) : null}
 				{slide !== carouselItems.length ? (
 					<button
+						type="button"
 						aria-label={next.label}
 						onClick={() => nextSlide()}
 						className="c-carousel__button c-carousel__button--next"

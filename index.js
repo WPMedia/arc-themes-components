@@ -1,8 +1,8 @@
 /* eslint import/order: ["error", {"alphabetize": {"order": "asc", "caseInsensitive": true}}] */
 // inject imports after this comment and alphabetize them
-import Carousel from "./src/components/carousel";
 import Attribution from "./src/components/attribution";
 import Button from "./src/components/button";
+import Carousel from "./src/components/carousel";
 import Date from "./src/components/date";
 import Heading from "./src/components/headings/heading";
 import HeadingSection from "./src/components/headings/section";
@@ -21,9 +21,9 @@ import formatCredits from "./src/utils/format-credits";
 import formatPowaVideoEmbed from "./src/utils/format-powa-video-embed";
 
 export {
-	Carousel,
 	Attribution,
 	Button,
+	Carousel,
 	Date,
 	formatCredits,
 	formatPowaVideoEmbed,

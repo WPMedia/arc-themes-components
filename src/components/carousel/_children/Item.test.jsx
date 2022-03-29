@@ -5,7 +5,7 @@ import Item from "./Item";
 describe("Carousel.Item", () => {
 	it("should render children", () => {
 		render(
-			<Item label="Carousel Label" viewable={true}>
+			<Item label="Carousel Label" viewable>
 				<div />
 			</Item>
 		);
@@ -14,7 +14,7 @@ describe("Carousel.Item", () => {
 
 	it("should set an accessible label", () => {
 		render(
-			<Item label="Carousel Label" viewable={true}>
+			<Item label="Carousel Label" viewable>
 				<div />
 			</Item>
 		);
