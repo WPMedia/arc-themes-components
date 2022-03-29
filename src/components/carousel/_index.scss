@@ -6,7 +6,6 @@
 	display: grid;
 	grid-template: "carousel";
 	justify-content: center;
-
 	overflow: hidden;
 
 	@include scss.component-properties("carousel");
@@ -17,8 +16,6 @@
 
 	&__track {
 		display: flex;
-		// gap: 1rem; // Work out best way to account for gap
-
 		transition: transform 0.4s ease-in;
 		will-change: transform;
 
