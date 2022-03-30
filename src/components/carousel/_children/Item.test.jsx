@@ -15,7 +15,7 @@ describe("Carousel.Item", () => {
 	it("should render function children", () => {
 		render(
 			<Item label="Carousel Label" viewable>
-				{() => <button type="button"></button>}
+				{() => <button type="button">Button</button>}
 			</Item>
 		);
 		expect(screen.getByRole("group")).not.toBeNull();
