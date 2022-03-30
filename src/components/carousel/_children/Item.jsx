@@ -25,8 +25,6 @@ Item.propTypes = {
 	children: PropTypes.node.isRequired,
 	/** Accessible label */
 	label: PropTypes.string.isRequired,
-	/** Is the item viewable? */
-	viewable: PropTypes.bool,
 };
 
 export default Item;
