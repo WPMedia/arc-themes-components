@@ -12,6 +12,16 @@ describe("Carousel.Item", () => {
 		expect(screen.getByRole("group")).not.toBeNull();
 	});
 
+	it("should render function children", () => {
+		render(
+			<Item label="Carousel Label" viewable>
+				{() => <button type="button"></button>}
+			</Item>
+		);
+		expect(screen.getByRole("group")).not.toBeNull();
+		expect(screen.getByRole("button")).not.toBeNull();
+	});
+
 	it("should set an accessible label", () => {
 		render(
 			<Item label="Carousel Label" viewable>
