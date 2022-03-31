@@ -46,4 +46,13 @@ describe("Button", () => {
 		const element = screen.getByRole("link");
 		expect(element).toHaveClass(ORIGINAL_CLASSES);
 	});
+
+	it("should respond to assistiveHidden and show tab index -1 and aria-hidden", () => {
+		render(<Button assistiveHidden>Button Text</Button>);
+
+		const element = screen.getByRole("button", { hidden: true });
+
+		expect(element).toHaveAttribute("aria-hidden", "true");
+		expect(element).toHaveAttribute("tabIndex", "-1");
+	});
 });

@@ -12,6 +12,7 @@ const COMPONENT_CLASS_NAME = "c-button";
 const Button = forwardRef((props, ref) => {
 	const {
 		accessibilityLabel,
+		assistiveHidden,
 		children,
 		className,
 		disabled,
@@ -29,6 +30,8 @@ const Button = forwardRef((props, ref) => {
 		...rest,
 		ref,
 		"aria-label": accessibilityLabel,
+		"aria-hidden": assistiveHidden ? "true" : undefined,
+		tabIndex: assistiveHidden ? "-1" : undefined,
 		className: [
 			COMPONENT_CLASS_NAME,
 			href && `${COMPONENT_CLASS_NAME}--link`,
@@ -73,6 +76,8 @@ Button.defaultProps = {
 Button.propTypes = {
 	/** Provide an accessible name to the button - use only when the button itself does not have meaningful text content */
 	accessibilityLabel: PropTypes.string,
+	/** Remove the button from the accessibility tree with aria-hidden, tabindex=-1 */
+	assistiveHidden: PropTypes.bool,
 	/** Class name(s) that get appended to default class name of the component */
 	className: PropTypes.string,
 	/** The text, images or any node that will be displayed within the component */
