@@ -47,23 +47,23 @@ const Feature = () => (
 <Canvas>
 	<Story name="Carousel">
 		<Carousel id="carousel-1" label="Carousel of Images">
-			<Carousel.Item label="Slide 1 of 5">
+			<Carousel.Item label="Slide 1 of 6">
 				{({ viewable }) => (
 					<a href="/" aria-hidden={viewable ? null : true} tabIndex={viewable ? null : "-1"}>
 						<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
 					</a>
 				)}
 			</Carousel.Item>
-			<Carousel.Item label="Slide 2 of 5">
+			<Carousel.Item label="Slide 2 of 6">
 				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
 			</Carousel.Item>
-			<Carousel.Item label="Slide 3 of 5">
+			<Carousel.Item label="Slide 3 of 6">
 				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
 			</Carousel.Item>
-			<Carousel.Item label="Slide 4 of 5">
+			<Carousel.Item label="Slide 4 of 6">
 				<Image src="/coffee.jpeg" alt="A cup of coffee" />
 			</Carousel.Item>
-			<Carousel.Item label="Slide 5 of 5">
+			<Carousel.Item label="Slide 5 of 6">
 				{({ viewable }) => (
 					<div>
 						<a href="/" aria-hidden={viewable ? null : true} tabIndex={viewable ? null : "-1"}>
@@ -72,7 +72,7 @@ const Feature = () => (
 					</div>
 				)}
 			</Carousel.Item>
-			<Carousel.Item label="Slide 3 of 5">
+			<Carousel.Item label="Slide 6 of 6">
 				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
 			</Carousel.Item>
 		</Carousel>
