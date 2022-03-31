@@ -15,10 +15,10 @@ const Item = ({ children, label, viewable, ...rest }) => (
 		{typeof children === "function"
 			? children({ viewable })
 			: Children.map(children, (child) =>
-					cloneElement(child, {
-						"aria-hidden": viewable ? null : true,
-						tabIndex: !viewable ? "-1" : null,
-					})
+				cloneElement(child, {
+					"aria-hidden": viewable ? null : true,
+					tabIndex: !viewable ? "-1" : null,
+				})
 			  )}
 	</div>
 );
