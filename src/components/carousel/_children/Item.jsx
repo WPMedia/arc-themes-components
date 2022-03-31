@@ -2,8 +2,9 @@
 import PropTypes from "prop-types";
 import { Children, cloneElement } from "react";
 
-const Item = ({ children, label, viewable }) => (
+const Item = ({ children, label, viewable, ...rest }) => (
 	<div
+		{...rest}
 		role="group"
 		aria-roledescription="slide"
 		tabIndex={viewable ? null : "-1"}
@@ -13,10 +14,12 @@ const Item = ({ children, label, viewable }) => (
 	>
 		{typeof children === "function"
 			? children({ viewable })
-			: Children.map(children, (child) => cloneElement(child, {
-				"aria-hidden": viewable ? null : true,
-				tabIndex: !viewable ? "-1" : null,
-			}))}
+			: Children.map(children, (child) =>
+					cloneElement(child, {
+						"aria-hidden": viewable ? null : true,
+						tabIndex: !viewable ? "-1" : null,
+					})
+			  )}
 	</div>
 );
 

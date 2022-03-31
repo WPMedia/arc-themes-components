@@ -7,7 +7,7 @@ import Item from "./_children/Item";
 
 const COMPONENT_CLASS_NAME = "c-carousel";
 
-const Carousel = ({ children, className, id, label, next, previous, slidesToShow }) => {
+const Carousel = ({ children, className, id, label, next, previous, slidesToShow, ...rest }) => {
 	const [slide, setSlide] = useState(slidesToShow);
 	const [position, setPosition] = useState(0);
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
@@ -21,8 +21,7 @@ const Carousel = ({ children, className, id, label, next, previous, slidesToShow
 	const carouselItems = childItems.map((child, index) =>
 		child.type.name === "Item"
 			? cloneElement(child, {
-				slideNumber: index + 1,
-				viewable: index + 1 > slide - slidesToShow && index + 1 <= slide,
+					viewable: index + 1 > slide - slidesToShow && index + 1 <= slide,
 			  })
 			: null
 	);
@@ -53,6 +52,7 @@ const Carousel = ({ children, className, id, label, next, previous, slidesToShow
 
 	return (
 		<div
+			{...rest}
 			className={containerClassNames}
 			id={id}
 			aria-label={label}

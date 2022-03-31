@@ -12,6 +12,15 @@ describe("Carousel.Item", () => {
 		expect(screen.getByRole("group")).not.toBeNull();
 	});
 
+	it("should allow pass through of props", () => {
+		const { container } = render(
+			<Item label="Carousel Label" data-id="custom-id">
+				<div />
+			</Item>
+		);
+		expect(container.querySelector(".c-carousel__slide")).toHaveAttribute("data-id", "custom-id");
+	});
+
 	it("should render function children", () => {
 		render(
 			<Item label="Carousel Label" viewable>

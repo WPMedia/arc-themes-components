@@ -18,6 +18,15 @@ describe("Carousel", () => {
 		expect(screen.getByRole("region")).not.toBeNull();
 	});
 
+	it("should allow pass through of props", () => {
+		const { container } = render(
+			<Carousel id="carousel-2" label="Carousel Label" data-id="custom-id">
+				<div />
+			</Carousel>
+		);
+		expect(container.querySelector(".c-carousel")).toHaveAttribute("data-id", "custom-id");
+	});
+
 	it("should render additional classes", () => {
 		const ORIGINAL_CLASSES = "c-carousel";
 		const ADDITIONAL_CLASSES = "additionalClass1 additionalClass2";
