@@ -26,11 +26,15 @@ $tokens: () !default;
 // Mixins
 //
 @mixin block-components($blockName) {
-	@if list.length(map.get($tokens, "default", "blocks", $blockName, "components")) >= 0 {
-		@each $name, $value in map.get($tokens, "default", "blocks", $blockName, "components") {
-			@if type-of($value) == map {
-				@each $bName, $bValue in $value {
-					--c-#{$name}-#{$bName}: #{maintain-quotes($bValue)};
+	@each $breakpoint, $breakpointValue in $breakpoints {
+		@media ($breakpointValue) {
+			@if list.length(map.get($tokens, $breakpoint, "blocks", $blockName, "components")) >= 0 {
+				@each $name, $value in map.get($tokens, $breakpoint, "blocks", $blockName, "components") {
+					@if type-of($value) == map {
+						@each $bName, $bValue in $value {
+							--c-#{$name}-#{$bName}: #{maintain-quotes($bValue)};
+						}
+					}
 				}
 			}
 		}
@@ -103,7 +107,8 @@ $tokens: () !default;
 	@if list.length($tokens) != 0 {
 		:root {
 			// Alias Tokens
-			@if map.has-key($tokens, "alias") {
+
+			@if map.has-key($tokens, "alias") == true {
 				@each $name, $value in map.get($tokens, "alias") {
 					--#{$name}: #{maintain-quotes($value)};
 				}

@@ -2,7 +2,11 @@
 
 @use "root" with (
 	$alias: (),
-	$breakpoints: (),
+	$breakpoints: (
+		default: "min-width: 0",
+		tablet: "min-width: 20rem",
+		desktop: "min-width: 48rem",
+	),
 	$global: (),
 	$tokens: (
 		default: (
@@ -38,7 +42,15 @@
 		tablet: (
 			alias: (),
 			components: (),
-			blocks: (),
+			blocks: (
+				"block1": (
+					components: (
+						"component1": (
+							"font-size": var(--font-size-large),
+						),
+					),
+				),
+			),
 		),
 		desktop: (
 			alias: (),
@@ -151,7 +163,13 @@
 				@include root.block-components("block1");
 			}
 			@include expect {
-				--c-component1-font-size: var(--font-size-small);
+				@media (min-width: 0) {
+					--c-component1-font-size: var(--font-size-small);
+				}
+
+				@media (min-width: 20rem) {
+					--c-component1-font-size: var(--font-size-large);
+				}
 			}
 		}
 	}
