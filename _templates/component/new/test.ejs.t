@@ -10,6 +10,7 @@ describe('<%= h.changeCase.title( component_name ) %>', () => {
 		render(<<%= h.changeCase.pascal(component_name) %>>Hello World</<%= h.changeCase.pascal(component_name) %>>);
 		expect(screen.queryByText('Hello World')).not.toBeNull();
 	});
+
 	it('should render additional classes', () => {
 		const ORIGINAL_CLASSES = 'c-<%= h.inflection.dasherize(component_name) %>';
 		const ADDITIONAL_CLASSES = 'additionalClass1 additionalClass2';

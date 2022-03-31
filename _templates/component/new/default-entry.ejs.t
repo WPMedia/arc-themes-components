@@ -5,8 +5,11 @@ import PropTypes from 'prop-types';
 
 const COMPONENT_CLASS_NAME = 'c-<%= h.inflection.dasherize(component_name) %>';
 
-const <%= h.changeCase.pascal(component_name) %> = ({ children, className }) => (
-	<div className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}>
+const <%= h.changeCase.pascal(component_name) %> = ({ children, className, ...rest }) => (
+	<div
+		{...rest}
+		className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
+	>
 		{children}
 	</div>
 );

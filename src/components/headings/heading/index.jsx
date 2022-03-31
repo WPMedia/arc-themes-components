@@ -3,7 +3,7 @@ import LevelContext from "../context";
 
 const COMPONENT_CLASS_NAME = "c-heading";
 
-const Heading = ({ className, children }) => (
+const Heading = ({ className, children, ...rest }) => (
 	<LevelContext.Consumer>
 		{(level) => {
 			// max heading level is 6
@@ -11,6 +11,7 @@ const Heading = ({ className, children }) => (
 
 			return (
 				<HeadingTag
+					{...rest}
 					className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
 				>
 					{children}

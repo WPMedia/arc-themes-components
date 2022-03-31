@@ -2,8 +2,9 @@ import PropTypes from "prop-types";
 
 const COMPONENT_CLASS_NAME = "c-media-item";
 
-const MediaItem = ({ caption, children, className, credit, title }) => (
+const MediaItem = ({ caption, children, className, credit, title, ...rest }) => (
 	<figure
+		{...rest}
 		className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
 	>
 		{children}

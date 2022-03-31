@@ -21,6 +21,11 @@ describe("Paragraph", () => {
 		`);
 	});
 
+	it("should allow pass through of props", () => {
+		const { container } = render(<Paragraph id="custom-id">Paragraph Text</Paragraph>);
+		expect(container.querySelector(".c-paragraph")).toHaveAttribute("id", "custom-id");
+	});
+
 	it("should not apply truncation by default", () => {
 		const { container } = render(<Paragraph>Paragraph Text</Paragraph>);
 		expect(container.querySelector(".c-paragraph").getAttribute("style")).toBe(null);

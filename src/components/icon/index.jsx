@@ -5,11 +5,12 @@ import * as Icons from "./icons";
 
 const COMPONENT_CLASS_NAME = "c-icon";
 
-const Icon = ({ className, context, description, fill, height, name, title, width }) => {
+const Icon = ({ className, context, description, fill, height, name, title, width, ...rest }) => {
 	const IconName = Icons[name];
 
 	return (
 		<svg
+			{...rest}
 			className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
 			width={width}
 			height={height}

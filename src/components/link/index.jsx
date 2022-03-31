@@ -15,7 +15,15 @@ function determineVisuallyHiddenText(supplementalText, opensInNewTab) {
 	return "";
 }
 
-const Link = ({ assistiveHidden, children, className, href, openInNewTab, supplementalText }) => {
+const Link = ({
+	assistiveHidden,
+	children,
+	className,
+	href,
+	openInNewTab,
+	supplementalText,
+	...rest
+}) => {
 	// openInNewTab is undefined by default
 	// http or https link or openInNewTab can be either true or undefined for opening in new tab
 	const opensInNewTab =
@@ -25,6 +33,7 @@ const Link = ({ assistiveHidden, children, className, href, openInNewTab, supple
 
 	return (
 		<a
+			{...rest}
 			className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
 			href={href}
 			aria-hidden={assistiveHidden ? "true" : undefined}

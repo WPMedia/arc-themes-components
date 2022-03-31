@@ -11,10 +11,12 @@ const Stack = ({
 	justification,
 	gap,
 	wrap,
+	...rest
 }) => {
 	const childCount = React.Children.count(children);
 	return (
 		<div
+			{...rest}
 			className={className ? `c-stack ${className}` : "c-stack"}
 			data-style-direction={direction}
 			data-style-justification={justification}

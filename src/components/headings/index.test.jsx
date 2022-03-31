@@ -12,6 +12,16 @@ describe("Heading", () => {
 		});
 		expect(headingOutput).toHaveClass("c-heading");
 	});
+
+	it("should allow pass through of props", () => {
+		render(<Heading id="custom-id">Hello World</Heading>);
+		const headingOutput = screen.getByRole("heading", {
+			level: 1,
+			name: "Hello World",
+		});
+		expect(headingOutput).toHaveAttribute("id", "custom-id");
+	});
+
 	it("should render additional classes", () => {
 		render(<Heading className="test-class">Hello World</Heading>);
 		const headingOutput = screen.getByRole("heading", {
@@ -33,6 +43,7 @@ describe("HeadingSection", () => {
 		const headingOutput = screen.getByRole("heading", { level: 2 });
 		expect(headingOutput).not.toBeNull();
 	});
+
 	it("increases the heading level for each HeadingSection until level 6", () => {
 		render(
 			<div>

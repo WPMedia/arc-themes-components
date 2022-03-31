@@ -4,7 +4,7 @@ import EmbedContainer from "react-oembed-container";
 
 const COMPONENT_CLASS_NAME = "c-video";
 
-const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup }) => {
+const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup, ...rest }) => {
 	// only render or call powaboot on client-side
 	const shouldRenderVideoContent = embedMarkup && typeof window !== "undefined";
 
@@ -20,6 +20,7 @@ const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup }) => {
 
 	return (
 		<div
+			{...rest}
 			className={containerClassNames}
 			style={{
 				"--aspect-ratio": aspectRatio,
