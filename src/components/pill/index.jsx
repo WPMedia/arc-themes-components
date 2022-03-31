@@ -2,9 +2,10 @@ import PropTypes from "prop-types";
 
 const COMPONENT_CLASS_NAME = "c-pill";
 
-const Pill = ({ children, className, href }) =>
+const Pill = ({ children, className, href, ...rest }) =>
 	href ? (
 		<a
+			{...rest}
 			className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
 			href={href}
 		>
@@ -12,6 +13,7 @@ const Pill = ({ children, className, href }) =>
 		</a>
 	) : (
 		<span
+			{...rest}
 			className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
 		>
 			{children}

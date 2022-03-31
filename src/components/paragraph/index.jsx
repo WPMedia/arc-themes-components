@@ -2,8 +2,9 @@ import PropTypes from "prop-types";
 
 const COMPONENT_CLASS_NAME = "c-paragraph";
 
-const Paragraph = ({ children, className, truncationLines }) => (
+const Paragraph = ({ children, className, truncationLines, ...rest }) => (
 	<p
+		{...rest}
 		style={{ "--paragraph-truncation": truncationLines > 0 ? truncationLines : null }}
 		className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
 	>

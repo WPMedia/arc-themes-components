@@ -10,6 +10,12 @@ describe("Icon", () => {
 		expect(container.querySelectorAll("svg")).toHaveLength(1);
 	});
 
+	it("should allow pass through of props", () => {
+		const { container } = render(<Icon name="User" id="custom-id" />);
+		expect(container.querySelectorAll("svg")).toHaveLength(1);
+		expect(container.querySelector(".c-icon")).toHaveAttribute("id", "custom-id");
+	});
+
 	it("should render Icon with title when context is image", () => {
 		render(<Icon name="User" context="image" title="Icon Title" />);
 

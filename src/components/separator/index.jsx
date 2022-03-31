@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const COMPONENT_CLASS_NAME = "c-separator";
 
-const Separator = ({ className, separatorString }) => {
+const Separator = ({ className, separatorString, ...rest }) => {
 	const isCustomSeparator = separatorString !== "";
 	const classNames = [COMPONENT_CLASS_NAME, className]
 		.filter((classString) => classString)
@@ -10,6 +10,7 @@ const Separator = ({ className, separatorString }) => {
 
 	return (
 		<span
+			{...rest}
 			className={classNames}
 			style={{
 				// ensuring emoji within are rendered as strings so that they count as tokens

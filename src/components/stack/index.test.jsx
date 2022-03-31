@@ -14,6 +14,17 @@ describe("Stack", () => {
 		expect(container.querySelectorAll(".c-stack div")).toHaveLength(1);
 	});
 
+	it("should allow pass through of props", () => {
+		const { container } = render(
+			<Stack id="custom-id">
+				<div style={{ height: "100px", width: "200px" }}>
+					<img alt="image 1" src="https://picsum.photos/200/100" />
+				</div>
+			</Stack>
+		);
+		expect(container.querySelector(".c-stack")).toHaveAttribute("id", "custom-id");
+	});
+
 	it("should render only two child divs", () => {
 		const { container } = render(
 			<Stack>

@@ -2,8 +2,11 @@ import PropTypes from "prop-types";
 
 const COMPONENT_CLASS_NAME = "c-attribution";
 
-const Attribution = ({ children, className }) => (
-	<div className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}>
+const Attribution = ({ children, className, ...rest }) => (
+	<div
+		{...rest}
+		className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
+	>
 		{children}
 	</div>
 );

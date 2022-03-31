@@ -2,8 +2,9 @@ import PropTypes from "prop-types";
 
 const COMPONENT_CLASS_NAME = "c-date";
 
-const Date = ({ className, dateString, dateTime }) => (
+const Date = ({ className, dateString, dateTime, ...rest }) => (
 	<time
+		{...rest}
 		className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
 		dateTime={dateTime}
 	>

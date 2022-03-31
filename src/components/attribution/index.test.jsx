@@ -7,6 +7,12 @@ describe("Attribution", () => {
 		render(<Attribution>Hello World</Attribution>);
 		expect(screen.queryByText("Hello World")).not.toBeNull();
 	});
+
+	it("should allow pass through of props", () => {
+		const { container } = render(<Attribution id="custom-id">Hello World</Attribution>);
+		expect(container.querySelector(".c-attribution")).toHaveAttribute("id", "custom-id");
+	});
+
 	it("should render additional classes", () => {
 		const ORIGINAL_CLASSES = "c-attribution";
 		const ADDITIONAL_CLASSES = "additionalClass1 additionalClass2";
