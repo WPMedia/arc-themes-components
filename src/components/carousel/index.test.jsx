@@ -183,4 +183,38 @@ describe("Carousel", () => {
 		await userEvent.click(screen.getByRole("button", { name: "Next" }));
 		expect(screen.queryAllByText("Previous")).toHaveLength(1);
 	});
+
+	it("should render custom buttons and call their onClick events", async () => {
+		const nextEvent = jest.fn();
+		const prevEvent = jest.fn();
+		render(
+			<Carousel
+				id="carousel-2"
+				label="Carousel Label"
+				slidesToShow={1}
+				nextButton={
+					<button type="button" onClick={nextEvent}>
+						Next
+					</button>
+				}
+				previousButton={
+					<button type="button" onClick={prevEvent}>
+						Previous
+					</button>
+				}
+			>
+				<Carousel.Item label="Slide 1 of 5">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 5">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+
+		await userEvent.click(screen.getByRole("button", { name: "Next" }));
+		expect(nextEvent).toHaveBeenCalled();
+		await userEvent.click(screen.getByRole("button", { name: "Previous" }));
+		expect(prevEvent).toHaveBeenCalled();
+	});
 });
