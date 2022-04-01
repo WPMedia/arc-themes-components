@@ -80,7 +80,6 @@ const Carousel = ({
 		trackMouse: true,
 	});
 
-	// nextButton.type === Button ?
 	const resolvedNextButton = nextButton ? (
 		cloneElement(nextButton, {
 			"aria-controls": id,
