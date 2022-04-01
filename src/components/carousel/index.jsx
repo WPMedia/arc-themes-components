@@ -54,7 +54,7 @@ const Carousel = ({
 	const carouselItems = childItems.map((child, index) =>
 		child.type.name === "Item"
 			? cloneElement(child, {
-					viewable: index + 1 > slide - slidesToShow && index + 1 <= slide,
+				viewable: index + 1 > slide - slidesToShow && index + 1 <= slide,
 			  })
 			: null
 	);
