@@ -45,15 +45,15 @@ const Carousel = ({
 	const [position, setPosition] = useState(0);
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 
-	const subComponents = Object.keys(Carousel).map((key) =>
-		Children.map(children, (child) => (child?.type?.name === key ? child : null))
+	const subComponents = Object.values(Carousel).map((subcomponentType) =>
+		Children.map(children, (child) => (child?.type === subcomponentType ? child : null))
 	);
 
 	const childItems = Children.toArray(subComponents);
 
 	const carouselItems = childItems.map((child, index) => {
 		const viewable = index + 1 > slide - slidesToShow && index + 1 <= slide;
-		child.type.name === "Item" ? cloneElement(child, { viewable }) : null;
+		return child.type === Item ? cloneElement(child, { viewable }) : null;
 	});
 
 	const previousSlide = () => {
@@ -80,6 +80,7 @@ const Carousel = ({
 		trackMouse: true,
 	});
 
+	// nextButton.type === Button ?
 	const resolvedNextButton = nextButton ? (
 		cloneElement(nextButton, {
 			"aria-controls": id,
@@ -95,6 +96,7 @@ const Carousel = ({
 		<DefaultNextButton id={id} onClick={() => nextSlide()} />
 	);
 
+	// previousButton.type === Button ?
 	const resolvedPreviousButton = previousButton ? (
 		cloneElement(previousButton, {
 			"aria-controls": id,
