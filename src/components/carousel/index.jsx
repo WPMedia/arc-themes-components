@@ -96,7 +96,6 @@ const Carousel = ({
 		<DefaultNextButton id={id} onClick={() => nextSlide()} />
 	);
 
-	// previousButton.type === Button ?
 	const resolvedPreviousButton = previousButton ? (
 		cloneElement(previousButton, {
 			"aria-controls": id,
