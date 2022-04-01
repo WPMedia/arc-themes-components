@@ -1,7 +1,9 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 
+import Icon from "../icon";
 import Image from "../image";
 
+import Button from "./_children/Button";
 import Item from "./_children/Item";
 import Carousel from ".";
 
@@ -46,7 +48,20 @@ const Feature = () => (
 
 <Canvas>
 	<Story name="Carousel">
-		<Carousel id="carousel-1" label="Carousel of Images">
+		<Carousel
+			id="carousel-1"
+			label="Carousel of Images"
+			nextButton={
+				<Carousel.Button id="carousel-1" label="Next Slide">
+					<Icon name="ArrowRight" />
+				</Carousel.Button>
+			}
+			previousButton={
+				<Carousel.Button id="carousel-1" label="Previous Slide">
+					<Icon name="ArrowLeft" />
+				</Carousel.Button>
+			}
+		>
 			<Carousel.Item label="Slide 1 of 6">
 				{({ viewable }) => (
 					<a href="/" aria-hidden={viewable ? null : true} tabIndex={viewable ? null : "-1"}>
@@ -87,8 +102,12 @@ const Feature = () => (
 			id="carousel-1"
 			label="Carousel of Images"
 			slidesToShow={1}
-			next={{ element: "Next" }}
-			previous={{ element: "Previous" }}
+			nextButton={
+				<button type="button" onClick={() => console.log("Nick")}>
+					Next
+				</button>
+			}
+			previousButton={<button type="button">Previous</button>}
 		>
 			<Carousel.Item label="Slide 1 of 5">
 				<a href="/">

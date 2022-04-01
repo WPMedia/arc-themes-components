@@ -2,12 +2,45 @@ import { Children, cloneElement, useState } from "react";
 import PropTypes from "prop-types";
 import { useSwipeable } from "react-swipeable";
 
-import Icon from "../icon";
+import Button from "./_children/Button";
 import Item from "./_children/Item";
 
 const COMPONENT_CLASS_NAME = "c-carousel";
 
-const Carousel = ({ children, className, id, label, next, previous, slidesToShow, ...rest }) => {
+const DefaultNextButton = ({ id, onClick }) => (
+	<Button
+		id={id}
+		onClick={onClick}
+		label="Next Slide"
+		className="c-carousel__button c-carousel__button--next"
+	>
+		Next
+	</Button>
+);
+
+const DefaultPreviousButton = ({ id, onClick }) => (
+	<Button
+		id={id}
+		onClick={onClick}
+		label="Previous Slide"
+		className="c-carousel__button c-carousel__button--previous"
+	>
+		Previous
+	</Button>
+);
+
+const Carousel = ({
+	children,
+	className,
+	id,
+	label,
+	next,
+	nextButton,
+	previousButton,
+	previous,
+	slidesToShow,
+	...rest
+}) => {
 	const [slide, setSlide] = useState(slidesToShow);
 	const [position, setPosition] = useState(0);
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
@@ -21,7 +54,7 @@ const Carousel = ({ children, className, id, label, next, previous, slidesToShow
 	const carouselItems = childItems.map((child, index) =>
 		child.type.name === "Item"
 			? cloneElement(child, {
-				viewable: index + 1 > slide - slidesToShow && index + 1 <= slide,
+					viewable: index + 1 > slide - slidesToShow && index + 1 <= slide,
 			  })
 			: null
 	);
@@ -70,52 +103,37 @@ const Carousel = ({ children, className, id, label, next, previous, slidesToShow
 
 			<div className="c-carousel__actions">
 				{slide !== slidesToShow ? (
-					<button
-						type="button"
-						aria-label={previous.label}
-						onClick={() => previousSlide()}
-						className="c-carousel__button c-carousel__button--previous"
-						aria-controls={id}
-					>
-						{previous.element ? previous.element : <Icon {...previous.iconProps} />}
-					</button>
+					previousButton ? (
+						cloneElement(previousButton, {
+							"aria-controls": id,
+							onClick: () => previousSlide(),
+							className: "c-carousel__button c-carousel__button--previous",
+						})
+					) : (
+						<DefaultPreviousButton id={id} onClick={() => previousSlide()} />
+					)
 				) : null}
 				{slide !== carouselItems.length ? (
-					<button
-						type="button"
-						aria-label={next.label}
-						onClick={() => nextSlide()}
-						className="c-carousel__button c-carousel__button--next"
-						aria-controls={id}
-					>
-						{next.element ? next.element : <Icon {...next.iconProps} />}
-					</button>
+					nextButton ? (
+						cloneElement(nextButton, {
+							"aria-controls": id,
+							onClick: () => nextSlide(),
+							className: "c-carousel__button c-carousel__button--next",
+						})
+					) : (
+						<DefaultNextButton id={id} onClick={() => nextSlide()} />
+					)
 				) : null}
 			</div>
 		</div>
 	);
 };
 
+Carousel.Button = Button;
 Carousel.Item = Item;
 
 Carousel.defaultProps = {
 	slidesToShow: 4,
-	next: {
-		label: "Next Slide",
-		iconProps: {
-			name: "ArrowRight",
-			width: 24,
-			height: 24,
-		},
-	},
-	previous: {
-		label: "Previous Slide",
-		iconProps: {
-			name: "ArrowLeft",
-			width: 24,
-			height: 24,
-		},
-	},
 };
 
 Carousel.propTypes = {
@@ -127,20 +145,11 @@ Carousel.propTypes = {
 	id: PropTypes.string.isRequired,
 	/** An accessible label */
 	label: PropTypes.string.isRequired,
-	/** Next Action */
-	next: PropTypes.shape({
-		label: PropTypes.string,
-		element: PropTypes.node,
-		iconProps: PropTypes.object,
-	}),
-	/** Previous Action */
-	previous: PropTypes.shape({
-		label: PropTypes.string,
-		element: PropTypes.node,
-		iconProps: PropTypes.object,
-	}),
 	/** Number of slides to show in view */
 	slidesToShow: PropTypes.number,
+
+	previousButton: PropTypes.node,
+	nextButton: PropTypes.node,
 };
 
 export default Carousel;

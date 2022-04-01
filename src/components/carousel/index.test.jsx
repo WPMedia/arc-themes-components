@@ -158,8 +158,8 @@ describe("Carousel", () => {
 				id="carousel-2"
 				label="Carousel Label"
 				slidesToShow={1}
-				next={{ element: <span>Next</span> }}
-				previous={{ element: <span>Previous</span> }}
+				nextButton={<button type="button">Next</button>}
+				previousButton={<button type="button">Previous</button>}
 			>
 				<Carousel.Item label="Slide 1 of 5">
 					<div />
