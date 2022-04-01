@@ -51,13 +51,10 @@ const Carousel = ({
 
 	const childItems = Children.toArray(subComponents);
 
-	const carouselItems = childItems.map((child, index) =>
-		child.type.name === "Item"
-			? cloneElement(child, {
-				viewable: index + 1 > slide - slidesToShow && index + 1 <= slide,
-			  })
-			: null
-	);
+	const carouselItems = childItems.map((child, index) => {
+		const viewable = index + 1 > slide - slidesToShow && index + 1 <= slide;
+		child.type.name === "Item" ? cloneElement(child, { viewable }) : null;
+	});
 
 	const previousSlide = () => {
 		if (slide - 1 < slidesToShow) {
@@ -83,6 +80,36 @@ const Carousel = ({
 		trackMouse: true,
 	});
 
+	const resolvedNextButton = nextButton ? (
+		cloneElement(nextButton, {
+			"aria-controls": id,
+			onClick: (e) => {
+				nextSlide();
+				if (nextButton.props?.onClick) {
+					nextButton.props.onClick(e);
+				}
+			},
+			className: "c-carousel__button c-carousel__button--next",
+		})
+	) : (
+		<DefaultNextButton id={id} onClick={() => nextSlide()} />
+	);
+
+	const resolvedPreviousButton = previousButton ? (
+		cloneElement(previousButton, {
+			"aria-controls": id,
+			onClick: (e) => {
+				previousSlide();
+				if (previousButton.props?.onClick) {
+					previousButton.props.onClick(e);
+				}
+			},
+			className: "c-carousel__button c-carousel__button--previous",
+		})
+	) : (
+		<DefaultPreviousButton id={id} onClick={() => previousSlide()} />
+	);
+
 	return (
 		<div
 			{...rest}
@@ -102,28 +129,8 @@ const Carousel = ({
 			</div>
 
 			<div className="c-carousel__actions">
-				{slide !== slidesToShow ? (
-					previousButton ? (
-						cloneElement(previousButton, {
-							"aria-controls": id,
-							onClick: () => previousSlide(),
-							className: "c-carousel__button c-carousel__button--previous",
-						})
-					) : (
-						<DefaultPreviousButton id={id} onClick={() => previousSlide()} />
-					)
-				) : null}
-				{slide !== carouselItems.length ? (
-					nextButton ? (
-						cloneElement(nextButton, {
-							"aria-controls": id,
-							onClick: () => nextSlide(),
-							className: "c-carousel__button c-carousel__button--next",
-						})
-					) : (
-						<DefaultNextButton id={id} onClick={() => nextSlide()} />
-					)
-				) : null}
+				{slide !== slidesToShow ? resolvedPreviousButton : null}
+				{slide !== carouselItems.length ? resolvedNextButton : null}
 			</div>
 		</div>
 	);
