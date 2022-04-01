@@ -119,11 +119,11 @@ const Carousel = ({
 			role="region"
 			aria-roledescription="carousel"
 			style={{ "--carousel-slide-width": slidesToShow !== 4 ? `${100 / slidesToShow}%` : null }}
+			{...handlers}
 		>
 			<div
 				className="c-carousel__track"
 				style={{ transform: `translate3d(${position}%, 0px, 0px)` }}
-				{...handlers}
 			>
 				{carouselItems.map((component) => component)}
 			</div>
