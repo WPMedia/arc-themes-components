@@ -105,7 +105,6 @@ $tokens: () !default;
 	@if list.length($tokens) != 0 {
 		:root {
 			// Alias Tokens
-
 			@if map.has-key($tokens, "alias") == true {
 				@each $name, $value in map.get($tokens, "alias") {
 					--#{$name}: #{maintain-quotes($value)};
@@ -135,6 +134,40 @@ $tokens: () !default;
 @function maintain-quotes($item) {
 	@return #{meta.inspect($item)};
 }
+
+@function get-all-component-definitions($allTokens: (), $breakpoints: ()) {
+	$componentMaps: ();
+
+	@if type-of($allTokens) != map {
+		@return $componentMaps;
+	}
+
+	@if map.has-key($allTokens, "default", "components") {
+		@each $name, $value in map.get($allTokens, "default", "components") {
+			$componentMaps: map.set($componentMaps, $name, $value);
+		}
+	}
+
+	@each $breakpoint, $breakpointValue in $breakpoints {
+		@each $blockName, $blockValue in map.get($allTokens, $breakpoint, "blocks") {
+			@if type-of($blockValue) == map {
+				@if list.length(map.get($blockValue, "components")) >= 0 {
+					@each $name, $value in map.get($blockValue, "components") {
+						@each $cName, $cValue in $value {
+							@if map.get($componentMaps, $name, $cName) == null {
+								$componentMaps: map.set($componentMaps, $name, $cName, "initial");
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@return $componentMaps;
+}
+
+$componentMaps: get-all-component-definitions($tokens);
 
 //
 // Start of output of CSS Variables
