@@ -87,7 +87,7 @@ const Carousel = ({
 					nextButton.props.onClick(e);
 				}
 			},
-			className: "c-carousel__button c-carousel__button--next",
+			className: `c-carousel__button c-carousel__button--next ${previousButton.props?.className}`,
 		})
 	) : (
 		<DefaultNextButton id={id} onClick={() => nextSlide()} />
@@ -102,7 +102,7 @@ const Carousel = ({
 					previousButton.props.onClick(e);
 				}
 			},
-			className: "c-carousel__button c-carousel__button--previous",
+			className: `c-carousel__button c-carousel__button--previous ${previousButton.props?.className}`,
 		})
 	) : (
 		<DefaultPreviousButton id={id} onClick={() => previousSlide()} />
