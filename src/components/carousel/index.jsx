@@ -34,10 +34,8 @@ const Carousel = ({
 	className,
 	id,
 	label,
-	next,
 	nextButton,
 	previousButton,
-	previous,
 	slidesToShow,
 	...rest
 }) => {
@@ -152,11 +150,12 @@ Carousel.propTypes = {
 	id: PropTypes.string.isRequired,
 	/** An accessible label */
 	label: PropTypes.string.isRequired,
+	/** Used to set a custom previous button, a cloned Carousel.Button element */
+	previousButton: PropTypes.node,
+	/** Used to set a custom next button, a cloned Carousel.Button element */
+	nextButton: PropTypes.node,
 	/** Number of slides to show in view */
 	slidesToShow: PropTypes.number,
-
-	previousButton: PropTypes.node,
-	nextButton: PropTypes.node,
 };
 
 export default Carousel;

@@ -42,6 +42,10 @@ const Feature = () => (
 
 <ArgsTable of={Item} />
 
+### Carousel.Button
+
+<ArgsTable of={Button} />
+
 ## Stories
 
 ** Carousel **
@@ -102,11 +106,7 @@ const Feature = () => (
 			id="carousel-1"
 			label="Carousel of Images"
 			slidesToShow={1}
-			nextButton={
-				<button type="button">
-					Next
-				</button>
-			}
+			nextButton={<button type="button">Next</button>}
 			previousButton={<button type="button">Previous</button>}
 		>
 			<Carousel.Item label="Slide 1 of 5">

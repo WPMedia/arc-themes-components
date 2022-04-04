@@ -21,7 +21,7 @@ Button.propTypes = {
 	id: PropTypes.string.isRequired,
 	/** Accessible label */
 	label: PropTypes.string,
-	/** Funcation assigned to the onClick event */
+	/** Function assigned to the onClick event */
 	onClick: PropTypes.func,
 };
 
