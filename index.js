@@ -2,6 +2,7 @@
 // inject imports after this comment and alphabetize them
 import Attribution from "./src/components/attribution";
 import Button from "./src/components/button";
+import Carousel from "./src/components/carousel";
 import Date from "./src/components/date";
 import Heading from "./src/components/headings/heading";
 import HeadingSection from "./src/components/headings/section";
@@ -22,6 +23,7 @@ import formatPowaVideoEmbed from "./src/utils/format-powa-video-embed";
 export {
 	Attribution,
 	Button,
+	Carousel,
 	Date,
 	formatCredits,
 	formatPowaVideoEmbed,

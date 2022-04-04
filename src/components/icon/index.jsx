@@ -32,6 +32,7 @@ const Icon = ({ className, context, description, fill, height, name, title, widt
 
 Icon.defaultProps = {
 	context: "presentational",
+	fill: "currentColor",
 	height: 48,
 	width: 48,
 };
