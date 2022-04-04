@@ -234,8 +234,9 @@ $tokens: (
 				@include root.component-properties("component2");
 			}
 			@include expect {
-				font-size: var(--c-component1-font-size);
-				font-weight: var(--c-component1-font-weight);
+				font-size: var(--c-component2-font-size);
+				font-weight: var(--c-component2-font-weight);
+				color: var(--c-component2-color);
 			}
 		}
 	}
