@@ -19,7 +19,8 @@
 					"css-appearance",
 					"intrinsic-width",
 					"viewport-units",
-					"css3-cursor"
+					"css3-cursor",
+					"css-initial-value"
 				],
 				"ignorePartialSupport": true,
 				"severity": "warning"
@@ -38,7 +39,12 @@
 				"ignoreProperties": ["box-orient", "appearance"]
 			}
 		],
-		"value-no-vendor-prefix": [true, { "ignoreValues": ["box"] }],
+		"value-no-vendor-prefix": [
+			true,
+			{
+				"ignoreValues": ["box"]
+			}
+		],
 		"order/order": null,
 		"selector-class-pattern": [
 			"c-[a-z]+",
