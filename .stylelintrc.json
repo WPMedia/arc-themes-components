@@ -12,7 +12,15 @@
 			true,
 			{
 				"browsers": ["> 1%", "Last 2 versions", "not IE 11"],
-				"ignore": ["css-sticky", "multicolumn"],
+				"ignore": [
+					"css-sticky",
+					"multicolumn",
+					"calc",
+					"css-appearance",
+					"intrinsic-width",
+					"viewport-units",
+					"css3-cursor"
+				],
 				"ignorePartialSupport": true,
 				"severity": "warning"
 			}
@@ -27,8 +35,10 @@
 		"property-no-vendor-prefix": [
 			true,
 			{
-				"ignoreProperties": ["box-orient"]
+				"ignoreProperties": ["box-orient", "appearance"]
 			}
-		]
+		],
+		"value-no-vendor-prefix": [true, { "ignoreValues": ["box"] }],
+		"order/order": null
 	}
 }
