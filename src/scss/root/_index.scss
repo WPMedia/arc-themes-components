@@ -85,11 +85,9 @@ $tokens: () !default;
 			@warn '#{$name} "#{$componentName}" is configured with no options';
 		} @else {
 			@if type-of($componentItem) == map {
-				@each $componentProperty, $componentValue in $componentItem {
-					@if type-of($componentValue) != map {
-						--#{$prefix}-#{$componentName}-#{$componentProperty}: #{maintain-quotes(
-								$componentValue
-							)};
+				@each $cProperty, $cValue in $componentItem {
+					@if type-of($cValue) != map {
+						--#{$prefix}-#{$componentName}-#{$cProperty}: #{maintain-quotes($cValue)};
 					}
 				}
 			}

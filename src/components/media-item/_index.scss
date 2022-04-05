@@ -3,18 +3,18 @@
 .c-media-item {
 	@include scss.component-properties("media-item");
 
-	.c-media-item__fig-caption {
+	&__fig-caption {
 		@include scss.component-properties("media-item-fig-caption");
 
-		.c-media-item__title {
+		&__title {
 			@include scss.component-properties("media-item-title");
 		}
 
-		.c-media-item__caption {
+		&__caption {
 			@include scss.component-properties("media-item-caption");
 		}
 
-		.c-media-item__credit {
+		&__credit {
 			@include scss.component-properties("media-item-credit");
 		}
 	}

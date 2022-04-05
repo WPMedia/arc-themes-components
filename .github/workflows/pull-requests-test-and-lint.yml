@@ -40,3 +40,13 @@ jobs:
 
       - name: Check linting on all files
         run: npm run lint
+
+      - name: stylelint
+        uses: reviewdog/action-stylelint@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_error: true
+          reporter: github-pr-review
+          filter_mode: "diff_context"
+          stylelint_config: ".stylelintrc.json"
+          stylelint_input: "**/*.(scss)"
