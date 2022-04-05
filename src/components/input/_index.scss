@@ -3,15 +3,15 @@
 .c-input {
 	@include scss.component-properties("input");
 
-	&__input {
+	.c-input__input {
 		@include scss.component-with-states("input-input", [focus]);
 	}
 
-	&__label {
+	.c-input__label {
 		@include scss.component-properties("input-label");
 	}
 
-	&__tip {
+	.c-input__tip {
 		@include scss.component-properties("input-tip");
 	}
 }
@@ -19,15 +19,15 @@
 .c-input--default {
 	@include scss.component-properties("input-default");
 
-	&__input {
+	.c-input__input {
 		@include scss.component-with-states("input-default-input", [focus]);
 	}
 
-	&__label {
+	.c-input__label {
 		@include scss.component-properties("input-default-label");
 	}
 
-	&__tip {
+	.c-input__tip {
 		@include scss.component-properties("input-default-tip");
 	}
 }
@@ -35,15 +35,15 @@
 .c-input--error {
 	@include scss.component-properties("input-error");
 
-	&__input {
+	.c-input__input {
 		@include scss.component-with-states("input-error-input", [focus]);
 	}
 
-	&__label {
+	.c-input__label {
 		@include scss.component-properties("input-error-label");
 	}
 
-	&__tip {
+	.c-input__tip {
 		@include scss.component-properties("input-error-tip");
 	}
 }
@@ -51,15 +51,15 @@
 .c-input--success {
 	@include scss.component-properties("input-success");
 
-	&__input {
+	.c-input__input {
 		@include scss.component-with-states("input-success-input", [focus]);
 	}
 
-	&__label {
+	.c-input__label {
 		@include scss.component-properties("input-success-label");
 	}
 
-	&__tip {
+	.c-input__tip {
 		@include scss.component-properties("input-success-tip");
 	}
 }
@@ -67,15 +67,15 @@
 .c-input--warning {
 	@include scss.component-properties("input-warning");
 
-	&__input {
+	.c-input__input {
 		@include scss.component-with-states("input-warning-input", [focus]);
 	}
 
-	&__label {
+	.c-input__label {
 		@include scss.component-properties("input-warning-label");
 	}
 
-	&__tip {
+	.c-input__tip {
 		@include scss.component-properties("input-warning-tip");
 	}
 }
