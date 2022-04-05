@@ -39,6 +39,12 @@
 			}
 		],
 		"value-no-vendor-prefix": [true, { "ignoreValues": ["box"] }],
-		"order/order": null
+		"order/order": null,
+		"selector-class-pattern": [
+			"c-[a-z]+",
+			{
+				"resolveNestedSelectors": true
+			}
+		]
 	}
 }
