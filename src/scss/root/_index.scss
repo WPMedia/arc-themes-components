@@ -38,26 +38,27 @@ $tokens: () !default;
 }
 
 @function get-all-component-definitions($allTokens: (), $breakpoints: ()) {
-	$componentMaps: ();
+	$component-map: ();
 
 	@if type-of($allTokens) != map {
-		@return $componentMaps;
+		@return $component-map;
 	}
 
 	@if map.has-key($allTokens, "default", "components") {
 		@each $name, $value in map.get($allTokens, "default", "components") {
-			$componentMaps: map.set($componentMaps, $name, $value);
+			$component-map: map.set($component-map, $name, $value);
 		}
 	}
 
+	/* stylelint-disable max-nesting-depth */
 	@each $breakpoint, $breakpointValue in $breakpoints {
 		@each $blockName, $blockValue in map.get($allTokens, $breakpoint, "blocks") {
 			@if type-of($blockValue) == map {
 				@if list.length(map.get($blockValue, "components")) >= 0 {
 					@each $name, $value in map.get($blockValue, "components") {
 						@each $cName, $cValue in $value {
-							@if map.get($componentMaps, $name, $cName) == null {
-								$componentMaps: map.set($componentMaps, $name, $cName, "initial");
+							@if map.get($component-map, $name, $cName) == null {
+								$component-map: map.set($component-map, $name, $cName, "initial");
 							}
 						}
 					}
@@ -66,11 +67,11 @@ $tokens: () !default;
 		}
 	}
 
-	@return $componentMaps;
+	@return $component-map;
 }
 
 // Map of all components unique properties
-$componentMaps: get-all-component-definitions($tokens, $breakpoints);
+$component-map: get-all-component-definitions($tokens, $breakpoints);
 
 //
 // Mixins
@@ -102,8 +103,8 @@ $componentMaps: get-all-component-definitions($tokens, $breakpoints);
 }
 
 @mixin component-properties($component) {
-	@if map.has-key($componentMaps, $component) {
-		@each $name, $value in map.get($componentMaps, $component) {
+	@if map.has-key($component-map, $component) {
+		@each $name, $value in map.get($component-map, $component) {
 			#{$name}: component-var($component, $name);
 		}
 	}
