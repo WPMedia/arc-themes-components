@@ -33,6 +33,9 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # GITHUB_ACTOR is the username of the user that initiated the workflow run
+      # https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
+      # need this config for running `npm version {version level}` commit
       - name: Iterate version patch for stable release
         run: |
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"

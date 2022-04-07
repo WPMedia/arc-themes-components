@@ -37,6 +37,9 @@ jobs:
         id: get-datetime
         run: echo "::set-output name=date::$(date +'%Y%m%d%H%M%S')"
 
+      # GITHUB_ACTOR is the username of the user that initiated the workflow run
+      # https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
+      # need this config for running `npm version {version level}` commit
       - name: Prerelease with tag, eg (`0.0.2-beta.{hash of commit}.{current-date-time}`)
         run: |
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"

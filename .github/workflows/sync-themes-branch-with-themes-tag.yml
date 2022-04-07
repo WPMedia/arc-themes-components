@@ -47,6 +47,9 @@ jobs:
 
           echo "::set-output name=formatted_branch_name::$new_branch_name"
 
+      # GITHUB_ACTOR is the username of the user that initiated the workflow run
+      # https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
+      # need this config for running `npm version {version level}` commit
       # Prerelease (tests and lint)
       - run: |
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
