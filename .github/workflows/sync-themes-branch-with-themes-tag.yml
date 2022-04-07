@@ -38,11 +38,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Git config
-      - run: git config --global user.email "jack.howard@washpost.com" && git config --global user.name "jackhowa"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
-
       - name: Format branch name . to - for preid version compatibility
         id: format_branch_step
         run: |
@@ -52,8 +47,14 @@ jobs:
 
           echo "::set-output name=formatted_branch_name::$new_branch_name"
 
+      # GITHUB_ACTOR is the username of the user that initiated the workflow run
+      # https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
+      # need this config for running `npm version {version level}` commit
       # Prerelease (tests and lint)
-      - run: npm version prerelease --preid=${{ steps.format_branch_step.outputs.formatted_branch_name }}
+      - run: |
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config --local user.name "$GITHUB_ACTOR"
+          npm version prerelease --preid=${{ steps.format_branch_step.outputs.formatted_branch_name }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -63,7 +64,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Push tag
-      - run: git push origin ${{ env.SYNCED_RELEASE_TAG }} -f
+      - run: git push origin ${{ env.SYNCED_RELEASE_TAG }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

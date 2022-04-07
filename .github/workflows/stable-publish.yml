@@ -33,13 +33,14 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set git config with NPM token
-        run: git config --global user.email "jack.howard@washpost.com" && git config --global user.name "jackhowa"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
-
+      # GITHUB_ACTOR is the username of the user that initiated the workflow run
+      # https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
+      # need this config for running `npm version {version level}` commit
       - name: Iterate version patch for stable release
-        run: npm version patch
+        run: |
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config --local user.name "$GITHUB_ACTOR"
+          npm version patch
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -50,6 +51,6 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push tag of stable
-        run: git push origin stable -f
+        run: git push origin stable
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -33,17 +33,18 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set git config with NPM token
-        run: git config --global user.email "jack.howard@washpost.com" && git config --global user.name "jackhowa"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_PERSONAL_AUTH_TOKEN }}
-
       - name: Get current datetime for re-running publish if necessary
         id: get-datetime
         run: echo "::set-output name=date::$(date +'%Y%m%d%H%M%S')"
 
+      # GITHUB_ACTOR is the username of the user that initiated the workflow run
+      # https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
+      # need this config for running `npm version {version level}` commit
       - name: Prerelease with tag, eg (`0.0.2-canary.{hash of commit}.{current-date-time}`)
-        run: npm version prerelease --preid=canary.$(git rev-parse --short HEAD).${{ steps.get-datetime.outputs.date }}
+        run: |
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config --local user.name "$GITHUB_ACTOR"
+          npm version prerelease --preid=canary.$(git rev-parse --short HEAD).${{ steps.get-datetime.outputs.date }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -54,6 +55,6 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push tag of canary
-        run: git push origin canary -f
+        run: git push origin canary
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
