@@ -51,4 +51,8 @@
 			@include scss.component-properties("carousel-button-previous");
 		}
 	}
+
+	&__full-screen-toggle {
+		@include scss.component-properties("carousel-full-screen-toggle");
+	}
 }

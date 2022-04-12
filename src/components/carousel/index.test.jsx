@@ -217,4 +217,44 @@ describe("Carousel", () => {
 		await userEvent.click(screen.getByRole("button", { name: "Previous" }));
 		expect(prevEvent).toHaveBeenCalled();
 	});
+
+	it("should show full-screen button if full screen option enabled and use custom button", async () => {
+		render(
+			<Carousel
+				id="carousel-2"
+				label="Carousel Label"
+				fullScreenShowButton={<button type="button">Show Custom Full Screen</button>}
+				fullScreenMinimizeButton={<button type="button">Hide Custom Full Screen</button>}
+				enableFullScreenToggleButton
+			>
+				<Carousel.Item label="Slide 1 of 5">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+
+		expect(screen.queryAllByText("Show Custom Full Screen")).toHaveLength(1);
+	});
+	it("should show full-screen button if full screen option enabled and use default button", async () => {
+		render(
+			<Carousel id="carousel-2" label="Carousel Label" enableFullScreenToggleButton>
+				<Carousel.Item label="Slide 1 of 5">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+
+		expect(screen.queryAllByText("Full Screen")).toHaveLength(1);
+	});
+	it("does not show full screen button default if disabled", () => {
+		render(
+			<Carousel id="carousel-2" label="Carousel Label">
+				<Carousel.Item label="Slide 1 of 5">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+
+		expect(screen.queryAllByText("Full Screen")).toHaveLength(0);
+	});
 });

@@ -37,10 +37,15 @@ const Carousel = ({
 	nextButton,
 	previousButton,
 	slidesToShow,
+	fullScreenShowButton,
+	fullScreenMinimizeButton,
+	enableFullScreenToggleButton,
 	...rest
 }) => {
 	const [slide, setSlide] = useState(slidesToShow);
 	const [position, setPosition] = useState(0);
+	const [isFullScreen, setIsFullScreen] = useState(false);
+
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 
 	const subComponents = Object.values(Carousel).map((subcomponentType) =>
@@ -68,6 +73,29 @@ const Carousel = ({
 		}
 		setSlide(slide + 1);
 		setPosition(position - 100 / slidesToShow);
+	};
+
+	const toggleFullScreen = () => {
+		// id is the carousel id
+		// the full screen element is the whole carousel
+		const fullScreenElement = document.getElementById(id);
+
+		if (document.fullscreenEnabled) {
+			if (!document.fullscreenElement) {
+				fullScreenElement.requestFullscreen().then(() => setIsFullScreen(true));
+			} else {
+				document.exitFullscreen().then(() => setIsFullScreen(false));
+			}
+		}
+
+		// safari needs prefix
+		if (document.webkitFullscreenEnabled) {
+			if (!document.webkitFullscreenElement) {
+				fullScreenElement.webkitRequestFullscreen().then(() => setIsFullScreen(true));
+			} else {
+				document.webkitExitFullscreen().then(() => setIsFullScreen(false));
+			}
+		}
 	};
 
 	/* istanbul ignore next */
@@ -108,6 +136,36 @@ const Carousel = ({
 		<DefaultPreviousButton id={id} onClick={() => previousSlide()} />
 	);
 
+	const resolvedFullScreenShowButton = fullScreenShowButton ? (
+		cloneElement(fullScreenShowButton, {
+			onClick: toggleFullScreen,
+			className: `${COMPONENT_CLASS_NAME}__full-screen-toggle ${fullScreenShowButton.props?.className}`,
+		})
+	) : (
+		<button
+			onClick={toggleFullScreen}
+			type="button"
+			className={`${COMPONENT_CLASS_NAME}__full-screen-toggle`}
+		>
+			Full Screen
+		</button>
+	);
+
+	const resolvedFullScreenMinimizeButton = fullScreenMinimizeButton ? (
+		cloneElement(fullScreenMinimizeButton, {
+			onClick: toggleFullScreen,
+			className: `${COMPONENT_CLASS_NAME}__full-screen-toggle ${fullScreenMinimizeButton.props?.className}`,
+		})
+	) : (
+		<button
+			onClick={toggleFullScreen}
+			type="button"
+			className={`${COMPONENT_CLASS_NAME}__full-screen-toggle`}
+		>
+			Minimize Screen
+		</button>
+	);
+
 	return (
 		<div
 			{...rest}
@@ -127,6 +185,8 @@ const Carousel = ({
 			</div>
 
 			<div className="c-carousel__actions">
+				{enableFullScreenToggleButton && !isFullScreen ? resolvedFullScreenShowButton : null}
+				{enableFullScreenToggleButton && isFullScreen ? resolvedFullScreenMinimizeButton : null}
 				{slide !== slidesToShow ? resolvedPreviousButton : null}
 				{slide !== carouselItems.length ? resolvedNextButton : null}
 			</div>
@@ -134,7 +194,6 @@ const Carousel = ({
 	);
 };
 
-Carousel.Button = Button;
 Carousel.Item = Item;
 
 Carousel.defaultProps = {
@@ -156,6 +215,12 @@ Carousel.propTypes = {
 	nextButton: PropTypes.node,
 	/** Number of slides to show in view */
 	slidesToShow: PropTypes.number,
+	/** Used to set a custom full screen show button, cloned with event handlers */
+	fullScreenShowButton: PropTypes.node,
+	/** Used to set a custom full screen exit button, cloned with event handlers */
+	fullScreenMinimizeButton: PropTypes.node,
+	/** Opt into showing a full screen toggle button. Uses defaults if no `fullScreenShowButton` or `fullScreenMinimizeButton` provided for respective button states */
+	enableFullScreenToggleButton: PropTypes.bool,
 };
 
 export default Carousel;
