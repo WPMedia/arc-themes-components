@@ -29,6 +29,7 @@ const DefaultPreviousButton = ({ id, onClick }) => (
 	</Button>
 );
 
+/* istanbul ignore next  */
 const DefaultExitFullScreenButton = ({ id, onClick }) => (
 	<Button
 		id={id}
@@ -99,6 +100,7 @@ const Carousel = ({
 		setPosition(position - 100 / slidesToShow);
 	};
 
+	/* istanbul ignore next  */
 	const toggleFullScreen = () => {
 		// id is the carousel id
 		// the full screen element is the whole carousel
@@ -179,6 +181,7 @@ const Carousel = ({
 		<DefaultExitFullScreenButton id={id} onClick={toggleFullScreen} />
 	);
 
+	/* istanbul ignore next  */
 	const fullScreenEnabledAllowed =
 		(document.fullscreenEnabled || document.webkitFullscreenEnabled) && enableFullScreen;
 
@@ -203,7 +206,11 @@ const Carousel = ({
 			<div className="c-carousel__actions">
 				{/* only show button at all if enabled on the document */}
 				{fullScreenEnabledAllowed && !isFullScreen ? resolvedFullScreenShowButton : null}
-				{fullScreenEnabledAllowed && isFullScreen ? resolvedFullScreenMinimizeButton : null}
+				{
+					/* istanbul ignore next  */ fullScreenEnabledAllowed && isFullScreen
+						? resolvedFullScreenMinimizeButton
+						: null
+				}
 				{slide !== slidesToShow ? resolvedPreviousButton : null}
 				{slide !== carouselItems.length && carouselItems.length > 1 ? resolvedNextButton : null}
 			</div>
