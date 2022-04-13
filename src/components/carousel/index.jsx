@@ -55,6 +55,7 @@ const Carousel = ({
 	});
 
 	const previousSlide = () => {
+		/* istanbul ignore next */
 		if (slide - 1 < slidesToShow) {
 			return;
 		}
@@ -63,6 +64,7 @@ const Carousel = ({
 	};
 
 	const nextSlide = () => {
+		/* istanbul ignore next */
 		if (slide + 1 > carouselItems.length) {
 			return;
 		}
@@ -128,7 +130,7 @@ const Carousel = ({
 
 			<div className="c-carousel__actions">
 				{slide !== slidesToShow ? resolvedPreviousButton : null}
-				{slide !== carouselItems.length ? resolvedNextButton : null}
+				{slide !== carouselItems.length && carouselItems.length > 1 ? resolvedNextButton : null}
 			</div>
 		</div>
 	);

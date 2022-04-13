@@ -18,6 +18,22 @@ describe("Carousel", () => {
 		expect(screen.getByRole("region")).not.toBeNull();
 	});
 
+	it("should only render Carousel.Item children", () => {
+		render(
+			<Carousel id="Carousel-1" label="Carousel Label" slidesToShow={1}>
+				<Carousel.Item label="Slide 1 of 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Button id="a">Button</Carousel.Button>
+			</Carousel>
+		);
+		expect(screen.getByRole("region")).not.toBeNull();
+		expect(screen.queryAllByText("Button")).toHaveLength(0);
+	});
+
 	it("should allow pass through of props", () => {
 		const { container } = render(
 			<Carousel id="carousel-2" label="Carousel Label" data-id="custom-id">
@@ -55,7 +71,20 @@ describe("Carousel", () => {
 
 		expect(screen.getByRole("region", { name: "Carousel Label" })).not.toBeNull();
 		expect(screen.getByRole("button")).not.toBeNull();
-		expect(screen.queryAllByText("Previous Slide")).toHaveLength(0);
+		expect(screen.queryAllByText("Previous")).toHaveLength(0);
+	});
+
+	it("should not render next button", () => {
+		render(
+			<Carousel id="carousel-2" label="Carousel Label" slidesToShow={1}>
+				<Carousel.Item label="Slide 1 of 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+
+		expect(screen.getByRole("region", { name: "Carousel Label" })).not.toBeNull();
+		expect(screen.queryAllByText("Next")).toHaveLength(0);
 	});
 
 	it("should render previous button after using next button and next button is removed", async () => {
