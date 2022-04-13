@@ -1,5 +1,6 @@
 /* eslint import/order: ["error", {"alphabetize": {"order": "asc", "caseInsensitive": true}}] */
 // inject imports after this comment and alphabetize them
+import Grid from "./src/components/grid";
 import Attribution from "./src/components/attribution";
 import Button from "./src/components/button";
 import Carousel from "./src/components/carousel";
@@ -21,6 +22,7 @@ import formatCredits from "./src/utils/format-credits";
 import formatPowaVideoEmbed from "./src/utils/format-powa-video-embed";
 
 export {
+	Grid,
 	Attribution,
 	Button,
 	Carousel,

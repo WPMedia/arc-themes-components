@@ -1,0 +1,44 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+
+import Image from "../image";
+
+import Grid from ".";
+
+<Meta title="Components/Grid" component={Grid} />
+
+# Grid
+
+The `<Grid>` component is an wrapper to the CSS Grid layout in order for Themes to
+be able to control two-dimensional grid layout's within blocks.
+
+## Usage
+
+```jsx
+import { Grid } from "@wpmedia/arc-themes-components";
+
+const Feature = () => (
+	<Grid>
+		<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+		<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+		<Image src="/coffee.jpeg" alt="A cup of coffee" />
+	</Grid>
+);
+```
+
+## Properties
+
+<ArgsTable of={Grid} />
+
+## Stories
+
+** Grid **
+
+<Canvas>
+	<Story name="Grid">
+		<Grid>
+			<div style={{ height: "250px", width: "100%", backgroundColor: "rebeccapurple" }}> </div>
+			<div style={{ height: "250px", width: "100%", backgroundColor: "antiquewhite" }}> </div>
+			<div style={{ height: "250px", width: "100%", backgroundColor: "rebeccapurple" }}> </div>
+		</Grid>
+	</Story>
+</Canvas>
