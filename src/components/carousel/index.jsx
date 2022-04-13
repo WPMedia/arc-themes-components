@@ -169,6 +169,10 @@ const Carousel = ({
 		</button>
 	);
 
+	const fullScreenEnabledAllowed =
+		(document.fullscreenEnabled || document.webkitFullscreenEnabled) &&
+		enableFullScreenToggleButton;
+
 	return (
 		<div
 			{...rest}
@@ -188,8 +192,9 @@ const Carousel = ({
 			</div>
 
 			<div className="c-carousel__actions">
-				{enableFullScreenToggleButton && !isFullScreen ? resolvedFullScreenShowButton : null}
-				{enableFullScreenToggleButton && isFullScreen ? resolvedFullScreenMinimizeButton : null}
+				{/* only show button at all if enabled on the document */}
+				{fullScreenEnabledAllowed && !isFullScreen ? resolvedFullScreenShowButton : null}
+				{fullScreenEnabledAllowed && isFullScreen ? resolvedFullScreenMinimizeButton : null}
 				{slide !== slidesToShow ? resolvedPreviousButton : null}
 				{slide !== carouselItems.length && carouselItems.length > 1 ? resolvedNextButton : null}
 			</div>
