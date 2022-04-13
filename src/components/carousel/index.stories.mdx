@@ -100,10 +100,10 @@ const Feature = () => (
 	</Story>
 </Canvas>
 
-** Single Slide **
+** Single Slide Display **
 
 <Canvas>
-	<Story name="Single Slide">
+	<Story name="Single Slide Display">
 		<Carousel
 			id="carousel-1"
 			label="Carousel of Images"
@@ -126,6 +126,55 @@ const Feature = () => (
 				<Image src="/coffee.jpeg" alt="A cup of coffee" />
 			</Carousel.Item>
 			<Carousel.Item label="Slide 5 of 5">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+		</Carousel>
+	</Story>
+</Canvas>
+
+** No Additional Slides **
+
+<Canvas>
+	<Story name="No Additional Slides">
+		<Carousel
+			id="carousel-1"
+			label="Carousel of Images"
+			slidesToShow={4}
+			nextButton={<button type="button">Next</button>}
+			previousButton={<button type="button">Previous</button>}
+		>
+			<Carousel.Item label="Slide 1 of 4">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 2 of 4">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 3 of 4">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 4 of 4">
+				<Image src="/coffee.jpeg" alt="A cup of coffee" />
+			</Carousel.Item>
+		</Carousel>
+	</Story>
+</Canvas>
+
+** Single Slide **
+
+<Canvas>
+	<Story name="Single Slide">
+		<Carousel
+			id="carousel-1"
+			label="Carousel of Images"
+			slidesToShow={1}
+			nextButton={<button type="button">Next</button>}
+			previousButton={<button type="button">Previous</button>}
+		>
+			<Carousel.Item label="Slide 1 of 1">
 				<a href="/">
 					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
 				</a>
@@ -168,6 +217,50 @@ const Feature = () => (
 		>
 			<Carousel.Item label="Slide 1 of 1">
 				<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+			</Carousel.Item>
+		</Carousel>
+	</Story>
+</Canvas>
+
+** Show Custom Full Screen Toggle With Multiple Slides **
+
+<Canvas>
+	<Story name="Show Custom Full Screen Toggle With Multiple Slides">
+		<Carousel
+			id="carousel-1"
+			label="Carousel of Images"
+			slidesToShow={1}
+			enableFullScreenToggleButton
+			fullScreenShowButton={
+				<button type="button">
+					<Icon name="Fullscreen" />
+					Expand
+				</button>
+			}
+			fullScreenMinimizeButton={
+				<button type="button">
+					<Icon name="Close" />
+				</button>
+			}
+		>
+			<Carousel.Item label="Slide 1 of 5">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 2 of 5">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 3 of 5">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 4 of 5">
+				<Image src="/coffee.jpeg" alt="A cup of coffee" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 5 of 5">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
 			</Carousel.Item>
 		</Carousel>
 	</Story>
