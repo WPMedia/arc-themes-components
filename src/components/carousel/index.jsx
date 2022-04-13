@@ -86,14 +86,15 @@ const Carousel = ({
 			} else {
 				document.exitFullscreen().then(() => setIsFullScreen(false));
 			}
-		}
-
-		// safari needs prefix
-		if (document.webkitFullscreenEnabled) {
-			if (!document.webkitFullscreenElement) {
-				fullScreenElement.webkitRequestFullscreen().then(() => setIsFullScreen(true));
-			} else {
-				document.webkitExitFullscreen().then(() => setIsFullScreen(false));
+		} else {
+			// safari needs prefix
+			// eslint-disable-next-line no-lonely-if
+			if (document.webkitFullscreenEnabled) {
+				if (!document.webkitFullscreenElement) {
+					fullScreenElement.webkitRequestFullscreen().then(() => setIsFullScreen(true));
+				} else {
+					document.webkitExitFullscreen().then(() => setIsFullScreen(false));
+				}
 			}
 		}
 	};
