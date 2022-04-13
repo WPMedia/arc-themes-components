@@ -41,6 +41,8 @@ jobs:
       - name: Check linting on all files
         run: npm run lint
 
+      # This is a temp fix until stylelint action fixes its issue
+      # https://github.com/reviewdog/reviewdog/issues/1158#issuecomment-1097649732
       - name: Stylelint Owner Fix
         run: sudo chown -R root:root $GITHUB_WORKSPACE
 
