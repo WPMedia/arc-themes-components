@@ -39,7 +39,7 @@ const Carousel = ({
 	slidesToShow,
 	fullScreenShowButton,
 	fullScreenMinimizeButton,
-	enableFullScreenToggleButton,
+	enableFullScreen,
 	...rest
 }) => {
 	const [slide, setSlide] = useState(slidesToShow);
@@ -170,8 +170,7 @@ const Carousel = ({
 	);
 
 	const fullScreenEnabledAllowed =
-		(document.fullscreenEnabled || document.webkitFullscreenEnabled) &&
-		enableFullScreenToggleButton;
+		(document.fullscreenEnabled || document.webkitFullscreenEnabled) && enableFullScreen;
 
 	return (
 		<div
@@ -229,7 +228,7 @@ Carousel.propTypes = {
 	/** Used to set a custom full screen exit button, cloned with event handlers */
 	fullScreenMinimizeButton: PropTypes.node,
 	/** Opt into showing a full screen toggle button. Uses defaults if no `fullScreenShowButton` or `fullScreenMinimizeButton` provided for respective button states */
-	enableFullScreenToggleButton: PropTypes.bool,
+	enableFullScreen: PropTypes.bool,
 };
 
 export default Carousel;

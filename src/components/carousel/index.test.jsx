@@ -3,6 +3,11 @@ import userEvent from "@testing-library/user-event";
 
 import Carousel from ".";
 
+// define full screen like in browsers that support full screen api
+Object.defineProperty(global.document, "fullscreenEnabled", {
+	value: true,
+});
+
 describe("Carousel", () => {
 	it("should render carousel", () => {
 		render(
@@ -254,7 +259,7 @@ describe("Carousel", () => {
 				label="Carousel Label"
 				fullScreenShowButton={<button type="button">Show Custom Full Screen</button>}
 				fullScreenMinimizeButton={<button type="button">Hide Custom Full Screen</button>}
-				enableFullScreenToggleButton
+				enableFullScreen
 			>
 				<Carousel.Item label="Slide 1 of 5">
 					<div />
@@ -266,7 +271,7 @@ describe("Carousel", () => {
 	});
 	it("should show full-screen button if full screen option enabled and use default button", async () => {
 		render(
-			<Carousel id="carousel-2" label="Carousel Label" enableFullScreenToggleButton>
+			<Carousel id="carousel-2" label="Carousel Label" enableFullScreen>
 				<Carousel.Item label="Slide 1 of 5">
 					<div />
 				</Carousel.Item>
