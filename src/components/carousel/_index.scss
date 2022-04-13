@@ -50,9 +50,13 @@
 		&--previous {
 			@include scss.component-properties("carousel-button-previous");
 		}
-	}
 
-	&__full-screen-toggle {
-		@include scss.component-properties("carousel-full-screen-toggle");
+		&--enter-full-screen {
+			@include scss.component-properties("carousel-button-enter-full-screen");
+		}
+
+		&--exit-full-screen {
+			@include scss.component-properties("carousel-button-exit-full-screen");
+		}
 	}
 }

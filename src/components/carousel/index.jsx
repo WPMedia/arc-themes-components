@@ -29,23 +29,23 @@ const DefaultPreviousButton = ({ id, onClick }) => (
 	</Button>
 );
 
-const DefaultMinimizeScreenButton = ({ id, onClick }) => (
+const DefaultExitFullScreenButton = ({ id, onClick }) => (
 	<Button
 		id={id}
 		onClick={onClick}
 		label="Exit full screen mode displaying the carousel"
-		className={`${COMPONENT_CLASS_NAME}__full-screen-toggle`}
+		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--exit-full-screen`}
 	>
 		Minimize Screen
 	</Button>
 );
 
-const DefaultShowScreenButton = ({ id, onClick }) => (
+const DefaultEnterFullScreenButton = ({ id, onClick }) => (
 	<Button
 		id={id}
 		onClick={onClick}
 		label="Enter full screen mode displaying the carousel"
-		className={`${COMPONENT_CLASS_NAME}__full-screen-toggle`}
+		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--enter-full-screen`}
 	>
 		Full Screen
 	</Button>
@@ -164,19 +164,19 @@ const Carousel = ({
 	const resolvedFullScreenShowButton = fullScreenShowButton ? (
 		cloneElement(fullScreenShowButton, {
 			onClick: toggleFullScreen,
-			className: `${COMPONENT_CLASS_NAME}__full-screen-toggle ${fullScreenShowButton.props?.className}`,
+			className: `${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--enter-full-screen ${fullScreenShowButton.props?.className}`,
 		})
 	) : (
-		<DefaultShowScreenButton id={id} onClick={toggleFullScreen} />
+		<DefaultEnterFullScreenButton id={id} onClick={toggleFullScreen} />
 	);
 
 	const resolvedFullScreenMinimizeButton = fullScreenMinimizeButton ? (
 		cloneElement(fullScreenMinimizeButton, {
 			onClick: toggleFullScreen,
-			className: `${COMPONENT_CLASS_NAME}__full-screen-toggle ${fullScreenMinimizeButton.props?.className}`,
+			className: `${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--enter-full-screen ${fullScreenMinimizeButton.props?.className}`,
 		})
 	) : (
-		<DefaultMinimizeScreenButton id={id} onClick={toggleFullScreen} />
+		<DefaultExitFullScreenButton id={id} onClick={toggleFullScreen} />
 	);
 
 	const fullScreenEnabledAllowed =
