@@ -42,7 +42,7 @@ jobs:
         run: npm run lint
 
       - name: stylelint
-      - run: sudo chown -R root:root $GITHUB_WORKSPACE
+        run: sudo chown -R root:root $GITHUB_WORKSPACE
         uses: reviewdog/action-stylelint@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
