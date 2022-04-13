@@ -29,6 +29,28 @@ const DefaultPreviousButton = ({ id, onClick }) => (
 	</Button>
 );
 
+const DefaultMinimizeScreenButton = ({ id, onClick }) => (
+	<Button
+		id={id}
+		onClick={onClick}
+		label="Exit full screen mode displaying the carousel"
+		className={`${COMPONENT_CLASS_NAME}__full-screen-toggle`}
+	>
+		Minimize Screen
+	</Button>
+);
+
+const DefaultShowScreenButton = ({ id, onClick }) => (
+	<Button
+		id={id}
+		onClick={onClick}
+		label="Enter full screen mode displaying the carousel"
+		className={`${COMPONENT_CLASS_NAME}__full-screen-toggle`}
+	>
+		Full Screen
+	</Button>
+);
+
 const Carousel = ({
 	children,
 	className,
@@ -145,13 +167,7 @@ const Carousel = ({
 			className: `${COMPONENT_CLASS_NAME}__full-screen-toggle ${fullScreenShowButton.props?.className}`,
 		})
 	) : (
-		<button
-			onClick={toggleFullScreen}
-			type="button"
-			className={`${COMPONENT_CLASS_NAME}__full-screen-toggle`}
-		>
-			Full Screen
-		</button>
+		<DefaultShowScreenButton id={id} onClick={toggleFullScreen} />
 	);
 
 	const resolvedFullScreenMinimizeButton = fullScreenMinimizeButton ? (
@@ -160,13 +176,7 @@ const Carousel = ({
 			className: `${COMPONENT_CLASS_NAME}__full-screen-toggle ${fullScreenMinimizeButton.props?.className}`,
 		})
 	) : (
-		<button
-			onClick={toggleFullScreen}
-			type="button"
-			className={`${COMPONENT_CLASS_NAME}__full-screen-toggle`}
-		>
-			Minimize Screen
-		</button>
+		<DefaultMinimizeScreenButton id={id} onClick={toggleFullScreen} />
 	);
 
 	const fullScreenEnabledAllowed =
