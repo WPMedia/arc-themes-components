@@ -6,6 +6,7 @@
 	display: grid;
 	grid-template-areas: "carousel";
 	overflow: hidden;
+	word-break: break-word;
 
 	@include scss.component-properties("carousel");
 
