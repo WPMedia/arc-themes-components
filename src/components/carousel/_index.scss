@@ -5,7 +5,6 @@
 
 	display: grid;
 	grid-template-areas: "carousel";
-	justify-content: center;
 	overflow: hidden;
 
 	@include scss.component-properties("carousel");
@@ -15,7 +14,9 @@
 	}
 
 	&__track {
+		--slide-gap: var(--c-carousel-track-gap, 0px);
 		display: flex;
+		justify-self: center;
 		transition: transform 0.4s ease-in;
 		will-change: transform;
 
@@ -23,7 +24,7 @@
 	}
 
 	&__slide {
-		flex: 0 0 var(--slide-width);
+		flex: 0 0 calc(var(--slide-width) - var(--slide-gap));
 
 		@include scss.component-properties("carousel-slide");
 	}
