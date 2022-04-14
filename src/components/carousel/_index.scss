@@ -15,6 +15,7 @@
 
 	&__track {
 		/* stylelint-disable length-zero-no-unit */
+		// Disabled the rule as the px value is needed within the calc below
 		--slide-gap: var(--c-carousel-track-gap, 0px);
 		display: flex;
 		justify-self: center;
