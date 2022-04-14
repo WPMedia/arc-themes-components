@@ -14,6 +14,7 @@
 	}
 
 	&__track {
+		/* stylelint-disable length-zero-no-unit */
 		--slide-gap: var(--c-carousel-track-gap, 0px);
 		display: flex;
 		justify-self: center;
