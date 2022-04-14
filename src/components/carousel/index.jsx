@@ -12,7 +12,7 @@ const DefaultNextButton = ({ id, onClick }) => (
 		id={id}
 		onClick={onClick}
 		label="Next Slide"
-		className="c-carousel__button c-carousel__button--next"
+		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--next`}
 	>
 		Next
 	</Button>
@@ -23,11 +23,23 @@ const DefaultPreviousButton = ({ id, onClick }) => (
 		id={id}
 		onClick={onClick}
 		label="Previous Slide"
-		className="c-carousel__button c-carousel__button--previous"
+		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--previous`}
 	>
 		Previous
 	</Button>
 );
+
+const resolvedButton = (element, id, className, onClick) =>
+	cloneElement(element, {
+		"aria-controls": id,
+		onClick: (e) => {
+			onClick();
+			if (element.props?.onClick) {
+				element.props.onClick(e);
+			}
+		},
+		className: `${COMPONENT_CLASS_NAME}__button ${className} ${element.props?.className}`,
+	});
 
 const Carousel = ({
 	children,
@@ -81,31 +93,13 @@ const Carousel = ({
 	});
 
 	const resolvedNextButton = nextButton ? (
-		cloneElement(nextButton, {
-			"aria-controls": id,
-			onClick: (e) => {
-				nextSlide();
-				if (nextButton.props?.onClick) {
-					nextButton.props.onClick(e);
-				}
-			},
-			className: `c-carousel__button c-carousel__button--next ${previousButton.props?.className}`,
-		})
+		resolvedButton(nextButton, id, `${COMPONENT_CLASS_NAME}__button--next`, nextSlide)
 	) : (
 		<DefaultNextButton id={id} onClick={() => nextSlide()} />
 	);
 
 	const resolvedPreviousButton = previousButton ? (
-		cloneElement(previousButton, {
-			"aria-controls": id,
-			onClick: (e) => {
-				previousSlide();
-				if (previousButton.props?.onClick) {
-					previousButton.props.onClick(e);
-				}
-			},
-			className: `c-carousel__button c-carousel__button--previous ${previousButton.props?.className}`,
-		})
+		resolvedButton(previousButton, id, `${COMPONENT_CLASS_NAME}__button--previous`, previousSlide)
 	) : (
 		<DefaultPreviousButton id={id} onClick={() => previousSlide()} />
 	);
