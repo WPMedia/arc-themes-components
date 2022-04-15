@@ -196,6 +196,15 @@ const Carousel = ({
 			style={{ "--carousel-slide-width": slidesToShow !== 4 ? `${100 / slidesToShow}%` : null }}
 			{...handlers}
 		>
+			<div className={`${COMPONENT_CLASS_NAME}__top-actions`}>
+				{/* only show button at all if enabled on the document */}
+				{fullScreenEnabledAllowed && !isFullScreen ? resolvedFullScreenShowButton : null}
+				{
+					/* istanbul ignore next  */ fullScreenEnabledAllowed && isFullScreen
+						? resolvedFullScreenMinimizeButton
+						: null
+				}
+			</div>
 			<div
 				className="c-carousel__track"
 				style={{ transform: `translate3d(${position}%, 0px, 0px)` }}
@@ -204,13 +213,6 @@ const Carousel = ({
 			</div>
 
 			<div className="c-carousel__actions">
-				{/* only show button at all if enabled on the document */}
-				{fullScreenEnabledAllowed && !isFullScreen ? resolvedFullScreenShowButton : null}
-				{
-					/* istanbul ignore next  */ fullScreenEnabledAllowed && isFullScreen
-						? resolvedFullScreenMinimizeButton
-						: null
-				}
 				{slide !== slidesToShow ? resolvedPreviousButton : null}
 				{slide !== carouselItems.length && carouselItems.length > 1 ? resolvedNextButton : null}
 			</div>

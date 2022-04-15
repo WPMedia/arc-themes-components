@@ -38,6 +38,11 @@
 		@include scss.component-properties("carousel-actions");
 	}
 
+	&__top-actions {
+		z-index: 1;
+		@include scss.component-properties("carousel-top-actions");
+	}
+
 	&__button {
 		@include scss.component-properties("carousel-button");
 
