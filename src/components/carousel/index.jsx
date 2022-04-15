@@ -29,6 +29,29 @@ const DefaultPreviousButton = ({ id, onClick }) => (
 	</Button>
 );
 
+/* istanbul ignore next  */
+const DefaultExitFullScreenButton = ({ id, onClick }) => (
+	<Button
+		id={id}
+		onClick={onClick}
+		label="Exit full screen mode displaying the carousel"
+		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--exit-full-screen`}
+	>
+		Minimize Screen
+	</Button>
+);
+
+const DefaultEnterFullScreenButton = ({ id, onClick }) => (
+	<Button
+		id={id}
+		onClick={onClick}
+		label="Enter full screen mode displaying the carousel"
+		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--enter-full-screen`}
+	>
+		Full Screen
+	</Button>
+);
+
 const resolvedButton = (element, id, className, onClick) =>
 	cloneElement(element, {
 		"aria-controls": id,
@@ -49,10 +72,15 @@ const Carousel = ({
 	nextButton,
 	previousButton,
 	slidesToShow,
+	fullScreenShowButton,
+	fullScreenMinimizeButton,
+	enableFullScreen,
 	...rest
 }) => {
 	const [slide, setSlide] = useState(slidesToShow);
 	const [position, setPosition] = useState(0);
+	const [isFullScreen, setIsFullScreen] = useState(false);
+
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 
 	const subComponents = Object.values(Carousel).map((subcomponentType) =>
@@ -84,6 +112,31 @@ const Carousel = ({
 		setPosition(position - 100 / slidesToShow);
 	};
 
+	/* istanbul ignore next  */
+	const toggleFullScreen = () => {
+		// id is the carousel id
+		// the full screen element is the whole carousel
+		const fullScreenElement = document.getElementById(id);
+
+		if (document.fullscreenEnabled) {
+			if (!document.fullscreenElement) {
+				fullScreenElement.requestFullscreen().then(() => setIsFullScreen(true));
+			} else {
+				document.exitFullscreen().then(() => setIsFullScreen(false));
+			}
+		} else {
+			// safari needs prefix
+			// eslint-disable-next-line no-lonely-if
+			if (document.webkitFullscreenEnabled) {
+				if (!document.webkitFullscreenElement) {
+					fullScreenElement.webkitRequestFullscreen().then(() => setIsFullScreen(true));
+				} else {
+					document.webkitExitFullscreen().then(() => setIsFullScreen(false));
+				}
+			}
+		}
+	};
+
 	/* istanbul ignore next */
 	const handlers = useSwipeable({
 		onSwipedLeft: () => nextSlide(),
@@ -104,6 +157,32 @@ const Carousel = ({
 		<DefaultPreviousButton id={id} onClick={() => previousSlide()} />
 	);
 
+	const resolvedFullScreenShowButton = fullScreenShowButton ? (
+		resolvedButton(
+			fullScreenShowButton,
+			id,
+			`${COMPONENT_CLASS_NAME}__button--enter-full-screen`,
+			toggleFullScreen
+		)
+	) : (
+		<DefaultEnterFullScreenButton id={id} onClick={toggleFullScreen} />
+	);
+
+	const resolvedFullScreenMinimizeButton = fullScreenMinimizeButton ? (
+		resolvedButton(
+			fullScreenMinimizeButton,
+			id,
+			`${COMPONENT_CLASS_NAME}__button--exit-full-screen`,
+			toggleFullScreen
+		)
+	) : (
+		<DefaultExitFullScreenButton id={id} onClick={toggleFullScreen} />
+	);
+
+	/* istanbul ignore next  */
+	const fullScreenEnabledAllowed =
+		(document.fullscreenEnabled || document.webkitFullscreenEnabled) && enableFullScreen;
+
 	return (
 		<div
 			{...rest}
@@ -115,6 +194,15 @@ const Carousel = ({
 			style={{ "--carousel-slide-width": slidesToShow !== 4 ? `${100 / slidesToShow}%` : null }}
 			{...handlers}
 		>
+			<div className={`${COMPONENT_CLASS_NAME}__top-actions`}>
+				{/* only show button at all if enabled on the document */}
+				{fullScreenEnabledAllowed && !isFullScreen ? resolvedFullScreenShowButton : null}
+				{
+					/* istanbul ignore next  */ fullScreenEnabledAllowed && isFullScreen
+						? resolvedFullScreenMinimizeButton
+						: null
+				}
+			</div>
 			<div
 				className="c-carousel__track"
 				style={{ transform: `translate3d(${position}%, 0px, 0px)` }}
@@ -152,6 +240,12 @@ Carousel.propTypes = {
 	nextButton: PropTypes.node,
 	/** Number of slides to show in view */
 	slidesToShow: PropTypes.number,
+	/** Used to set a custom full screen show button, cloned with event handlers */
+	fullScreenShowButton: PropTypes.node,
+	/** Used to set a custom full screen exit button, cloned with event handlers */
+	fullScreenMinimizeButton: PropTypes.node,
+	/** Opt into showing a full screen toggle button. Uses defaults if no `fullScreenShowButton` or `fullScreenMinimizeButton` provided for respective button states */
+	enableFullScreen: PropTypes.bool,
 };
 
 export default Carousel;
