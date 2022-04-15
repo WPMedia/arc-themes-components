@@ -39,7 +39,12 @@
 	}
 
 	&__top-actions {
+		display: flex;
+		justify-content: space-between;
+		place-self: start;
+		width: 100%;
 		z-index: 1;
+
 		@include scss.component-properties("carousel-top-actions");
 	}
 
