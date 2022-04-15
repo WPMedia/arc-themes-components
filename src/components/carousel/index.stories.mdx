@@ -187,7 +187,7 @@ const Feature = () => (
 
 <Canvas>
 	<Story name="Show Full Screen Toggle">
-		<Carousel id="carousel-1" label="Carousel of Images" enableFullScreen>
+		<Carousel slidesToShow={1} id="carousel-1" label="Carousel of Images" enableFullScreen>
 			<Carousel.Item label="Slide 1 of 1">
 				<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
 			</Carousel.Item>
@@ -202,6 +202,7 @@ const Feature = () => (
 		<Carousel
 			id="carousel-1"
 			label="Carousel of Images"
+			slidesToShow={1}
 			enableFullScreen
 			fullScreenShowButton={
 				<button type="button">

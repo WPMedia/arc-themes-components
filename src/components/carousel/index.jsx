@@ -77,10 +77,11 @@ const Carousel = ({
 	enableFullScreen,
 	...rest
 }) => {
+	// slidesToShow is a number of slides to show at once
 	const [slide, setSlide] = useState(slidesToShow);
 	const [position, setPosition] = useState(0);
 	const [isFullScreen, setIsFullScreen] = useState(false);
-
+	const totalSlides = Children.count(children);
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 
 	const subComponents = Object.values(Carousel).map((subcomponentType) =>
@@ -195,7 +196,9 @@ const Carousel = ({
 			{...handlers}
 		>
 			<div className={`${COMPONENT_CLASS_NAME}__top-actions`}>
-				<p className={`${COMPONENT_CLASS_NAME}__image-counter-label`}>Label</p>
+				<p className={`${COMPONENT_CLASS_NAME}__image-counter-label`}>
+					{slide} of {totalSlides}
+				</p>
 				{/* only show button at all if enabled on the document */}
 				{fullScreenEnabledAllowed && !isFullScreen ? resolvedFullScreenShowButton : null}
 				{
