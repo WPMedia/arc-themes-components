@@ -44,6 +44,11 @@
 
 	&__top-actions {
 		grid-area: top-actions;
+		display: flex;
+		justify-content: space-between;
+		place-self: start;
+		width: 100%;
+
 		@include scss.component-properties("carousel-top-actions");
 	}
 
