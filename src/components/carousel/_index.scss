@@ -14,6 +14,10 @@
 		grid-area: carousel;
 	}
 
+	&__image-counter-label {
+		@include scss.component-properties("carousel-image-counter");
+	}
+
 	&:fullscreen {
 		@include scss.component-properties("carousel-fullscreen");
 
@@ -82,10 +86,6 @@
 		&--exit-full-screen {
 			@include scss.component-properties("carousel-button-exit-full-screen");
 		}
-	}
-
-	&__image-counter-label {
-		@include scss.component-properties("carousel-image-counter");
 	}
 
 	// add backdrop for setting full-screen background-color
