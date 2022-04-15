@@ -14,6 +14,16 @@
 		grid-area: carousel;
 	}
 
+	&:fullscreen {
+		@include scss.component-properties("carousel-fullscreen");
+
+		// setting fullscreen status for counter label
+		// overrides counter label styles
+		.c-carousel__image-counter-label {
+			@include scss.component-properties("carousel-fullscreen-image-counter");
+		}
+	}
+
 	&__track {
 		/* stylelint-disable length-zero-no-unit */
 		// Disabled the rule as the px value is needed within the calc below
@@ -76,5 +86,10 @@
 
 	&__image-counter-label {
 		@include scss.component-properties("carousel-image-counter");
+	}
+
+	// add backdrop for setting full-screen background-color
+	&::backdrop {
+		@include scss.component-properties("carousel-backdrop");
 	}
 }
