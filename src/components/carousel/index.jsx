@@ -115,6 +115,9 @@ const Carousel = ({
 			style={{ "--carousel-slide-width": slidesToShow !== 4 ? `${100 / slidesToShow}%` : null }}
 			{...handlers}
 		>
+			<div className={`${COMPONENT_CLASS_NAME}__top-actions`}>
+				<p className={`${COMPONENT_CLASS_NAME}__image-counter-label`}>Label</p>
+			</div>
 			<div
 				className="c-carousel__track"
 				style={{ transform: `translate3d(${position}%, 0px, 0px)` }}

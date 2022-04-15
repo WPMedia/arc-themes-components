@@ -4,7 +4,7 @@
 	--slide-width: var(--carousel-slide-width, 25%);
 
 	display: grid;
-	grid-template-areas: "carousel";
+	grid-template-areas: "top-actions" "carousel";
 	overflow: hidden;
 	word-break: break-word;
 
@@ -42,6 +42,11 @@
 		@include scss.component-properties("carousel-actions");
 	}
 
+	&__top-actions {
+		grid-area: top-actions;
+		@include scss.component-properties("carousel-top-actions");
+	}
+
 	&__button {
 		@include scss.component-properties("carousel-button");
 
@@ -54,5 +59,9 @@
 		&--previous {
 			@include scss.component-properties("carousel-button-previous");
 		}
+	}
+
+	&__image-counter-label {
+		@include scss.component-properties("carousel-image-counter");
 	}
 }
