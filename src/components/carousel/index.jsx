@@ -71,6 +71,7 @@ const Carousel = ({
 	label,
 	nextButton,
 	previousButton,
+	showLabel,
 	slidesToShow,
 	fullScreenShowButton,
 	fullScreenMinimizeButton,
@@ -196,9 +197,11 @@ const Carousel = ({
 			{...handlers}
 		>
 			<div className={`${COMPONENT_CLASS_NAME}__top-actions`}>
-				<p className={`${COMPONENT_CLASS_NAME}__image-counter-label`}>
-					{slide} of {totalSlides}
-				</p>
+				{showLabel ? (
+					<p className={`${COMPONENT_CLASS_NAME}__image-counter-label`}>
+						{slide} of {totalSlides}
+					</p>
+				) : null}
 				{/* only show button at all if enabled on the document */}
 				{fullScreenEnabledAllowed && !isFullScreen ? resolvedFullScreenShowButton : null}
 				{
@@ -227,6 +230,7 @@ Carousel.Item = Item;
 
 Carousel.defaultProps = {
 	slidesToShow: 4,
+	showLabel: false,
 };
 
 Carousel.propTypes = {
@@ -250,6 +254,8 @@ Carousel.propTypes = {
 	fullScreenMinimizeButton: PropTypes.node,
 	/** Opt into showing a full screen toggle button. Uses defaults if no `fullScreenShowButton` or `fullScreenMinimizeButton` provided for respective button states */
 	enableFullScreen: PropTypes.bool,
+	/** Show the current slide number */
+	showLabel: PropTypes.bool,
 };
 
 export default Carousel;
