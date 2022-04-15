@@ -183,6 +183,34 @@ const Feature = () => (
 	</Story>
 </Canvas>
 
+** With Label And Multiple Slides **
+
+<Canvas>
+	<Story name="With Label And Multiple Slides Showing One">
+		<Carousel id="carousel-1" label="Carousel of Images" showLabel slidesToShow={1}>
+			<Carousel.Item label="Slide 1 of 5">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 2 of 5">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 3 of 5">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 4 of 5">
+				<Image src="/coffee.jpeg" alt="A cup of coffee" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 5 of 5">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+		</Carousel>
+	</Story>
+</Canvas>
+
 ** Show Full Screen Toggle **
 
 <Canvas>
@@ -243,6 +271,40 @@ const Feature = () => (
 					<Icon name="Close" />
 				</button>
 			}
+		>
+			<Carousel.Item label="Slide 1 of 5">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 2 of 5">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 3 of 5">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 4 of 5">
+				<Image src="/coffee.jpeg" alt="A cup of coffee" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 5 of 5">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+		</Carousel>
+	</Story>
+</Canvas>
+
+** Show With Label And Full Screen Toggle With Multiple Slides **
+
+<Canvas>
+	<Story name="Show With Label And Full Screen Toggle With Multiple Slides">
+		<Carousel
+			id="carousel-1"
+			label="Carousel of Images"
+			slidesToShow={1}
+			showLabel
+			enableFullScreen
 		>
 			<Carousel.Item label="Slide 1 of 5">
 				<a href="/">
