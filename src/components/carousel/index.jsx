@@ -197,7 +197,7 @@ const Carousel = ({
 			style={{ "--carousel-slide-width": slidesToShow !== 4 ? `${100 / slidesToShow}%` : null }}
 			{...handlers}
 		>
-			<div className={`${COMPONENT_CLASS_NAME}__top-actions`}>
+			<div className={`${COMPONENT_CLASS_NAME}__controls`}>
 				{showLabel ? (
 					<p className={`${COMPONENT_CLASS_NAME}__image-counter-label`}>
 						{pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`}
