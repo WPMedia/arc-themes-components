@@ -53,25 +53,25 @@ const DefaultEnterFullScreenButton = ({ id, onClick }) => (
 	</Button>
 );
 
-const DefaultStartAutoPlayButton = ({ id, onClick }) => (
+const DefaultStartAutoplayButton = ({ id, onClick }) => (
 	<Button
 		id={id}
 		onClick={onClick}
 		label="Start rotating the slides"
 		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--start-auto-play`}
 	>
-		Start AutoPlay
+		Start Autoplay
 	</Button>
 );
 
-const DefaultStopAutoPlayButton = ({ id, onClick }) => (
+const DefaultStopAutoplayButton = ({ id, onClick }) => (
 	<Button
 		id={id}
 		onClick={onClick}
 		label="Stop rotating the slides"
 		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--stop-auto-play`}
 	>
-		Stop AutoPlay
+		Stop Autoplay
 	</Button>
 );
 
@@ -98,8 +98,8 @@ const Carousel = ({
 	previousButton,
 	showLabel,
 	slidesToShow,
-	startAutoPlayButton,
-	stopAutoPlayButton,
+	startAutoplayButton,
+	stopAutoplayButton,
 	fullScreenShowButton,
 	fullScreenMinimizeButton,
 	enableFullScreen,
@@ -109,7 +109,7 @@ const Carousel = ({
 	const [slide, setSlide] = useState(slidesToShow);
 	const [position, setPosition] = useState(0);
 	const [isFullScreen, setIsFullScreen] = useState(false);
-	const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+	const [isAutoplaying, setIsAutoplaying] = useState(false);
 	const totalSlides = Children.count(children);
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 
@@ -142,11 +142,11 @@ const Carousel = ({
 		setPosition(position - 100 / slidesToShow);
 	};
 
-	// a prefers-reduced-motion user setting must always override autoplay
-	const autoplayEnabledAndAllowed =
+	// a prefers-reduced-motion user setting must always override Autoplay
+	const AutoplayEnabledAndAllowed =
 		enableAutoplay && !!window.matchMedia("'(prefers-reduced-motion: reduce)");
 
-	useInterval(nextSlide, autoplayEnabledAndAllowed && isAutoPlaying ? 4000 : null);
+	useInterval(nextSlide, AutoplayEnabledAndAllowed && isAutoplaying ? 4000 : null);
 
 	/* istanbul ignore next  */
 	const toggleFullScreen = () => {
@@ -173,7 +173,7 @@ const Carousel = ({
 		}
 	};
 
-	const toggleAutoPlay = () => setIsAutoPlaying(!isAutoPlaying);
+	const toggleAutoplay = () => setIsAutoplaying(!isAutoplaying);
 
 	/* istanbul ignore next */
 	const handlers = useSwipeable({
@@ -217,26 +217,26 @@ const Carousel = ({
 		<DefaultExitFullScreenButton id={id} onClick={toggleFullScreen} />
 	);
 
-	const resolvedStartAutoPlayButton = startAutoPlayButton ? (
+	const resolvedStartAutoplayButton = startAutoplayButton ? (
 		resolvedButton(
-			startAutoPlayButton,
+			startAutoplayButton,
 			id,
 			`${COMPONENT_CLASS_NAME}__button--start-auto-play`,
-			toggleAutoPlay
+			toggleAutoplay
 		)
 	) : (
-		<DefaultStartAutoPlayButton id={id} onClick={toggleAutoPlay} />
+		<DefaultStartAutoplayButton id={id} onClick={toggleAutoplay} />
 	);
 
-	const resolvedStopAutoPlayButton = stopAutoPlayButton ? (
+	const resolvedStopAutoplayButton = stopAutoplayButton ? (
 		resolvedButton(
-			stopAutoPlayButton,
+			stopAutoplayButton,
 			id,
 			`${COMPONENT_CLASS_NAME}__button--stop-auto-play`,
-			toggleAutoPlay
+			toggleAutoplay
 		)
 	) : (
-		<DefaultStopAutoPlayButton id={id} onClick={toggleAutoPlay} />
+		<DefaultStopAutoplayButton id={id} onClick={toggleAutoplay} />
 	);
 
 	/* istanbul ignore next  */
@@ -260,8 +260,8 @@ const Carousel = ({
 						{pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`}
 					</p>
 				) : null}
-				{autoplayEnabledAndAllowed && !isAutoPlaying ? resolvedStartAutoPlayButton : null}
-				{autoplayEnabledAndAllowed && isAutoPlaying ? resolvedStopAutoPlayButton : null}
+				{AutoplayEnabledAndAllowed && !isAutoplaying ? resolvedStartAutoplayButton : null}
+				{AutoplayEnabledAndAllowed && isAutoplaying ? resolvedStopAutoplayButton : null}
 				{/* only show button at all if enabled on the document */}
 				{fullScreenEnabledAllowed && !isFullScreen ? resolvedFullScreenShowButton : null}
 				{
@@ -316,10 +316,10 @@ Carousel.propTypes = {
 	showLabel: PropTypes.bool,
 	/** Number of slides to show in view */
 	slidesToShow: PropTypes.number,
-	/** Button that shows to indicate start autoplay, assuming it's enabled and available to user */
-	startAutoPlayButton: PropTypes.node,
-	/** Button that shows to indicate stop autoplay, assuming it's enabled and available to user */
-	stopAutoPlayButton: PropTypes.node,
+	/** Button that shows to indicate start Autoplay, assuming it's enabled and available to user */
+	startAutoplayButton: PropTypes.node,
+	/** Button that shows to indicate stop Autoplay, assuming it's enabled and available to user */
+	stopAutoplayButton: PropTypes.node,
 	/** Used to set a custom full screen show button, cloned with event handlers */
 	fullScreenShowButton: PropTypes.node,
 	/** Used to set a custom full screen exit button, cloned with event handlers */

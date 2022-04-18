@@ -350,7 +350,7 @@ describe("Carousel", () => {
 		const foundLabel = screen.queryByText("1 of 2 super cool images");
 		expect(foundLabel).not.toBeNull();
 	});
-	it("shows start autoplay when opting into autoplay", () => {
+	it("shows start Autoplay when opting into Autoplay", () => {
 		render(
 			<Carousel id="carousel-2" label="Carousel Label" showLabel slidesToShow={1} enableAutoplay>
 				<Carousel.Item label="Slide 1 of 2">
@@ -362,10 +362,10 @@ describe("Carousel", () => {
 			</Carousel>
 		);
 		// query by text returns null if not found
-		const foundLabel = screen.queryByText("Start AutoPlay");
+		const foundLabel = screen.queryByText("Start Autoplay");
 		expect(foundLabel).not.toBeNull();
 	});
-	it("does not show start autoplay when opting into autoplay", () => {
+	it("does not show start Autoplay when opting into Autoplay", () => {
 		render(
 			<Carousel id="carousel-2" label="Carousel Label" showLabel slidesToShow={1}>
 				<Carousel.Item label="Slide 1 of 2">
@@ -377,7 +377,7 @@ describe("Carousel", () => {
 			</Carousel>
 		);
 		// query by text returns null if not found
-		const foundLabel = screen.queryByText("Start AutoPlay");
+		const foundLabel = screen.queryByText("Start Autoplay");
 		expect(foundLabel).toBeNull();
 	});
 	it("shows stop autoplay when opted into autoplay and on click", async () => {
@@ -407,12 +407,12 @@ describe("Carousel", () => {
 				label="Carousel Label"
 				showLabel
 				slidesToShow={1}
-				startAutoPlayButton={
+				startAutoplayButton={
 					<button aria-label={customStartLabel} className="really-special-button" type="button">
 						{customButtonText}
 					</button>
 				}
-				stopAutoPlayButton={
+				stopAutoplayButton={
 					<button aria-label={customStopLabel} type="button">
 						Stop that autoplay already!
 					</button>
