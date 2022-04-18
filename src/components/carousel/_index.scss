@@ -4,7 +4,7 @@
 	--slide-width: var(--carousel-slide-width, 25%);
 
 	display: grid;
-	grid-template-areas: "top-actions" "carousel";
+	grid-template-areas: "controls" "carousel";
 	overflow: hidden;
 	word-break: break-word;
 
@@ -12,6 +12,20 @@
 
 	> * {
 		grid-area: carousel;
+	}
+
+	&__image-counter-label {
+		@include scss.component-properties("carousel-image-counter");
+	}
+
+	&:fullscreen {
+		@include scss.component-properties("carousel-fullscreen");
+
+		// setting fullscreen status for counter label
+		// overrides counter label styles
+		.c-carousel__image-counter-label {
+			@include scss.component-properties("carousel-fullscreen-image-counter");
+		}
 	}
 
 	&__track {
@@ -42,10 +56,14 @@
 		@include scss.component-properties("carousel-actions");
 	}
 
-	&__top-actions {
-		grid-area: top-actions;
+	&__controls {
+		grid-area: controls;
+		display: flex;
+		justify-content: space-between;
+		place-self: start;
+		width: 100%;
 
-		@include scss.component-properties("carousel-top-actions");
+		@include scss.component-properties("carousel-controls");
 	}
 
 	&__button {
@@ -68,5 +86,10 @@
 		&--exit-full-screen {
 			@include scss.component-properties("carousel-button-exit-full-screen");
 		}
+	}
+
+	// add backdrop for setting full-screen background-color
+	&::backdrop {
+		@include scss.component-properties("carousel-backdrop");
 	}
 }

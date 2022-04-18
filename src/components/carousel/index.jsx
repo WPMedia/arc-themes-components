@@ -70,17 +70,20 @@ const Carousel = ({
 	id,
 	label,
 	nextButton,
+	pageCountPhrase,
 	previousButton,
+	showLabel,
 	slidesToShow,
 	fullScreenShowButton,
 	fullScreenMinimizeButton,
 	enableFullScreen,
 	...rest
 }) => {
+	// slidesToShow is a number of slides to show at once
 	const [slide, setSlide] = useState(slidesToShow);
 	const [position, setPosition] = useState(0);
 	const [isFullScreen, setIsFullScreen] = useState(false);
-
+	const totalSlides = Children.count(children);
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 
 	const subComponents = Object.values(Carousel).map((subcomponentType) =>
@@ -194,7 +197,12 @@ const Carousel = ({
 			style={{ "--carousel-slide-width": slidesToShow !== 4 ? `${100 / slidesToShow}%` : null }}
 			{...handlers}
 		>
-			<div className={`${COMPONENT_CLASS_NAME}__top-actions`}>
+			<div className={`${COMPONENT_CLASS_NAME}__controls`}>
+				{showLabel ? (
+					<p className={`${COMPONENT_CLASS_NAME}__image-counter-label`}>
+						{pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`}
+					</p>
+				) : null}
 				{/* only show button at all if enabled on the document */}
 				{fullScreenEnabledAllowed && !isFullScreen ? resolvedFullScreenShowButton : null}
 				{
@@ -204,13 +212,13 @@ const Carousel = ({
 				}
 			</div>
 			<div
-				className="c-carousel__track"
+				className={`${COMPONENT_CLASS_NAME}__track`}
 				style={{ transform: `translate3d(${position}%, 0px, 0px)` }}
 			>
 				{carouselItems.map((component) => component)}
 			</div>
 
-			<div className="c-carousel__actions">
+			<div className={`${COMPONENT_CLASS_NAME}__actions`}>
 				{slide !== slidesToShow ? resolvedPreviousButton : null}
 				{slide !== carouselItems.length && carouselItems.length > 1 ? resolvedNextButton : null}
 			</div>
@@ -222,6 +230,8 @@ Carousel.Button = Button;
 Carousel.Item = Item;
 
 Carousel.defaultProps = {
+	pageCountPhrase: () => {},
+	showLabel: false,
 	slidesToShow: 4,
 };
 
@@ -234,10 +244,14 @@ Carousel.propTypes = {
 	id: PropTypes.string.isRequired,
 	/** An accessible label */
 	label: PropTypes.string.isRequired,
+	/** Page count phrase text for internationalization, function takes in current, total */
+	pageCountPhrase: PropTypes.func,
 	/** Used to set a custom previous button, a cloned Carousel.Button element */
 	previousButton: PropTypes.node,
 	/** Used to set a custom next button, a cloned Carousel.Button element */
 	nextButton: PropTypes.node,
+	/** Show the current slide number */
+	showLabel: PropTypes.bool,
 	/** Number of slides to show in view */
 	slidesToShow: PropTypes.number,
 	/** Used to set a custom full screen show button, cloned with event handlers */

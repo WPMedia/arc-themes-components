@@ -291,4 +291,58 @@ describe("Carousel", () => {
 
 		expect(screen.queryAllByText("Full Screen")).toHaveLength(0);
 	});
+
+	it("shows label if opted in", () => {
+		render(
+			<Carousel id="carousel-2" label="Carousel Label" showLabel slidesToShow={1}>
+				<Carousel.Item label="Slide 1 of 5">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 5">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+		// query by text returns null if not found
+		const foundLabel = screen.queryByText("1 of 2");
+		expect(foundLabel).not.toBeNull();
+	});
+	it("does not show label if not opted in", () => {
+		render(
+			<Carousel id="carousel-2" label="Carousel Label" slidesToShow={1}>
+				<Carousel.Item label="Slide 1 of 5">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 5">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+		// query by text returns null if not found
+		const foundLabel = screen.queryByText("1 of 2");
+		expect(foundLabel).toBeNull();
+	});
+	it("shows custom label text if opted in and provides function", () => {
+		render(
+			<Carousel
+				id="carousel-2"
+				label="Carousel Label"
+				showLabel
+				slidesToShow={1}
+				pageCountPhrase={(currentSlide, totalSlides) =>
+					`${currentSlide} of ${totalSlides} super cool images`
+				}
+			>
+				<Carousel.Item label="Slide 1 of 5">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 5">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+		// query by text returns null if not found
+		const foundLabel = screen.queryByText("1 of 2 super cool images");
+		expect(foundLabel).not.toBeNull();
+	});
 });
