@@ -159,7 +159,7 @@ const Carousel = ({
 		enableAutoplay && !!window.matchMedia("'(prefers-reduced-motion: reduce)");
 
 	// 4000 is the default autoplay interval via engine theme sdk
-	useInterval(autoplaySlides, autoplayEnabledAndAllowed && isAutoPlaying ? 1000 : null);
+	useInterval(autoplaySlides, autoplayEnabledAndAllowed && isAutoPlaying ? 4000 : null);
 
 	/* istanbul ignore next  */
 	const toggleFullScreen = () => {
