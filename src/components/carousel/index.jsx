@@ -228,7 +228,7 @@ const Carousel = ({
 		<DefaultStartAutoPlayButton id={id} onClick={toggleAutoPlay} />
 	);
 
-	const resolvedStopAutoPlayButton = startAutoPlayButton ? (
+	const resolvedStopAutoPlayButton = stopAutoPlayButton ? (
 		resolvedButton(
 			stopAutoPlayButton,
 			id,
