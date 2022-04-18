@@ -315,7 +315,7 @@ Carousel.propTypes = {
 	children: PropTypes.node.isRequired,
 	/** Autoplay slides if user setting allows it */
 	enableAutoplay: PropTypes.bool,
-	/** A unique identifer for the carousel */
+	/** A unique identifier for the carousel */
 	id: PropTypes.string.isRequired,
 	/** An accessible label */
 	label: PropTypes.string.isRequired,
