@@ -387,3 +387,43 @@ const Feature = () => (
 		</Carousel>
 	</Story>
 </Canvas>
+
+** Autoplay enabled with custom buttons **
+
+<Canvas>
+	<Story name="Autoplay enabled with custom buttons">
+		<Carousel
+			id="carousel-1"
+			label="Carousel of Images"
+			slidesToShow={1}
+			enableAutoplay
+			startAutoPlayButton={
+				<button type="button">
+					Start Autoplay
+					<Icon name="Play" />
+				</button>
+			}
+			stopAutoPlayButton={
+				<button type="button">
+					Stop Autoplay
+					<Icon name="Pause" />
+				</button>
+			}
+		>
+			<Carousel.Item label="Slide 1 of 4">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 2 of 4">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 3 of 4">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 4 of 4">
+				<Image src="/coffee.jpeg" alt="A cup of coffee" />
+			</Carousel.Item>
+		</Carousel>
+	</Story>
+</Canvas>
