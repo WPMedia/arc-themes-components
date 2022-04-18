@@ -327,3 +327,38 @@ const Feature = () => (
 		</Carousel>
 	</Story>
 </Canvas>
+
+** Show Custom Label Text **
+
+<Canvas>
+	<Story name="Show Custom Label Text">
+		<Carousel
+			id="carousel-1"
+			label="Carousel of Images"
+			slidesToShow={1}
+			showLabel
+			enableFullScreen
+			pageCountPhrase={(current, total) => `${current} of ${total} cool images`}
+		>
+			<Carousel.Item label="Slide 1 of 5">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 2 of 5">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 3 of 5">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 4 of 5">
+				<Image src="/coffee.jpeg" alt="A cup of coffee" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 5 of 5">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+		</Carousel>
+	</Story>
+</Canvas>

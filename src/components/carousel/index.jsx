@@ -70,6 +70,7 @@ const Carousel = ({
 	id,
 	label,
 	nextButton,
+	pageCountPhrase,
 	previousButton,
 	showLabel,
 	slidesToShow,
@@ -199,7 +200,7 @@ const Carousel = ({
 			<div className={`${COMPONENT_CLASS_NAME}__top-actions`}>
 				{showLabel ? (
 					<p className={`${COMPONENT_CLASS_NAME}__image-counter-label`}>
-						{slide} of {totalSlides}
+						{pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`}
 					</p>
 				) : null}
 				{/* only show button at all if enabled on the document */}
@@ -229,8 +230,9 @@ Carousel.Button = Button;
 Carousel.Item = Item;
 
 Carousel.defaultProps = {
-	slidesToShow: 4,
+	pageCountPhrase: () => {},
 	showLabel: false,
+	slidesToShow: 4,
 };
 
 Carousel.propTypes = {
@@ -242,6 +244,8 @@ Carousel.propTypes = {
 	id: PropTypes.string.isRequired,
 	/** An accessible label */
 	label: PropTypes.string.isRequired,
+	/** Page count phrase text for internationalization, function takes in current, total */
+	pageCountPhrase: PropTypes.func,
 	/** Used to set a custom previous button, a cloned Carousel.Button element */
 	previousButton: PropTypes.node,
 	/** Used to set a custom next button, a cloned Carousel.Button element */
