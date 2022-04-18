@@ -4,6 +4,7 @@ import { useSwipeable } from "react-swipeable";
 
 import Button from "./_children/Button";
 import Item from "./_children/Item";
+import useInterval from "../../utils/use-interval/useInterval";
 
 const COMPONENT_CLASS_NAME = "c-carousel";
 
@@ -52,6 +53,28 @@ const DefaultEnterFullScreenButton = ({ id, onClick }) => (
 	</Button>
 );
 
+const DefaultStartAutoPlayButton = ({ id, onClick }) => (
+	<Button
+		id={id}
+		onClick={onClick}
+		label="Start rotating the slides"
+		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--start-auto-play`}
+	>
+		Start AutoPlay
+	</Button>
+);
+
+const DefaultStopAutoPlayButton = ({ id, onClick }) => (
+	<Button
+		id={id}
+		onClick={onClick}
+		label="Stop rotating the slides"
+		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--stop-auto-play`}
+	>
+		Stop AutoPlay
+	</Button>
+);
+
 const resolvedButton = (element, id, className, onClick) =>
 	cloneElement(element, {
 		"aria-controls": id,
@@ -67,6 +90,7 @@ const resolvedButton = (element, id, className, onClick) =>
 const Carousel = ({
 	children,
 	className,
+	enableAutoplay,
 	id,
 	label,
 	nextButton,
@@ -74,6 +98,8 @@ const Carousel = ({
 	previousButton,
 	showLabel,
 	slidesToShow,
+	startAutoPlayButton,
+	stopAutoPlayButton,
 	fullScreenShowButton,
 	fullScreenMinimizeButton,
 	enableFullScreen,
@@ -83,6 +109,7 @@ const Carousel = ({
 	const [slide, setSlide] = useState(slidesToShow);
 	const [position, setPosition] = useState(0);
 	const [isFullScreen, setIsFullScreen] = useState(false);
+	const [isAutoPlaying, setIsAutoPlaying] = useState(false);
 	const totalSlides = Children.count(children);
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 
@@ -106,6 +133,7 @@ const Carousel = ({
 		setPosition(position + 100 / slidesToShow);
 	};
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const nextSlide = () => {
 		/* istanbul ignore next */
 		if (slide + 1 > carouselItems.length) {
@@ -114,6 +142,24 @@ const Carousel = ({
 		setSlide(slide + 1);
 		setPosition(position - 100 / slidesToShow);
 	};
+
+	const autoplaySlides = () => {
+		/* istanbul ignore next */
+		if (slide + 1 > carouselItems.length) {
+			// reset back to the first slide
+			setSlide(slidesToShow);
+			setPosition(0);
+		} else {
+			nextSlide();
+		}
+	};
+
+	// a prefers-reduced-motion user setting must always override autoplay
+	const autoplayEnabledAndAllowed =
+		enableAutoplay && !!window.matchMedia("'(prefers-reduced-motion: reduce)");
+
+	// 4000 is the default autoplay interval via engine theme sdk
+	useInterval(autoplaySlides, autoplayEnabledAndAllowed && isAutoPlaying ? 1000 : null);
 
 	/* istanbul ignore next  */
 	const toggleFullScreen = () => {
@@ -139,6 +185,8 @@ const Carousel = ({
 			}
 		}
 	};
+
+	const toggleAutoPlay = () => setIsAutoPlaying(!isAutoPlaying);
 
 	/* istanbul ignore next */
 	const handlers = useSwipeable({
@@ -182,6 +230,28 @@ const Carousel = ({
 		<DefaultExitFullScreenButton id={id} onClick={toggleFullScreen} />
 	);
 
+	const resolvedStartAutoPlayButton = startAutoPlayButton ? (
+		resolvedButton(
+			startAutoPlayButton,
+			id,
+			`${COMPONENT_CLASS_NAME}__button--start-auto-play`,
+			toggleAutoPlay
+		)
+	) : (
+		<DefaultStartAutoPlayButton id={id} onClick={toggleAutoPlay} />
+	);
+
+	const resolvedStopAutoPlayButton = startAutoPlayButton ? (
+		resolvedButton(
+			stopAutoPlayButton,
+			id,
+			`${COMPONENT_CLASS_NAME}__button--stop-auto-play`,
+			toggleAutoPlay
+		)
+	) : (
+		<DefaultStopAutoPlayButton id={id} onClick={toggleAutoPlay} />
+	);
+
 	/* istanbul ignore next  */
 	const fullScreenEnabledAllowed =
 		(document.fullscreenEnabled || document.webkitFullscreenEnabled) && enableFullScreen;
@@ -203,6 +273,8 @@ const Carousel = ({
 						{pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`}
 					</p>
 				) : null}
+				{autoplayEnabledAndAllowed && !isAutoPlaying ? resolvedStartAutoPlayButton : null}
+				{autoplayEnabledAndAllowed && isAutoPlaying ? resolvedStopAutoPlayButton : null}
 				{/* only show button at all if enabled on the document */}
 				{fullScreenEnabledAllowed && !isFullScreen ? resolvedFullScreenShowButton : null}
 				{
@@ -230,6 +302,7 @@ Carousel.Button = Button;
 Carousel.Item = Item;
 
 Carousel.defaultProps = {
+	enableAutoplay: false,
 	pageCountPhrase: () => {},
 	showLabel: false,
 	slidesToShow: 4,
@@ -240,6 +313,8 @@ Carousel.propTypes = {
 	className: PropTypes.string,
 	/** The text, images or any node that will be displayed within the component */
 	children: PropTypes.node.isRequired,
+	/** Autoplay slides if user setting allows it */
+	enableAutoplay: PropTypes.bool,
 	/** A unique identifer for the carousel */
 	id: PropTypes.string.isRequired,
 	/** An accessible label */

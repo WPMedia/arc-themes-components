@@ -86,6 +86,14 @@
 		&--exit-full-screen {
 			@include scss.component-properties("carousel-button-exit-full-screen");
 		}
+
+		&--start-auto-play {
+			@include scss.component-properties("carousel-button-start-auto-play");
+		}
+
+		&--stop-auto-play {
+			@include scss.component-properties("carousel-button-stop-auto-play");
+		}
 	}
 
 	// add backdrop for setting full-screen background-color
