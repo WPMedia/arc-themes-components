@@ -316,6 +316,10 @@ Carousel.propTypes = {
 	showLabel: PropTypes.bool,
 	/** Number of slides to show in view */
 	slidesToShow: PropTypes.number,
+	/** Button that shows to indicate start autoplay, assuming it's enabled and available to user */
+	startAutoPlayButton: PropTypes.node,
+	/** Button that shows to indicate stop autoplay, assuming it's enabled and available to user */
+	stopAutoPlayButton: PropTypes.node,
 	/** Used to set a custom full screen show button, cloned with event handlers */
 	fullScreenShowButton: PropTypes.node,
 	/** Used to set a custom full screen exit button, cloned with event handlers */
