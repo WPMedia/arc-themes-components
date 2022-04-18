@@ -8,6 +8,11 @@ Object.defineProperty(global.document, "fullscreenEnabled", {
 	value: true,
 });
 
+// mock accessibility to ensure that the carousel renders match media for reduce motion
+Object.defineProperty(global.window, "matchMedia", {
+	value: () => true,
+});
+
 describe("Carousel", () => {
 	it("should render carousel", () => {
 		render(
@@ -344,5 +349,93 @@ describe("Carousel", () => {
 		// query by text returns null if not found
 		const foundLabel = screen.queryByText("1 of 2 super cool images");
 		expect(foundLabel).not.toBeNull();
+	});
+	it("shows start autoplay when opting into autoplay", () => {
+		render(
+			<Carousel id="carousel-2" label="Carousel Label" showLabel slidesToShow={1} enableAutoplay>
+				<Carousel.Item label="Slide 1 of 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+		// query by text returns null if not found
+		const foundLabel = screen.queryByText("Start AutoPlay");
+		expect(foundLabel).not.toBeNull();
+	});
+	it("does not show start autoplay when opting into autoplay", () => {
+		render(
+			<Carousel id="carousel-2" label="Carousel Label" showLabel slidesToShow={1}>
+				<Carousel.Item label="Slide 1 of 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+		// query by text returns null if not found
+		const foundLabel = screen.queryByText("Start AutoPlay");
+		expect(foundLabel).toBeNull();
+	});
+	it("shows stop autoplay when opted into autoplay and on click", async () => {
+		render(
+			<Carousel id="carousel-2" label="Carousel Label" showLabel slidesToShow={1} enableAutoplay>
+				<Carousel.Item label="Slide 1 of 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+
+		await userEvent.click(screen.getByRole("button", { name: "Start rotating the slides" }));
+		await waitFor(() => {
+			expect(screen.getByRole("button", { name: "Stop rotating the slides" })).toBeInTheDocument();
+		});
+	});
+	it("renders a custom start autoplay button", async () => {
+		const customButtonText = "Start that autoplay already!";
+		const customStartLabel = "Start the autoplay please";
+		const customStopLabel = "Stop the autoplay please";
+		render(
+			<Carousel
+				id="carousel-2"
+				label="Carousel Label"
+				showLabel
+				slidesToShow={1}
+				startAutoPlayButton={
+					<button aria-label={customStartLabel} className="really-special-button" type="button">
+						{customButtonText}
+					</button>
+				}
+				stopAutoPlayButton={
+					<button aria-label={customStopLabel} type="button">
+						Stop that autoplay already!
+					</button>
+				}
+				enableAutoplay
+			>
+				<Carousel.Item label="Slide 1 of 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+
+		// query by text returns null if not found
+		const foundLabel = screen.queryByText(customButtonText);
+		expect(foundLabel).not.toBeNull();
+		expect(foundLabel.classList).toContain("really-special-button");
+
+		await userEvent.click(screen.getByRole("button", { name: customStartLabel }));
+		await waitFor(() => {
+			expect(screen.getByRole("button", { name: customStopLabel })).toBeInTheDocument();
+		});
 	});
 });
