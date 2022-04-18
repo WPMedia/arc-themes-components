@@ -11,7 +11,6 @@
 		"plugin/no-unsupported-browser-features": [
 			true,
 			{
-				"browsers": ["> 1%", "Last 2 versions", "not IE 11"],
 				"ignore": [
 					"css-sticky",
 					"multicolumn",
