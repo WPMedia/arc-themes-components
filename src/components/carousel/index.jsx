@@ -142,21 +142,11 @@ const Carousel = ({
 		setPosition(position - 100 / slidesToShow);
 	};
 
-	const autoplaySlides = () => {
-		if (slide + 1 > carouselItems.length) {
-			// reset back to the first slide
-			setSlide(slidesToShow);
-			setPosition(0);
-		} else {
-			nextSlide();
-		}
-	};
-
 	// a prefers-reduced-motion user setting must always override autoplay
 	const autoplayEnabledAndAllowed =
 		enableAutoplay && !!window.matchMedia("'(prefers-reduced-motion: reduce)");
 
-	useInterval(autoplaySlides, autoplayEnabledAndAllowed && isAutoPlaying ? 4000 : null);
+	useInterval(nextSlide, autoplayEnabledAndAllowed && isAutoPlaying ? 4000 : null);
 
 	/* istanbul ignore next  */
 	const toggleFullScreen = () => {
