@@ -133,7 +133,6 @@ const Carousel = ({
 		setPosition(position + 100 / slidesToShow);
 	};
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const nextSlide = () => {
 		/* istanbul ignore next */
 		if (slide + 1 > carouselItems.length) {
@@ -144,7 +143,6 @@ const Carousel = ({
 	};
 
 	const autoplaySlides = () => {
-		/* istanbul ignore next */
 		if (slide + 1 > carouselItems.length) {
 			// reset back to the first slide
 			setSlide(slidesToShow);
@@ -158,7 +156,6 @@ const Carousel = ({
 	const autoplayEnabledAndAllowed =
 		enableAutoplay && !!window.matchMedia("'(prefers-reduced-motion: reduce)");
 
-	// 4000 is the default autoplay interval via engine theme sdk
 	useInterval(autoplaySlides, autoplayEnabledAndAllowed && isAutoPlaying ? 4000 : null);
 
 	/* istanbul ignore next  */
