@@ -212,13 +212,13 @@ const Carousel = ({
 				}
 			</div>
 			<div
-				className="c-carousel__track"
+				className={`${COMPONENT_CLASS_NAME}__track`}
 				style={{ transform: `translate3d(${position}%, 0px, 0px)` }}
 			>
 				{carouselItems.map((component) => component)}
 			</div>
 
-			<div className="c-carousel__actions">
+			<div className={`${COMPONENT_CLASS_NAME}__actions`}>
 				{slide !== slidesToShow ? resolvedPreviousButton : null}
 				{slide !== carouselItems.length && carouselItems.length > 1 ? resolvedNextButton : null}
 			</div>
