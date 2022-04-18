@@ -250,6 +250,8 @@ Carousel.propTypes = {
 	previousButton: PropTypes.node,
 	/** Used to set a custom next button, a cloned Carousel.Button element */
 	nextButton: PropTypes.node,
+	/** Show the current slide number */
+	showLabel: PropTypes.bool,
 	/** Number of slides to show in view */
 	slidesToShow: PropTypes.number,
 	/** Used to set a custom full screen show button, cloned with event handlers */
@@ -258,8 +260,6 @@ Carousel.propTypes = {
 	fullScreenMinimizeButton: PropTypes.node,
 	/** Opt into showing a full screen toggle button. Uses defaults if no `fullScreenShowButton` or `fullScreenMinimizeButton` provided for respective button states */
 	enableFullScreen: PropTypes.bool,
-	/** Show the current slide number */
-	showLabel: PropTypes.bool,
 };
 
 export default Carousel;
