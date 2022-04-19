@@ -1,4 +1,4 @@
-import { Children, cloneElement, useState } from "react";
+import { Children, cloneElement, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useSwipeable } from "react-swipeable";
 
@@ -64,6 +64,17 @@ const resolvedButton = (element, id, className, onClick) =>
 		className: `${COMPONENT_CLASS_NAME}__button ${className} ${element.props?.className}`,
 	});
 
+const getSlidesToShowFromDom = (id) => {
+	if (typeof window === "undefined") {
+		return 4;
+	}
+
+	return parseInt(
+		getComputedStyle(document.getElementById(id)).getPropertyValue("--viewable-slides"),
+		10
+	);
+};
+
 const Carousel = ({
 	children,
 	className,
@@ -79,8 +90,8 @@ const Carousel = ({
 	enableFullScreen,
 	...rest
 }) => {
-	// slidesToShow is a number of slides to show at once
-	const [slide, setSlide] = useState(slidesToShow);
+	const [slidesToShowInView, setSlidesToShowInView] = useState(0);
+	const [slide, setSlide] = useState(0);
 	const [position, setPosition] = useState(0);
 	const [isFullScreen, setIsFullScreen] = useState(false);
 	const totalSlides = Children.count(children);
@@ -90,20 +101,38 @@ const Carousel = ({
 		Children.map(children, (child) => (child?.type === subcomponentType ? child : null))
 	);
 
+	useEffect(() => {
+		setSlidesToShowInView(getSlidesToShowFromDom(id));
+		setSlide(getSlidesToShowFromDom(id));
+	}, [id]);
+
+	useEffect(() => {
+		const resizeFn = () => {
+			if (slidesToShowInView === 0 || getSlidesToShowFromDom(id) === slidesToShowInView) {
+				return;
+			}
+			setSlidesToShowInView(getSlidesToShowFromDom(id));
+			setSlide(getSlidesToShowFromDom(id));
+			setPosition(0);
+		};
+		window.addEventListener("resize", resizeFn, false);
+		return () => window.addEventListener("resize", resizeFn, false);
+	}, [id, slidesToShowInView]);
+
 	const childItems = Children.toArray(subComponents);
 
 	const carouselItems = childItems.map((child, index) => {
-		const viewable = index + 1 > slide - slidesToShow && index + 1 <= slide;
+		const viewable = index + 1 > slide - slidesToShowInView && index + 1 <= slide;
 		return child.type === Item ? cloneElement(child, { viewable }) : null;
 	});
 
 	const previousSlide = () => {
 		/* istanbul ignore next */
-		if (slide - 1 < slidesToShow) {
+		if (slide - 1 < slidesToShowInView) {
 			return;
 		}
 		setSlide(slide - 1);
-		setPosition(position + 100 / slidesToShow);
+		setPosition(position + 100 / slidesToShowInView);
 	};
 
 	const nextSlide = () => {
@@ -112,7 +141,7 @@ const Carousel = ({
 			return;
 		}
 		setSlide(slide + 1);
-		setPosition(position - 100 / slidesToShow);
+		setPosition(position - 100 / slidesToShowInView);
 	};
 
 	/* istanbul ignore next  */
@@ -194,7 +223,10 @@ const Carousel = ({
 			aria-label={label}
 			role="region"
 			aria-roledescription="carousel"
-			style={{ "--carousel-slide-width": slidesToShow !== 4 ? `${100 / slidesToShow}%` : null }}
+			style={{
+				"--carousel-slide-width": `${100 / slidesToShowInView}%`,
+				"--viewable-slides": slidesToShow,
+			}}
 			{...handlers}
 		>
 			<div className={`${COMPONENT_CLASS_NAME}__controls`}>
@@ -219,7 +251,7 @@ const Carousel = ({
 			</div>
 
 			<div className={`${COMPONENT_CLASS_NAME}__actions`}>
-				{slide !== slidesToShow ? resolvedPreviousButton : null}
+				{slide !== slidesToShowInView ? resolvedPreviousButton : null}
 				{slide !== carouselItems.length && carouselItems.length > 1 ? resolvedNextButton : null}
 			</div>
 		</div>
@@ -232,7 +264,6 @@ Carousel.Item = Item;
 Carousel.defaultProps = {
 	pageCountPhrase: () => {},
 	showLabel: false,
-	slidesToShow: 4,
 };
 
 Carousel.propTypes = {

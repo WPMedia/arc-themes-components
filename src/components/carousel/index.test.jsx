@@ -23,6 +23,26 @@ describe("Carousel", () => {
 		expect(screen.getByRole("region")).not.toBeNull();
 	});
 
+	it("should render carousel after resize", async () => {
+		render(
+			<Carousel id="Carousel-1" label="Carousel Label" slidesToShow={1}>
+				<Carousel.Item label="Slide 1 of 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+
+		// Change the viewport to 500px.
+		global.innerWidth = 500;
+
+		// Trigger the window resize event.
+		await global.dispatchEvent(new Event("resize"));
+		expect(screen.getByRole("region")).not.toBeNull();
+	});
+
 	it("should only render Carousel.Item children", () => {
 		render(
 			<Carousel id="Carousel-1" label="Carousel Label" slidesToShow={1}>
@@ -120,7 +140,7 @@ describe("Carousel", () => {
 			expect(screen.getByRole("button", { name: "Previous Slide" })).not.toBeNull();
 		});
 
-		expect(screen.queryByRole("button", { name: "Next Slide" })).toBeNull();
+		expect(screen.queryByRole("button", { name: "Next" })).toBeNull();
 	});
 
 	it("shows next and previous buttons when there are items previous and next", async () => {
@@ -183,7 +203,7 @@ describe("Carousel", () => {
 		});
 		await userEvent.click(screen.getByRole("button", { name: "Previous Slide" }));
 
-		expect(screen.queryByRole("button", { name: "Previous Slide" })).toBeNull();
+		expect(screen.queryByRole("button", { name: "Previous" })).toBeNull();
 	});
 
 	it("should render custom buttons", async () => {
@@ -269,6 +289,7 @@ describe("Carousel", () => {
 
 		expect(screen.queryAllByText("Show Custom Full Screen")).toHaveLength(1);
 	});
+
 	it("should show full-screen button if full screen option enabled and use default button", async () => {
 		render(
 			<Carousel id="carousel-2" label="Carousel Label" enableFullScreen>
@@ -280,6 +301,7 @@ describe("Carousel", () => {
 
 		expect(screen.queryAllByText("Full Screen")).toHaveLength(1);
 	});
+
 	it("does not show full screen button default if disabled", () => {
 		render(
 			<Carousel id="carousel-2" label="Carousel Label">
@@ -307,6 +329,7 @@ describe("Carousel", () => {
 		const foundLabel = screen.queryByText("1 of 2");
 		expect(foundLabel).not.toBeNull();
 	});
+
 	it("does not show label if not opted in", () => {
 		render(
 			<Carousel id="carousel-2" label="Carousel Label" slidesToShow={1}>
@@ -322,6 +345,7 @@ describe("Carousel", () => {
 		const foundLabel = screen.queryByText("1 of 2");
 		expect(foundLabel).toBeNull();
 	});
+
 	it("shows custom label text if opted in and provides function", () => {
 		render(
 			<Carousel
