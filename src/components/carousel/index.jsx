@@ -70,7 +70,7 @@ const getSlidesToShowFromDom = (id) => {
 	}
 
 	return parseInt(
-		getComputedStyle(document.getElementById(id)).getPropertyValue("--viewable-slides"),
+		getComputedStyle(document.getElementById(id)).getPropertyValue("--viewable-slides") || 4,
 		10
 	);
 };
