@@ -1,4 +1,4 @@
-import { Children, cloneElement, useEffect, useState } from "react";
+import { Children, cloneElement, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { useSwipeable } from "react-swipeable";
 
@@ -69,10 +69,7 @@ const getSlidesToShowFromDom = (id) => {
 		return 4;
 	}
 
-	return parseInt(
-		getComputedStyle(document.getElementById(id)).getPropertyValue("--viewable-slides") || 4,
-		10
-	);
+	return parseInt(getComputedStyle(id).getPropertyValue("--viewable-slides") || 4, 10);
 };
 
 const Carousel = ({
@@ -96,28 +93,32 @@ const Carousel = ({
 	const [isFullScreen, setIsFullScreen] = useState(false);
 	const totalSlides = Children.count(children);
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
+	const carouselElement = useRef();
 
 	const subComponents = Object.values(Carousel).map((subcomponentType) =>
 		Children.map(children, (child) => (child?.type === subcomponentType ? child : null))
 	);
 
 	useEffect(() => {
-		setSlidesToShowInView(getSlidesToShowFromDom(id));
-		setSlide(getSlidesToShowFromDom(id));
-	}, [id]);
+		setSlidesToShowInView(getSlidesToShowFromDom(carouselElement.current));
+		setSlide(getSlidesToShowFromDom(carouselElement.current));
+	}, [carouselElement]);
 
 	useEffect(() => {
 		const resizeFn = () => {
-			if (slidesToShowInView === 0 || getSlidesToShowFromDom(id) === slidesToShowInView) {
+			if (
+				slidesToShowInView === 0 ||
+				getSlidesToShowFromDom(carouselElement.current) === slidesToShowInView
+			) {
 				return;
 			}
-			setSlidesToShowInView(getSlidesToShowFromDom(id));
-			setSlide(getSlidesToShowFromDom(id));
+			setSlidesToShowInView(getSlidesToShowFromDom(carouselElement.current));
+			setSlide(getSlidesToShowFromDom(carouselElement.current));
 			setPosition(0);
 		};
 		window.addEventListener("resize", resizeFn, false);
 		return () => window.removeEventListener("resize", resizeFn, false);
-	}, [id, slidesToShowInView]);
+	}, [carouselElement, slidesToShowInView]);
 
 	const childItems = Children.toArray(subComponents);
 
@@ -228,6 +229,7 @@ const Carousel = ({
 				"--viewable-slides": slidesToShow,
 			}}
 			{...handlers}
+			ref={carouselElement}
 		>
 			<div className={`${COMPONENT_CLASS_NAME}__controls`}>
 				{showLabel ? (
