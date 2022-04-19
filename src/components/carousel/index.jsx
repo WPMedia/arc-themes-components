@@ -273,6 +273,7 @@ const Carousel = ({
 			<div
 				className={`${COMPONENT_CLASS_NAME}__track`}
 				style={{ transform: `translate3d(${position}%, 0px, 0px)` }}
+				aria-live={isAutoplaying ? "off" : "polite"}
 			>
 				{carouselItems.map((component) => component)}
 			</div>
