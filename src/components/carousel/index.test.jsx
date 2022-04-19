@@ -140,7 +140,7 @@ describe("Carousel", () => {
 			expect(screen.getByRole("button", { name: "Previous Slide" })).not.toBeNull();
 		});
 
-		expect(screen.queryByRole("button", { name: "Next" })).toBeNull();
+		expect(screen.queryByRole("button", { name: "Next Slide" })).toBeNull();
 	});
 
 	it("shows next and previous buttons when there are items previous and next", async () => {
@@ -203,7 +203,7 @@ describe("Carousel", () => {
 		});
 		await userEvent.click(screen.getByRole("button", { name: "Previous Slide" }));
 
-		expect(screen.queryByRole("button", { name: "Previous" })).toBeNull();
+		expect(screen.queryByRole("button", { name: "Previous Slide" })).toBeNull();
 	});
 
 	it("should render custom buttons", async () => {
