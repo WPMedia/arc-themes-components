@@ -5,6 +5,7 @@ import { useSwipeable } from "react-swipeable";
 import Button from "./_children/Button";
 import Item from "./_children/Item";
 import useInterval from "../../utils/use-interval/useInterval";
+import isServerSide from "../../utils/is-server-side/isServerside";
 
 const COMPONENT_CLASS_NAME = "c-carousel";
 
@@ -144,7 +145,7 @@ const Carousel = ({
 
 	// a prefers-reduced-motion user setting must always override Autoplay
 	const AutoplayEnabledAndAllowed =
-		enableAutoplay && !!window.matchMedia("'(prefers-reduced-motion: reduce)");
+		enableAutoplay && !isServerSide() && !!window.matchMedia("'(prefers-reduced-motion: reduce)");
 
 	useInterval(nextSlide, AutoplayEnabledAndAllowed && isAutoplaying ? 4000 : null);
 
@@ -239,9 +240,12 @@ const Carousel = ({
 		<DefaultStopAutoplayButton id={id} onClick={toggleAutoplay} />
 	);
 
+	// check to ensure client-side to make sure document is available
 	/* istanbul ignore next  */
 	const fullScreenEnabledAllowed =
-		(document.fullscreenEnabled || document.webkitFullscreenEnabled) && enableFullScreen;
+		!isServerSide() &&
+		(document.fullscreenEnabled || document.webkitFullscreenEnabled) &&
+		enableFullScreen;
 
 	return (
 		<div
