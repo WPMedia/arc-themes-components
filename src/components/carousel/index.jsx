@@ -144,10 +144,10 @@ const Carousel = ({
 	};
 
 	// a prefers-reduced-motion user setting must always override Autoplay
-	const AutoplayEnabledAndAllowed =
+	const autoplayEnabledAndAllowed =
 		enableAutoplay && !isServerSide() && !!window.matchMedia("'(prefers-reduced-motion: reduce)");
 
-	useInterval(nextSlide, AutoplayEnabledAndAllowed && isAutoplaying ? 4000 : null);
+	useInterval(nextSlide, autoplayEnabledAndAllowed && isAutoplaying ? 4000 : null);
 
 	/* istanbul ignore next  */
 	const toggleFullScreen = () => {
@@ -264,8 +264,8 @@ const Carousel = ({
 						{pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`}
 					</p>
 				) : null}
-				{AutoplayEnabledAndAllowed && !isAutoplaying ? resolvedStartAutoplayButton : null}
-				{AutoplayEnabledAndAllowed && isAutoplaying ? resolvedStopAutoplayButton : null}
+				{autoplayEnabledAndAllowed && !isAutoplaying ? resolvedStartAutoplayButton : null}
+				{autoplayEnabledAndAllowed && isAutoplaying ? resolvedStopAutoplayButton : null}
 				{/* only show button at all if enabled on the document */}
 				{fullScreenEnabledAllowed && !isFullScreen ? resolvedFullScreenShowButton : null}
 				{
