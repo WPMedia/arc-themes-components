@@ -116,7 +116,7 @@ const Carousel = ({
 			setPosition(0);
 		};
 		window.addEventListener("resize", resizeFn, false);
-		return () => window.addEventListener("resize", resizeFn, false);
+		return () => window.removeEventListener("resize", resizeFn, false);
 	}, [id, slidesToShowInView]);
 
 	const childItems = Children.toArray(subComponents);
