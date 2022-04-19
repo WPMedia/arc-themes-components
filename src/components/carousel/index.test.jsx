@@ -345,4 +345,69 @@ describe("Carousel", () => {
 		const foundLabel = screen.queryByText("1 of 2 super cool images");
 		expect(foundLabel).not.toBeNull();
 	});
+	it("shows additional controls next and previous if opted in", async () => {
+		render(
+			<Carousel id="carousel-2" label="Carousel Label" slidesToShow={1} showAdditionalSlideControls>
+				<Carousel.Item label="Slide 1 of 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+
+		// previous button not visible yet on first render
+		expect(screen.queryAllByText("<")).toHaveLength(0);
+
+		// show next button
+		expect(screen.queryAllByText(">")).toHaveLength(1);
+
+		// click top next button
+		await userEvent.click(screen.getByText(">"));
+
+		await waitFor(() => {
+			// show default previous button
+			expect(screen.queryAllByText("<")).toHaveLength(1);
+
+			// next button no longer visible as it's the last slide
+			expect(screen.queryAllByText(">")).toHaveLength(0);
+		});
+	});
+	it("shows additional controls next and previous if opted in and custom buttons", async () => {
+		render(
+			<Carousel
+				id="carousel-2"
+				label="Carousel Label"
+				slidesToShow={1}
+				showAdditionalSlideControls
+				additionalNextButton={<button type="button">Next Custom</button>}
+				additionalPreviousButton={<button type="button">Previous Custom</button>}
+			>
+				<Carousel.Item label="Slide 1 of 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+
+		// previous button not visible yet on first render
+		expect(screen.queryAllByText("Previous Custom")).toHaveLength(0);
+
+		// show next button
+		expect(screen.queryAllByText("Next Custom")).toHaveLength(1);
+
+		// click top next button
+		await userEvent.click(screen.getByText("Next Custom"));
+
+		await waitFor(() => {
+			// show default previous button
+			expect(screen.queryAllByText("Previous Custom")).toHaveLength(1);
+
+			// next button no longer visible as it's the last slide
+			expect(screen.queryAllByText("Next Custom")).toHaveLength(0);
+		});
+	});
 });
