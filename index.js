@@ -20,6 +20,8 @@ import Stack from "./src/components/stack";
 import Video from "./src/components/video";
 import formatCredits from "./src/utils/format-credits";
 import formatPowaVideoEmbed from "./src/utils/format-powa-video-embed";
+import isServerSide from "./src/utils/is-server-side/isServerSide";
+import useInterval from "./src/utils/use-interval/useInterval";
 
 export {
 	Attribution,
@@ -34,6 +36,7 @@ export {
 	Icon,
 	Image,
 	Input,
+	isServerSide,
 	Link,
 	MediaItem,
 	Overline,
@@ -41,5 +44,6 @@ export {
 	Pill,
 	Separator,
 	Stack,
+	useInterval,
 	Video,
 };
