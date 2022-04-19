@@ -305,7 +305,7 @@ Carousel.propTypes = {
 	className: PropTypes.string,
 	/** The text, images or any node that will be displayed within the component */
 	children: PropTypes.node.isRequired,
-	/** Autoplay slides if user setting allows it */
+	/** Opt into showing an autoplay toggle button */
 	enableAutoplay: PropTypes.bool,
 	/** A unique identifier for the carousel */
 	id: PropTypes.string.isRequired,
