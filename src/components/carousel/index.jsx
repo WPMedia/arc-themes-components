@@ -173,11 +173,21 @@ const Carousel = ({
 		setPosition(position - 100 / slidesToShowInView);
 	};
 
+	const autoplayNextSlide = () => {
+		/* istanbul ignore next */
+		if (slide + 1 > carouselItems.length) {
+			setIsAutoplaying(false);
+		} else {
+			setSlide(slide + 1);
+			setPosition(position - 100 / slidesToShowInView);
+		}
+	};
+
 	// a prefers-reduced-motion user setting must always override Autoplay
 	const autoplayEnabledAndAllowed =
 		enableAutoplay && !isServerSide() && !!window.matchMedia("'(prefers-reduced-motion: reduce)");
 
-	useInterval(nextSlide, autoplayEnabledAndAllowed && isAutoplaying ? 4000 : null);
+	useInterval(autoplayNextSlide, autoplayEnabledAndAllowed && isAutoplaying ? 4000 : null);
 
 	/* istanbul ignore next  */
 	const toggleFullScreen = () => {
