@@ -54,25 +54,15 @@ const DefaultEnterFullScreenButton = ({ id, onClick }) => (
 	</Button>
 );
 
-const DefaultStartAutoplayButton = ({ id, onClick }) => (
+const AutoplayButton = ({ id, onClick, iconNode, text, ariaLabel }) => (
 	<Button
 		id={id}
 		onClick={onClick}
-		label="Start rotating the slides"
-		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--start-auto-play`}
+		label={ariaLabel}
+		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--toggle-auto-play`}
 	>
-		Start Autoplay
-	</Button>
-);
-
-const DefaultStopAutoplayButton = ({ id, onClick }) => (
-	<Button
-		id={id}
-		onClick={onClick}
-		label="Stop rotating the slides"
-		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--stop-auto-play`}
-	>
-		Stop Autoplay
+		{iconNode}
+		{text}
 	</Button>
 );
 
@@ -97,6 +87,7 @@ const getSlidesToShowFromDom = (id) => {
 };
 
 const Carousel = ({
+	autoplayPhraseLabels,
 	children,
 	className,
 	enableAutoplay,
@@ -107,8 +98,10 @@ const Carousel = ({
 	previousButton,
 	showLabel,
 	slidesToShow,
-	startAutoplayButton,
-	stopAutoplayButton,
+	startAutoplayIcon,
+	startAutoplayText,
+	stopAutoplayIcon,
+	stopAutoplayText,
 	fullScreenShowButton,
 	fullScreenMinimizeButton,
 	enableFullScreen,
@@ -258,28 +251,6 @@ const Carousel = ({
 		<DefaultExitFullScreenButton id={id} onClick={toggleFullScreen} />
 	);
 
-	const resolvedStartAutoplayButton = startAutoplayButton ? (
-		resolvedButton(
-			startAutoplayButton,
-			id,
-			`${COMPONENT_CLASS_NAME}__button--start-auto-play`,
-			toggleAutoplay
-		)
-	) : (
-		<DefaultStartAutoplayButton id={id} onClick={toggleAutoplay} />
-	);
-
-	const resolvedStopAutoplayButton = stopAutoplayButton ? (
-		resolvedButton(
-			stopAutoplayButton,
-			id,
-			`${COMPONENT_CLASS_NAME}__button--stop-auto-play`,
-			toggleAutoplay
-		)
-	) : (
-		<DefaultStopAutoplayButton id={id} onClick={toggleAutoplay} />
-	);
-
 	// check to ensure client-side to make sure document is available
 	/* istanbul ignore next  */
 	const fullScreenEnabledAllowed =
@@ -311,8 +282,15 @@ const Carousel = ({
 							? resolvedFullScreenMinimizeButton
 							: null
 					}
-					{autoplayEnabledAndAllowed && !isAutoplaying ? resolvedStartAutoplayButton : null}
-					{autoplayEnabledAndAllowed && isAutoplaying ? resolvedStopAutoplayButton : null}
+					{autoplayEnabledAndAllowed ? (
+						<AutoplayButton
+							id={id}
+							onClick={toggleAutoplay}
+							text={isAutoplaying ? stopAutoplayText : startAutoplayText}
+							iconNode={isAutoplaying ? stopAutoplayIcon : startAutoplayIcon}
+							ariaLabel={isAutoplaying ? autoplayPhraseLabels.stop : autoplayPhraseLabels.start}
+						/>
+					) : null}
 				</div>
 				<div className={`${COMPONENT_CLASS_NAME}__counter-controls-container`}>
 					{showLabel ? (
@@ -338,16 +316,26 @@ const Carousel = ({
 	);
 };
 
-Carousel.Button = Button;
 Carousel.Item = Item;
 
 Carousel.defaultProps = {
+	autoplayPhraseLabels: {
+		start: "Start automatic slide show",
+		stop: "Stop automatic slide show",
+	},
 	enableAutoplay: false,
 	pageCountPhrase: () => {},
 	showLabel: false,
+	startAutoplayText: "Start Autoplay",
+	stopAutoplayText: "Stop Autoplay",
 };
 
 Carousel.propTypes = {
+	/** Object of phases for stop and start labels of Autoplay button */
+	autoplayPhraseLabels: PropTypes.shape({
+		start: PropTypes.string,
+		stop: PropTypes.string,
+	}),
 	/** Class name(s) that get appended to default class name of the component */
 	className: PropTypes.string,
 	/** The text, images or any node that will be displayed within the component */
@@ -368,10 +356,14 @@ Carousel.propTypes = {
 	showLabel: PropTypes.bool,
 	/** Number of slides to show in view */
 	slidesToShow: PropTypes.number,
-	/** Button that shows to indicate start Autoplay, assuming it's enabled and available to user */
-	startAutoplayButton: PropTypes.node,
-	/** Button that shows to indicate stop Autoplay, assuming it's enabled and available to user */
-	stopAutoplayButton: PropTypes.node,
+	/** Icon or dom node that shows to indicate start Autoplay, assuming it's enabled and available to user */
+	startAutoplayIcon: PropTypes.node,
+	/** Text to display to begin autoplaying the slides if the button is enabled */
+	startAutoplayText: PropTypes.string,
+	/** Icon or dom node that shows to indicate stop Autoplay, assuming it's enabled and available to user */
+	stopAutoplayIcon: PropTypes.node,
+	/** Text to display to stop autoplaying the slides if the button is enabled and slideshow is autoplaying */
+	stopAutoplayText: PropTypes.string,
 	/** Used to set a custom full screen show button, cloned with event handlers */
 	fullScreenShowButton: PropTypes.node,
 	/** Used to set a custom full screen exit button, cloned with event handlers */

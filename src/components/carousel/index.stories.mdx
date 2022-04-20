@@ -393,22 +393,18 @@ const Feature = () => (
 <Canvas>
 	<Story name="Display custom autoplay toggle">
 		<Carousel
+			autoplayPhraseLabels={{
+				start: "Start that autoplay thing",
+				stop: "Stop that autoplay thing",
+			}}
 			id="carousel-1"
 			label="Carousel of Images"
 			slidesToShow={1}
 			enableAutoplay
-			startAutoplayButton={
-				<button type="button">
-					Start Autoplay
-					<Icon name="Play" />
-				</button>
-			}
-			stopAutoplayButton={
-				<button type="button">
-					Stop Autoplay
-					<Icon name="Pause" />
-				</button>
-			}
+			startAutoplayIcon={<Icon name="Play" />}
+			startAutoplayText={"Start Autoplay"}
+			stopAutoplayIcon={<Icon name="Pause" />}
+			stopAutoplayText={"Stop Autoplay"}
 		>
 			<Carousel.Item label="Slide 1 of 4">
 				<a href="/">
@@ -438,6 +434,10 @@ const Feature = () => (
 			slidesToShow={2}
 			enableAutoplay
 			enableFullScreen
+			startAutoplayIcon={<Icon name="Play" />}
+			startAutoplayText={"Start Autoplay"}
+			stopAutoplayIcon={<Icon name="Pause" />}
+			stopAutoplayText={"Stop Autoplay"}
 		>
 			<Carousel.Item label="Slide 1 of 4">
 				<a href="/">
@@ -468,6 +468,10 @@ const Feature = () => (
 			enableAutoplay
 			enableFullScreen
 			showLabel
+			startAutoplayIcon={<Icon name="Play" />}
+			startAutoplayText={"Start Autoplay"}
+			stopAutoplayIcon={<Icon name="Pause" />}
+			stopAutoplayText={"Stop Autoplay"}
 		>
 			<Carousel.Item label="Slide 1 of 4">
 				<a href="/">
