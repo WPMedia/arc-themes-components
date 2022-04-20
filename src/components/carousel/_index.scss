@@ -97,6 +97,14 @@
 		}
 	}
 
+	&__counter-controls-container {
+		@include scss.component-properties("carousel-counter-controls-container");
+	}
+
+	&__expand-autoplay-container {
+		@include scss.component-properties("carousel-expand-autoplay-container");
+	}
+
 	// add backdrop for setting full-screen background-color
 	&::backdrop {
 		@include scss.component-properties("carousel-backdrop");

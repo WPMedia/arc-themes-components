@@ -293,20 +293,24 @@ const Carousel = ({
 			ref={carouselElement}
 		>
 			<div className={`${COMPONENT_CLASS_NAME}__controls`}>
-				{showLabel ? (
-					<p className={`${COMPONENT_CLASS_NAME}__image-counter-label`}>
-						{pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`}
-					</p>
-				) : null}
-				{autoplayEnabledAndAllowed && !isAutoplaying ? resolvedStartAutoplayButton : null}
-				{autoplayEnabledAndAllowed && isAutoplaying ? resolvedStopAutoplayButton : null}
-				{/* only show button at all if enabled on the document */}
-				{fullScreenEnabledAllowed && !isFullScreen ? resolvedFullScreenShowButton : null}
-				{
-					/* istanbul ignore next  */ fullScreenEnabledAllowed && isFullScreen
-						? resolvedFullScreenMinimizeButton
-						: null
-				}
+				<div className={`${COMPONENT_CLASS_NAME}__expand-autoplay-container`}>
+					{/* only show button at all if enabled on the document */}
+					{fullScreenEnabledAllowed && !isFullScreen ? resolvedFullScreenShowButton : null}
+					{
+						/* istanbul ignore next  */ fullScreenEnabledAllowed && isFullScreen
+							? resolvedFullScreenMinimizeButton
+							: null
+					}
+					{autoplayEnabledAndAllowed && !isAutoplaying ? resolvedStartAutoplayButton : null}
+					{autoplayEnabledAndAllowed && isAutoplaying ? resolvedStopAutoplayButton : null}
+				</div>
+				<div className={`${COMPONENT_CLASS_NAME}__counter-controls-container`}>
+					{showLabel ? (
+						<p className={`${COMPONENT_CLASS_NAME}__image-counter-label`}>
+							{pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`}
+						</p>
+					) : null}
+				</div>
 			</div>
 			<div
 				className={`${COMPONENT_CLASS_NAME}__track`}
