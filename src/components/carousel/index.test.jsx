@@ -370,7 +370,7 @@ describe("Carousel", () => {
 		expect(foundLabel).not.toBeNull();
 	});
 	it("shows additional controls next and previous if opted in", async () => {
-		render(
+		const { container } = render(
 			<Carousel id="carousel-2" label="Carousel Label" slidesToShow={1} showAdditionalSlideControls>
 				<Carousel.Item label="Slide 1 of 2">
 					<div />
@@ -381,21 +381,40 @@ describe("Carousel", () => {
 			</Carousel>
 		);
 
-		// previous button not visible yet on first render
-		expect(screen.queryAllByText("<")).toHaveLength(0);
+		const controlsArea = container.querySelector(".c-carousel__counter-controls-container");
 
 		// show next button
-		expect(screen.queryAllByText(">")).toHaveLength(1);
+		expect(controlsArea.querySelectorAll(".c-carousel__button--additional-next")).toHaveLength(1);
+
+		// show svg within controls area additional next button
+		expect(controlsArea.querySelector(".c-carousel__button--additional-next svg")).not.toBeNull();
+
+		// previous button not visible yet on first render
+		expect(controlsArea.querySelectorAll(".c-carousel__button--additional-previous")).toHaveLength(
+			0
+		);
 
 		// click top next button
-		await userEvent.click(screen.getByText(">"));
+		await userEvent.click(controlsArea.querySelector(".c-carousel__button--additional-next"));
 
 		await waitFor(() => {
-			// show default previous button
-			expect(screen.queryAllByText("<")).toHaveLength(1);
+			const updatedControlsArea = container.querySelector(
+				".c-carousel__counter-controls-container"
+			);
 
 			// next button no longer visible as it's the last slide
-			expect(screen.queryAllByText(">")).toHaveLength(0);
+			expect(
+				updatedControlsArea.querySelectorAll(".c-carousel__button--additional-next")
+			).toHaveLength(0);
+
+			// show default previous button
+			expect(
+				updatedControlsArea.querySelectorAll(".c-carousel__button--additional-previous")
+			).toHaveLength(1);
+			// show svg within controls area additional previous button
+			expect(
+				controlsArea.querySelector(".c-carousel__button--additional-previous svg")
+			).not.toBeNull();
 		});
 	});
 	it("shows additional controls next and previous if opted in and custom buttons", async () => {
