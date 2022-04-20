@@ -316,6 +316,7 @@ const Carousel = ({
 	);
 };
 
+Carousel.Button = Button;
 Carousel.Item = Item;
 
 Carousel.defaultProps = {
