@@ -416,31 +416,23 @@ describe("Carousel", () => {
 			</Carousel>
 		);
 
-		await userEvent.click(screen.getByRole("button", { name: "Start rotating the slides" }));
+		await userEvent.click(screen.getByRole("button", { name: "Start automatic slide show" }));
 		await waitFor(() => {
-			expect(screen.getByRole("button", { name: "Stop rotating the slides" })).toBeInTheDocument();
+			expect(screen.getByRole("button", { name: "Stop automatic slide show" })).toBeInTheDocument();
 		});
 	});
 	it("renders a custom start autoplay button", async () => {
-		const customButtonText = "Start that autoplay already!";
-		const customStartLabel = "Start the autoplay please";
-		const customStopLabel = "Stop the autoplay please";
+		const customStartButtonText = "Start that autoplay already!";
+		const customStopButtonText = "Stop that autoplay already!";
 		render(
 			<Carousel
 				id="carousel-2"
 				label="Carousel Label"
 				showLabel
 				slidesToShow={1}
-				startAutoplayButton={
-					<button aria-label={customStartLabel} className="really-special-button" type="button">
-						{customButtonText}
-					</button>
-				}
-				stopAutoplayButton={
-					<button aria-label={customStopLabel} type="button">
-						Stop that autoplay already!
-					</button>
-				}
+				startAutoplayIcon={<span className="really-special-button">Special icon</span>}
+				startAutoplayText={customStartButtonText}
+				stopAutoplayText={customStopButtonText}
 				enableAutoplay
 			>
 				<Carousel.Item label="Slide 1 of 2">
@@ -453,13 +445,22 @@ describe("Carousel", () => {
 		);
 
 		// query by text returns null if not found
-		const foundLabel = screen.queryByText(customButtonText);
-		expect(foundLabel).not.toBeNull();
-		expect(foundLabel.classList).toContain("really-special-button");
+		const foundStartLabel = screen.queryByText(customStartButtonText);
+		expect(foundStartLabel).not.toBeNull();
 
-		await userEvent.click(screen.getByRole("button", { name: customStartLabel }));
+		const notFoundStopLabel = screen.queryByText(customStopButtonText);
+		expect(notFoundStopLabel).toBeNull();
+
+		const foundSpanIcon = screen.queryByText("Special icon");
+		expect(foundSpanIcon).not.toBeNull();
+
+		await userEvent.click(screen.getByRole("button", { name: "Start automatic slide show" }));
 		await waitFor(() => {
-			expect(screen.getByRole("button", { name: customStopLabel })).toBeInTheDocument();
+			const notFoundStartLabel = screen.queryByText(customStartButtonText);
+			expect(notFoundStartLabel).toBeNull();
+			const foundStopLabel = screen.queryByText(customStopButtonText);
+			expect(foundStopLabel).not.toBeNull();
+			expect(screen.getByRole("button", { name: "Stop automatic slide show" })).toBeInTheDocument();
 		});
 	});
 });
