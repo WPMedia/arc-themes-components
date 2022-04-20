@@ -1,7 +1,21 @@
 @use "../../scss.scss" with (
+	$breakpoints: (
+		default: "min-width: 0",
+		desktop: "min-width: 48rem",
+	),
 	$tokens: (
+		desktop: (
+			components: (
+				carousel: (
+					--slides: 4,
+				),
+			),
+		),
 		default: (
 			components: (
+				carousel: (
+					--slides: 1,
+				),
 				stack: (
 					gap: 1rem,
 				),
