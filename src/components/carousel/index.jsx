@@ -1,7 +1,7 @@
 import { Children, cloneElement, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { useSwipeable } from "react-swipeable";
-
+import Icon from "../icon";
 import Button from "./_children/Button";
 import Item from "./_children/Item";
 
@@ -36,7 +36,7 @@ const DefaultAdditionalPreviousButton = ({ id, onClick }) => (
 		label="Previous Slide"
 		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--additional-previous`}
 	>
-		{"<"}
+		<Icon name="ChevronLeft" />
 	</Button>
 );
 
@@ -47,7 +47,7 @@ const DefaultAdditionalNextButton = ({ id, onClick }) => (
 		label="Next Slide"
 		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--additional-next`}
 	>
-		{">"}
+		<Icon name="ChevronRight" />
 	</Button>
 );
 
