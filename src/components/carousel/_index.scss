@@ -98,10 +98,14 @@
 	}
 
 	&__counter-controls-container {
+		display: flex;
+
 		@include scss.component-properties("carousel-counter-controls-container");
 	}
 
 	&__expand-autoplay-container {
+		display: flex;
+
 		@include scss.component-properties("carousel-expand-autoplay-container");
 	}
 
