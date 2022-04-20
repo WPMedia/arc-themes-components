@@ -85,7 +85,7 @@ const resolvedButton = (element, id, className, onClick) =>
 				element.props.onClick(e);
 			}
 		},
-		className: `${COMPONENT_CLASS_NAME}__button ${className} ${element.props?.className}`,
+		className: `${COMPONENT_CLASS_NAME}__button ${className} ${element.props?.className || ""}`,
 	});
 
 const getSlidesToShowFromDom = (id) => {
