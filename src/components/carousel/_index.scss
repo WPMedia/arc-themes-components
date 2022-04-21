@@ -51,6 +51,7 @@
 		display: flex;
 		justify-content: space-between;
 		place-self: center;
+		pointer-events: none;
 		width: 100%;
 		z-index: 1;
 
@@ -68,6 +69,8 @@
 	}
 
 	&__button {
+		cursor: pointer;
+		pointer-events: auto;
 		@include scss.component-properties("carousel-button");
 
 		&--next {

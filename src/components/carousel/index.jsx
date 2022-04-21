@@ -228,7 +228,6 @@ const Carousel = ({
 				"--carousel-slide-width": `${100 / slidesToShowInView}%`,
 				"--viewable-slides": slidesToShow,
 			}}
-			{...handlers}
 			ref={carouselElement}
 		>
 			<div className={`${COMPONENT_CLASS_NAME}__controls`}>
@@ -248,6 +247,7 @@ const Carousel = ({
 			<div
 				className={`${COMPONENT_CLASS_NAME}__track`}
 				style={{ transform: `translate3d(${position}%, 0px, 0px)` }}
+				{...handlers}
 			>
 				{carouselItems.map((component) => component)}
 			</div>
