@@ -158,7 +158,9 @@ const Carousel = ({
 			return;
 		}
 		setSlide(slide - 1);
-		setPosition(position + 100 / slidesToShowInView);
+		const slideOffset =
+			carouselElement.current.querySelector(".c-carousel__slide:nth-of-type(2)")?.offsetLeft || 0;
+		setPosition(position + slideOffset);
 	};
 
 	const nextSlide = () => {
@@ -167,7 +169,9 @@ const Carousel = ({
 			return;
 		}
 		setSlide(slide + 1);
-		setPosition(position - 100 / slidesToShowInView);
+		const slideOffset =
+			carouselElement.current.querySelector(".c-carousel__slide:nth-of-type(2)")?.offsetLeft || 0;
+		setPosition(position - slideOffset);
 	};
 
 	/* istanbul ignore next  */
@@ -305,10 +309,10 @@ const Carousel = ({
 			</div>
 			<div
 				className={`${COMPONENT_CLASS_NAME}__track`}
-				style={{ transform: `translate3d(${position}%, 0px, 0px)` }}
+				style={{ transform: `translate3d(${position}px, 0px, 0px)` }}
 				{...handlers}
 			>
-				{carouselItems.map((component) => component)}
+				{carouselItems}
 			</div>
 
 			<div className={`${COMPONENT_CLASS_NAME}__actions`}>
