@@ -1,7 +1,7 @@
 import { Children, cloneElement, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { useSwipeable } from "react-swipeable";
-
+import Icon from "../icon";
 import Button from "./_children/Button";
 import Item from "./_children/Item";
 
@@ -26,6 +26,28 @@ const DefaultPreviousButton = ({ id, onClick }) => (
 		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--previous`}
 	>
 		Previous
+	</Button>
+);
+
+const DefaultAdditionalPreviousButton = ({ id, onClick }) => (
+	<Button
+		id={id}
+		onClick={onClick}
+		label="Previous Slide"
+		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--additional-previous`}
+	>
+		<Icon name="ChevronLeft" />
+	</Button>
+);
+
+const DefaultAdditionalNextButton = ({ id, onClick }) => (
+	<Button
+		id={id}
+		onClick={onClick}
+		label="Next Slide"
+		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--additional-next`}
+	>
+		<Icon name="ChevronRight" />
 	</Button>
 );
 
@@ -73,6 +95,8 @@ const getSlidesToShowFromDom = (id) => {
 };
 
 const Carousel = ({
+	additionalPreviousButton,
+	additionalNextButton,
 	children,
 	className,
 	id,
@@ -80,6 +104,7 @@ const Carousel = ({
 	nextButton,
 	pageCountPhrase,
 	previousButton,
+	showAdditionalSlideControls,
 	showLabel,
 	slidesToShow,
 	fullScreenShowButton,
@@ -190,6 +215,28 @@ const Carousel = ({
 		<DefaultPreviousButton id={id} onClick={() => previousSlide()} />
 	);
 
+	const resolvedAdditionalNextButton = additionalNextButton ? (
+		resolvedButton(
+			additionalNextButton,
+			id,
+			`${COMPONENT_CLASS_NAME}__button--additional-next`,
+			nextSlide
+		)
+	) : (
+		<DefaultAdditionalNextButton id={id} onClick={nextSlide} />
+	);
+
+	const resolvedAdditionalPreviousButton = additionalPreviousButton ? (
+		resolvedButton(
+			additionalPreviousButton,
+			id,
+			`${COMPONENT_CLASS_NAME}__button--additional-previous`,
+			previousSlide
+		)
+	) : (
+		<DefaultAdditionalPreviousButton id={id} onClick={previousSlide} />
+	);
+
 	const resolvedFullScreenShowButton = fullScreenShowButton ? (
 		resolvedButton(
 			fullScreenShowButton,
@@ -232,18 +279,30 @@ const Carousel = ({
 			ref={carouselElement}
 		>
 			<div className={`${COMPONENT_CLASS_NAME}__controls`}>
-				{showLabel ? (
-					<p className={`${COMPONENT_CLASS_NAME}__image-counter-label`}>
-						{pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`}
-					</p>
-				) : null}
-				{/* only show button at all if enabled on the document */}
-				{fullScreenEnabledAllowed && !isFullScreen ? resolvedFullScreenShowButton : null}
-				{
-					/* istanbul ignore next  */ fullScreenEnabledAllowed && isFullScreen
-						? resolvedFullScreenMinimizeButton
-						: null
-				}
+				<div className={`${COMPONENT_CLASS_NAME}__expand-autoplay-container`}>
+					{/* only show button at all if enabled on the document */}
+					{fullScreenEnabledAllowed && !isFullScreen ? resolvedFullScreenShowButton : null}
+					{
+						/* istanbul ignore next  */ fullScreenEnabledAllowed && isFullScreen
+							? resolvedFullScreenMinimizeButton
+							: null
+					}
+				</div>
+				<div className={`${COMPONENT_CLASS_NAME}__counter-controls-container`}>
+					{showLabel ? (
+						<p className={`${COMPONENT_CLASS_NAME}__image-counter-label`}>
+							{pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`}
+						</p>
+					) : null}
+					{showAdditionalSlideControls ? (
+						<div className={`${COMPONENT_CLASS_NAME}__additional-controls`}>
+							{slide !== slidesToShow ? resolvedAdditionalPreviousButton : null}
+							{slide !== carouselItems.length && carouselItems.length > 1
+								? resolvedAdditionalNextButton
+								: null}
+						</div>
+					) : null}
+				</div>
 			</div>
 			<div
 				className={`${COMPONENT_CLASS_NAME}__track`}
@@ -269,6 +328,10 @@ Carousel.defaultProps = {
 };
 
 Carousel.propTypes = {
+	/** Used to set a custom additional next button, a cloned Carousel.Button element */
+	additionalNextButton: PropTypes.node,
+	/** Used to set a custom additional previous button, a cloned Carousel.Button element */
+	additionalPreviousButton: PropTypes.node,
 	/** Class name(s) that get appended to default class name of the component */
 	className: PropTypes.string,
 	/** The text, images or any node that will be displayed within the component */
@@ -283,6 +346,8 @@ Carousel.propTypes = {
 	previousButton: PropTypes.node,
 	/** Used to set a custom next button, a cloned Carousel.Button element */
 	nextButton: PropTypes.node,
+	/** Show next and previous controls in addition to existing ones */
+	showAdditionalSlideControls: PropTypes.bool,
 	/** Show the current slide number */
 	showLabel: PropTypes.bool,
 	/** Number of slides to show in view */

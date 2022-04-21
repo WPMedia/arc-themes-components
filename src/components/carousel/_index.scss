@@ -80,6 +80,14 @@
 			@include scss.component-properties("carousel-button-previous");
 		}
 
+		&--additional-previous {
+			@include scss.component-properties("carousel-button-additional-previous");
+		}
+
+		&--additional-next {
+			@include scss.component-properties("carousel-button-additional-next");
+		}
+
 		&--enter-full-screen {
 			@include scss.component-properties("carousel-button-enter-full-screen");
 		}
@@ -87,6 +95,22 @@
 		&--exit-full-screen {
 			@include scss.component-properties("carousel-button-exit-full-screen");
 		}
+	}
+
+	&__additional-controls {
+		@include scss.component-properties("carousel-additional-controls");
+	}
+
+	&__counter-controls-container {
+		display: flex;
+		align-items: center;
+		@include scss.component-properties("carousel-counter-controls-container");
+	}
+
+	&__expand-autoplay-container {
+		display: flex;
+		align-items: center;
+		@include scss.component-properties("carousel-expand-autoplay-container");
 	}
 
 	// add backdrop for setting full-screen background-color
