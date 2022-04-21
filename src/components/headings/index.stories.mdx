@@ -30,6 +30,42 @@ In addition, the `<Heading>` component is customizable because custom classes ca
 | ------- | -------------------------------------------------------------- | ---------------------- | ------------- |
 | heading | Header tag that will show hierarchy based on heading container | h1, h2, h3, h4, h5, h6 |               |
 
+Set default value of color for all components heading
+
+```scss
+@use "@wpmedia/arc-themes-components/scss" with (
+	$tokens: (
+		default: (
+			components: (
+				heading: (
+					color: red,
+				),
+			),
+		),
+	)
+);
+```
+
+Set heading color value for a block
+
+```scss
+@use "@wpmedia/arc-themes-components/scss" with (
+	$tokens: (
+		default: (
+			blocks: (
+				story-card: (
+					components: (
+						heading: (
+							color: red,
+						),
+					),
+				),
+			),
+		),
+	)
+);
+```
+
 ## Usage
 
 ### Heading
