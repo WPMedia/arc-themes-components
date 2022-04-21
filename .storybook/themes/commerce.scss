@@ -1,4 +1,8 @@
 @use "../../scss.scss" with (
+	$breakpoints: (
+		default: "min-width: 0",
+		desktop: "min-width: 48rem",
+	),
 	$tokens: (
 		default: (
 			components: (
@@ -26,6 +30,16 @@
 				),
 				carousel-fullscreen-image-counter: (
 					color: white,
+				),
+				carousel-additional-controls: (
+					display: none,
+				),
+			),
+		),
+		desktop: (
+			components: (
+				carousel-additional-controls: (
+					display: block,
 				),
 			),
 		),
