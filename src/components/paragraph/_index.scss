@@ -7,7 +7,6 @@
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	-moz-box-oriented: vertical;
-	/* opera */
 	text-overflow: ellipsis;
 
 	@include scss.component-properties("paragraph");
