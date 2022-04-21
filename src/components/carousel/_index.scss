@@ -105,20 +105,6 @@
 		}
 	}
 
-	&__counter-controls-container {
-		display: flex;
-		align-items: center;
-
-		@include scss.component-properties("carousel-counter-controls-container");
-	}
-
-	&__expand-autoplay-container {
-		display: flex;
-		align-items: center;
-
-		@include scss.component-properties("carousel-expand-autoplay-container");
-	}
-
 	&__additional-controls {
 		@include scss.component-properties("carousel-additional-controls");
 	}
