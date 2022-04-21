@@ -98,6 +98,10 @@
 		&--exit-full-screen {
 			@include scss.component-properties("carousel-button-exit-full-screen");
 		}
+
+		&--toggle-auto-play {
+			@include scss.component-properties("carousel-button-toggle-auto-play");
+		}
 	}
 
 	&__additional-controls {
