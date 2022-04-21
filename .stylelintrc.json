@@ -19,7 +19,8 @@
 					"intrinsic-width",
 					"viewport-units",
 					"css3-cursor",
-					"css-initial-value"
+					"css-initial-value",
+					"pointer-events"
 				],
 				"ignorePartialSupport": true,
 				"severity": "warning"
