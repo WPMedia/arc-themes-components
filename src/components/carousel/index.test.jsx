@@ -8,6 +8,11 @@ Object.defineProperty(global.document, "fullscreenEnabled", {
 	value: true,
 });
 
+// mock accessibility to ensure that the carousel renders match media for reduce motion
+Object.defineProperty(global.window, "matchMedia", {
+	value: () => true,
+});
+
 describe("Carousel", () => {
 	it("should render carousel", () => {
 		render(
@@ -369,6 +374,39 @@ describe("Carousel", () => {
 		const foundLabel = screen.queryByText("1 of 2 super cool images");
 		expect(foundLabel).not.toBeNull();
 	});
+
+	it("shows start Autoplay when opting into Autoplay", () => {
+		render(
+			<Carousel id="carousel-2" label="Carousel Label" showLabel slidesToShow={1} enableAutoplay>
+				<Carousel.Item label="Slide 1 of 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+		// query by text returns null if not found
+		const foundLabel = screen.queryByText("Start Autoplay");
+		expect(foundLabel).not.toBeNull();
+	});
+
+	it("does not show start Autoplay when opting into Autoplay", () => {
+		render(
+			<Carousel id="carousel-2" label="Carousel Label" showLabel slidesToShow={1}>
+				<Carousel.Item label="Slide 1 of 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+		// query by text returns null if not found
+		const foundLabel = screen.queryByText("Start Autoplay");
+		expect(foundLabel).toBeNull();
+	});
+
 	it("shows additional controls next and previous if opted in", async () => {
 		const { container } = render(
 			<Carousel id="carousel-2" label="Carousel Label" slidesToShow={1} showAdditionalSlideControls>
@@ -417,6 +455,50 @@ describe("Carousel", () => {
 			).not.toBeNull();
 		});
 	});
+	it("renders a custom start autoplay button", async () => {
+		const customStartButtonText = "Start that autoplay already!";
+		const customStopButtonText = "Stop that autoplay already!";
+
+		render(
+			<Carousel
+				id="carousel-2"
+				label="Carousel Label"
+				showLabel
+				slidesToShow={1}
+				startAutoplayIcon={<span className="really-special-button">Special icon</span>}
+				startAutoplayText={customStartButtonText}
+				stopAutoplayText={customStopButtonText}
+				enableAutoplay
+			>
+				<Carousel.Item label="Slide 1 of 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+
+		// query by text returns null if not found
+		const foundStartLabel = screen.queryByText(customStartButtonText);
+		expect(foundStartLabel).not.toBeNull();
+
+		const notFoundStopLabel = screen.queryByText(customStopButtonText);
+		expect(notFoundStopLabel).toBeNull();
+
+		const foundSpanIcon = screen.queryByText("Special icon");
+		expect(foundSpanIcon).not.toBeNull();
+
+		await userEvent.click(screen.getByRole("button", { name: "Start automatic slide show" }));
+		await waitFor(() => {
+			const notFoundStartLabel = screen.queryByText(customStartButtonText);
+			expect(notFoundStartLabel).toBeNull();
+			const foundStopLabel = screen.queryByText(customStopButtonText);
+			expect(foundStopLabel).not.toBeNull();
+			expect(screen.getByRole("button", { name: "Stop automatic slide show" })).toBeInTheDocument();
+		});
+	});
+
 	it("shows additional controls next and previous if opted in and custom buttons", async () => {
 		render(
 			<Carousel

@@ -17,6 +17,8 @@ touch interactions.
 
 The slideshow component also allows users to toggle full screen mode. The full-screen functionality uses the Fullscreen API, which all modern browsers [support](https://caniuse.com/fullscreen).
 
+Autoplay functionality that rotates the images within the carousel is also available. The autoplay feature is [accessible](https://www.w3.org/TR/wai-aria-practices-1.2/#carousel) for users who have opted into [`prefer-reduced-motion`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) by not displaying the option, trumping `enableAutoplay`. The feature is customizable by allowing custom block creators to use their own icons, text, and aria-label to indicate the autoplay functionality.
+
 ## Usage
 
 ```jsx
@@ -371,6 +373,65 @@ const Feature = () => (
 	</Story>
 </Canvas>
 
+** Display autoplay toggle **
+
+<Canvas>
+	<Story name="Display autoplay toggle">
+		<Carousel id="carousel-1" label="Carousel of Images" slidesToShow={1} enableAutoplay>
+			<Carousel.Item label="Slide 1 of 4">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 2 of 4">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 3 of 4">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 4 of 4">
+				<Image src="/coffee.jpeg" alt="A cup of coffee" />
+			</Carousel.Item>
+		</Carousel>
+	</Story>
+</Canvas>
+
+** Display custom autoplay toggle **
+
+<Canvas>
+	<Story name="Display custom autoplay toggle">
+		<Carousel
+			autoplayPhraseLabels={{
+				start: "Start that autoplay thing",
+				stop: "Stop that autoplay thing",
+			}}
+			id="carousel-1"
+			label="Carousel of Images"
+			slidesToShow={1}
+			enableAutoplay
+			startAutoplayIcon={<Icon name="Play" />}
+			startAutoplayText={"Start Autoplay"}
+			stopAutoplayIcon={<Icon name="Pause" />}
+			stopAutoplayText={"Stop Autoplay"}
+		>
+			<Carousel.Item label="Slide 1 of 4">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 2 of 4">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 3 of 4">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 4 of 4">
+				<Image src="/coffee.jpeg" alt="A cup of coffee" />
+			</Carousel.Item>
+		</Carousel>
+	</Story>
+</Canvas>
+
 ** Show additional controls **
 
 <Canvas>
@@ -382,24 +443,86 @@ const Feature = () => (
 			showLabel
 			showAdditionalSlideControls
 		>
-			<Carousel.Item label="Slide 1 of 5">
+			<Carousel.Item label="Slide 1 of 4">
 				<a href="/">
 					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
 				</a>
 			</Carousel.Item>
-			<Carousel.Item label="Slide 2 of 5">
+			<Carousel.Item label="Slide 2 of 4">
 				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
 			</Carousel.Item>
-			<Carousel.Item label="Slide 3 of 5">
+			<Carousel.Item label="Slide 3 of 4">
 				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
 			</Carousel.Item>
-			<Carousel.Item label="Slide 4 of 5">
+			<Carousel.Item label="Slide 4 of 4">
 				<Image src="/coffee.jpeg" alt="A cup of coffee" />
 			</Carousel.Item>
-			<Carousel.Item label="Slide 5 of 5">
+		</Carousel>
+	</Story>
+</Canvas>
+
+** Display autoplay toggle with multiple slides showing and full-screen toggle showing **
+
+<Canvas>
+	<Story name="Display autoplay toggle with multiple slides showing and full-screen toggle showing">
+		<Carousel
+			id="carousel-1"
+			label="Carousel of Images"
+			slidesToShow={2}
+			enableAutoplay
+			enableFullScreen
+			startAutoplayIcon={<Icon name="Play" />}
+			startAutoplayText={"Start Autoplay"}
+			stopAutoplayIcon={<Icon name="Pause" />}
+			stopAutoplayText={"Stop Autoplay"}
+		>
+			<Carousel.Item label="Slide 1 of 4">
 				<a href="/">
 					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
 				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 2 of 4">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 3 of 4">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 4 of 4">
+				<Image src="/coffee.jpeg" alt="A cup of coffee" />
+			</Carousel.Item>
+		</Carousel>
+	</Story>
+</Canvas>
+
+** Display autoplay toggle with multiple slides showing, full-screen toggle showing, show label **
+
+<Canvas>
+	<Story name="Display autoplay toggle with multiple slides showing, full-screen toggle showing, show label">
+		<Carousel
+			id="carousel-1"
+			label="Carousel of Images"
+			slidesToShow={2}
+			enableAutoplay
+			enableFullScreen
+			showLabel
+			startAutoplayIcon={<Icon name="Play" />}
+			startAutoplayText={"Start Autoplay"}
+			stopAutoplayIcon={<Icon name="Pause" />}
+			stopAutoplayText={"Stop Autoplay"}
+		>
+			<Carousel.Item label="Slide 1 of 4">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 2 of 4">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 3 of 4">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 4 of 4">
+				<Image src="/coffee.jpeg" alt="A cup of coffee" />
 			</Carousel.Item>
 		</Carousel>
 	</Story>
@@ -434,19 +557,14 @@ const Feature = () => (
 					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
 				</a>
 			</Carousel.Item>
-			<Carousel.Item label="Slide 2 of 5">
+			<Carousel.Item label="Slide 2 of 4">
 				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
 			</Carousel.Item>
-			<Carousel.Item label="Slide 3 of 5">
+			<Carousel.Item label="Slide 3 of 4">
 				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
 			</Carousel.Item>
-			<Carousel.Item label="Slide 4 of 5">
+			<Carousel.Item label="Slide 4 of 4">
 				<Image src="/coffee.jpeg" alt="A cup of coffee" />
-			</Carousel.Item>
-			<Carousel.Item label="Slide 5 of 5">
-				<a href="/">
-					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
-				</a>
 			</Carousel.Item>
 		</Carousel>
 	</Story>

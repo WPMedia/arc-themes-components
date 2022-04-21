@@ -45,7 +45,7 @@
 		flex: 0 0
 			calc(
 				var(--slide-width) -
-					calc(var(--slide-gap) * calc(var(--viewable-slides) - 1) / var(--viewable-slides))
+				calc(var(--slide-gap) * calc(var(--viewable-slides) - 1) / var(--viewable-slides))
 			);
 
 		@include scss.component-properties("carousel-slide");
@@ -101,6 +101,10 @@
 
 		&--exit-full-screen {
 			@include scss.component-properties("carousel-button-exit-full-screen");
+		}
+
+		&--toggle-auto-play {
+			@include scss.component-properties("carousel-button-toggle-auto-play");
 		}
 	}
 

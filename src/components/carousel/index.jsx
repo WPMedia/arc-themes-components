@@ -4,6 +4,8 @@ import { useSwipeable } from "react-swipeable";
 import Icon from "../icon";
 import Button from "./_children/Button";
 import Item from "./_children/Item";
+import useInterval from "../../utils/use-interval/useInterval";
+import isServerSide from "../../utils/is-server-side/isServerSide";
 
 const COMPONENT_CLASS_NAME = "c-carousel";
 
@@ -74,6 +76,18 @@ const DefaultEnterFullScreenButton = ({ id, onClick }) => (
 	</Button>
 );
 
+const AutoplayButton = ({ id, onClick, iconNode, text, ariaLabel }) => (
+	<Button
+		id={id}
+		onClick={onClick}
+		label={ariaLabel}
+		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--toggle-auto-play`}
+	>
+		{iconNode}
+		{text}
+	</Button>
+);
+
 const resolvedButton = (element, id, className, onClick) =>
 	cloneElement(element, {
 		"aria-controls": id,
@@ -83,7 +97,7 @@ const resolvedButton = (element, id, className, onClick) =>
 				element.props.onClick(e);
 			}
 		},
-		className: `${COMPONENT_CLASS_NAME}__button ${className} ${element.props?.className}`,
+		className: `${COMPONENT_CLASS_NAME}__button ${className} ${element.props?.className || ""}`,
 	});
 
 const getSlidesToShowFromDom = (id) => {
@@ -95,10 +109,15 @@ const getSlidesToShowFromDom = (id) => {
 };
 
 const Carousel = ({
-	additionalPreviousButton,
 	additionalNextButton,
+	additionalPreviousButton,
+	autoplayPhraseLabels,
 	children,
 	className,
+	enableAutoplay,
+	enableFullScreen,
+	fullScreenMinimizeButton,
+	fullScreenShowButton,
 	id,
 	label,
 	nextButton,
@@ -107,15 +126,17 @@ const Carousel = ({
 	showAdditionalSlideControls,
 	showLabel,
 	slidesToShow,
-	fullScreenShowButton,
-	fullScreenMinimizeButton,
-	enableFullScreen,
+	startAutoplayIcon,
+	startAutoplayText,
+	stopAutoplayIcon,
+	stopAutoplayText,
 	...rest
 }) => {
 	const [slidesToShowInView, setSlidesToShowInView] = useState(0);
 	const [slide, setSlide] = useState(0);
 	const [position, setPosition] = useState(0);
 	const [isFullScreen, setIsFullScreen] = useState(false);
+	const [isAutoplaying, setIsAutoplaying] = useState(false);
 	const totalSlides = Children.count(children);
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 	const carouselElement = useRef();
@@ -174,6 +195,22 @@ const Carousel = ({
 		setPosition(position - slideOffset);
 	};
 
+	const autoplayNextSlide = () => {
+		/* istanbul ignore next */
+		if (slide + 1 > carouselItems.length) {
+			setIsAutoplaying(false);
+		} else {
+			setSlide(slide + 1);
+			setPosition(position - 100 / slidesToShowInView);
+		}
+	};
+
+	// a prefers-reduced-motion user setting must always override Autoplay
+	const autoplayEnabledAndAllowed =
+		enableAutoplay && !isServerSide() && !!window.matchMedia("'(prefers-reduced-motion: reduce)");
+
+	useInterval(autoplayNextSlide, autoplayEnabledAndAllowed && isAutoplaying ? 4000 : null);
+
 	/* istanbul ignore next  */
 	const toggleFullScreen = () => {
 		// id is the carousel id
@@ -198,6 +235,8 @@ const Carousel = ({
 			}
 		}
 	};
+
+	const toggleAutoplay = () => setIsAutoplaying(!isAutoplaying);
 
 	/* istanbul ignore next */
 	const handlers = useSwipeable({
@@ -263,9 +302,12 @@ const Carousel = ({
 		<DefaultExitFullScreenButton id={id} onClick={toggleFullScreen} />
 	);
 
+	// check to ensure client-side to make sure document is available
 	/* istanbul ignore next  */
 	const fullScreenEnabledAllowed =
-		(document.fullscreenEnabled || document.webkitFullscreenEnabled) && enableFullScreen;
+		!isServerSide() &&
+		(document.fullscreenEnabled || document.webkitFullscreenEnabled) &&
+		enableFullScreen;
 
 	return (
 		<div
@@ -290,6 +332,15 @@ const Carousel = ({
 							? resolvedFullScreenMinimizeButton
 							: null
 					}
+					{autoplayEnabledAndAllowed ? (
+						<AutoplayButton
+							id={id}
+							onClick={toggleAutoplay}
+							text={isAutoplaying ? stopAutoplayText : startAutoplayText}
+							iconNode={isAutoplaying ? stopAutoplayIcon : startAutoplayIcon}
+							ariaLabel={isAutoplaying ? autoplayPhraseLabels.stop : autoplayPhraseLabels.start}
+						/>
+					) : null}
 				</div>
 				<div className={`${COMPONENT_CLASS_NAME}__counter-controls-container`}>
 					{showLabel ? (
@@ -310,6 +361,7 @@ const Carousel = ({
 			<div
 				className={`${COMPONENT_CLASS_NAME}__track`}
 				style={{ transform: `translate3d(${position}px, 0px, 0px)` }}
+				aria-live={isAutoplaying ? "off" : "polite"}
 				{...handlers}
 			>
 				{carouselItems}
@@ -327,8 +379,15 @@ Carousel.Button = Button;
 Carousel.Item = Item;
 
 Carousel.defaultProps = {
+	autoplayPhraseLabels: {
+		start: "Start automatic slide show",
+		stop: "Stop automatic slide show",
+	},
+	enableAutoplay: false,
 	pageCountPhrase: () => {},
 	showLabel: false,
+	startAutoplayText: "Start Autoplay",
+	stopAutoplayText: "Stop Autoplay",
 };
 
 Carousel.propTypes = {
@@ -336,11 +395,18 @@ Carousel.propTypes = {
 	additionalNextButton: PropTypes.node,
 	/** Used to set a custom additional previous button, a cloned Carousel.Button element */
 	additionalPreviousButton: PropTypes.node,
+	/** Object of phases for stop and start labels of Autoplay button */
+	autoplayPhraseLabels: PropTypes.shape({
+		start: PropTypes.string,
+		stop: PropTypes.string,
+	}),
 	/** Class name(s) that get appended to default class name of the component */
 	className: PropTypes.string,
 	/** The text, images or any node that will be displayed within the component */
 	children: PropTypes.node.isRequired,
-	/** A unique identifer for the carousel */
+	/** Opt into showing an autoplay toggle button */
+	enableAutoplay: PropTypes.bool,
+	/** A unique identifier for the carousel */
 	id: PropTypes.string.isRequired,
 	/** An accessible label */
 	label: PropTypes.string.isRequired,
@@ -356,6 +422,14 @@ Carousel.propTypes = {
 	showLabel: PropTypes.bool,
 	/** Number of slides to show in view */
 	slidesToShow: PropTypes.number,
+	/** Icon or dom node that shows to indicate start Autoplay, assuming it's enabled and available to user */
+	startAutoplayIcon: PropTypes.node,
+	/** Text to display to begin autoplaying the slides if the button is enabled */
+	startAutoplayText: PropTypes.string,
+	/** Icon or dom node that shows to indicate stop Autoplay, assuming it's enabled and available to user */
+	stopAutoplayIcon: PropTypes.node,
+	/** Text to display to stop autoplaying the slides if the button is enabled and slideshow is autoplaying */
+	stopAutoplayText: PropTypes.string,
 	/** Used to set a custom full screen show button, cloned with event handlers */
 	fullScreenShowButton: PropTypes.node,
 	/** Used to set a custom full screen exit button, cloned with event handlers */
