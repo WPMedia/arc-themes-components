@@ -22,6 +22,18 @@ describe("Heading", () => {
 		expect(headingOutput).toHaveAttribute("id", "custom-id");
 	});
 
+	it("should not apply truncation by default", () => {
+		const { container } = render(<Heading>Heading Text</Heading>);
+		expect(container.querySelector(".c-heading").getAttribute("style")).toBe(null);
+	});
+
+	it("should apply truncation when specified", () => {
+		const { container } = render(<Heading truncationLines={3}>Heading Text</Heading>);
+		expect(container.querySelector(".c-heading").getAttribute("style")).toContain(
+			"--heading-truncation: 3;"
+		);
+	});
+
 	it("should render additional classes", () => {
 		render(<Heading className="test-class">Hello World</Heading>);
 		const headingOutput = screen.getByRole("heading", {

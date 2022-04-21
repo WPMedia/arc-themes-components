@@ -1,5 +1,16 @@
 @use "../../scss";
 
 .c-heading {
+	--heading-truncation: var(--c-heading--webkit-line-clamp, "none");
+
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-moz-box-oriented: vertical;
+	/* opera */
+	text-overflow: -o-ellipsis-lastline;
+
 	@include scss.component-properties("heading");
+
+	-webkit-line-clamp: var(--heading-truncation);
 }
