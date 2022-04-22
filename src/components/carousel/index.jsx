@@ -421,7 +421,7 @@ Carousel.propTypes = {
 	additionalNextButton: PropTypes.node,
 	/** Used to set a custom additional previous button, a cloned Carousel.Button element */
 	additionalPreviousButton: PropTypes.node,
-	/** Ad element to render for each ad placement based on adInterstitialClicks. The Ad will only render when visable, and not when the carousel renders */
+	/** Ad element to render for each ad placement based on adInterstitialClicks. The Ad will only render when visible, and not when the carousel renders */
 	adElement: PropTypes.node,
 	/** Number of clicks between Ads (clicks can be in any direction) */
 	adInterstitialClicks: PropTypes.number,
