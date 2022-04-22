@@ -569,3 +569,48 @@ const Feature = () => (
 		</Carousel>
 	</Story>
 </Canvas>
+
+** Ad Placement **
+
+<Canvas>
+	<Story name="Ad Placement">
+		<Carousel
+			id="carousel-1"
+			label="Carousel of Images"
+			slidesToShow={1}
+			showLabel
+			adInterstitialClicks={2}
+			adElement={
+				<div
+					style={{
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+					}}
+				>
+					Ad Placement
+				</div>
+			}
+		>
+			<Carousel.Item label="Slide 1 of 5">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 2 of 5">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 3 of 5">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 4 of 5">
+				<Image src="/coffee.jpeg" alt="A cup of coffee" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 5 of 5">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+		</Carousel>
+	</Story>
+</Canvas>
