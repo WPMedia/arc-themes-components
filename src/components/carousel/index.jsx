@@ -108,9 +108,34 @@ const getSlidesToShowFromDom = (id) => {
 	return parseInt(getComputedStyle(id).getPropertyValue("--viewable-slides") || 4, 10);
 };
 
+const insertAdsIntoItems = (carouselItems, adElement, adInterstitialClicks, slide) => {
+	for (
+		let itemIndex = adInterstitialClicks;
+		itemIndex < carouselItems.length;
+		itemIndex += adInterstitialClicks + 1
+	) {
+		carouselItems.splice(
+			itemIndex,
+			0,
+			slide === itemIndex + 1 ? (
+				cloneElement(adElement, {
+					className: `${COMPONENT_CLASS_NAME}__slide`,
+					key: `ad-${itemIndex}`,
+				})
+			) : (
+				<div className={`${COMPONENT_CLASS_NAME}__slide`} key={`ad-placeholder-${itemIndex}`} />
+			)
+		);
+	}
+
+	return carouselItems;
+};
+
 const Carousel = ({
 	additionalNextButton,
 	additionalPreviousButton,
+	adElement,
+	adInterstitialClicks,
 	autoplayPhraseLabels,
 	children,
 	className,
@@ -137,7 +162,6 @@ const Carousel = ({
 	const [position, setPosition] = useState(0);
 	const [isFullScreen, setIsFullScreen] = useState(false);
 	const [isAutoplaying, setIsAutoplaying] = useState(false);
-	const totalSlides = Children.count(children);
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 	const carouselElement = useRef();
 
@@ -168,10 +192,16 @@ const Carousel = ({
 
 	const childItems = Children.toArray(subComponents);
 
-	const carouselItems = childItems.map((child, index) => {
+	let carouselItems = childItems.map((child, index) => {
 		const viewable = index + 1 > slide - slidesToShowInView && index + 1 <= slide;
 		return child.type === Item ? cloneElement(child, { viewable }) : null;
 	});
+
+	if (adElement && adInterstitialClicks) {
+		carouselItems = insertAdsIntoItems(carouselItems, adElement, adInterstitialClicks, slide);
+	}
+
+	const totalSlides = carouselItems.length;
 
 	const previousSlide = () => {
 		/* istanbul ignore next */
@@ -395,6 +425,10 @@ Carousel.propTypes = {
 	additionalNextButton: PropTypes.node,
 	/** Used to set a custom additional previous button, a cloned Carousel.Button element */
 	additionalPreviousButton: PropTypes.node,
+	/** Ad element to render for each ad placement based on adInterstitialClicks. The Ad will only render when visible, and not when the carousel renders */
+	adElement: PropTypes.node,
+	/** Number of clicks between Ads (clicks can be in any direction) */
+	adInterstitialClicks: PropTypes.number,
 	/** Object of phases for stop and start labels of Autoplay button */
 	autoplayPhraseLabels: PropTypes.shape({
 		start: PropTypes.string,

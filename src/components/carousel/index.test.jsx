@@ -455,6 +455,7 @@ describe("Carousel", () => {
 			).not.toBeNull();
 		});
 	});
+
 	it("renders a custom start autoplay button", async () => {
 		const customStartButtonText = "Start that autoplay already!";
 		const customStopButtonText = "Stop that autoplay already!";
@@ -533,6 +534,32 @@ describe("Carousel", () => {
 
 			// next button no longer visible as it's the last slide
 			expect(screen.queryAllByText("Next Custom")).toHaveLength(0);
+		});
+	});
+
+	it("should render carousel with an Ad placement", async () => {
+		render(
+			<Carousel
+				id="carousel-ad-placement"
+				label="Carousel Label"
+				slidesToShow={1}
+				adInterstitialClicks={1}
+				adElement={<div>Ad Placement</div>}
+			>
+				<Carousel.Item label="Slide 1 of 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+		expect(screen.getByRole("region")).not.toBeNull();
+		expect(screen.queryAllByText("Ad Placement")).toHaveLength(0);
+
+		await userEvent.click(screen.getByRole("button", { name: "Next Slide" }));
+		await waitFor(() => {
+			expect(screen.queryAllByText("Ad Placement")).toHaveLength(1);
 		});
 	});
 });
