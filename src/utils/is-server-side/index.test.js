@@ -1,4 +1,4 @@
-import isServerSide from "./isServerSide";
+import isServerSide from ".";
 
 describe("isServerSide", () => {
 	it("should return true is window object is undefined", () => {

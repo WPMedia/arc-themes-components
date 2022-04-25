@@ -4,8 +4,8 @@ import { useSwipeable } from "react-swipeable";
 import Icon from "../icon";
 import Button from "./_children/Button";
 import Item from "./_children/Item";
-import useInterval from "../../utils/use-interval/useInterval";
-import isServerSide from "../../utils/is-server-side/isServerSide";
+import useInterval from "../../utils/hooks/use-interval";
+import isServerSide from "../../utils/is-server-side";
 
 const COMPONENT_CLASS_NAME = "c-carousel";
 
