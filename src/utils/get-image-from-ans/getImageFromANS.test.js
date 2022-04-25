@@ -1,4 +1,4 @@
-import getImageFromANS from "./extractImageFromStory";
+import getImageFromANS from "./getImageFromANS";
 
 const mockLeadArtVideo = {
 	_id: "WRONBKU2AVFKBOGTD3U7TYQJEQ",
