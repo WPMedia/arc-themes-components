@@ -3624,6 +3624,11 @@ const mockStoryPromoItemsGalleryFocalPoint = {
 };
 
 describe("when extract an image from a story", () => {
+	it("return null if not found", () => {
+		const url = getImageFromANS({});
+
+		expect(url).toEqual(null);
+	});
 	it("must extract image from lead_art.promo_items if is present", () => {
 		const url = getImageFromANS(mockLeadArtVideo);
 		const imageUrl = mockLeadArtVideo.promo_items.lead_art.promo_items.basic.url;
