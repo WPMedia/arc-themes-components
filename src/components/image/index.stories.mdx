@@ -67,3 +67,61 @@ const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
 		<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" height="250" />
 	</Story>
 </Canvas>
+
+** Use srcset and sizes with pixels **
+
+<Canvas>
+	<Story name="Use srcset and sizes with pixels">
+		<Image
+			src="/computer-user.jpeg"
+			alt="A person sat down using a laptop computer"
+			height={250}
+			width={100}
+			availableImageSizes={[1000, 600, 100]}
+			mediaConditionSizes={[
+				{
+					mediaCondition: "(min-width: 800px)",
+					sourceSizeValue: "1000px",
+				},
+				{
+					mediaCondition: "(max-width: 750px)",
+					sourceSizeValue: "600px",
+				},
+				{
+					sourceSizeValue: "100px",
+					isDefault: true,
+				},
+			]}
+			imageUrlWithToken={""} // add url here
+		/>
+	</Story>
+</Canvas>
+
+** Use srcset and sizes with viewport width **
+
+<Canvas>
+	<Story name="Use srcset and sizes with viewport width">
+		<Image
+			src="/computer-user.jpeg"
+			alt="A person sat down using a laptop computer"
+			height={250}
+			width={100}
+			availableImageSizes={[1500, 750, 100]}
+			mediaConditionSizes={[
+				{
+					mediaCondition: "(min-width: 800px)",
+					sourceSizeValue: "20vw",
+				},
+				{
+					mediaCondition: "(max-width: 750px)",
+					sourceSizeValue: "100vw",
+				},
+				{
+					sourceSizeValue: "10vw",
+					isDefault: true,
+				},
+			]}
+			imageUrlWithToken={""} // add url here
+		/>
+	</Story>
+</Canvas>
