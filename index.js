@@ -22,8 +22,8 @@ import Video from "./src/components/video";
 import formatCredits from "./src/utils/format-credits";
 import formatPowaVideoEmbed from "./src/utils/format-powa-video-embed";
 import getImageFromANS from "./src/utils/get-image-from-ans";
-import isServerSide from "./src/utils/is-server-side/isServerSide";
-import useInterval from "./src/utils/use-interval/useInterval";
+import useInterval from "./src/utils/hooks/use-interval";
+import isServerSide from "./src/utils/is-server-side";
 
 export {
 	Attribution,
