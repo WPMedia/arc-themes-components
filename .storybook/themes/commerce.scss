@@ -176,7 +176,6 @@
 			components:
 				(
 					body: (
-						background-color: var(--global-color-white),
 						color: var(--global-color-black),
 						font-family: var(--primary-font-family),
 						font-size: var(--global-font-size-4),
@@ -211,7 +210,7 @@
 							text-decoration: underline,
 						),
 					button-primary: (
-						background-color: var(--global-neutral-10),
+						background-color: var(--primary-color),
 						color: var(--global-white),
 					),
 					button-primary-hover: (
@@ -241,7 +240,6 @@
 					),
 					button-secondary-reverse-hover: (
 						border-color: var(--global-neutral-7),
-						background-color: transparent,
 						color: var(--global-neutral-7),
 					),
 					// DESIGN ASSUMPTION
@@ -254,7 +252,6 @@
 							background-color: var(--global-white),
 						),
 					button-default-hover: (
-						color: var(--global-neutral-10),
 						background-color: var(--global-neutral-1),
 					),
 					// DESIGN ASSUMPTION: Date does not require component styling.
@@ -300,6 +297,12 @@
 						height: var(--global-spacing-4),
 						width: var(--global-spacing-4),
 					),
+					input: (
+						align-items: flex-start,
+						display: flex,
+						flex-direction: column,
+						gap: var(--global-spacing-1),
+					),
 					// DESIGN QUESTION:
 					// There are multiple paddings for input in Figma.
 					// Is this the correct one for a standard, default text input?
@@ -307,7 +310,6 @@
 						(
 							border: 1px solid var(--global-neutral-5),
 							border-radius: var(--global-border-radius-1),
-							display: block,
 							padding: var(--global-spacing-1) var(--global-spacing-2),
 						),
 					// DESIGN ASSUMPTION:
@@ -322,11 +324,6 @@
 					input-label: (
 						display: block,
 						font-weight: var(--global-font-weight-7),
-						margin-bottom: var(--global-spacing-1),
-					),
-					input-tip: (
-						display: block,
-						margin-top: var(--global-spacing-1),
 					),
 					// DESIGN ASSUMPTION:
 					// The border color in Figma is not one of the red
@@ -339,15 +336,6 @@
 						outline-color: var(--global-red-4),
 					),
 					link: (
-						color: var(--global-neutral-10),
-					),
-					link-hover: (
-						color: var(--global-neutral-10),
-					),
-					link-active: (
-						color: var(--global-neutral-10),
-					),
-					link-visited: (
 						color: var(--global-neutral-10),
 					),
 					media-item-fig-caption: (
