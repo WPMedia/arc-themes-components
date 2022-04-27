@@ -334,25 +334,17 @@
 					input-error-input-focus: (
 						outline-color: var(--global-red-4),
 					),
-					// DESIGN QUESTION:
-					// The input warning border color in Figma is not one of the red
-					// color tokens. I took my best guess with global-green-4.
-					input-success-input:
-						(
-							border-color: var(--global-green-4),
-						),
-					input-success-input-focus: (
-						outline-color: var(--global-green-4),
+					input-success-input: (
+						border-color: var(--global-green-5),
 					),
-					// DESIGN QUESTION:
-					// The input success border color in Figma is not one of the red
-					// color tokens. I took my best guess with global-orange-3.
-					input-warning-input:
-						(
-							border-color: var(--global-orange-3),
-						),
+					input-success-input-focus: (
+						outline-color: var(--global-green-5),
+					),
+					input-warning-input: (
+						border-color: var(--global-orange-2),
+					),
 					input-warning-input-focus: (
-						outline-color: var(--global-orange-3),
+						outline-color: var(--global-orange-2),
 					),
 					link: (
 						color: var(--global-neutral-10),
