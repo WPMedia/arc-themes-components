@@ -365,14 +365,7 @@
 							font-size: var(--global-font-size-2),
 							line-height: var(--global-spacing-2),
 							padding: var(--global-spacing-2) var(--global-spacing-3),
-						),
-					// DESIGN QUESTION:
-					// Do we have or need standard styling for the Price component
-					// with List Price and Sale Price?
-					//
-					// DESIGN ASSUMPTION: Separator does not require component styling.
-					//
-					// DESIGN ASSUMPTION: Stack does not require component styling.
+						)
 				),
 			blocks: (
 				category-carousel: (
