@@ -353,11 +353,6 @@
 					// Can you confirm the design on "Image not found" in Storybook?
 					//
 					// DESIGN ASSUMPTION: Media Item does not require component styling.
-					//
-					// ENGINEERING & DESIGN QUESTION:
-					// 1. Engineering has a "Pill" component.
-					// 2. This is represented in Figma as a "Badge."
-					// What naming convention are we using?
 					pill:
 						(
 							background-color: var(--global-neutral-10),
