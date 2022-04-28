@@ -323,13 +323,9 @@
 					input-label: (
 						font-weight: var(--global-font-weight-7),
 					),
-					// DESIGN QUESTION:
-					// The input error border color in Figma is not one of the red
-					// color tokens. I took my best guess with global-red-4.
-					input-error-input:
-						(
-							border-color: var(--global-red-4),
-						),
+					input-error-input: (
+						border-color: var(--global-red-4),
+					),
 					input-error-input-focus: (
 						outline-color: var(--global-red-4),
 					),
