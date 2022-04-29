@@ -6,8 +6,9 @@ import Sale from "./_children/Sale";
 const COMPONENT_CLASS_NAME = "c-price";
 
 const Price = ({ children, className, ...rest }) => {
-	const subComponents = Object.values(Price).map((subcomponentType) =>
-		Children.map(children, (child) => (child?.type === subcomponentType ? child : null))
+	const allowedTypes = Object.values(Price).map((subcomponentType) => subcomponentType);
+	const subComponents = Children.map(children, (child) =>
+		child?.type && allowedTypes?.find((e) => e === child?.type) ? child : null
 	);
 
 	return (
