@@ -6,7 +6,9 @@ import Sale from "./_children/Sale";
 const COMPONENT_CLASS_NAME = "c-price";
 
 const Price = ({ children, className, ...rest }) => {
+	// Array of allowed Children component types
 	const allowedTypes = Object.values(Price).map((subcomponentType) => subcomponentType);
+	// Loop over the Children and remove components that are not one of the allowedTypes
 	const subComponents = Children.map(children, (child) =>
 		child?.type && allowedTypes?.find((e) => e === child?.type) ? child : null
 	);
