@@ -1,8 +1,65 @@
 import { render, screen } from "@testing-library/react";
+import renderer from "react-test-renderer";
 
 import Price from ".";
 
 describe("Price", () => {
+	it("should render in order passed in", () => {
+		const tree = renderer
+			.create(
+				<Price>
+					<Price.Sale>$100</Price.Sale>
+					<Price.List>$200</Price.List>
+				</Price>
+			)
+			.toJSON();
+
+		expect(tree).toMatchInlineSnapshot(`
+		<div
+		  className="c-price"
+		  data-testid="price"
+		>
+		  <div
+		    className="c-price__sale"
+		  >
+		    $100
+		  </div>
+		  <div
+		    className="c-price__list"
+		  >
+		    $200
+		  </div>
+		</div>
+	`);
+
+		const treeAlt = renderer
+			.create(
+				<Price>
+					<Price.List>$200</Price.List>
+					<Price.Sale>$100</Price.Sale>
+				</Price>
+			)
+			.toJSON();
+
+		expect(treeAlt).toMatchInlineSnapshot(`
+		<div
+		  className="c-price"
+		  data-testid="price"
+		>
+		  <div
+		    className="c-price__list"
+		  >
+		    $200
+		  </div>
+		  <div
+		    className="c-price__sale"
+		  >
+		    $100
+		  </div>
+		</div>
+	`);
+	});
+
 	it("should render sub components", () => {
 		render(
 			<Price>
