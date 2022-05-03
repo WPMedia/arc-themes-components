@@ -19,7 +19,7 @@ const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup, ...res
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 
 	return (
-		<div className={`${COMPONENT_CLASS_NAME}__backdrop`}>
+		<div className={`${COMPONENT_CLASS_NAME}__frame`}>
 			<div
 				{...rest}
 				className={containerClassNames}
