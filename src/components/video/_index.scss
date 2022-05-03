@@ -14,11 +14,10 @@
 
 	aspect-ratio: var(--aspect-ratio);
 	// convert to vh via * 1vh
-	height: calc(var(--height) * 1vh);
-
+	max-height: calc(var(--height) * 1vh);
 	max-width: 100%;
 }
 
-.c-video--container {
-	@include scss.component-properties("video-container");
+.c-video__backdrop {
+	@include scss.component-properties("video-backdrop");
 }
