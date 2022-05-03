@@ -18,3 +18,7 @@
 
 	max-width: 100%;
 }
+
+.c-video--container {
+	@include scss.component-properties("video-container");
+}
