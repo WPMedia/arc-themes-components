@@ -19,23 +19,25 @@ const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup, ...res
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 
 	return (
-		<div
-			{...rest}
-			className={containerClassNames}
-			style={{
-				"--aspect-ratio": aspectRatio,
-				"--height": viewportPercentage,
-			}}
-		>
-			{shouldRenderVideoContent ? (
-				<EmbedContainer markup={embedMarkup}>
-					<div
-						dangerouslySetInnerHTML={{
-							__html: embedMarkup,
-						}}
-					/>
-				</EmbedContainer>
-			) : null}
+		<div className={`${COMPONENT_CLASS_NAME}__frame`}>
+			<div
+				{...rest}
+				className={containerClassNames}
+				style={{
+					"--aspect-ratio": aspectRatio,
+					"--height": viewportPercentage,
+				}}
+			>
+				{shouldRenderVideoContent ? (
+					<EmbedContainer markup={embedMarkup}>
+						<div
+							dangerouslySetInnerHTML={{
+								__html: embedMarkup,
+							}}
+						/>
+					</EmbedContainer>
+				) : null}
+			</div>
 		</div>
 	);
 };
