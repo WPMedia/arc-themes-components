@@ -157,6 +157,54 @@
 		"border-radius-1": 0.25em,
 	),
 	$alias: (
+		// Font families
+		"font-family-primary": "Inter",
+		"font-family-seconardy": "Lora",
+		// Core colors
+		"background-color": var(--global-white),
+		"color-primary": var(--global-neutral-10),
+		"color-secondary": var(--global-orange-4),
+		"text-color": var(--global-neutral-8),
+		"text-color-subtle": var(--global-neutral-5),
+		"border-color": var(--global-neutral-4),
+		"icon-fill-color": var(--global-neutral-8),
+		"icon-fill-color-subtle": var(--global-neutral-5),
+		// Status colors
+		"background-color-success": var(--global-green-1),
+		"text-color-success": var(--global-green-9),
+		"background-color-warning": var(--global-orange-1),
+		"text-color-warning": var(--global-orange-9),
+		"background-color-danger": var(--global-red-1),
+		"text-color-danger": var(--global-red-9),
+		// Form colors
+		"form-background-color": var(--global-white),
+		"form-border-color": var(--global-neutral-5),
+		"form-border-color-active": var(--global-blue-5),
+		"form-border-color-success": var(--global-green-5),
+		"form-border-color-warning": var(--global-orange-2),
+		"form-border-color-danger": var(--global-red-4),
+		// Typography - body
+		"body-font-size-mobile": var(--global-font-size-3),
+		"body-font-weight-mobile": var(--global-font-weight-5),
+		"body-line-height-mobile": var(--global-line-height-3),
+		"body-font-size-desktop": var(--global-font-size-4),
+		"body-font-weight-desktop": var(--global-font-weight-5),
+		"body-line-height-desktop": var(--global-line-height-3),
+		// Typography - small
+		"font-size-small-mobile": var(--global-font-size-2),
+		"font-weight-small-mobile": var(--global-font-weight-5),
+		"line-height-small-mobile": var(--global-line-height-2),
+		"font-size-small-desktop": var(--global-font-size-3),
+		"font-weight-small-desktop": var(--global-font-weight-5),
+		"line-height-small-desktop": var(--global-line-height-3),
+		// Typography - tiny
+		"font-size-tiny-mobile": var(--global-font-size-1),
+		"font-weight-tiny-mobile": var(--global-font-weight-5),
+		"line-height-tiny-mobile": var(--global-line-height-1),
+		"font-size-tiny-desktop": var(--global-font-size-2),
+		"font-weight-tiny-desktop": var(--global-font-weight-5),
+		"line-height-tiny-desktop": var(--global-line-height-2),
+		// Layout
 		"layout-max-width": 1440,
 		"layout-content-max-width": 1216,
 		//
@@ -168,23 +216,22 @@
 				calc(100vw - var(--global-spacing-5)),
 				calc(var(--layout-content-max-width) / var(--layout-max-width) * 100%)
 			),
-		"primary-color": var(--global-neutral-10),
-		"primary-font-family": "Inter",
-		"secondary-font-family": "Lora",
-		"text-color": var(--global-neutral-8),
 	),
 	$tokens: (
 		default: (
 			components: (
 				attribution: (
+					color: var(--text-color),
 					font-size: var(--global-font-size-3),
+					font-weight: var(--global-font-weight-7),
 					line-height: var(--global-line-height-3),
 				),
 				body: (
-					color: var(--global-color-neutral-8),
-					font-family: var(--primary-font-family),
-					font-size: var(--global-font-size-4),
-					line-height: var(--global-line-height-4),
+					color: var(--text-color),
+					font-family: var(--font-family-primary),
+					font-weight: var(--body-font-weight-mobile),
+					font-size: var(--body-font-size-mobile),
+					line-height: var(--body-line-height-mobile),
 				),
 				button: (
 					border: 1px solid transparent,
@@ -205,7 +252,7 @@
 					line-height: var(--global-line-height-4),
 				),
 				button-primary: (
-					background-color: var(--primary-color),
+					background-color: var(--color-primary),
 					color: var(--global-white),
 				),
 				button-primary-hover: (
@@ -213,8 +260,8 @@
 				),
 				button-primary-reverse: (
 					background-color: transparent,
-					border-color: var(--primary-color),
-					color: var(--primary-color),
+					border-color: var(--color-primary),
+					color: var(--color-primary),
 				),
 				button-primary-reverse-hover: (
 					border-color: var(--global-neutral-7),
@@ -222,7 +269,7 @@
 				),
 				button-secondary: (
 					background-color: var(--global-white),
-					color: var(--primary-color),
+					color: var(--color-primary),
 				),
 				button-secondary-hover: (
 					background-color: var(--global-neutral-7),
@@ -238,7 +285,7 @@
 					color: var(--global-neutral-7),
 				),
 				button-default: (
-					color: var(--primary-color),
+					color: var(--color-primary),
 					background-color: var(--global-white),
 				),
 				button-default-hover: (
@@ -295,50 +342,54 @@
 					gap: var(--global-spacing-1),
 				),
 				input-input: (
-					border: 1px solid var(--global-neutral-5),
+					border: 1px solid var(--form-border-color),
 					border-radius: var(--global-border-radius-1),
 					padding: var(--global-spacing-2) var(--global-spacing-3),
 				),
 				input-input-focus: (
-					outline: double 2px var(--global-neutral-5),
+					outline: double 2px var(--form-border-color),
 				),
 				input-label: (
 					font-weight: var(--global-font-weight-7),
 				),
 				input-error-input: (
-					border-color: var(--global-red-4),
+					border-color: var(--form-border-color-danger),
 				),
 				input-error-input-focus: (
-					outline-color: var(--global-red-4),
+					outline-color: var(--form-border-color-danger),
 				),
 				input-success-input: (
-					border-color: var(--global-green-5),
+					border-color: var(--form-border-color-success),
 				),
 				input-success-input-focus: (
-					outline-color: var(--global-green-5),
+					outline-color: var(--form-border-color-success),
 				),
 				input-warning-input: (
-					border-color: var(--global-orange-2),
+					border-color: var(--form-border-color-warning),
 				),
 				input-warning-input-focus: (
-					outline-color: var(--global-orange-2),
+					outline-color: var(--form-border-color-warning),
 				),
 				link: (
-					color: var(--primary-color),
+					color: var(--color-primary),
 				),
 				media-item-fig-caption: (
-					color: var(--global-neutral-5),
+					color: var(--text-color-subtle),
 					font-size: var(--global-font-size-2),
 					line-height: var(--global-line-height-2),
 				),
+				media-item-title: (
+					font-weight: var(--global-font-weight-7),
+				),
 				pill: (
-					background-color: var(--primary-color),
+					background-color: var(--color-primary),
 					border-radius: 2em,
 					color: var(--global-white),
 					font-size: var(--global-font-size-2),
 					font-weight: var(--global-font-weight-7),
 					line-height: var(--global-line-height-2),
 					padding: var(--global-spacing-1) var(--global-spacing-2),
+					text-decoration: none,
 				),
 			),
 			blocks: (
@@ -374,7 +425,7 @@
 					gap: var(--global-spacing-5),
 				),
 				hero: (
-					color: var(--primary-color),
+					color: var(--color-primary),
 					components: (
 						button: (
 							text-decoration: none,
@@ -396,7 +447,7 @@
 					color: var(--global-white),
 				),
 				hero-dark: (
-					color: var(--primary-color),
+					color: var(--color-primary),
 				),
 				hero-image: (
 					max-height: 65vh,
@@ -445,7 +496,7 @@
 					color: var(--global-white),
 				),
 				quilted-image__overlay-text--dark: (
-					color: var(--primary-color),
+					color: var(--color-primary),
 				),
 				quilted-image__overlay: (
 					left: var(--global-spacing-4),
@@ -467,6 +518,11 @@
 		),
 		desktop: (
 			components: (
+				body: (
+					font-weight: var(--body-font-weight-desktop),
+					font-size: var(--body-font-size-desktop),
+					line-height: var(--body-line-height-desktop),
+				),
 				carousel: (
 					--slides: 4,
 				),
@@ -475,10 +531,6 @@
 				),
 				carousel-track: (
 					gap: var(--global-spacing-6),
-				),
-				pill: (
-					font-size: var(--global-font-size-3),
-					line-height: var(--global-line-height-3),
 				),
 			),
 			blocks: (
