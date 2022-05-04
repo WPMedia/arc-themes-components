@@ -157,25 +157,71 @@
 		"border-radius-1": 0.25em,
 	),
 	$alias: (
+		// Font families
+		"font-family-primary": "Inter",
+		"font-family-seconardy": "Lora",
+		// Core colors
+		"background-color": var(--global-white),
+		"color-primary": var(--global-neutral-10),
+		"color-secondary": var(--global-orange-4),
+		"text-color": var(--global-neutral-8),
+		"text-color-subtle": var(--global-neutral-5),
+		"border-color": var(--global-neutral-4),
+		"icon-fill-color": var(--global-neutral-8),
+		"icon-fill-color-subtle": var(--global-neutral-5),
+		// Status colors
+		"background-color-success": var(--global-green-1),
+		"text-color-success": var(--global-green-9),
+		"background-color-warning": var(--global-orange-1),
+		"text-color-warning": var(--global-orange-9),
+		"background-color-danger": var(--global-red-1),
+		"text-color-danger": var(--global-red-9),
+		// Form colors
+		"form-background-color": var(--global-white),
+		"form-border-color": var(--global-neutral-5),
+		"form-border-color-active": var(--global-blue-5),
+		"form-border-color-success": var(--global-green-5),
+		"form-border-color-warning": var(--global-orange-2),
+		"form-border-color-danger": var(--global-red-4),
+		// Typography - body
+		"body-font-size-mobile": var(--global-font-size-3),
+		"body-font-weight-mobile": var(--global-font-weight-5),
+		"body-line-height-mobile": var(--global-line-height-3),
+		"body-font-size-desktop": var(--global-font-size-4),
+		"body-font-weight-desktop": var(--global-font-weight-5),
+		"body-line-height-desktop": var(--global-line-height-3),
+		// Typography - small
+		"font-size-small-mobile": var(--global-font-size-2),
+		"font-weight-small-mobile": var(--global-font-weight-5),
+		"line-height-small-mobile": var(--global-line-height-2),
+		"font-size-small-desktop": var(--global-font-size-3),
+		"font-weight-small-desktop": var(--global-font-weight-5),
+		"line-height-small-desktop": var(--global-line-height-3),
+		// Typography - tiny
+		"font-size-tiny-mobile": var(--global-font-size-1),
+		"font-weight-tiny-mobile": var(--global-font-weight-5),
+		"line-height-tiny-mobile": var(--global-line-height-1),
+		"font-size-tiny-desktop": var(--global-font-size-2),
+		"font-weight-tiny-desktop": var(--global-font-weight-5),
+		"line-height-tiny-desktop": var(--global-line-height-2),
+		// Layout
 		"layout-max-width": 1440,
 		"layout-content-max-width": 1216,
 		//
 		// --layout-content-scale-width identifies the inner document width for header and content
-		// alignment.  It accounts for a minimum width that has (--global-spacing-6 / 2) margins
+		// alignment.  It accounts for a minimum width that has (--global-spacing-5 / 2) margins
 		//
 		"layout-content-scale-width":
 			min(
-				calc(100vw - var(--global-spacing-6)),
+				calc(100vw - var(--global-spacing-5)),
 				calc(var(--layout-content-max-width) / var(--layout-max-width) * 100%)
 			),
-		"primary-color": var(--global-neutral-10),
-		"primary-font-family": "Inter",
 	),
 	$tokens: (
 		default: (
 			components: (
 				body: (
-					font-family: var(--primary-font-family),
+					font-family: var(--font-family-primary),
 					font-size: var(--global-font-size-4),
 				),
 				button: (
@@ -202,7 +248,7 @@
 					color: var(--global-neutral-7),
 				),
 				button-primary: (
-					background-color: var(--primary-color),
+					background-color: var(--color-primary),
 					color: var(--global-white),
 				),
 				button-primary-hover: (
@@ -210,8 +256,8 @@
 				),
 				button-primary-reverse: (
 					background-color: transparent,
-					border-color: var(--primary-color),
-					color: var(--primary-color),
+					border-color: var(--color-primary),
+					color: var(--color-primary),
 				),
 				button-primary-reverse-hover: (
 					border-color: var(--global-blue-7),
