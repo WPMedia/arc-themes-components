@@ -3,50 +3,573 @@
 		default: "min-width: 0",
 		desktop: "min-width: 48rem",
 	),
+	$global: (
+		"white": #ffffff,
+		"blue-1": #ebefff,
+		"blue-2": #b0c3f2,
+		"blue-3": #7aa2e5,
+		"blue-4": #4a89d8,
+		"blue-5": #1e78cb,
+		"blue-6": #1458a9,
+		"blue-7": #0c3d87,
+		"blue-8": #062665,
+		"blue-9": #021443,
+		"blue-10": #000721,
+		"red-1": #ff8a8a,
+		"red-2": #e65555,
+		"red-3": #ce2929,
+		"red-4": #b50505,
+		"red-5": #9c0000,
+		"red-6": #840000,
+		"red-7": #6b0000,
+		"red-8": #520000,
+		"red-9": #3a0000,
+		"red-10": #210000,
+		"orange-1": #fa714b,
+		"orange-2": #e24f23,
+		"orange-3": #c93302,
+		"orange-4": #b12e00,
+		"orange-5": #982a00,
+		"orange-6": #802500,
+		"orange-7": #682000,
+		"orange-8": #4f1900,
+		"orange-9": #371200,
+		"orange-10": #1f0b00,
+		"green-1": #80d971,
+		"green-2": #57c244,
+		"green-3": #34ab1f,
+		"green-4": #189402,
+		"green-5": #137d00,
+		"green-6": #0f6600,
+		"green-7": #0c4f00,
+		"green-8": #083800,
+		"green-9": #052100,
+		"green-10": #020a00,
+		"neutral-1": #e6efff,
+		"neutral-2": #c3cfe3,
+		"neutral-3": #a3b0c6,
+		"neutral-4": #8593aa,
+		"neutral-5": #69778e,
+		"neutral-6": #4f5c71,
+		"neutral-7": #384355,
+		"neutral-8": #232b39,
+		"neutral-9": #10151c,
+		"neutral-10": #000000,
+		"spacing-1": 0.25rem,
+		// 4px
+		"spacing-2": 0.5rem,
+		// 8px
+		"spacing-3": 0.75rem,
+		// 12px
+		"spacing-4": 1rem,
+		// 16px
+		"spacing-5": 1.5rem,
+		// 24px
+		"spacing-6": 2rem,
+		// 32px
+		"spacing-7": 2.5rem,
+		// 40px
+		"spacing-8": 3rem,
+		// 48px
+		"spacing-9": 3.5rem,
+		// 56px
+		"spacing-10": 4rem,
+		// 64px
+		"spacing-11": 4.5rem,
+		// 72px
+		"spacing-12": 5rem,
+		// 80px
+		"spacing-13": 5.5rem,
+		// 88px
+		"spacing-14": 6rem,
+		// 96px
+		"spacing-15": 6.5rem,
+		// 104px
+		"spacing-16": 7rem,
+		// 112px
+		"spacing-17": 7.5rem,
+		// 120px
+		"font-weight-1": 100,
+		"font-weight-2": 200,
+		"font-weight-3": 300,
+		"font-weight-4": 400,
+		"font-weight-5": 500,
+		"font-weight-6": 600,
+		"font-weight-7": 700,
+		"font-weight-8": 800,
+		"font-weight-9": 900,
+		"font-size-1": 0.625rem,
+		// 10px
+		"font-size-2": 0.75rem,
+		// 12px
+		"font-size-3": 0.875rem,
+		// 14px
+		"font-size-4": 1rem,
+		// 16px
+		"font-size-5": 1.125rem,
+		// 18px
+		"font-size-6": 1.1875rem,
+		// 19px
+		"font-size-7": 1.25rem,
+		// 20px
+		"font-size-8": 1.375rem,
+		// 22px
+		"font-size-9": 1.5rem,
+		// 24px
+		"font-size-10": 1.75rem,
+		// 28px
+		"font-size-11": 2rem,
+		// 32px
+		"font-size-12": 2.25rem,
+		// 36px
+		"font-size-13": 2.56rem,
+		// 41px
+		"font-size-14": 3rem,
+		// 48px
+		"font-size-15": 3.25rem,
+		// 52px
+		"line-height-1": 0.875rem,
+		// 14px
+		"line-height-2": 1rem,
+		// 16px
+		"line-height-3": 1.25rem,
+		// 20px
+		"line-height-4": 1.5rem,
+		// 24px
+		"line-height-5": 2rem,
+		// 32px
+		"line-height-6": 2.125rem,
+		// 34px
+		"line-height-7": 2.5rem,
+		// 40px
+		"line-height-8": 3rem,
+		// 48px
+		"line-height-9": 3.5rem,
+		// 56px
+		"line-height-10": 3.875rem,
+		// 62px
+		"box-shadow-1": 0px 0px 16px rgba(25, 25, 25, 0.4),
+		"z-index-1": 1,
+		"z-index-2": 10,
+		"z-index-3": 50,
+		"z-index-4": 100,
+		"z-index-5": 500,
+		"border-radius-1": 0.25em,
+	),
+	$alias: (
+		"layout-max-width": 1440,
+		"layout-content-max-width": 1216,
+		//
+		// --layout-content-scale-width identifies the inner document width for header and content
+		// alignment.  It accounts for a minimum width that has (--global-spacing-6 / 2) margins
+		//
+		"layout-content-scale-width":
+			min(
+				calc(100vw - var(--global-spacing-6)),
+				calc(var(--layout-content-max-width) / var(--layout-max-width) * 100%)
+			),
+		"primary-color": var(--global-neutral-10),
+		"primary-font-family": "Inter",
+	),
 	$tokens: (
 		default: (
 			components: (
-				stack: (
-					gap: 1rem,
+				body: (
+					font-family: var(--primary-font-family),
+					font-size: var(--global-font-size-4),
 				),
-				stack-divider-vertical: (
-					border: none,
-					border-bottom-width: 2px,
-					border-bottom-style: solid,
-					border-bottom-color: #712d2d,
-					height: 1px,
+				button: (
+					border: 1px solid transparent,
+					border-radius: var(--global-border-radius-1),
+					font-size: var(--global-font-size-3),
+					line-height: var(--global-line-height-3),
+					font-weight: var(--global-font-weight-7),
+					gap: var(--global-spacing-2),
+				),
+				button-small: (
+					padding: var(--global-spacing-1) var(--global-spacing-4),
+				),
+				button-medium: (
+					padding: var(--global-spacing-3) var(--global-spacing-4),
+				),
+				button-large: (
+					padding: var(--global-spacing-4),
+					font-size: var(--global-font-size-4),
+				),
+				button-default: (
+					background-color: var(--global-white),
+					border-color: var(--global-neutral-7),
+					color: var(--global-neutral-7),
+				),
+				button-primary: (
+					background-color: var(--primary-color),
+					color: var(--global-white),
+				),
+				button-primary-hover: (
+					background-color: var(--global-blue-7),
+				),
+				button-primary-reverse: (
+					background-color: transparent,
+					border-color: var(--primary-color),
+					color: var(--primary-color),
+				),
+				button-primary-reverse-hover: (
+					border-color: var(--global-blue-7),
+					color: var(--global-blue-7),
+				),
+				button-secondary: (
+					background-color: var(--global-white),
+					color: var(--global-neutral-10),
+				),
+				button-secondary-hover: (
+					background-color: var(--global-neutral-2),
+				),
+				button-secondary-reverse: (
+					background-color: transparent,
+					color: var(--global-white),
+				),
+				button-secondary-reverse-hover: (
+					border-color: var(--global-neutral-2),
+					color: var(--global-neutral-2),
+				),
+				heading: (
+					font-weight: var(--global-font-weight-7),
+				),
+				carousel: (
+					--slides: 1,
+				),
+				carousel-actions: (
+					display: none,
+					padding-left: var(--global-spacing-4),
+					padding-right: var(--global-spacing-4),
+					//
+					// The width should place the action buttons near the edge of the carousel responsively
+					//
+					// width is derived from adding
+					//   --layout-content-max-width
+					//   2x button widths (--global-font-size-9)
+					//   2x button margins (--global-font-size-5)
+					// then dividing those by
+					//   --layout-max-width
+					// using the formula: (48 + 32 + 1216 + 32 + 48) / 1440
+					//
+					width: calc(calc(var(--layout-content-max-width) + 160) / var(--layout-max-width) * 100%),
+				),
+				carousel-button: (
+					box-shadow: var(--global-box-shadow-1),
+					border-radius: var(--global-spacing-1),
+					background-color: var(--global-white),
+					height: var(--global-spacing-8),
+					width: var(--global-spacing-8),
+				),
+				carousel-track: (
+					gap: var(--global-spacing-2),
+					width: var(--layout-content-scale-width),
+				),
+			),
+			blocks: (
+				category-carousel: (
+					gap: var(--global-spacing-2),
+					components: (
+						heading: (
+							-webkit-line-clamp: 2,
+						),
+						icon: (
+							height: var(--global-font-size-9),
+							width: var(--global-font-size-9),
+						),
+					),
+				),
+				category-carousel-title: (
+					font-size: var(--global-font-size-7),
+					margin-left: auto,
+					margin-right: auto,
+					width: var(--layout-content-scale-width),
+				),
+				category-carousel-slide: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-1),
+						),
+					),
+				),
+				category-carousel-slide-title: (
+					font-size: var(--global-font-size-2),
+				),
+				hero-stacked: (
+					gap: var(--global-spacing-5),
+				),
+				hero: (
+					color: var(--global-neutral-10),
+					components: (
+						button: (
+							text-decoration: none,
+						),
+						stack: (
+							gap: var(--global-spacing-4),
+						),
+						heading: (
+							font-size: var(--global-font-size-11),
+							line-height: var(--global-line-height-7),
+						),
+						paragraph: (
+							font-size: var(--global-font-size-3),
+							line-height: var(--global-line-height-3),
+						),
+					),
+				),
+				hero-light: (
+					color: var(--global-white),
+				),
+				hero-dark: (
+					color: var(--global-neutral-10),
+				),
+				hero-image: (
+					max-height: 65vh,
 					width: 100%,
 				),
-				stack-divider-horizontal: (
-					border: none,
-					border-left-width: 2px,
-					border-left-style: solid,
-					border-left-color: #712d2d,
+				hero-image-stacked: (
 					height: auto,
-					width: 1px,
+					width: 100%,
 				),
-				carousel-image-counter: (
-					color: #191919,
+				hero-text-left: (
+					max-width: 100%,
+					justify-self: flex-start,
+					padding: 0 var(--global-spacing-4),
 				),
-				carousel-fullscreen-image-counter: (
-					color: white,
+				hero-text-stacked: (
+					max-width: 24rem,
 				),
-				carousel-additional-controls: (
-					display: none,
+				hero-subheadline: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-7),
+							font-weight: var(--global-font-weight-4),
+							line-height: var(--global-line-height-4),
+						),
+					),
 				),
-				video: (
-					background-color: #000000,
-					margin: auto,
+				quilted-image: (
+					margin: 0 auto,
+					max-width: calc(var(--layout-content-max-width) * 1px),
+					components: (
+						heading: (
+							font-size: var(--global-font-size-7),
+							font-weight: var(--global-font-weight-7),
+							line-height: var(--global-line-height-4),
+							margin-bottom: var(--global-spacing-2),
+							margin-left: var(--global-spacing-4),
+						),
+					),
 				),
-				video-frame: (
-					background-color: #000000,
+				quilted-image__wrapper: (
+					gap: var(--global-spacing-6),
+					grid-template-areas: "top" "middle" "bottom",
+					grid-auto-flow: "column",
+				),
+				quilted-image__overlay-text--light: (
+					color: var(--global-white),
+				),
+				quilted-image__overlay-text--dark: (
+					color: var(--global-neutral-10),
+				),
+				quilted-image__overlay: (
+					left: var(--global-spacing-4),
+					bottom: var(--global-spacing-4),
+					padding-right: var(--global-spacing-4),
+					components: (
+						paragraph: (
+							font-weight: var(--global-font-weight-7),
+							line-height: var(--global-line-height-4),
+							font-size: var(--global-font-size-5),
+						),
+						stack: (
+							gap: var(--global-spacing-4),
+							align-items: start,
+						),
+					),
+				),
+				story-carousel: (
+					components: (
+						carousel: (
+							--slides: 1,
+						),
+						carousel-actions: (
+							margin-top: 0,
+							// Need to have the setting here so desktop gets included
+						),
+					),
+					gap: var(--global-spacing-2),
+				),
+				story-carousel-title: (
+					font-size: var(--global-font-size-7),
+					margin-left: auto,
+					margin-right: auto,
+					width: var(--layout-content-scale-width),
+				),
+				story-carousel-card: (
+					components: (
+						heading: (
+							-webkit-line-clamp: 2,
+							font-size: var(--global-font-size-3),
+							line-height: var(--global-line-height-3),
+							color: var(--global-neutral-10),
+						),
+						paragraph: (
+							-webkit-line-clamp: 3,
+							font-weight: var(--global-font-weight-4),
+							font-size: var(--global-font-size-3),
+							line-height: var(--global-line-height-3),
+							color: var(--global-neutral-5),
+						),
+					),
+					gap: var(--global-spacing-1),
+				),
+				product-assortment-carousel: (
+					components: (
+						carousel: (
+							--slides: 1,
+						),
+						icon: (
+							height: var(--global-font-size-9),
+							width: var(--global-font-size-9),
+						),
+						link: (
+							color: var(--global-neutral-7),
+						),
+					),
+					gap: var(--global-spacing-2),
+				),
+				product-assortment-carousel-title: (
+					font-size: var(--global-font-size-7),
+					margin-left: auto,
+					margin-right: auto,
+					width: var(--layout-content-scale-width),
+				),
+				product-assortment-carousel-product: (
+					components: (
+						heading: (
+							-webkit-line-clamp: 2,
+							font-weight: var(--global-font-weight-4),
+							line-height: var(--global-line-height-3),
+						),
+						price: (
+							gap: var(--global-spacing-1),
+						),
+						price-list: (
+							color: var(--global-neutral-5),
+							text-decoration: line-through,
+						),
+					),
+					gap: var(--global-spacing-1),
+				),
+				product-assortment-carousel-product-single-price: (
+					components: (
+						price-list: (
+							color: var(--global-neutral-7),
+							text-decoration: none,
+						),
+					),
 				),
 			),
 		),
 		desktop: (
+			alias: (),
 			components: (
-				carousel-additional-controls: (
-					display: block,
+				carousel: (
+					--slides: 4,
+				),
+				carousel-actions: (
+					display: flex,
+				),
+				carousel-track: (
+					gap: var(--global-spacing-6),
+				),
+			),
+			blocks: (
+				category-carousel-title: (
+					font-size: var(--global-font-size-11),
+				),
+				category-carousel-slide-title: (
+					font-size: var(--global-font-size-3),
+				),
+				hero: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-14),
+							line-height: var(--global-line-height-10),
+						),
+						paragraph: (
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+						),
+					),
+				),
+				hero-image: (
+					max-height: auto,
+					width: 100%,
+				),
+				hero-text-stacked: (
+					max-width: 65%,
+				),
+				hero-text-left: (
+					max-width: 65%,
+					padding: 0 var(--global-spacing-4) 0 var(--global-spacing-16),
+				),
+				hero-subheadline: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-11),
+							line-height: var(--global-line-height-6),
+						),
+					),
+				),
+				quilted-image: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-11),
+							line-height: var(--global-line-height-6),
+							margin-left: 0,
+						),
+					),
+				),
+				quilted-image__overlay: (
+					left: var(--global-spacing-6),
+					bottom: var(--global-spacing-6),
+					components: (
+						paragraph: (
+							font-size: var(--global-font-size-7),
+						),
+						stack: (
+							gap: var(--global-spacing-6),
+						),
+					),
+				),
+				quilted-image__wrapper: (
+					grid-template-areas: "top top" "bottom bottom",
+				),
+				story-carousel: (
+					components: (
+						carousel: (
+							--slides: 4,
+						),
+						carousel-actions: (
+							margin-top: -7rem,
+						),
+					),
+				),
+				story-carousel-title: (
+					font-size: var(--global-font-size-11),
+				),
+				product-assortment-carousel: (
+					components: (
+						carousel: (
+							--slides: 4,
+						),
+					),
+				),
+				product-assortment-carousel-title: (
+					font-size: var(--global-font-size-11),
 				),
 			),
 		),
