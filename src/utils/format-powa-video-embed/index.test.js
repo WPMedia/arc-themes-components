@@ -17,3 +17,12 @@ it("returns a powa embed code with fields attached with data-", () => {
 		})
 	).toMatchInlineSnapshot(`"<div class=\\"powa\\" data-powavideoid=\\"12345\\"></div>"`);
 });
+
+it("returns a powa embed code with fields that are defined attached with data-", () => {
+	expect(
+		formatPowaVideoEmbed('<div class="powa" ></div>', {
+			powaVideoId: "12345",
+			bad: undefined,
+		})
+	).toMatchInlineSnapshot(`"<div class=\\"powa\\" data-powavideoid=\\"12345\\"></div>"`);
+});
