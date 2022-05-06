@@ -5,17 +5,17 @@
 
 	&__fig-caption {
 		@include scss.component-properties("media-item-fig-caption");
+	}
 
-		&__title {
-			@include scss.component-properties("media-item-title");
-		}
+	&__title {
+		@include scss.component-properties("media-item-title");
+	}
 
-		&__caption {
-			@include scss.component-properties("media-item-caption");
-		}
+	&__caption {
+		@include scss.component-properties("media-item-caption");
+	}
 
-		&__credit {
-			@include scss.component-properties("media-item-credit");
-		}
+	&__credit {
+		@include scss.component-properties("media-item-credit");
 	}
 }
