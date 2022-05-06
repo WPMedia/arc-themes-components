@@ -5,7 +5,9 @@ const formatPowaVideoEmbed = (embedMarkup, powaFields = {}) => {
 		const doc = parser.parseFromString(embedMarkup, "text/html");
 		const embedHTMLWithPlayStatus = doc.body;
 
-		const powaFieldEntries = Object.entries(powaFields);
+		const powaFieldEntries = Object.entries(powaFields).filter(
+			([, value]) => typeof value !== "undefined"
+		);
 
 		// set the rest of powa fields
 		// https://redirector.arcpublishing.com/alc/arc-products/videocenter/user-docs/video-center-player-settings/
