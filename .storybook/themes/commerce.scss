@@ -184,12 +184,15 @@
 		"form-border-color-danger": var(--global-red-4),
 		"form-border-color-success": var(--global-green-5),
 		// Typography
+		// body
 		"body-font-weight": var(--global-font-weight-4),
 		"body-font-size": var(--global-font-size-3),
-		"body-line-height": var(--global-line-height-3),
+		"body-line-height": var(--global-line-height-4),
+		// body : small
 		"body-font-weight-small": var(--global-font-weight-4),
 		"body-font-size-small": var(--global-font-size-2),
 		"body-line-height-small": var(--global-line-height-2),
+		// body : tiny
 		"body-font-weight-tiny": var(--global-font-weight-4),
 		"body-font-size-tiny": var(--global-font-size-1),
 		"body-line-height-tiny": var(--global-line-height-1),
@@ -212,12 +215,11 @@
 				attribution: (
 					color: var(--text-color),
 					font-size: var(--body-font-size-small),
-					font-weight: var(--global-font-weight-4),
+					line-height: var(--body-line-height-small),
 				),
 				body: (
 					color: var(--text-color),
 					font-family: var(--font-family-primary),
-					font-weight: var(--body-font-weight),
 					font-size: var(--body-font-size),
 					line-height: var(--body-line-height),
 				),
@@ -228,14 +230,19 @@
 					gap: var(--global-spacing-2),
 				),
 				button-small: (
+					font-size: var(--body-font-size-small),
+					line-height: var(--body-line-height-small),
 					padding: var(--global-spacing-1) var(--global-spacing-4),
 				),
 				button-medium: (
+					font-size: var(--body-font-size-small),
+					line-height: var(--body-line-height-small),
 					padding: var(--global-spacing-3) var(--global-spacing-4),
 				),
 				button-large: (
+					font-size: var(--body-font-size),
+					line-height: var(--body-line-height),
 					padding: var(--global-spacing-4),
-					font-size: var(--global-font-size-4),
 				),
 				button-default: (
 					background-color: var(--global-white),
@@ -308,7 +315,7 @@
 				),
 				date: (
 					font-size: var(--body-font-size-small),
-					line-height: var(--global-line-height-3),
+					line-height: var(--body-line-height-small),
 				),
 				heading: (
 					font-weight: var(--global-font-weight-7),
@@ -366,7 +373,7 @@
 				media-item-fig-caption: (
 					color: var(--body-text-color-subtle),
 					font-size: var(--body-font-size-tiny),
-					line-height: var(--global-line-height-2),
+					line-height: var(--body-line-height-tiny),
 				),
 				media-item-title: (
 					font-weight: var(--global-font-weight-7),
@@ -378,7 +385,6 @@
 				),
 				paragraph: (
 					font-family: var(--font-family-secondary),
-					line-height: var(--global-line-height-4),
 				),
 				pill: (
 					background-color: var(--color-primary),
