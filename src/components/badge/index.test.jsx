@@ -17,7 +17,7 @@ describe("Badge", () => {
 	it("should render additional classes", () => {
 		const ORIGINAL_CLASSES = "c-badge";
 		const ADDITIONAL_CLASSES = "additionalClass1 additionalClass2";
-		render(<Badge className={ADDITIONAL_CLASSES}>Hello World</Badge>);
+		render(<Badge className={ADDITIONAL_CLASSES}>{BADGE_TEXT}</Badge>);
 		const element = screen.queryByText(BADGE_TEXT);
 		expect(element).toHaveClass(ADDITIONAL_CLASSES);
 		expect(element).toHaveClass(ORIGINAL_CLASSES);
