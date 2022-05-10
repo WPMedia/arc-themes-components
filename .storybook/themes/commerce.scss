@@ -400,12 +400,11 @@
 				),
 				stack-divider-vertical: (
 					border-bottom: var(--global-border-width-1) var(--global-border-style-1)
-						var(--form-border-color),
+						var(--border-color),
 				),
 				stack-divider-horizontal: (
 					border: none,
-					border-left: var(--global-border-width-1) var(--global-border-style-1)
-						var(--form-border-color),
+					border-left: var(--global-border-width-1) var(--global-border-style-1) var(--border-color),
 					width: 1px,
 					height: auto,
 				),
