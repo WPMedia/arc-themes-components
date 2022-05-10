@@ -34,7 +34,7 @@ describe("Badge", () => {
 		const variant = "success";
 		const SUCCESS_CLASS = "c-badge--success";
 		render(<Badge variant={variant}>{BADGE_TEXT}</Badge>);
-		const element = screen.queryByText("Hello World");
+		const element = screen.queryByText(BADGE_TEXT);
 		expect(element).toHaveClass(SUCCESS_CLASS);
 	});
 });
