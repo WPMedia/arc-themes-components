@@ -1,6 +1,7 @@
 /* eslint import/order: ["error", {"alphabetize": {"order": "asc", "caseInsensitive": true}}] */
 // inject imports after this comment and alphabetize them
 import Attribution from "./src/components/attribution";
+import Badge from "./src/components/badge";
 import Button from "./src/components/button";
 import Carousel from "./src/components/carousel";
 import Date from "./src/components/date";
@@ -27,6 +28,7 @@ import isServerSide from "./src/utils/is-server-side";
 
 export {
 	Attribution,
+	Badge,
 	Button,
 	Carousel,
 	Date,
