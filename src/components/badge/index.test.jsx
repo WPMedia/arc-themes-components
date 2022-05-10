@@ -26,7 +26,7 @@ describe("Badge", () => {
 	it("should use the 'default' className when no variant is indicated.", () => {
 		const DEFAULT_CLASS = "c-badge--default";
 		render(<Badge>{BADGE_TEXT}</Badge>);
-		const element = screen.queryByText("Hello World");
+		const element = screen.queryByText(BADGE_TEXT);
 		expect(element).toHaveClass(DEFAULT_CLASS);
 	});
 
