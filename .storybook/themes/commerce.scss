@@ -379,9 +379,11 @@
 					font-weight: var(--global-font-weight-7),
 				),
 				overline: (
+					color: var(--text-color),
 					font-size: var(--global-font-size-7),
 					font-weight: var(--global-font-weight-7),
 					line-height: var(--global-line-height-4),
+					text-decoration: none,
 				),
 				paragraph: (
 					font-family: var(--font-family-secondary),
