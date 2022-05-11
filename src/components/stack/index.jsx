@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Stack = ({
+	as,
 	className,
 	alignment,
 	children,
@@ -14,8 +15,9 @@ const Stack = ({
 	...rest
 }) => {
 	const childCount = React.Children.count(children);
+	const Element = `${as}`;
 	return (
-		<div
+		<Element
 			{...rest}
 			className={className ? `c-stack ${className}` : "c-stack"}
 			data-style-direction={direction}
@@ -31,11 +33,12 @@ const Stack = ({
 					{divider && index !== childCount - 1 ? <hr aria-hidden="true" /> : null}
 				</>
 			))}
-		</div>
+		</Element>
 	);
 };
 
 Stack.defaultProps = {
+	as: "div",
 	className: "",
 	alignment: "unset",
 	direction: "vertical",
@@ -46,6 +49,8 @@ Stack.defaultProps = {
 };
 
 Stack.propTypes = {
+	/** Specify the HTML Element to use to render as */
+	as: PropTypes.string,
 	/** Class name(s) that get appended to default class name of the component */
 	className: PropTypes.string,
 	/** The alignment of the elements within the component.
