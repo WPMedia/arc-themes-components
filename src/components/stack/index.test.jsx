@@ -14,6 +14,15 @@ describe("Stack", () => {
 		expect(container.querySelectorAll(".c-stack div")).toHaveLength(1);
 	});
 
+	it("should render as a section", () => {
+		const { container } = render(
+			<Stack as="section">
+				<img alt="image 1" src="https://picsum.photos/200/100" />
+			</Stack>
+		);
+		expect(container.querySelectorAll("section.c-stack")).toHaveLength(1);
+	});
+
 	it("should allow pass through of props", () => {
 		const { container } = render(
 			<Stack id="custom-id">
