@@ -1,0 +1,120 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs";
+
+import formatAuthors from ".";
+
+<Meta title="Utilities/Format Authors" component={formatAuthors} />
+
+# Serial Join
+
+The `formatAuthors()` function takes in an array of author Objects and returns it using the serial comma (Oxford comma) rules.
+
+## Usage
+
+```jsx
+import formatAuthors from "./formatAuthors";
+
+const htmlString = formatAuthors(globalContent.credits.by);
+```
+
+## Properties
+
+| Name        | Description                                                   | Default |
+| ----------- | ------------------------------------------------------------- | ------- |
+| **authors** | An array of `by-object`s from an `ans-item` `credits` object. | []      |
+
+## Stories
+
+** One item **
+
+<Canvas>
+	<Story name="One item">
+		<div
+			dangerouslySetInnerHTML={{
+				__html: formatAuthors([
+					{
+						name: "Author One",
+						type: "author",
+						url: "#",
+					},
+				]),
+			}}
+		/>
+	</Story>
+</Canvas>
+
+** Two items **
+
+<Canvas>
+	<Story name="Two items">
+		<div
+			dangerouslySetInnerHTML={{
+				__html: formatAuthors([
+					{
+						name: "Author One",
+						type: "author",
+						url: "#",
+					},
+					{
+						name: "Author Two",
+						type: "author",
+					},
+				]),
+			}}
+		/>
+	</Story>
+</Canvas>
+
+** Three items **
+
+<Canvas>
+	<Story name="Three items">
+		<div
+			dangerouslySetInnerHTML={{
+				__html: formatAuthors([
+					{
+						name: "Author One",
+						type: "author",
+						url: "#",
+					},
+					{
+						name: "Author Two",
+						type: "author",
+					},
+					{
+						name: "Author Three",
+						type: "author",
+					},
+				]),
+			}}
+		/>
+	</Story>
+</Canvas>
+
+** Three items, with a custom conjunction **
+
+<Canvas>
+	<Story name="Three items, with a custom conjunction">
+		<div
+			dangerouslySetInnerHTML={{
+				__html: formatAuthors(
+					[
+						{
+							name: "Author One",
+							type: "author",
+							url: "#",
+						},
+						{
+							name: "Author Two",
+							type: "author",
+						},
+						{
+							name: "Author Three",
+							type: "author",
+						},
+					],
+					"or"
+				),
+			}}
+		/>
+	</Story>
+</Canvas>
