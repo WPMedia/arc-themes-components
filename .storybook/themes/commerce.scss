@@ -187,7 +187,7 @@
 		// body
 		"body-font-weight": var(--global-font-weight-4),
 		"body-font-size": var(--global-font-size-3),
-		"body-line-height": var(--global-line-height-4),
+		"body-line-height": var(--global-line-height-3),
 		// body : small
 		"body-font-weight-small": var(--global-font-weight-4),
 		"body-font-size-small": var(--global-font-size-2),
@@ -652,6 +652,7 @@
 		desktop: (
 			alias: (
 				"body-font-size": var(--global-font-size-4),
+				"body-line-height": var(--global-line-height-4),
 				"body-font-size-small": var(--global-font-size-3),
 				"body-line-height-small": var(--global-line-height-3),
 				"body-font-size-tiny": var(--global-font-size-2),
