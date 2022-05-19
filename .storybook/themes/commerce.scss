@@ -155,7 +155,9 @@
 		"z-index-3": 50,
 		"z-index-4": 100,
 		"z-index-5": 500,
-		"border-radius-1": 0.25em,
+		"border-radius-1": 0.25rem,
+		"border-radius-2": 20rem,
+		"border-radius-3": 100vmax,
 		"border-style-1": solid,
 		"border-width-1": 1px,
 	),
@@ -183,6 +185,10 @@
 		"form-border-color-warning": var(--global-orange-2),
 		"form-border-color-danger": var(--global-red-4),
 		"form-border-color-success": var(--global-green-5),
+		// Border Radius
+		"border-radius-default": var(--global-border-radius-1),
+		"border-radius-pill": var(--global-border-radius-2),
+		"border-radius-circle": var(--global-border-radius-3),
 		// Typography
 		// body
 		"body-font-weight": var(--global-font-weight-4),
@@ -201,13 +207,8 @@
 		"content-max-width": 1216,
 		//
 		// --content-scale-width identifies the inner document width for header and content
-		// alignment.  It accounts for a minimum width that has (--global-spacing-6 / 2) margins
 		//
-		"content-scale-width":
-			min(
-				calc(100vw - var(--global-spacing-6)),
-				calc(var(--content-max-width) / var(--layout-max-width) * 100%)
-			),
+		"content-scale-width": calc(var(--content-max-width) / var(--layout-max-width) * 100%),
 	),
 	$tokens: (
 		default: (
@@ -218,7 +219,8 @@
 					line-height: var(--body-line-height-small),
 				),
 				badge: (
-					border-radius: 2em,
+					align-self: baseline,
+					border-radius: var(--border-radius-pill),
 					color: var(--global-white),
 					font-size: var(--body-font-size-tiny),
 					font-weight: var(--global-font-weight-7),
@@ -251,7 +253,7 @@
 				),
 				button: (
 					border: var(--global-border-width-1) var(--global-border-style-1) transparent,
-					border-radius: var(--global-border-radius-1),
+					border-radius: var(--border-radius-default),
 					font-weight: var(--global-font-weight-7),
 					gap: var(--global-spacing-2),
 				),
@@ -315,29 +317,18 @@
 					display: none,
 					padding-left: var(--global-spacing-4),
 					padding-right: var(--global-spacing-4),
-					//
-					// The width should place the action buttons near the edge of the carousel responsively
-					//
-					// width is derived from adding
-					//   --content-max-width
-					//   2x button widths (--global-font-size-9)
-					//   2x button margins (--global-font-size-5)
-					// then dividing those by
-					//   --layout-max-width
-					// using the formula: (48 + 32 + 1216 + 32 + 48) / 1440
-					//
-					width: calc(calc(var(--content-max-width) + 160) / var(--layout-max-width) * 100%),
 				),
 				carousel-button: (
 					box-shadow: var(--global-box-shadow-1),
-					border-radius: var(--global-spacing-1),
+					border-radius: var(--border-radius-default),
 					background-color: var(--global-white),
 					height: var(--global-spacing-8),
 					width: var(--global-spacing-8),
 				),
 				carousel-track: (
 					gap: var(--global-spacing-2),
-					width: var(--content-scale-width),
+					max-width: var(--content-scale-width),
+					width: 100%,
 				),
 				date: (
 					font-size: var(--body-font-size-small),
@@ -359,8 +350,8 @@
 				),
 				input-input: (
 					border: var(--global-border-width-1) var(--global-border-style-1) var(--form-border-color),
-					border-radius: var(--global-border-radius-1),
-					padding: var(--global-spacing-4) var(--global-spacing-2),
+					border-radius: var(--border-radius-default),
+					padding: var(--global-spacing-2) var(--global-spacing-4),
 				),
 				input-small-input: (
 					padding: var(--global-spacing-1) var(--global-spacing-2),
@@ -406,7 +397,7 @@
 					gap: var(--global-spacing-2),
 				),
 				media-item-fig-caption: (
-					color: var(--body-text-color-subtle),
+					color: var(--text-color-subtle),
 					font-size: var(--body-font-size-tiny),
 					line-height: var(--body-line-height-tiny),
 				),
@@ -425,7 +416,7 @@
 				),
 				pill: (
 					background-color: var(--color-primary),
-					border-radius: 2em,
+					border-radius: var(--border-radius-pill),
 					color: var(--global-white),
 					font-size: var(--global-font-size-2),
 					line-height: var(--global-line-height-2),
@@ -445,6 +436,12 @@
 					width: 1px,
 					height: auto,
 				),
+				video: (
+					margin: auto,
+				),
+				video-frame: (
+					background-color: var(--global-black),
+				),
 			),
 			blocks: (
 				category-carousel: (
@@ -463,7 +460,8 @@
 					font-size: var(--global-font-size-7),
 					margin-left: auto,
 					margin-right: auto,
-					width: var(--content-scale-width),
+					max-width: var(--content-scale-width),
+					width: 100%,
 				),
 				category-carousel-slide: (
 					components: (
@@ -511,13 +509,23 @@
 					height: auto,
 					width: 100%,
 				),
+				hero-text-overlay: (
+					margin: 0 auto,
+					max-width: var(--content-scale-width),
+					width: 100%,
+				),
 				hero-text-left: (
-					max-width: 100%,
 					justify-self: flex-start,
-					padding: 0 var(--global-spacing-4),
+					max-width: var(--content-scale-width),
+					width: 100%,
 				),
 				hero-text-stacked: (
-					max-width: 24rem,
+					margin: 0 auto,
+					components: (
+						paragraph: (
+							max-width: 24rem,
+						),
+					),
 				),
 				hero-subheadline: (
 					components: (
@@ -528,87 +536,8 @@
 						),
 					),
 				),
-				quilted-image: (
-					margin: 0 auto,
-					max-width: calc(var(--content-max-width) * 1px),
-					components: (
-						heading: (
-							font-size: var(--global-font-size-7),
-							font-weight: var(--global-font-weight-7),
-							line-height: var(--global-line-height-4),
-							margin-bottom: var(--global-spacing-2),
-							margin-left: var(--global-spacing-4),
-						),
-					),
-				),
-				quilted-image__wrapper: (
-					gap: var(--global-spacing-6),
-					grid-template-areas: "top" "middle" "bottom",
-					grid-auto-flow: "column",
-				),
-				quilted-image__overlay-text--light: (
-					color: var(--global-white),
-				),
-				quilted-image__overlay-text--dark: (
-					color: var(--global-black),
-				),
-				quilted-image__overlay: (
-					left: var(--global-spacing-4),
-					bottom: var(--global-spacing-4),
-					padding-right: var(--global-spacing-4),
-					components: (
-						paragraph: (
-							font-weight: var(--global-font-weight-7),
-							line-height: var(--global-line-height-4),
-							font-size: var(--global-font-size-5),
-						),
-						stack: (
-							gap: var(--global-spacing-4),
-							align-items: start,
-						),
-					),
-				),
-				story-carousel: (
-					components: (
-						carousel: (
-							--slides: 1,
-						),
-						carousel-actions: (
-							margin-top: 0,
-							// Need to have the setting here so desktop gets included
-						),
-					),
-					gap: var(--global-spacing-2),
-				),
-				story-carousel-title: (
-					font-size: var(--global-font-size-7),
-					margin-left: auto,
-					margin-right: auto,
-					width: var(--content-scale-width),
-				),
-				story-carousel-card: (
-					components: (
-						heading: (
-							-webkit-line-clamp: 2,
-							font-size: var(--global-font-size-3),
-							line-height: var(--global-line-height-3),
-							color: var(--global-black),
-						),
-						paragraph: (
-							-webkit-line-clamp: 3,
-							font-weight: var(--global-font-weight-4),
-							font-size: var(--global-font-size-3),
-							line-height: var(--global-line-height-3),
-							color: var(--global-neutral-5),
-						),
-					),
-					gap: var(--global-spacing-1),
-				),
 				product-assortment-carousel: (
 					components: (
-						carousel: (
-							--slides: 1,
-						),
 						icon: (
 							height: var(--global-font-size-9),
 							width: var(--global-font-size-9),
@@ -623,7 +552,8 @@
 					font-size: var(--global-font-size-7),
 					margin-left: auto,
 					margin-right: auto,
-					width: var(--content-scale-width),
+					max-width: var(--content-scale-width),
+					width: 100%,
 				),
 				product-assortment-carousel-product: (
 					components: (
@@ -649,6 +579,165 @@
 							text-decoration: none,
 						),
 					),
+				),
+				quilted-image: (
+					margin-left: auto,
+					margin-right: auto,
+					width: 100%,
+					components: (
+						heading: (
+							font-size: var(--global-font-size-7),
+							font-weight: var(--global-font-weight-7),
+							line-height: var(--global-line-height-4),
+							margin-left: auto,
+							margin-right: auto,
+							margin-bottom: var(--global-spacing-2),
+							max-width: var(--content-scale-width),
+							width: 100%,
+						),
+					),
+				),
+				quilted-image__wrapper: (
+					gap: var(--global-spacing-6),
+					grid-template-areas: "top" "middle" "bottom",
+					grid-auto-flow: "column",
+					margin: 0 auto,
+					width: 100%,
+					max-width: 100%,
+				),
+				quilted-image__overlay-text--light: (
+					color: var(--global-white),
+				),
+				quilted-image__overlay-text--dark: (
+					color: var(--global-black),
+				),
+				quilted-image__media-panel: (
+					text-decoration: none,
+				),
+				quilted-image__overlay: (
+					align-self: end,
+					margin-bottom: var(--global-spacing-4),
+					margin-left: auto,
+					margin-right: auto,
+					max-width: var(--content-scale-width),
+					width: 100%,
+					components: (
+						paragraph: (
+							font-weight: var(--global-font-weight-7),
+							line-height: var(--global-line-height-4),
+							font-size: var(--global-font-size-5),
+						),
+						stack: (
+							gap: var(--global-spacing-4),
+							align-items: start,
+						),
+					),
+				),
+				single-column-regular-main: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-11),
+						),
+					),
+				),
+				story-carousel: (
+					components: (
+						carousel-actions: (
+							margin-top: 0,
+							// Need to have the setting here so desktop gets included
+						),
+						icon: (
+							height: var(--global-font-size-9),
+							width: var(--global-font-size-9),
+						),
+					),
+					gap: var(--global-spacing-2),
+				),
+				story-carousel-title: (
+					font-size: var(--global-font-size-7),
+					margin-left: auto,
+					margin-right: auto,
+					max-width: var(--content-scale-width),
+					width: 100%,
+				),
+				story-carousel-card: (
+					components: (
+						heading: (
+							-webkit-line-clamp: 2,
+							font-size: var(--global-font-size-3),
+							line-height: var(--global-line-height-3),
+							color: var(--global-black),
+						),
+						paragraph: (
+							-webkit-line-clamp: 3,
+							font-weight: var(--global-font-weight-4),
+							font-size: var(--global-font-size-3),
+							line-height: var(--global-line-height-3),
+							color: var(--global-neutral-5),
+						),
+					),
+					gap: var(--global-spacing-1),
+				),
+				video-player: (
+					components: (
+						media-item: (
+							width: 100%,
+							margin: auto,
+						),
+					),
+				),
+				video-player-feature: (
+					gap: 0,
+					components: (
+						media-item-fig-caption: (
+							margin-bottom: var(--global-spacing-2),
+							margin-left: var(--global-spacing-4),
+							margin-right: var(--global-spacing-4),
+							margin-top: var(--global-spacing-2),
+						),
+					),
+				),
+				video-player-feature-meta: (
+					margin: auto,
+					width: var(--content-scale-width),
+					components: (
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-5),
+						),
+						paragraph: (
+							font-size: var(--global-font-size-3),
+							line-height: var(--global-line-height-3),
+						),
+						stack: (
+							gap: var(--global-spacing-3),
+						),
+					),
+				),
+				video-player-inline: (
+					gap: var(--global-spacing-3),
+					components: (
+						heading: (
+							font-size: var(--global-font-size-9),
+							line-height: var(--global-line-height-5),
+						),
+						media-item: (
+							width: 100%,
+							margin: auto,
+						),
+						media-item-fig-caption: (
+							margin-bottom: 0,
+							margin-left: 0,
+							margin-right: 0,
+							margin-top: var(--global-spacing-2),
+						),
+						stack: (
+							gap: 0,
+						),
+					),
+				),
+				video-player-inline-video: (
+					gap: 0,
 				),
 			),
 		),
@@ -695,12 +784,12 @@
 					max-height: auto,
 					width: 100%,
 				),
-				hero-text-stacked: (
-					max-width: 65%,
-				),
 				hero-text-left: (
-					max-width: 65%,
-					padding: 0 var(--global-spacing-4) 0 var(--global-spacing-16),
+					components: (
+						paragraph: (
+							max-width: 65%,
+						),
+					),
 				),
 				hero-subheadline: (
 					components: (
@@ -710,35 +799,46 @@
 						),
 					),
 				),
+				product-assortment-carousel-title: (
+					font-size: var(--global-font-size-11),
+				),
 				quilted-image: (
+					max-width: var(--content-scale-width),
+					width: 100%,
 					components: (
 						heading: (
 							font-size: var(--global-font-size-11),
 							line-height: var(--global-line-height-6),
-							margin-left: 0,
 						),
 					),
 				),
 				quilted-image__overlay: (
-					left: var(--global-spacing-6),
-					bottom: var(--global-spacing-6),
+					margin-left: var(--global-spacing-6),
+					margin-bottom: var(--global-spacing-6),
+					max-width: 100%,
 					components: (
 						paragraph: (
 							font-size: var(--global-font-size-7),
 						),
 						stack: (
-							gap: var(--global-spacing-6),
+							gap: var(--global-spacing-4),
 						),
 					),
 				),
 				quilted-image__wrapper: (
 					grid-template-areas: "top top" "bottom bottom",
+					max-width: var(--content-scale-width),
+					width: 100%,
+				),
+				single-column-regular-main: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-16),
+						),
+					),
 				),
 				story-carousel: (
 					components: (
-						carousel: (
-							--slides: 4,
-						),
 						carousel-actions: (
 							margin-top: -7rem,
 						),
@@ -747,15 +847,25 @@
 				story-carousel-title: (
 					font-size: var(--global-font-size-11),
 				),
-				product-assortment-carousel: (
+				video-player-feature-meta: (
 					components: (
-						carousel: (
-							--slides: 4,
+						heading: (
+							font-size: var(--global-font-size-13),
+							line-height: var(--global-line-height-8),
+						),
+						paragraph: (
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
 						),
 					),
 				),
-				product-assortment-carousel-title: (
-					font-size: var(--global-font-size-11),
+				video-player-inline: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-13),
+							line-height: var(--global-line-height-8),
+						),
+					),
 				),
 			),
 		),
