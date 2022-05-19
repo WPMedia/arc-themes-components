@@ -187,7 +187,7 @@
 		// body
 		"body-font-weight": var(--global-font-weight-4),
 		"body-font-size": var(--global-font-size-3),
-		"body-line-height": var(--global-line-height-4),
+		"body-line-height": var(--global-line-height-3),
 		// body : small
 		"body-font-weight-small": var(--global-font-weight-4),
 		"body-font-size-small": var(--global-font-size-2),
@@ -360,7 +360,10 @@
 				input-input: (
 					border: var(--global-border-width-1) var(--global-border-style-1) var(--form-border-color),
 					border-radius: var(--global-border-radius-1),
-					padding: var(--global-spacing-2) var(--global-spacing-4),
+					padding: var(--global-spacing-4) var(--global-spacing-2),
+				),
+				input-small-input: (
+					padding: var(--global-spacing-1) var(--global-spacing-2),
 				),
 				input-input-focus: (
 					outline: solid 2px var(--form-border-color),
@@ -390,11 +393,17 @@
 				link: (
 					color: var(--color-primary),
 				),
+				link-active: (
+					text-decoration: none,
+				),
+				link-hover: (
+					text-decoration: none,
+				),
 				media-item: (
 					align-items: stretch,
 					display: flex,
 					flex-direction: column,
-					gap: var(--global-spacing-1),
+					gap: var(--global-spacing-2),
 				),
 				media-item-fig-caption: (
 					color: var(--body-text-color-subtle),
@@ -646,6 +655,7 @@
 		desktop: (
 			alias: (
 				"body-font-size": var(--global-font-size-4),
+				"body-line-height": var(--global-line-height-4),
 				"body-font-size-small": var(--global-font-size-3),
 				"body-line-height-small": var(--global-line-height-3),
 				"body-font-size-tiny": var(--global-font-size-2),
