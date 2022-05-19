@@ -362,6 +362,9 @@
 					border-radius: var(--global-border-radius-1),
 					padding: var(--global-spacing-4) var(--global-spacing-2),
 				),
+				input-small-input: (
+					padding: var(--global-spacing-1) var(--global-spacing-2),
+				),
 				input-input-focus: (
 					outline: solid 2px var(--form-border-color),
 					outline-offset: 1px,

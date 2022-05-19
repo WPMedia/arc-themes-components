@@ -16,6 +16,22 @@
 	}
 }
 
+.c-input--small {
+	@include scss.component-properties("input-small");
+
+	.c-input__input {
+		@include scss.component-with-states("input-small-input", [focus]);
+	}
+
+	.c-input__label {
+		@include scss.component-properties("input-small-label");
+	}
+
+	.c-input__tip {
+		@include scss.component-properties("input-small-tip");
+	}
+}
+
 .c-input--default {
 	@include scss.component-properties("input-default");
 

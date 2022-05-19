@@ -10,6 +10,11 @@ export const FIELD_TYPES = {
 	TEXT: "text",
 };
 
+const INPUT_SIZE = {
+	LARGE: "large",
+	SMALL: "small",
+};
+
 const INPUT_STATUS = {
 	DEFAULT: "default",
 	ERROR: "error",
@@ -32,17 +37,18 @@ const Input = ({
 	className,
 	defaultValue,
 	hidden,
+	inputState,
 	label,
 	name,
 	onChange,
 	placeholder,
 	required,
 	showDefaultError,
+	size,
 	tip,
 	type,
 	validationErrorMessage,
 	validationPattern,
-	inputState,
 }) => {
 	const [valid, setValid] = useState(true);
 	const [value, setValue] = useState(defaultValue);
@@ -91,6 +97,7 @@ const Input = ({
 	const containerClassNames = [
 		COMPONENT_CLASS_NAME,
 		className,
+		`${COMPONENT_CLASS_NAME}--${size}`,
 		// hidden overrides input state
 		hidden ? `${COMPONENT_CLASS_NAME}--hidden` : `${COMPONENT_CLASS_NAME}--${derivedInputState}`,
 	]
@@ -124,8 +131,14 @@ const Input = ({
 };
 
 Input.propTypes = {
+	/** Class name(s) that get appended to default class name of the component */
+	className: PropTypes.string,
 	/** Default value for the input */
 	defaultValue: PropTypes.string,
+	/** Whether the input, label, and tip are hidden */
+	hidden: PropTypes.bool,
+	/** Status of the input passed down */
+	inputState: PropTypes.oneOf(Object.values(INPUT_STATUS)),
 	/** Label for the input for indicating to users input's purpose */
 	label: PropTypes.string.isRequired,
 	/** Name of the input for submitting data */
@@ -136,10 +149,10 @@ Input.propTypes = {
 	placeholder: PropTypes.string,
 	/** Whether the input is required */
 	required: PropTypes.bool,
-	/** Whether the input, label, and tip are hidden */
-	hidden: PropTypes.bool,
 	/** Whether to show the default error message */
 	showDefaultError: PropTypes.bool,
+	/** Size of the input */
+	size: PropTypes.oneOf(Object.values(INPUT_SIZE)),
 	/** Tip for the input. Shown on the page as a hint for users */
 	tip: PropTypes.string,
 	/** Type of the input based on available types listed */
@@ -148,10 +161,6 @@ Input.propTypes = {
 	validationErrorMessage: PropTypes.string,
 	/** Validation Pattern is a regex pattern for handling errors */
 	validationPattern: PropTypes.string,
-	/** Class name(s) that get appended to default class name of the component */
-	className: PropTypes.string,
-	/** Status of the input passed down */
-	inputState: PropTypes.oneOf(Object.values(INPUT_STATUS)),
 };
 
 Input.defaultProps = {
@@ -160,6 +169,7 @@ Input.defaultProps = {
 	onChange: () => {},
 	required: false,
 	showDefaultError: false,
+	size: INPUT_SIZE.LARGE,
 	type: FIELD_TYPES.TEXT,
 };
 
