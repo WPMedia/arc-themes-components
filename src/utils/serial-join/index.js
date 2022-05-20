@@ -2,7 +2,7 @@
 
 const serialJoin = (list = [], conjunction = "and", delimiter = ",", spacer = " ") =>
 	list
-		.filter((item) => typeof item !== "object" && typeof item !== "undefined" && item !== null)
+		.filter((item) => typeof item !== "object" && typeof item !== "undefined")
 		.map(
 			(item, index, { length }) =>
 				`${length > 1 && index === length - 1 ? `${conjunction}${spacer}` : ""}${item}${
