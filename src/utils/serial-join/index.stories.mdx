@@ -18,12 +18,12 @@ const formattedString = serialJoin(["one", "two", "three"]);
 
 ## Properties
 
-| Name            | Description                                                      | Default |
-| --------------- | ---------------------------------------------------------------- | ------- |
-| **list**        | An array of values that can be coerced to a string value.        | []      |
-| **conjunction** | A set of characters that should be used for the "and".           | "and"   |
-| **delimiter**   | A set of characters that should be used for the "comma".         | ","     |
-| **spacer**      | A set of characters that should be used for the inserted spaces. | " "     |
+| Name            | Description                                                                    | Default |
+| --------------- | ------------------------------------------------------------------------------ | ------- |
+| **list**        | An array of values that can be coerced to a string value or an array of nodes. | []      |
+| **conjunction** | A set of characters that should be used for the "and".                         | "and"   |
+| **delimiter**   | A set of characters that should be used for the "comma".                       | ","     |
+| **spacer**      | A set of characters that should be used for the inserted spaces.               | " "     |
 
 ## Stories
 
@@ -72,5 +72,13 @@ const formattedString = serialJoin(["one", "two", "three"]);
 <Canvas>
 	<Story name="Three items, with an empty conjunction, custom delimiter, and empty spacer">
 		<div>{serialJoin(["one", "two", "three"], "", "/", "")}</div>
+	</Story>
+</Canvas>
+
+** Three node items **
+
+<Canvas>
+	<Story name="Three node items">
+		<div>{serialJoin([<span>one</span>, <i>two</i>, <b>three</b>])}</div>
 	</Story>
 </Canvas>

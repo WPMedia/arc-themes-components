@@ -6,7 +6,7 @@ import formatAuthors from ".";
 
 # Serial Join
 
-The `formatAuthors()` function takes in an array of author Objects and returns it using the serial comma (Oxford comma) rules.
+The `formatAuthors()` function takes in an array of author objects and returns an array of nodes of linked and unlinked authors (based on the data provided) using the serial comma (Oxford comma) rules.
 
 ## Usage
 
@@ -28,17 +28,13 @@ const htmlString = formatAuthors(globalContent.credits.by);
 
 <Canvas>
 	<Story name="One item">
-		<div
-			dangerouslySetInnerHTML={{
-				__html: formatAuthors([
-					{
-						name: "Author One",
-						type: "author",
-						url: "#",
-					},
-				]),
-			}}
-		/>
+		{formatAuthors([
+			{
+				name: "Author One",
+				type: "author",
+				url: "#",
+			},
+		])}
 	</Story>
 </Canvas>
 
@@ -46,21 +42,17 @@ const htmlString = formatAuthors(globalContent.credits.by);
 
 <Canvas>
 	<Story name="Two items">
-		<div
-			dangerouslySetInnerHTML={{
-				__html: formatAuthors([
-					{
-						name: "Author One",
-						type: "author",
-						url: "#",
-					},
-					{
-						name: "Author Two",
-						type: "author",
-					},
-				]),
-			}}
-		/>
+		{formatAuthors([
+			{
+				name: "Author One",
+				type: "author",
+				url: "#",
+			},
+			{
+				name: "Author Two",
+				type: "author",
+			},
+		])}
 	</Story>
 </Canvas>
 
@@ -68,25 +60,22 @@ const htmlString = formatAuthors(globalContent.credits.by);
 
 <Canvas>
 	<Story name="Three items">
-		<div
-			dangerouslySetInnerHTML={{
-				__html: formatAuthors([
-					{
-						name: "Author One",
-						type: "author",
-						url: "#",
-					},
-					{
-						name: "Author Two",
-						type: "author",
-					},
-					{
-						name: "Author Three",
-						type: "author",
-					},
-				]),
-			}}
-		/>
+		{formatAuthors([
+			{
+				name: "Author One",
+				type: "author",
+				url: "#",
+			},
+			{
+				name: "Author Two",
+				type: "author",
+			},
+			{
+				name: "Author Three",
+				type: "author",
+				url: "#",
+			},
+		])}
 	</Story>
 </Canvas>
 
@@ -94,27 +83,24 @@ const htmlString = formatAuthors(globalContent.credits.by);
 
 <Canvas>
 	<Story name="Three items, with a custom conjunction">
-		<div
-			dangerouslySetInnerHTML={{
-				__html: formatAuthors(
-					[
-						{
-							name: "Author One",
-							type: "author",
-							url: "#",
-						},
-						{
-							name: "Author Two",
-							type: "author",
-						},
-						{
-							name: "Author Three",
-							type: "author",
-						},
-					],
-					"or"
-				),
-			}}
-		/>
+		{formatAuthors(
+			[
+				{
+					name: "Author One",
+					type: "author",
+					url: "#",
+				},
+				{
+					name: "Author Two",
+					type: "author",
+				},
+				{
+					name: "Author Three",
+					type: "author",
+					url: "#",
+				},
+			],
+			"or"
+		)}
 	</Story>
 </Canvas>

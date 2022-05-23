@@ -1,3 +1,5 @@
+import { render } from "@testing-library/react";
+
 import formatAuthors from ".";
 
 const authors = [
@@ -22,35 +24,48 @@ const authors = [
 ];
 
 describe("format authors utility function", () => {
-	it("should return empty string if nothing passed in", () => {
-		expect(formatAuthors()).toBe("");
+	it("should return nothing if nothing passed in", () => {
+		const { container } = render(formatAuthors());
+		expect(container).toBeEmptyDOMElement();
 	});
-	it("should return empty string if empty array passed in", () => {
-		expect(formatAuthors([])).toBe("");
+	it("should return nothing if empty array passed in", () => {
+		const { container } = render(formatAuthors([]));
+		expect(container).toBeEmptyDOMElement();
 	});
-	it("should return empty string if null value passed in", () => {
-		expect(formatAuthors([null])).toBe("");
+	it("should return nothing if null value passed in", () => {
+		const { container } = render(formatAuthors([null]));
+		expect(container).toBeEmptyDOMElement();
 	});
-	it("should return empty string if undefined value passed in", () => {
-		expect(formatAuthors([undefined])).toBe("");
-	});
-	it("should return properly formatted for a single item", () => {
-		expect(formatAuthors(authors.slice(0, 1))).toBe('<a href="#">Author One</a>');
-	});
-	it("should return properly formatted for two items", () => {
-		expect(formatAuthors(authors.slice(0, 2))).toBe('<a href="#">Author One</a> and Author Two');
-	});
-	it("should return properly formatted for three items", () => {
-		expect(formatAuthors(authors.slice(0, 3))).toBe(
-			'<a href="#">Author One</a>, Author Two, and Author Three'
-		);
+	it("should return nothing if undefined value passed in", () => {
+		const { container } = render(formatAuthors([undefined]));
+		expect(container).toBeEmptyDOMElement();
 	});
 	it("should return nothing for invalid authors", () => {
-		expect(formatAuthors(authors.slice(3, 4))).toBe("");
+		const { container } = render(formatAuthors(authors.slice(3, 4)));
+		expect(container).toBeEmptyDOMElement();
 	});
-	it("should return properly formatted for three items aith custom conjunction", () => {
-		expect(formatAuthors(authors.slice(0, 3), "or")).toBe(
-			'<a href="#">Author One</a>, Author Two, or Author Three'
-		);
+	it("should return properly formatted for a single item", () => {
+		const { queryByRole } = render(formatAuthors(authors.slice(0, 1)));
+		expect(queryByRole("link", { name: "Author One" })).toBeInTheDocument();
+	});
+	it("should return properly formatted for two items", () => {
+		const { container, queryByRole } = render(formatAuthors(authors.slice(0, 2)));
+		expect(queryByRole("link", { name: "Author One" })).toBeInTheDocument();
+		expect(queryByRole("link", { name: "Author Two" })).not.toBeInTheDocument();
+		expect(container.textContent).toBe("Author One and Author Two");
+	});
+	it("should return properly formatted for three items", () => {
+		const { container, queryByRole } = render(formatAuthors(authors.slice(0, 3)));
+		expect(queryByRole("link", { name: "Author One" })).toBeInTheDocument();
+		expect(queryByRole("link", { name: "Author Two" })).not.toBeInTheDocument();
+		expect(queryByRole("link", { name: "Author Three" })).not.toBeInTheDocument();
+		expect(container.textContent).toBe("Author One, Author Two, and Author Three");
+	});
+	it("should return properly formatted for three items with custom conjunction", () => {
+		const { container, queryByRole } = render(formatAuthors(authors.slice(0, 3), "or"));
+		expect(queryByRole("link", { name: "Author One" })).toBeInTheDocument();
+		expect(queryByRole("link", { name: "Author Two" })).not.toBeInTheDocument();
+		expect(queryByRole("link", { name: "Author Three" })).not.toBeInTheDocument();
+		expect(container.textContent).toBe("Author One, Author Two, or Author Three");
 	});
 });
