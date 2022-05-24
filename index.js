@@ -22,6 +22,7 @@ import Stack from "./src/components/stack";
 import Video from "./src/components/video";
 import formatCredits from "./src/utils/format-credits";
 import formatPowaVideoEmbed from "./src/utils/format-powa-video-embed";
+import formatURL from "./src/utils/format-url";
 import getImageFromANS from "./src/utils/get-image-from-ans";
 import useInterval from "./src/utils/hooks/use-interval";
 import isServerSide from "./src/utils/is-server-side";
@@ -34,6 +35,7 @@ export {
 	Date,
 	formatCredits,
 	formatPowaVideoEmbed,
+	formatURL,
 	getImageFromANS,
 	Grid,
 	Heading,
