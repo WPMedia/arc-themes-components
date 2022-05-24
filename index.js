@@ -20,12 +20,15 @@ import Price from "./src/components/price";
 import Separator from "./src/components/separator";
 import Stack from "./src/components/stack";
 import Video from "./src/components/video";
+
+import formatAuthors from "./src/utils/format-authors";
 import formatCredits from "./src/utils/format-credits";
 import formatPowaVideoEmbed from "./src/utils/format-powa-video-embed";
 import formatURL from "./src/utils/format-url";
 import getImageFromANS from "./src/utils/get-image-from-ans";
 import useInterval from "./src/utils/hooks/use-interval";
 import isServerSide from "./src/utils/is-server-side";
+import serialJoin from "./src/utils/serial-join";
 
 export {
 	Attribution,
@@ -33,6 +36,7 @@ export {
 	Button,
 	Carousel,
 	Date,
+	formatAuthors,
 	formatCredits,
 	formatPowaVideoEmbed,
 	formatURL,
@@ -51,6 +55,7 @@ export {
 	Pill,
 	Price,
 	Separator,
+	serialJoin,
 	Stack,
 	useInterval,
 	Video,
