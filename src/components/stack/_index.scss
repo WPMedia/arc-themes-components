@@ -18,7 +18,11 @@
 
 .c-stack[data-style-direction="horizontal"] {
 	flex-direction: row;
+	// only affects immediate child
+	// not nested not-last-children
+	// any element except hr. in case someone wants to customize last children and keep hr
 	> *:not(:last-child):not(hr) {
+		// horizontal direction so can customize functionality per direction
 		@include scss.component-properties("stack-not-last-child-horizontal");
 	}
 }
