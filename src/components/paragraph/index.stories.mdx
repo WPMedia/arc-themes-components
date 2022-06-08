@@ -8,6 +8,10 @@ import Paragraph from "./";
 
 Outputs a paragraph of text. Allows for plain text as well as text with HTML markup. Provides for truncation as well.
 
+If the text you are trying to output has HTML entities within it you will not be able to
+use the `{children}`. You will need to use `dangerouslySetInnerHTML` to overcome a
+limitation with JSX
+
 ## Usage
 
 ```jsx
