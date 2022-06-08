@@ -61,6 +61,25 @@ const Feature = () => (
 	</Story>
 </Canvas>
 
+** Vertical with nested div **
+
+<Canvas>
+	<Story name="Vertical with nested divs">
+		<Stack>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "blue" }}>
+				<div>
+					<p style={{ color: "red" }}>text 1 </p>{" "}
+				</div>
+				<div>
+					<p style={{ color: "red" }}>text 2</p>{" "}
+				</div>
+			</div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "red" }}> </div>
+			<div style={{ height: "250px", width: "250px", backgroundColor: "brown" }}> </div>
+		</Stack>
+	</Story>
+</Canvas>
+
 ** Vertical centered**
 
 <Canvas>

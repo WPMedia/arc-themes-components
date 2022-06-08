@@ -11,10 +11,16 @@
 
 .c-stack[data-style-direction="vertical"] {
 	flex-flow: column;
+	> *:not(:last-child):not(hr) {
+		@include scss.component-properties("stack-not-last-child-vertical");
+	}
 }
 
 .c-stack[data-style-direction="horizontal"] {
 	flex-direction: row;
+	> *:not(:last-child):not(hr) {
+		@include scss.component-properties("stack-not-last-child-horizontal");
+	}
 }
 
 .c-stack[data-style-direction="vertical"] > hr {
