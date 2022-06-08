@@ -19,7 +19,7 @@ Paragraph.defaultProps = {
 
 Paragraph.propTypes = {
 	/** Elements that will be displayed within the component. */
-	children: PropTypes.any.isRequired,
+	children: PropTypes.any,
 	/** Class name(s) that get appended to default class name of the component */
 	className: PropTypes.string,
 	/** Number of lines to show before being truncated and augmented with ellipses.
