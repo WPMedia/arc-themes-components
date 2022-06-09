@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import renderer from "react-test-renderer";
 
 import Button from ".";
 
@@ -37,6 +38,21 @@ describe("Button", () => {
 
 		expect(element).toHaveClass(ORIGINAL_CLASSES);
 		expect(element).toHaveClass("c-button--primary");
+	});
+
+	it("should only render children span when children passed", () => {
+		const tree = renderer.create(<Button iconLeft={<p>Icon?</p>} />).toJSON();
+
+		expect(tree).toMatchInlineSnapshot(`
+		<button
+		  className="c-button c-button--medium c-button--default"
+		  type="button"
+		>
+		  <p>
+		    Icon?
+		  </p>
+		</button>
+	`);
 	});
 
 	it("should render as an anchor", () => {
