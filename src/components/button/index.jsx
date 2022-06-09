@@ -4,7 +4,7 @@
 	value - which ESLint is unable to parse as acceptable when in the use case below
 	is valid as there is a default and the use of oneOf PropType validation
 */
-import { forwardRef } from "react";
+import { Children, forwardRef } from "react";
 import PropTypes from "prop-types";
 
 const COMPONENT_CLASS_NAME = "c-button";
@@ -47,7 +47,7 @@ const Button = forwardRef((props, ref) => {
 	const buttonContents = (
 		<>
 			{iconLeft}
-			<span>{children}</span>
+			{Children.count(children) ? <span>{children}</span> : null}
 			{iconRight}
 		</>
 	);
