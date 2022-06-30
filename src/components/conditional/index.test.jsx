@@ -16,6 +16,6 @@ describe("Conditional", () => {
 				Hello World
 			</Conditional>
 		);
-		expect(screen.getByRole("link")).toBeNull();
+		expect(screen.getByRole("link")).not.toBeNull();
 	});
 });
