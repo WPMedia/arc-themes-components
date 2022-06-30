@@ -128,6 +128,18 @@ describe("Link", () => {
 		expect(additionalHiddenText).toHaveClass("visually-hidden");
 	});
 
+	it("should render default open new tab text if no supplemental text and new tab", () => {
+		render(
+			<Link href={EXTERNAL_LINK_DESTINATION} openInNewTab>
+				{LINK_TEXT}
+			</Link>
+		);
+
+		const additionalHiddenText = screen.queryByText("Opens in new window");
+
+		expect(additionalHiddenText).toHaveClass("visually-hidden");
+	});
+
 	it("should render no supplemental text if no supplemental text and same tab", () => {
 		render(<Link href="/">{LINK_TEXT}</Link>);
 

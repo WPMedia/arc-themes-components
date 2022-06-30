@@ -4,6 +4,7 @@ import Attribution from "./src/components/attribution";
 import Badge from "./src/components/badge";
 import Button from "./src/components/button";
 import Carousel from "./src/components/carousel";
+import Conditional from "./src/components/conditional";
 import Date from "./src/components/date";
 import Grid from "./src/components/grid";
 import Heading from "./src/components/headings/heading";
@@ -35,6 +36,7 @@ export {
 	Badge,
 	Button,
 	Carousel,
+	Conditional,
 	Date,
 	formatAuthors,
 	formatCredits,
