@@ -10,7 +10,7 @@ describe("Conditional", () => {
 		expect(screen.queryByText("Hello World")).not.toBeNull();
 	});
 
-	it("should render additional classes", () => {
+	it("should not use the Component", () => {
 		render(
 			<Conditional component={Link} condition={"b" !== "a"} href="/">
 				Hello World
