@@ -19,6 +19,10 @@ const getLocation = (uri) => {
 };
 
 const formatURL = (item) => {
+	if (!item) {
+		return "";
+	}
+
 	const url = getLocation(item);
 
 	if (url.hash || url.search || url.pathname.match(/\./)) {

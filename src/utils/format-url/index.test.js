@@ -23,14 +23,24 @@ describe("Format url should not add a slash at the end if", () => {
 		const mailToLink = "mailto:readers@washpost.com";
 		expect(formatURL(mailToLink)).toStrictEqual(mailToLink);
 	});
+
 	it("it is with query params", () => {
 		const linkWithQuery = "/test?query=a";
 
 		expect(formatURL(linkWithQuery)).toStrictEqual(linkWithQuery);
 	});
+
 	it("it already has one", () => {
 		const linkWithSlash = "/test/";
 
 		expect(formatURL(linkWithSlash)).toStrictEqual(linkWithSlash);
+	});
+
+	it("handles nulls", () => {
+		expect(formatURL(null)).toStrictEqual("");
+	});
+
+	it("handles undefined", () => {
+		expect(formatURL(undefined)).toStrictEqual("");
 	});
 });
