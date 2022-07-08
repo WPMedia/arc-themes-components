@@ -4,11 +4,11 @@ const COMPONENT_CLASS_NAME = "c-image";
 
 const Image = ({
 	alt,
-	availableImageSizes = [],
+	// availableImageSizes = [],
 	className,
-	imageUrlWithToken,
+	// imageUrlWithToken,
 	loading,
-	mediaConditionSizes = [],
+	// mediaConditionSizes = [],
 	resizerOptions = {},
 	src,
 }) => {
@@ -22,25 +22,6 @@ const Image = ({
 			loading={loading}
 			src={src}
 			width={width}
-			sizes={mediaConditionSizes.reduce((sizeString, currentObject) => {
-				const { isDefault = false } = currentObject;
-
-				const { mediaCondition, sourceSizeValue } = currentObject;
-
-				// should only be one default
-				if (isDefault) {
-					return `${sizeString}${sourceSizeValue}`;
-				}
-
-				return `${mediaCondition} ${sourceSizeValue}, ${sizeString}`;
-			}, "")}
-			srcSet={availableImageSizes.reduce((srcSetString, currentWidth) => {
-				// on first call
-				if (srcSetString === "") {
-					return `${imageUrlWithToken}&width=${currentWidth} ${currentWidth}w`;
-				}
-				return `${srcSetString}, ${imageUrlWithToken}&width=${currentWidth} ${currentWidth}w`;
-			}, "")}
 		/>
 	);
 };
