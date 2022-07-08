@@ -46,8 +46,7 @@ const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
 		<Image
 			src="/computer-user.jpeg"
 			alt="A person sat down using a laptop computer"
-			width="200"
-			height="147"
+			resizedOptions={{ width: 200, height: 147 }}
 		/>
 	</Story>
 </Canvas>
@@ -56,7 +55,11 @@ const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
 
 <Canvas>
 	<Story name="Width only">
-		<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" width="250" />
+		<Image
+			src="/computer-user.jpeg"
+			alt="A person sat down using a laptop computer"
+			resizedOptions={{ width: 250 }}
+		/>
 	</Story>
 </Canvas>
 
@@ -64,6 +67,10 @@ const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
 
 <Canvas>
 	<Story name="Height only">
-		<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" height="250" />
+		<Image
+			src="/computer-user.jpeg"
+			alt="A person sat down using a laptop computer"
+			resizedOptions={{ height: 250 }}
+		/>
 	</Story>
 </Canvas>
