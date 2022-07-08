@@ -4,43 +4,46 @@ const COMPONENT_CLASS_NAME = "c-image";
 
 const Image = ({
 	alt,
-	className,
-	height,
-	loading,
-	src,
-	width,
-	mediaConditionSizes = [],
 	availableImageSizes = [],
+	className,
 	imageUrlWithToken,
-}) => (
-	<img
-		alt={alt}
-		className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
-		height={height}
-		loading={loading}
-		src={src}
-		width={width}
-		sizes={mediaConditionSizes.reduce((sizeString, currentObject) => {
-			const { isDefault = false } = currentObject;
+	loading,
+	mediaConditionSizes = [],
+	resizerOptions = {},
+	src,
+}) => {
+	const { height = null, width = null } = resizerOptions;
 
-			const { mediaCondition, sourceSizeValue } = currentObject;
+	return (
+		<img
+			alt={alt}
+			className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
+			height={height}
+			loading={loading}
+			src={src}
+			width={width}
+			sizes={mediaConditionSizes.reduce((sizeString, currentObject) => {
+				const { isDefault = false } = currentObject;
 
-			// should only be one default
-			if (isDefault) {
-				return `${sizeString}${sourceSizeValue}`;
-			}
+				const { mediaCondition, sourceSizeValue } = currentObject;
 
-			return `${mediaCondition} ${sourceSizeValue}, ${sizeString}`;
-		}, "")}
-		srcSet={availableImageSizes.reduce((srcSetString, currentWidth) => {
-			// on first call
-			if (srcSetString === "") {
-				return `${imageUrlWithToken}&width=${currentWidth} ${currentWidth}w`;
-			}
-			return `${srcSetString}, ${imageUrlWithToken}&width=${currentWidth} ${currentWidth}w`;
-		}, "")}
-	/>
-);
+				// should only be one default
+				if (isDefault) {
+					return `${sizeString}${sourceSizeValue}`;
+				}
+
+				return `${mediaCondition} ${sourceSizeValue}, ${sizeString}`;
+			}, "")}
+			srcSet={availableImageSizes.reduce((srcSetString, currentWidth) => {
+				// on first call
+				if (srcSetString === "") {
+					return `${imageUrlWithToken}&width=${currentWidth} ${currentWidth}w`;
+				}
+				return `${srcSetString}, ${imageUrlWithToken}&width=${currentWidth} ${currentWidth}w`;
+			}, "")}
+		/>
+	);
+};
 
 Image.defaultProps = {
 	alt: "",
