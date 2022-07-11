@@ -12,6 +12,7 @@ import HeadingSection from "./src/components/headings/section";
 import Icon from "./src/components/icon";
 import Image from "./src/components/image";
 import Input from "./src/components/input";
+import Join from "./src/components/join";
 import Link from "./src/components/link";
 import MediaItem from "./src/components/media-item";
 import Overline from "./src/components/overline";
@@ -26,6 +27,8 @@ import formatAuthors from "./src/utils/format-authors";
 import formatCredits from "./src/utils/format-credits";
 import formatPowaVideoEmbed from "./src/utils/format-powa-video-embed";
 import formatURL from "./src/utils/format-url";
+
+// the following are ordered by dependency
 import getImageFromANS from "./src/utils/get-image-from-ans";
 import useInterval from "./src/utils/hooks/use-interval";
 import isServerSide from "./src/utils/is-server-side";
@@ -50,6 +53,7 @@ export {
 	Image,
 	Input,
 	isServerSide,
+	Join,
 	Link,
 	MediaItem,
 	Overline,
