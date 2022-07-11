@@ -32,7 +32,7 @@ Details.propTypes = {
 	children: PropTypes.node.isRequired,
 	/** Icon to be used instead of default CSS behaviour for summary */
 	icon: PropTypes.node,
-	/** */
+	/** Denote the Icon placement in the summary, left or right */
 	iconPlacement: PropTypes.oneOf(["left", "right"]),
 	/** Flag to indicate whether or not the contents are shown by default */
 	open: PropTypes.bool,
