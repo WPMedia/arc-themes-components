@@ -1,0 +1,59 @@
+@use "../../scss";
+
+.c-details {
+	summary {
+		@include scss.component-properties("details-summary");
+	}
+
+	&__summary-text {
+		@include scss.component-properties("details-summary-text");
+	}
+
+	&__summary-icon {
+		@include scss.component-properties("details-summary-icon");
+	}
+
+	&[open] {
+		@include scss.component-properties("details-open");
+	}
+
+	&[open] &__summary-text {
+		@include scss.component-properties("details-open-summary-text");
+	}
+
+	&[open] &__summary-icon {
+		@include scss.component-properties("details-open-summary-icon");
+	}
+
+	&--with-icon {
+		summary {
+			align-items: center;
+			display: flex;
+			@include scss.component-properties("details-with-icon-summary");
+		}
+
+		&__summary-text {
+			@include scss.component-properties("details-with-icon-summary-text");
+		}
+
+		&__summary-icon {
+			@include scss.component-properties("details-with-icon-summary-icon");
+		}
+
+		&[open] {
+			@include scss.component-properties("details-with-icon-open");
+		}
+
+		&[open] &__summary-text {
+			@include scss.component-properties("details-with-icon-open-summary-text");
+		}
+
+		&[open] &__summary-icon {
+			@include scss.component-properties("details-with-icon-open-summary-icon");
+		}
+
+		@include scss.component-properties("details-with-icon");
+	}
+
+	@include scss.component-properties("details");
+}
