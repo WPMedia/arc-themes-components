@@ -8,14 +8,16 @@ import Details from ".";
 
 # Details
 
---- Add a description of the component here ---
+The `Details` component is a disclosure widget in which information is visible only when the widget is toggled into an "open" state. A summary or label must be provided.
+
+This is a wrapper for the HTML `<details>` element - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details
 
 ## Usage
 
 ```jsx
 import { Details } from "@wpmedia/arc-themes-components";
 
-const Feature = () => <Details>Component Children</Details>;
+const Feature = () => <Details summary="Summary">Details Text</Details>;
 ```
 
 ## Properties
