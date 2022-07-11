@@ -24,7 +24,7 @@ describe("Details", () => {
 
 	it("should render with custom Icon", () => {
 		render(
-			<Details summary="Summary" icon={<>Icon</>}>
+			<Details summary="Summary" icon={<>Icon</>} iconPlacement="left">
 				Hello World
 			</Details>
 		);
