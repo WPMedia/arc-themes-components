@@ -40,4 +40,22 @@ describe("Image", () => {
 		expect(element).toHaveAttribute("height", "100");
 		expect(element).not.toHaveAttribute("width");
 	});
+
+	it("should pass in a first option with ? into the source with the resized image option", () => {
+		render(<Image src="test-image.jpg" resizedOptions={{ filter: 70 }} />);
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute("src", "test-image.jpg?filter=70");
+	});
+
+	it("should pass in many options into the source with the resized image option", () => {
+		render(<Image src="test-image.jpg" resizedOptions={{ filter: 70, quality: 50 }} />);
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute("src", "test-image.jpg?filter=70&quality=50");
+	});
+
+	it("should pass in boolean as a string into the source with the resized image option", () => {
+		render(<Image src="test-image.jpg" resizedOptions={{ filter: true, fancy: false }} />);
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute("src", "test-image.jpg?filter=true&fancy=false");
+	});
 });
