@@ -390,7 +390,6 @@
 				),
 				link: (
 					color: var(--color-primary),
-					text-decoration: underline,
 				),
 				link-active: (
 					text-decoration: none,
@@ -463,7 +462,7 @@
 					components: (
 						button-default: (
 							background: none,
-							border-width: none,
+							border-width: 0,
 							flex: 0 0 auto,
 						),
 						button-large: (
