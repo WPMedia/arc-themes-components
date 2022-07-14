@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const COMPONENT_CLASS_NAME = "c-image";
 
-const Image = ({ alt, className, loading, src, resizedOptions }) => {
+const Image = ({ alt, className, loading, src, resizedOptions, resizerURL }) => {
 	const { width, height } = resizedOptions;
 	const stringOptions = Object.keys(resizedOptions).reduce((acc, key, currentIndex) => {
 		// on the first iteration need to prepend the ? to the string
@@ -11,7 +11,7 @@ const Image = ({ alt, className, loading, src, resizedOptions }) => {
 		}
 		return `${acc}&${key}=${resizedOptions[key]}`;
 	}, "");
-	const srcWithOptions = src.concat(stringOptions);
+	const srcWithOptions = resizerURL.concat(src, stringOptions);
 	return (
 		<img
 			alt={alt}
@@ -28,6 +28,7 @@ Image.defaultProps = {
 	alt: "",
 	loading: "lazy",
 	resizedOptions: {},
+	resizerURL: "",
 };
 
 Image.propTypes = {
@@ -44,6 +45,8 @@ Image.propTypes = {
 		/** The intrinsic height of the image in pixels */
 		height: PropTypes.number,
 	}),
+	/** The URL of the resizer service */
+	resizerURL: PropTypes.string,
 	/** The URL to an image to load and display */
 	src: PropTypes.string.isRequired,
 };

@@ -58,4 +58,19 @@ describe("Image", () => {
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute("src", "test-image.jpg?filter=true&fancy=false");
 	});
+
+	it("should prefix the src with the resizer url and add query parameters", () => {
+		render(
+			<Image
+				src="/test-image.jpg"
+				resizerURL="https://resizer.example.com"
+				resizedOptions={{ filter: 70, quality: 50 }}
+			/>
+		);
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute(
+			"src",
+			"https://resizer.example.com/test-image.jpg?filter=70&quality=50"
+		);
+	});
 });
