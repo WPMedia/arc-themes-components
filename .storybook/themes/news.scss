@@ -251,7 +251,9 @@
 					line-height: var(--body-line-height),
 				),
 				button: (
-					border: var(--global-border-width-1) var(--global-border-style-1) transparent,
+					border-color: transparent,
+					border-style: var(--global-border-style-1),
+					border-width: var(--global-border-width-1),
 					border-radius: var(--border-radius),
 					font-weight: var(--global-font-weight-7),
 					gap: var(--global-spacing-2),
