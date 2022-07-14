@@ -462,7 +462,7 @@
 					components: (
 						button-default: (
 							background: none,
-							border: none,
+							border-width: none,
 							flex: 0 0 auto,
 						),
 						button-large: (
@@ -1132,6 +1132,8 @@
 					components: (
 						button: (
 							background-color: transparent,
+						),
+						button-default: (
 							border-width: 0,
 						),
 						button-medium: (
