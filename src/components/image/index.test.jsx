@@ -73,4 +73,20 @@ describe("Image", () => {
 			"https://resizer.example.com/test-image.jpg?filter=70&quality=50"
 		);
 	});
+
+	it("should handle width and height passed into responsive images and render srcset", () => {
+		render(
+			<Image
+				src="/test-image.jpg"
+				resizerURL="https://resizer.example.com"
+				resizedOptions={{ filter: 70, quality: 50, height: 50, width: 100 }}
+				responsiveImages={[100, 200, 300]}
+			/>
+		);
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute(
+			"srcset",
+			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&width=100&height=50 100w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&width=200&height=100 200w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&width=300&height=150 300w"
+		);
+	});
 });
