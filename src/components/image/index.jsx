@@ -8,6 +8,7 @@ const Image = ({ alt, className, loading, src, resizedOptions, resizerURL, respo
 	const { width, height, auth } = resizedOptions;
 
 	if (!auth) {
+		// eslint-disable-next-line no-console
 		console.error("No auth token provided for resizer");
 
 		return (
