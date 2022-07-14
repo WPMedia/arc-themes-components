@@ -3,13 +3,13 @@
 .c-paragraph {
 	--paragraph-truncation: var(--c-paragraph--webkit-line-clamp, "none");
 
-	overflow: hidden;
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-moz-box-oriented: vertical;
-	text-overflow: ellipsis;
-
 	@include scss.component-properties("paragraph");
+
+	overflow: var(--paragraph-overflow, hidden);
+	display: var(--paragraph-display, -webkit-box);
+	-webkit-box-orient: var(--paragraph--webkit-box-orient, vertical);
+	-moz-box-oriented: var(--paragraph--moz-box-oriented, vertical);
+	text-overflow: var(--paragraph-text-overflow, ellipsis);
 
 	-webkit-line-clamp: var(--paragraph-truncation);
 }
