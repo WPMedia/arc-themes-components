@@ -1130,9 +1130,11 @@
 					position: fixed,
 					top: 200px,
 					components: (
-						button-medium: (
-							background: transparent,
+						button: (
+							background-color: transparent,
 							border-width: 0,
+						),
+						button-medium: (
 							padding: 0 var(--global-spacing-3),
 						),
 					),
