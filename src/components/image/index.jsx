@@ -3,39 +3,43 @@ import PropTypes from "prop-types";
 const COMPONENT_CLASS_NAME = "c-image";
 
 const Image = ({ alt, className, loading, src, resizedOptions, resizerURL, responsiveImages }) => {
-	const { width, height } = resizedOptions;
+	// get the default height and width of the image
+	// use aspect ratio to generate other sizes
+	const { width, height, auth } = resizedOptions;
 
-	// todo: deduplicate logic with height and width
-	const stringOptions = Object.keys(resizedOptions).reduce((acc, key, currentIndex) => {
-		// on the first iteration need to prepend the ? to the string
-		if (currentIndex === 0) {
-			return `?${key}=${resizedOptions[key]}`;
-		}
-		return `${acc}&${key}=${resizedOptions[key]}`;
-	}, "");
-	// todo: will need to ignore height and width setting here
-	// this will allow the options to be added in the srcset
-	const stringOptionsWithoutHeightWidth = Object.keys(resizedOptions).reduce(
-		(acc, key, currentIndex) => {
-			if (key === "height" || key === "width") {
-				return acc;
-			}
-			// on the first iteration need to prepend the ? to the string
-			if (currentIndex === 0) {
-				return `?${key}=${resizedOptions[key]}`;
-			}
-			return `${acc}&${key}=${resizedOptions[key]}`;
-		},
-		""
-	);
-	const srcWithOptions = resizerURL.concat(src, stringOptions);
-	const srcWithOptionsWithoutHeightWidth = resizerURL.concat(src, stringOptionsWithoutHeightWidth);
+	if (!auth) {
+		console.error("No auth token provided for resizer");
+
+		return (
+			<img
+				alt={alt}
+				className={className ? `${COMPONENT_CLASS_NAME} ${className}` : COMPONENT_CLASS_NAME}
+				src={src}
+				width={width}
+				height={height}
+			/>
+		);
+	}
 
 	// todo: handle if there's no height and/or no width in the resized options
-	// get the aspect ratio of the image based on the resizedOptions.width and height
-	// height is 100px and width is 200px
-	// aspect ratio is 2
-	const aspectRatio = resizedOptions.width / resizedOptions.height;
+	const aspectRatio = width / height;
+
+	// add all options except height and width
+	const stringOptionsWithoutHeightWidth = Object.keys(resizedOptions).reduce((acc, key) => {
+		// skip height and width setting to account for different sizes
+		if (key === "height" || key === "width") {
+			return acc;
+		}
+
+		if (acc === "") {
+			return `?${key}=${resizedOptions[key]}`;
+		}
+
+		return `${acc}&${key}=${resizedOptions[key]}`;
+	}, "");
+
+	// "https://resizer.com" + "\image.jpg" + "?auth=secret&filter=true"
+	const srcWithOptionsWithoutHeightWidth = resizerURL.concat(src, stringOptionsWithoutHeightWidth);
 
 	// divide the derived aspect ratio by each of the responsiveImages widths to get the height
 	const responsiveHeightsAndWidths = responsiveImages.map((responsiveImageWidth) => ({
@@ -43,21 +47,30 @@ const Image = ({ alt, className, loading, src, resizedOptions, resizerURL, respo
 		height: responsiveImageWidth / aspectRatio,
 	}));
 
+	// add the height and width to the default src if they exist
+	// auth token will at least exist here so don't need to worry about ? prepend
+	const defaultSrc = srcWithOptionsWithoutHeightWidth.concat(
+		`${width ? `&width=${width}` : ""}${height ? `&height=${height}` : ""}`
+	);
+
 	return (
 		<img
 			alt={alt}
-			className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
+			className={className ? `${COMPONENT_CLASS_NAME} ${className}` : COMPONENT_CLASS_NAME}
 			height={height}
 			loading={loading}
-			src={srcWithOptions}
+			src={defaultSrc}
 			width={width}
-			// todo: handle if no responsive images are provided
-			srcSet={responsiveHeightsAndWidths
-				.map(
-					(responsiveImage) =>
-						`${srcWithOptionsWithoutHeightWidth}&width=${responsiveImage.width}&height=${responsiveImage.height} ${responsiveImage.width}w`
-				)
-				.join(", ")}
+			srcSet={
+				responsiveHeightsAndWidths.length > 0
+					? responsiveHeightsAndWidths
+							.map(
+								(responsiveImage) =>
+									`${srcWithOptionsWithoutHeightWidth}&width=${responsiveImage.width}&height=${responsiveImage.height} ${responsiveImage.width}w`
+							)
+							.join(", ")
+					: null
+			}
 		/>
 	);
 };
