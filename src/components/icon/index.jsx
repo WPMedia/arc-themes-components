@@ -58,6 +58,7 @@ Icon.propTypes = {
 	name: PropTypes.oneOf([
 		"ArrowLeft",
 		"ArrowRight",
+		"Camera",
 		"ChevronDown",
 		"ChevronLeft",
 		"ChevronRight",
