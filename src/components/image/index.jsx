@@ -22,8 +22,11 @@ const Image = ({ alt, className, loading, src, resizedOptions, resizerURL, respo
 		);
 	}
 
-	// todo: handle if there's no height and/or no width in the resized options
-	const aspectRatio = width / height;
+	let aspectRatio = 0;
+
+	if (height && width) {
+		aspectRatio = width / height;
+	}
 
 	// add all options except height and width
 	const stringOptionsWithoutHeightWidth = Object.keys(resizedOptions).reduce((acc, key) => {
@@ -42,11 +45,34 @@ const Image = ({ alt, className, loading, src, resizedOptions, resizerURL, respo
 	// "https://resizer.com" + "\image.jpg" + "?auth=secret&filter=true"
 	const srcWithOptionsWithoutHeightWidth = resizerURL.concat(src, stringOptionsWithoutHeightWidth);
 
-	// divide the derived aspect ratio by each of the responsiveImages widths to get the height
-	const responsiveHeightsAndWidths = responsiveImages.map((responsiveImageWidth) => ({
-		width: responsiveImageWidth,
-		height: responsiveImageWidth / aspectRatio,
-	}));
+	let responsiveHeightsAndWidths = [];
+	if (aspectRatio === 0) {
+		responsiveHeightsAndWidths = responsiveImages.reduce((accumulator, responsiveImageWidth) => {
+			if (Number.isInteger(responsiveImageWidth) && responsiveImageWidth > 0) {
+				return [
+					...accumulator,
+					{
+						width: responsiveImageWidth,
+					},
+				];
+			}
+			return accumulator;
+		}, []);
+	} else {
+		// divide the derived aspect ratio by each of the responsiveImages widths to get the height
+		responsiveHeightsAndWidths = responsiveImages.reduce((accumulator, responsiveImageWidth) => {
+			if (Number.isInteger(responsiveImageWidth) && responsiveImageWidth > 0) {
+				return [
+					...accumulator,
+					{
+						width: responsiveImageWidth,
+						height: responsiveImageWidth / aspectRatio,
+					},
+				];
+			}
+			return accumulator;
+		}, []);
+	}
 
 	// add the height and width to the default src if they exist
 	// auth token will at least exist here so don't need to worry about ? prepend
@@ -67,7 +93,9 @@ const Image = ({ alt, className, loading, src, resizedOptions, resizerURL, respo
 					? responsiveHeightsAndWidths
 							.map(
 								(responsiveImage) =>
-									`${srcWithOptionsWithoutHeightWidth}&width=${responsiveImage.width}&height=${responsiveImage.height} ${responsiveImage.width}w`
+									`${srcWithOptionsWithoutHeightWidth}&width=${responsiveImage.width}${
+										responsiveImage?.height ? `&height=${responsiveImage.height}` : ""
+									} ${responsiveImage.width}w`
 							)
 							.join(", ")
 					: null
