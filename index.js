@@ -31,6 +31,7 @@ import formatURL from "./src/utils/format-url";
 
 // the following are ordered by dependency
 import getImageFromANS from "./src/utils/get-image-from-ans";
+import getVideoFromANS from "./src/utils/get-video-from-ans";
 import useInterval from "./src/utils/hooks/use-interval";
 import isServerSide from "./src/utils/is-server-side";
 import serialJoin from "./src/utils/serial-join";
@@ -48,6 +49,7 @@ export {
 	formatPowaVideoEmbed,
 	formatURL,
 	getImageFromANS,
+	getVideoFromANS,
 	Grid,
 	Heading,
 	HeadingSection,
