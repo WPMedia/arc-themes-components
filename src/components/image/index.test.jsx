@@ -111,4 +111,53 @@ describe("Image", () => {
 			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=100&height=50 100w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=200&height=100 200w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=300&height=150 300w"
 		);
 	});
+
+	it("should render srcset without height and width using responsive images array", () => {
+		render(
+			<Image
+				src="/test-image.jpg"
+				resizerURL="https://resizer.example.com"
+				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
+				responsiveImages={[100, 200, 300]}
+			/>
+		);
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute(
+			"srcset",
+			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=100 100w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=200 200w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=300 300w"
+		);
+	});
+
+	it("should only render positive integer responsive images array", () => {
+		render(
+			<Image
+				src="/test-image.jpg"
+				resizerURL="https://resizer.example.com"
+				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
+				responsiveImages={[100, 200, 300, -100, "yes", true]}
+			/>
+		);
+
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute(
+			"srcset",
+			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=100 100w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=200 200w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=300 300w"
+		);
+	});
+
+	it("should render srcset using responsive images array with height and width", () => {
+		render(
+			<Image
+				src="/test-image.jpg"
+				resizerURL="https://resizer.example.com"
+				resizedOptions={{ filter: 70, quality: 50, auth: "secret", height: 100, width: 50 }}
+				responsiveImages={[100, 200, 300, -100, "yes", true]}
+			/>
+		);
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute(
+			"srcset",
+			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=100&height=200 100w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=200&height=400 200w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=300&height=600 300w"
+		);
+	});
 });
