@@ -27,6 +27,7 @@ import formatCredits from "./src/utils/format-credits";
 import formatPowaVideoEmbed from "./src/utils/format-powa-video-embed";
 import formatURL from "./src/utils/format-url";
 import getImageFromANS from "./src/utils/get-image-from-ans";
+import getVideoFromANS from "./src/utils/get-video-from-ans";
 import useInterval from "./src/utils/hooks/use-interval";
 import isServerSide from "./src/utils/is-server-side";
 import serialJoin from "./src/utils/serial-join";
@@ -43,6 +44,7 @@ export {
 	formatPowaVideoEmbed,
 	formatURL,
 	getImageFromANS,
+	getVideoFromANS,
 	Grid,
 	Heading,
 	HeadingSection,
