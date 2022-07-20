@@ -194,4 +194,21 @@ describe("Image", () => {
 			"(min-width: 600px) 75vw, (min-width: 500px) 100vw, 50vw"
 		);
 	});
+
+	it("uses the first default size provided", () => {
+		render(
+			<Image
+				src="/test-image.jpg"
+				resizerURL="https://resizer.example.com"
+				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
+				responsiveImages={[100, 200, 300]}
+				sizes={[
+					{ sourceSizeValue: "50vw", isDefault: true },
+					{ sourceSizeValue: "75vw", isDefault: true },
+				]}
+			/>
+		);
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute("sizes", "50vw");
+	});
 });
