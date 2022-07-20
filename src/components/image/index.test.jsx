@@ -160,4 +160,38 @@ describe("Image", () => {
 			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=100&height=200 100w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=200&height=400 200w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=300&height=600 300w"
 		);
 	});
+	it("passes in sizes array of object string default rendered", () => {
+		render(
+			<Image
+				src="/test-image.jpg"
+				resizerURL="https://resizer.example.com"
+				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
+				responsiveImages={[100, 200, 300]}
+				sizes={[{ isDefault: true, sourceSizeValue: "50vw" }]}
+			/>
+		);
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute("sizes", "50vw");
+	});
+
+	it("passes in sizes array of object with many sizes", () => {
+		render(
+			<Image
+				src="/test-image.jpg"
+				resizerURL="https://resizer.example.com"
+				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
+				responsiveImages={[100, 200, 300]}
+				sizes={[
+					{ sourceSizeValue: "50vw", isDefault: true },
+					{ sourceSizeValue: "75vw", mediaCondition: "(min-width: 600px)" },
+					{ sourceSizeValue: "100vw", mediaCondition: "(min-width: 500px)" },
+				]}
+			/>
+		);
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute(
+			"sizes",
+			"(min-width: 600px) 75vw, (min-width: 500px) 100vw, 50vw"
+		);
+	});
 });

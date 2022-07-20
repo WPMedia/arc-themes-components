@@ -2,7 +2,16 @@ import PropTypes from "prop-types";
 
 const COMPONENT_CLASS_NAME = "c-image";
 
-const Image = ({ alt, className, loading, src, resizedOptions, resizerURL, responsiveImages }) => {
+const Image = ({
+	alt,
+	className,
+	loading,
+	src,
+	resizedOptions,
+	resizerURL,
+	responsiveImages,
+	sizes,
+}) => {
 	// get the default height and width of the image
 	// use aspect ratio to generate other sizes
 	const { width, height, auth } = resizedOptions;
@@ -89,6 +98,20 @@ const Image = ({ alt, className, loading, src, resizedOptions, resizerURL, respo
 							.join(", ")
 					: null
 			}
+			sizes={
+				sizes
+					? sizes
+							.reduce((sizesStringList, currentSizeObject) => {
+								if (currentSizeObject.isDefault) {
+									return sizesStringList;
+								}
+								return `${sizesStringList}${currentSizeObject.mediaCondition} ${currentSizeObject.sourceSizeValue}, `;
+							}, "")
+							.concat(
+								sizes.find((currentSizeObject) => currentSizeObject.isDefault).sourceSizeValue
+							)
+					: null
+			}
 		/>
 	);
 };
@@ -99,6 +122,7 @@ Image.defaultProps = {
 	resizedOptions: {},
 	resizerURL: "",
 	responsiveImages: [],
+	sizes: "",
 };
 
 Image.propTypes = {
@@ -119,6 +143,17 @@ Image.propTypes = {
 	resizerURL: PropTypes.string,
 	/** Array of widths to use as sizes for the image */
 	responsiveImages: PropTypes.arrayOf(PropTypes.number),
+	/** The options relating to each of the available srcset options of the image */
+	sizes: PropTypes.arrayOf(
+		PropTypes.shape({
+			/** Whether it's the default last size available */
+			isDefault: PropTypes.bool,
+			/** The intrinsic width of the image in pixels or responsive units */
+			sourceSizeValue: PropTypes.string,
+			/** Media condition to render the corresponding source size value */
+			mediaCondition: PropTypes.string,
+		})
+	),
 	/** The URL to an image to load and display */
 	src: PropTypes.string.isRequired,
 };
