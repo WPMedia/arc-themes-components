@@ -83,16 +83,14 @@ const Image = ({
 			src={defaultSrc}
 			width={width}
 			srcSet={
-				responsiveHeightsAndWidths.length > 0
-					? responsiveHeightsAndWidths
-							.map(
-								(responsiveImage) =>
-									`${srcWithOptionsWithoutHeightWidth}&width=${responsiveImage.width}${
-										responsiveImage?.height ? `&height=${responsiveImage.height}` : ""
-									} ${responsiveImage.width}w`
-							)
-							.join(", ")
-					: null
+				responsiveHeightsAndWidths
+					.map(
+						(responsiveImage) =>
+							`${srcWithOptionsWithoutHeightWidth}&width=${responsiveImage.width}${
+								responsiveImage?.height ? `&height=${responsiveImage.height}` : ""
+							} ${responsiveImage.width}w`
+					)
+					.join(", ") || null
 			}
 			sizes={
 				sizes
