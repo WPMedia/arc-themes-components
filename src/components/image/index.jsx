@@ -108,7 +108,8 @@ const Image = ({
 								return `${sizesStringList}${currentSizeObject.mediaCondition} ${currentSizeObject.sourceSizeValue}, `;
 							}, "")
 							.concat(
-								sizes.find((currentSizeObject) => currentSizeObject.isDefault).sourceSizeValue
+								sizes.find((currentSizeObject) => currentSizeObject.isDefault)?.sourceSizeValue ||
+									""
 							)
 					: null
 			}

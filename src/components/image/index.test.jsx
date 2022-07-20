@@ -211,4 +211,18 @@ describe("Image", () => {
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute("sizes", "50vw");
 	});
+
+	it("handles not having a default size", () => {
+		render(
+			<Image
+				src="/test-image.jpg"
+				resizerURL="https://resizer.example.com"
+				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
+				responsiveImages={[100, 200, 300]}
+				sizes={[{ sourceSizeValue: "50vw", mediaCondition: "(min-width: 600px)" }]}
+			/>
+		);
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute("sizes", "(min-width: 600px) 50vw, ");
+	});
 });
