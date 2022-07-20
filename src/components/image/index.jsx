@@ -22,15 +22,8 @@ const Image = ({ alt, className, loading, src, resizedOptions, resizerURL, respo
 		);
 	}
 
-	let aspectRatio = 0;
-
-	if (height && width) {
-		aspectRatio = width / height;
-	}
-
 	// add all options except height and width
 	const stringOptionsWithoutHeightWidth = Object.keys(resizedOptions).reduce((acc, key) => {
-		// skip height and width setting to account for different sizes
 		if (key === "height" || key === "width") {
 			return acc;
 		}
@@ -45,34 +38,30 @@ const Image = ({ alt, className, loading, src, resizedOptions, resizerURL, respo
 	// "https://resizer.com" + "\image.jpg" + "?auth=secret&filter=true"
 	const srcWithOptionsWithoutHeightWidth = resizerURL.concat(src, stringOptionsWithoutHeightWidth);
 
-	let responsiveHeightsAndWidths = [];
-	if (aspectRatio === 0) {
-		responsiveHeightsAndWidths = responsiveImages.reduce((accumulator, responsiveImageWidth) => {
-			if (Number.isInteger(responsiveImageWidth) && responsiveImageWidth > 0) {
-				return [
-					...accumulator,
-					{
-						width: responsiveImageWidth,
-					},
-				];
-			}
-			return accumulator;
-		}, []);
-	} else {
-		// divide the derived aspect ratio by each of the responsiveImages widths to get the height
-		responsiveHeightsAndWidths = responsiveImages.reduce((accumulator, responsiveImageWidth) => {
-			if (Number.isInteger(responsiveImageWidth) && responsiveImageWidth > 0) {
-				return [
-					...accumulator,
-					{
-						width: responsiveImageWidth,
-						height: responsiveImageWidth / aspectRatio,
-					},
-				];
-			}
-			return accumulator;
-		}, []);
+	let aspectRatio = 0;
+
+	// if no height and width, no responsive image calculation
+	if (height && width) {
+		aspectRatio = width / height;
 	}
+
+	const responsiveHeightsAndWidths = responsiveImages.reduce(
+		(accumulator, responsiveImageWidth) => {
+			if (Number.isInteger(responsiveImageWidth) && responsiveImageWidth > 0) {
+				return [
+					...accumulator,
+					{
+						width: responsiveImageWidth,
+						// divide the derived aspect ratio by each of the responsiveImages widths to get the height
+						// aspect ratio of zero will not show the height
+						...(aspectRatio !== 0 && { height: responsiveImageWidth / aspectRatio }),
+					},
+				];
+			}
+			return accumulator;
+		},
+		[]
+	);
 
 	// add the height and width to the default src if they exist
 	// auth token will at least exist here so don't need to worry about ? prepend
