@@ -21,7 +21,6 @@ module.exports = {
 	plugins: ["react", "jest", "jsx-a11y", "react-hooks", "sort-exports"],
 	rules: {
 		"global-require": "off",
-		indent: ["error", "tab"],
 		"no-tabs": [
 			"error",
 			{
