@@ -45,7 +45,7 @@ describe("Image", () => {
 
 	it("should render height and width if height and width", () => {
 		render(
-			<Image src="test-image.jpg" resizedOptions={{ width: 100, height: 100, auth: "secret" }} />
+			<Image src="test-image.jpg" resizedOptions={{ auth: "secret" }} width={100} height={100} />
 		);
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute("height", "100");
@@ -53,7 +53,7 @@ describe("Image", () => {
 	});
 
 	it("should render only height if height and no width", () => {
-		render(<Image src="test-image.jpg" resizedOptions={{ height: 100, auth: "secret" }} />);
+		render(<Image src="test-image.jpg" resizedOptions={{ auth: "secret" }} height={100} />);
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute("height", "100");
 		expect(element).not.toHaveAttribute("width");
@@ -101,8 +101,10 @@ describe("Image", () => {
 			<Image
 				src="/test-image.jpg"
 				resizerURL="https://resizer.example.com"
-				resizedOptions={{ filter: 70, quality: 50, height: 50, width: 100, auth: "secret" }}
+				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
 				responsiveImages={[100, 200, 300]}
+				height={50}
+				width={100}
 			/>
 		);
 		const element = screen.getByRole("img");
@@ -150,7 +152,9 @@ describe("Image", () => {
 			<Image
 				src="/test-image.jpg"
 				resizerURL="https://resizer.example.com"
-				resizedOptions={{ filter: 70, quality: 50, auth: "secret", height: 100, width: 50 }}
+				height={100}
+				width={50}
+				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
 				responsiveImages={[100, 200, 300, -100, "yes", true]}
 			/>
 		);

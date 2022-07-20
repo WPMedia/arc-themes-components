@@ -10,11 +10,13 @@ const Image = ({
 	resizedOptions,
 	resizerURL,
 	responsiveImages,
+	width,
+	height,
 	sizes,
 }) => {
 	// get the default height and width of the image
 	// use aspect ratio to generate other sizes
-	const { width, height, auth } = resizedOptions;
+	const { auth } = resizedOptions;
 
 	if (!auth) {
 		// eslint-disable-next-line no-console
@@ -31,21 +33,15 @@ const Image = ({
 		);
 	}
 
-	// add all options except height and width
-	const stringOptionsWithoutHeightWidth = Object.keys(resizedOptions).reduce((acc, key) => {
-		if (key === "height" || key === "width") {
-			return acc;
-		}
-
-		if (acc === "") {
-			return `?${key}=${resizedOptions[key]}`;
-		}
-
-		return `${acc}&${key}=${resizedOptions[key]}`;
-	}, "");
+	// ex: 'filter=filterHere&auth=abc123'
+	const stringOptionsWithoutHeightWidth = new URLSearchParams(resizedOptions).toString();
 
 	// "https://resizer.com" + "\image.jpg" + "?auth=secret&filter=true"
-	const srcWithOptionsWithoutHeightWidth = resizerURL.concat(src, stringOptionsWithoutHeightWidth);
+	const srcWithOptionsWithoutHeightWidth = resizerURL.concat(
+		src,
+		"?",
+		stringOptionsWithoutHeightWidth
+	);
 
 	let aspectRatio = 0;
 
@@ -124,6 +120,8 @@ Image.defaultProps = {
 	resizerURL: "",
 	responsiveImages: [],
 	sizes: "",
+	width: null,
+	height: null,
 };
 
 Image.propTypes = {
@@ -131,15 +129,12 @@ Image.propTypes = {
 	alt: PropTypes.string,
 	/** Class name(s) that get appended to default class name of the component */
 	className: PropTypes.string,
+	/** The intrinsic height of the image in pixels */
+	height: PropTypes.number,
 	/** Indication of how the browser should load the image, using the native loading attribute of an <img /> tag */
 	loading: PropTypes.oneOf(["lazy", "eager"]),
 	/** Options to pass into v2 resizer, with height and width being used for img tag as well */
-	resizedOptions: PropTypes.shape({
-		/** The intrinsic width of the image in pixels */
-		width: PropTypes.number,
-		/** The intrinsic height of the image in pixels */
-		height: PropTypes.number,
-	}),
+	resizedOptions: PropTypes.shape({}),
 	/** The URL of the resizer service */
 	resizerURL: PropTypes.string,
 	/** Array of widths to use as sizes for the image */
@@ -155,6 +150,8 @@ Image.propTypes = {
 			mediaCondition: PropTypes.string,
 		})
 	),
+	/** The intrinsic width of the image in pixels */
+	width: PropTypes.number,
 	/** The URL to an image to load and display */
 	src: PropTypes.string.isRequired,
 };
