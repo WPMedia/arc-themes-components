@@ -27,8 +27,6 @@ module.exports = {
 				allowIndentationTabs: true,
 			},
 		],
-		"react/jsx-indent": [2, "tab"],
-		"react/jsx-indent-props": [2, "tab"],
 		"no-underscore-dangle": [
 			"error",
 			{
