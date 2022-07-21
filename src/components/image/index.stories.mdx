@@ -27,7 +27,23 @@ For more information on responsive image best practices, please see: https://dev
 ```jsx
 import { Image } from "@wpmedia/arc-themes-components";
 
-const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
+const Feature = () => (
+	<Image
+		src="cat.jpg"
+		width={100}
+		height={100}
+		resizerURL="https://resizer.com/v2/"
+		alt="A cat meowing"
+		resizedOptions={{
+			auth: "secret",
+		}}
+		responsiveImages={[100, 500, 1000]}
+		sizes={[
+			{ isDefault: true, sourceSizeValue: "100px" },
+			{ sourceSizeValue: "500px", mediaCondition: "(min-width: 1000px)" },
+		]}
+	/>
+);
 ```
 
 ## Properties
@@ -41,12 +57,12 @@ const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
 <Canvas>
 	<Story name="Default">
 		<Image
-			src="/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
+			src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
 			alt="A person posing"
 			resizedOptions={{
 				auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 			}}
-			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2"
+			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	</Story>
 </Canvas>
@@ -56,12 +72,12 @@ const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
 <Canvas>
 	<Story name="Image not found">
 		<Image
-			src="/nowhere.jpg"
+			src="nowhere.jpg"
 			alt="A person posing"
 			resizedOptions={{
 				auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 			}}
-			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2"
+			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	</Story>
 </Canvas>
@@ -71,13 +87,13 @@ const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
 <Canvas>
 	<Story name="Only width">
 		<Image
-			src="/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
+			src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
 			alt="A person posing"
 			width={300}
 			resizedOptions={{
 				auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 			}}
-			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2"
+			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	</Story>
 </Canvas>
@@ -87,13 +103,13 @@ const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
 <Canvas>
 	<Story name="Only height">
 		<Image
-			src="/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
+			src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
 			alt="A person posing"
 			height={300}
 			resizedOptions={{
 				auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 			}}
-			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2"
+			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	</Story>
 </Canvas>
@@ -103,14 +119,14 @@ const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
 <Canvas>
 	<Story name="Width and height">
 		<Image
-			src="/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
+			src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
 			alt="A person posing"
 			height={300}
 			width={300}
 			resizedOptions={{
 				auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 			}}
-			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2"
+			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	</Story>
 </Canvas>
@@ -120,7 +136,7 @@ const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
 <Canvas>
 	<Story name="Width and height and many responsive images">
 		<Image
-			src="/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
+			src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
 			alt="A person posing"
 			height={300}
 			width={300}
@@ -128,7 +144,7 @@ const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
 				auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 			}}
 			responsiveImages={[100, 200, 1000]}
-			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2"
+			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 			sizes={[
 				{ isDefault: true, sourceSizeValue: "1000px" },
 				{
@@ -145,7 +161,7 @@ const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
 <Canvas>
 	<Story name="Width and height and many responsive images without sizes default">
 		<Image
-			src="/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
+			src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
 			alt="A person posing"
 			height={300}
 			width={300}
@@ -153,7 +169,7 @@ const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
 				auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 			}}
 			responsiveImages={[100, 200, 1000]}
-			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2"
+			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 			sizes={[{ mediaCondition: "(min-width: 1000px)", sourceSizeValue: "200px" }]}
 		/>
 	</Story>
@@ -164,13 +180,13 @@ const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
 <Canvas>
 	<Story name="Responsive images without height and width">
 		<Image
-			src="/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
+			src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
 			alt="A person posing"
 			resizedOptions={{
 				auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 			}}
 			responsiveImages={[100, 200, 1000]}
-			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2"
+			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 			sizes={[
 				{ isDefault: true, sourceSizeValue: "1000px" },
 				{
@@ -187,7 +203,7 @@ const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
 <Canvas>
 	<Story name="Responsive image with resized options like lowered quality">
 		<Image
-			src="/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
+			src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
 			alt="A person posing"
 			height={300}
 			width={300}
@@ -196,7 +212,7 @@ const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
 				auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 			}}
 			responsiveImages={[100, 200, 1000]}
-			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2"
+			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 			sizes={[
 				{ isDefault: true, sourceSizeValue: "1000px" },
 				{
@@ -213,7 +229,7 @@ const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
 <Canvas>
 	<Story name="Responsive image with viewport width sizes, filling about half the screen with vw on desktop">
 		<Image
-			src="/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
+			src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
 			alt="A person posing"
 			height={300}
 			width={300}
@@ -222,7 +238,7 @@ const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
 				auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 			}}
 			responsiveImages={[100, 200, 1000, 1500]}
-			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2"
+			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 			sizes={[
 				{ isDefault: true, sourceSizeValue: "25vw" },
 				{
@@ -238,6 +254,25 @@ const Feature = () => <Image src="cat.jpg" alt="A cat jumping up to a ball" />;
 
 <Canvas>
 	<Story name="Without auth token renders src raw">
-		<Image src="/computer-user.jpeg" alt="A person using a computer" />
+		<Image src="computer-user.jpeg" alt="A person using a computer" />
+	</Story>
+</Canvas>
+
+** External url **
+
+<Canvas>
+	<Story name="External url">
+		<Image
+			src="https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
+			alt="A person posing"
+			height={300}
+			width={300}
+			resizedOptions={{
+				auth: "f314a3f3b86665d1ef144a4a429324658d253fe5af94719822deee11be985738",
+			}}
+			responsiveImages={[100, 200, 1000, 1500]}
+			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
+			sizes={[{ isDefault: true, sourceSizeValue: "200px" }]}
+		/>
 	</Story>
 </Canvas>

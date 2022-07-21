@@ -36,7 +36,7 @@ const Image = ({
 	// ex: 'filter=filterHere&auth=abc123'
 	const stringOptionsWithoutHeightWidth = new URLSearchParams(resizedOptions).toString();
 
-	// "https://resizer.com" + "\image.jpg" + "?auth=secret&filter=true"
+	// "https://resizer.com/" + "image.jpg" + "?auth=secret&filter=true"
 	const srcWithOptionsWithoutHeightWidth = resizerURL.concat(
 		src,
 		"?",
@@ -133,7 +133,7 @@ Image.propTypes = {
 	loading: PropTypes.oneOf(["lazy", "eager"]),
 	/** Options to pass into v2 resizer, with height and width being used for img tag as well */
 	resizedOptions: PropTypes.shape({}),
-	/** The URL of the resizer service */
+	/** The URL of the resizer service. Should have a trailing slash */
 	resizerURL: PropTypes.string,
 	/** Array of widths to use as sizes for the image */
 	responsiveImages: PropTypes.arrayOf(PropTypes.number),
@@ -150,7 +150,7 @@ Image.propTypes = {
 	),
 	/** The intrinsic width of the image in pixels */
 	width: PropTypes.number,
-	/** The URL to an image to load and display */
+	/** The URL to an image to load and display. Should not have a leading slash */
 	src: PropTypes.string.isRequired,
 };
 
