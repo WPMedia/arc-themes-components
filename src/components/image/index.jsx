@@ -74,6 +74,29 @@ const Image = ({
 		`${width ? `&width=${width}` : ""}${height ? `&height=${height}` : ""}`
 	);
 
+	const responsiveSrcSet =
+		responsiveHeightsAndWidths
+			.map(
+				(responsiveImage) =>
+					`${srcWithOptionsWithoutHeightWidth}&width=${responsiveImage.width}${
+						responsiveImage?.height ? `&height=${responsiveImage.height}` : ""
+					} ${responsiveImage.width}w`
+			)
+			.join(", ") || null;
+
+	const responsiveSizes = sizes
+		? sizes
+				.reduce((sizesStringList, currentSizeObject) => {
+					if (currentSizeObject.isDefault) {
+						return sizesStringList;
+					}
+					return `${sizesStringList}${currentSizeObject.mediaCondition} ${currentSizeObject.sourceSizeValue}, `;
+				}, "")
+				.concat(
+					sizes.find((currentSizeObject) => currentSizeObject.isDefault)?.sourceSizeValue || ""
+				)
+		: null;
+
 	return (
 		<img
 			alt={alt}
@@ -82,31 +105,8 @@ const Image = ({
 			loading={loading}
 			src={defaultSrc}
 			width={width}
-			srcSet={
-				responsiveHeightsAndWidths
-					.map(
-						(responsiveImage) =>
-							`${srcWithOptionsWithoutHeightWidth}&width=${responsiveImage.width}${
-								responsiveImage?.height ? `&height=${responsiveImage.height}` : ""
-							} ${responsiveImage.width}w`
-					)
-					.join(", ") || null
-			}
-			sizes={
-				sizes
-					? sizes
-							.reduce((sizesStringList, currentSizeObject) => {
-								if (currentSizeObject.isDefault) {
-									return sizesStringList;
-								}
-								return `${sizesStringList}${currentSizeObject.mediaCondition} ${currentSizeObject.sourceSizeValue}, `;
-							}, "")
-							.concat(
-								sizes.find((currentSizeObject) => currentSizeObject.isDefault)?.sourceSizeValue ||
-									""
-							)
-					: null
-			}
+			srcSet={responsiveSrcSet}
+			sizes={responsiveSizes}
 		/>
 	);
 };
