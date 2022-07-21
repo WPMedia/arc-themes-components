@@ -33,68 +33,46 @@ const Image = ({
 		);
 	}
 
-	// ex: 'filter=filterHere&auth=abc123'
-	const stringOptionsWithoutHeightWidth = new URLSearchParams(resizedOptions).toString();
-
 	// "https://resizer.com/" + "image.jpg" + "?auth=secret&filter=true"
 	const srcWithOptionsWithoutHeightWidth = resizerURL.concat(
 		src,
 		"?",
-		stringOptionsWithoutHeightWidth
-	);
-
-	let aspectRatio = 0;
-
-	// if no height and width, no responsive image calculation
-	if (height && width) {
-		aspectRatio = width / height;
-	}
-
-	const responsiveHeightsAndWidths = responsiveImages.reduce(
-		(accumulator, responsiveImageWidth) => {
-			if (Number.isInteger(responsiveImageWidth) && responsiveImageWidth > 0) {
-				return [
-					...accumulator,
-					{
-						width: responsiveImageWidth,
-						// divide the derived aspect ratio by each of the responsiveImages widths to get the height
-						// aspect ratio of zero will not show the height
-						...(aspectRatio !== 0 && { height: responsiveImageWidth / aspectRatio }),
-					},
-				];
-			}
-			return accumulator;
-		},
-		[]
+		new URLSearchParams(resizedOptions).toString()
 	);
 
 	// add the height and width to the default src if they exist
 	// auth token will at least exist here so don't need to worry about ? prepend
 	const defaultSrc = srcWithOptionsWithoutHeightWidth.concat(
-		`${width ? `&width=${width}` : ""}${height ? `&height=${height}` : ""}`
+		`${width ? `&width=${width}` : ""}`,
+		`${height ? `&height=${height}` : ""}`
 	);
 
+	// if no height and width, no responsive image calculation
+	const aspectRatio = height && width ? width / height : 0;
 	const responsiveSrcSet =
-		responsiveHeightsAndWidths
-			.map(
-				(responsiveImage) =>
-					`${srcWithOptionsWithoutHeightWidth}&width=${responsiveImage.width}${
-						responsiveImage?.height ? `&height=${responsiveImage.height}` : ""
-					} ${responsiveImage.width}w`
+		responsiveImages
+			.filter(
+				(responsiveImageWidth) => Number.isInteger(responsiveImageWidth) && responsiveImageWidth > 0
+			)
+			.map((responsiveImageWidth) =>
+				// divide the derived aspect ratio by each of the responsiveImages widths to get the height
+				// aspect ratio of zero will not show the height
+				srcWithOptionsWithoutHeightWidth.concat(
+					`&width=${responsiveImageWidth}`,
+					`${aspectRatio !== 0 && height ? `&height=${responsiveImageWidth / aspectRatio}` : ""}`,
+					` ${responsiveImageWidth}w`
+				)
 			)
 			.join(", ") || null;
 
 	const responsiveSizes = sizes
 		? sizes
-				.reduce((sizesStringList, currentSizeObject) => {
-					if (currentSizeObject.isDefault) {
-						return sizesStringList;
-					}
-					return `${sizesStringList}${currentSizeObject.mediaCondition} ${currentSizeObject.sourceSizeValue}, `;
-				}, "")
+				.filter(({ isDefault }) => !isDefault)
+				.map(({ mediaCondition, sourceSizeValue }) => `${mediaCondition} ${sourceSizeValue}`)
 				.concat(
-					sizes.find((currentSizeObject) => currentSizeObject.isDefault)?.sourceSizeValue || ""
+					sizes.find((currentSizeObject) => currentSizeObject.isDefault)?.sourceSizeValue || []
 				)
+				.join(", ")
 		: null;
 
 	return (

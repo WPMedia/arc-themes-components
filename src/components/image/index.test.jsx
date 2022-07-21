@@ -227,6 +227,6 @@ describe("Image", () => {
 			/>
 		);
 		const element = screen.getByRole("img");
-		expect(element).toHaveAttribute("sizes", "(min-width: 600px) 50vw, ");
+		expect(element).toHaveAttribute("sizes", "(min-width: 600px) 50vw");
 	});
 });
