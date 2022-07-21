@@ -21,15 +21,12 @@ module.exports = {
 	plugins: ["react", "jest", "jsx-a11y", "react-hooks", "sort-exports"],
 	rules: {
 		"global-require": "off",
-		indent: ["error", "tab"],
 		"no-tabs": [
 			"error",
 			{
 				allowIndentationTabs: true,
 			},
 		],
-		"react/jsx-indent": [2, "tab"],
-		"react/jsx-indent-props": [2, "tab"],
 		"no-underscore-dangle": [
 			"error",
 			{
