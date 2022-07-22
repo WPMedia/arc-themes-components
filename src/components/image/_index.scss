@@ -5,7 +5,7 @@
 	font-style: italic;
 	// don't want the image to grow larger than itself
 	// without it, we couldn't use height and width for reserving space and srcset and sizes
-	inline-size: max-content;
+	max-inline-size: 100%;
 	// don't want the image to shrink smaller than its intrinsic size due to height and width set
 	block-size: auto;
 
