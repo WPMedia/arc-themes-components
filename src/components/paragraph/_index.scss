@@ -11,5 +11,5 @@
 	-moz-box-oriented: var(--c-paragraph--moz-box-oriented, vertical);
 	text-overflow: var(--c-paragraph-text-overflow, ellipsis);
 
-	-webkit-line-clamp: var(--c-paragraph-truncation);
+	-webkit-line-clamp: var(--paragraph-truncation);
 }
