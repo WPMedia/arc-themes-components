@@ -5,11 +5,11 @@
 
 	@include scss.component-properties("paragraph");
 
-	overflow: var(--paragraph-overflow, hidden);
-	display: var(--paragraph-display, -webkit-box);
-	-webkit-box-orient: var(--paragraph--webkit-box-orient, vertical);
-	-moz-box-oriented: var(--paragraph--moz-box-oriented, vertical);
-	text-overflow: var(--paragraph-text-overflow, ellipsis);
+	overflow: var(--c-paragraph-overflow, hidden);
+	display: var(--c-paragraph-display, -webkit-box);
+	-webkit-box-orient: var(--c-paragraph--webkit-box-orient, vertical);
+	-moz-box-oriented: var(--c-paragraph--moz-box-oriented, vertical);
+	text-overflow: var(--c-paragraph-text-overflow, ellipsis);
 
-	-webkit-line-clamp: var(--paragraph-truncation);
+	-webkit-line-clamp: var(--c-paragraph-truncation);
 }
