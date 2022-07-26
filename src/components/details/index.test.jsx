@@ -34,7 +34,7 @@ describe("Details", () => {
 	});
 
 	it("should render children as HTML", () => {
-		const childMockHTML = "Hello<br />World";
+		const childMockHTML = "Hello<br />World \u00F7";
 		const { container } = render(
 			<Details summary="Summary" icon={<>Icon</>} iconPlacement="left" childrenHTML>
 				{childMockHTML}
@@ -45,6 +45,6 @@ describe("Details", () => {
 		expect(screen.queryByText("Icon")).not.toBeNull();
 
 		const element = container.querySelector("details > p");
-		expect(element.outerHTML).toEqual("<p>Hello<br>World</p>");
+		expect(element.outerHTML).toEqual("<p>Hello<br>World ÷</p>");
 	});
 });
