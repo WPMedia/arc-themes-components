@@ -44,11 +44,11 @@
 			@include scss.component-properties("details-with-icon-open");
 		}
 
-		&[open] &__summary-text {
+		&[open] .c-details__summary-text {
 			@include scss.component-properties("details-with-icon-open-summary-text");
 		}
 
-		&[open] &__summary-icon {
+		&[open] .c-details__summary-icon {
 			@include scss.component-properties("details-with-icon-open-summary-icon");
 		}
 
