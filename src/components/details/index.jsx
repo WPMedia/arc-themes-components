@@ -40,7 +40,7 @@ Details.propTypes = {
 	className: PropTypes.string,
 	/** The text, images or any node that will be displayed within the component */
 	children: PropTypes.node,
-	/** Falg to denote if the children should be rendered as HTML using dangerouslySetInnerHTML */
+	/** Flag to denote if the children should be rendered as HTML using dangerouslySetInnerHTML */
 	childrenHTML: PropTypes.bool,
 	/** Icon to be used instead of default CSS behaviour for summary */
 	icon: PropTypes.node,
