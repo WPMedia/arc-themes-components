@@ -95,7 +95,7 @@ Image.defaultProps = {
 	resizedOptions: {},
 	resizerURL: "",
 	responsiveImages: [],
-	sizes: "",
+	sizes: [],
 	width: null,
 	height: null,
 };
