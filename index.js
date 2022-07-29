@@ -1,5 +1,6 @@
 /* eslint import/order: ["error", {"alphabetize": {"order": "asc", "caseInsensitive": true}}] */
 // inject imports after this comment and alphabetize them
+import Picture from "./src/components/picture";
 import Attribution from "./src/components/attribution";
 import Badge from "./src/components/badge";
 import Button from "./src/components/button";
@@ -37,6 +38,7 @@ import isServerSide from "./src/utils/is-server-side";
 import serialJoin from "./src/utils/serial-join";
 
 export {
+	Picture,
 	Attribution,
 	Badge,
 	Button,
