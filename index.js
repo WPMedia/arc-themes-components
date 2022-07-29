@@ -1,6 +1,5 @@
 /* eslint import/order: ["error", {"alphabetize": {"order": "asc", "caseInsensitive": true}}] */
 // inject imports after this comment and alphabetize them
-import Picture from "./src/components/picture";
 import Attribution from "./src/components/attribution";
 import Badge from "./src/components/badge";
 import Button from "./src/components/button";
@@ -19,6 +18,7 @@ import Link from "./src/components/link";
 import MediaItem from "./src/components/media-item";
 import Overline from "./src/components/overline";
 import Paragraph from "./src/components/paragraph";
+import Picture from "./src/components/picture";
 import Pill from "./src/components/pill";
 import Price from "./src/components/price";
 import Separator from "./src/components/separator";
@@ -38,7 +38,6 @@ import isServerSide from "./src/utils/is-server-side";
 import serialJoin from "./src/utils/serial-join";
 
 export {
-	Picture,
 	Attribution,
 	Badge,
 	Button,
@@ -64,6 +63,7 @@ export {
 	MediaItem,
 	Overline,
 	Paragraph,
+	Picture,
 	Pill,
 	Price,
 	Separator,
