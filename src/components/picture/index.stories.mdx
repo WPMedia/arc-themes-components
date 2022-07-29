@@ -1,0 +1,54 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+
+import Picture from ".";
+import Source from "./_children/source";
+import Image from "../image";
+
+<Meta title="Components/Picture" component={Picture} />
+
+# Picture
+
+--- Add a description of the component here ---
+
+## Usage
+
+```jsx
+import { Image, Picture } from "@wpmedia/arc-themes-components";
+
+const Feature = () => <Picture>Component Children</Picture>;
+```
+
+## Properties
+
+<ArgsTable of={Picture} />
+
+## Stories
+
+** Picture **
+
+<Canvas>
+	<Story name="Picture">
+		<Picture>
+			<Picture.Source
+				height="300px"
+				media="(min-width: 800px)"
+				resizerOptions={{
+					auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
+				}}
+				resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
+				src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
+				width="400px"
+			/>
+			<Image
+				src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
+				alt="A person posing"
+				height={300}
+				width={300}
+				resizedOptions={{
+					auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
+				}}
+				resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
+			/>
+		</Picture>
+	</Story>
+</Canvas>
