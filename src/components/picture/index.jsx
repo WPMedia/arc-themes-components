@@ -9,7 +9,7 @@ const Picture = ({ children, className, ...rest }) => (
 		{...rest}
 		className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
 	>
-		{/* TODO: put comment here */}
+		{/* `Image` and `Source` are the only two supported Children of `Picture` */}
 		{Children.toArray(children).filter((child) => [Image, Source].includes(child.type))}
 	</picture>
 );
@@ -19,7 +19,7 @@ Picture.Source = Source;
 Picture.propTypes = {
 	/** Class name(s) that get appended to default class name of the component */
 	className: PropTypes.string,
-	/* NOTE: Add Children - image component TODO : mention allowed child types */
+	/** The text, images or any node that will be displayed within the component - Only Picture.Source and Image children items are allowed */
 	children: PropTypes.node.isRequired,
 };
 
