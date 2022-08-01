@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import formatSrcset from "./format-srcset";
+import formatSrcset from "../../../utils/format-srcset";
 
 const Source = ({ height, media, resizerOptions, resizerURL, src, width, ...rest }) => {
 	if (media && src) {
