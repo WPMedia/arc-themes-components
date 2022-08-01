@@ -7,7 +7,6 @@ const Source = ({ height, media, resizerOptions, resizerURL, src, width, ...rest
 			return (
 				<source
 					{...rest}
-					className="c-picture__source"
 					height={height}
 					media={media}
 					srcSet={formatSrcset(resizerURL.concat(src), resizerOptions, width, height)}
