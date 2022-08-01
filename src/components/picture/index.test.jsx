@@ -4,7 +4,7 @@ import Picture from ".";
 import Source from "./_children/source";
 
 describe("Picture component", () => {
-	it("render a pciture element with a nested source element", () => {
+	it("render a picture element with a nested source element", () => {
 		const { container } = render(
 			<Picture>
 				<Source src="test.jpeg" media="(max-width: 799px)" />
