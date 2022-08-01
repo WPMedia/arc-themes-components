@@ -1,7 +1,6 @@
 const formatSrcset = (src, resizerOptions, width, height) =>
-	// TODO : Update comment
-	// Append resizerOptions to src as a querystring params:
-	// "https://resizer.com/image.jpg" + "?auth=secret&filter=true"
+	// Use resizerOptions as querystring params on the src URL. If width and/or height are provided
+	// both in resizerOptions as well as function arguments, the function arguments will be used.
 	src.concat(
 		"?",
 		new URLSearchParams({
