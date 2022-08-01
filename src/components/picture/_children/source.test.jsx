@@ -17,7 +17,6 @@ describe("Source subcomponent", () => {
 		const { container } = render(<Source src="test.jpeg" media="(max-width: 799px)" />);
 		expect(container.firstChild).toMatchInlineSnapshot(`
 		<source
-		  class="c-picture__source"
 		  media="(max-width: 799px)"
 		  srcset="test.jpeg"
 		/>
