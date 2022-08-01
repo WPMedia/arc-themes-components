@@ -20,20 +20,25 @@ const Source = ({ height, media, resizerOptions, resizerURL, src, width, ...rest
 	return null;
 };
 
-Source.defaultProps = {};
+Source.defaultProps = {
+	resizerOptions: {},
+	resizerURL: "",
+	width: null,
+	height: null,
+};
 
 Source.propTypes = {
-	/** TODO */
+	/** The intrinsic height of the image in pixels */
 	height: PropTypes.number,
-	/** Media query of the src media */
+	/** Media query used for the tag's `media` attribute */
 	media: PropTypes.string,
-	/** Options to pass into v2 resize. */
+	/** Options to pass into v2 resizer. */
 	resizerOptions: PropTypes.object,
-	/** TODO: The complete URL of the image source. */
+	/** The URL of the resizer service. Should have a trailing slash */
 	resizerURL: PropTypes.string,
-	/** TODO */
-	src: PropTypes.string,
-	/** TODO */
+	/** The URL to an image to load and display. Should not have a leading slash */
+	src: PropTypes.string.isRequired,
+	/** The intrinsic width of the image in pixels */
 	width: PropTypes.number,
 };
 
