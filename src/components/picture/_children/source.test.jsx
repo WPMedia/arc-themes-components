@@ -33,7 +33,6 @@ describe("Source subcomponent", () => {
 		);
 		expect(container.firstChild).toMatchInlineSnapshot(`
 		<source
-		  class="c-picture__source"
 		  media="(max-width: 799px)"
 		  srcset="http://www.test.org/test.jpeg?auth=fff1111&filter=70&smart=true"
 		/>
