@@ -15,7 +15,6 @@ describe("Picture component", () => {
 		  class="c-picture"
 		>
 		  <source
-		    class="c-picture__source"
 		    media="(max-width: 799px)"
 		    srcset="test.jpeg"
 		  />
