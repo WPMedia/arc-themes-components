@@ -14,7 +14,7 @@ const Source = ({ height, media, resizerOptions, resizerURL, src, width, ...rest
 				/>
 			);
 		}
-		return <source {...rest} className="c-picture__source" media={media} srcSet={src} />;
+		return <source {...rest} media={media} srcSet={src} />;
 	}
 	return null;
 };
