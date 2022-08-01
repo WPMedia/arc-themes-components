@@ -37,7 +37,7 @@ Source.propTypes = {
 	/** The URL of the resizer service. Should have a trailing slash */
 	resizerURL: PropTypes.string,
 	/** The URL to an image to load and display. Should not have a leading slash */
-	src: PropTypes.string.isRequired,
+	src: PropTypes.string,
 	/** The intrinsic width of the image in pixels */
 	width: PropTypes.number,
 };
