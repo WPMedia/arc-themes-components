@@ -28,7 +28,7 @@ describe("Source subcomponent", () => {
 				src="test.jpeg"
 				media="(max-width: 799px)"
 				resizerURL="http://www.test.org/"
-				resizerOptions={{ auth: "fff1111", filter: 70, smart: true }}
+				resizedOptions={{ auth: "fff1111", filter: 70, smart: true }}
 			/>
 		);
 		expect(container.firstChild).toMatchInlineSnapshot(`

@@ -1,15 +1,15 @@
 import PropTypes from "prop-types";
 import formatSrcset from "../../../utils/format-srcset";
 
-const Source = ({ height, media, resizerOptions, resizerURL, src, width, ...rest }) => {
+const Source = ({ height, media, resizedOptions, resizerURL, src, width, ...rest }) => {
 	if (media && src) {
-		if (resizerOptions?.auth) {
+		if (resizedOptions?.auth) {
 			return (
 				<source
 					{...rest}
 					height={height}
 					media={media}
-					srcSet={formatSrcset(resizerURL.concat(src), resizerOptions, width, height)}
+					srcSet={formatSrcset(resizerURL.concat(src), resizedOptions, width, height)}
 					width={width}
 				/>
 			);
@@ -20,7 +20,7 @@ const Source = ({ height, media, resizerOptions, resizerURL, src, width, ...rest
 };
 
 Source.defaultProps = {
-	resizerOptions: {},
+	resizedOptions: {},
 	resizerURL: "",
 	width: null,
 	height: null,
@@ -32,7 +32,7 @@ Source.propTypes = {
 	/** Media query used for the tag's `media` attribute */
 	media: PropTypes.string,
 	/** Options to pass into v2 resizer. */
-	resizerOptions: PropTypes.object,
+	resizedOptions: PropTypes.object,
 	/** The URL of the resizer service. Should have a trailing slash */
 	resizerURL: PropTypes.string,
 	/** The URL to an image to load and display. Should not have a leading slash */

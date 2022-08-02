@@ -22,26 +22,31 @@ The `Picture` component can use zero or more `Picture.Source` subcomponents and 
 ```jsx
 import { Picture, Image } from "@wpmedia/arc-themes-components";
 
-const Feature = () => <Picture>
-	<Picture.Source
-		src="cat.jpg"
-		width={400}
-		height={300}
-		media="(min-width: 768px)"
-		resizerURL="https://resizer.com/v2/"
-		resizedOptions={{
-			auth: "secret",
-		}}
+const Feature = () => (
+	<Picture>
+		<Picture.Source
+			src="cat.jpg"
+			width={400}
+			height={300}
+			media="(min-width: 768px)"
+			resizerURL="https://resizer.com/v2/"
+			resizedOptions={{
+				auth: "secret",
+			}}
 		/>
-	/>
-	<Image
-		src="cat.jpg"
-		width={200}
-		height={200}
-		resizerURL="https://resizer.com/v2/"
-		alt="A cat meowing"
-	/>
-</Picture>;
+		/>
+		<Image
+			src="cat.jpg"
+			width={200}
+			height={200}
+			resizerURL="https://resizer.com/v2/"
+			resizedOptions={{
+				auth: "secret",
+			}}
+			alt="A cat meowing"
+		/>
+	</Picture>
+);
 ```
 
 ## Properties
@@ -66,7 +71,7 @@ A `Picture` with a single `Source` and `Image`.
 				width={400}
 				height={300}
 				media="(min-width: 768px)"
-				resizerOptions={{
+				resizedOptions={{
 					auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 				}}
 				resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
@@ -97,7 +102,7 @@ A `Picture` with a multiple `Source` subcomponents to support multiple media que
 				width={500}
 				height={300}
 				media="(min-width: 768px)"
-				resizerOptions={{
+				resizedOptions={{
 					auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 				}}
 				resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
@@ -127,7 +132,7 @@ A `Picture` with a multiple `Source` subcomponents to support multiple media que
 				src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
 				width={500}
 				height={300}
-				resizerOptions={{
+				resizedOptions={{
 					auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 				}}
 				resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
