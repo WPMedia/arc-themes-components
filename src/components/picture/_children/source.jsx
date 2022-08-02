@@ -3,7 +3,7 @@ import formatSrcset from "../../../utils/format-srcset";
 
 const Source = ({ height, media, resizerOptions, resizerURL, src, width, ...rest }) => {
 	if (media && src) {
-		if (resizerOptions && resizerOptions.auth) {
+		if (resizerOptions?.auth) {
 			return (
 				<source
 					{...rest}
