@@ -20,7 +20,7 @@ The `Picture` component can use zero or more `Picture.Source` subcomponents and 
 ## Usage
 
 ```jsx
-import { Picture, Image } from "@wpmedia/arc-themes-components";
+import { Picture } from "@wpmedia/arc-themes-components";
 
 const Feature = () => (
 	<Picture>
@@ -35,7 +35,7 @@ const Feature = () => (
 			}}
 		/>
 		/>
-		<Image
+		<Picture.Image
 			src="cat.jpg"
 			width={200}
 			height={200}
@@ -57,11 +57,15 @@ const Feature = () => (
 
 <ArgsTable of={Picture.Source} />
 
+### Picture.Image
+
+<ArgsTable of={Picture.Image} />
+
 ## Stories
 
 ** Picture **
 
-A `Picture` with a single `Source` and `Image`.
+A `Picture` with a single `Picture.Source` and `Picture.Image`.
 
 <Canvas>
 	<Story name="Picture">
@@ -92,7 +96,7 @@ A `Picture` with a single `Source` and `Image`.
 
 ** Picture with multiple Sources **
 
-A `Picture` with a multiple `Source` subcomponents to support multiple media queries.
+A `Picture` with a multiple `Picture.Source` subcomponents to support multiple media queries.
 
 <Canvas>
 	<Story name="Picture with multiple Sources">
