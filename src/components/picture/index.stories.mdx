@@ -1,8 +1,6 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 
 import Picture from ".";
-import Source from "./_children/source";
-import Image from "../image";
 
 <Meta title="Components/Picture" component={Picture} />
 
@@ -80,7 +78,7 @@ A `Picture` with a single `Picture.Source` and `Picture.Image`.
 				}}
 				resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 			/>
-			<Image
+			<Picture.Image
 				src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
 				alt="A person posing"
 				height={300}
@@ -111,7 +109,7 @@ A `Picture` with a multiple `Picture.Source` subcomponents to support multiple m
 				}}
 				resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 			/>
-			<Image
+			<Picture.Image
 				src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
 				alt="A person posing"
 				height={300}
@@ -141,7 +139,7 @@ A `Picture` with a multiple `Picture.Source` subcomponents to support multiple m
 				}}
 				resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 			/>
-			<Image
+			<Picture.Image
 				src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
 				alt="A person posing"
 				height={300}
