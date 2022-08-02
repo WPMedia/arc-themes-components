@@ -3,6 +3,15 @@ import { render } from "@testing-library/react";
 import Source from "./source";
 
 describe("Source subcomponent", () => {
+	it("return null if no src prop is provided", () => {
+		const { container } = render(<Source media="(max-width: 799px)" resizedOptions={{}} />);
+		expect(container.firstChild).toBeNull();
+	});
+	it("return null if no media prop is provided", () => {
+		const { container } = render(<Source src="test.jpg" resizedOptions={{}} />);
+		expect(container.firstChild).toBeNull();
+	});
+
 	it("render unresized image an auth key has not been provided", () => {
 		const { container } = render(
 			<Source src="test.jpeg" media="(max-width: 799px)" resizedOptions={{}} />
