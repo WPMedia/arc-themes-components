@@ -4,7 +4,9 @@ import Source from "./source";
 
 describe("Source subcomponent", () => {
 	it("render unresized image an auth key has not been provided", () => {
-		const { container } = render(<Source src="test.jpeg" media="(max-width: 799px)" />);
+		const { container } = render(
+			<Source src="test.jpeg" media="(max-width: 799px)" resizedOptions={{}} />
+		);
 		expect(container.firstChild).toMatchInlineSnapshot(`
 		<source
 		  media="(max-width: 799px)"
