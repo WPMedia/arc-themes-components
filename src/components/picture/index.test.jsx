@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
 import Picture from ".";
-import Source from "./_children/source";
 
 describe("Picture component", () => {
 	it("render a picture element with a nested source element", () => {
