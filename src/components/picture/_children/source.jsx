@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
-import formatSrcset from "../../../utils/format-srcset";
+import formatSrcset from "../../../utils/format-image-resizer-src";
 
 const Source = ({ height, media, resizedOptions, resizerURL, src, width, ...rest }) => {
+	if (!media || !src) return null;
 	if (resizedOptions?.auth) {
 		return (
 			<source
