@@ -13,18 +13,6 @@
 		@include scss.component-properties("details-summary-icon");
 	}
 
-	&[open] {
-		@include scss.component-properties("details-open");
-	}
-
-	&[open] &__summary-text {
-		@include scss.component-properties("details-open-summary-text");
-	}
-
-	&[open] &__summary-icon {
-		@include scss.component-properties("details-open-summary-icon");
-	}
-
 	&--with-icon {
 		summary {
 			align-items: center;
@@ -53,6 +41,22 @@
 		}
 
 		@include scss.component-properties("details-with-icon");
+	}
+
+	&[open] {
+		@include scss.component-properties("details-open");
+	}
+
+	&[open] summary {
+		@include scss.component-properties("details-open-summary");
+	}
+
+	&[open] &__summary-text {
+		@include scss.component-properties("details-open-summary-text");
+	}
+
+	&[open] &__summary-icon {
+		@include scss.component-properties("details-open-summary-icon");
 	}
 
 	@include scss.component-properties("details");
