@@ -3,16 +3,6 @@ import { render } from "@testing-library/react";
 import Source from "./source";
 
 describe("Source subcomponent", () => {
-	it("render null if src property is not provided", () => {
-		const { container } = render(<Source media="(max-width: 799px)" />);
-		expect(container.firstChild).toBeNull();
-	});
-
-	it("render null if media property is not provided", () => {
-		const { container } = render(<Source src="test.jpeg" />);
-		expect(container.firstChild).toBeNull();
-	});
-
 	it("render unresized image an auth key has not been provided", () => {
 		const { container } = render(<Source src="test.jpeg" media="(max-width: 799px)" />);
 		expect(container.firstChild).toMatchInlineSnapshot(`
