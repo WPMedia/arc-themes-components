@@ -15,6 +15,7 @@ const Picture = ({ children, className, ...rest }) => (
 );
 
 Picture.Source = Source;
+Picture.Image = Image;
 
 Picture.propTypes = {
 	/** Class name(s) that get appended to default class name of the component */
