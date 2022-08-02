@@ -14,7 +14,7 @@ const Source = ({ height, media, resizedOptions, resizerURL, src, width, ...rest
 			/>
 		);
 	}
-	return <source {...rest} media={media} srcSet={src} />;
+	return <source {...rest} media={media} srcSet={src} height={height} width={width} />;
 };
 
 Source.defaultProps = {
