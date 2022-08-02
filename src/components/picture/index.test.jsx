@@ -7,7 +7,7 @@ describe("Picture component", () => {
 	it("render a picture element with a nested source element", () => {
 		const { container } = render(
 			<Picture>
-				<Source src="test.jpeg" media="(max-width: 799px)" />
+				<Picture.Source src="test.jpeg" media="(max-width: 799px)" />
 			</Picture>
 		);
 		expect(container.firstChild).toMatchInlineSnapshot(`
@@ -27,7 +27,7 @@ describe("Picture component", () => {
 		const ADDITIONAL_CLASSES = "additionalClass1 additionalClass2";
 		render(
 			<Picture className={ADDITIONAL_CLASSES} data-testid="test-picture">
-				<Source src="test.jpeg" media="(max-width: 799px)" />
+				<Picture.Source src="test.jpeg" media="(max-width: 799px)" />
 			</Picture>
 		);
 		const element = screen.queryByTestId("test-picture");
