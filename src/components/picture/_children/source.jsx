@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import formatSrcset from "../../../utils/format-image-resizer-src";
+import formatSrc from "../../../utils/format-image-resizer-src";
 
 const Source = ({ height, media, resizedOptions, resizerURL, src, width, ...rest }) => {
 	if (media && src) {
@@ -9,7 +9,7 @@ const Source = ({ height, media, resizedOptions, resizerURL, src, width, ...rest
 					{...rest}
 					height={height}
 					media={media}
-					srcSet={formatSrcset(resizerURL.concat(src), resizedOptions, width, height)}
+					srcSet={formatSrc(resizerURL.concat(src), resizedOptions, width, height)}
 					width={width}
 				/>
 			);
