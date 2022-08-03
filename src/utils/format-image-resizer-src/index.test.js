@@ -1,9 +1,9 @@
-import formatSrcset from ".";
+import formatSrc from ".";
 
 describe("format sourceset", () => {
 	it("without width or height params", () => {
 		expect(
-			formatSrcset("https://www.test.org/image.jpg", {
+			formatSrc("https://www.test.org/image.jpg", {
 				auth: "xyz123",
 				filter: 70,
 				smart: true,
@@ -13,7 +13,7 @@ describe("format sourceset", () => {
 
 	it("with width and height included as resizer options", () => {
 		expect(
-			formatSrcset("https://www.test.org/image.jpg", {
+			formatSrc("https://www.test.org/image.jpg", {
 				auth: "xyz123",
 				filter: 70,
 				smart: true,
@@ -25,7 +25,7 @@ describe("format sourceset", () => {
 
 	it("with width and height as explicit params, not as resizer options", () => {
 		expect(
-			formatSrcset(
+			formatSrc(
 				"https://www.test.org/image.jpg",
 				{
 					auth: "xyz123",
@@ -40,7 +40,7 @@ describe("format sourceset", () => {
 
 	it("with width and height explicit params overriding dimensions provided as resizer options", () => {
 		expect(
-			formatSrcset(
+			formatSrc(
 				"https://www.test.org/image.jpg",
 				{
 					auth: "xyz123",
