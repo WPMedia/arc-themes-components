@@ -87,8 +87,6 @@ Image.defaultProps = {
 	resizerURL: "",
 	responsiveImages: [],
 	sizes: "",
-	width: null,
-	height: null,
 };
 
 Image.propTypes = {
