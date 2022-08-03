@@ -46,9 +46,9 @@ describe("Source subcomponent", () => {
 				resizedOptions={{ auth: "fff1111", filter: 70, smart: true, width: 100, height: 100 }}
 			/>
 		);
-		// should set the height of the source element
+		// should not set the height of the source element from the resizedOptions
 		expect(container.firstChild).not.toHaveAttribute("height", "100");
-		// should set the width of the source element
+		// should not set the width of the source element from the resizedOptions
 		expect(container.firstChild).not.toHaveAttribute("width", "100");
 	});
 	it("should set the height and width of the source element if width and height explicitly passed in", () => {
