@@ -22,6 +22,8 @@ If you don't set a `responsiveImages` array, you will have no responsive image o
 
 For more information on responsive image best practices, please see: https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images. We are using sizes and srcset based off of these practices, using arc resizer v2 auth and filters. If you seek more customization, you can create your own image component as well. Or, please refer to the Picture component if you require different image art direction or image.
 
+NOTE: The `resizedOptions` will not be used for the height and width: the `height` and `width` prop will only be used for setting width and height of the `<img>` as well as for calculating the aspect ratio used to generated the `<img>`'s srcset.
+
 ## Usage
 
 ```jsx
