@@ -229,4 +229,25 @@ describe("Image", () => {
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute("sizes", "(min-width: 600px) 50vw");
 	});
+	it("should only allow the top-level height and width to set the src and srcset", () => {
+		render(
+			<Image
+				src="/test-image.jpg"
+				resizerURL="https://resizer.example.com"
+				resizedOptions={{ auth: "secret", width: 55, height: 144 }}
+				responsiveImages={[100, 200, 300]}
+				height={100}
+				width={50}
+			/>
+		);
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute(
+			"src",
+			"https://resizer.example.com/test-image.jpg?auth=secret&width=50&height=100"
+		);
+		expect(element).toHaveAttribute(
+			"srcset",
+			"https://resizer.example.com/test-image.jpg?auth=secret&width=100&height=200 100w, https://resizer.example.com/test-image.jpg?auth=secret&width=200&height=400 200w, https://resizer.example.com/test-image.jpg?auth=secret&width=300&height=600 300w"
+		);
+	});
 });

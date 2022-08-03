@@ -33,11 +33,20 @@ const Image = ({
 		);
 	}
 
-	// "https://resizer.com/" + "image.jpg" + "?auth=secret&filter=true"
+	// height and width should only be set on the image top-level
+	// we're filtered out resized options so that we have consistent approach to setting dimensions
+	// for aspect ratio as well as the img element itself for cls
+	const {
+		width: _unusedWidth,
+		height: _unusedHeight,
+		...resizedOptionsNoDimensions
+	} = resizedOptions;
+
+	// "https://resizer.com/" + "image.jpg" + "?" + "auth=secret&filter=true"
 	const srcWithOptionsWithoutHeightWidth = resizerURL.concat(
 		src,
 		"?",
-		new URLSearchParams(resizedOptions).toString()
+		new URLSearchParams(resizedOptionsNoDimensions).toString()
 	);
 
 	// add the height and width to the default src if they exist
