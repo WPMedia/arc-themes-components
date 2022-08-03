@@ -249,5 +249,7 @@ describe("Image", () => {
 			"srcset",
 			"https://resizer.example.com/test-image.jpg?auth=secret&width=100&height=200 100w, https://resizer.example.com/test-image.jpg?auth=secret&width=200&height=400 200w, https://resizer.example.com/test-image.jpg?auth=secret&width=300&height=600 300w"
 		);
+		expect(element).toHaveAttribute("height", "100");
+		expect(element).toHaveAttribute("width", "50");
 	});
 });
