@@ -86,7 +86,7 @@ Image.defaultProps = {
 	resizedOptions: {},
 	resizerURL: "",
 	responsiveImages: [],
-	sizes: "",
+	sizes: [],
 };
 
 Image.propTypes = {
@@ -98,8 +98,8 @@ Image.propTypes = {
 	height: PropTypes.number,
 	/** Indication of how the browser should load the image, using the native loading attribute of an <img /> tag */
 	loading: PropTypes.oneOf(["lazy", "eager"]),
-	/** Options to pass into v2 resizer, with height and width being used for img tag as well */
-	resizedOptions: PropTypes.shape({}),
+	/** Options to pass into v2 resizer */
+	resizedOptions: PropTypes.object,
 	/** The URL of the resizer service. Should have a trailing slash */
 	resizerURL: PropTypes.string,
 	/** Array of widths to use as sizes for the image */

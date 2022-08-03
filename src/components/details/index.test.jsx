@@ -12,12 +12,12 @@ describe("Details", () => {
 	it("should render additional classes", () => {
 		const ORIGINAL_CLASSES = "c-details";
 		const ADDITIONAL_CLASSES = "additionalClass1 additionalClass2";
-		render(
+		const { container } = render(
 			<Details className={ADDITIONAL_CLASSES} summary="Summary">
 				Hello World
 			</Details>
 		);
-		const element = screen.queryByText("Hello World");
+		const element = container.querySelector("details");
 		expect(element).toHaveClass(ADDITIONAL_CLASSES);
 		expect(element).toHaveClass(ORIGINAL_CLASSES);
 	});
@@ -31,5 +31,20 @@ describe("Details", () => {
 		expect(screen.queryByText("Summary")).not.toBeNull();
 		expect(screen.queryByText("Hello World")).not.toBeNull();
 		expect(screen.queryByText("Icon")).not.toBeNull();
+	});
+
+	it("should render children as HTML", () => {
+		const childMockHTML = "Hello<br />World \u00F7";
+		const { container } = render(
+			<Details summary="Summary" icon={<>Icon</>} iconPlacement="left" childrenHTML>
+				{childMockHTML}
+			</Details>
+		);
+
+		expect(screen.queryByText("Summary")).not.toBeNull();
+		expect(screen.queryByText("Icon")).not.toBeNull();
+
+		const element = container.querySelector("details > p");
+		expect(element.outerHTML).toEqual("<p>Hello<br>World ÷</p>");
 	});
 });
