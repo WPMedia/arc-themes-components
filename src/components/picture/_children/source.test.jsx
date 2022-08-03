@@ -37,4 +37,62 @@ describe("Source subcomponent", () => {
 		/>
 	`);
 	});
+	it("should set the height and the width of the source element to resized options", () => {
+		const { container } = render(
+			<Source
+				src="test.jpeg"
+				media="(max-width: 799px)"
+				resizerURL="http://www.test.org/"
+				resizedOptions={{ auth: "fff1111", filter: 70, smart: true, width: 100, height: 100 }}
+			/>
+		);
+		expect(container.firstChild).toHaveAttribute(
+			"srcset",
+			"http://www.test.org/test.jpeg?auth=fff1111&filter=70&smart=true&width=100&height=100"
+		);
+		// should set the height of the source element
+		expect(container.firstChild).toHaveAttribute("height", "100");
+		// should set the width of the source element
+		expect(container.firstChild).toHaveAttribute("width", "100");
+	});
+	it("should set the height and width of the source element if width and height explicitly passed in", () => {
+		const { container } = render(
+			<Source
+				src="test.jpeg"
+				media="(max-width: 799px)"
+				resizerURL="http://www.test.org/"
+				height={100}
+				width={100}
+				resizedOptions={{ auth: "fff1111", filter: 70, smart: true }}
+			/>
+		);
+		expect(container.firstChild).toHaveAttribute(
+			"srcset",
+			"http://www.test.org/test.jpeg?auth=fff1111&filter=70&smart=true&width=100&height=100"
+		);
+		// should set the height of the source element
+		expect(container.firstChild).toHaveAttribute("height", "100");
+		// should set the width of the source element
+		expect(container.firstChild).toHaveAttribute("width", "100");
+	});
+	it("should opt to use the explicit height and width over the resizedOptions ones in the srcset and the img attributes", () => {
+		const { container } = render(
+			<Source
+				src="test.jpeg"
+				media="(max-width: 799px)"
+				resizerURL="http://www.test.org/"
+				height={100}
+				width={100}
+				resizedOptions={{ auth: "fff1111", filter: 70, smart: true, height: 77, width: 155 }}
+			/>
+		);
+		expect(container.firstChild).toHaveAttribute(
+			"srcset",
+			"http://www.test.org/test.jpeg?auth=fff1111&filter=70&smart=true&height=100&width=100"
+		);
+		// should set the height of the source element
+		expect(container.firstChild).toHaveAttribute("height", "100");
+		// should set the width of the source element
+		expect(container.firstChild).toHaveAttribute("width", "100");
+	});
 });
