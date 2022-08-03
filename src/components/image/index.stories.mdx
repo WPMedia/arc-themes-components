@@ -14,7 +14,7 @@ Crucially, an "auth" key will allow the image to be resized. This object will re
 
 For responsive images, the goal is to provide options given the media conditions, like screen size, provided using the "sizes" prop that takes in an array of objects. This is will render the [sizes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-sizes) string.
 
-Given the sizes specified, the browser will choose the best image to display from the `srcset` attribute created given the `resizedOptions` and the `responsiveImages` prop. The `resizedOptions` will also provide the aspect ratio, with `resizedOptions.height` and `resizedOptions.width`, needed to make the `srcset` available images.
+Given the sizes specified, the browser will choose the best image to display from the `srcset` attribute created given the `resizedOptions` and the `responsiveImages` prop.
 
 The width and height prop are used to set the aspect ratio of the responsive images. For instance, if you set the width of 200 and height of 100, you're using an aspect ratio of 2. Then, if you're using `responsiveImages` of `[100, 200, 300]`, you'll get the height and width of the following: width=100, height=50 for 100, width=200 height=100 for 200, and width=300 height=150 for 300. In this way, the images are responsive based off of width. You are also opting into browser best practices of setting any width to give the browser a hint of how big the image will be. However, the image that's set based off of the `sizes` `mediaCondition` and `sourceSizeValue` will determine how big the image actually will be.
 
