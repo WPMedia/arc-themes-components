@@ -22,8 +22,6 @@ const Source = ({ height, media, resizedOptions, resizerURL, src, width, ...rest
 Source.defaultProps = {
 	resizedOptions: {},
 	resizerURL: "",
-	width: null,
-	height: null,
 };
 
 Source.propTypes = {
