@@ -51,7 +51,7 @@ const Image = ({
 					resizerURL.concat(src),
 					resizedOptions,
 					responsiveImageWidth,
-					aspectRatio !== 0 && height ? Math.floor(responsiveImageWidth / aspectRatio) : undefined
+					aspectRatio !== 0 && height ? responsiveImageWidth / aspectRatio : undefined
 				).concat(` ${responsiveImageWidth}w`)
 			)
 			.join(", ") || null;

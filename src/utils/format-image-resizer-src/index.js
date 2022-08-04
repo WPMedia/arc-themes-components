@@ -14,8 +14,8 @@ const formatSrc = (srcWithResizerUrl, resizedOptions, width, height) => {
 			...resizedOptionsNoDimensions,
 			// show height and width in params if available
 			// using optional object key syntax
-			...(width ? { width } : {}),
-			...(height ? { height } : {}),
+			...(width ? { width: Math.floor(width) } : {}),
+			...(height ? { height: Math.floor(height) } : {}),
 		}).toString()
 	);
 };
