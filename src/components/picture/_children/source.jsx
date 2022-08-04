@@ -3,18 +3,19 @@ import formatSrc from "../../../utils/format-image-resizer-src";
 
 const Source = ({ height, media, resizedOptions, resizerURL, src, width, ...rest }) => {
 	if (media && src) {
-		if (resizedOptions?.auth) {
-			return (
-				<source
-					{...rest}
-					height={height}
-					media={media}
-					srcSet={formatSrc(resizerURL.concat(src), resizedOptions, width, height)}
-					width={width}
-				/>
-			);
-		}
-		return <source {...rest} media={media} srcSet={src} height={height} width={width} />;
+		return (
+			<source
+				{...rest}
+				height={height}
+				media={media}
+				srcSet={
+					resizedOptions?.auth
+						? formatSrc(resizerURL.concat(src), resizedOptions, width, height)
+						: src
+				}
+				width={width}
+			/>
+		);
 	}
 	return null;
 };
