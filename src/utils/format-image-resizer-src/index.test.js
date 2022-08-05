@@ -31,7 +31,7 @@ describe("format source", () => {
 					smart: true,
 				},
 				50,
-				50
+				50.5
 			)
 		).toBe("https://www.test.org/image.jpg?auth=xyz123&filter=70&smart=true&width=50&height=50");
 	});
