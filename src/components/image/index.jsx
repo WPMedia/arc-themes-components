@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import formatSrc from "../../utils/format-image-resizer-src";
 
 const COMPONENT_CLASS_NAME = "c-image";
 
@@ -33,19 +34,7 @@ const Image = ({
 		);
 	}
 
-	// "https://resizer.com/" + "image.jpg" + "?auth=secret&filter=true"
-	const srcWithOptionsWithoutHeightWidth = resizerURL.concat(
-		src,
-		"?",
-		new URLSearchParams(resizedOptions).toString()
-	);
-
-	// add the height and width to the default src if they exist
-	// auth token will at least exist here so don't need to worry about ? prepend
-	const defaultSrc = srcWithOptionsWithoutHeightWidth.concat(
-		`${width ? `&width=${width}` : ""}`,
-		`${height ? `&height=${height}` : ""}`
-	);
+	const defaultSrc = formatSrc(resizerURL.concat(src), resizedOptions, width, height);
 
 	// if no height and width, no responsive image calculation
 	const aspectRatio = height && width ? width / height : 0;
@@ -57,11 +46,13 @@ const Image = ({
 			.map((responsiveImageWidth) =>
 				// divide the derived aspect ratio by each of the responsiveImages widths to get the height
 				// aspect ratio of zero will not show the height
-				srcWithOptionsWithoutHeightWidth.concat(
-					`&width=${responsiveImageWidth}`,
-					`${aspectRatio !== 0 && height ? `&height=${responsiveImageWidth / aspectRatio}` : ""}`,
-					` ${responsiveImageWidth}w`
-				)
+
+				formatSrc(
+					resizerURL.concat(src),
+					resizedOptions,
+					responsiveImageWidth,
+					aspectRatio !== 0 && height ? responsiveImageWidth / aspectRatio : undefined
+				).concat(` ${responsiveImageWidth}w`)
 			)
 			.join(", ") || null;
 
@@ -96,8 +87,6 @@ Image.defaultProps = {
 	resizerURL: "",
 	responsiveImages: [],
 	sizes: [],
-	width: null,
-	height: null,
 };
 
 Image.propTypes = {

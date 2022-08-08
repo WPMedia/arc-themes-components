@@ -18,6 +18,7 @@ import Link from "./src/components/link";
 import MediaItem from "./src/components/media-item";
 import Overline from "./src/components/overline";
 import Paragraph from "./src/components/paragraph";
+import Picture from "./src/components/picture";
 import Pill from "./src/components/pill";
 import Price from "./src/components/price";
 import Separator from "./src/components/separator";
@@ -62,6 +63,7 @@ export {
 	MediaItem,
 	Overline,
 	Paragraph,
+	Picture,
 	Pill,
 	Price,
 	Separator,
