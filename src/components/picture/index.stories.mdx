@@ -71,8 +71,8 @@ A `Picture` with a single `Picture.Source` and `Picture.Image`.
 		<Picture>
 			<Picture.Source
 				src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
-				width={400}
-				height={300}
+				height={600}
+				width={900}
 				media="(min-width: 768px)"
 				resizedOptions={{
 					auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
@@ -82,8 +82,8 @@ A `Picture` with a single `Picture.Source` and `Picture.Image`.
 			<Picture.Image
 				src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
 				alt="A person posing"
-				height={300}
-				width={300}
+				height={400}
+				width={600}
 				resizedOptions={{
 					auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 				}}
@@ -93,45 +93,34 @@ A `Picture` with a single `Picture.Source` and `Picture.Image`.
 	</Story>
 </Canvas>
 
-** Landscape Picture Source for mobile, portrait Picture Source for desktop **
+** Portrait Picture Source for mobile, landscape Picture Image for desktop **
 
-Multiple `Picture.Source` may be used to explicitly target Art Direction requirements for specific viewport widths.
+`Picture.Source` may be used to explicitly target Art Direction requirements for specific viewport widths.
 
 <Canvas>
-	<Story name="Landscape Picture Source for mobile, portrait Picture Source for desktop">
+	<Story name="Portrait Picture Source for mobile, landscape Picture Image for desktop">
 		<Picture>
 			<Picture.Source
 				src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
-				width={700}
-				height={900}
+				height={1500}
+				width={999}
 				media="(max-width: 768px)"
 				resizedOptions={{
 					auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
-					crop: "1500,325:nw",
+					crop: "1450,325:nw",
 					quality: 70,
-				}}
-				resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
-			/>
-			<Picture.Source
-				src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
-				height={1000}
-				width={1800}
-				media="(min-width: 769px)"
-				resizedOptions={{
-					auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
-					crop: "1000,300:nw",
-					quality: 80,
 				}}
 				resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 			/>
 			<Picture.Image
 				src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
 				alt="A person posing"
-				height={333}
-				width={500}
+				height={1000}
+				width={1800}
 				resizedOptions={{
 					auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
-					quality: 50,
+					crop: "1000,300:nw",
+					quality: 80,
 				}}
 				resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 			/>
@@ -148,8 +137,8 @@ Multiple `Picture.Source` may be used to explicitly target Art Direction require
 		<Picture>
 			<Picture.Source
 				src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
-				width={500}
-				height={300}
+				height={999}
+				width={1500}
 				resizedOptions={{
 					auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 				}}
@@ -158,8 +147,8 @@ Multiple `Picture.Source` may be used to explicitly target Art Direction require
 			<Picture.Image
 				src="HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg"
 				alt="A person posing"
-				height={300}
-				width={300}
+				height={400}
+				width={600}
 				resizedOptions={{
 					auth: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 				}}
