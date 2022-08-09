@@ -9,7 +9,7 @@ const Source = ({ height, media, resizedOptions, resizerURL, src, width, ...rest
 				height={height}
 				media={media}
 				srcSet={
-					resizedOptions?.auth
+					resizedOptions?.auth && resizerURL
 						? formatSrc(resizerURL.concat(src), resizedOptions, width, height)
 						: src
 				}

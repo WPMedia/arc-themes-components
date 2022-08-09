@@ -43,9 +43,33 @@ describe("Image", () => {
 		expect(element).not.toHaveAttribute("width");
 	});
 
+	it("should use src if resizerURL and no Auth", () => {
+		render(
+			<Image
+				src="test-image.jpg"
+				resizerURL="https://resizer.example.com/"
+				resizedOptions={{ filter: 70 }}
+			/>
+		);
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute("src", "test-image.jpg");
+	});
+
+	it("should use src if no resizerURL and no Auth", () => {
+		render(<Image src="test-image.jpg" resizedOptions={{ filter: 70 }} />);
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute("src", "test-image.jpg");
+	});
+
 	it("should render height and width if height and width", () => {
 		render(
-			<Image src="test-image.jpg" resizedOptions={{ auth: "secret" }} width={100} height={100} />
+			<Image
+				src="test-image.jpg"
+				resizerURL="https://resizer.example.com/"
+				resizedOptions={{ auth: "secret" }}
+				width={100}
+				height={100}
+			/>
 		);
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute("height", "100");
@@ -60,32 +84,55 @@ describe("Image", () => {
 	});
 
 	it("should pass in a first option with ? into the source with the resized image option", () => {
-		render(<Image src="test-image.jpg" resizedOptions={{ filter: 70, auth: "secret" }} />);
+		render(
+			<Image
+				src="test-image.jpg"
+				resizerURL="https://resizer.example.com/"
+				resizedOptions={{ filter: 70, auth: "secret" }}
+			/>
+		);
 		const element = screen.getByRole("img");
-		expect(element).toHaveAttribute("src", "test-image.jpg?filter=70&auth=secret");
+		expect(element).toHaveAttribute(
+			"src",
+			"https://resizer.example.com/test-image.jpg?filter=70&auth=secret"
+		);
 	});
 
 	it("should pass in many options into the source with the resized image option", () => {
 		render(
-			<Image src="test-image.jpg" resizedOptions={{ filter: 70, quality: 50, auth: "secret" }} />
+			<Image
+				src="test-image.jpg"
+				resizerURL="https://resizer.example.com/"
+				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
+			/>
 		);
 		const element = screen.getByRole("img");
-		expect(element).toHaveAttribute("src", "test-image.jpg?filter=70&quality=50&auth=secret");
+		expect(element).toHaveAttribute(
+			"src",
+			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret"
+		);
 	});
 
 	it("should pass in boolean as a string into the source with the resized image option", () => {
 		render(
-			<Image src="test-image.jpg" resizedOptions={{ filter: true, fancy: false, auth: "secret" }} />
+			<Image
+				src="test-image.jpg"
+				resizerURL="https://resizer.example.com/"
+				resizedOptions={{ filter: true, fancy: false, auth: "secret" }}
+			/>
 		);
 		const element = screen.getByRole("img");
-		expect(element).toHaveAttribute("src", "test-image.jpg?filter=true&fancy=false&auth=secret");
+		expect(element).toHaveAttribute(
+			"src",
+			"https://resizer.example.com/test-image.jpg?filter=true&fancy=false&auth=secret"
+		);
 	});
 
 	it("should prefix the src with the resizer url and add query parameters", () => {
 		render(
 			<Image
-				src="/test-image.jpg"
-				resizerURL="https://resizer.example.com"
+				src="test-image.jpg"
+				resizerURL="https://resizer.example.com/"
 				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
 			/>
 		);
@@ -99,8 +146,8 @@ describe("Image", () => {
 	it("should handle width and height passed into responsive images and render srcset", () => {
 		render(
 			<Image
-				src="/test-image.jpg"
-				resizerURL="https://resizer.example.com"
+				src="test-image.jpg"
+				resizerURL="https://resizer.example.com/"
 				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
 				responsiveImages={[100, 200, 300]}
 				height={50}
@@ -117,8 +164,8 @@ describe("Image", () => {
 	it("should render srcset without height and width using responsive images array", () => {
 		render(
 			<Image
-				src="/test-image.jpg"
-				resizerURL="https://resizer.example.com"
+				src="test-image.jpg"
+				resizerURL="https://resizer.example.com/"
 				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
 				responsiveImages={[100, 200, 300]}
 			/>
@@ -133,8 +180,8 @@ describe("Image", () => {
 	it("should only render positive integer responsive images array", () => {
 		render(
 			<Image
-				src="/test-image.jpg"
-				resizerURL="https://resizer.example.com"
+				src="test-image.jpg"
+				resizerURL="https://resizer.example.com/"
 				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
 				responsiveImages={[100, 200, 300, -100, "yes", true]}
 			/>
@@ -150,8 +197,8 @@ describe("Image", () => {
 	it("should render srcset using responsive images array with height and width", () => {
 		render(
 			<Image
-				src="/test-image.jpg"
-				resizerURL="https://resizer.example.com"
+				src="test-image.jpg"
+				resizerURL="https://resizer.example.com/"
 				height={100}
 				width={50}
 				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
@@ -167,8 +214,8 @@ describe("Image", () => {
 	it("passes in sizes array of object string default rendered", () => {
 		render(
 			<Image
-				src="/test-image.jpg"
-				resizerURL="https://resizer.example.com"
+				src="test-image.jpg"
+				resizerURL="https://resizer.example.com/"
 				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
 				responsiveImages={[100, 200, 300]}
 				sizes={[{ isDefault: true, sourceSizeValue: "50vw" }]}
@@ -181,8 +228,8 @@ describe("Image", () => {
 	it("passes in sizes array of object with many sizes", () => {
 		render(
 			<Image
-				src="/test-image.jpg"
-				resizerURL="https://resizer.example.com"
+				src="test-image.jpg"
+				resizerURL="https://resizer.example.com/"
 				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
 				responsiveImages={[100, 200, 300]}
 				sizes={[
@@ -202,8 +249,8 @@ describe("Image", () => {
 	it("uses the first default size provided", () => {
 		render(
 			<Image
-				src="/test-image.jpg"
-				resizerURL="https://resizer.example.com"
+				src="test-image.jpg"
+				resizerURL="https://resizer.example.com/"
 				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
 				responsiveImages={[100, 200, 300]}
 				sizes={[
@@ -219,8 +266,8 @@ describe("Image", () => {
 	it("handles not having a default size", () => {
 		render(
 			<Image
-				src="/test-image.jpg"
-				resizerURL="https://resizer.example.com"
+				src="test-image.jpg"
+				resizerURL="https://resizer.example.com/"
 				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
 				responsiveImages={[100, 200, 300]}
 				sizes={[{ sourceSizeValue: "50vw", mediaCondition: "(min-width: 600px)" }]}
