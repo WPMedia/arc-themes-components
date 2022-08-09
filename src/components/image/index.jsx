@@ -15,22 +15,17 @@ const Image = ({
 	height,
 	sizes,
 }) => {
-	// get the default height and width of the image
-	// use aspect ratio to generate other sizes
 	const { auth } = resizedOptions;
+	const componentClassNames = className
+		? `${COMPONENT_CLASS_NAME} ${className}`
+		: COMPONENT_CLASS_NAME;
 
-	if (!auth) {
+	if (!auth || !resizerURL) {
 		// eslint-disable-next-line no-console
 		console.error("No auth token provided for resizer");
 
 		return (
-			<img
-				alt={alt}
-				className={className ? `${COMPONENT_CLASS_NAME} ${className}` : COMPONENT_CLASS_NAME}
-				src={src}
-				width={width}
-				height={height}
-			/>
+			<img alt={alt} className={componentClassNames} src={src} width={width} height={height} />
 		);
 	}
 
@@ -56,20 +51,21 @@ const Image = ({
 			)
 			.join(", ") || null;
 
-	const responsiveSizes = sizes
-		? sizes
-				.filter(({ isDefault }) => !isDefault)
-				.map(({ mediaCondition, sourceSizeValue }) => `${mediaCondition} ${sourceSizeValue}`)
-				.concat(
-					sizes.find((currentSizeObject) => currentSizeObject.isDefault)?.sourceSizeValue || []
-				)
-				.join(", ")
-		: null;
+	const responsiveSizes =
+		sizes && sizes.length
+			? sizes
+					.filter(({ isDefault }) => !isDefault)
+					.map(({ mediaCondition, sourceSizeValue }) => `${mediaCondition} ${sourceSizeValue}`)
+					.concat(
+						sizes.find((currentSizeObject) => currentSizeObject.isDefault)?.sourceSizeValue || []
+					)
+					.join(", ")
+			: null;
 
 	return (
 		<img
 			alt={alt}
-			className={className ? `${COMPONENT_CLASS_NAME} ${className}` : COMPONENT_CLASS_NAME}
+			className={componentClassNames}
 			height={height}
 			loading={loading}
 			src={defaultSrc}
