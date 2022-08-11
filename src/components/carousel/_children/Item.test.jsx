@@ -21,6 +21,15 @@ describe("Carousel.Item", () => {
 		expect(container.querySelector(".c-carousel__slide")).toHaveAttribute("data-id", "custom-id");
 	});
 
+	it("should allow pass through of className", () => {
+		const { container } = render(
+			<Item label="Carousel Label" className="custom-class">
+				<div />
+			</Item>
+		);
+		expect(container.querySelector(".c-carousel__slide")).toHaveClass("custom-class");
+	});
+
 	it("should render function children", () => {
 		render(
 			<Item label="Carousel Label" viewable>
