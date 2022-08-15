@@ -6,7 +6,7 @@ describe("construct social url helper", () => {
 	});
 	it("takes in facebook as a field and returns interpolated string", () => {
 		expect(formatSocialURL(formatSocialURL.types.Facebook, "username")).toBe(
-			"https://www.thefacebook.com/username"
+			"https://www.facebook.com/username"
 		);
 	});
 	it("takes in instagram as a field and returns interpolated string", () => {

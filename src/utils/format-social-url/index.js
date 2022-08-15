@@ -19,7 +19,7 @@ function formatSocialURL(type, field) {
 		case SocialTypes.Email:
 			return `mailto:${field}`;
 		case SocialTypes.Facebook:
-			return `https://www.thefacebook.com/${field}`;
+			return `https://www.facebook.com/${field}`;
 		case SocialTypes.Instagram:
 			return `https://www.instagram.com/${field}/`;
 		case SocialTypes.LinkedIn:
