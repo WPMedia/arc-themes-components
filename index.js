@@ -28,6 +28,7 @@ import Video from "./src/components/video";
 import formatAuthors from "./src/utils/format-authors";
 import formatCredits from "./src/utils/format-credits";
 import formatPowaVideoEmbed from "./src/utils/format-powa-video-embed";
+import formatSocialURL from "./src/utils/format-social-url";
 import formatURL from "./src/utils/format-url";
 
 // the following are ordered by dependency
@@ -48,6 +49,7 @@ export {
 	formatAuthors,
 	formatCredits,
 	formatPowaVideoEmbed,
+	formatSocialURL,
 	formatURL,
 	getImageFromANS,
 	getVideoFromANS,
