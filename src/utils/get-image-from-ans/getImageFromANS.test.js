@@ -30,7 +30,7 @@ const mockLeadArtVideo = {
 		},
 	},
 };
-const mockLeadArtVideoNoImage = {
+const mockLeadArtVideoNoImageType = {
 	_id: "ZFGIZMA6LFEUHMOMN4D4CAJXWY",
 	type: "story",
 	version: "0.10.5",
@@ -52,17 +52,12 @@ const mockLeadArtVideoNoImage = {
 			_id: "ba52f779-47be-46b9-8bd5-58dcb4318101",
 			promo_items: {
 				basic: {
-					type: "image",
+					type: "not-image-type",
 					version: "0.5.8",
 					credits: {},
 				},
 			},
 			video_type: "clip",
-			promo_image: {
-				type: "image",
-				version: "0.5.8",
-				credits: {},
-			},
 		},
 	},
 };
@@ -184,8 +179,8 @@ describe("when extract an image from a story", () => {
 		});
 	});
 
-	it("must return null if lead_art or basic doesn't have an image", () => {
-		const url = getImageFromANS(mockLeadArtVideoNoImage);
+	it("must return null if lead_art or basic doesn't have an image type", () => {
+		const url = getImageFromANS(mockLeadArtVideoNoImageType);
 
 		expect(url).toBeNull();
 	});
