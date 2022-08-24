@@ -192,8 +192,6 @@ describe("when extract an image from a story", () => {
 
 	it("must extract image from basic if lead_art is gallery", () => {
 		const url = getImageFromANS(mockStoryPromoItemsGalleryFocalPoint);
-		const imageUrl =
-			mockStoryPromoItemsGalleryFocalPoint.promo_items.lead_art.promo_items.basic.url;
 
 		expect(url).toEqual({ _id: "P3V3THIJPVGUBLRIIYWKFHZTKA", type: "image", url: "bar.jpg" });
 	});
