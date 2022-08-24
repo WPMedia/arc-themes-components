@@ -7,7 +7,7 @@ const extractImageFromPromo = (promoItem) =>
  *
  * @param storyObject ANS story
  *
- * @return an object with the image URL or null if not found
+ * @return an object with the image URL or null if ans object is not type image
  */
 const getImageFromANS = (storyObject) => {
 	const { promo_items: promoItems } = storyObject || {};
