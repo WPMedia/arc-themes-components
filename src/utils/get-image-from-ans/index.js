@@ -1,6 +1,6 @@
 // returns an object
 const extractImageFromPromo = (promoItem) =>
-	promoItem?.basic?.type === "image" && promoItem?.basic?.url ? promoItem.basic : null;
+	promoItem?.basic?.type === "image" ? promoItem.basic : null;
 
 /**
  * Helper to resolve an image from an story.
