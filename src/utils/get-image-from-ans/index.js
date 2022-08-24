@@ -1,12 +1,13 @@
+// returns an object
 const extractImageFromPromo = (promoItem) =>
-	promoItem?.basic?.type === "image" && promoItem?.basic?.url ? promoItem.basic.url : null;
+	promoItem?.basic?.type === "image" ? promoItem.basic : null;
 
 /**
  * Helper to resolve an image from an story.
  *
  * @param storyObject ANS story
  *
- * @return an string with the image URL or null if not found
+ * @return an object with the image URL or null if ans object is not type image
  */
 const getImageFromANS = (storyObject) => {
 	const { promo_items: promoItems } = storyObject || {};

@@ -30,7 +30,7 @@ const mockLeadArtVideo = {
 		},
 	},
 };
-const mockLeadArtVideoNoImage = {
+const mockLeadArtVideoNoImageType = {
 	_id: "ZFGIZMA6LFEUHMOMN4D4CAJXWY",
 	type: "story",
 	version: "0.10.5",
@@ -52,17 +52,12 @@ const mockLeadArtVideoNoImage = {
 			_id: "ba52f779-47be-46b9-8bd5-58dcb4318101",
 			promo_items: {
 				basic: {
-					type: "image",
+					type: "not-image-type",
 					version: "0.5.8",
 					credits: {},
 				},
 			},
 			video_type: "clip",
-			promo_image: {
-				type: "image",
-				version: "0.5.8",
-				credits: {},
-			},
 		},
 	},
 };
@@ -151,30 +146,48 @@ describe("when extract an image from a story", () => {
 		expect(url).toBeNull();
 	});
 	it("must extract image from lead_art.promo_items if is present", () => {
-		const url = getImageFromANS(mockLeadArtVideo);
-		const imageUrl = mockLeadArtVideo.promo_items.lead_art.promo_items.basic.url;
+		const objectWithURL = getImageFromANS(mockLeadArtVideo);
 
-		expect(url).toEqual(imageUrl);
+		expect(objectWithURL).toEqual({
+			caption: "GF Default - A Shallow River Streaming Through A Bed Of Rocks",
+			credits: {},
+			height: 1080,
+			type: "image",
+			url: "https://d22ff27hdsy159.cloudfront.net/11-05-2019/t_9f51049ae2e640ba99b4a7f1763ca5fc_name_t_1c01cadfde48422b857383e38d8553a7_name_Pexels_Videos_2330708__scaled.jpg",
+			version: "0.5.8",
+			width: 1920,
+		});
 	});
 
 	it("must extract image from basic if lead_art image is empty", () => {
-		const url = getImageFromANS(mockLeadArtVideoPromoBasic);
-		const imageUrl = mockLeadArtVideoPromoBasic.promo_items.basic.url;
+		const objectWithURL = getImageFromANS(mockLeadArtVideoPromoBasic);
 
-		expect(url).toEqual(imageUrl);
+		expect(objectWithURL).toEqual({
+			_id: "GH3BDATX7FBZ7DSPPZFD5DPFJM",
+			additional_properties: {
+				fullSizeResizeUrl:
+					"/photo/resize/6BiTyEjupbGWhooSE6SJwf0bPl8=/arc-anglerfish-arc2-prod-corecomponents/public/GH3BDATX7FBZ7DSPPZFD5DPFJM.jpg",
+				ingestionMethod: "manual",
+				keywords: [],
+				mime_type: "image/jpeg",
+				originalName: "tv-test-pattern.jpg",
+				originalUrl:
+					"https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/GH3BDATX7FBZ7DSPPZFD5DPFJM.jpg",
+			},
+			type: "image",
+			url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/GH3BDATX7FBZ7DSPPZFD5DPFJM.jpg",
+		});
 	});
 
-	it("must return null if lead_art or basic doesn't have an image", () => {
-		const url = getImageFromANS(mockLeadArtVideoNoImage);
+	it("must return null if lead_art or basic doesn't have an image type", () => {
+		const url = getImageFromANS(mockLeadArtVideoNoImageType);
 
 		expect(url).toBeNull();
 	});
 
 	it("must extract image from basic if lead_art is gallery", () => {
 		const url = getImageFromANS(mockStoryPromoItemsGalleryFocalPoint);
-		const imageUrl =
-			mockStoryPromoItemsGalleryFocalPoint.promo_items.lead_art.promo_items.basic.url;
 
-		expect(url).toEqual(imageUrl);
+		expect(url).toEqual({ _id: "P3V3THIJPVGUBLRIIYWKFHZTKA", type: "image", url: "bar.jpg" });
 	});
 });
