@@ -456,6 +456,23 @@ describe("Carousel", () => {
 		});
 	});
 
+	it("hides additional controls if only one child and opted in", async () => {
+		const { container } = render(
+			<Carousel id="carousel-2" label="Carousel Label" showAdditionalSlideControls>
+				<Carousel.Item label="Slide 1 of 1">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+
+		const controlsArea = container.querySelector(".c-carousel__counter-controls-container");
+
+		// hide previous button
+		expect(controlsArea.querySelectorAll(".c-carousel__button--additional-previous")).toHaveLength(
+			0
+		);
+	});
+
 	it("renders a custom start autoplay button", async () => {
 		const customStartButtonText = "Start that autoplay already!";
 		const customStopButtonText = "Stop that autoplay already!";
