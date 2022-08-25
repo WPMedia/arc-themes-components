@@ -378,7 +378,7 @@ const Carousel = ({
 							{pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`}
 						</p>
 					) : null}
-					{showAdditionalSlideControls ? (
+					{carouselItems.length > 1 && showAdditionalSlideControls ? (
 						<div className={`${COMPONENT_CLASS_NAME}__additional-controls`}>
 							{slide !== slidesToShow ? resolvedAdditionalPreviousButton : null}
 							{slide !== carouselItems.length && carouselItems.length > 1
