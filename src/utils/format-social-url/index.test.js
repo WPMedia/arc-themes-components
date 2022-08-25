@@ -67,4 +67,7 @@ describe("construct social url helper", () => {
 	it("returns the field value if unknown", () => {
 		expect(formatSocialURL("unknown value", "username")).toBe("username");
 	});
+	it("returns the field value if it is prefixed with protocol", () => {
+		expect(formatSocialURL("facebook", "http://fb.me/user")).toBe("http://fb.me/user");
+	});
 });
