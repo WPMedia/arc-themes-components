@@ -6,6 +6,7 @@ const SocialTypes = Object.freeze({
 	Medium: "medium",
 	Pinterest: "pinterest",
 	Reddit: "reddit",
+	Rss: "rss",
 	Snapchat: "snapchat",
 	SoundCloud: "soundcloud",
 	Tumblr: "tumblr",
@@ -15,6 +16,10 @@ const SocialTypes = Object.freeze({
 });
 
 function formatSocialURL(type, field) {
+	// return field if it comes in with a protocol prefix
+	if (field.match(/^https?:\/\/\S+/)) {
+		return field;
+	}
 	switch (type) {
 		case SocialTypes.Email:
 			return `mailto:${field}`;
