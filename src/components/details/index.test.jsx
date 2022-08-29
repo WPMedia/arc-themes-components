@@ -44,7 +44,9 @@ describe("Details", () => {
 		expect(screen.queryByText("Summary")).not.toBeNull();
 		expect(screen.queryByText("Icon")).not.toBeNull();
 
-		const element = container.querySelector("details > p");
-		expect(element.outerHTML).toEqual("<p>Hello<br>World ÷</p>");
+		const element = container.querySelector("details > div");
+		expect(element.outerHTML).toMatchInlineSnapshot(
+			`"<div class=\\"c-details__content\\">Hello<br>World ÷</div>"`
+		);
 	});
 });
