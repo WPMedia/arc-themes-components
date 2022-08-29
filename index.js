@@ -35,6 +35,7 @@ import formatURL from "./src/utils/format-url";
 import getImageFromANS from "./src/utils/get-image-from-ans";
 import getVideoFromANS from "./src/utils/get-video-from-ans";
 import useInterval from "./src/utils/hooks/use-interval";
+import imageANSToImageSrc from "./src/utils/image-ans-to-image-src";
 import isServerSide from "./src/utils/is-server-side";
 import serialJoin from "./src/utils/serial-join";
 
@@ -58,6 +59,7 @@ export {
 	HeadingSection,
 	Icon,
 	Image,
+	imageANSToImageSrc,
 	Input,
 	isServerSide,
 	Join,
