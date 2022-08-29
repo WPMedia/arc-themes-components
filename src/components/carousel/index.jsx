@@ -376,9 +376,9 @@ const Carousel = ({
 					{showLabel ? (
 						<p
 							className={`${COMPONENT_CLASS_NAME}__image-counter-label`}
-							dangerouslySetInnerHTML={
-								pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`
-							}
+							dangerouslySetInnerHTML={{
+								__html: pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`,
+							}}
 						/>
 					) : null}
 					{carouselItems.length > 1 && showAdditionalSlideControls ? (
