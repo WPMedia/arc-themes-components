@@ -24,7 +24,14 @@ const Details = ({
 				<span className={`${COMPONENT_CLASS_NAME}__summary-text`}>{summary}</span>
 				{iconPlacement === "right" && IconOutput}
 			</summary>
-			{childrenHTML ? <p dangerouslySetInnerHTML={{ __html: children }} /> : children}
+			{childrenHTML ? (
+				<div
+					className={`${COMPONENT_CLASS_NAME}__content`}
+					dangerouslySetInnerHTML={{ __html: children }}
+				/>
+			) : (
+				children
+			)}
 		</details>
 	);
 };

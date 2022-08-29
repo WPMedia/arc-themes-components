@@ -64,5 +64,9 @@
 		@include scss.component-properties("details-open-summary-icon");
 	}
 
+	&__content {
+		@include scss.component-properties("details-content");
+	}
+
 	@include scss.component-properties("details");
 }
