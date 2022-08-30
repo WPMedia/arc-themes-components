@@ -348,7 +348,7 @@ const Carousel = ({
 			role="region"
 			aria-roledescription="carousel"
 			style={{
-				"--carousel-slide-width": `${100 / slidesToShowInView}%`,
+				"--carousel-slide-width": `${100 / (slidesToShowInView || slidesToShow)}%`,
 				"--viewable-slides": slidesToShow,
 			}}
 			ref={carouselElement}
@@ -374,9 +374,12 @@ const Carousel = ({
 				</div>
 				<div className={`${COMPONENT_CLASS_NAME}__counter-controls-container`}>
 					{showLabel ? (
-						<p className={`${COMPONENT_CLASS_NAME}__image-counter-label`}>
-							{pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`}
-						</p>
+						<p
+							className={`${COMPONENT_CLASS_NAME}__image-counter-label`}
+							dangerouslySetInnerHTML={{
+								__html: pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`,
+							}}
+						/>
 					) : null}
 					{carouselItems.length > 1 && showAdditionalSlideControls ? (
 						<div className={`${COMPONENT_CLASS_NAME}__additional-controls`}>
