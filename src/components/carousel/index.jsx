@@ -348,7 +348,7 @@ const Carousel = ({
 			role="region"
 			aria-roledescription="carousel"
 			style={{
-				"--carousel-slide-width": `${100 / slidesToShowInView}%`,
+				"--carousel-slide-width": `${100 / (slidesToShowInView || slidesToShow)}%`,
 				"--viewable-slides": slidesToShow,
 			}}
 			ref={carouselElement}
