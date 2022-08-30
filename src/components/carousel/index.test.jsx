@@ -579,4 +579,30 @@ describe("Carousel", () => {
 			expect(screen.queryAllByText("Ad Placement")).toHaveLength(1);
 		});
 	});
+
+	it("should render additional label as html", async () => {
+		// divider and play as unicode characters
+		const mockHTML = "&#8227;1 &#47; 2";
+		const { container } = render(
+			<Carousel
+				id="carousel-2"
+				label="Carousel Label"
+				slidesToShow={1}
+				showLabel
+				showAdditionalSlideControls
+				pageCountPhrase={() => mockHTML}
+			>
+				<Carousel.Item label="Slide 1 of 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+
+		expect(
+			container.querySelector(".c-carousel__image-counter-label").innerHTML
+		).toMatchInlineSnapshot(`"‣1 / 2"`);
+	});
 });
