@@ -33,6 +33,7 @@ import formatURL from "./src/utils/format-url";
 
 // the following are ordered by dependency
 import getImageFromANS from "./src/utils/get-image-from-ans";
+import getPromoType from "./src/utils/get-promo-type";
 import getVideoFromANS from "./src/utils/get-video-from-ans";
 import useInterval from "./src/utils/hooks/use-interval";
 import imageANSToImageSrc from "./src/utils/image-ans-to-image-src";
@@ -53,6 +54,7 @@ export {
 	formatSocialURL,
 	formatURL,
 	getImageFromANS,
+	getPromoType,
 	getVideoFromANS,
 	Grid,
 	Heading,
