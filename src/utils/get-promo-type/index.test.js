@@ -10,6 +10,11 @@ const contentTypeGalleryPromo = {
 	type: "story",
 	promo_items: { lead_art: { type: "gallery" } },
 };
+const contentTypeImage = { type: "image" };
+const contentTypeImagePromo = {
+	type: "story",
+	promo_items: { lead_art: { type: "image" } },
+};
 
 describe("should return type of content for labels", () => {
 	it("must return undefined if no parameters received", () => {
@@ -43,6 +48,11 @@ describe("should return type of content for labels", () => {
 		expect(rc).toBe("gallery");
 	});
 
+	it('must return "image" if story type is "image"', () => {
+		const rc = getPromoType(contentTypeImage);
+		expect(rc).toBe("image");
+	});
+
 	it('must return "video" if story type is "story" and promo lead art is "video"', () => {
 		const rc = getPromoType(contentTypeVideoPromo);
 		expect(rc).toBe("video");
@@ -51,5 +61,10 @@ describe("should return type of content for labels", () => {
 	it('must return "gallery" if story type is "story" and promo lead art is "gallery"', () => {
 		const rc = getPromoType(contentTypeGalleryPromo);
 		expect(rc).toBe("gallery");
+	});
+
+	it('must return "image" if story type is "story" and promo lead art is "image"', () => {
+		const rc = getPromoType(contentTypeImagePromo);
+		expect(rc).toBe("image");
 	});
 });

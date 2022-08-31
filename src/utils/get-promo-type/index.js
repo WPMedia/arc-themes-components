@@ -12,6 +12,9 @@ function getPromoType(content) {
 		case "gallery":
 			promoType = "gallery";
 			break;
+		case "image":
+			promoType = "image";
+			break;
 		default:
 			if (content.promo_items?.lead_art?.type) {
 				promoType = getPromoType(content.promo_items.lead_art);
