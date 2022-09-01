@@ -628,3 +628,56 @@ const Feature = () => (
 		</Carousel>
 	</Story>
 </Canvas>
+
+** Two slides autoplay **
+
+<Canvas>
+	<Story name="Two slides autoplay">
+		<Carousel
+			id="carousel-1"
+			label="Carousel of Images"
+			slidesToShow={1}
+			nextButton={<button type="button">Next</button>}
+			previousButton={<button type="button">Previous</button>}
+			enableAutoplay
+			showLabel
+		>
+			<Carousel.Item label="Slide 1 of 5">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 2 of 5">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+		</Carousel>
+	</Story>
+</Canvas>
+
+** Three slides autoplay **
+
+<Canvas>
+	<Story name="Three slides autoplay">
+		<Carousel
+			id="carousel-1"
+			label="Carousel of Images"
+			slidesToShow={1}
+			nextButton={<button type="button">Next</button>}
+			previousButton={<button type="button">Previous</button>}
+			enableAutoplay
+			showLabel
+		>
+			<Carousel.Item label="Slide 1 of 5">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 2 of 5">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 3 of 4">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+		</Carousel>
+	</Story>
+</Canvas>
