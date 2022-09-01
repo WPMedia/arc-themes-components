@@ -231,7 +231,9 @@ const Carousel = ({
 			setIsAutoplaying(false);
 		} else {
 			setSlide(slide + 1);
-			setPosition(position - 100 / slidesToShowInView);
+			const slideOffset =
+				carouselElement.current.querySelector(".c-carousel__slide:nth-of-type(2)")?.offsetLeft || 0;
+			setPosition(position - slideOffset);
 		}
 	};
 
