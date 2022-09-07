@@ -6,6 +6,7 @@ import Button from "./_children/Button";
 import Item from "./_children/Item";
 import useInterval from "../../utils/hooks/use-interval";
 import isServerSide from "../../utils/is-server-side";
+import IndicatorArea from "./_children/IndicatorArea";
 
 const COMPONENT_CLASS_NAME = "c-carousel";
 
@@ -144,6 +145,7 @@ const Carousel = ({
 	fullScreenMinimizeButton,
 	fullScreenShowButton,
 	id,
+	indicators,
 	label,
 	nextButton,
 	pageCountPhrase,
@@ -203,15 +205,24 @@ const Carousel = ({
 
 	const totalSlides = carouselItems.length;
 
+	const goToSlide = (newSlideIndex) => {
+		setSlide(newSlideIndex);
+		const slideOffset =
+			carouselElement.current.querySelector(".c-carousel__slide:nth-of-type(2)")?.offsetLeft || 0;
+
+		// find the difference between the current position and the new one
+		// then multiple that difference by slide offset to get the new position
+		// add the current position to the new position adjustment to get the new position
+		const newPosition = position + (slide - newSlideIndex) * slideOffset;
+		setPosition(newPosition);
+	};
+
 	const previousSlide = () => {
 		/* istanbul ignore next */
 		if (slide - 1 < slidesToShowInView) {
 			return;
 		}
-		setSlide(slide - 1);
-		const slideOffset =
-			carouselElement.current.querySelector(".c-carousel__slide:nth-of-type(2)")?.offsetLeft || 0;
-		setPosition(position + slideOffset);
+		goToSlide(slide - 1);
 	};
 
 	const nextSlide = () => {
@@ -219,10 +230,7 @@ const Carousel = ({
 		if (slide + 1 > carouselItems.length) {
 			return;
 		}
-		setSlide(slide + 1);
-		const slideOffset =
-			carouselElement.current.querySelector(".c-carousel__slide:nth-of-type(2)")?.offsetLeft || 0;
-		setPosition(position - slideOffset);
+		goToSlide(slide + 1);
 	};
 
 	const autoplayNextSlide = () => {
@@ -406,6 +414,14 @@ const Carousel = ({
 				{slide !== slidesToShowInView ? resolvedPreviousButton : null}
 				{slide !== carouselItems.length && carouselItems.length > 1 ? resolvedNextButton : null}
 			</div>
+			{indicators !== "none" ? (
+				<IndicatorArea
+					indicatorType={indicators}
+					currentSlideNumber={slide}
+					totalSlideNumber={totalSlides}
+					goToSlide={goToSlide}
+				/>
+			) : null}
 		</div>
 	);
 };
@@ -419,6 +435,7 @@ Carousel.defaultProps = {
 		stop: "Stop automatic slide show",
 	},
 	enableAutoplay: false,
+	indicators: "none",
 	pageCountPhrase: () => {},
 	showLabel: false,
 	startAutoplayText: "Start Autoplay",
@@ -447,6 +464,8 @@ Carousel.propTypes = {
 	enableAutoplay: PropTypes.bool,
 	/** A unique identifier for the carousel */
 	id: PropTypes.string.isRequired,
+	/** Show the current state of the carousel with UI options */
+	indicators: PropTypes.oneOf(["none", "dots", "thumbnails"]),
 	/** An accessible label */
 	label: PropTypes.string.isRequired,
 	/** Page count phrase text for internationalization, function takes in current, total */

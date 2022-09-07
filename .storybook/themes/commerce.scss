@@ -334,6 +334,26 @@
 					max-width: var(--content-scale-width),
 					width: 100%,
 				),
+				carousel-indicator-container: (
+					display: flex,
+					gap: var(--global-spacing-4),
+					padding: var(--global-spacing-4) 0 0 0,
+					justify-content: center,
+					align-items: center,
+				),
+				carousel-indicator-dots: (
+					height: var(--global-spacing-3),
+					width: var(--global-spacing-3),
+					border: 1px solid var(--global-neutral-5),
+					border-radius: var(--border-radius-pill),
+					background-color: transparent,
+				),
+				carousel-indicator-dots-active: (
+					border: none,
+					height: var(--global-spacing-4),
+					width: var(--global-spacing-4),
+					background-color: var(--global-neutral-5),
+				),
 				date: (
 					font-size: var(--body-font-size-small),
 					line-height: var(--body-line-height-small),
