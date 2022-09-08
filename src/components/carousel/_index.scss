@@ -135,10 +135,11 @@
 		@include scss.component-properties("carousel-indicator-container");
 	}
 
-	&__indicator-dots {
+	&__indicator-dot {
 		&--active {
-			@include scss.component-properties("carousel-indicator-dots-active");
+			@include scss.component-properties("carousel-indicator-dot-active");
 		}
+		@include scss.component-properties("carousel-indicator-dot");
 		@include scss.component-properties("carousel-indicator-dots");
 	}
 }

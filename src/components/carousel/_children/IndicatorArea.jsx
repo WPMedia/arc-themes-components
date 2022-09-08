@@ -11,8 +11,8 @@ const IndicatorArea = ({ indicatorType, currentSlideNumber, totalSlideNumber, go
 					type="button"
 					onClick={() => goToSlide(index + 1)}
 					className={[
-						`${BLOCK_CLASS_NAME}__indicator-dots`,
-						index === currentSlideNumber - 1 ? `${BLOCK_CLASS_NAME}__indicator-dots--active` : "",
+						`${BLOCK_CLASS_NAME}__indicator-dot`,
+						index === currentSlideNumber - 1 ? `${BLOCK_CLASS_NAME}__indicator-dot--active` : "",
 					]
 						.filter((potentiallyTruthyString) => potentiallyTruthyString)
 						.join(" ")}

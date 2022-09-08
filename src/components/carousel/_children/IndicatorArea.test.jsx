@@ -8,23 +8,23 @@ describe("Indicator Area", () => {
 	});
 	it("should render dots if indicator type is dots and total slide number is set to an integer over 1", () => {
 		const { container } = render(<IndicatorArea indicatorType="dots" totalSlideNumber={3} />);
-		expect(container.querySelectorAll(".c-carousel__indicator-dots").length).toBe(3);
+		expect(container.querySelectorAll(".c-carousel__indicator-dot").length).toBe(3);
 	});
 	it("should call go to slide function if button is clicked showing the slide clicked", () => {
 		const goToSlide = jest.fn();
 		const { container } = render(
 			<IndicatorArea indicatorType="dots" totalSlideNumber={3} goToSlide={goToSlide} />
 		);
-		container.querySelectorAll(".c-carousel__indicator-dots")[1].click();
+		container.querySelectorAll(".c-carousel__indicator-dot")[1].click();
 		expect(goToSlide).toHaveBeenCalledWith(2);
 	});
 	it("should set the second slide to be active if current slide number is 2", () => {
 		const { container } = render(
 			<IndicatorArea indicatorType="dots" totalSlideNumber={3} currentSlideNumber={2} />
 		);
-		expect(container.querySelectorAll(".c-carousel__indicator-dots--active").length).toBe(1);
-		expect(container.querySelectorAll(".c-carousel__indicator-dots")[1]).toHaveClass(
-			"c-carousel__indicator-dots--active"
+		expect(container.querySelectorAll(".c-carousel__indicator-dot--active").length).toBe(1);
+		expect(container.querySelectorAll(".c-carousel__indicator-dot")[1]).toHaveClass(
+			"c-carousel__indicator-dot--active"
 		);
 	});
 });
