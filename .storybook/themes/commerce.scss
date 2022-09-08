@@ -344,15 +344,15 @@
 				carousel-indicator-dots: (
 					height: var(--global-spacing-3),
 					width: var(--global-spacing-3),
-					border: var(--global-border-width-1) solid var(--global-neutral-5),
-					border-radius: var(--border-radius-pill),
+					border: var(--global-border-width-1) solid var(--border-color),
+					border-radius: var(--border-radius-circle),
 					background-color: transparent,
 				),
 				carousel-indicator-dots-active: (
 					border: none,
 					height: var(--global-spacing-4),
 					width: var(--global-spacing-4),
-					background-color: var(--global-neutral-5),
+					background-color: var(--global-neutral-4),
 				),
 				date: (
 					font-size: var(--body-font-size-small),
