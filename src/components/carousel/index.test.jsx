@@ -8,6 +8,13 @@ Object.defineProperty(global.document, "fullscreenEnabled", {
 	value: true,
 });
 
+jest.mock(
+	"./_children/IndicatorArea",
+	() =>
+		function MockIndicator() {
+			return <div data-testid="indicator-area" />;
+		}
+);
 // mock accessibility to ensure that the carousel renders match media for reduce motion
 Object.defineProperty(global.window, "matchMedia", {
 	value: () => true,
@@ -604,5 +611,61 @@ describe("Carousel", () => {
 		expect(
 			container.querySelector(".c-carousel__image-counter-label").innerHTML
 		).toMatchInlineSnapshot(`"‣1 / 2"`);
+	});
+
+	it("should not show indicator area by default", async () => {
+		render(
+			<Carousel id="carousel-2" label="Carousel Label" slidesToShow={1}>
+				<Carousel.Item label="Slide 1 of 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+		expect(screen.queryByTestId("indicator-area")).toBeNull();
+	});
+
+	it("should not show indicator area if indicators prop is none", () => {
+		render(
+			<Carousel id="carousel-2" label="Carousel Label" slidesToShow={1} indicators="none">
+				<Carousel.Item label="Slide 1 of 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+		expect(screen.queryByTestId("indicator-area")).toBeNull();
+	});
+
+	it("should show indicator area if indicators is dots", async () => {
+		render(
+			<Carousel id="carousel-2" label="Carousel Label" slidesToShow={1} indicators="dots">
+				<Carousel.Item label="Slide 1 of 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+		expect(screen.queryByTestId("indicator-area")).not.toBeNull();
+	});
+
+	it("should show indicator area if indicators prop is thumbnails", () => {
+		render(
+			<Carousel id="carousel-2" label="Carousel Label" slidesToShow={1} indicators="thumbnails">
+				<Carousel.Item label="Slide 1 of 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+		expect(screen.queryByTestId("indicator-area")).not.toBeNull();
 	});
 });
