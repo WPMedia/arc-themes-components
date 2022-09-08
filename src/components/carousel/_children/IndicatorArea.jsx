@@ -7,6 +7,7 @@ const IndicatorArea = ({ indicatorType, currentSlideNumber, totalSlideNumber, go
 				<button
 					// todo: translation for slide number
 					label={`Go to slide ${index + 1}`}
+					key={`carousel-indicator-dot-${index}`}
 					type="button"
 					onClick={() => goToSlide(index + 1)}
 					className={[
