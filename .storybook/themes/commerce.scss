@@ -354,6 +354,11 @@
 					width: var(--global-spacing-4),
 					background-color: var(--global-neutral-4),
 				),
+				carousel-indicator-thumbnail: (
+					height: var(--global-spacing-7),
+					width: var(--global-spacing-7),
+					background-color: transparent,
+				),
 				date: (
 					font-size: var(--body-font-size-small),
 					line-height: var(--body-line-height-small),

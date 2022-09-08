@@ -417,7 +417,9 @@ const Carousel = ({
 					currentSlideNumber={slide}
 					totalSlideNumber={totalSlides}
 					goToSlide={goToSlide}
-				/>
+				>
+					{children}
+				</IndicatorArea>
 			) : null}
 		</div>
 	);

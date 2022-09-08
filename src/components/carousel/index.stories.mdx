@@ -719,7 +719,31 @@ const Feature = () => (
 			showLabel
 			indicators="dots"
 		>
-			<Carousel.Item label="Slide 1 of 5">
+			<Carousel.Item label="Slide 1 of 3">
+				<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 2 of 3">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 3 of 3">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+		</Carousel>
+	</Story>
+</Canvas>
+
+** Indicators thumbnails **
+
+<Canvas>
+	<Story name="Indicators thumbnails">
+		<Carousel
+			id="carousel-1"
+			label="Carousel of Images"
+			slidesToShow={1}
+			showLabel
+			indicators="thumbnails"
+		>
+			<Carousel.Item label="Slide 1 of 3">
 				<a href="/">
 					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
 				</a>
