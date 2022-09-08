@@ -238,10 +238,7 @@ const Carousel = ({
 		if (slide + 1 > carouselItems.length) {
 			setIsAutoplaying(false);
 		} else {
-			setSlide(slide + 1);
-			const slideOffset =
-				carouselElement.current.querySelector(".c-carousel__slide:nth-of-type(2)")?.offsetLeft || 0;
-			setPosition(position - slideOffset);
+			goToSlide(slide + 1);
 		}
 	};
 
