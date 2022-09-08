@@ -344,7 +344,7 @@
 				carousel-indicator-dots: (
 					height: var(--global-spacing-3),
 					width: var(--global-spacing-3),
-					border: 1px solid var(--global-neutral-5),
+					border: var(--global-border-width-1) solid var(--global-neutral-5),
 					border-radius: var(--border-radius-pill),
 					background-color: transparent,
 				),
