@@ -1,4 +1,4 @@
-import { Children } from "react";
+import { Children, useEffect } from "react";
 
 const BLOCK_CLASS_NAME = "c-carousel";
 
@@ -9,6 +9,18 @@ const IndicatorArea = ({
 	indicatorType,
 	totalSlideNumber,
 }) => {
+	const isThumbnail = indicatorType === "thumbnails";
+
+	useEffect(() => {
+		if (isThumbnail) {
+			const indicator = document.querySelector(`.${BLOCK_CLASS_NAME}__indicator-thumbnail--active`);
+
+			if (indicator) {
+				indicator.scrollIntoView();
+			}
+		}
+	}, [currentSlideNumber, isThumbnail]);
+
 	if (indicatorType === "dots") {
 		return (
 			<div className={`${BLOCK_CLASS_NAME}__indicator-dots-container`}>

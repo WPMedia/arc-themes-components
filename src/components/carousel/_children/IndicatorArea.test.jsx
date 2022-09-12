@@ -44,6 +44,9 @@ describe("Indicator Area", () => {
 		expect(screen.getAllByTestId("test-child").length).toBe(1);
 	});
 	it("should set the second slide to be active on the thumbnail type", () => {
+		const scrollViewMock = jest.fn();
+		window.HTMLElement.prototype.scrollIntoView = scrollViewMock;
+
 		const { container } = render(
 			<IndicatorArea indicatorType="thumbnails" currentSlideNumber={2}>
 				<div data-testid="test-child-1" />
@@ -54,9 +57,14 @@ describe("Indicator Area", () => {
 		const activeThumbnail = container.querySelector(".c-carousel__indicator-thumbnail--active");
 		expect(activeThumbnail).not.toBeNull();
 
+		// check that the scroll into view mock has been called
+		expect(scrollViewMock).toHaveBeenCalled();
+
 		expect(activeThumbnail.children[0].dataset.testid).toBe("test-child-2");
 	});
-	it("should set the second slide to be active if current slide number is 2", () => {
+	it("should set the second slide to be active if current slide number is 2 for dots", () => {
+		const scrollViewMock = jest.fn();
+		window.HTMLElement.prototype.scrollIntoView = scrollViewMock;
 		const { container } = render(
 			<IndicatorArea indicatorType="dots" totalSlideNumber={3} currentSlideNumber={2} />
 		);
@@ -64,5 +72,9 @@ describe("Indicator Area", () => {
 		expect(container.querySelectorAll(".c-carousel__indicator-dot")[1]).toHaveClass(
 			"c-carousel__indicator-dot--active"
 		);
+
+		// check that the scroll into view mock has not been called
+		// only call scroll into view for the thumbnails -- not dots
+		expect(scrollViewMock).not.toHaveBeenCalled();
 	});
 });
