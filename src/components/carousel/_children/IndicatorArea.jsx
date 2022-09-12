@@ -42,7 +42,7 @@ const IndicatorArea = ({
 		{indicatorType === "thumbnails" &&
 			getImages(children).map((child, index) => (
 				<button
-					label={`Go to slide ${index + 1}`}
+					aria-label={`Go to slide ${index + 1}`}
 					key={child.key}
 					type="button"
 					onClick={() => goToSlide(index + 1)}
