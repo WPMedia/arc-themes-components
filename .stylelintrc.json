@@ -19,7 +19,8 @@
 					"viewport-units",
 					"css3-cursor",
 					"css-initial-value",
-					"pointer-events"
+					"pointer-events",
+					"word-break"
 				],
 				"ignorePartialSupport": true,
 				"severity": "warning"
