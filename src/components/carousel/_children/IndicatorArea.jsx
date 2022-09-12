@@ -27,7 +27,7 @@ const IndicatorArea = ({
 			Array.from({ length: totalSlideNumber }, (_unusedValue, index) => (
 				<button
 					// todo: translation for slide number
-					label={`Go to slide ${index + 1}`}
+					aria-label={`Go to slide ${index + 1}`}
 					key={`carousel-indicator-dot-${index}`}
 					type="button"
 					onClick={() => goToSlide(index + 1)}
