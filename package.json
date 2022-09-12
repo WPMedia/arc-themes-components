@@ -16,7 +16,8 @@
     "prepare": "husky install",
     "storybook": "start-storybook -p 60003",
     "storybook:build": "build-storybook",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "stylelint-check": "stylelint-config-prettier-check"
   },
   "lint-staged": {
     "*": "prettier --write --ignore-unknown"

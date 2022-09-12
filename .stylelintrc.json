@@ -6,7 +6,6 @@
 		"stylelint-config-prettier"
 	],
 	"rules": {
-		"indentation": "tab",
 		"max-nesting-depth": 5,
 		"plugin/no-unsupported-browser-features": [
 			true,
