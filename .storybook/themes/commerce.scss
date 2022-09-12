@@ -334,7 +334,7 @@
 					max-width: var(--content-scale-width),
 					width: 100%,
 				),
-				carousel-indicator-container: (
+				carousel-indicator-dots-container: (
 					display: flex,
 					gap: var(--global-spacing-4),
 					padding: var(--global-spacing-4) 0 0 0,
@@ -354,10 +354,22 @@
 					width: var(--global-spacing-4),
 					background-color: var(--global-neutral-4),
 				),
+				carousel-indicator-thumbnails-container: (
+					padding: var(--global-spacing-4) var(--global-spacing-3) 0 var(--global-spacing-3),
+					width: 100%,
+					overflow-y: scroll,
+					height: var(--global-spacing-9),
+					white-space: nowrap,
+				),
 				carousel-indicator-thumbnail: (
+					margin: 0 var(--global-spacing-3),
 					height: var(--global-spacing-7),
 					width: var(--global-spacing-7),
+					padding: var(--global-spacing-1),
 					background-color: transparent,
+				),
+				carousel-indicator-thumbnail-active: (
+					border: var(--global-border-width-1) solid var(--global-black),
 				),
 				date: (
 					font-size: var(--body-font-size-small),

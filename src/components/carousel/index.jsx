@@ -157,6 +157,7 @@ const Carousel = ({
 	startAutoplayText,
 	stopAutoplayIcon,
 	stopAutoplayText,
+	thumbnails,
 	...rest
 }) => {
 	const [slidesToShowInView, setSlidesToShowInView] = useState(0);
@@ -418,7 +419,7 @@ const Carousel = ({
 					totalSlideNumber={totalSlides}
 					goToSlide={goToSlide}
 				>
-					{children}
+					{thumbnails}
 				</IndicatorArea>
 			) : null}
 		</div>
@@ -487,6 +488,8 @@ Carousel.propTypes = {
 	stopAutoplayIcon: PropTypes.node,
 	/** Text to display to stop autoplaying the slides if the button is enabled and slideshow is autoplaying */
 	stopAutoplayText: PropTypes.string,
+	/** Array of thumbnails to show in the thumbnail indicator area */
+	thumbnails: PropTypes.arrayOf(PropTypes.node),
 	/** Used to set a custom full screen show button, cloned with event handlers */
 	fullScreenShowButton: PropTypes.node,
 	/** Used to set a custom full screen exit button, cloned with event handlers */

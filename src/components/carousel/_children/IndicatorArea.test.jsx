@@ -1,10 +1,10 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import IndicatorArea from "./IndicatorArea";
 
 describe("Indicator Area", () => {
-	it("should render a parent component if no indicator type is provided", () => {
+	it("should render null if no indicator type is provided", () => {
 		const { container } = render(<IndicatorArea />);
-		expect(container.querySelector(".c-carousel__indicator-container")).not.toBeNull();
+		expect(container).toBeEmptyDOMElement();
 	});
 	it("should render dots if indicator type is dots and total slide number is set to an integer over 1", () => {
 		const { container } = render(<IndicatorArea indicatorType="dots" totalSlideNumber={3} />);
@@ -17,6 +17,44 @@ describe("Indicator Area", () => {
 		);
 		container.querySelectorAll(".c-carousel__indicator-dot")[1].click();
 		expect(goToSlide).toHaveBeenCalledWith(2);
+	});
+	it("should call go to slide function if button is clicked showing the slide clicked for type thumbnail", () => {
+		const goToSlide = jest.fn();
+		const { container } = render(
+			<IndicatorArea indicatorType="thumbnails" totalSlideNumber={3} goToSlide={goToSlide}>
+				<div key="1" />
+				<div key="2" />
+				<div key="3" />
+			</IndicatorArea>
+		);
+		container.querySelectorAll(".c-carousel__indicator-thumbnail")[1].click();
+		expect(goToSlide).toHaveBeenCalledWith(2);
+	});
+
+	it("should render a thumbnail container if indicator type is thumbnails", () => {
+		const { container } = render(<IndicatorArea indicatorType="thumbnails" />);
+		expect(container.querySelector(".c-carousel__indicator-thumbnails-container")).not.toBeNull();
+	});
+	it("should render thumbnail indicator as a child for a thumbnail", () => {
+		render(
+			<IndicatorArea indicatorType="thumbnails">
+				<div data-testid="test-child" />
+			</IndicatorArea>
+		);
+		expect(screen.getAllByTestId("test-child").length).toBe(1);
+	});
+	it("should set the second slide to be active on the thumbnail type", () => {
+		const { container } = render(
+			<IndicatorArea indicatorType="thumbnails" currentSlideNumber={2}>
+				<div data-testid="test-child-1" />
+				<div data-testid="test-child-2" />
+			</IndicatorArea>
+		);
+
+		const activeThumbnail = container.querySelector(".c-carousel__indicator-thumbnail--active");
+		expect(activeThumbnail).not.toBeNull();
+
+		expect(activeThumbnail.children[0].dataset.testid).toBe("test-child-2");
 	});
 	it("should set the second slide to be active if current slide number is 2", () => {
 		const { container } = render(

@@ -129,10 +129,10 @@
 		@include scss.component-properties("carousel-backdrop");
 	}
 
-	&__indicator-container {
+	&__indicator-dots-container {
 		grid-area: indicators;
 		width: 100%;
-		@include scss.component-properties("carousel-indicator-container");
+		@include scss.component-properties("carousel-indicator-dots-container");
 	}
 
 	&__indicator-dot {
@@ -141,6 +141,12 @@
 		}
 		@include scss.component-properties("carousel-indicator-dot");
 	}
+
+	&__indicator-thumbnails-container {
+		grid-area: indicators;
+		@include scss.component-properties("carousel-indicator-thumbnails-container");
+	}
+
 	&__indicator-thumbnail {
 		&--active {
 			@include scss.component-properties("carousel-indicator-thumbnail-active");
