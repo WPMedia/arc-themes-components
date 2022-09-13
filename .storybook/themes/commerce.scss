@@ -344,7 +344,7 @@
 				carousel-indicator-dot: (
 					height: var(--global-spacing-3),
 					width: var(--global-spacing-3),
-					border: var(--global-border-width-1) solid var(--border-color),
+					border: var(--global-border-width-1) var(--global-border-style-1) var(--border-color),
 					border-radius: var(--border-radius-circle),
 					background-color: transparent,
 				),
@@ -371,7 +371,7 @@
 					opacity: 40%,
 				),
 				carousel-indicator-thumbnail-active: (
-					border: var(--global-border-width-1) solid var(--global-black),
+					border: var(--global-border-width-1) var(--global-border-style-1) var(--global-black),
 					opacity: 1,
 				),
 				date: (
