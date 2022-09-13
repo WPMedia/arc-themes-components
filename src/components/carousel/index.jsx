@@ -146,6 +146,7 @@ const Carousel = ({
 	fullScreenShowButton,
 	id,
 	indicators,
+	goToSlidePhrase,
 	label,
 	nextButton,
 	pageCountPhrase,
@@ -418,6 +419,7 @@ const Carousel = ({
 					currentSlideNumber={slide}
 					totalSlideNumber={totalSlides}
 					goToSlide={goToSlide}
+					goToSlidePhrase={goToSlidePhrase}
 				>
 					{thumbnails}
 				</IndicatorArea>
@@ -436,6 +438,7 @@ Carousel.defaultProps = {
 	},
 	enableAutoplay: false,
 	indicators: "none",
+	goToSlidePhrase: () => {},
 	pageCountPhrase: () => {},
 	showLabel: false,
 	startAutoplayText: "Start Autoplay",
@@ -462,6 +465,14 @@ Carousel.propTypes = {
 	children: PropTypes.node.isRequired,
 	/** Opt into showing an autoplay toggle button */
 	enableAutoplay: PropTypes.bool,
+	/** Opt into showing a full screen toggle button. Uses defaults if no `fullScreenShowButton` or `fullScreenMinimizeButton` provided for respective button states */
+	enableFullScreen: PropTypes.bool,
+	/** Used to set a custom full screen exit button, cloned with event handlers */
+	fullScreenMinimizeButton: PropTypes.node,
+	/** Used to set a custom full screen show button, cloned with event handlers */
+	fullScreenShowButton: PropTypes.node,
+	/** Internationalization function for handling indicator aria-labels  */
+	goToSlidePhrase: PropTypes.func,
 	/** A unique identifier for the carousel */
 	id: PropTypes.string.isRequired,
 	/** Show the current state of the carousel with UI options */
@@ -490,12 +501,6 @@ Carousel.propTypes = {
 	stopAutoplayText: PropTypes.string,
 	/** Array of thumbnails to show in the thumbnail indicator area */
 	thumbnails: PropTypes.arrayOf(PropTypes.node),
-	/** Used to set a custom full screen show button, cloned with event handlers */
-	fullScreenShowButton: PropTypes.node,
-	/** Used to set a custom full screen exit button, cloned with event handlers */
-	fullScreenMinimizeButton: PropTypes.node,
-	/** Opt into showing a full screen toggle button. Uses defaults if no `fullScreenShowButton` or `fullScreenMinimizeButton` provided for respective button states */
-	enableFullScreen: PropTypes.bool,
 };
 
 export default Carousel;

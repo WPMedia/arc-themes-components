@@ -6,6 +6,7 @@ const IndicatorArea = ({
 	children,
 	currentSlideNumber,
 	goToSlide,
+	goToSlidePhrase,
 	indicatorType,
 	totalSlideNumber,
 }) => {
@@ -26,8 +27,7 @@ const IndicatorArea = ({
 			<div className={`${BLOCK_CLASS_NAME}__indicator-dots-container`}>
 				{Array.from({ length: totalSlideNumber }, (_unusedValue, index) => (
 					<button
-						// todo: translation for slide number
-						aria-label={`Go to slide ${index + 1}`}
+						aria-label={goToSlidePhrase(index + 1) || `Go to slide ${index + 1}`}
 						key={`carousel-indicator-dot-${index}`}
 						type="button"
 						onClick={() => goToSlide(index + 1)}
@@ -48,7 +48,7 @@ const IndicatorArea = ({
 			<div className={`${BLOCK_CLASS_NAME}__indicator-thumbnails-container`}>
 				{Children.map(children, (child, index) => (
 					<button
-						aria-label={`Go to slide ${index + 1}`}
+						aria-label={goToSlidePhrase(index + 1) || `Go to slide ${index + 1}`}
 						key={child.key}
 						type="button"
 						onClick={() => goToSlide(index + 1)}
