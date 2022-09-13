@@ -6,7 +6,8 @@ import Button from "./_children/Button";
 import Item from "./_children/Item";
 import useInterval from "../../utils/hooks/use-interval";
 import isServerSide from "../../utils/is-server-side";
-import IndicatorArea from "./_children/IndicatorArea";
+import DotIndicatorArea from "./_children/DotIndicatorArea";
+import ThumbnailIndicatorArea from "./_children/ThumbnailIndicatorArea";
 
 const COMPONENT_CLASS_NAME = "c-carousel";
 
@@ -413,16 +414,23 @@ const Carousel = ({
 				{slide !== slidesToShowInView ? resolvedPreviousButton : null}
 				{slide !== carouselItems.length && carouselItems.length > 1 ? resolvedNextButton : null}
 			</div>
-			{indicators !== "none" ? (
-				<IndicatorArea
-					indicatorType={indicators}
+
+			{indicators === "thumbnails" ? (
+				<ThumbnailIndicatorArea
 					currentSlideNumber={slide}
-					totalSlideNumber={totalSlides}
 					goToSlide={goToSlide}
 					goToSlidePhrase={goToSlidePhrase}
 				>
 					{thumbnails}
-				</IndicatorArea>
+				</ThumbnailIndicatorArea>
+			) : null}
+			{indicators === "dots" ? (
+				<DotIndicatorArea
+					currentSlideNumber={slide}
+					goToSlide={goToSlide}
+					goToSlidePhrase={goToSlidePhrase}
+					totalSlideNumber={totalSlides}
+				/>
 			) : null}
 		</div>
 	);
@@ -438,7 +446,8 @@ Carousel.defaultProps = {
 	},
 	enableAutoplay: false,
 	indicators: "none",
-	goToSlidePhrase: () => {},
+
+	goToSlidePhrase: /* istanbul ignore next  */ (targetSlide) => `Go to slide ${targetSlide}`,
 	pageCountPhrase: () => {},
 	showLabel: false,
 	startAutoplayText: "Start Autoplay",

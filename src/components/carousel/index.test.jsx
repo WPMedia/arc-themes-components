@@ -9,12 +9,21 @@ Object.defineProperty(global.document, "fullscreenEnabled", {
 });
 
 jest.mock(
-	"./_children/IndicatorArea",
+	"./_children/DotIndicatorArea",
 	() =>
-		function MockIndicator() {
-			return <div data-testid="indicator-area" />;
+		function MockDotIndicator() {
+			return <div data-testid="dot-indicator-area" />;
 		}
 );
+
+jest.mock(
+	"./_children/ThumbnailIndicatorArea",
+	() =>
+		function MockThumbnailIndicator() {
+			return <div data-testid="thumbnail-indicator-area" />;
+		}
+);
+
 // mock accessibility to ensure that the carousel renders match media for reduce motion
 Object.defineProperty(global.window, "matchMedia", {
 	value: () => true,
@@ -638,7 +647,8 @@ describe("Carousel", () => {
 				</Carousel.Item>
 			</Carousel>
 		);
-		expect(screen.queryByTestId("indicator-area")).toBeNull();
+		expect(screen.queryByTestId("dot-indicator-area")).toBeNull();
+		expect(screen.queryByTestId("thumbnail-indicator-area")).toBeNull();
 	});
 
 	it("should show indicator area if indicators is dots", async () => {
@@ -652,7 +662,8 @@ describe("Carousel", () => {
 				</Carousel.Item>
 			</Carousel>
 		);
-		expect(screen.queryByTestId("indicator-area")).not.toBeNull();
+		expect(screen.queryByTestId("dot-indicator-area")).not.toBeNull();
+		expect(screen.queryByTestId("thumbnail-indicator-area")).toBeNull();
 	});
 
 	it("should show indicator area if indicators prop is thumbnails", () => {
@@ -666,6 +677,7 @@ describe("Carousel", () => {
 				</Carousel.Item>
 			</Carousel>
 		);
-		expect(screen.queryByTestId("indicator-area")).not.toBeNull();
+		expect(screen.queryByTestId("dot-indicator-area")).toBeNull();
+		expect(screen.queryByTestId("thumbnail-indicator-area")).not.toBeNull();
 	});
 });
