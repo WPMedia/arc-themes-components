@@ -446,7 +446,6 @@ Carousel.defaultProps = {
 	},
 	enableAutoplay: false,
 	indicators: "none",
-
 	goToSlidePhrase: /* istanbul ignore next  */ (targetSlide) => `Go to slide ${targetSlide}`,
 	pageCountPhrase: () => {},
 	showLabel: false,
