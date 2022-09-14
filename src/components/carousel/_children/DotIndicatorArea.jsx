@@ -27,7 +27,7 @@ DotIndicatorArea.propTypes = {
 	/** Function to go to a slide */
 	goToSlide: PropTypes.func.isRequired,
 	/** Internationalization function for handling indicator aria-labels  */
-	goToSlidePhrase: PropTypes.func,
+	goToSlidePhrase: PropTypes.func.isRequired,
 	/** The total number of slides */
 	totalSlideNumber: PropTypes.number.isRequired,
 };
