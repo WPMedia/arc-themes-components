@@ -6,7 +6,6 @@
 		"stylelint-config-prettier"
 	],
 	"rules": {
-		"indentation": "tab",
 		"max-nesting-depth": 5,
 		"plugin/no-unsupported-browser-features": [
 			true,
@@ -20,7 +19,8 @@
 					"viewport-units",
 					"css3-cursor",
 					"css-initial-value",
-					"pointer-events"
+					"pointer-events",
+					"word-break"
 				],
 				"ignorePartialSupport": true,
 				"severity": "warning"

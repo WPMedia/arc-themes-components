@@ -19,6 +19,8 @@ The slideshow component also allows users to toggle full screen mode. The full-s
 
 Autoplay functionality that rotates the images within the carousel is also available. The autoplay feature is [accessible](https://www.w3.org/TR/wai-aria-practices-1.2/#carousel) for users who have opted into [`prefer-reduced-motion`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) by not displaying the option, trumping `enableAutoplay`. The feature is customizable by allowing custom block creators to use their own icons, text, and aria-label to indicate the autoplay functionality.
 
+The `indicators` prop allows a viewer to see either `dots` or `thumbnails` to visualize and control the state of the carousel. In essence, the indicator area shows the current slide index and the active slide's place in the list. The prop defaults to `none`. In order to customize the thumbnails shown, the prop `thumbnails` takes in an array of nodes. The first `thumbnails` node will correspond to the first carousel item: if you click the first thumbnail, it will go to the first thumbnail. In addition, if the first featured image is navigated to, the first thumbnail will become active and come into view. `thumbnails` prop is required to work with `indicators` prop when the `indicators` value is opting into using thumbnails.
+
 ## Usage
 
 ```jsx
@@ -676,6 +678,174 @@ const Feature = () => (
 				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
 			</Carousel.Item>
 			<Carousel.Item label="Slide 3 of 4">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+		</Carousel>
+	</Story>
+</Canvas>
+
+** Indicators none **
+
+<Canvas>
+	<Story name="Indicators none">
+		<Carousel
+			id="carousel-1"
+			label="Carousel of Images"
+			slidesToShow={1}
+			showLabel
+			indicators="none"
+		>
+			<Carousel.Item label="Slide 1 of 3">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 2 of 3">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 3 of 3">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+		</Carousel>
+	</Story>
+</Canvas>
+
+** Indicators dots **
+
+<Canvas>
+	<Story name="Indicators dots">
+		<Carousel
+			id="carousel-1"
+			label="Carousel of Images"
+			slidesToShow={1}
+			showLabel
+			indicators="dots"
+		>
+			<Carousel.Item label="Slide 1 of 3">
+				<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 2 of 3">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 3 of 3">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+		</Carousel>
+	</Story>
+</Canvas>
+
+** Indicators thumbnails **
+
+<Canvas>
+	<Story name="Indicators thumbnails">
+		<Carousel
+			id="carousel-1"
+			label="Carousel of Images"
+			slidesToShow={1}
+			showLabel
+			indicators="thumbnails"
+			thumbnails={[
+				<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />,
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />,
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />,
+			]}
+		>
+			<Carousel.Item label="Slide 1 of 3">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 2 of 3">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 3 of 3">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+		</Carousel>
+	</Story>
+</Canvas>
+
+** Indicators thumbnails with many images **
+
+<Canvas>
+	<Story name="Indicators thumbnails with many images">
+		<Carousel
+			id="carousel-1"
+			label="Carousel of Images"
+			slidesToShow={1}
+			showLabel
+			indicators="thumbnails"
+			thumbnails={[
+				<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />,
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />,
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />,
+				<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />,
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />,
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />,
+				<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />,
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />,
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />,
+				<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />,
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />,
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />,
+				<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />,
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />,
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />,
+			]}
+		>
+			<Carousel.Item label="Slide 1 of 15">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 2 of 15">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 3 of 15">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 4 of 15">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 5 of 15">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 6 of 15">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 7 of 15">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 8 of 15">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 9 of 15">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 10 of 15">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 11 of 15">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 12 of 15">
+				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 13 of 15">
+				<a href="/">
+					<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+				</a>
+			</Carousel.Item>
+			<Carousel.Item label="Slide 14 of 15">
+				<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+			</Carousel.Item>
+			<Carousel.Item label="Slide 15 of 15">
 				<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
 			</Carousel.Item>
 		</Carousel>

@@ -6,6 +6,8 @@ import Button from "./_children/Button";
 import Item from "./_children/Item";
 import useInterval from "../../utils/hooks/use-interval";
 import isServerSide from "../../utils/is-server-side";
+import DotIndicatorArea from "./_children/DotIndicatorArea";
+import ThumbnailIndicatorArea from "./_children/ThumbnailIndicatorArea";
 
 const COMPONENT_CLASS_NAME = "c-carousel";
 
@@ -144,6 +146,8 @@ const Carousel = ({
 	fullScreenMinimizeButton,
 	fullScreenShowButton,
 	id,
+	indicators,
+	goToSlidePhrase,
 	label,
 	nextButton,
 	pageCountPhrase,
@@ -155,6 +159,7 @@ const Carousel = ({
 	startAutoplayText,
 	stopAutoplayIcon,
 	stopAutoplayText,
+	thumbnails,
 	...rest
 }) => {
 	const [slidesToShowInView, setSlidesToShowInView] = useState(0);
@@ -203,15 +208,24 @@ const Carousel = ({
 
 	const totalSlides = carouselItems.length;
 
+	const goToSlide = (newSlideIndex) => {
+		setSlide(newSlideIndex);
+		const slideOffset =
+			carouselElement.current.querySelector(".c-carousel__slide:nth-of-type(2)")?.offsetLeft || 0;
+
+		// find the difference between the current position and the new one
+		// then multiple that difference by slide offset to get the new position
+		// add the current position to the new position adjustment to get the new position
+		const newPosition = position + (slide - newSlideIndex) * slideOffset;
+		setPosition(newPosition);
+	};
+
 	const previousSlide = () => {
 		/* istanbul ignore next */
 		if (slide - 1 < slidesToShowInView) {
 			return;
 		}
-		setSlide(slide - 1);
-		const slideOffset =
-			carouselElement.current.querySelector(".c-carousel__slide:nth-of-type(2)")?.offsetLeft || 0;
-		setPosition(position + slideOffset);
+		goToSlide(slide - 1);
 	};
 
 	const nextSlide = () => {
@@ -219,10 +233,7 @@ const Carousel = ({
 		if (slide + 1 > carouselItems.length) {
 			return;
 		}
-		setSlide(slide + 1);
-		const slideOffset =
-			carouselElement.current.querySelector(".c-carousel__slide:nth-of-type(2)")?.offsetLeft || 0;
-		setPosition(position - slideOffset);
+		goToSlide(slide + 1);
 	};
 
 	const autoplayNextSlide = () => {
@@ -230,10 +241,7 @@ const Carousel = ({
 		if (slide + 1 > carouselItems.length) {
 			setIsAutoplaying(false);
 		} else {
-			setSlide(slide + 1);
-			const slideOffset =
-				carouselElement.current.querySelector(".c-carousel__slide:nth-of-type(2)")?.offsetLeft || 0;
-			setPosition(position - slideOffset);
+			goToSlide(slide + 1);
 		}
 	};
 
@@ -406,6 +414,24 @@ const Carousel = ({
 				{slide !== slidesToShowInView ? resolvedPreviousButton : null}
 				{slide !== carouselItems.length && carouselItems.length > 1 ? resolvedNextButton : null}
 			</div>
+
+			{indicators === "thumbnails" ? (
+				<ThumbnailIndicatorArea
+					currentSlideNumber={slide}
+					goToSlide={goToSlide}
+					goToSlidePhrase={goToSlidePhrase}
+				>
+					{thumbnails}
+				</ThumbnailIndicatorArea>
+			) : null}
+			{indicators === "dots" ? (
+				<DotIndicatorArea
+					currentSlideNumber={slide}
+					goToSlide={goToSlide}
+					goToSlidePhrase={goToSlidePhrase}
+					totalSlideNumber={totalSlides}
+				/>
+			) : null}
 		</div>
 	);
 };
@@ -419,6 +445,8 @@ Carousel.defaultProps = {
 		stop: "Stop automatic slide show",
 	},
 	enableAutoplay: false,
+	indicators: "none",
+	goToSlidePhrase: /* istanbul ignore next  */ (targetSlide) => `Go to slide ${targetSlide}`,
 	pageCountPhrase: () => {},
 	showLabel: false,
 	startAutoplayText: "Start Autoplay",
@@ -445,8 +473,18 @@ Carousel.propTypes = {
 	children: PropTypes.node.isRequired,
 	/** Opt into showing an autoplay toggle button */
 	enableAutoplay: PropTypes.bool,
+	/** Opt into showing a full screen toggle button. Uses defaults if no `fullScreenShowButton` or `fullScreenMinimizeButton` provided for respective button states */
+	enableFullScreen: PropTypes.bool,
+	/** Used to set a custom full screen exit button, cloned with event handlers */
+	fullScreenMinimizeButton: PropTypes.node,
+	/** Used to set a custom full screen show button, cloned with event handlers */
+	fullScreenShowButton: PropTypes.node,
+	/** Internationalization function for handling indicator aria-labels  */
+	goToSlidePhrase: PropTypes.func,
 	/** A unique identifier for the carousel */
 	id: PropTypes.string.isRequired,
+	/** Show the current state of the carousel with UI options */
+	indicators: PropTypes.oneOf(["none", "dots", "thumbnails"]),
 	/** An accessible label */
 	label: PropTypes.string.isRequired,
 	/** Page count phrase text for internationalization, function takes in current, total */
@@ -469,12 +507,8 @@ Carousel.propTypes = {
 	stopAutoplayIcon: PropTypes.node,
 	/** Text to display to stop autoplaying the slides if the button is enabled and slideshow is autoplaying */
 	stopAutoplayText: PropTypes.string,
-	/** Used to set a custom full screen show button, cloned with event handlers */
-	fullScreenShowButton: PropTypes.node,
-	/** Used to set a custom full screen exit button, cloned with event handlers */
-	fullScreenMinimizeButton: PropTypes.node,
-	/** Opt into showing a full screen toggle button. Uses defaults if no `fullScreenShowButton` or `fullScreenMinimizeButton` provided for respective button states */
-	enableFullScreen: PropTypes.bool,
+	/** Array of thumbnails to show in the thumbnail indicator area */
+	thumbnails: PropTypes.arrayOf(PropTypes.node),
 };
 
 export default Carousel;
