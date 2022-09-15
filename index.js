@@ -39,6 +39,7 @@ import useInterval from "./src/utils/hooks/use-interval";
 import imageANSToImageSrc from "./src/utils/image-ans-to-image-src";
 import isServerSide from "./src/utils/is-server-side";
 import serialJoin from "./src/utils/serial-join";
+import signImagesInANSObject from "./src/utils/sign-images-in-ans-object";
 
 export {
 	Attribution,
@@ -74,6 +75,7 @@ export {
 	Price,
 	Separator,
 	serialJoin,
+	signImagesInANSObject,
 	Stack,
 	useInterval,
 	Video,
