@@ -5,7 +5,7 @@
 	--slide-width: var(--carousel-slide-width, 25%);
 
 	display: grid;
-	grid-template-areas: "controls" "carousel";
+	grid-template-areas: "controls" "carousel" "indicators";
 	overflow: hidden;
 	word-break: break-word;
 
@@ -45,7 +45,7 @@
 		flex: 0 0
 			calc(
 				var(--slide-width) -
-				calc(var(--slide-gap) * calc(var(--viewable-slides) - 1) / var(--viewable-slides))
+					calc(var(--slide-gap) * calc(var(--viewable-slides) - 1) / var(--viewable-slides))
 			);
 
 		@include scss.component-properties("carousel-slide");
@@ -127,5 +127,30 @@
 	// add backdrop for setting full-screen background-color
 	&::backdrop {
 		@include scss.component-properties("carousel-backdrop");
+	}
+
+	&__indicator-dots-container {
+		grid-area: indicators;
+		width: 100%;
+		@include scss.component-properties("carousel-indicator-dots-container");
+	}
+
+	&__indicator-dot {
+		&--active {
+			@include scss.component-properties("carousel-indicator-dot-active");
+		}
+		@include scss.component-properties("carousel-indicator-dot");
+	}
+
+	&__indicator-thumbnails-container {
+		grid-area: indicators;
+		@include scss.component-properties("carousel-indicator-thumbnails-container");
+	}
+
+	&__indicator-thumbnail {
+		&--active {
+			@include scss.component-properties("carousel-indicator-thumbnail-active");
+		}
+		@include scss.component-properties("carousel-indicator-thumbnail");
 	}
 }

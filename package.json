@@ -1,14 +1,14 @@
 {
   "name": "@wpmedia/arc-themes-components",
-  "version": "0.0.4-arc-themes-release-version-2-0-2.0",
+  "version": "0.0.4-arc-themes-release-version-2-0-2.8",
   "description": "The arc-themes-components will be the basis for presentational components and reusable utility functions workflow of themes and client devs. A core tenet of Themes is composability for developers.",
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage",
     "test:watch": "npm run test -- --watch -o --coverage",
-    "test:changed-feature-branch": "jest --changedSince=origin/arc-themes-release-version-2.0.1 --coverage --passWithNoTests",
+    "test:changed-feature-branch": "jest --changedSince=origin/arc-themes-release-version-2.0.2 --coverage --passWithNoTests",
     "lint": "eslint --ext js --ext jsx src .storybook index.js",
-    "lint:changed-feature-branch": "eslint --max-warnings 0 --no-error-on-unmatched-pattern $(git diff --name-only origin/arc-themes-release-version-2.0.1 | grep -E \"(.js$|.jsx$)\" || echo \"no js/jsx files changed\")",
+    "lint:changed-feature-branch": "eslint --max-warnings 0 --no-error-on-unmatched-pattern $(git diff --name-only origin/arc-themes-release-version-2.0.2 | grep -E \"(.js$|.jsx$)\" || echo \"no js/jsx files changed\")",
     "lint:fix": "npm run lint -- --fix",
     "lint:styles": "stylelint '**/*.scss' --formatter verbose",
     "lint:styles:fix": "stylelint '**/*.scss' --fix",
@@ -16,7 +16,8 @@
     "prepare": "husky install",
     "storybook": "start-storybook -p 60003",
     "storybook:build": "build-storybook",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "stylelint-check": "stylelint-config-prettier-check"
   },
   "lint-staged": {
     "*": "prettier --write --ignore-unknown"
