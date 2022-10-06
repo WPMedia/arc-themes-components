@@ -14,6 +14,7 @@ const Image = ({
 	width,
 	height,
 	sizes,
+	...rest
 }) => {
 	const { auth } = resizedOptions;
 	const componentClassNames = className
@@ -64,6 +65,7 @@ const Image = ({
 
 	return (
 		<img
+			{...rest}
 			alt={alt}
 			className={componentClassNames}
 			height={height}
