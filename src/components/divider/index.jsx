@@ -3,11 +3,9 @@ import PropTypes from "prop-types";
 const COMPONENT_CLASS_NAME = "c-divider";
 
 const Divider = ({ className, assistiveHidden }) => {
-	let ariaProp = {};
+	const ariaProp = {};
 	if (assistiveHidden) {
-		ariaProp = {
-			"aria-hidden": "true",
-		};
+		ariaProp["aria-hidden"] = "true";
 	}
 	return (
 		<hr
