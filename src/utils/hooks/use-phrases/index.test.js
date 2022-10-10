@@ -1,5 +1,6 @@
-import usePhrases from ".";
 import getProperties from "fusion:properties";
+
+import usePhrases from ".";
 
 jest.mock("fusion:properties");
 
