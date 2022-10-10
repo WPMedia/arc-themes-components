@@ -10,6 +10,10 @@ Divider component renders hr HTML tag. Using the hr tag, an HTML page can define
 The hr element, which is used to divide text or indicate a change in an HTML page, is typically presented as a horizontal rule, [see MDN doc](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr).
 Divider component also expects _assistiveHidden_ prop that adds _aria-hidden_ attribute that can be used to hide non-interactive content from the accessibility API [see MDN doc](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-hidden#:~:text=The%20aria%2Dhidden%20attribute%20can,children%20from%20the%20accessibility%20tree)
 
+# Not a Divider
+
+Do not use Divider when the quotation is not a break in the paragraph level of the article’s flow (e.g. Article body block's pull quote)
+
 ## Usage
 
 ```jsx
