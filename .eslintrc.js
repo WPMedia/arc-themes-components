@@ -21,6 +21,12 @@ module.exports = {
 	plugins: ["react", "jest", "jsx-a11y", "react-hooks", "sort-exports"],
 	rules: {
 		"global-require": "off",
+		"import/no-unresolved": [
+			2,
+			{
+				ignore: ["react", "^fusion:.+$"],
+			},
+		],
 		"no-tabs": [
 			"error",
 			{

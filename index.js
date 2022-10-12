@@ -36,6 +36,7 @@ import getImageFromANS from "./src/utils/get-image-from-ans";
 import getPromoType from "./src/utils/get-promo-type";
 import getVideoFromANS from "./src/utils/get-video-from-ans";
 import useInterval from "./src/utils/hooks/use-interval";
+import usePhrases from "./src/utils/hooks/use-phrases";
 import imageANSToImageSrc from "./src/utils/image-ans-to-image-src";
 import isServerSide from "./src/utils/is-server-side";
 import serialJoin from "./src/utils/serial-join";
@@ -78,5 +79,6 @@ export {
 	signImagesInANSObject,
 	Stack,
 	useInterval,
+	usePhrases,
 	Video,
 };

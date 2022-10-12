@@ -10,14 +10,27 @@ module.exports = {
 		"@storybook/addon-essentials",
 	],
 	staticDirs: ["../resources"],
-	webpackFinal: async (config) => {
-		config.module.rules.push({
-			test: /\.scss$/,
-			use: ["style-loader", "css-loader", "sass-loader"],
-			include: path.resolve(__dirname, "../"),
-		});
-
-		// Return the altered config
-		return config;
-	},
+	webpackFinal: (config) => ({
+		...config,
+		module: {
+			...config.module,
+			rules: [
+				...config.module.rules,
+				{
+					test: /\.scss$/,
+					use: ["style-loader", "css-loader", "sass-loader"],
+					include: path.resolve(__dirname, "../"),
+				},
+			],
+		},
+		resolve: {
+			...config.resolve,
+			alias: {
+				...config.resolve.alias,
+				"fusion:context": path.resolve(__dirname, "./alias/context.js"),
+				"fusion:intl": path.resolve(__dirname, "./alias/intl.js"),
+				"fusion:properties": path.resolve(__dirname, "./alias/properties.js"),
+			},
+		},
+	}),
 };
