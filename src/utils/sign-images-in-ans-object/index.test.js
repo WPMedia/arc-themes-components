@@ -3,6 +3,7 @@ import signImagesInANSObject from ".";
 const data = {
 	_id: "43UU6MCQERAMRPTD23B3CEXE7E",
 	type: "story",
+	undefinedValue: undefined,
 	content_elements: [
 		{
 			_id: "LJJSIEXMZ5FTDBP7PFHXI5A4XY",

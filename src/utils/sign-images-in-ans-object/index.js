@@ -3,7 +3,7 @@ const signImagesInANSObject =
 	({ data, ...rest }) => {
 		const replacements = new Set();
 
-		const stringData = JSON.stringify(data, (key, value) => {
+		const stringData = JSON.stringify(data, (key, value = {}) => {
 			const { _id, type, auth } = value;
 			if (!auth?.[resizerAppVersion] && type === "image") {
 				replacements.add(_id);
