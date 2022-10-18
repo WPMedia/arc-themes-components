@@ -381,6 +381,11 @@
 					font-size: var(--body-font-size-small),
 					line-height: var(--body-line-height-small),
 				),
+				divider: (
+					border-color: var(--border-color),
+					border-style: var(--global-border-style-1),
+					border-width: var(--global-border-width-1),
+				),
 				heading: (
 					font-weight: var(--global-font-weight-7),
 				),
