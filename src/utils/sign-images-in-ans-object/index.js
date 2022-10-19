@@ -3,7 +3,10 @@ const signImagesInANSObject =
 	({ data, ...rest }) => {
 		const replacements = new Set();
 
-		const stringData = JSON.stringify(data, (key, value = {}) => {
+		const stringData = JSON.stringify(data, (key, value) => {
+			if (value === null || typeof value === "undefined") {
+				return value;
+			}
 			const { _id, type, auth } = value;
 			if (!auth?.[resizerAppVersion] && type === "image") {
 				replacements.add(_id);
@@ -26,16 +29,17 @@ const signImagesInANSObject =
 					independent: true,
 				}).then((auth) => ({ id, auth }))
 			)
-		).then((authResults) => ({
-			data: JSON.parse(
-				authResults.reduce(
-					(accumulator, { id, auth }) =>
-						accumulator.replace(new RegExp(`__replaceMe${id}__`, "g"), auth),
-					stringData
-				)
-			),
-			...rest,
-		}));
+		).then((authResults) => {
+			const replaced = authResults.reduce(
+				(accumulator, { id, auth }) =>
+					accumulator.replace(new RegExp(`__replaceMe${id}__`, "g"), auth.hash),
+				stringData
+			);
+			return {
+				data: JSON.parse(replaced),
+				...rest,
+			};
+		});
 	};
 
 export default signImagesInANSObject;
