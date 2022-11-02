@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
 import formatSrc from "../../utils/format-image-resizer-src";
 import imageANSToImageSrc from "../../utils/image-ans-to-image-src";
-import calculateAspectRatio from "./aspect-ratio";
+import calculateWidthAndHeight from "./calculate-width-height";
 
 const COMPONENT_CLASS_NAME = "c-image";
 
@@ -14,7 +14,7 @@ const Image = ({
 	loading,
 	src,
 	resizedOptions,
-	resizerURL = RESIZER_URL,
+	resizerURL,
 	responsiveImages,
 	width,
 	height,
@@ -28,7 +28,7 @@ const Image = ({
 		? `${COMPONENT_CLASS_NAME} ${className}`
 		: COMPONENT_CLASS_NAME;
 
-	if (!auth || !resizerURL) {
+	if (!auth) {
 		// eslint-disable-next-line no-console
 		console.error("No auth token provided for resizer");
 
@@ -37,22 +37,25 @@ const Image = ({
 		);
 	}
 
-	const defaultSrc = formatSrc(resizerURL.concat(formattedSrc), resizedOptions, width, height);
+	const imageWidthAndHeight = calculateWidthAndHeight({ aspectRatio, width, height, ansImage });
+	const imageAspectRatio = imageWidthAndHeight.width / imageWidthAndHeight.height;
 
-	// if no height and width, no responsive image calculation
-	const imageAspectRatio = calculateAspectRatio({ aspectRatio, width, height, ansImage });
+	const defaultSrc = formatSrc(
+		resizerURL.concat(formattedSrc),
+		{ ...resizedOptions, auth },
+		imageWidthAndHeight.width,
+		imageWidthAndHeight.height
+	);
+
 	const responsiveSrcSet =
 		responsiveImages
 			.filter(
 				(responsiveImageWidth) => Number.isInteger(responsiveImageWidth) && responsiveImageWidth > 0
 			)
 			.map((responsiveImageWidth) =>
-				// divide the derived aspect ratio by each of the responsiveImages widths to get the height
-				// aspect ratio of zero will not show the height
-
 				formatSrc(
 					resizerURL.concat(formattedSrc),
-					resizedOptions,
+					{ ...resizedOptions, auth },
 					responsiveImageWidth,
 					imageAspectRatio !== 0 && height ? responsiveImageWidth / imageAspectRatio : undefined
 				).concat(` ${responsiveImageWidth}w`)
@@ -75,12 +78,11 @@ const Image = ({
 			{...rest}
 			alt={alt}
 			className={componentClassNames}
-			height={height}
 			loading={loading}
 			src={defaultSrc}
-			width={width}
 			srcSet={responsiveSrcSet}
 			sizes={responsiveSizes}
+			{...imageWidthAndHeight}
 		/>
 	);
 };
@@ -89,7 +91,7 @@ Image.defaultProps = {
 	alt: "",
 	loading: "lazy",
 	resizedOptions: {},
-	resizerURL: "",
+	resizerURL: RESIZER_URL || "",
 	responsiveImages: [],
 	sizes: [],
 };
