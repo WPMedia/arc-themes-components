@@ -1,22 +1,29 @@
 import PropTypes from "prop-types";
+import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
 import formatSrc from "../../utils/format-image-resizer-src";
+import imageANSToImageSrc from "../../utils/image-ans-to-image-src";
+import calculateAspectRatio from "./aspect-ratio";
 
 const COMPONENT_CLASS_NAME = "c-image";
 
 const Image = ({
 	alt,
+	ansImage,
+	aspectRatio,
 	className,
 	loading,
 	src,
 	resizedOptions,
-	resizerURL,
+	resizerURL = RESIZER_URL,
 	responsiveImages,
 	width,
 	height,
 	sizes,
 	...rest
 }) => {
-	const { auth } = resizedOptions;
+	const auth = ansImage ? ansImage.auth[RESIZER_APP_VERSION] : resizedOptions?.auth;
+	const formattedSrc = ansImage ? imageANSToImageSrc(ansImage) : src;
+
 	const componentClassNames = className
 		? `${COMPONENT_CLASS_NAME} ${className}`
 		: COMPONENT_CLASS_NAME;
@@ -30,10 +37,10 @@ const Image = ({
 		);
 	}
 
-	const defaultSrc = formatSrc(resizerURL.concat(src), resizedOptions, width, height);
+	const defaultSrc = formatSrc(resizerURL.concat(formattedSrc), resizedOptions, width, height);
 
 	// if no height and width, no responsive image calculation
-	const aspectRatio = height && width ? width / height : 0;
+	const imageAspectRatio = calculateAspectRatio({ aspectRatio, width, height, ansImage });
 	const responsiveSrcSet =
 		responsiveImages
 			.filter(
@@ -44,10 +51,10 @@ const Image = ({
 				// aspect ratio of zero will not show the height
 
 				formatSrc(
-					resizerURL.concat(src),
+					resizerURL.concat(formattedSrc),
 					resizedOptions,
 					responsiveImageWidth,
-					aspectRatio !== 0 && height ? responsiveImageWidth / aspectRatio : undefined
+					imageAspectRatio !== 0 && height ? responsiveImageWidth / imageAspectRatio : undefined
 				).concat(` ${responsiveImageWidth}w`)
 			)
 			.join(", ") || null;
@@ -90,6 +97,14 @@ Image.defaultProps = {
 Image.propTypes = {
 	/** Alt text for the image - if not set the image will be treated as decorative */
 	alt: PropTypes.string,
+	/** ANS Image object that has at minimum, _id, url and auth object to allow the component to handle building the img src attribute */
+	ansImage: PropTypes.shape({
+		_id: PropTypes.string,
+		url: PropTypes.string,
+		auth: PropTypes.object,
+	}),
+	/** The aspect ratio in which to display the image */
+	aspectRatio: PropTypes.string,
 	/** Class name(s) that get appended to default class name of the component */
 	className: PropTypes.string,
 	/** The intrinsic height of the image in pixels */
@@ -116,7 +131,7 @@ Image.propTypes = {
 	/** The intrinsic width of the image in pixels */
 	width: PropTypes.number,
 	/** The URL to an image to load and display. Should not have a leading slash */
-	src: PropTypes.string.isRequired,
+	src: PropTypes.string,
 };
 
 export default Image;
