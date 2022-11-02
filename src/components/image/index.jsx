@@ -57,7 +57,7 @@ const Image = ({
 					resizerURL.concat(formattedSrc),
 					{ ...resizedOptions, auth },
 					responsiveImageWidth,
-					imageAspectRatio !== 0 && height ? responsiveImageWidth / imageAspectRatio : undefined
+					imageAspectRatio !== 0 ? responsiveImageWidth / imageAspectRatio : undefined
 				).concat(` ${responsiveImageWidth}w`)
 			)
 			.join(", ") || null;
