@@ -5,20 +5,27 @@ const calculateWidthAndHeight = ({ aspectRatio = "", width, height, ansImage = {
 
 	const [w, h] = aspectRatio.split(":");
 	const imageWidth = ansImage?.width || width;
+	const imageHeight = ansImage?.height || height;
 
 	if (aspectRatio && imageWidth) {
 		const calculatedHeight = (h / w) * imageWidth;
-		return { width: imageWidth, height: Math.floor(calculatedHeight) };
+		return {
+			width: imageWidth,
+			height: Math.floor(calculatedHeight),
+		};
 	}
 
-	if (aspectRatio && height) {
-		const calculatedWidth = (w / h) * height;
-		return { width: Math.floor(calculatedWidth), height };
+	if (aspectRatio && imageHeight) {
+		const calculatedWidth = (w / h) * imageHeight;
+		return {
+			width: Math.floor(calculatedWidth),
+			height: imageHeight,
+		};
 	}
 
 	return {
-		width: width || null,
-		height: height || null,
+		width: imageWidth || null,
+		height: imageHeight || null,
 	};
 };
 
