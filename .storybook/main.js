@@ -30,6 +30,7 @@ module.exports = {
 				"fusion:context": path.resolve(__dirname, "./alias/context.js"),
 				"fusion:intl": path.resolve(__dirname, "./alias/intl.js"),
 				"fusion:properties": path.resolve(__dirname, "./alias/properties.js"),
+				"fusion:environment": path.resolve(__dirname, "./alias/environment.js"),
 			},
 		},
 	}),
