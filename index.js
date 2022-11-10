@@ -7,6 +7,7 @@ import Carousel from "./src/components/carousel";
 import Conditional from "./src/components/conditional";
 import Date from "./src/components/date";
 import Details from "./src/components/details";
+import Divider from "./src/components/divider";
 import Grid from "./src/components/grid";
 import Heading from "./src/components/headings/heading";
 import HeadingSection from "./src/components/headings/section";
@@ -50,6 +51,7 @@ export {
 	Conditional,
 	Date,
 	Details,
+	Divider,
 	formatAuthors,
 	formatCredits,
 	formatPowaVideoEmbed,
