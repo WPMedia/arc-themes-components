@@ -8,7 +8,6 @@
 //
 // Variables
 //
-$alias: () !default;
 $breakpoints: (
 	default: "min-width: 0",
 ) !default;
@@ -177,9 +176,6 @@ $component-map: get-all-component-definitions($tokens, $breakpoints);
 :root {
 	@each $name, $value in $global {
 		--global-#{$name}: #{maintain-quotes($value)};
-	}
-	@each $name, $value in $alias {
-		--#{$name}: #{maintain-quotes($value)};
 	}
 }
 
