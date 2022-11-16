@@ -67,7 +67,6 @@ $tokens: (
 );
 
 @use "root" with (
-	$alias: (),
 	$breakpoints: (
 		default: "min-width: 0",
 		tablet: "min-width: 20rem",
