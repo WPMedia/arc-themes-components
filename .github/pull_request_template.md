@@ -1,6 +1,6 @@
 ## Ticket
 
-- [TMEDIA-](https://arcpublishing.atlassian.net/browse/TMEDIA-)
+- [THEMES-](https://arcpublishing.atlassian.net/browse/THEMES-)
 
 ## Description
 
