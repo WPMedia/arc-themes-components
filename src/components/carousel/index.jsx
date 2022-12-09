@@ -181,19 +181,14 @@ const Carousel = ({
 
 	useEffect(() => {
 		const resizeFn = () => {
-			if (
-				slidesToShowInView === 0 ||
-				getSlidesToShowFromDom(carouselElement.current) === slidesToShowInView
-			) {
-				return;
-			}
-			setSlidesToShowInView(getSlidesToShowFromDom(carouselElement.current));
-			setSlide(getSlidesToShowFromDom(carouselElement.current));
-			setPosition(0);
+			const slideOffset =
+				carouselElement.current.querySelector(`.c-carousel__slide:nth-of-type(${slide})`)
+					?.offsetLeft || 0;
+			setPosition(-slideOffset);
 		};
 		window.addEventListener("resize", resizeFn, false);
 		return () => window.removeEventListener("resize", resizeFn, false);
-	}, [carouselElement, slidesToShowInView]);
+	});
 
 	const childItems = Children.toArray(subComponents);
 
