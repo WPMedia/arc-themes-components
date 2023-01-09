@@ -4,6 +4,7 @@ import { useSwipeable } from "react-swipeable";
 import Icon from "../icon";
 import Button from "./_children/Button";
 import Item from "./_children/Item";
+import EventEmitter from "../../utils/event-emitter";
 import useInterval from "../../utils/hooks/use-interval";
 import isServerSide from "../../utils/is-server-side";
 import DotIndicatorArea from "./_children/DotIndicatorArea";
@@ -203,6 +204,19 @@ const Carousel = ({
 
 	const totalSlides = carouselItems.length;
 
+	const emitEvent = (eventName, options) => {
+		EventEmitter.dispatch(eventName, {
+			eventName,
+			ansGalleryId: id,
+			ansGalleryHeadline: label,
+			ansImageId: "",
+			caption: "",
+			orderPosition: slide,
+			totalImages: totalSlides,
+			...options,
+		});
+	};
+
 	const goToSlide = (newSlideIndex) => {
 		setSlide(newSlideIndex);
 		const slideOffset =
@@ -213,6 +227,11 @@ const Carousel = ({
 		// add the current position to the new position adjustment to get the new position
 		const newPosition = position + (slide - newSlideIndex) * slideOffset;
 		setPosition(newPosition);
+		if (slide > newSlideIndex) {
+			emitEvent("galleryImagePrevious", { autoplay: isAutoplaying });
+		} else {
+			emitEvent("galleryImageNext", { autoplay: isAutoplaying });
+		}
 	};
 
 	const previousSlide = () => {
@@ -255,8 +274,10 @@ const Carousel = ({
 		if (document.fullscreenEnabled) {
 			if (!document.fullscreenElement) {
 				fullScreenElement.requestFullscreen().then(() => setIsFullScreen(true));
+				emitEvent("galleryExpandEnter");
 			} else {
 				document.exitFullscreen().then(() => setIsFullScreen(false));
+				emitEvent("galleryExpandExit");
 			}
 		} else {
 			// safari needs prefix
@@ -264,14 +285,23 @@ const Carousel = ({
 			if (document.webkitFullscreenEnabled) {
 				if (!document.webkitFullscreenElement) {
 					fullScreenElement.webkitRequestFullscreen().then(() => setIsFullScreen(true));
+					emitEvent("galleryExpandEnter");
 				} else {
 					document.webkitExitFullscreen().then(() => setIsFullScreen(false));
+					emitEvent("galleryExpandExit");
 				}
 			}
 		}
 	};
 
-	const toggleAutoplay = () => setIsAutoplaying(!isAutoplaying);
+	const toggleAutoplay = () => {
+		if (isAutoplaying) {
+			emitEvent("galleryAutoplayStop");
+		} else {
+			emitEvent("galleryAutoplayStart");
+		}
+		setIsAutoplaying(!isAutoplaying);
+	};
 
 	/* istanbul ignore next */
 	const handlers = useSwipeable({
