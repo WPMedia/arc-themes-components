@@ -227,11 +227,9 @@ const Carousel = ({
 		// add the current position to the new position adjustment to get the new position
 		const newPosition = position + (slide - newSlideIndex) * slideOffset;
 		setPosition(newPosition);
-		if (slide > newSlideIndex) {
-			emitEvent("galleryImagePrevious", { autoplay: isAutoplaying });
-		} else {
-			emitEvent("galleryImageNext", { autoplay: isAutoplaying });
-		}
+		emitEvent(slide > newSlideIndex ? "galleryImagePrevious" : "galleryImageNext", {
+			autoplay: isAutoplaying,
+		});
 	};
 
 	const previousSlide = () => {
@@ -295,11 +293,7 @@ const Carousel = ({
 	};
 
 	const toggleAutoplay = () => {
-		if (isAutoplaying) {
-			emitEvent("galleryAutoplayStop");
-		} else {
-			emitEvent("galleryAutoplayStart");
-		}
+		emitEvent(isAutoplaying ? "galleryAutoplayStop" : "galleryAutoplayStart");
 		setIsAutoplaying(!isAutoplaying);
 	};
 
