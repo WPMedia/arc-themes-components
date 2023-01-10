@@ -209,8 +209,6 @@ const Carousel = ({
 			eventName,
 			ansGalleryId: id,
 			ansGalleryHeadline: label,
-			ansImageId: "",
-			caption: "",
 			orderPosition: slide,
 			totalImages: totalSlides,
 			...options,
