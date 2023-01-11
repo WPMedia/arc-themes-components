@@ -50,7 +50,7 @@ describe("Unmocked Events Carousel", () => {
 				ansGalleryId: "Carousel-1",
 				autoplay: false,
 				eventName: "galleryImageNext",
-				orderPosition: 1,
+				orderPosition: 2,
 				totalImages: 2,
 			})
 		);
@@ -61,7 +61,7 @@ describe("Unmocked Events Carousel", () => {
 				ansGalleryId: "Carousel-1",
 				autoplay: false,
 				eventName: "galleryImagePrevious",
-				orderPosition: 2,
+				orderPosition: 1,
 				totalImages: 2,
 			})
 		);
@@ -118,7 +118,7 @@ describe("Unmocked Events Carousel", () => {
 				ansGalleryId: "Carousel-2",
 				autoplay: false,
 				eventName: "galleryImageNext",
-				orderPosition: 1,
+				orderPosition: 2,
 				totalImages: 3,
 			})
 		);
@@ -129,7 +129,7 @@ describe("Unmocked Events Carousel", () => {
 				ansGalleryId: "Carousel-2",
 				autoplay: false,
 				eventName: "galleryImagePrevious",
-				orderPosition: 2,
+				orderPosition: 1,
 				totalImages: 3,
 			})
 		);
