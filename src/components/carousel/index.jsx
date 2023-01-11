@@ -103,13 +103,8 @@ const resolvedButton = (element, id, className, onClick) =>
 		className: `${COMPONENT_CLASS_NAME}__button ${className} ${element.props?.className || ""}`,
 	});
 
-const getSlidesToShowFromDom = (id) => {
-	if (typeof window === "undefined") {
-		return 4;
-	}
-
-	return parseInt(getComputedStyle(id).getPropertyValue("--viewable-slides") || 4, 10);
-};
+const getSlidesToShowFromDom = (id) =>
+	parseInt(window?.getComputedStyle(id)?.getPropertyValue("--viewable-slides") || 4, 10);
 
 const insertAdsIntoItems = (carouselItems, adElement, adInterstitialClicks, slide) => {
 	for (
