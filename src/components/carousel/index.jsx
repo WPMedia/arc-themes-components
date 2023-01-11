@@ -199,12 +199,12 @@ const Carousel = ({
 
 	const totalSlides = carouselItems.length;
 
-	const emitEvent = (eventName, options) => {
+	const emitEvent = (eventName, page, options) => {
 		EventEmitter.dispatch(eventName, {
 			eventName,
 			ansGalleryId: id,
 			ansGalleryHeadline: label,
-			orderPosition: slide,
+			orderPosition: page || slide,
 			totalImages: totalSlides,
 			...options,
 		});
@@ -220,7 +220,7 @@ const Carousel = ({
 		// add the current position to the new position adjustment to get the new position
 		const newPosition = position + (slide - newSlideIndex) * slideOffset;
 		setPosition(newPosition);
-		emitEvent(slide > newSlideIndex ? "galleryImagePrevious" : "galleryImageNext", {
+		emitEvent(slide > newSlideIndex ? "galleryImagePrevious" : "galleryImageNext", newSlideIndex, {
 			autoplay: isAutoplaying,
 		});
 	};
