@@ -76,6 +76,7 @@ const Image = ({
 	return (
 		<img
 			{...rest}
+			data-chromatic="ignore"
 			alt={alt}
 			className={componentClassNames}
 			loading={loading}
