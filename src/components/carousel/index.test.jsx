@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import EventEmitter from "../../utils/event-emitter";
 
 import Carousel from ".";
 
@@ -7,6 +8,10 @@ import Carousel from ".";
 Object.defineProperty(global.document, "fullscreenEnabled", {
 	value: true,
 });
+
+jest.mock("../../utils/event-emitter", () => ({
+	dispatch: jest.fn(),
+}));
 
 jest.mock(
 	"./_children/DotIndicatorArea",
@@ -30,6 +35,10 @@ Object.defineProperty(global.window, "matchMedia", {
 });
 
 describe("Carousel", () => {
+	afterEach(() => {
+		EventEmitter.dispatch.mockClear();
+	});
+
 	it("should render carousel", () => {
 		render(
 			<Carousel id="Carousel-1" label="Carousel Label" slidesToShow={1}>
@@ -679,5 +688,44 @@ describe("Carousel", () => {
 		);
 		expect(screen.queryByTestId("dot-indicator-area")).toBeNull();
 		expect(screen.queryByTestId("thumbnail-indicator-area")).not.toBeNull();
+	});
+
+	it("should emit the expected events", async () => {
+		render(
+			<Carousel
+				id="Carousel-1"
+				label="Carousel Label"
+				slidesToShow={1}
+				enableAutoplay
+				enableFullScreen
+			>
+				<Carousel.Item label="Slide 1 of 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+		await userEvent.click(screen.getByRole("button", { name: "Next Slide" }));
+		expect(EventEmitter.dispatch).toHaveBeenLastCalledWith(
+			"galleryImageNext",
+			expect.objectContaining({ autoplay: false })
+		);
+		await userEvent.click(screen.getByRole("button", { name: "Previous Slide" }));
+		expect(EventEmitter.dispatch).toHaveBeenLastCalledWith(
+			"galleryImagePrevious",
+			expect.objectContaining({ autoplay: false })
+		);
+		await userEvent.click(screen.getByRole("button", { name: "Start automatic slide show" }));
+		expect(EventEmitter.dispatch).toHaveBeenLastCalledWith(
+			"galleryAutoplayStart",
+			expect.any(Object)
+		);
+		await userEvent.click(screen.getByRole("button", { name: "Stop automatic slide show" }));
+		expect(EventEmitter.dispatch).toHaveBeenLastCalledWith(
+			"galleryAutoplayStop",
+			expect.any(Object)
+		);
 	});
 });

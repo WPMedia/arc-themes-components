@@ -26,6 +26,7 @@ import Separator from "./src/components/separator";
 import Stack from "./src/components/stack";
 import Video from "./src/components/video";
 
+import EventEmitter from "./src/utils/event-emitter";
 import formatAuthors from "./src/utils/format-authors";
 import formatCredits from "./src/utils/format-credits";
 import formatPowaVideoEmbed from "./src/utils/format-powa-video-embed";
@@ -52,6 +53,7 @@ export {
 	Date,
 	Details,
 	Divider,
+	EventEmitter,
 	formatAuthors,
 	formatCredits,
 	formatPowaVideoEmbed,
