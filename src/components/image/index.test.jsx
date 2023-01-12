@@ -276,4 +276,25 @@ describe("Image", () => {
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute("sizes", "(min-width: 600px) 50vw");
 	});
+
+	it("uses ansImage prop for data", () => {
+		render(
+			<Image
+				ansImage={{
+					_id: 123,
+					url: "test-image.jpg",
+					auth: {
+						2: "secret",
+					},
+				}}
+				resizerURL="https://resizer.example.com/"
+				resizedOptions={{ filter: 70, quality: 50 }}
+			/>
+		);
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute(
+			"src",
+			"https://resizer.example.com/123.jpg?filter=70&quality=50&auth=secret"
+		);
+	});
 });
