@@ -24,10 +24,13 @@ describe("Video", () => {
 	});
 
 	it("should render container with aspect ratio", () => {
-		const { container } = render(<Video aspectRatio={16 / 9} />);
-		expect(container.querySelector(`.${COMPONENT_CLASS_NAME}`)).toHaveStyle(
-			"--aspect-ratio: 1.7777777777777777"
-		);
+		const { container } = render(<Video aspectRatio={"4:3"} />);
+		expect(container.querySelector(`.${COMPONENT_CLASS_NAME}`)).toHaveStyle("--aspect-ratio: 4/3");
+	});
+
+	it("should render container with aspect ratio of 16:9 if none is provided", () => {
+		const { container } = render(<Video />);
+		expect(container.querySelector(`.${COMPONENT_CLASS_NAME}`)).toHaveStyle("--aspect-ratio: 16/9");
 	});
 
 	it("should render container with vertical viewport percentage", () => {
@@ -41,5 +44,16 @@ describe("Video", () => {
 		const { container } = render(<Video embedMarkup="<div class='powa' />" />);
 		expect(window.powaBoot).toHaveBeenCalled();
 		expect(container.querySelector(".powa")).not.toBeNull();
+	});
+
+	it("should modify the embed markup aspect ratio if not equal to 16:9 and render markup if not empty", () => {
+		// mock window powa boot function to mimick powa
+		window.powaBoot = jest.fn();
+		const { container } = render(
+			<Video aspectRatio={"4:3"} embedMarkup="<div class='powa' data-aspect-ratio='0.562'/>" />
+		);
+		expect(window.powaBoot).toHaveBeenCalled();
+		expect(container.querySelector(".powa")).not.toBeNull();
+		expect(container.querySelector(".powa")).toHaveAttribute("data-aspect-ratio", "0.75");
 	});
 });
