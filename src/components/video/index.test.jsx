@@ -24,7 +24,7 @@ describe("Video", () => {
 	});
 
 	it("should render container with aspect ratio", () => {
-		const { container } = render(<Video aspectRatio={"4:3"} />);
+		const { container } = render(<Video aspectRatio="4:3" />);
 		expect(container.querySelector(`.${COMPONENT_CLASS_NAME}`)).toHaveStyle("--aspect-ratio: 4/3");
 	});
 
@@ -50,7 +50,7 @@ describe("Video", () => {
 		// mock window powa boot function to mimick powa
 		window.powaBoot = jest.fn();
 		const { container } = render(
-			<Video aspectRatio={"4:3"} embedMarkup="<div class='powa' data-aspect-ratio='0.562'/>" />
+			<Video aspectRatio="4:3" embedMarkup="<div class='powa' data-aspect-ratio='0.562'/>" />
 		);
 		expect(window.powaBoot).toHaveBeenCalled();
 		expect(container.querySelector(".powa")).not.toBeNull();
