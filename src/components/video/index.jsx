@@ -18,21 +18,28 @@ const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup, ...res
 
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 
+	const embedMarkupWithAspectRatio =
+		aspectRatio === "16:9" || !aspectRatio
+			? embedMarkup
+			: embedMarkup?.replace("0.562", aspectRatio.split(":")[1] / aspectRatio.split(":")[0]);
+
+	const aspectRatioFormatted = aspectRatio ? aspectRatio.replace(":", "/") : "16/9";
+
 	return (
 		<div className={`${COMPONENT_CLASS_NAME}__frame`}>
 			<div
 				{...rest}
 				className={containerClassNames}
 				style={{
-					"--aspect-ratio": aspectRatio,
+					"--aspect-ratio": aspectRatioFormatted,
 					"--height": viewportPercentage,
 				}}
 			>
 				{shouldRenderVideoContent ? (
-					<EmbedContainer markup={embedMarkup}>
+					<EmbedContainer markup={embedMarkupWithAspectRatio}>
 						<div
 							dangerouslySetInnerHTML={{
-								__html: embedMarkup,
+								__html: embedMarkupWithAspectRatio,
 							}}
 						/>
 					</EmbedContainer>
@@ -46,7 +53,7 @@ Video.propTypes = {
 	/** Class name(s) that get appended to default class name of the component */
 	className: PropTypes.string,
 	/** The aspect ratio of the video */
-	aspectRatio: PropTypes.number,
+	aspectRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]),
 	/* The vertical percentage of the viewport takes up */
 	viewportPercentage: PropTypes.number,
 };
