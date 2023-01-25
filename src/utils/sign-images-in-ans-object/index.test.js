@@ -36,6 +36,23 @@ const data = {
 	},
 };
 
+const noIDImageData = {
+	_id: "43UU6MCQERAMRPTD23B3CEXE7E",
+	type: "story",
+	promo_items: {
+		lead_art: {
+			embed_html: "<embededVideo />",
+			promo_items: {
+				basic: {
+					type: "image",
+					url: "https://test.img/filename.jpg",
+				},
+			},
+			type: "video",
+		},
+	},
+};
+
 const idAuthMap = {
 	LJJSIEXMZ5FTDBP7PFHXI5A4XY: {
 		hash: "40b3b900866998ec98c4a286eef727080a10ac968d5eed7bd4a6a084511db6cy",
@@ -49,6 +66,9 @@ const idAuthMap = {
 	OYRQQIJJLNBVNN4QLERLG2FZZ4: {
 		hash: "545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e40",
 	},
+	"https://test.img/filename.jpg": {
+		hash: "545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e41",
+	},
 };
 
 const fetcher = jest.fn((id) => idAuthMap[id]);
@@ -57,6 +77,10 @@ const cachedCall = jest.fn((cacheId, fetchMethod, options) =>
 );
 
 describe("Sign Images In ANS Object", () => {
+	beforeEach(() => {
+		cachedCall.mockClear();
+	});
+
 	it("returns the correct auth key values in the returned ans object", async () => {
 		const signIt = signImagesInANSObject(cachedCall, fetcher, 2);
 
@@ -111,6 +135,28 @@ describe("Sign Images In ANS Object", () => {
 		);
 		expect(signedData.content_elements[2].auth[2]).toBe(
 			"40b3b900866998ec98c4a286eef727080a10ac968d5eed7bd4a6a084511db6cz"
+		);
+	});
+
+	it("returns the correct auth key for a non-id image (third party url)", async () => {
+		const signIt = signImagesInANSObject(cachedCall, fetcher, 2);
+
+		const { data: signedData } = await signIt({ data: noIDImageData });
+
+		expect(cachedCall).toHaveBeenCalledWith(
+			"image-token-https://test.img/filename.jpg",
+			fetcher,
+			expect.objectContaining({
+				query: { id: "https://test.img/filename.jpg" },
+				ttl: 31536000,
+				independent: true,
+			})
+		);
+
+		expect(cachedCall).toHaveBeenCalledTimes(1);
+
+		expect(signedData.promo_items.lead_art.promo_items.basic.auth[2]).toBe(
+			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e41"
 		);
 	});
 });
