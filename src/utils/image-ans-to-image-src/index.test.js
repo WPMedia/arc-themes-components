@@ -7,6 +7,12 @@ describe("imageANSToImageSrc", () => {
 		expect(imageANSToImageSrc({ _id: 321, url: "test.test.jpeg" })).toBe("321.jpeg");
 	});
 
+	it("return image src as encoded url when no _id but an auth exists", () => {
+		expect(imageANSToImageSrc({ url: "http://image.com/test.jpg", auth: { 1: "123" } })).toBe(
+			"http://image.com/test.jpg"
+		);
+	});
+
 	it("will return null if incorrect ANS data", () => {
 		expect(imageANSToImageSrc({ _id: 123, url: "testjpg" })).toBe(null);
 		expect(imageANSToImageSrc({ _id: 123 })).toBe(null);

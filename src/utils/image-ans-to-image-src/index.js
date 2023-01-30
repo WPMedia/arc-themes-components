@@ -6,7 +6,7 @@
  * @return an image string to be used in the src of a image tag
  */
 const imageANSToImageSrc = (data) => {
-	const { _id: id, url } = data || {};
+	const { _id: id, auth, url } = data || {};
 
 	if (id && url) {
 		const urlParts = url.split(".");
@@ -14,7 +14,9 @@ const imageANSToImageSrc = (data) => {
 			return `${id}.${urlParts.pop()}`;
 		}
 	}
-
+	if (auth) {
+		return encodeURI(url);
+	}
 	return null;
 };
 
