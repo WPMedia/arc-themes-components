@@ -7,15 +7,15 @@
  */
 const imageANSToImageSrc = (data) => {
 	const { _id: id, auth, url } = data || {};
-
-	if (id && url) {
-		const urlParts = url.split(".");
-		if (urlParts.length !== 1) {
-			return `${id}.${urlParts.pop()}`;
+	if (url) {
+		if (id) {
+			const urlParts = url.split(".");
+			if (urlParts.length !== 1) {
+				return `${id}.${urlParts.pop()}`;
+			}
+		} else if (auth) {
+			return encodeURI(url);
 		}
-	}
-	if (auth) {
-		return encodeURI(url);
 	}
 	return null;
 };
