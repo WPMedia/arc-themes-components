@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import PropTypes from "prop-types";
 import EmbedContainer from "react-oembed-container";
+import formatPowaVideoEmbed from "../../utils/format-powa-video-embed";
 
 const COMPONENT_CLASS_NAME = "c-video";
 
@@ -18,12 +19,14 @@ const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup, ...res
 
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 
-	const embedMarkupWithAspectRatio =
-		aspectRatio === "16:9" || !aspectRatio
-			? embedMarkup
-			: embedMarkup?.replace("0.562", aspectRatio.split(":")[1] / aspectRatio.split(":")[0]);
+	const truncate = (num) => Math.trunc(num * 1000) / 1000;
 
-	const aspectRatioFormatted = aspectRatio ? aspectRatio.replace(":", "/") : "16/9";
+	const [w, h] = aspectRatio ? aspectRatio.split(":") : [16, 9];
+	const videoAspectRatio = truncate(h / w);
+
+	const embedMarkupWithAspectRatio = formatPowaVideoEmbed(embedMarkup, {
+		"aspect-ratio": videoAspectRatio,
+	});
 
 	return (
 		<div className={`${COMPONENT_CLASS_NAME}__frame`}>
@@ -31,7 +34,7 @@ const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup, ...res
 				{...rest}
 				className={containerClassNames}
 				style={{
-					"--aspect-ratio": aspectRatioFormatted,
+					"--aspect-ratio": truncate(w / h),
 					"--height": viewportPercentage,
 				}}
 			>
@@ -53,7 +56,7 @@ Video.propTypes = {
 	/** Class name(s) that get appended to default class name of the component */
 	className: PropTypes.string,
 	/** The aspect ratio of the video */
-	aspectRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]),
+	aspectRatio: PropTypes.number,
 	/* The vertical percentage of the viewport takes up */
 	viewportPercentage: PropTypes.number,
 };

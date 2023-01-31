@@ -1,10 +1,21 @@
+const isEqual = (object1, object2) => {
+	const keys1 = Object.keys(object1);
+	const keys2 = Object.keys(object2);
+	if (keys1.length === keys2.length) {
+		return !keys1.find((key) => object1[key] !== object2[key]);
+	}
+	return false;
+};
+
 const formatPowaVideoEmbed = (embedMarkup, powaFields = {}) => {
 	if (embedMarkup) {
 		// get markup as node to set properties
 		const parser = new DOMParser();
 		const doc = parser.parseFromString(embedMarkup, "text/html");
 		const embedHTMLWithPlayStatus = doc.body;
-
+		if (isEqual(powaFields, { "aspect-ratio": 0.562 })) {
+			return embedHTMLWithPlayStatus.innerHTML;
+		}
 		const powaFieldEntries = Object.entries(powaFields).filter(
 			([, value]) => typeof value !== "undefined"
 		);

@@ -24,13 +24,15 @@ describe("Video", () => {
 	});
 
 	it("should render container with aspect ratio", () => {
-		const { container } = render(<Video aspectRatio="4:3" />);
-		expect(container.querySelector(`.${COMPONENT_CLASS_NAME}`)).toHaveStyle("--aspect-ratio: 4/3");
+		const { container } = render(<Video aspectRatio="3:2" />);
+		expect(container.querySelector(`.${COMPONENT_CLASS_NAME}`)).toHaveStyle("--aspect-ratio: 1.5");
 	});
 
 	it("should render container with aspect ratio of 16:9 if none is provided", () => {
 		const { container } = render(<Video />);
-		expect(container.querySelector(`.${COMPONENT_CLASS_NAME}`)).toHaveStyle("--aspect-ratio: 16/9");
+		expect(container.querySelector(`.${COMPONENT_CLASS_NAME}`)).toHaveStyle(
+			"--aspect-ratio: 1.777"
+		);
 	});
 
 	it("should render container with vertical viewport percentage", () => {
