@@ -7,14 +7,14 @@ const signImagesInANSObject =
 			if (value === null || typeof value === "undefined") {
 				return value;
 			}
-			const { _id, type, auth } = value;
+			const { _id, type, auth, url } = value;
 			if (!auth?.[resizerAppVersion] && type === "image") {
-				replacements.add(_id);
+				replacements.add(_id || url);
 				return {
 					...value,
 					auth: {
 						...value.auth,
-						[resizerAppVersion]: `__replaceMe${_id}__`,
+						[resizerAppVersion]: `__replaceMe${_id || url}__`,
 					},
 				};
 			}

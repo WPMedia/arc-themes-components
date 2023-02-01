@@ -56,7 +56,7 @@ Video.propTypes = {
 	/** Class name(s) that get appended to default class name of the component */
 	className: PropTypes.string,
 	/** The aspect ratio of the video */
-	aspectRatio: PropTypes.number,
+	aspectRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]),
 	/* The vertical percentage of the viewport takes up */
 	viewportPercentage: PropTypes.number,
 };
