@@ -29,7 +29,6 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
-          debug: true
           languages: ${{ matrix.language }}
           queries: +security-and-quality
 
