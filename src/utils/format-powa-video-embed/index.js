@@ -26,7 +26,7 @@ const formatPowaVideoEmbed = (embedMarkup, powaFields = {}) => {
 		// set the rest of powa fields
 		// https://redirector.arcpublishing.com/alc/arc-products/videocenter/user-docs/video-center-player-settings/
 		powaFieldEntries.forEach(([key, value]) => {
-			embedHTMLWithPlayStatus.querySelector(".powa").setAttribute(`data-${key}`, value);
+			embedHTMLWithPlayStatus.querySelector(".powa")?.setAttribute(`data-${key}`, value);
 		});
 
 		// innerhtml ensures body tag not rendered
