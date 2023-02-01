@@ -13,7 +13,10 @@ const formatPowaVideoEmbed = (embedMarkup, powaFields = {}) => {
 		const parser = new DOMParser();
 		const doc = parser.parseFromString(embedMarkup, "text/html");
 		const embedHTMLWithPlayStatus = doc.body;
-		if (isEqual(powaFields, { "aspect-ratio": 0.562 })) {
+		if (
+			isEqual(powaFields, { "aspect-ratio": 0.562 }) ||
+			isEqual(powaFields, { "aspect-ratio": 0.5625 })
+		) {
 			return embedHTMLWithPlayStatus.innerHTML;
 		}
 		const powaFieldEntries = Object.entries(powaFields).filter(

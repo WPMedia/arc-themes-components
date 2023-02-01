@@ -19,7 +19,7 @@ const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup, ...res
 
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 
-	const truncate = (num) => Math.trunc(num * 1000) / 1000;
+	const truncate = (num) => Math.trunc(num * 10000) / 10000;
 
 	const [w, h] = aspectRatio ? aspectRatio.split(":") : [16, 9];
 	const videoAspectRatio = truncate(h / w);

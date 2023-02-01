@@ -31,7 +31,7 @@ describe("Video", () => {
 	it("should render container with aspect ratio of 16:9 if none is provided", () => {
 		const { container } = render(<Video />);
 		expect(container.querySelector(`.${COMPONENT_CLASS_NAME}`)).toHaveStyle(
-			"--aspect-ratio: 1.777"
+			"--aspect-ratio: 1.7777"
 		);
 	});
 
