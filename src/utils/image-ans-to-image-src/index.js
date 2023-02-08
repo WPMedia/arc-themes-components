@@ -14,7 +14,7 @@ const imageANSToImageSrc = (data) => {
 				return `${id}.${urlParts.pop()}`;
 			}
 		} else if (auth) {
-			return encodeURI(url);
+			return encodeURIComponent(url);
 		}
 	}
 	return null;
