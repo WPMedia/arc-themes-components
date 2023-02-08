@@ -9,7 +9,7 @@ describe("imageANSToImageSrc", () => {
 
 	it("return image src as encoded url when no _id but an auth exists", () => {
 		expect(imageANSToImageSrc({ url: "http://image.com/test.jpg", auth: { 1: "123" } })).toBe(
-			"http://image.com/test.jpg"
+			encodeURIComponent("http://image.com/test.jpg")
 		);
 	});
 
