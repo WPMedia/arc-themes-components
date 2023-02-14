@@ -354,3 +354,20 @@ $tokens: (
 		);
 	}
 }
+
+@include describe("replace-token-reference") {
+	@include it("replaces global token reference with CSS var") {
+		@include assert-equal(root.replace-token-reference("$global.black"), "var(--global-black)");
+	}
+
+	@include it("replaces alias token reference with CSS var") {
+		@include assert-equal(
+			root.replace-token-reference("$alias.primary-font"),
+			"var(--primary-font)"
+		);
+	}
+
+	@include it("returns the original value if not a token reference") {
+		@include assert-equal(root.replace-token-reference("0px 10px"), "0px 10px");
+	}
+}

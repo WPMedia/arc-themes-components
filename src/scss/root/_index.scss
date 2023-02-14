@@ -69,6 +69,30 @@ $tokens: () !default;
 	@return $component-map;
 }
 
+@function get-value-name-from-reference($value) {
+	@return str-slice($value, str-index($value, ".") + 1);
+}
+
+// Replaces the $global and $alias references in a property value.
+@function replace-token-reference($value) {
+	$newValue: $value;
+	@if type-of($value) == string {
+		// Handle $global
+		@if str-index($value, "$global.") {
+			$globalVar: get-value-name-from-reference($value);
+			$newValue: var(--global-#{$globalVar});
+		}
+
+		// Handle $alias
+		@if str-index($value, "$alias.") {
+			$aliasVar: get-value-name-from-reference($value);
+			$newValue: var(--#{$aliasVar});
+		}
+	}
+
+	@return $newValue;
+}
+
 // Map of all components unique properties
 $component-map: get-all-component-definitions($tokens, $breakpoints);
 
@@ -82,6 +106,7 @@ $component-map: get-all-component-definitions($tokens, $breakpoints);
 				@each $name, $value in map.get($tokens, $breakpoint, "blocks", $blockName, "components") {
 					@if type-of($value) == map {
 						@each $bName, $bValue in $value {
+							$bValue: replace-token-reference($bValue);
 							--c-#{$name}-#{$bName}: #{maintain-quotes($bValue)};
 						}
 					}
@@ -137,6 +162,7 @@ $component-map: get-all-component-definitions($tokens, $breakpoints);
 			@if type-of($componentItem) == map {
 				@each $cProperty, $cValue in $componentItem {
 					@if type-of($cValue) != map {
+						$cValue: replace-token-reference($cValue);
 						--#{$prefix}-#{$componentName}-#{$cProperty}: #{maintain-quotes($cValue)};
 					}
 				}
