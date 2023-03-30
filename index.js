@@ -37,6 +37,7 @@ import formatURL from "./src/utils/format-url";
 import getImageFromANS from "./src/utils/get-image-from-ans";
 import getPromoType from "./src/utils/get-promo-type";
 import getVideoFromANS from "./src/utils/get-video-from-ans";
+import handleFetchError from "./src/utils/handle-fetch-error";
 import useInterval from "./src/utils/hooks/use-interval";
 import usePhrases from "./src/utils/hooks/use-phrases";
 import imageANSToImageSrc from "./src/utils/image-ans-to-image-src";
@@ -63,6 +64,7 @@ export {
 	getPromoType,
 	getVideoFromANS,
 	Grid,
+	handleFetchError,
 	Heading,
 	HeadingSection,
 	Icon,
