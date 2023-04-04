@@ -1,7 +1,7 @@
-import LazyLoad from "../src/components/LazyLoad";
+import LazyLoad from ".";
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 
-<Meta title="LazyLoad" component={LazyLoad} />
+<Meta title="Components/LazyLoad" component={LazyLoad} />
 
 # LazyLoad
 
@@ -19,7 +19,7 @@ The default is 0 for all 4 options. By adjusting those values, you can force an 
 Import it into a block:
 
 ```
-import { LazyLoad } from '@wpmedia/engine-theme-sdk';
+import { LazyLoad } from '@wpmedia/arc-themes-components';
 
 ...
 
@@ -50,7 +50,7 @@ const ChildComponent = () => <div id="test-child-component" />;
 
 <Canvas>
 	<Story name="Basic">
-		<div style={{ margin: "30px" }}>
+		<div style={{ margin: "30px", paddingBottom: "30px" }}>
 			<div
 				style={{
 					backgroundColor: "blue",
@@ -84,7 +84,7 @@ const ChildComponent = () => <div id="test-child-component" />;
 
 <Canvas>
 	<Story name="With custom fields">
-		<div style={{ margin: "30px" }}>
+		<div style={{ margin: "30px", paddingBottom: "30px" }}>
 			<div
 				style={{
 					backgroundColor: "blue",
