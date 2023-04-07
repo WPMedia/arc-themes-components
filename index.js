@@ -42,6 +42,7 @@ import useInterval from "./src/utils/hooks/use-interval";
 import usePhrases from "./src/utils/hooks/use-phrases";
 import imageANSToImageSrc from "./src/utils/image-ans-to-image-src";
 import isServerSide from "./src/utils/is-server-side";
+import { localizeDate, localizeDateTime } from "./src/utils/localize-date";
 import serialJoin from "./src/utils/serial-join";
 import signImagesInANSObject from "./src/utils/sign-images-in-ans-object";
 
@@ -74,6 +75,8 @@ export {
 	isServerSide,
 	Join,
 	Link,
+	localizeDate,
+	localizeDateTime,
 	MediaItem,
 	Overline,
 	Paragraph,
