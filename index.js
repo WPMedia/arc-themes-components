@@ -15,6 +15,7 @@ import Icon from "./src/components/icon";
 import Image from "./src/components/image";
 import Input from "./src/components/input";
 import Join from "./src/components/join";
+import LazyLoad from "./src/components/lazy-load";
 import Link from "./src/components/link";
 import MediaItem from "./src/components/media-item";
 import Overline from "./src/components/overline";
@@ -74,6 +75,7 @@ export {
 	Input,
 	isServerSide,
 	Join,
+	LazyLoad,
 	Link,
 	localizeDate,
 	localizeDateTime,
