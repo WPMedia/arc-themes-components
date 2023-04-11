@@ -13,7 +13,7 @@ The `signImagesInANSObject()` function is a support function for `content-source
 ```jsx
 import axios from "axios";
 
-import { ARC_ACCESS_TOKEN, RESIZER_APP_VERSION } from "fusion:environment";
+import { ARC_ACCESS_TOKEN, RESIZER_TOKEN_VERSION } from "fusion:environment";
 import { fetch as resizerFetch } from "@wpmedia/signing-service-content-source";
 
 import signImagesInANSObject from "./signImagesInANSObject";
@@ -27,7 +27,7 @@ const fetch = ({ ... }, { cachedCall }) => {
     		Authorization: `Bearer ${ARC_ACCESS_TOKEN}`
     	},
 	})
-	.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_APP_VERSION))
+	.then(signImagesInANSObject(cachedCall, resizerFetch, RESIZER_TOKEN_VERSION))
 	.then(({ data }) => data);
 };
 

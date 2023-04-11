@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION, RESIZER_URL } from "fusion:environment";
 import formatSrc from "../../utils/format-image-resizer-src";
 import imageANSToImageSrc from "../../utils/image-ans-to-image-src";
 import calculateWidthAndHeight from "./calculate-width-height";
@@ -21,7 +21,7 @@ const Image = ({
 	sizes,
 	...rest
 }) => {
-	const auth = ansImage ? ansImage.auth[RESIZER_APP_VERSION] : resizedOptions?.auth;
+	const auth = ansImage ? ansImage.auth[RESIZER_TOKEN_VERSION] : resizedOptions?.auth;
 	const formattedSrc = ansImage ? imageANSToImageSrc(ansImage) : src;
 
 	const componentClassNames = className
