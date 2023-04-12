@@ -61,13 +61,5 @@
 				"gap": "var(--global-spacing-6)"
 			}
 		}
-	},
-	"details-summary": {
-		"styles": {
-			"default": {},
-			"desktop": {
-				"font-size": "var(--global-font-size-7)"
-			}
-		}
 	}
 }
