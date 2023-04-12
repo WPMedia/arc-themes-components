@@ -1,12 +1,16 @@
 {
 	"video": {
 		"styles": {
-			"margin": "auto"
+			"default": {
+				"margin": "auto"
+			}
 		}
 	},
 	"video-frame": {
 		"styles": {
-			"background-color": "var(--global-black)"
+			"default": {
+				"background-color": "var(--global-black)"
+			}
 		}
 	}
 }

@@ -1,8 +1,10 @@
 {
 	"divider": {
 		"styles": {
-			"background-color": "var(--border-color)",
-			"height": "1px"
+			"default": {
+				"background-color": "var(--border-color)",
+				"height": "1px"
+			}
 		}
 	}
 }

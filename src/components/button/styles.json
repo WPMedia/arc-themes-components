@@ -1,90 +1,116 @@
 {
 	"button": {
 		"styles": {
-			"border-color": "transparent",
-			"border-style": "var(--global-border-style-1)",
-			"border-width": "var(--global-border-width-1)",
-			"border-radius": "var(--border-radius)",
-			"font-weight": "var(--global-font-weight-7)",
-			"gap": "var(--global-spacing-2)"
+			"default": {
+				"border-color": "transparent",
+				"border-style": "var(--global-border-style-1)",
+				"border-width": "var(--global-border-width-1)",
+				"border-radius": "var(--border-radius)",
+				"font-weight": "var(--global-font-weight-7)",
+				"gap": "var(--global-spacing-2)"
+			}
 		}
 	},
 	"button-small": {
 		"styles": {
-			"font-size": "var(--body-font-size-small)",
-			"line-height": "var(--body-line-height-small)",
-			"padding": "var(--global-spacing-1) var(--global-spacing-4)"
+			"default": {
+				"font-size": "var(--body-font-size-small)",
+				"line-height": "var(--body-line-height-small)",
+				"padding": "var(--global-spacing-1) var(--global-spacing-4)"
+			}
 		}
 	},
 	"button-medium": {
 		"styles": {
-			"font-size": "var(--body-font-size-small)",
-			"line-height": "var(--body-line-height-small)",
-			"padding": "var(--global-spacing-3) var(--global-spacing-4)"
+			"default": {
+				"font-size": "var(--body-font-size-small)",
+				"line-height": "var(--body-line-height-small)",
+				"padding": "var(--global-spacing-3) var(--global-spacing-4)"
+			}
 		}
 	},
 	"button-large": {
 		"styles": {
-			"font-size": "var(--body-font-size)",
-			"line-height": "var(--body-line-height)",
-			"padding": "var(--global-spacing-4)"
+			"default": {
+				"font-size": "var(--body-font-size)",
+				"line-height": "var(--body-line-height)",
+				"padding": "var(--global-spacing-4)"
+			}
 		}
 	},
 	"button-default": {
 		"styles": {
-			"background-color": "var(--global-white)",
-			"border-color": "var(--global-neutral-7)",
-			"border-width": "var(--global-border-width-1)",
-			"color": "var(--global-neutral-7)"
+			"default": {
+				"background-color": "var(--global-white)",
+				"border-color": "var(--global-neutral-7)",
+				"border-width": "var(--global-border-width-1)",
+				"color": "var(--global-neutral-7)"
+			}
 		}
 	},
 	"button-primary": {
 		"styles": {
-			"background-color": "var(--color-primary)",
-			"color": "var(--global-white)"
+			"default": {
+				"background-color": "var(--color-primary)",
+				"color": "var(--global-white)"
+			}
 		}
 	},
 	"button-primary-hover": {
 		"styles": {
-			"background-color": "var(--global-neutral-7)"
+			"default": {
+				"background-color": "var(--global-neutral-7)"
+			}
 		}
 	},
 	"button-primary-reverse": {
 		"styles": {
-			"background-color": "transparent",
-			"border-color": "var(--color-primary)",
-			"color": "var(--color-primary)"
+			"default": {
+				"background-color": "transparent",
+				"border-color": "var(--color-primary)",
+				"color": "var(--color-primary)"
+			}
 		}
 	},
 	"button-primary-reverse-hover": {
 		"styles": {
-			"border-color": "var(--global-neutral-7)",
-			"color": "var(--global-neutral-7)"
+			"default": {
+				"border-color": "var(--global-neutral-7)",
+				"color": "var(--global-neutral-7)"
+			}
 		}
 	},
 	"button-secondary": {
 		"styles": {
-			"background-color": "var(--global-white)",
-			"color": "var (--global-black)"
+			"default": {
+				"background-color": "var(--global-white)",
+				"color": "var (--global-black)"
+			}
 		}
 	},
 	"button-secondary-hover": {
 		"styles": {
-			"background-color": "var(--global-neutral-7)",
-			"color": "var(--global-white)"
+			"default": {
+				"background-color": "var(--global-neutral-7)",
+				"color": "var(--global-white)"
+			}
 		}
 	},
 	"button-secondary-reverse": {
 		"styles": {
-			"background-color": "transparent",
-			"border-color": "var(--global-white)",
-			"color": "var(--global-white)"
+			"default": {
+				"background-color": "transparent",
+				"border-color": "var(--global-white)",
+				"color": "var(--global-white)"
+			}
 		}
 	},
 	"button-secondary-reverse-hover": {
 		"styles": {
-			"border-color": "var(--global-neutral-7)",
-			"color": "var(--global-neutral-7)"
+			"default": {
+				"border-color": "var(--global-neutral-7)",
+				"color": "var(--global-neutral-7)"
+			}
 		}
 	}
 }

@@ -1,9 +1,11 @@
 {
 	"icon": {
 		"styles": {
-			"fill": "var(--icon-fill-color)",
-			"height": "var(--global-spacing-5)",
-			"width": "var(--global-spacing-5)"
+			"default": {
+				"fill": "var(--icon-fill-color)",
+				"height": "var(--global-spacing-5)",
+				"width": "var(--global-spacing-5)"
+			}
 		}
 	}
 }
