@@ -1,0 +1,19 @@
+{
+	"stack-divider-vertical": {
+		"styles": {
+			"default": {
+				"border-bottom": "var(--global-border-width-1) var(--global-border-style-1) var(--border-color)"
+			}
+		}
+	},
+	"stack-divider-horizontal": {
+		"styles": {
+			"default": {
+				"border": "none",
+				"border-left": "var(--global-border-width-1) var(--global-border-style-1) var(--border-color)",
+				"width": "1px",
+				"height": "auto"
+			}
+		}
+	}
+}
