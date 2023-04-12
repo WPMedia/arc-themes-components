@@ -1,1 +1,10 @@
-{}
+{
+	"heading": {
+		"styles": {
+			"font-family": "var(--font-family-primary)",
+			"font-size": "var(--heading-level-3-font-size)",
+			"font-weight": "var(--heading-level-3-font-weight)",
+			"line-height": "var(--heading-level-3-line-height)"
+		}
+	}
+}

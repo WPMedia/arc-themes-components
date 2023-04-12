@@ -1,1 +1,9 @@
-{}
+{
+	"attribution": {
+		"styles": {
+			"color": "var(--text-color)",
+			"font-size": "var(--body-font-size-small)",
+			"line-height": "var(--body-line-height-small)"
+		}
+	}
+}

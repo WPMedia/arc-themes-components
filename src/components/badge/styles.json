@@ -1,1 +1,43 @@
-{}
+{
+	"badge": {
+		"styles": {
+			"align-self": "baseline",
+			"border-radius": "var(--border-radius-pill)",
+			"color": "var(--global-white)",
+			"font-size": "var(--body-font-size-tiny)",
+			"font-weight": "var(--global-font-weight-7)",
+			"line-height": "var(--body-line-height-tiny)",
+			"padding": "var(--global-spacing-1) var(--global-spacing-2)"
+		}
+	},
+	"badge-danger": {
+		"styles": {
+			"background-color": "var(--status-color-danger)"
+		}
+	},
+	"badge-default": {
+		"styles": {
+			"background-color": "var(--text-color)"
+		}
+	},
+	"badge-light": {
+		"styles": {
+			"background-color": "var(--text-color-subtle)"
+		}
+	},
+	"badge-primary": {
+		"styles": {
+			"background-color": "var(--color-primary)"
+		}
+	},
+	"badge-success": {
+		"styles": {
+			"background-color": "var(--status-color-success)"
+		}
+	},
+	"badge-warning": {
+		"styles": {
+			"background-color": "var(--status-color-warning)"
+		}
+	}
+}

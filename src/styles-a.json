@@ -47,14 +47,14 @@
 			"background-color": "var(--status-color-warning)"
 		}
 	},
-	"body": {
-		"styles": {
-			"color": "var(--text-color)",
-			"font-family": "var(--font-family-primary)",
-			"font-size": "var(--body-font-size)",
-			"line-height": "var(--body-line-height)"
-		}
-	},
+	// "body": {
+	// 	"styles": {
+	// 		"color": "var(--text-color)",
+	// 		"font-family": "var(--font-family-primary)",
+	// 		"font-size": "var(--body-font-size)",
+	// 		"line-height": "var(--body-line-height)"
+	// 	}
+	// },
 	"button": {
 		"styles": {
 			"border-color": "transparent",
@@ -143,48 +143,48 @@
 			"color": "var(--global-neutral-7)"
 		}
 	},
-	"carousel": {
-		"styles": {
-			"--slides": 1
-		}
-	},
-	"carousel-actions": {
-		"styles": {
-			"display": "none",
-			"padding-left": "var(--global-spacing-4)",
-			"padding-right": "var(--global-spacing-4)"
-		}
-	},
-	"carousel-button": {
-		"styles": {
-			"box-shadow": "var(--global-box-shadow-1)",
-			"border-radius": "var(--border-radius)",
-			"background-color": "var(--global-white)",
-			"height": "var(--global-spacing-8)",
-			"width": "auto",
-			"padding": "0 var(--global-spacing-2)",
-			"display": "flex",
-			"align-items": "center",
-			"gap": "var(--global-spacing-2)"
-		}
-	},
-	"carousel-button-previous": {
-		"styles": {
-			"background-color": "var(--global-white)"
-		}
-	},
-	"carousel-button-next": {
-		"styles": {
-			"background-color": "var(--global-white)"
-		}
-	},
-	"carousel-track": {
-		"styles": {
-			"gap": "var(--global-spacing-2)",
-			"max-width": "var(--content-scale-width)",
-			"width": "100%"
-		}
-	},
+	// "carousel": {
+	// 	"styles": {
+	// 		"--slides": 1
+	// 	}
+	// },
+	// "carousel-actions": {
+	// 	"styles": {
+	// 		"display": "none",
+	// 		"padding-left": "var(--global-spacing-4)",
+	// 		"padding-right": "var(--global-spacing-4)"
+	// 	}
+	// },
+	// "carousel-button": {
+	// 	"styles": {
+	// 		"box-shadow": "var(--global-box-shadow-1)",
+	// 		"border-radius": "var(--border-radius)",
+	// 		"background-color": "var(--global-white)",
+	// 		"height": "var(--global-spacing-8)",
+	// 		"width": "auto",
+	// 		"padding": "0 var(--global-spacing-2)",
+	// 		"display": "flex",
+	// 		"align-items": "center",
+	// 		"gap": "var(--global-spacing-2)"
+	// 	}
+	// },
+	// "carousel-button-previous": {
+	// 	"styles": {
+	// 		"background-color": "var(--global-white)"
+	// 	}
+	// },
+	// "carousel-button-next": {
+	// 	"styles": {
+	// 		"background-color": "var(--global-white)"
+	// 	}
+	// },
+	// "carousel-track": {
+	// 	"styles": {
+	// 		"gap": "var(--global-spacing-2)",
+	// 		"max-width": "var(--content-scale-width)",
+	// 		"width": "100%"
+	// 	}
+	// },
 	"date": {
 		"styles": {
 			"font-size": "var(--body-font-size-small)",
@@ -322,14 +322,14 @@
 			"text-decoration": "none"
 		}
 	},
-	"paragraph": {
-		"styles": {
-			"font-family": "var(--font-family-secondary)",
-			"font-size": "var(--body-font-size)",
-			"font-weight": "var(--body-font-weight)",
-			"line-height": "var(--body-line-height)"
-		}
-	},
+	// "paragraph": {
+	// 	"styles": {
+	// 		"font-family": "var(--font-family-secondary)",
+	// 		"font-size": "var(--body-font-size)",
+	// 		"font-weight": "var(--body-font-weight)",
+	// 		"line-height": "var(--body-line-height)"
+	// 	}
+	// },
 	"pill": {
 		"styles": {
 			"background-color": "var(--color-primary)",

@@ -1,1 +1,12 @@
-{}
+{
+	"video": {
+		"styles": {
+			"margin": "auto"
+		}
+	},
+	"video-frame": {
+		"styles": {
+			"background-color": "var(--global-black)"
+		}
+	}
+}

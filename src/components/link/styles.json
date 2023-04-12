@@ -1,1 +1,17 @@
-{}
+{
+	"link": {
+		"styles": {
+			"color": "var(--color-primary)"
+		}
+	},
+	"link-active": {
+		"styles": {
+			"text-decoration": "none"
+		}
+	},
+	"link-hover": {
+		"styles": {
+			"text-decoration": "none"
+		}
+	}
+}

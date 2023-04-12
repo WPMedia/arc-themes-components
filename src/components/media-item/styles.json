@@ -1,1 +1,22 @@
-{}
+{
+	"media-item": {
+		"styles": {
+			"align-items": "stretch",
+			"display": "flex",
+			"flex-direction": "column",
+			"gap": "var(--global-spacing-2)"
+		}
+	},
+	"media-item-fig-caption": {
+		"styles": {
+			"color": "var(--text-color-subtle)",
+			"font-size": "var(--body-font-size-tiny)",
+			"line-height": "var(--body-line-height-tiny)"
+		}
+	},
+	"media-item-title": {
+		"styles": {
+			"font-weight": "var(--global-font-weight-7)"
+		}
+	}
+}

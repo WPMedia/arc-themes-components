@@ -1,1 +1,10 @@
-{}
+{
+	"paragraph": {
+		"styles": {
+			"font-family": "var(--font-family-secondary)",
+			"font-size": "var(--body-font-size)",
+			"font-weight": "var(--body-font-weight)",
+			"line-height": "var(--body-line-height)"
+		}
+	}
+}
