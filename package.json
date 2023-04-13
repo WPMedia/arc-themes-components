@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/arc-themes-components",
-  "version": "0.0.4-arc-themes-release-version-2-0-3.31",
+  "version": "0.0.4-arc-themes-release-version-2-0-3.32",
   "description": "The arc-themes-components will be the basis for presentational components and reusable utility functions workflow of themes and client devs. A core tenet of Themes is composability for developers.",
   "main": "index.js",
   "scripts": {
@@ -91,6 +91,7 @@
     "stylelint-no-unsupported-browser-features": "^5.0.2"
   },
   "dependencies": {
+    "@wpmedia/timezone": "^1.1.1",
     "lazy-child": "^0.3.1",
     "react-oembed-container": "^1.0.1",
     "react-swipeable": "^6.2.1"
