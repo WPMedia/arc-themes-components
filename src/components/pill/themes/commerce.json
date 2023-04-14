@@ -1,0 +1,21 @@
+{
+	"pill": {
+		"styles": {
+			"default": {
+				"background-color": "var(--color-primary)",
+				"border-radius": "var(--border-radius-pill)",
+				"color": "var(--global-white)",
+				"font-size": "var(--body-font-size-tiny)",
+				"padding": "var(--global-spacing-1) var(--global-spacing-4)",
+				"text-decoration": "none"
+			}
+		}
+	},
+	"pill-hover": {
+		"styles": {
+			"default": {
+				"background-color": "var(--global-neutral-7)"
+			}
+		}
+	}
+}

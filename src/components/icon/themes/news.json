@@ -1,0 +1,11 @@
+{
+	"icon": {
+		"styles": {
+			"default": {
+				"fill": "var(--icon-fill-color)",
+				"height": "var(--global-spacing-5)",
+				"width": "var(--global-spacing-5)"
+			}
+		}
+	}
+}

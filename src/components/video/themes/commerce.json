@@ -1,0 +1,16 @@
+{
+	"video": {
+		"styles": {
+			"default": {
+				"margin": "auto"
+			}
+		}
+	},
+	"video-frame": {
+		"styles": {
+			"default": {
+				"background-color": "var(--global-black)"
+			}
+		}
+	}
+}

@@ -1,0 +1,28 @@
+{
+	"media-item": {
+		"styles": {
+			"default": {
+				"align-items": "stretch",
+				"display": "flex",
+				"flex-direction": "column",
+				"gap": "var(--global-spacing-2)"
+			}
+		}
+	},
+	"media-item-fig-caption": {
+		"styles": {
+			"default": {
+				"color": "var(--text-color-subtle)",
+				"font-size": "var(--body-font-size-tiny)",
+				"line-height": "var(--body-line-height-tiny)"
+			}
+		}
+	},
+	"media-item-title": {
+		"styles": {
+			"default": {
+				"font-weight": "var(--global-font-weight-7)"
+			}
+		}
+	}
+}
