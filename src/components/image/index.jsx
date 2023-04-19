@@ -31,7 +31,6 @@ const Image = ({
 	const componentClassNames = className
 		? `${COMPONENT_CLASS_NAME} ${className}`
 		: COMPONENT_CLASS_NAME;
-	console.log("RESIZER_TOKEN_VERSION", RESIZER_TOKEN_VERSION);
 	if (!auth) {
 		// eslint-disable-next-line no-console
 		console.error("No auth token provided for resizer");
@@ -43,14 +42,14 @@ const Image = ({
 
 	const imageWidthAndHeight = calculateWidthAndHeight({ aspectRatio, width, height, ansImage });
 	const imageAspectRatio = imageWidthAndHeight.width / imageWidthAndHeight.height;
-	console.log("formattedSrc", formattedSrc);
+
 	const defaultSrc = formatSrc(
 		resizerURLToUse.concat(formattedSrc),
 		{ ...resizedOptions, auth },
 		imageWidthAndHeight.width,
 		imageWidthAndHeight.height
 	);
-	console.log("defaultSrc", defaultSrc);
+
 	const responsiveSrcSet =
 		responsiveImages
 			.filter(
@@ -76,7 +75,7 @@ const Image = ({
 					)
 					.join(", ")
 			: null;
-	console.log("returning image with src: ", defaultSrc);
+
 	return (
 		<img
 			{...rest}
