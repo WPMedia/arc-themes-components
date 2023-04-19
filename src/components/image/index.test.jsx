@@ -281,7 +281,7 @@ describe("Image", () => {
 		render(
 			<Image
 				ansImage={{
-					_id: 123,
+					_id: "123",
 					url: "test-image.jpg",
 					auth: {
 						2: "secret",
