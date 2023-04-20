@@ -33,5 +33,6 @@ module.exports = {
 		"!.*.js",
 		"!__tests__/scss.test.js",
 		"!_templates/**",
+		"!**/scripts/**",
 	],
 };

@@ -13,6 +13,7 @@
     "lint:styles": "stylelint '**/*.scss' --formatter verbose",
     "lint:styles:fix": "stylelint '**/*.scss' --fix",
     "generate:component": "hygen component new",
+    "postinstall": "node scripts/postinstall.js",
     "prepare": "husky install",
     "storybook": "start-storybook -p 60003",
     "storybook:build": "build-storybook",
