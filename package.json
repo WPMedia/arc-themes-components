@@ -30,7 +30,8 @@
   "files": [
     "index.js",
     "src/*",
-    "scss.scss"
+    "scss.scss",
+    "scripts"
   ],
   "keywords": [
     "themes"
