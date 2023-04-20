@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
-import { RESIZER_TOKEN_VERSION, RESIZER_URL } from "fusion:environment";
+import { useFusionContext } from "fusion:context";
+import { RESIZER_TOKEN_VERSION } from "fusion:environment";
+import getProperties from "fusion:properties";
 import formatSrc from "../../utils/format-image-resizer-src";
 import imageANSToImageSrc from "../../utils/image-ans-to-image-src";
 import calculateWidthAndHeight from "./calculate-width-height";
@@ -23,11 +25,12 @@ const Image = ({
 }) => {
 	const auth = ansImage ? ansImage.auth[RESIZER_TOKEN_VERSION] : resizedOptions?.auth;
 	const formattedSrc = ansImage ? imageANSToImageSrc(ansImage) : src;
-
+	const { arcSite } = useFusionContext();
+	const { resizerURL: defaultResizerURL } = getProperties(arcSite);
+	const resizerURLToUse = resizerURL || defaultResizerURL;
 	const componentClassNames = className
 		? `${COMPONENT_CLASS_NAME} ${className}`
 		: COMPONENT_CLASS_NAME;
-
 	if (!auth) {
 		// eslint-disable-next-line no-console
 		console.error("No auth token provided for resizer");
@@ -41,7 +44,7 @@ const Image = ({
 	const imageAspectRatio = imageWidthAndHeight.width / imageWidthAndHeight.height;
 
 	const defaultSrc = formatSrc(
-		resizerURL.concat(formattedSrc),
+		resizerURLToUse.concat(formattedSrc),
 		{ ...resizedOptions, auth },
 		imageWidthAndHeight.width,
 		imageWidthAndHeight.height
@@ -54,7 +57,7 @@ const Image = ({
 			)
 			.map((responsiveImageWidth) =>
 				formatSrc(
-					resizerURL.concat(formattedSrc),
+					resizerURLToUse.concat(formattedSrc),
 					{ ...resizedOptions, auth },
 					responsiveImageWidth,
 					imageAspectRatio !== 0 ? responsiveImageWidth / imageAspectRatio : undefined
@@ -92,7 +95,6 @@ Image.defaultProps = {
 	alt: "",
 	loading: "lazy",
 	resizedOptions: {},
-	resizerURL: RESIZER_URL || "",
 	responsiveImages: [],
 	sizes: [],
 };
