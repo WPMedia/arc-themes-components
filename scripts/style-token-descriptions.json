@@ -1,0 +1,547 @@
+{
+	"attribution": {
+		"attribution": {
+			"description": "The main container for the attribution component, typically used to credit a source or author."
+		},
+		"attribution-link": {
+			"description": "The link within the attribution component that points to the source or author's website, styled in its default state."
+		},
+		"attribution-link-hover": {
+			"description": "The styling of the attribution link when the user hovers over it with their cursor."
+		},
+		"attribution-link-active": {
+			"description": "The styling of the attribution link when it is being actively clicked by the user."
+		},
+		"attribution-link-visited": {
+			"description": "The styling of the attribution link after it has been visited by the user, indicating that the link has already been clicked."
+		}
+	},
+	"badge": {
+		"badge": {
+			"description": "The main container for the badge component, used to display a small piece of information or a status indicator."
+		},
+		"badge-default": {
+			"description": "The default styling for the badge component, typically used when no specific category or color is assigned."
+		},
+		"badge-light": {
+			"description": "A lighter version of the badge component, designed to stand out on darker backgrounds."
+		},
+		"badge-primary": {
+			"description": "The primary version of the badge component, using the primary color of the design system for emphasis or importance."
+		},
+		"badge-danger": {
+			"description": "The danger version of the badge component, using a red or similar color to indicate errors, warnings, or critical information."
+		},
+		"badge-warning": {
+			"description": "The warning version of the badge component, using an orange or similar color to indicate caution, pending actions, or non-critical issues."
+		},
+		"badge-success": {
+			"description": "The success version of the badge component, using a green or similar color to indicate success, completion, or positive information."
+		}
+	},
+	"button": {
+		"button": {
+			"description": "The main container for the button component, used as an interactive element for user actions."
+		},
+		"button-hover": {
+			"description": "The styling of the button component when the user hovers over it with their cursor."
+		},
+		"button-active": {
+			"description": "The styling of the button component when it is being actively clicked by the user."
+		},
+		"button-focus": {
+			"description": "The styling of the button component when it receives focus, typically through keyboard navigation or programmatically."
+		},
+		"button-disabled": {
+			"description": "The styling of the button component when it is disabled, indicating that it is not currently interactive."
+		},
+		"button-link": {
+			"description": "The styling of the button component when it visually appears as a link rather than a standard button."
+		},
+		"button-full-width": {
+			"description": "The styling of the button component when it spans the full width of its parent container."
+		},
+		"button-default": {
+			"description": "The default styling of the button component, typically used when no specific category or color is assigned."
+		},
+		"button-primary": {
+			"description": "The primary version of the button component, using the primary color of the design system for emphasis or importance."
+		},
+		"button-primary-reverse": {
+			"description": "The primary version of the button component with inverted colors, useful for displaying on dark backgrounds or for visual variety."
+		},
+		"button-secondary": {
+			"description": "The secondary version of the button component, using a secondary color or a more subtle styling compared to the primary version."
+		},
+		"button-secondary-reverse": {
+			"description": "The secondary version of the button component with inverted colors, useful for displaying on dark backgrounds or for visual variety."
+		},
+		"button-small": {
+			"description": "The small version of the button component, used when a more compact size is desired."
+		},
+		"button-medium": {
+			"description": "The medium version of the button component, used as the default size for most use cases."
+		},
+		"button-large": {
+			"description": "The large version of the button component, used when a more prominent or visually impactful button is desired."
+		},
+		"button-disabled-hover": {
+			"description": "The styling of the disabled button component when the user hovers over it, typically maintaining the disabled appearance."
+		},
+		"button-disabled-active": {
+			"description": "The styling of the disabled button component when it is being clicked, typically maintaining the disabled appearance."
+		},
+		"button-link-hover": {
+			"description": "The styling of the button component with link appearance when the user hovers over it."
+		},
+		"button-link-active": {
+			"description": "The styling of the button component with link appearance when it is being actively clicked by the user."
+		},
+		"button-default-hover": {
+			"description": "The styling of the default button component when the user hovers over it."
+		},
+		"button-default-active": {
+			"description": "The styling of the default button component when it is being actively clicked by the user."
+		},
+		"button-primary-hover": {
+			"description": "The styling of the primary button component when the user hovers over it."
+		},
+		"button-primary-active": {
+			"description": "The styling of the primary button component when it is being actively clicked by the user."
+		},
+		"button-primary-reverse-hover": {
+			"description": "The styling of the primary reverse button component when theuser hovers over it."
+		},
+		"button-primary-reverse-active": {
+			"description": "The styling of the primary reverse button component when it is being actively clicked by the user."
+		},
+		"button-secondary-hover": {
+			"description": "The styling of the secondary button component when the user hovers over it."
+		},
+		"button-secondary-active": {
+			"description": "The styling of the secondary button component when it is being actively clicked by the user."
+		},
+		"button-secondary-reverse-hover": {
+			"description": "The styling of the secondary reverse button component when the user hovers over it."
+		},
+		"button-secondary-reverse-active": {
+			"description": "The styling of the secondary reverse button component when it is being actively clicked by the user."
+		},
+		"button-small-hover": {
+			"description": "The styling of the small button component when the user hovers over it."
+		},
+		"button-small-active": {
+			"description": "The styling of the small button component when it is being actively clicked by the user."
+		},
+		"button-medium-hover": {
+			"description": "The styling of the medium button component when the user hovers over it."
+		},
+		"button-medium-active": {
+			"description": "The styling of the medium button component when it is being actively clicked by the user."
+		},
+		"button-large-hover": {
+			"description": "The styling of the large button component when the user hovers over it."
+		},
+		"button-large-active": {
+			"description": "The styling of the large button component when it is being actively clicked by the user."
+		}
+	},
+	"carousel": {
+		"controls": {
+			"description": "The container for the navigation controls, such as next and previous buttons, within the carousel component."
+		},
+		"carousel": {
+			"description": "The main container for the carousel component, used to display a series of content items in a horizontally sliding layout."
+		},
+		"indicators": {
+			"description": "The container for the indicators that display the current position and total number of items within the carousel."
+		},
+		"carousel-image-counter": {
+			"description": "The element displaying the count of images within the carousel, typically shown as 'current/total' format."
+		},
+		"carousel-fullscreen": {
+			"description": "The styling for the carousel component when it is displayed in fullscreen mode."
+		},
+		"carousel-fullscreen-image-counter": {
+			"description": "The element displaying the count of images within the fullscreen carousel, typically shown as 'current/total' format."
+		},
+		"carousel-track": {
+			"description": "The container holding the carousel slides, allowing for the sliding animation and positioning."
+		},
+		"carousel-slide": {
+			"description": "An individual content item or slide within the carousel component."
+		},
+		"carousel-actions": {
+			"description": "The container for the action buttons, such as expand, autoplay, and exit fullscreen, within the carousel component."
+		},
+		"carousel-controls": {
+			"description": "The container for the main navigation controls, such as next and previous buttons, within the carousel component."
+		},
+		"carousel-button": {
+			"description": "The base styling for buttons within the carousel component."
+		},
+		"carousel-button-next": {
+			"description": "The styling for the 'next' button within the carousel component, used to navigate to the next slide."
+		},
+		"carousel-button-previous": {
+			"description": "The styling for the 'previous' button within the carousel component, used to navigate to the previous slide."
+		},
+		"carousel-button-additional-previous": {
+			"description": "The styling for any additional 'previous' buttons within the carousel component, used for extra customization or features."
+		},
+		"carousel-button-additional-next": {
+			"description": "The styling for any additional 'next' buttons within the carousel component, used for extra customization or features."
+		},
+		"carousel-button-enter-full-screen": {
+			"description": "The styling for the 'enter fullscreen' button within the carousel component, used to expand the carousel to fullscreen mode."
+		},
+		"carousel-button-exit-full-screen": {
+			"description": "The styling for the 'exit fullscreen' button within the carousel component, used to exit fullscreen mode and return to the normal view."
+		},
+		"carousel-button-toggle-auto-play": {
+			"description": "The styling for the 'toggle autoplay' button within the carousel component, used to start or stop the automatic transition between slides."
+		},
+		"carousel-additional-controls": {
+			"description": "The container for any additional controls within the carousel component, used for extra customization or features."
+		},
+		"carousel-counter-controls-container": {
+			"description": "The container for the carousel counter controls, displaying the current position and total number of items within the carousel."
+		},
+		"carousel-expand-autoplay-container": {
+			"description": "The container for the expand and autoplay controls within the carousel component."
+		},
+		"carousel-backdrop": {
+			"description": "The background or backdrop for the carousel component, used to visually separate the carousel from the rest of the page content."
+		},
+		"carousel-indicator-dots-container": {
+			"description": "The container for the dot indicators within the carousel component, used to display the current position and total number of items as dots."
+		},
+		"carousel-indicator-dot-active": {
+			"description": "The styling for the active dot indicator within the carousel component, representing the currently displayed slide."
+		},
+		"carousel-indicator-dot": {
+			"description": "The styling for the individual dot indicators within the carousel component, representing each slide in the carousel."
+		},
+		"carousel-indicator-thumbnails-container": {
+			"description": "The container for the thumbnail indicators within the carousel component, used to display a small preview of each slide."
+		},
+		"carousel-indicator-thumbnail-active": {
+			"description": "The styling for the active thumbnail indicator within the carousel component, representing the currently displayed slide."
+		},
+		"carousel-indicator-thumbnail": {
+			"description": "The styling for the individual thumbnail indicators within the carousel component, representing each slide in the carousel."
+		}
+	},
+	"date": {
+		"date": {
+			"description": "The styling for the date component, which is used to display a formatted date or to provide an input for users to select a date."
+		}
+	},
+	"details": {
+		"details-summary": {
+			"description": "The styling for the summary section of the details component, which acts as a header or trigger to expand/collapse the details content."
+		},
+		"details-summary-text": {
+			"description": "The styling for the text within the summary section of the details component."
+		},
+		"details-summary-icon": {
+			"description": "The styling for the icon within the summary section of the details component, usually indicating the expand/collapse state."
+		},
+		"details-with-icon-summary": {
+			"description": "The styling for the summary section of the details component when it includes an additional icon, typically for visual emphasis or branding."
+		},
+		"details-with-icon-summary-text": {
+			"description": "The styling for the text within the summary section of the details component when it includes an additional icon."
+		},
+		"details-with-icon-summary-icon": {
+			"description": "The styling for the additional icon within the summary section of the details component, typically for visual emphasis or branding."
+		},
+		"details-with-icon-open": {
+			"description": "The styling for the details component with an additional icon when it is in the expanded or open state."
+		},
+		"details-with-icon-open-summary-text": {
+			"description": "The styling for the text within the summary section of the details component with an additional icon when it is in the expanded or open state."
+		},
+		"details-with-icon-open-summary-icon": {
+			"description": "The styling for the additional icon within the summary section of the details component when it is in the expanded or open state."
+		},
+		"details-with-icon": {
+			"description": "The styling for the details component when it includes an additional icon, typically for visual emphasis or branding."
+		},
+		"details-open": {
+			"description": "The styling for the details component when it is in the expanded or open state."
+		},
+		"details-open-summary": {
+			"description": "The styling for the summary section of the details component when it is in the expanded or open state."
+		},
+		"details-open-summary-text": {
+			"description": "The styling for the text within the summary section of the details component when it is in the expanded or open state."
+		},
+		"details-open-summary-icon": {
+			"description": "The styling for the icon within the summary section of the details component when it is in the expanded or open state, usually indicating the expand/collapse state."
+		},
+		"details-content": {
+			"description": "The styling for the content section of the details component, which is displayed when the component is expanded or opened."
+		},
+		"details": {
+			"description": "The base styling for the details component, used to create an expandable and collapsible section of content with a summary trigger."
+		}
+	},
+	"divider": {
+		"divider": {
+			"description": "The styling for the divider component, used to create a visual separation between sections or elements within a layout."
+		}
+	},
+	"grid": {
+		"grid": {
+			"description": "The styling for the grid component, used to create a flexible and responsive layout system for organizing content within a container."
+		}
+	},
+	"headings": {
+		"heading": {
+			"description": "The styling for the heading component, used to create visually distinct and semantically meaningful headings for content sections."
+		}
+	},
+	"icon": {
+		"icon": {
+			"description": "The styling for the icon component, used to display scalable vector icons that can be customized through size, color, and other CSS properties."
+		}
+	},
+	"image": {
+		"image": {
+			"description": "The styling for the image component, used to display images with support for various sizing, alignment, and responsive behavior options."
+		}
+	},
+	"input": {
+		"input": {
+			"description": "The base styling for the input component, including layout, sizing, and default appearance."
+		},
+		"input-input": {
+			"description": "The styling for the actual input field within the input component."
+		},
+		"input-label": {
+			"description": "The styling for the label associated with the input field."
+		},
+		"input-tip": {
+			"description": "The styling for any additional helper text or tips provided along with the input field."
+		},
+		"input-small": {
+			"description": "The styling for a smaller version of the input component."
+		},
+		"input-small-input": {
+			"description": "The styling for the actual input field within the small input component."
+		},
+		"input-small-label": {
+			"description": "The styling for the label associated with the small input field."
+		},
+		"input-small-tip": {
+			"description": "The styling for any additional helper text or tips provided along with the small input field."
+		},
+		"input-default": {
+			"description": "The default styling for the input component."
+		},
+		"input-default-input": {
+			"description": "The default styling for the actual input field within the input component."
+		},
+		"input-default-label": {
+			"description": "The default styling for the label associated with the input field."
+		},
+		"input-default-tip": {
+			"description": "The default styling for any additional helper text or tips provided along with the input field."
+		},
+		"input-error": {
+			"description": "The styling for the input component in an error state."
+		},
+		"input-error-input": {
+			"description": "The styling for the actual input field within the input component in an error state."
+		},
+		"input-error-label": {
+			"description": "The styling for the label associated with the input field in an error state."
+		},
+		"input-error-tip": {
+			"description": "The styling for any additional helper text or tips provided along with the input field in an error state."
+		},
+		"input-success": {
+			"description": "The styling for the input component in a success state."
+		},
+		"input-success-input": {
+			"description": "The styling for the actual input field within the input component in a success state."
+		},
+		"input-success-label": {
+			"description": "The styling for the label associated with the input field in a success state."
+		},
+		"input-success-tip": {
+			"description": "The styling for any additional helper text or tips provided along with the input field in a success state."
+		},
+		"input-warning": {
+			"description": "The styling for the input component in a warning state."
+		},
+		"input-warning-input": {
+			"description": "The styling for the actual input field within the input component in a warning state."
+		},
+		"input-warning-label": {
+			"description": "The styling for the label associated with the input field in a warning state."
+		},
+		"input-warning-tip": {
+			"description": "The styling for any additional helper text or tips provided along with the input field in a warning state."
+		},
+		"input-input-focus": {
+			"description": "The styling for the actual input field within the input component when it is focused."
+		},
+		"input-small-input-focus": {
+			"description": "The styling for the actual input field within the small input component when it is focused."
+		},
+		"input-default-input-focus": {
+			"description": "The styling for the actual input field within the default input component when it is focused."
+		},
+		"input-error-input-focus": {
+			"description": "The styling for the actual input field within the input component in an error state when it is focused."
+		},
+		"input-success-input-focus": {
+			"description": "The styling for the actual input field within the input component in a success state when it is focused."
+		},
+		"input-warning-input-focus": {
+			"description": "The styling for the actual input field within the input component in a warning state when it is focused."
+		}
+	},
+	"link": {
+		"link": {
+			"description": "The base styling for a link component."
+		},
+		"link-hover": {
+			"description": "The styling for a link component when hovered."
+		},
+		"link-active": {
+			"description": "The styling for a link component when it is active or being clicked."
+		},
+		"link-visited": {
+			"description": "The styling for a link component after it has been visited."
+		}
+	},
+	"media-item": {
+		"media-item": {
+			"description": "The base styling for a media item component, typically used for images or videos with accompanying text."
+		},
+		"media-item-fig-caption": {
+			"description": "The styling for the figure caption within the media item component."
+		},
+		"media-item-title": {
+			"description": "The styling for the title text within the media item component."
+		},
+		"media-item-caption": {
+			"description": "The styling for the caption text within the media item component."
+		},
+		"media-item-credit": {
+			"description": "The styling for the credit text within the media item component."
+		}
+	},
+	"overline": {
+		"overline": {
+			"description": "The base styling for an overline component, typically used for small, secondary text above a heading or title."
+		},
+		"overline-hover": {
+			"description": "The styling for an overline component when hovered."
+		},
+		"overline-active": {
+			"description": "The styling for an overline component when it is active or being clicked."
+		},
+		"overline-visited": {
+			"description": "The styling for an overline component after it has been visited."
+		},
+		"overline-focus": {
+			"description": "The styling for an overline component when it is focused."
+		}
+	},
+	"paragraph": {
+		"paragraph": {
+			"description": "The base styling for a paragraph component, used for displaying blocks of text."
+		}
+	},
+	"picture": {
+		"picture": {
+			"description": "The base styling for a picture component, used for displaying responsive images in different formats and sizes."
+		}
+	},
+	"pill": {
+		"pill": {
+			"description": "The base styling for a pill component, typically used for tags, labels, or buttons."
+		},
+		"pill-hover": {
+			"description": "The styling for a pill component when hovered."
+		},
+		"pill-active": {
+			"description": "The styling for a pill component when it is active or being clicked."
+		},
+		"pill-visited": {
+			"description": "The styling for a pill component after it has been visited."
+		},
+		"pill-focus": {
+			"description": "The styling for a pill component when it is focused."
+		}
+	},
+	"price": {
+		"price-list": {
+			"description": "The styling for a list-style price component, typically used to display a list of prices or price ranges."
+		},
+		"price-sale": {
+			"description": "The styling for a sale price component, typically used to display a discounted price."
+		},
+		"price": {
+			"description": "The base styling for a price component, used for displaying product or service prices."
+		}
+	},
+	"separator": {
+		"●": {
+			"description": "The styling for a separator component with a bullet shape, typically used to separate inline items or elements."
+		},
+		"separator": {
+			"description": "The base styling for a separator component, used to visually separate items or elements in a layout."
+		}
+	},
+	"stack": {
+		"stack": {
+			"description": "The base styling for a stack component, which is a container for managing and aligning a group of elements."
+		},
+		"true": {
+			"description": "The styling for the stack component when enabled or active."
+		},
+		"vertical": {
+			"description": "The styling for the stack component when the layout direction is vertical."
+		},
+		"horizontal": {
+			"description": "The styling for the stack component when the layout direction is horizontal."
+		},
+		"stack-divider-vertical": {
+			"description": "The styling for a vertical divider inside the stack component, used to visually separate items."
+		},
+		"stack-divider-horizontal": {
+			"description": "The styling for a horizontal divider inside the stack component, used to visually separate items."
+		},
+		"start": {
+			"description": "The styling for the stack component when the alignment is set to start."
+		},
+		"center": {
+			"description": "The styling for the stack component when the alignment is set to center."
+		},
+		"end": {
+			"description": "The styling for the stack component when the alignment is set to end."
+		},
+		"nowrap": {
+			"description": "The styling for the stack component when the wrapping behavior is set to nowrap."
+		},
+		"wrap": {
+			"description": "The styling for the stack component when the wrapping behavior is set to wrap."
+		},
+		"reverse": {
+			"description": "The styling for the stack component when the layout direction is reversed."
+		}
+	},
+	"video": {
+		"video": {
+			"description": "The base styling for a video component, used for displaying video content."
+		},
+		"video-frame": {
+			"description": "The styling for the video frame, which contains the video component and may include controls or other elements."
+		}
+	}
+}
