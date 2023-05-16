@@ -172,7 +172,6 @@ const Carousel = ({
 	);
 
 	useEffect(() => {
-		console.log("carouselElement ", carouselElement);
 		setSlidesToShowInView(getSlidesToShowFromDom(carouselElement.current));
 		setSlide(getSlidesToShowFromDom(carouselElement.current));
 	}, [carouselElement]);
