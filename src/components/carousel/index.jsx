@@ -163,6 +163,7 @@ const Carousel = ({
 	const [position, setPosition] = useState(0);
 	const [isFullScreen, setIsFullScreen] = useState(false);
 	const [isAutoplaying, setIsAutoplaying] = useState(false);
+	const [isFullscreenTransition, setIsFullscreenTransition] = useState(false);
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 	const carouselElement = useRef();
 
@@ -171,6 +172,7 @@ const Carousel = ({
 	);
 
 	useEffect(() => {
+		console.log("carouselElement ", carouselElement);
 		setSlidesToShowInView(getSlidesToShowFromDom(carouselElement.current));
 		setSlide(getSlidesToShowFromDom(carouselElement.current));
 	}, [carouselElement]);
@@ -180,7 +182,9 @@ const Carousel = ({
 			const slideOffset =
 				carouselElement.current.querySelector(`.c-carousel__slide:nth-of-type(${slide})`)
 					?.offsetLeft || 0;
-			setPosition(-slideOffset);
+			if (!isFullscreenTransition) {
+				setPosition(-slideOffset);
+			}
 		};
 		window.addEventListener("resize", resizeFn, false);
 		return () => window.removeEventListener("resize", resizeFn, false);
@@ -214,7 +218,6 @@ const Carousel = ({
 		setSlide(newSlideIndex);
 		const slideOffset =
 			carouselElement.current.querySelector(".c-carousel__slide:nth-of-type(2)")?.offsetLeft || 0;
-
 		// find the difference between the current position and the new one
 		// then multiple that difference by slide offset to get the new position
 		// add the current position to the new position adjustment to get the new position
@@ -261,13 +264,19 @@ const Carousel = ({
 		// id is the carousel id
 		// the full screen element is the whole carousel
 		const fullScreenElement = document.getElementById(id);
-
+		setIsFullscreenTransition(true);
 		if (document.fullscreenEnabled) {
 			if (!document.fullscreenElement) {
-				fullScreenElement.requestFullscreen().then(() => setIsFullScreen(true));
+				fullScreenElement.requestFullscreen().then(() => {
+					setIsFullScreen(false);
+					setIsFullscreenTransition(false);
+				});
 				emitEvent("galleryExpandEnter");
 			} else {
-				document.exitFullscreen().then(() => setIsFullScreen(false));
+				document.exitFullscreen().then(() => {
+					setIsFullScreen(false);
+					setIsFullscreenTransition(false);
+				});
 				emitEvent("galleryExpandExit");
 			}
 		} else {
@@ -275,10 +284,16 @@ const Carousel = ({
 			// eslint-disable-next-line no-lonely-if
 			if (document.webkitFullscreenEnabled) {
 				if (!document.webkitFullscreenElement) {
-					fullScreenElement.webkitRequestFullscreen().then(() => setIsFullScreen(true));
+					fullScreenElement.webkitRequestFullscreen().then(() => {
+						setIsFullScreen(false);
+						setIsFullscreenTransition(false);
+					});
 					emitEvent("galleryExpandEnter");
 				} else {
-					document.webkitExitFullscreen().then(() => setIsFullScreen(false));
+					document.webkitExitFullscreen().then(() => {
+						setIsFullScreen(false);
+						setIsFullscreenTransition(false);
+					});
 					emitEvent("galleryExpandExit");
 				}
 			}
@@ -360,7 +375,6 @@ const Carousel = ({
 		!isServerSide() &&
 		(document.fullscreenEnabled || document.webkitFullscreenEnabled) &&
 		enableFullScreen;
-
 	return (
 		<div
 			{...rest}
@@ -375,6 +389,7 @@ const Carousel = ({
 			}}
 			ref={carouselElement}
 		>
+			<h1>{slidesToShowInView || slidesToShow}</h1>
 			<div className={`${COMPONENT_CLASS_NAME}__controls`}>
 				<div className={`${COMPONENT_CLASS_NAME}__expand-autoplay-container`}>
 					{/* only show button at all if enabled on the document */}
@@ -415,7 +430,9 @@ const Carousel = ({
 			</div>
 			<div
 				className={`${COMPONENT_CLASS_NAME}__track`}
-				style={{ transform: `translate3d(${position}px, 0px, 0px)` }}
+				style={{
+					transform: isFullscreenTransition ? "none" : `translate3d(${position}px, 0px, 0px)`,
+				}}
 				aria-live={isAutoplaying ? "off" : "polite"}
 				{...handlers}
 			>
