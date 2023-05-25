@@ -181,7 +181,7 @@ $component-map: get-all-component-definitions($tokens, $breakpoints);
 	@if list.length($tokens) != 0 {
 		:root {
 			// Alias Tokens
-			@if map.has-key($tokens, "alias") == true {
+			@if map.has-key($tokens, "alias") {
 				@each $name, $value in map.get($tokens, "alias") {
 					--#{$name}: #{maintain-quotes($value)};
 				}
@@ -207,8 +207,10 @@ $component-map: get-all-component-definitions($tokens, $breakpoints);
 
 @if list.length($tokens) != 0 {
 	@each $breakpoint, $breakpointValue in $breakpoints {
-		@media ($breakpointValue) {
-			@include root-tokens(map.get($tokens, $breakpoint));
+		@if map.has-key($tokens, $breakpoint) {
+			@media ($breakpointValue) {
+				@include root-tokens(map.get($tokens, $breakpoint));
+			}
 		}
 	}
 }
