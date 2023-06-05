@@ -170,6 +170,26 @@ const Carousel = ({
 		Children.map(children, (child) => (child?.type === subcomponentType ? child : null))
 	);
 
+	const childItems = Children.toArray(subComponents);
+
+	let carouselItems = childItems.map((child, index) => {
+		const viewable = index + 1 > slide - slidesToShowInView && index + 1 <= slide;
+		return child.type === Item ? cloneElement(child, { viewable }) : null;
+	});
+
+	const totalSlides = carouselItems.length;
+
+	const emitEvent = (eventName, page, options) => {
+		EventEmitter.dispatch(eventName, {
+			eventName,
+			ansGalleryId: id,
+			ansGalleryHeadline: label,
+			orderPosition: page || slide,
+			totalImages: totalSlides,
+			...options,
+		});
+	};
+
 	useEffect(() => {
 		setSlidesToShowInView(getSlidesToShowFromDom(carouselElement.current));
 		setSlide(getSlidesToShowFromDom(carouselElement.current));
@@ -186,29 +206,23 @@ const Carousel = ({
 		return () => window.removeEventListener("resize", resizeFn, false);
 	});
 
-	const childItems = Children.toArray(subComponents);
-
-	let carouselItems = childItems.map((child, index) => {
-		const viewable = index + 1 > slide - slidesToShowInView && index + 1 <= slide;
-		return child.type === Item ? cloneElement(child, { viewable }) : null;
+	useEffect(() => {
+		const handleFullscreen = () => {
+			if (document.fullscreenElement) {
+				setIsFullScreen(true);
+				emitEvent("galleryExpandEnter");
+			} else {
+				setIsFullScreen(false);
+				emitEvent("galleryExpandExit");
+			}
+		};
+		document.addEventListener("fullscreenchange", handleFullscreen);
+		return () => window.removeEventListener("fullscreenchange", handleFullscreen, false);
 	});
 
 	if (adElement && adInterstitialClicks) {
 		carouselItems = insertAdsIntoItems(carouselItems, adElement, adInterstitialClicks, slide);
 	}
-
-	const totalSlides = carouselItems.length;
-
-	const emitEvent = (eventName, page, options) => {
-		EventEmitter.dispatch(eventName, {
-			eventName,
-			ansGalleryId: id,
-			ansGalleryHeadline: label,
-			orderPosition: page || slide,
-			totalImages: totalSlides,
-			...options,
-		});
-	};
 
 	const goToSlide = (newSlideIndex) => {
 		setSlide(newSlideIndex);
