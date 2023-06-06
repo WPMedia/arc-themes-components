@@ -23,6 +23,8 @@ const getCustomMetaData = (metaHTMLString) => {
 				metaName: metaNode.getAttribute("name"),
 				metaValue: metaNode.getAttribute("value") || metaNode.getAttribute("content"),
 			}));
+	} else {
+		customMetaData = [];
 	}
 	return customMetaData;
 };

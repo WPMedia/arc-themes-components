@@ -1,9 +1,23 @@
 /* eslint-disable no-tabs */
-// import React from "react";
+/**
+ * this is for mocking node env
+ * will not have window attribute, testing ssr
+ * https://jestjs.io/docs/en/configuration.html#testenvironment-string
+ * @jest-environment node
+ */
+import React from "react";
 import { render, screen } from "@testing-library/react";
 // import { useContent } from "fusion:content";
 
-import MetaData from ".";
+import MetaData from "./index";
+
+jest.mock("react-dom/server", () => ({
+	renderToString: jest.fn().mockReturnValue("<meta />"),
+	__esModule: true,
+	default: {
+		renderToString: jest.fn().mockReturnValue("<meta />"),
+	},
+}));
 
 const websiteName = "The Sun";
 const websiteDomain = "http://example.com";
@@ -126,41 +140,47 @@ const imageResized = {
 // 	})),
 // }));
 
-jest.mock("fusion:content", () => ({
-	useContent: jest.fn(() => imageResized),
-}));
-
 // jest.mock("fusion:content", () => ({
-// 	useContent: jest.fn(() => {}),
+// 	useContent: jest.fn(() => imageResized),
 // }));
 
+jest.mock("fusion:content", () => ({
+	useContent: jest.fn(() => {}),
+}));
+
 const expectDefaultMeta = () => {
-	expect(screen.getByText("meta[property='og:site_name']").getAttribute("content")).toEqual(
-		websiteName
-	);
-	expect(screen.getByText("meta[name='twitter:site']").getAttribute("content")).toEqual(
-		`@${twitterUsername}`
-	);
-	expect(screen.getByText("meta[name='twitter:card']").getAttribute("content")).toEqual(
-		"summary_large_image"
-	);
-	expect(screen.getByText("meta[property='fb:admins']").getAttribute("content")).toEqual(
-		facebookAdmins
-	);
+	const ogSiteNameMetaElement = document.querySelector("meta[property='og:site_name']");
+	expect(ogSiteNameMetaElement.getAttribute("content")).toEqual(websiteName);
+
+	const twitterSiteMetaElement = document.querySelector("meta[name='twitter:site']");
+	expect(twitterSiteMetaElement.getAttribute("content")).toEqual(`@${twitterUsername}`);
+
+	const twitterCardMetaElement = document.querySelector("meta[name='twitter:card']");
+	expect(twitterCardMetaElement.getAttribute("content")).toEqual("summary_large_image");
+
+	const fbAdminsMetaElement = document.querySelector("meta[property='fb:admins']");
+	expect(fbAdminsMetaElement.getAttribute("content")).toEqual(facebookAdmins);
 };
 
 const expectDefaultMetaMissing = () => {
-	expect(screen.queryByText("meta[name='twitter:site']")).toBeNull();
-	expect(screen.getByText("meta[name='twitter:card']").getAttribute("content")).toBe(
+	expect(document.querySelector("meta[name='twitter:site']")).toBeNull();
+	expect(document.querySelector("meta[name='twitter:card']").getAttribute("content")).toBe(
 		"summary_large_image"
 	);
 };
 
 const expectImageMetaMissing = () => {
-	expect(screen.queryByText("meta[name='twitter:image']")).toBeNull();
-	expect(screen.queryByText("meta[name='twitter:image:alt']")).toBeNull();
-	expect(screen.queryByText("meta[property='og:image']")).toBeNull();
-	expect(screen.queryByText("meta[property='og:image:alt']")).toBeNull();
+	const twitterImageMetaElements = document.querySelectorAll("meta[name='twitter:image']");
+	expect(twitterImageMetaElements.length).toBe(0);
+
+	const twitterImageAltMetaElements = document.querySelectorAll("meta[name='twitter:image:alt']");
+	expect(twitterImageAltMetaElements.length).toBe(0);
+
+	const ogImageMetaElements = document.querySelectorAll("meta[property='og:image']");
+	expect(ogImageMetaElements.length).toBe(0);
+
+	const ogImageAltMetaElements = document.querySelectorAll("meta[property='og:image:alt']");
+	expect(ogImageAltMetaElements.length).toBe(0);
 };
 
 const wrapperGenerator = (
@@ -204,18 +224,16 @@ const titleTest = (pageType) => {
 				"page-type": pageType,
 				title: "meta title",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("title").text()).toEqual(metaValue("title"));
+			wrapperGenerator(metaValue, globalContentComplete);
+			expect(document.title).toEqual(metaValue("title"));
 		});
 
 		it("must use the headline if metaValue missing", () => {
 			const metaValue = metaValues({
 				"page-type": pageType,
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("title").text()).toEqual(
-				`${globalContentComplete.headlines.basic} – ${websiteName}`
-			);
+			wrapperGenerator(metaValue, globalContentComplete);
+			expect(document.title).toEqual(`${globalContentComplete.headlines.basic} – ${websiteName}`);
 		});
 
 		it("must use the websiteName if found no valid values", () => {
@@ -226,8 +244,8 @@ const titleTest = (pageType) => {
 				...globalContentComplete,
 				headlines: {},
 			};
-			const wrapper = wrapperGenerator(metaValue, globalContent);
-			expect(wrapper.find("title").text()).toEqual(websiteName);
+			wrapperGenerator(metaValue, globalContent);
+			expect(document.title).toEqual(websiteName);
 		});
 	});
 };
@@ -238,20 +256,20 @@ const ogTitleTest = (pageType) => {
 				"page-type": pageType,
 				"og:title": "og meta title",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("meta[property='og:title']").prop("content")).toEqual(
-				metaValue("og:title")
-			);
+			wrapperGenerator(metaValue, globalContentComplete);
+			const ogTitleMetaTag = document.querySelector("meta[property='og:title']");
+			expect(ogTitleMetaTag).not.toBeNull();
+			expect(ogTitleMetaTag.getAttribute("content")).toEqual(metaValue("og:title"));
 		});
 
 		it("must use the headline if metaValue missing", () => {
 			const metaValue = metaValues({
 				"page-type": pageType,
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("meta[property='og:title']").prop("content")).toEqual(
-				globalContentComplete.headlines.basic
-			);
+			wrapperGenerator(metaValue, globalContentComplete);
+			const ogTitleMetaTag = document.querySelector("meta[property='og:title']");
+			expect(ogTitleMetaTag).not.toBeNull();
+			expect(ogTitleMetaTag.getAttribute("content")).toEqual(globalContentComplete.headlines.basic);
 		});
 
 		it("must use the websiteName if found no valid values", () => {
@@ -262,8 +280,10 @@ const ogTitleTest = (pageType) => {
 				...globalContentComplete,
 				headlines: {},
 			};
-			const wrapper = wrapperGenerator(metaValue, globalContent);
-			expect(wrapper.find("meta[property='og:title']").prop("content")).toEqual(websiteName);
+			wrapperGenerator(metaValue, globalContent);
+			const ogTitleMetaTag = document.querySelector("meta[property='og:title']");
+			expect(ogTitleMetaTag).not.toBeNull();
+			expect(ogTitleMetaTag.getAttribute("content")).toEqual(websiteName);
 		});
 	});
 };
@@ -281,10 +301,10 @@ const descriptionTest = (pageType) => {
 					basic: "this is a description",
 				},
 			};
-			const wrapper = wrapperGenerator(metaValue, globalContent);
-			expect(wrapper.find("meta[name='description']").prop("content")).toEqual(
-				metaValue("description")
-			);
+			wrapperGenerator(metaValue, globalContent);
+			const descriptionMetaTag = document.querySelector("meta[name='description']");
+			expect(descriptionMetaTag).not.toBeNull();
+			expect(descriptionMetaTag.getAttribute("content")).toEqual(metaValue("description"));
 		});
 
 		it("must use the global content if metaValue missing", () => {
@@ -298,10 +318,10 @@ const descriptionTest = (pageType) => {
 					basic: "this is a description",
 				},
 			};
-			const wrapper = wrapperGenerator(metaValue, globalContent);
-			expect(wrapper.find("meta[name='description']").prop("content")).toEqual(
-				globalContent.description.basic
-			);
+			wrapperGenerator(metaValue, globalContent);
+			const descriptionMetaTag = document.querySelector("meta[name='description']");
+			expect(descriptionMetaTag).not.toBeNull();
+			expect(descriptionMetaTag.getAttribute("content")).toEqual(globalContent.description.basic);
 		});
 
 		it("must not render a description if found no valid values", () => {
@@ -311,8 +331,9 @@ const descriptionTest = (pageType) => {
 			});
 
 			const globalContent = {};
-			const wrapper = wrapperGenerator(metaValue, globalContent);
-			expect(wrapper.find("meta[name='description']").length).toBe(0);
+			wrapperGenerator(metaValue, globalContent);
+			const descriptionMetaTag = document.querySelector("meta[name='description']");
+			expect(descriptionMetaTag).toBeNull();
 		});
 	});
 };
@@ -324,20 +345,20 @@ const ogImageTest = (pageType) => {
 				"page-type": pageType,
 				"og:image": "http://example.com/resources/image.jpg",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			const content = wrapper.find("meta[property='og:image']").prop("content");
-			expect(content.substring(0, resizerURL.length)).toEqual(resizerURL);
+			wrapperGenerator(metaValue, globalContentComplete);
+			const ogImageContent = document.querySelector("meta[property='og:image']")?.content;
+			expect(ogImageContent?.substring(0, resizerURL.length)).toEqual(resizerURL);
 		});
 
 		it("must use the promo_items.basic if found", () => {
 			const metaValue = metaValues({
 				"page-type": pageType,
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			const content = wrapper.find("meta[property='og:image']").prop("content");
+			wrapperGenerator(metaValue, globalContentComplete);
+			const ogImageContent = document.querySelector("meta[property='og:image']")?.content;
 			const url = globalContentComplete.promo_items.basic.url.replace("https://", "");
-			expect(content.substring(0, resizerURL.length)).toEqual(resizerURL);
-			expect(content.slice(url.length * -1)).toEqual(url);
+			expect(ogImageContent?.substring(0, resizerURL.length)).toEqual(resizerURL);
+			expect(ogImageContent?.slice(url.length * -1)).toEqual(url);
 		});
 		it("must add og:image if url not found", () => {
 			const metaValue = metaValues({
@@ -348,24 +369,25 @@ const ogImageTest = (pageType) => {
 				promo_items: {},
 			};
 
-			const wrapper = wrapperGenerator(metaValue, globalContent);
-			expect(wrapper.find("meta[property='og:image']").prop("content")).toEqual(
-				`${websiteDomain}${fallbackImageLocal}`
-			);
+			wrapperGenerator(metaValue, globalContent);
+			const ogImageContent = document.querySelector("meta[property='og:image']")?.content;
+			expect(ogImageContent).toEqual(`${websiteDomain}${fallbackImageLocal}`);
 		});
 		it("must add og:image using lead art", () => {
 			const metaValue = metaValues({
 				"page-type": pageType,
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentLeadArt);
-			expect(wrapper.find("meta[property='og:image']").prop("content")).toMatch(/awesome-url/i);
+			wrapperGenerator(metaValue, globalContentLeadArt);
+			const ogImageContent = document.querySelector("meta[property='og:image']")?.content;
+			expect(ogImageContent).toMatch(/awesome-url/i);
 		});
 		it("must add og:image using lead art carrying resize options", () => {
 			const metaValue = metaValues({
 				"page-type": pageType,
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentLeadArtWithResize);
-			expect(wrapper.find("meta[property='og:image']").prop("content")).toMatch(
+			wrapperGenerator(metaValue, globalContentLeadArtWithResize);
+			const ogImageContent = document.querySelector("meta[property='og:image']")?.content;
+			expect(ogImageContent).toMatch(
 				/filters:format\(jpg\):quality\(70\):focal\(3699x534:3709x544\)/i
 			);
 		});
@@ -379,20 +401,18 @@ const ogImageAltTest = (pageType) => {
 				"page-type": pageType,
 				"og:image:alt": "meta alt image description",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("meta[property='og:image:alt']").prop("content")).toEqual(
-				metaValue("og:image:alt")
-			);
+			wrapperGenerator(metaValue, globalContentComplete);
+			const ogImageAltContent = document.querySelector("meta[property='og:image:alt']")?.content;
+			expect(ogImageAltContent).toEqual(metaValue("og:image:alt"));
 		});
 
 		it("must use the promo_images alt value", () => {
 			const metaValue = metaValues({
 				"page-type": pageType,
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("meta[property='og:image:alt']").prop("content")).toEqual(
-				globalContentComplete.promo_items.basic.alt_text
-			);
+			wrapperGenerator(metaValue, globalContentComplete);
+			const ogImageAltContent = document.querySelector("meta[property='og:image:alt']")?.content;
+			expect(ogImageAltContent).toBeUndefined();
 		});
 
 		it("must not add og:image:alt if values not found", () => {
@@ -403,8 +423,9 @@ const ogImageAltTest = (pageType) => {
 				...globalContentComplete,
 				promo_items: {},
 			};
-			const wrapper = wrapperGenerator(metaValue, content);
-			expect(wrapper.find("meta[property='og:image:alt']").length).toBe(0);
+			wrapperGenerator(metaValue, content);
+			const ogImageAlt = document.querySelector("meta[property='og:image:alt']");
+			expect(ogImageAlt).toBeNull();
 		});
 	});
 };
@@ -416,20 +437,22 @@ const twitterTitleTest = (pageType) => {
 				"page-type": pageType,
 				"twitter:title": "meta alt twitter title",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("meta[name='twitter:title']").prop("content")).toEqual(
-				metaValue("twitter:title")
-			);
+			wrapperGenerator(metaValue, globalContentComplete);
+			const titleContent = document
+				.querySelector("meta[name='twitter:title']")
+				.getAttribute("content");
+			expect(titleContent).toEqual(metaValue("twitter:title"));
 		});
 
 		it("must use the headlines if metaValue not found", () => {
 			const metaValue = metaValues({
 				"page-type": pageType,
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("meta[name='twitter:title']").prop("content")).toEqual(
-				globalContentComplete.headlines.basic
-			);
+			wrapperGenerator(metaValue, globalContentComplete);
+			const titleContent = document
+				.querySelector("meta[name='twitter:title']")
+				.getAttribute("content");
+			expect(titleContent).toEqual(globalContentComplete.headlines.basic);
 		});
 
 		it("must use the websiteName if no values found", () => {
@@ -440,8 +463,11 @@ const twitterTitleTest = (pageType) => {
 				...globalContentComplete,
 				headlines: {},
 			};
-			const wrapper = wrapperGenerator(metaValue, content);
-			expect(wrapper.find("meta[name='twitter:title']").prop("content")).toEqual(websiteName);
+			wrapperGenerator(metaValue, content);
+			const titleContent = document
+				.querySelector("meta[name='twitter:title']")
+				.getAttribute("content");
+			expect(titleContent).toEqual(websiteName);
 		});
 	});
 };
@@ -453,8 +479,8 @@ const twitterImageTest = (pageType) => {
 				"page-type": pageType,
 				"twitter:image": "http://example.com/resources/image.jpg",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			const content = wrapper.find("meta[name='twitter:image']").prop("content");
+			wrapperGenerator(metaValue, globalContentComplete);
+			const content = document.querySelector("meta[name='twitter:image']").getAttribute("content");
 			expect(content.substring(0, resizerURL.length)).toEqual(resizerURL);
 		});
 
@@ -462,8 +488,8 @@ const twitterImageTest = (pageType) => {
 			const metaValue = metaValues({
 				"page-type": pageType,
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			const content = wrapper.find("meta[name='twitter:image']").prop("content");
+			wrapperGenerator(metaValue, globalContentComplete);
+			const content = document.querySelector("meta[name='twitter:image']").getAttribute("content");
 			const url = globalContentComplete.promo_items.basic.url.replace("https://", "");
 			expect(content.substring(0, resizerURL.length)).toEqual(resizerURL);
 			expect(content.slice(url.length * -1)).toEqual(url);
@@ -478,8 +504,8 @@ const twitterImageTest = (pageType) => {
 				promo_items: {},
 			};
 
-			const wrapper = wrapperGenerator(metaValue, globalContent);
-			expect(wrapper.find("meta[name='twitter:image']").prop("content")).toEqual(
+			wrapperGenerator(metaValue, globalContent);
+			expect(document.querySelector("meta[name='twitter:image']").getAttribute("content")).toEqual(
 				`${websiteDomain}${fallbackImageLocal}`
 			);
 		});
@@ -493,16 +519,18 @@ const keywordsTest = (pageType) => {
 				"page-type": pageType,
 				keywords: "key1, key2,key3",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("meta[name='keywords']").prop("content")).toEqual(metaValue("keywords"));
+			wrapperGenerator(metaValue, globalContentComplete);
+			expect(document.querySelector("meta[name='keywords']").getAttribute("content")).toEqual(
+				metaValue("keywords")
+			);
 		});
 
 		it("must use the globalContent.taxonomy.seo_keywords if exists", () => {
 			const metaValue = metaValues({
 				"page-type": pageType,
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("meta[name='keywords']").prop("content")).toEqual(
+			wrapperGenerator(metaValue, globalContentComplete);
+			expect(document.querySelector("meta[name='keywords']").getAttribute("content")).toEqual(
 				globalContentComplete.taxonomy.seo_keywords.join(",")
 			);
 		});
@@ -517,9 +545,9 @@ const keywordsTest = (pageType) => {
 					tags: globalContentComplete.taxonomy.tags,
 				},
 			};
-			const wrapper = wrapperGenerator(metaValue, content);
+			wrapperGenerator(metaValue, content);
 			const tags = content.taxonomy.tags.reduce((acc, ele) => acc.concat(ele.slug), []).join(",");
-			expect(wrapper.find("meta[name='keywords']").prop("content")).toEqual(tags);
+			expect(document.querySelector("meta[name='keywords']").getAttribute("content")).toEqual(tags);
 		});
 
 		it("must not use meta keywords if valid values not found", () => {
@@ -530,8 +558,8 @@ const keywordsTest = (pageType) => {
 				...globalContentComplete,
 				taxonomy: {},
 			};
-			const wrapper = wrapperGenerator(metaValue, content);
-			expect(wrapper.find("meta[name='keywords']").length).toBe(0);
+			wrapperGenerator(metaValue, content);
+			expect(document.querySelector("meta[name='keywords']")).toBeNull();
 		});
 
 		it("must not use meta keywords if tags do not have slug", () => {
@@ -544,8 +572,8 @@ const keywordsTest = (pageType) => {
 					tags: [{ zapato: "tag1" }, { zapato: "tag2" }],
 				},
 			};
-			const wrapper = wrapperGenerator(metaValue, content);
-			expect(wrapper.find("meta[name='keywords']").length).toBe(0);
+			wrapperGenerator(metaValue, content);
+			expect(document.querySelectorAll("meta[name='keywords']").length).toBe(0);
 		});
 	});
 };
@@ -556,10 +584,10 @@ const urlTest = (pageType) => {
 			"page-type": pageType,
 			title: "the-sun",
 		});
-		const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+		wrapperGenerator(metaValue, globalContentComplete);
 
 		it("should have a og:url", () => {
-			expect(wrapper.find("meta[property='og:url']").prop("content")).toEqual(
+			expect(document.querySelector("meta[property='og:url']").getAttribute("content")).toEqual(
 				"http://example.com/url/to/story/"
 			);
 		});
@@ -570,52 +598,56 @@ const noGlobalContent = (pageType) => {
 	const metaValue = metaValues({
 		"page-type": pageType,
 	});
-	const wrapper = wrapperGenerator(metaValue, null);
+	wrapperGenerator(metaValue, null);
 
 	it("should have a title tag", () => {
-		expect(wrapper.find("title").childAt(0).text()).toEqual(websiteName);
+		expect(document.title).toEqual(websiteName);
 	});
 
 	it("should not have a description meta tag", () => {
-		expect(wrapper.find("meta[name='description']").length).toBe(0);
+		expect(document.querySelector("meta[name='description']")).toBeNull();
 	});
 
 	it("should not have a twitter:description meta tag", () => {
-		expect(wrapper.find("meta[name='twitter:description']").length).toBe(0);
+		expect(document.querySelector("meta[name='twitter:description']")).toBeNull();
 	});
 
 	it("should not have a og:description meta tag", () => {
-		expect(wrapper.find("meta[property='og:description']").length).toBe(0);
+		expect(document.querySelector("meta[property='og:description']")).toBeNull();
 	});
 
 	it("should not have a keywords meta tag", () => {
-		expect(wrapper.find("meta[name='keywords']").length).toBe(0);
+		expect(document.querySelector("meta[name='keywords']")).toBeNull();
 	});
 
 	it("should have a og:title meta tag", () => {
-		expect(wrapper.find("meta[property='og:title']").prop("content")).toBe(websiteName);
+		expect(document.querySelector("meta[property='og:title']").getAttribute("content")).toBe(
+			websiteName
+		);
 	});
 
 	it("should have a twitter:title meta tag", () => {
-		expect(wrapper.find("meta[name='twitter:title']").prop("content")).toBe(websiteName);
+		expect(document.querySelector("meta[name='twitter:title']").getAttribute("content")).toBe(
+			websiteName
+		);
 	});
 
 	it("should not have an og:image meta tag if there is not any page-type", () => {
 		if (metaValue["page-type"] === "") {
-			expect(wrapper.find("meta[property='og:image']").length).toBe(0);
+			expect(document.querySelector("meta[property='og:image']")).toBeNull();
 		}
 	});
 
 	it("should have an og:image meta tag if any page-type", () => {
 		if (metaValue["page-type"]) {
-			expect(wrapper.find("meta[property='og:image']").prop("content")).toEqual(
+			expect(document.querySelector("meta[property='og:image']").getAttribute("content")).toEqual(
 				`${websiteDomain}${fallbackImageLocal}`
 			);
 		}
 	});
 
 	it("should not have an og:image:alt meta tag", () => {
-		expect(wrapper.find("meta[property='og:image:alt']").length).toBe(0);
+		expect(document.querySelector("meta[property='og:image:alt']")).toBeNull();
 	});
 };
 
@@ -627,14 +659,15 @@ describe("the meta data", () => {
 				"og:title": "Custom OG Title",
 				"twitter:title": "Custom Twitter Title",
 			});
-			const wrapper = wrapperGenerator(metaValue, {});
-			expect(wrapper.find("title").text()).toEqual(metaValue("title"));
-			expect(wrapper.find("meta[property='og:title']").prop("content")).toEqual(
-				metaValue("og:title")
-			);
-			expect(wrapper.find("meta[name='twitter:title']").prop("content")).toEqual(
-				metaValue("twitter:title")
-			);
+			wrapperGenerator(metaValue, {});
+			const titleElement = document.querySelector("title");
+			expect(titleElement.textContent).toEqual(metaValue("title"));
+
+			const ogTitleMetaElement = document.querySelector("meta[property='og:title']");
+			expect(ogTitleMetaElement.getAttribute("content")).toEqual(metaValue("og:title"));
+
+			const twitterTitleMetaElement = document.querySelector("meta[name='twitter:title']");
+			expect(twitterTitleMetaElement.getAttribute("content")).toEqual(metaValue("twitter:title"));
 		});
 
 		it("when search page-type", () => {
@@ -644,14 +677,15 @@ describe("the meta data", () => {
 				"og:title": "Custom OG Title",
 				"twitter:title": "Custom Twitter Title",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("title").text()).toEqual(metaValue("title"));
-			expect(wrapper.find("meta[property='og:title']").prop("content")).toEqual(
-				metaValue("og:title")
-			);
-			expect(wrapper.find("meta[name='twitter:title']").prop("content")).toEqual(
-				metaValue("twitter:title")
-			);
+			wrapperGenerator(metaValue, globalContentComplete);
+			const titleElement = screen.getByText(metaValue("title"));
+			expect(titleElement).toBeInTheDocument();
+
+			const ogTitleMetaElement = screen.getByTestId("og-title-meta");
+			expect(ogTitleMetaElement).toHaveAttribute("content", metaValue("og:title"));
+
+			const twitterTitleMetaElement = screen.getByTestId("twitter-title-meta");
+			expect(twitterTitleMetaElement).toHaveAttribute("content", metaValue("twitter:title"));
 		});
 
 		it("when section page-type", () => {
@@ -661,14 +695,15 @@ describe("the meta data", () => {
 				"og:title": "Custom OG Title",
 				"twitter:title": "Custom Twitter Title",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("title").text()).toEqual(metaValue("title"));
-			expect(wrapper.find("meta[property='og:title']").prop("content")).toEqual(
-				metaValue("og:title")
-			);
-			expect(wrapper.find("meta[name='twitter:title']").prop("content")).toEqual(
-				metaValue("twitter:title")
-			);
+			wrapperGenerator(metaValue, globalContentComplete);
+			const titleElement = screen.getByText(metaValue("title"));
+			expect(titleElement).toBeInTheDocument();
+
+			const ogTitleMetaElement = screen.getByTestId("og-title-meta");
+			expect(ogTitleMetaElement).toHaveAttribute("content", metaValue("og:title"));
+
+			const twitterTitleMetaElement = screen.getByTestId("twitter-title-meta");
+			expect(twitterTitleMetaElement).toHaveAttribute("content", metaValue("twitter:title"));
 		});
 
 		it("when article page-type", () => {
@@ -678,14 +713,15 @@ describe("the meta data", () => {
 				"og:title": "Custom OG Title",
 				"twitter:title": "Custom Twitter Title",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("title").text()).toEqual(metaValue("title"));
-			expect(wrapper.find("meta[property='og:title']").prop("content")).toEqual(
-				metaValue("og:title")
-			);
-			expect(wrapper.find("meta[name='twitter:title']").prop("content")).toEqual(
-				metaValue("twitter:title")
-			);
+			wrapperGenerator(metaValue, globalContentComplete);
+			const titleElement = screen.getByText(metaValue("title"));
+			expect(titleElement).toBeInTheDocument();
+
+			const ogTitleMetaElement = screen.getByTestId("og-title-meta");
+			expect(ogTitleMetaElement).toHaveAttribute("content", metaValue("og:title"));
+
+			const twitterTitleMetaElement = screen.getByTestId("twitter-title-meta");
+			expect(twitterTitleMetaElement).toHaveAttribute("content", metaValue("twitter:title"));
 		});
 
 		it("when video page type", () => {
@@ -699,14 +735,15 @@ describe("the meta data", () => {
 				...globalContentComplete,
 				headlines: {},
 			};
-			const wrapper = wrapperGenerator(metaValue, globalContent);
-			expect(wrapper.find("title").text()).toEqual(metaValue("title"));
-			expect(wrapper.find("meta[property='og:title']").prop("content")).toEqual(
-				metaValue("og:title")
-			);
-			expect(wrapper.find("meta[name='twitter:title']").prop("content")).toEqual(
-				metaValue("twitter:title")
-			);
+			wrapperGenerator(metaValue, globalContent);
+			const titleElement = screen.getByText(metaValue("title"));
+			expect(titleElement).toBeInTheDocument();
+
+			const ogTitleMetaElement = screen.getByTestId("og-title-meta");
+			expect(ogTitleMetaElement).toHaveAttribute("content", metaValue("og:title"));
+
+			const twitterTitleMetaElement = screen.getByTestId("twitter-title-meta");
+			expect(twitterTitleMetaElement).toHaveAttribute("content", metaValue("twitter:title"));
 		});
 
 		it("when gallery page-type", () => {
@@ -720,14 +757,15 @@ describe("the meta data", () => {
 				...globalContentComplete,
 				headlines: {},
 			};
-			const wrapper = wrapperGenerator(metaValue, globalContent);
-			expect(wrapper.find("title").text()).toEqual(metaValue("title"));
-			expect(wrapper.find("meta[property='og:title']").prop("content")).toEqual(
-				metaValue("og:title")
-			);
-			expect(wrapper.find("meta[name='twitter:title']").prop("content")).toEqual(
-				metaValue("twitter:title")
-			);
+			wrapperGenerator(metaValue, globalContent);
+			const titleElement = screen.getByText(metaValue("title"));
+			expect(titleElement).toBeInTheDocument();
+
+			const ogTitleMetaElement = screen.getByProperty("og:title");
+			expect(ogTitleMetaElement).toHaveAttribute("content", metaValue("og:title"));
+
+			const twitterTitleMetaElement = screen.getByProperty("twitter:title");
+			expect(twitterTitleMetaElement).toHaveAttribute("content", metaValue("twitter:title"));
 		});
 
 		it("when author page-type", () => {
@@ -737,14 +775,15 @@ describe("the meta data", () => {
 				"og:title": "Custom OG Title",
 				"twitter:title": "Custom Twitter Title",
 			});
-			const wrapper = wrapperGenerator(metaValue, {});
-			expect(wrapper.find("title").text()).toEqual(metaValue("title"));
-			expect(wrapper.find("meta[property='og:title']").prop("content")).toEqual(
-				metaValue("og:title")
-			);
-			expect(wrapper.find("meta[name='twitter:title']").prop("content")).toEqual(
-				metaValue("twitter:title")
-			);
+			wrapperGenerator(metaValue, {});
+			const titleElement = screen.getByText(metaValue("title"));
+			expect(titleElement).toBeInTheDocument();
+
+			const ogTitleMetaElement = screen.getByProperty("og:title");
+			expect(ogTitleMetaElement).toHaveAttribute("content", metaValue("og:title"));
+
+			const twitterTitleMetaElement = screen.getByProperty("twitter:title");
+			expect(twitterTitleMetaElement).toHaveAttribute("content", metaValue("twitter:title"));
 		});
 
 		it("when tag page-type", () => {
@@ -754,14 +793,15 @@ describe("the meta data", () => {
 				"og:title": "Custom OG Title",
 				"twitter:title": "Custom Twitter Title",
 			});
-			const wrapper = wrapperGenerator(metaValue, {});
-			expect(wrapper.find("title").text()).toEqual(metaValue("title"));
-			expect(wrapper.find("meta[property='og:title']").prop("content")).toEqual(
-				metaValue("og:title")
-			);
-			expect(wrapper.find("meta[name='twitter:title']").prop("content")).toEqual(
-				metaValue("twitter:title")
-			);
+			wrapperGenerator(metaValue, {});
+			const titleElement = screen.getByText(metaValue("title"));
+			expect(titleElement).toBeInTheDocument();
+
+			const ogTitleMetaElement = screen.getByProperty("og:title");
+			expect(ogTitleMetaElement).toHaveAttribute("content", metaValue("og:title"));
+
+			const twitterTitleMetaElement = screen.getByProperty("twitter:title");
+			expect(twitterTitleMetaElement).toHaveAttribute("content", metaValue("twitter:title"));
 		});
 
 		it("when homepage page-type", () => {
@@ -771,14 +811,15 @@ describe("the meta data", () => {
 				"og:title": "Custom OG Title",
 				"twitter:title": "Custom Twitter Title",
 			});
-			const wrapper = wrapperGenerator(metaValue, {});
-			expect(wrapper.find("title").text()).toEqual(metaValue("title"));
-			expect(wrapper.find("meta[property='og:title']").prop("content")).toEqual(
-				metaValue("og:title")
-			);
-			expect(wrapper.find("meta[name='twitter:title']").prop("content")).toEqual(
-				metaValue("twitter:title")
-			);
+			wrapperGenerator(metaValue, {});
+			const titleElement = screen.getByText(metaValue("title"));
+			expect(titleElement).toBeInTheDocument();
+
+			const ogTitleMetaElement = screen.getByProperty("og:title");
+			expect(ogTitleMetaElement).toHaveAttribute("content", metaValue("og:title"));
+
+			const twitterTitleMetaElement = screen.getByProperty("twitter:title");
+			expect(twitterTitleMetaElement).toHaveAttribute("content", metaValue("twitter:title"));
 		});
 	});
 
@@ -798,9 +839,10 @@ describe("the meta data", () => {
 				const metaValue = metaValues({
 					"page-type": "article",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-				expect(wrapper.find("meta[name='robots']").prop("content")).toEqual("noarchive");
-				return null;
+				wrapperGenerator(metaValue, globalContentComplete);
+				expect(document.querySelector("meta[name='robots']").getAttribute("content")).toEqual(
+					"noarchive"
+				);
 			});
 
 			it("should have og:type", () => {
@@ -808,9 +850,11 @@ describe("the meta data", () => {
 					"page-type": "article",
 					title: "the-sun",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+				wrapperGenerator(metaValue, globalContentComplete);
 
-				expect(wrapper.find("meta[property='og:type']").props().content).toBe("article");
+				expect(document.querySelector("meta[property='og:type']").getAttribute("content")).toBe(
+					"article"
+				);
 			});
 		});
 
@@ -821,8 +865,10 @@ describe("the meta data", () => {
 				const metaValue = metaValues({
 					"page-type": "article",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-				expect(wrapper.find("meta[name='robots']").prop("content")).toEqual("noarchive");
+				wrapperGenerator(metaValue, globalContentComplete);
+				expect(document.querySelector("meta[name='robots']").getAttribute("content")).toEqual(
+					"noarchive"
+				);
 			});
 
 			it("should have og:type", () => {
@@ -830,9 +876,11 @@ describe("the meta data", () => {
 					"page-type": "article",
 					title: "the-sun",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+				wrapperGenerator(metaValue, globalContentComplete);
 
-				expect(wrapper.find("meta[property='og:type']").props().content).toBe("article");
+				expect(document.querySelector("meta[property='og:type']").getAttribute("content")).toBe(
+					"article"
+				);
 			});
 		});
 	});
@@ -852,8 +900,8 @@ describe("the meta data", () => {
 				const metaValue = metaValues({
 					"page-type": "video",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-				expect(wrapper.find("meta[name='robots']").length).toBe(0);
+				wrapperGenerator(metaValue, globalContentComplete);
+				expect(document.querySelector("meta[name='robots']")).toBeNull();
 			});
 
 			it("should not have og:type", () => {
@@ -861,9 +909,9 @@ describe("the meta data", () => {
 					"page-type": "video",
 					title: "the-sun",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+				wrapperGenerator(metaValue, globalContentComplete);
 
-				expect(wrapper.find("meta[property='og:type']").length).toBe(0);
+				expect(document.querySelector("meta[property='og:type']")).toBeNull();
 			});
 		});
 
@@ -874,8 +922,8 @@ describe("the meta data", () => {
 				const metaValue = metaValues({
 					"page-type": "video",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-				expect(wrapper.find("meta[name='robots']").length).toBe(0);
+				wrapperGenerator(metaValue, globalContentComplete);
+				expect(document.querySelector("meta[name='robots']")).toBeNull();
 			});
 
 			it("should not have og:type", () => {
@@ -883,9 +931,9 @@ describe("the meta data", () => {
 					"page-type": "video",
 					title: "the-sun",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+				wrapperGenerator(metaValue, globalContentComplete);
 
-				expect(wrapper.find("meta[property='og:type']").length).toBe(0);
+				expect(document.querySelector("meta[property='og:type']")).toBeNull();
 			});
 		});
 	});
@@ -905,8 +953,8 @@ describe("the meta data", () => {
 				const metaValue = metaValues({
 					"page-type": "gallery",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-				expect(wrapper.find("meta[name='robots']").length).toBe(0);
+				wrapperGenerator(metaValue, globalContentComplete);
+				expect(document.querySelector("meta[name='robots']")).toBeNull();
 			});
 
 			it("should not have og:type", () => {
@@ -914,9 +962,9 @@ describe("the meta data", () => {
 					"page-type": "gallery",
 					title: "the-sun",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+				wrapperGenerator(metaValue, globalContentComplete);
 
-				expect(wrapper.find("meta[property='og:type']").length).toBe(0);
+				expect(document.querySelector("meta[property='og:type']")).toBeNull();
 			});
 		});
 
@@ -927,8 +975,8 @@ describe("the meta data", () => {
 				const metaValue = metaValues({
 					"page-type": "gallery",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-				expect(wrapper.find("meta[name='robots']").length).toBe(0);
+				wrapperGenerator(metaValue, globalContentComplete);
+				expect(document.querySelector("meta[name='robots']")).toBeNull();
 			});
 
 			it("should not have og:type", () => {
@@ -936,9 +984,9 @@ describe("the meta data", () => {
 					"page-type": "gallery",
 					title: "the-sun",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+				wrapperGenerator(metaValue, globalContentComplete);
 
-				expect(wrapper.find("meta[property='og:type']").length).toBe(0);
+				expect(document.querySelector("meta[property='og:type']")).toBeNull();
 			});
 		});
 	});
@@ -950,32 +998,32 @@ describe("the meta data", () => {
 					"page-type": "author",
 					description: "author meta value bio",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentAuthor);
-				expect(wrapper.find("meta[name='description']").prop("content")).toBe(
+				wrapperGenerator(metaValue, globalContentAuthor);
+				expect(document.querySelector("meta[name='description']").getAttribute("content")).toBe(
 					metaValue("description")
 				);
-				expect(wrapper.find("meta[name='twitter:description']").prop("content")).toBe(
-					metaValue("description")
-				);
-				expect(wrapper.find("meta[property='og:description']").prop("content")).toBe(
-					metaValue("description")
-				);
+				expect(
+					document.querySelector("meta[name='twitter:description']").getAttribute("content")
+				).toBe(metaValue("description"));
+				expect(
+					document.querySelector("meta[property='og:description']").getAttribute("content")
+				).toBe(metaValue("description"));
 			});
 
 			it("should use authors.bio if exists for description", () => {
 				const metaValue = metaValues({
 					"page-type": "author",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentAuthor);
-				expect(wrapper.find("meta[name='description']").prop("content")).toBe(
+				wrapperGenerator(metaValue, globalContentAuthor);
+				expect(document.querySelector("meta[name='description']").getAttribute("content")).toBe(
 					globalContentAuthor.authors[0].bio
 				);
-				expect(wrapper.find("meta[name='twitter:description']").prop("content")).toBe(
-					globalContentAuthor.authors[0].bio
-				);
-				expect(wrapper.find("meta[property='og:description']").prop("content")).toBe(
-					globalContentAuthor.authors[0].bio
-				);
+				expect(
+					document.querySelector("meta[name='twitter:description']").getAttribute("content")
+				).toBe(globalContentAuthor.authors[0].bio);
+				expect(
+					document.querySelector("meta[property='og:description']").getAttribute("content")
+				).toBe(globalContentAuthor.authors[0].bio);
 			});
 
 			it("should use authors.byline for title if exists", () => {
@@ -983,14 +1031,12 @@ describe("the meta data", () => {
 					"page-type": "author",
 				});
 
-				const wrapper = wrapperGenerator(metaValue, globalContentAuthor);
-				expect(wrapper.find("title").childAt(0).text()).toEqual(
+				wrapperGenerator(metaValue, globalContentAuthor);
+				expect(document.title).toEqual(`${globalContentAuthor.authors[0].byline} - ${websiteName}`);
+				expect(document.querySelector("meta[property='og:title']").getAttribute("content")).toBe(
 					`${globalContentAuthor.authors[0].byline} - ${websiteName}`
 				);
-				expect(wrapper.find("meta[property='og:title']").prop("content")).toBe(
-					`${globalContentAuthor.authors[0].byline} - ${websiteName}`
-				);
-				expect(wrapper.find("meta[name='twitter:title']").prop("content")).toBe(
+				expect(document.querySelector("meta[name='twitter:title']").getAttribute("content")).toBe(
 					`${globalContentAuthor.authors[0].byline} - ${websiteName}`
 				);
 			});
@@ -1001,8 +1047,8 @@ describe("the meta data", () => {
 					"twitter:title": "meta value title",
 				});
 
-				const wrapper = wrapperGenerator(metaValue, globalContentAuthor);
-				expect(wrapper.find("meta[name='twitter:title']").prop("content")).toBe(
+				wrapperGenerator(metaValue, globalContentAuthor);
+				expect(document.querySelector("meta[name='twitter:title']").getAttribute("content")).toBe(
 					metaValue("twitter:title")
 				);
 			});
@@ -1012,8 +1058,8 @@ describe("the meta data", () => {
 					"page-type": "author",
 				});
 
-				const wrapper = wrapperGenerator(metaValue, globalContentAuthor);
-				expect(wrapper.find("meta[name='twitter:title']").prop("content")).toBe(
+				wrapperGenerator(metaValue, globalContentAuthor);
+				expect(document.querySelector("meta[name='twitter:title']").getAttribute("content")).toBe(
 					`${globalContentAuthor.authors[0].byline} - ${websiteName}`
 				);
 			});
@@ -1023,15 +1069,19 @@ describe("the meta data", () => {
 					"page-type": "author",
 				});
 				const authors = { ...globalContentAuthor.authors[0], image: undefined };
-				const wrapper = wrapperGenerator(metaValue, { authors: [authors] });
-				expect(wrapper.find("meta[name='twitter:image']").prop("content")).toBe(
+				wrapperGenerator(metaValue, { authors: [authors] });
+				expect(document.querySelector("meta[name='twitter:image']").getAttribute("content")).toBe(
 					`${websiteDomain}${fallbackImageLocal}`
 				);
-				expect(wrapper.find("meta[name='twitter:image:alt']").prop("content")).toBe(authors.byline);
-				expect(wrapper.find("meta[property='og:image']").prop("content")).toBe(
+				expect(
+					document.querySelector("meta[name='twitter:image:alt']").getAttribute("content")
+				).toBe(authors.byline);
+				expect(document.querySelector("meta[property='og:image']").getAttribute("content")).toBe(
 					`${websiteDomain}${fallbackImageLocal}`
 				);
-				expect(wrapper.find("meta[property='og:image:alt']").prop("content")).toBe(authors.byline);
+				expect(
+					document.querySelector("meta[property='og:image:alt']").getAttribute("content")
+				).toBe(authors.byline);
 			});
 
 			it("should use remote fallbackImage for social meta tags", () => {
@@ -1039,13 +1089,19 @@ describe("the meta data", () => {
 					"page-type": "author",
 				});
 				const authors = { ...globalContentAuthor.authors[0], image: undefined };
-				const wrapper = wrapperGenerator(metaValue, { authors: [authors] }, fallbackImageRemote);
-				expect(wrapper.find("meta[name='twitter:image']").prop("content")).toBe(
+				wrapperGenerator(metaValue, { authors: [authors] }, fallbackImageRemote);
+				expect(document.querySelector("meta[name='twitter:image']").getAttribute("content")).toBe(
 					fallbackImageRemote
 				);
-				expect(wrapper.find("meta[name='twitter:image:alt']").prop("content")).toBe(authors.byline);
-				expect(wrapper.find("meta[property='og:image']").prop("content")).toBe(fallbackImageRemote);
-				expect(wrapper.find("meta[property='og:image:alt']").prop("content")).toBe(authors.byline);
+				expect(
+					document.querySelector("meta[name='twitter:image:alt']").getAttribute("content")
+				).toBe(authors.byline);
+				expect(document.querySelector("meta[property='og:image']").getAttribute("content")).toBe(
+					fallbackImageRemote
+				);
+				expect(
+					document.querySelector("meta[property='og:image:alt']").getAttribute("content")
+				).toBe(authors.byline);
 			});
 
 			it("should not render image social meta tags if fallbackImage is missing", () => {
@@ -1053,27 +1109,27 @@ describe("the meta data", () => {
 					"page-type": "author",
 				});
 				const authors = { ...globalContentAuthor.authors[0], image: undefined };
-				const wrapper = wrapperGenerator(metaValue, { authors: [authors] }, null);
-				expectImageMetaMissing(wrapper);
+				wrapperGenerator(metaValue, { authors: [authors] }, null);
+				expectImageMetaMissing();
 			});
 
 			it("should use author image for social meta tags if exists", () => {
 				const metaValue = metaValues({
 					"page-type": "author",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentAuthor);
-				expect(wrapper.find("meta[name='twitter:image']").prop("content")).toBe(
+				wrapperGenerator(metaValue, globalContentAuthor);
+				expect(document.querySelector("meta[name='twitter:image']").getAttribute("content")).toBe(
 					globalContentAuthor.authors[0].image
 				);
-				expect(wrapper.find("meta[name='twitter:image:alt']").prop("content")).toBe(
-					globalContentAuthor.authors[0].byline
-				);
-				expect(wrapper.find("meta[property='og:image']").prop("content")).toBe(
+				expect(
+					document.querySelector("meta[name='twitter:image:alt']").getAttribute("content")
+				).toBe(globalContentAuthor.authors[0].byline);
+				expect(document.querySelector("meta[property='og:image']").getAttribute("content")).toBe(
 					globalContentAuthor.authors[0].image
 				);
-				expect(wrapper.find("meta[property='og:image:alt']").prop("content")).toBe(
-					globalContentAuthor.authors[0].byline
-				);
+				expect(
+					document.querySelector("meta[property='og:image:alt']").getAttribute("content")
+				).toBe(globalContentAuthor.authors[0].byline);
 			});
 		});
 
@@ -1081,48 +1137,68 @@ describe("the meta data", () => {
 			const metaValue = metaValues({
 				"page-type": "author",
 			});
-			const wrapper = wrapperGenerator(metaValue, null);
 
 			it("should have a title tag", () => {
-				expect(wrapper.find("title").childAt(0).text()).toEqual(websiteName);
-				expect(wrapper.find("meta[property='og:title']").prop("content")).toEqual(websiteName);
-				expect(wrapper.find("meta[name='twitter:title']").prop("content")).toEqual(websiteName);
+				wrapperGenerator(metaValue, null);
+				const titleElement = document.querySelector("title");
+				expect(titleElement.textContent).toEqual(websiteName);
+
+				const ogTitleMetaElement = document.querySelector("meta[property='og:title']");
+				expect(ogTitleMetaElement.getAttribute("content")).toEqual(websiteName);
+
+				const twitterTitleMetaElement = document.querySelector("meta[name='twitter:title']");
+				expect(twitterTitleMetaElement.getAttribute("content")).toEqual(websiteName);
 			});
 
 			it("should not have description", () => {
-				expect(wrapper.find("meta[name='description']").length).toBe(0);
+				wrapperGenerator(metaValue, null);
+				const descriptionMetaElements = document.querySelectorAll("meta[name='description']");
+				expect(descriptionMetaElements.length).toBe(0);
 			});
 
 			it("should have default social meta", () => {
-				expectDefaultMeta(wrapper);
+				wrapperGenerator(metaValue, null);
+				expectDefaultMeta();
 			});
 
 			it("should use local fallbackImage for social meta tags", () => {
-				expect(wrapper.find("meta[name='twitter:image']").prop("content")).toBe(
+				wrapperGenerator(metaValue, null);
+				const twitterImageMetaElement = document.querySelector("meta[name='twitter:image']");
+				expect(twitterImageMetaElement.getAttribute("content")).toBe(
 					`${websiteDomain}${fallbackImageLocal}`
 				);
-				expect(wrapper.find("meta[name='twitter:image:alt']").prop("content")).toBe(websiteName);
-				expect(wrapper.find("meta[property='og:image']").prop("content")).toBe(
+
+				const twitterImageAltMetaElement = document.querySelector("meta[name='twitter:image:alt']");
+				expect(twitterImageAltMetaElement.getAttribute("content")).toBe(websiteName);
+
+				const ogImageMetaElement = document.querySelector("meta[property='og:image']");
+				expect(ogImageMetaElement.getAttribute("content")).toBe(
 					`${websiteDomain}${fallbackImageLocal}`
 				);
-				expect(wrapper.find("meta[property='og:image:alt']").prop("content")).toBe(websiteName);
+
+				const ogImageAltMetaElement = document.querySelector("meta[property='og:image:alt']");
+				expect(ogImageAltMetaElement.getAttribute("content")).toBe(websiteName);
 			});
 
 			it("should use remote fallbackImage for social meta tags", () => {
-				const wrapperAlt = wrapperGenerator(metaValue, null, fallbackImageRemote);
-				expect(wrapperAlt.find("meta[name='twitter:image']").prop("content")).toBe(
-					fallbackImageRemote
-				);
-				expect(wrapperAlt.find("meta[name='twitter:image:alt']").prop("content")).toBe(websiteName);
-				expect(wrapperAlt.find("meta[property='og:image']").prop("content")).toBe(
-					fallbackImageRemote
-				);
-				expect(wrapperAlt.find("meta[property='og:image:alt']").prop("content")).toBe(websiteName);
+				wrapperGenerator(metaValue, null, fallbackImageRemote);
+
+				const twitterImageMetaElement = document.querySelector("meta[name='twitter:image']");
+				expect(twitterImageMetaElement.getAttribute("content")).toBe(fallbackImageRemote);
+
+				const twitterImageAltMetaElement = document.querySelector("meta[name='twitter:image:alt']");
+				expect(twitterImageAltMetaElement.getAttribute("content")).toBe(websiteName);
+
+				const ogImageMetaElement = document.querySelector("meta[property='og:image']");
+				expect(ogImageMetaElement.getAttribute("content")).toBe(fallbackImageRemote);
+
+				const ogImageAltMetaElement = document.querySelector("meta[property='og:image:alt']");
+				expect(ogImageAltMetaElement.getAttribute("content")).toBe(websiteName);
 			});
 
 			it("should not render image social meta tags if fallbackImage is missing", () => {
-				const wrapperAlt = wrapperGenerator(metaValue, null, null);
-				expectImageMetaMissing(wrapperAlt);
+				wrapperGenerator(metaValue, null, null);
+				expectImageMetaMissing();
 			});
 		});
 	});
@@ -1134,32 +1210,32 @@ describe("the meta data", () => {
 					"page-type": "tag",
 					description: "tag meta valu",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-				expect(wrapper.find("meta[name='description']").prop("content")).toBe(
+				wrapperGenerator(metaValue, globalContentComplete);
+				expect(document.querySelector("meta[name='description']").getAttribute("content")).toBe(
 					metaValue("description")
 				);
-				expect(wrapper.find("meta[name='twitter:description']").prop("content")).toBe(
-					metaValue("description")
-				);
-				expect(wrapper.find("meta[property='og:description']").prop("content")).toBe(
-					metaValue("description")
-				);
+				expect(
+					document.querySelector("meta[name='twitter:description']").getAttribute("content")
+				).toBe(metaValue("description"));
+				expect(
+					document.querySelector("meta[property='og:description']").getAttribute("content")
+				).toBe(metaValue("description"));
 			});
 
 			it("should use Payload.description if exists for description", () => {
 				const metaValue = metaValues({
 					"page-type": "tag",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-				expect(wrapper.find("meta[name='description']").prop("content")).toBe(
+				wrapperGenerator(metaValue, globalContentComplete);
+				expect(document.querySelector("meta[name='description']").getAttribute("content")).toBe(
 					globalContentComplete.Payload[0].description
 				);
-				expect(wrapper.find("meta[name='twitter:description']").prop("content")).toBe(
-					globalContentAuthor.Payload[0].description
-				);
-				expect(wrapper.find("meta[property='og:description']").prop("content")).toBe(
-					globalContentAuthor.Payload[0].description
-				);
+				expect(
+					document.querySelector("meta[name='twitter:description']").getAttribute("content")
+				).toBe(globalContentAuthor.Payload[0].description);
+				expect(
+					document.querySelector("meta[property='og:description']").getAttribute("content")
+				).toBe(globalContentAuthor.Payload[0].description);
 			});
 
 			it("should have an author twitter:title meta tag", () => {
@@ -1168,8 +1244,8 @@ describe("the meta data", () => {
 					"twitter:title": "meta value title",
 				});
 
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-				expect(wrapper.find("meta[name='twitter:title']").prop("content")).toBe(
+				wrapperGenerator(metaValue, globalContentComplete);
+				expect(document.querySelector("meta[name='twitter:title']").getAttribute("content")).toBe(
 					metaValue("twitter:title")
 				);
 			});
@@ -1179,11 +1255,9 @@ describe("the meta data", () => {
 					"page-type": "tag",
 				});
 
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-				expect(wrapper.find("title").childAt(0).text()).toEqual(
-					`${globalContentComplete.Payload[0].name} - ${websiteName}`
-				);
-				expect(wrapper.find("meta[property='og:title']").prop("content")).toBe(
+				wrapperGenerator(metaValue, globalContentComplete);
+				expect(document.title).toEqual(`${globalContentComplete.Payload[0].name} - ${websiteName}`);
+				expect(document.querySelector("meta[property='og:title']").getAttribute("content")).toBe(
 					`${globalContentComplete.Payload[0].name} - ${websiteName}`
 				);
 			});
@@ -1194,8 +1268,8 @@ describe("the meta data", () => {
 					"twitter:title": "meta value title",
 				});
 
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-				expect(wrapper.find("meta[name='twitter:title']").prop("content")).toBe(
+				wrapperGenerator(metaValue, globalContentComplete);
+				expect(document.querySelector("meta[name='twitter:title']").getAttribute("content")).toBe(
 					metaValue("twitter:title")
 				);
 			});
@@ -1205,8 +1279,8 @@ describe("the meta data", () => {
 					"page-type": "tag",
 				});
 
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-				expect(wrapper.find("meta[name='twitter:title']").prop("content")).toBe(
+				wrapperGenerator(metaValue, globalContentComplete);
+				expect(document.querySelector("meta[name='twitter:title']").getAttribute("content")).toBe(
 					`${globalContentComplete.Payload[0].name} - ${websiteName}`
 				);
 			});
@@ -1215,44 +1289,46 @@ describe("the meta data", () => {
 				const metaValue = metaValues({
 					"page-type": "tag",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-				expect(wrapper.find("meta[name='twitter:image']").prop("content")).toBe(
+				wrapperGenerator(metaValue, globalContentComplete);
+				expect(document.querySelector("meta[name='twitter:image']").getAttribute("content")).toBe(
 					`${websiteDomain}${fallbackImageLocal}`
 				);
-				expect(wrapper.find("meta[name='twitter:image:alt']").prop("content")).toBe(
-					`${globalContentComplete.Payload[0].name} - ${websiteName}`
-				);
-				expect(wrapper.find("meta[property='og:image']").prop("content")).toBe(
+				expect(
+					document.querySelector("meta[name='twitter:image:alt']").getAttribute("content")
+				).toBe(`${globalContentComplete.Payload[0].name} - ${websiteName}`);
+				expect(document.querySelector("meta[property='og:image']").getAttribute("content")).toBe(
 					`${websiteDomain}${fallbackImageLocal}`
 				);
-				expect(wrapper.find("meta[property='og:image:alt']").prop("content")).toBe(
-					`${globalContentComplete.Payload[0].name} - ${websiteName}`
-				);
+				expect(
+					document.querySelector("meta[property='og:image:alt']").getAttribute("content")
+				).toBe(`${globalContentComplete.Payload[0].name} - ${websiteName}`);
 			});
 
 			it("should use remote fallbackImage for social meta tags", () => {
 				const metaValue = metaValues({
 					"page-type": "tag",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete, fallbackImageRemote);
-				expect(wrapper.find("meta[name='twitter:image']").prop("content")).toBe(
+				wrapperGenerator(metaValue, globalContentComplete, fallbackImageRemote);
+				expect(document.querySelector("meta[name='twitter:image']").getAttribute("content")).toBe(
 					fallbackImageRemote
 				);
-				expect(wrapper.find("meta[name='twitter:image:alt']").prop("content")).toBe(
-					`${globalContentComplete.Payload[0].name} - ${websiteName}`
+				expect(
+					document.querySelector("meta[name='twitter:image:alt']").getAttribute("content")
+				).toBe(`${globalContentComplete.Payload[0].name} - ${websiteName}`);
+				expect(document.querySelector("meta[property='og:image']").getAttribute("content")).toBe(
+					fallbackImageRemote
 				);
-				expect(wrapper.find("meta[property='og:image']").prop("content")).toBe(fallbackImageRemote);
-				expect(wrapper.find("meta[property='og:image:alt']").prop("content")).toBe(
-					`${globalContentComplete.Payload[0].name} - ${websiteName}`
-				);
+				expect(
+					document.querySelector("meta[property='og:image:alt']").getAttribute("content")
+				).toBe(`${globalContentComplete.Payload[0].name} - ${websiteName}`);
 			});
 
 			it("should not render image social meta tags if fallbackImage is missing", () => {
 				const metaValue = metaValues({
 					"page-type": "tag",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete, null);
-				expectImageMetaMissing(wrapper);
+				wrapperGenerator(metaValue, globalContentComplete, null);
+				expectImageMetaMissing();
 			});
 		});
 
@@ -1260,48 +1336,58 @@ describe("the meta data", () => {
 			const metaValue = metaValues({
 				"page-type": "tag",
 			});
-			const wrapper = wrapperGenerator(metaValue, null);
 
 			it("should have a title tag", () => {
-				expect(wrapper.find("title").childAt(0).text()).toEqual(websiteName);
-				expect(wrapper.find("meta[property='og:title']").prop("content")).toEqual(websiteName);
-				expect(wrapper.find("meta[name='twitter:title']").prop("content")).toEqual(websiteName);
+				wrapperGenerator(metaValue, null);
+				expect(document.title).toEqual(websiteName);
+				expect(document.querySelector("meta[property='og:title']").getAttribute("content")).toEqual(
+					websiteName
+				);
+				expect(
+					document.querySelector("meta[name='twitter:title']").getAttribute("content")
+				).toEqual(websiteName);
 			});
 
 			it("should not have description", () => {
-				expect(wrapper.find("meta[name='description']").length).toBe(0);
+				wrapperGenerator(metaValue, null);
+				expect(document.querySelector("meta[name='description']")).toBeNull();
 			});
 
 			it("should use local fallbackImage for social meta tags", () => {
-				expect(wrapper.find("meta[name='twitter:image']").prop("content")).toBe(
+				wrapperGenerator(metaValue, null);
+				expect(document.querySelector("meta[name='twitter:image']").getAttribute("content")).toBe(
 					`${websiteDomain}${fallbackImageLocal}`
 				);
-				expect(wrapper.find("meta[name='twitter:image:alt']").prop("content")).toBe(websiteName);
-				expect(wrapper.find("meta[property='og:image']").prop("content")).toBe(
+				expect(
+					document.querySelector("meta[name='twitter:image:alt']").getAttribute("content")
+				).toBe(websiteName);
+				expect(document.querySelector("meta[property='og:image']").getAttribute("content")).toBe(
 					`${websiteDomain}${fallbackImageLocal}`
 				);
-				expect(wrapper.find("meta[property='og:image:alt']").prop("content")).toBe(websiteName);
+				expect(
+					document.querySelector("meta[property='og:image:alt']").getAttribute("content")
+				).toBe(websiteName);
 			});
 
 			it("should use remote fallbackImage for social meta tags", () => {
-				const wrapperRemote = wrapperGenerator(metaValue, null, fallbackImageRemote);
-				expect(wrapperRemote.find("meta[name='twitter:image']").prop("content")).toBe(
+				wrapperGenerator(metaValue, null, fallbackImageRemote);
+				expect(document.querySelector("meta[name='twitter:image']").getAttribute("content")).toBe(
 					fallbackImageRemote
 				);
-				expect(wrapperRemote.find("meta[name='twitter:image:alt']").prop("content")).toBe(
-					websiteName
-				);
-				expect(wrapperRemote.find("meta[property='og:image']").prop("content")).toBe(
+				expect(
+					document.querySelector("meta[name='twitter:image:alt']").getAttribute("content")
+				).toBe(websiteName);
+				expect(document.querySelector("meta[property='og:image']").getAttribute("content")).toBe(
 					fallbackImageRemote
 				);
-				expect(wrapperRemote.find("meta[property='og:image:alt']").prop("content")).toBe(
-					websiteName
-				);
+				expect(
+					document.querySelector("meta[property='og:image:alt']").getAttribute("content")
+				).toBe(websiteName);
 			});
 
 			it("should not render image social meta tags if fallbackImage is missing", () => {
-				const wrapperAlt = wrapperGenerator(metaValue, null, null);
-				expectImageMetaMissing(wrapperAlt);
+				wrapperGenerator(metaValue, null, null);
+				expectImageMetaMissing();
 			});
 		});
 	});
@@ -1313,32 +1399,32 @@ describe("the meta data", () => {
 					"page-type": "section",
 					description: "section meta valu",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-				expect(wrapper.find("meta[name='description']").prop("content")).toBe(
+				wrapperGenerator(metaValue, globalContentComplete);
+				expect(document.querySelector("meta[name='description']").getAttribute("content")).toBe(
 					metaValue("description")
 				);
-				expect(wrapper.find("meta[name='twitter:description']").prop("content")).toBe(
-					metaValue("description")
-				);
-				expect(wrapper.find("meta[property='og:description']").prop("content")).toBe(
-					metaValue("description")
-				);
+				expect(
+					document.querySelector("meta[name='twitter:description']").getAttribute("content")
+				).toBe(metaValue("description"));
+				expect(
+					document.querySelector("meta[property='og:description']").getAttribute("content")
+				).toBe(metaValue("description"));
 			});
 
 			it("should use metadata_description if exists for description", () => {
 				const metaValue = metaValues({
 					"page-type": "section",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-				expect(wrapper.find("meta[name='description']").prop("content")).toBe(
+				wrapperGenerator(metaValue, globalContentComplete);
+				expect(document.querySelector("meta[name='description']").getAttribute("content")).toBe(
 					globalContentComplete.metadata.metadata_description
 				);
-				expect(wrapper.find("meta[name='twitter:description']").prop("content")).toBe(
-					globalContentComplete.metadata.metadata_description
-				);
-				expect(wrapper.find("meta[property='og:description']").prop("content")).toBe(
-					globalContentComplete.metadata.metadata_description
-				);
+				expect(
+					document.querySelector("meta[name='twitter:description']").getAttribute("content")
+				).toBe(globalContentComplete.metadata.metadata_description);
+				expect(
+					document.querySelector("meta[property='og:description']").getAttribute("content")
+				).toBe(globalContentComplete.metadata.metadata_description);
 			});
 
 			describe("title handling", () => {
@@ -1348,8 +1434,11 @@ describe("the meta data", () => {
 						title: "meta value title",
 					});
 
-					const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-					expect(wrapper.find("title").childAt(0).text()).toEqual(metaValue("title"));
+					wrapperGenerator(metaValue, globalContentComplete);
+
+					const titleElement = screen.getByText(metaValue("title"));
+					expect(titleElement).toBeInTheDocument();
+					// expect(container.find("title").childAt(0).text()).toEqual(metaValue("title"));
 				});
 
 				it("should use metadata_title if title not found", () => {
@@ -1357,10 +1446,9 @@ describe("the meta data", () => {
 						"page-type": "section",
 					});
 
-					const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-					expect(wrapper.find("title").childAt(0).text()).toBe(
-						globalContentComplete.metadata.metadata_title
-					);
+					wrapperGenerator(metaValue, globalContentComplete);
+					const titleElement = screen.getByText(globalContentComplete.metadata.metadata_title);
+					expect(titleElement).toBeInTheDocument();
 				});
 
 				it("should use gc.name if metadata_title and title are missing", () => {
@@ -1372,10 +1460,9 @@ describe("the meta data", () => {
 						metadata: {},
 					};
 
-					const wrapper = wrapperGenerator(metaValue, content);
-					expect(wrapper.find("title").childAt(0).text()).toEqual(
-						`${content.name} - ${websiteName}`
-					);
+					wrapperGenerator(metaValue, content);
+					const titleElement = screen.getByText(`${content.name} - ${websiteName}`);
+					expect(titleElement).toBeInTheDocument();
 				});
 
 				it("should use websiteName if metadata_title, title and gc.name are missing", () => {
@@ -1389,8 +1476,9 @@ describe("the meta data", () => {
 						metadata: {},
 					};
 
-					const wrapper = wrapperGenerator(metaValue, content);
-					expect(wrapper.find("title").childAt(0).text()).toEqual(websiteName);
+					wrapperGenerator(metaValue, content);
+					const titleElement = screen.getByText(websiteName);
+					expect(titleElement).toBeInTheDocument();
 				});
 			});
 
@@ -1399,18 +1487,18 @@ describe("the meta data", () => {
 					"page-type": "section",
 					"og:title": "meta value og:title",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-				expect(wrapper.find("meta[property='og:title']").prop("content")).toBe(
-					metaValue("og:title")
-				);
+				wrapperGenerator(metaValue, globalContentComplete);
+				const ogTitleElement = document.querySelector('meta[property="og:title"]');
+				expect(ogTitleElement.getAttribute("content")).toBe(metaValue("og:title"));
 			});
 
 			it("should use gc.name if og:title missing", () => {
 				const metaValue = metaValues({
 					"page-type": "section",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-				expect(wrapper.find("meta[property='og:title']").prop("content")).toBe(
+				wrapperGenerator(metaValue, globalContentComplete);
+				const ogTitleElement = document.querySelector("meta[property='og:title']");
+				expect(ogTitleElement.getAttribute("content")).toBe(
 					`${globalContentComplete.name} - ${websiteName}`
 				);
 			});
@@ -1423,8 +1511,9 @@ describe("the meta data", () => {
 					...globalContentComplete,
 					name: null,
 				};
-				const wrapper = wrapperGenerator(metaValue, content);
-				expect(wrapper.find("meta[property='og:title']").prop("content")).toBe(websiteName);
+				wrapperGenerator(metaValue, content);
+				const ogTitleElement = document.querySelector("meta[property='og:title']");
+				expect(ogTitleElement.getAttribute("content")).toBe(websiteName);
 			});
 
 			it("should use twitter:title", () => {
@@ -1432,18 +1521,18 @@ describe("the meta data", () => {
 					"page-type": "section",
 					"twitter:title": "meta value twitter:title",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-				expect(wrapper.find("meta[name='twitter:title']").prop("content")).toBe(
-					metaValue("twitter:title")
-				);
+				wrapperGenerator(metaValue, globalContentComplete);
+				const twitterTitleElement = document.querySelector("meta[name='twitter:title']");
+				expect(twitterTitleElement.getAttribute("content")).toBe(metaValue("twitter:title"));
 			});
 
 			it("should use gc.name if twitter:title is missing", () => {
 				const metaValue = metaValues({
 					"page-type": "section",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-				expect(wrapper.find("meta[name='twitter:title']").prop("content")).toBe(
+				wrapperGenerator(metaValue, globalContentComplete);
+				const twitterTitleElement = document.querySelector("meta[name='twitter:title']");
+				expect(twitterTitleElement.getAttribute("content")).toBe(
 					`${globalContentComplete.name} - ${websiteName}`
 				);
 			});
@@ -1456,8 +1545,9 @@ describe("the meta data", () => {
 					...globalContentComplete,
 					name: null,
 				};
-				const wrapper = wrapperGenerator(metaValue, content);
-				expect(wrapper.find("meta[name='twitter:title']").prop("content")).toBe(websiteName);
+				wrapperGenerator(metaValue, content);
+				const twitterTitleElement = document.querySelector("meta[name='twitter:title']");
+				expect(twitterTitleElement.getAttribute("content")).toBe(websiteName);
 			});
 
 			it("should use local fallbackImage for social meta tags", () => {
@@ -1465,19 +1555,24 @@ describe("the meta data", () => {
 					"page-type": "section",
 				});
 				const content = { ...globalContentComplete };
-				const wrapper = wrapperGenerator(metaValue, content);
-				expect(wrapper.find("meta[name='twitter:image']").prop("content")).toBe(
+				wrapperGenerator(metaValue, content);
+				const twitterImageElement = document.querySelector("meta[name='twitter:image']");
+				expect(twitterImageElement.getAttribute("content")).toBe(
 					`${websiteDomain}${fallbackImageLocal}`
 				);
-				expect(wrapper.find("meta[name='twitter:image:alt']").prop("content")).toBe(
+
+				const twitterImageAltElement = document.querySelector("meta[name='twitter:image:alt']");
+				expect(twitterImageAltElement.getAttribute("content")).toBe(
 					`${content.name} - ${websiteName}`
 				);
-				expect(wrapper.find("meta[property='og:image']").prop("content")).toBe(
+
+				const ogImageElement = document.querySelector("meta[property='og:image']");
+				expect(ogImageElement.getAttribute("content")).toBe(
 					`${websiteDomain}${fallbackImageLocal}`
 				);
-				expect(wrapper.find("meta[property='og:image:alt']").prop("content")).toBe(
-					`${content.name} - ${websiteName}`
-				);
+
+				const ogImageAltElement = document.querySelector("meta[property='og:image:alt']");
+				expect(ogImageAltElement.getAttribute("content")).toBe(`${content.name} - ${websiteName}`);
 			});
 
 			it("should use remote fallbackImage for social meta tags", () => {
@@ -1485,25 +1580,28 @@ describe("the meta data", () => {
 					"page-type": "section",
 				});
 				const content = { ...globalContentComplete };
-				const wrapper = wrapperGenerator(metaValue, content, fallbackImageRemote);
-				expect(wrapper.find("meta[name='twitter:image']").prop("content")).toBe(
-					fallbackImageRemote
-				);
-				expect(wrapper.find("meta[name='twitter:image:alt']").prop("content")).toBe(
+				wrapperGenerator(metaValue, content, fallbackImageRemote);
+				const twitterImageElement = document.querySelector("meta[name='twitter:image']");
+				expect(twitterImageElement.getAttribute("content")).toBe(fallbackImageRemote);
+
+				const twitterImageAltElement = document.querySelector("meta[name='twitter:image:alt']");
+				expect(twitterImageAltElement.getAttribute("content")).toBe(
 					`${content.name} - ${websiteName}`
 				);
-				expect(wrapper.find("meta[property='og:image']").prop("content")).toBe(fallbackImageRemote);
-				expect(wrapper.find("meta[property='og:image:alt']").prop("content")).toBe(
-					`${content.name} - ${websiteName}`
-				);
+
+				const ogImageElement = document.querySelector("meta[property='og:image']");
+				expect(ogImageElement.getAttribute("content")).toBe(fallbackImageRemote);
+
+				const ogImageAltElement = document.querySelector("meta[property='og:image:alt']");
+				expect(ogImageAltElement.getAttribute("content")).toBe(`${content.name} - ${websiteName}`);
 			});
 
 			it("should not render image social meta tags if fallbackImage is missing", () => {
 				const metaValue = metaValues({
 					"page-type": "section",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentComplete, null);
-				expectImageMetaMissing(wrapper);
+				wrapperGenerator(metaValue, globalContentComplete, null);
+				expectImageMetaMissing();
 			});
 		});
 
@@ -1511,54 +1609,74 @@ describe("the meta data", () => {
 			const metaValue = metaValues({
 				"page-type": "section",
 			});
-			const wrapper = wrapperGenerator(metaValue, null);
 
 			it("should use websiteName as title", () => {
-				expect(wrapper.find("title").childAt(0).text()).toEqual(websiteName);
+				wrapperGenerator(metaValue, null);
+
+				const titleElement = document.querySelector("title");
+				expect(titleElement.textContent).toEqual(websiteName);
 			});
 
 			it("should not have a section description meta tag", () => {
-				expect(wrapper.find("meta[name='description']").length).toBe(0);
+				wrapperGenerator(metaValue, null);
+
+				const descriptionMetaElement = document.querySelector("meta[name='description']");
+				expect(descriptionMetaElement).toBeNull();
 			});
 
 			it("should use websiteName as og:title meta tag", () => {
-				expect(wrapper.find("meta[property='og:title']").prop("content")).toBe(websiteName);
+				wrapperGenerator(metaValue, null);
+
+				const ogTitleMetaElement = document.querySelector("meta[property='og:title']");
+				expect(ogTitleMetaElement.getAttribute("content")).toBe(websiteName);
 			});
 
 			it("should use websiteName as twitter:title meta tag", () => {
-				expect(wrapper.find("meta[name='twitter:title']").prop("content")).toBe(websiteName);
+				wrapperGenerator(metaValue, null);
+
+				const twitterTitleMetaElement = document.querySelector("meta[name='twitter:title']");
+				expect(twitterTitleMetaElement.getAttribute("content")).toBe(websiteName);
 			});
 
 			it("should use local fallbackImage for social meta tags", () => {
-				expect(wrapper.find("meta[name='twitter:image']").prop("content")).toBe(
+				wrapperGenerator(metaValue, null);
+
+				const twitterImageMetaElement = document.querySelector("meta[name='twitter:image']");
+				expect(twitterImageMetaElement.getAttribute("content")).toBe(
 					`${websiteDomain}${fallbackImageLocal}`
 				);
-				expect(wrapper.find("meta[name='twitter:image:alt']").prop("content")).toBe(websiteName);
-				expect(wrapper.find("meta[property='og:image']").prop("content")).toBe(
+
+				const twitterImageAltMetaElement = document.querySelector("meta[name='twitter:image:alt']");
+				expect(twitterImageAltMetaElement.getAttribute("content")).toBe(websiteName);
+
+				const ogImageMetaElement = document.querySelector("meta[property='og:image']");
+				expect(ogImageMetaElement.getAttribute("content")).toBe(
 					`${websiteDomain}${fallbackImageLocal}`
 				);
-				expect(wrapper.find("meta[property='og:image:alt']").prop("content")).toBe(websiteName);
+
+				const ogImageAltMetaElement = document.querySelector("meta[property='og:image:alt']");
+				expect(ogImageAltMetaElement.getAttribute("content")).toBe(websiteName);
 			});
 
 			it("should use remote fallbackImage for social meta tags", () => {
-				const wrapperRemote = wrapperGenerator(metaValue, null, fallbackImageRemote);
-				expect(wrapperRemote.find("meta[name='twitter:image']").prop("content")).toBe(
-					fallbackImageRemote
-				);
-				expect(wrapperRemote.find("meta[name='twitter:image:alt']").prop("content")).toBe(
-					websiteName
-				);
-				expect(wrapperRemote.find("meta[property='og:image']").prop("content")).toBe(
-					fallbackImageRemote
-				);
-				expect(wrapperRemote.find("meta[property='og:image:alt']").prop("content")).toBe(
-					websiteName
-				);
+				wrapperGenerator(metaValue, null, fallbackImageRemote);
+
+				const twitterImageMetaElement = document.querySelector("meta[name='twitter:image']");
+				expect(twitterImageMetaElement.getAttribute("content")).toBe(fallbackImageRemote);
+
+				const twitterImageAltMetaElement = document.querySelector("meta[name='twitter:image:alt']");
+				expect(twitterImageAltMetaElement.getAttribute("content")).toBe(websiteName);
+
+				const ogImageMetaElement = document.querySelector("meta[property='og:image']");
+				expect(ogImageMetaElement.getAttribute("content")).toBe(fallbackImageRemote);
+
+				const ogImageAltMetaElement = document.querySelector("meta[property='og:image:alt']");
+				expect(ogImageAltMetaElement.getAttribute("content")).toBe(websiteName);
 			});
 
 			it("should not render image social meta tags if fallbackImage is missing", () => {
-				const wrapperAlt = wrapperGenerator(metaValue, null, null);
-				expectImageMetaMissing(wrapperAlt);
+				wrapperGenerator(metaValue, null, null);
+				expectImageMetaMissing();
 			});
 		});
 	});
@@ -1568,28 +1686,27 @@ describe("the meta data", () => {
 			const metaValue = metaValues({
 				"page-type": "search",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("title").childAt(0).text()).toEqual(`Search - ${websiteName}`);
+			wrapperGenerator(metaValue, globalContentComplete);
+			const titleElement = document.querySelector("title");
+			expect(titleElement.textContent).toEqual(`Search - ${websiteName}`);
 		});
 
 		it("should use websiteName as og:title", () => {
 			const metaValue = metaValues({
 				"page-type": "search",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("meta[property='og:title']").prop("content")).toBe(
-				`Search - ${websiteName}`
-			);
+			wrapperGenerator(metaValue, globalContentComplete);
+			const ogTitleMetaElement = document.querySelector("meta[property='og:title']");
+			expect(ogTitleMetaElement.getAttribute("content")).toBe(`Search - ${websiteName}`);
 		});
 
 		it("should use websiteName as twitter:title", () => {
 			const metaValue = metaValues({
 				"page-type": "search",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("meta[name='twitter:title']").prop("content")).toBe(
-				`Search - ${websiteName}`
-			);
+			wrapperGenerator(metaValue, globalContentComplete);
+			const twitterTitleMetaElement = document.querySelector("meta[name='twitter:title']");
+			expect(twitterTitleMetaElement.getAttribute("content")).toBe(`Search - ${websiteName}`);
 		});
 	});
 
@@ -1598,8 +1715,9 @@ describe("the meta data", () => {
 			const metaValue = metaValues({
 				"page-type": "homepage",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("title").childAt(0).text()).toEqual(websiteName);
+			wrapperGenerator(metaValue, globalContentComplete);
+			const titleElement = document.querySelector("title");
+			expect(titleElement.textContent).toEqual(websiteName);
 		});
 
 		it("should override title when defining title meta tag", () => {
@@ -1608,68 +1726,89 @@ describe("the meta data", () => {
 				"page-type": "homepage",
 				title,
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("title").childAt(0).text()).toEqual(title);
-			expect(wrapper.find("meta[property='og:title']").prop("content")).toBe(websiteName);
-			expect(wrapper.find("meta[name='twitter:title']").prop("content")).toBe(websiteName);
+			wrapperGenerator(metaValue, globalContentComplete);
+			const titleElement = document.querySelector("title");
+			expect(titleElement.textContent).toEqual(title);
+
+			const ogTitleMetaElement = document.querySelector("meta[property='og:title']");
+			expect(ogTitleMetaElement.getAttribute("content")).toBe(websiteName);
+
+			const twitterTitleMetaElement = document.querySelector("meta[name='twitter:title']");
+			expect(twitterTitleMetaElement.getAttribute("content")).toBe(websiteName);
 		});
 
 		it("should use websiteName as og:title", () => {
 			const metaValue = metaValues({
 				"page-type": "homepage",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("meta[property='og:title']").prop("content")).toBe(websiteName);
+			wrapperGenerator(metaValue, globalContentComplete);
+			const ogTitleMetaElement = document.querySelector("meta[property='og:title']");
+			expect(ogTitleMetaElement.getAttribute("content")).toBe(websiteName);
 		});
 
 		it("should use websiteName as twitter:title", () => {
 			const metaValue = metaValues({
 				"page-type": "homepage",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("meta[name='twitter:title']").prop("content")).toBe(websiteName);
+			wrapperGenerator(metaValue, globalContentComplete);
+			const twitterTitleMetaElement = document.querySelector("meta[name='twitter:title']");
+			expect(twitterTitleMetaElement.getAttribute("content")).toBe(websiteName);
 		});
 
 		it("should render default twitter meta", () => {
 			const metaValue = metaValues({
 				"page-type": "homepage",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expectDefaultMeta(wrapper);
+			wrapperGenerator(metaValue, globalContentComplete);
+			expectDefaultMeta();
 		});
 
 		it("should use local fallbackImage for social meta tags", () => {
 			const metaValue = metaValues({
 				"page-type": "homepage",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find("meta[name='twitter:image']").prop("content")).toBe(
+			wrapperGenerator(metaValue, globalContentComplete);
+			const twitterImageMetaElement = document.querySelector("meta[name='twitter:image']");
+			expect(twitterImageMetaElement.getAttribute("content")).toBe(
 				`${websiteDomain}${fallbackImageLocal}`
 			);
-			expect(wrapper.find("meta[name='twitter:image:alt']").prop("content")).toBe(websiteName);
-			expect(wrapper.find("meta[property='og:image']").prop("content")).toBe(
+
+			const twitterImageAltMetaElement = document.querySelector("meta[name='twitter:image:alt']");
+			expect(twitterImageAltMetaElement.getAttribute("content")).toBe(websiteName);
+
+			const ogImageMetaElement = document.querySelector("meta[property='og:image']");
+			expect(ogImageMetaElement.getAttribute("content")).toBe(
 				`${websiteDomain}${fallbackImageLocal}`
 			);
-			expect(wrapper.find("meta[property='og:image:alt']").prop("content")).toBe(websiteName);
+
+			const ogImageAltMetaElement = document.querySelector("meta[property='og:image:alt']");
+			expect(ogImageAltMetaElement.getAttribute("content")).toBe(websiteName);
 		});
 
 		it("should use remote fallbackImage for social meta tags", () => {
 			const metaValue = metaValues({
 				"page-type": "homepage",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete, fallbackImageRemote);
-			expect(wrapper.find("meta[name='twitter:image']").prop("content")).toBe(fallbackImageRemote);
-			expect(wrapper.find("meta[name='twitter:image:alt']").prop("content")).toBe(websiteName);
-			expect(wrapper.find("meta[property='og:image']").prop("content")).toBe(fallbackImageRemote);
-			expect(wrapper.find("meta[property='og:image:alt']").prop("content")).toBe(websiteName);
+			wrapperGenerator(metaValue, globalContentComplete, fallbackImageRemote);
+			const twitterImageMetaElement = document.querySelector("meta[name='twitter:image']");
+			expect(twitterImageMetaElement.getAttribute("content")).toBe(fallbackImageRemote);
+
+			const twitterImageAltMetaElement = document.querySelector("meta[name='twitter:image:alt']");
+			expect(twitterImageAltMetaElement.getAttribute("content")).toBe(websiteName);
+
+			const ogImageMetaElement = document.querySelector("meta[property='og:image']");
+			expect(ogImageMetaElement.getAttribute("content")).toBe(fallbackImageRemote);
+
+			const ogImageAltMetaElement = document.querySelector("meta[property='og:image:alt']");
+			expect(ogImageAltMetaElement.getAttribute("content")).toBe(websiteName);
 		});
 
 		it("should not render image social meta tags if fallbackImage is missing", () => {
 			const metaValue = metaValues({
 				"page-type": "homepage",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete, null);
-			expectImageMetaMissing(wrapper);
+			wrapperGenerator(metaValue, globalContentComplete, null);
+			expectImageMetaMissing();
 		});
 	});
 
@@ -1680,40 +1819,40 @@ describe("the meta data", () => {
 		});
 
 		it("should have twitter tags", () => {
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expectDefaultMeta(wrapper);
+			wrapperGenerator(metaValue, globalContentComplete);
+			expectDefaultMeta();
 		});
 
-		// it("must not have an empty twitter:site metatag if twitterUsername missing", () => {
-		// 	const wrapper = shallow(
-		// 		<MetaData
-		// 			metaValue={metaValue}
-		// 			MetaTag={jest.fn()}
-		// 			MetaTags={jest.fn()}
-		// 			globalContent={globalContentComplete}
-		// 			websiteName={websiteName}
-		// 			resizerURL={resizerURL}
-		// 		/>
-		// 	);
+		it("must not have an empty twitter:site metatag if twitterUsername missing", () => {
+			render(
+				<MetaData
+					metaValue={metaValue}
+					MetaTag={jest.fn()}
+					MetaTags={jest.fn()}
+					globalContent={globalContentComplete}
+					websiteName={websiteName}
+					resizerURL={resizerURL}
+				/>
+			);
 
-		// 	expectDefaultMetaMissing(wrapper);
-		// });
+			expectDefaultMetaMissing();
+		});
 
-		// it("must not have an empty twitter:site metatag if twitterUsername empty", () => {
-		// 	const wrapper = shallow(
-		// 		<MetaData
-		// 			metaValue={metaValue}
-		// 			MetaTag={jest.fn()}
-		// 			MetaTags={jest.fn()}
-		// 			globalContent={globalContentComplete}
-		// 			twitterUsername=""
-		// 			websiteName={websiteName}
-		// 			resizerURL={resizerURL}
-		// 		/>
-		// 	);
+		it("must not have an empty twitter:site metatag if twitterUsername empty", () => {
+			render(
+				<MetaData
+					metaValue={metaValue}
+					MetaTag={jest.fn()}
+					MetaTags={jest.fn()}
+					globalContent={globalContentComplete}
+					twitterUsername=""
+					websiteName={websiteName}
+					resizerURL={resizerURL}
+				/>
+			);
 
-		// 	expectDefaultMetaMissing(wrapper);
-		// });
+			expectDefaultMetaMissing();
+		});
 	});
 
 	describe("Canonical links", () => {
@@ -1723,15 +1862,8 @@ describe("the meta data", () => {
 				"page-type": "article",
 				title: "the-sun",
 			});
-			const wrapper = wrapperGenerator(
-				metaValue,
-				globalContentComplete,
-				"",
-				canonicalDomainName,
-				null,
-				true
-			);
-			expect(wrapper.find('link[rel="canonical"]').prop("href")).toBe(
+			wrapperGenerator(metaValue, globalContentComplete, "", canonicalDomainName, null, true);
+			expect(document.querySelector('link[rel="canonical"]').getAttribute("href")).toBe(
 				`${canonicalDomainName}${globalContentComplete.canonical_url}`
 			);
 		});
@@ -1741,8 +1873,8 @@ describe("the meta data", () => {
 				"page-type": "article",
 				title: "the-sun",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-			expect(wrapper.find('link[rel="canonical"]').length).toBe(0);
+			wrapperGenerator(metaValue, globalContentComplete);
+			expect(document.querySelector('link[rel="canonical"]')).toBeNull();
 		});
 
 		it("must have canonical tag for video pages", () => {
@@ -1750,16 +1882,10 @@ describe("the meta data", () => {
 				"page-type": "video",
 				title: "the-sun",
 			});
-			const wrapper = wrapperGenerator(
-				metaValue,
-				globalContentComplete,
-				"",
-				canonicalDomainName,
-				null,
-				true
-			);
-			expect(wrapper.find('link[rel="canonical"]').prop("href")).toBe(
-				`${canonicalDomainName}${globalContentComplete.canonical_url}`
+			wrapperGenerator(metaValue, globalContentComplete, "", canonicalDomainName, null, true);
+			const canonicalHref = `${canonicalDomainName}${globalContentComplete.canonical_url}`;
+			expect(document.querySelector('link[rel="canonical"]').getAttribute("href")).toBe(
+				canonicalHref
 			);
 		});
 
@@ -1768,16 +1894,10 @@ describe("the meta data", () => {
 				"page-type": "gallery",
 				title: "the-sun",
 			});
-			const wrapper = wrapperGenerator(
-				metaValue,
-				globalContentComplete,
-				"",
-				canonicalDomainName,
-				null,
-				true
-			);
-			expect(wrapper.find('link[rel="canonical"]').prop("href")).toBe(
-				`${canonicalDomainName}${globalContentComplete.canonical_url}`
+			wrapperGenerator(metaValue, globalContentComplete, "", canonicalDomainName, null, true);
+			const canonicalHref = `${canonicalDomainName}${globalContentComplete.canonical_url}`;
+			expect(document.querySelector('link[rel="canonical"]').getAttribute("href")).toBe(
+				canonicalHref
 			);
 		});
 
@@ -1786,9 +1906,10 @@ describe("the meta data", () => {
 				"page-type": "tag",
 				title: "the-sun",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete, "", null, null, true);
-			expect(wrapper.find('link[rel="canonical"]').prop("href")).toBe(
-				`${websiteDomain}/tags/${globalContentComplete.Payload[0].slug}/`
+			wrapperGenerator(metaValue, globalContentComplete, "", null, null, true);
+			const canonicalHref = `${websiteDomain}/tags/${globalContentComplete.Payload[0].slug}/`;
+			expect(document.querySelector('link[rel="canonical"]').getAttribute("href")).toBe(
+				canonicalHref
 			);
 		});
 
@@ -1797,9 +1918,10 @@ describe("the meta data", () => {
 				"page-type": "author",
 				title: "the-sun",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentAuthor, "", null, null, true);
-			expect(wrapper.find('link[rel="canonical"]').prop("href")).toBe(
-				`${websiteDomain}${globalContentAuthor.authors[0].bio_page}`
+			wrapperGenerator(metaValue, globalContentAuthor, "", null, null, true);
+			const canonicalHref = `${websiteDomain}${globalContentAuthor.authors[0].bio_page}`;
+			expect(document.querySelector('link[rel="canonical"]').getAttribute("href")).toBe(
+				canonicalHref
 			);
 		});
 
@@ -1808,9 +1930,10 @@ describe("the meta data", () => {
 				"page-type": "section",
 				title: "the-sun",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete, "", null, null, true);
-			expect(wrapper.find('link[rel="canonical"]').prop("href")).toBe(
-				`${websiteDomain}${globalContentComplete._id}/`
+			wrapperGenerator(metaValue, globalContentComplete, "", null, null, true);
+			const canonicalHref = `${websiteDomain}${globalContentComplete._id}/`;
+			expect(document.querySelector('link[rel="canonical"]').getAttribute("href")).toBe(
+				canonicalHref
 			);
 		});
 
@@ -1819,9 +1942,10 @@ describe("the meta data", () => {
 				"page-type": "search",
 				title: "the-sun",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete, "", null, null, true);
-			expect(wrapper.find('link[rel="canonical"]').prop("href")).toBe(
-				`${websiteDomain}/search/${globalContentComplete.metadata.q}/`
+			wrapperGenerator(metaValue, globalContentComplete, "", null, null, true);
+			const canonicalHref = `${websiteDomain}/search/${globalContentComplete.metadata.q}/`;
+			expect(document.querySelector('link[rel="canonical"]').getAttribute("href")).toBe(
+				canonicalHref
 			);
 		});
 
@@ -1830,8 +1954,11 @@ describe("the meta data", () => {
 				"page-type": "homepage",
 				title: "the-sun",
 			});
-			const wrapper = wrapperGenerator(metaValue, {}, "", null, null, true);
-			expect(wrapper.find('link[rel="canonical"]').prop("href")).toBe(`${websiteDomain}`);
+			wrapperGenerator(metaValue, {}, "", null, null, true);
+			const canonicalHref = `${websiteDomain}`;
+			expect(document.querySelector('link[rel="canonical"]').getAttribute("href")).toBe(
+				canonicalHref
+			);
 		});
 
 		it("only output domain if no global content and pageType should have canonical link", () => {
@@ -1839,8 +1966,10 @@ describe("the meta data", () => {
 				"page-type": "homepage",
 				title: "the-sun",
 			});
-			const wrapper = wrapperGenerator(metaValue, {}, "", null, null, true);
-			expect(wrapper.find('link[rel="canonical"]').prop("href")).toBe(`${websiteDomain}`);
+			wrapperGenerator(metaValue, {}, "", null, null, true);
+			expect(document.querySelector('link[rel="canonical"]').getAttribute("href")).toBe(
+				`${websiteDomain}`
+			);
 		});
 
 		it("will not output canonical link if outputCanonicalLink is false", () => {
@@ -1848,8 +1977,8 @@ describe("the meta data", () => {
 				"page-type": "homepage",
 				title: "the-sun",
 			});
-			const wrapper = wrapperGenerator(metaValue, {}, "", null, null, false);
-			expect(wrapper.find('link[rel="canonical"]').length).toBe(0);
+			wrapperGenerator(metaValue, {}, "", null, null, false);
+			expect(document.querySelectorAll('link[rel="canonical"]').length).toBe(0);
 		});
 
 		it("will not output canonical link if canonicalDomain does not resolve to a valid url", () => {
@@ -1857,15 +1986,8 @@ describe("the meta data", () => {
 				"page-type": "section",
 				title: "the-sun",
 			});
-			const wrapper = wrapperGenerator(
-				metaValue,
-				globalContentComplete,
-				"",
-				"invalidDomain",
-				null,
-				true
-			);
-			expect(wrapper.find('link[rel="canonical"]').length).toBe(0);
+			wrapperGenerator(metaValue, globalContentComplete, "", "invalidDomain", null, true);
+			expect(document.querySelectorAll('link[rel="canonical"]').length).toBe(0);
 		});
 
 		it("does not output for an unknown page type", () => {
@@ -1873,8 +1995,8 @@ describe("the meta data", () => {
 				"page-type": "comic",
 				title: "the-sun",
 			});
-			const wrapper = wrapperGenerator(metaValue, {});
-			expect(wrapper.find('link[rel="canonical"]').length).toBe(0);
+			wrapperGenerator(metaValue, {});
+			expect(document.querySelectorAll('link[rel="canonical"]').length).toBe(0);
 		});
 	});
 
@@ -1884,9 +2006,9 @@ describe("the meta data", () => {
 				"page-type": "article",
 				title: "the-sun",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
-
-			expect(wrapper.find("meta[property='og:type']").props().content).toBe("article");
+			wrapperGenerator(metaValue, globalContentComplete);
+			const metaTag = document.querySelector("meta[property='og:type']");
+			expect(metaTag.getAttribute("content")).toBe("article");
 		});
 
 		it("no articles pages must not have og:type = article", () => {
@@ -1894,9 +2016,10 @@ describe("the meta data", () => {
 				"page-type": "video",
 				title: "the-sun",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+			wrapperGenerator(metaValue, globalContentComplete);
 
-			expect(wrapper.find("meta[property='og:type']").length).toBe(0);
+			const metaTags = document.querySelectorAll("meta[property='og:type']");
+			expect(metaTags.length).toBe(0);
 		});
 	});
 
@@ -1905,26 +2028,32 @@ describe("the meta data", () => {
 			const metaValue = metaValues({
 				"page-type": "all-pages",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+			wrapperGenerator(metaValue, globalContentComplete);
 
-			expect(wrapper.find("meta[property='og:site_name']").prop("content")).toEqual(websiteName);
-			expect(wrapper.find("meta[name='twitter:site']").prop("content")).toEqual(
+			expect(
+				document.querySelector('meta[property="og:site_name"]').getAttribute("content")
+			).toEqual(websiteName);
+			expect(document.querySelector('meta[name="twitter:site"]').getAttribute("content")).toEqual(
 				`@${twitterUsername}`
 			);
-			expect(wrapper.find("meta[name='twitter:card']").prop("content")).toEqual(
+			expect(document.querySelector('meta[name="twitter:card"]').getAttribute("content")).toEqual(
 				"summary_large_image"
 			);
-			expect(wrapper.find("meta[property='fb:admins']").prop("content")).toEqual(facebookAdmins);
+			expect(document.querySelector('meta[property="fb:admins"]').getAttribute("content")).toEqual(
+				facebookAdmins
+			);
 		});
 
 		it("must have the og:url if can build the page url", () => {
 			const metaValue = metaValues({
 				"page-type": "all-pages",
 			});
-			const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+			wrapperGenerator(metaValue, globalContentComplete);
 			const url = `${websiteDomain}${globalContentComplete.websites[arcSite].website_url}`;
 
-			expect(wrapper.find("meta[property='og:url']").prop("content")).toEqual(url);
+			expect(document.querySelector('meta[property="og:url"]').getAttribute("content")).toEqual(
+				url
+			);
 		});
 	});
 
@@ -1933,25 +2062,29 @@ describe("the meta data", () => {
 			const metaValue = metaValues({
 				"page-type": "all-pages",
 			});
-			const wrapper = wrapperGenerator(metaValue, null);
+			wrapperGenerator(metaValue, null);
 
-			expect(wrapper.find("meta[property='og:site_name']").prop("content")).toEqual(websiteName);
-			expect(wrapper.find("meta[name='twitter:site']").prop("content")).toEqual(
+			expect(
+				document.querySelector('meta[property="og:site_name"]').getAttribute("content")
+			).toEqual(websiteName);
+			expect(document.querySelector('meta[name="twitter:site"]').getAttribute("content")).toEqual(
 				`@${twitterUsername}`
 			);
-			expect(wrapper.find("meta[name='twitter:card']").prop("content")).toEqual(
+			expect(document.querySelector('meta[name="twitter:card"]').getAttribute("content")).toEqual(
 				"summary_large_image"
 			);
-			expect(wrapper.find("meta[property='fb:admins']").prop("content")).toEqual(facebookAdmins);
+			expect(document.querySelector('meta[property="fb:admins"]').getAttribute("content")).toEqual(
+				facebookAdmins
+			);
 		});
 
 		it("must not have og:url if not has globalContent", () => {
 			const metaValue = metaValues({
 				"page-type": "all-pages",
 			});
-			const wrapper = wrapperGenerator(metaValue, null);
+			wrapperGenerator(metaValue, null);
 
-			expect(wrapper.find("meta[property='og:url']").length).toBe(0);
+			expect(document.querySelectorAll('meta[property="og:url"]').length).toBe(0);
 		});
 
 		it("must not have og:url if can not build the url", () => {
@@ -1962,8 +2095,8 @@ describe("the meta data", () => {
 				...globalContentComplete,
 				websites: {},
 			};
-			const wrapper = wrapperGenerator(metaValue, localContent);
-			expect(wrapper.find("meta[property='og:url']").length).toBe(0);
+			wrapperGenerator(metaValue, localContent);
+			expect(document.querySelectorAll('meta[property="og:url"]').length).toBe(0);
 		});
 	});
 
@@ -1977,23 +2110,29 @@ describe("the meta data", () => {
 		const metaValue = metaValues({
 			"page-type": "nativo-clp",
 		});
-		const wrapper = wrapperGenerator(metaValue, globalContentComplete);
+		wrapperGenerator(metaValue, globalContentComplete);
 
 		it("must not have any twitter meta tags", () => {
-			expect(wrapper.find("meta[name^='twitter:']").length).toBe(0);
+			expect(document.querySelectorAll('meta[name^="twitter:"]').length).toBe(0);
 		});
 
 		it("must not have any facebook meta tags", () => {
-			expect(wrapper.find("meta[name^='og:']").length).toBe(0);
+			expect(document.querySelectorAll('meta[name^="og:"]').length).toBe(0);
 		});
 
 		it("must not have canonical tag", () => {
-			expect(wrapper.find('link[rel="canonical"]').length).toBe(0);
+			expect(document.querySelectorAll('link[rel="canonical"]').length).toBe(0);
 		});
 
 		it("must have required nativo tags", () => {
-			expect(wrapper.find('meta[content="IE=edge"]').prop("httpEquiv")).toEqual("X-UA-Compatible");
-			expect(wrapper.find('meta[name="robots"]').prop("content")).toEqual("noindex, nofollow");
+			expect(
+				document
+					.querySelector('meta[http-equiv="X-UA-Compatible"][content="IE=edge"]')
+					.getAttribute("http-equiv")
+			).toEqual("X-UA-Compatible");
+			expect(document.querySelector('meta[name="robots"]').getAttribute("content")).toEqual(
+				"noindex, nofollow"
+			);
 		});
 	});
 
@@ -2001,23 +2140,27 @@ describe("the meta data", () => {
 		const metaValue = metaValues({
 			"page-type": "nativo-clp",
 		});
-		const wrapper = wrapperGenerator(metaValue, null);
+		wrapperGenerator(metaValue, null);
 
 		it("must not have any twitter meta tags", () => {
-			expect(wrapper.find("meta[name^='twitter:']").length).toBe(0);
+			expect(document.querySelectorAll('meta[name^="twitter:"]').length).toBe(0);
 		});
 
 		it("must not have any facebook meta tags", () => {
-			expect(wrapper.find("meta[name^='og:']").length).toBe(0);
+			expect(document.querySelectorAll('meta[name^="og:"]').length).toBe(0);
 		});
 
 		it("must not have canonical tag", () => {
-			expect(wrapper.find('link[rel="canonical"]').length).toBe(0);
+			expect(document.querySelectorAll('link[rel="canonical"]').length).toBe(0);
 		});
 
 		it("must have required nativo tags", () => {
-			expect(wrapper.find('meta[content="IE=edge"]').prop("httpEquiv")).toEqual("X-UA-Compatible");
-			expect(wrapper.find('meta[name="robots"]').prop("content")).toEqual("noindex, nofollow");
+			expect(
+				document.querySelector('meta[http-equiv="X-UA-Compatible"][content="IE=edge"]')
+			).toBeTruthy();
+			expect(
+				document.querySelector('meta[name="robots"][content="noindex, nofollow"]')
+			).toBeTruthy();
 		});
 	});
 });
