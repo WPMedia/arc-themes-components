@@ -23,8 +23,6 @@ const getCustomMetaData = (metaHTMLString) => {
 				metaName: metaNode.getAttribute("name"),
 				metaValue: metaNode.getAttribute("value") || metaNode.getAttribute("content"),
 			}));
-	} else {
-		customMetaData = [];
 	}
 	return customMetaData;
 };
@@ -187,10 +185,10 @@ const MetaData = ({
 		}
 		if (gc?.promo_items?.basic?.url || gc?.promo_items?.lead_art?.type === "image") {
 			const image = getImageFromANS(gc);
-			const auth = image.auth[RESIZER_TOKEN_VERSION];
+			const auth = image?.auth[RESIZER_TOKEN_VERSION];
 			return imageURL(imageANSToImageSrc(image), auth);
 		}
-		return "";
+		return null;
 	};
 
 	const getImgAlt = (metaType = "og:image:alt") => {
