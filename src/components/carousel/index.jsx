@@ -1,4 +1,4 @@
-import { Children, cloneElement, useEffect, useRef, useState } from "react";
+import { Children, cloneElement, useCallback, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { useSwipeable } from "react-swipeable";
 import Icon from "../icon";
@@ -179,16 +179,19 @@ const Carousel = ({
 
 	const totalSlides = carouselItems.length;
 
-	const emitEvent = (eventName, page, options) => {
-		EventEmitter.dispatch(eventName, {
-			eventName,
-			ansGalleryId: id,
-			ansGalleryHeadline: label,
-			orderPosition: page || slide,
-			totalImages: totalSlides,
-			...options,
-		});
-	};
+	const emitEvent = useCallback(
+		(eventName, page, options) => {
+			EventEmitter.dispatch(eventName, {
+				eventName,
+				ansGalleryId: id,
+				ansGalleryHeadline: label,
+				orderPosition: page || slide,
+				totalImages: totalSlides,
+				...options,
+			});
+		},
+		[id, label, slide, totalSlides]
+	);
 
 	useEffect(() => {
 		setSlidesToShowInView(getSlidesToShowFromDom(carouselElement.current));
@@ -208,12 +211,22 @@ const Carousel = ({
 
 	useEffect(() => {
 		const handleFullscreen = () => {
-			if (document.fullscreenElement) {
-				setIsFullScreen(true);
-				emitEvent("galleryExpandEnter");
-			} else {
-				setIsFullScreen(false);
-				emitEvent("galleryExpandExit");
+			if (document.fullscreenEnabled) {
+				if (document.fullScreenElement) {
+					setIsFullScreen(true);
+					emitEvent("galleryExpandEnter");
+				} else {
+					setIsFullScreen(false);
+					emitEvent("galleryExpandExit");
+				}
+			} else if (document.webkitFullscreenEnabled) {
+				if (document.webkitFullScreenElement) {
+					setIsFullScreen(true);
+					emitEvent("galleryExpandEnter");
+				} else {
+					setIsFullScreen(false);
+					emitEvent("galleryExpandExit");
+				}
 			}
 		};
 		document.addEventListener("fullscreenchange", handleFullscreen);
@@ -279,10 +292,8 @@ const Carousel = ({
 		if (document.fullscreenEnabled) {
 			if (!document.fullscreenElement) {
 				fullScreenElement.requestFullscreen().then(() => setIsFullScreen(true));
-				emitEvent("galleryExpandEnter");
 			} else {
 				document.exitFullscreen().then(() => setIsFullScreen(false));
-				emitEvent("galleryExpandExit");
 			}
 		} else {
 			// safari needs prefix
@@ -290,10 +301,8 @@ const Carousel = ({
 			if (document.webkitFullscreenEnabled) {
 				if (!document.webkitFullscreenElement) {
 					fullScreenElement.webkitRequestFullscreen().then(() => setIsFullScreen(true));
-					emitEvent("galleryExpandEnter");
 				} else {
 					document.webkitExitFullscreen().then(() => setIsFullScreen(false));
-					emitEvent("galleryExpandExit");
 				}
 			}
 		}
