@@ -136,13 +136,7 @@ const MetaData = ({
 }) => {
 	const pageType = metaValue("page-type");
 
-	let storyMetaDataTags = null;
-	let tagMetaDataTags = null;
-	let authorMetaDataTags = null;
-	let searchMetaDataTags = null;
-	let sectionMetaDataTags = null;
-	let homepageMetaDataTags = null;
-	let nativoMetaDataTags = null;
+	let pageMetaDataTags = null;
 	let commonTagsOnPage = true;
 	let canonicalLink = null;
 
@@ -173,20 +167,45 @@ const MetaData = ({
 			: {}
 	);
 
+	const author = gc && gc.authors && gc.authors.length ? gc.authors[0] : {};
+	const authorImageUrl =
+		typeof author.image === "string" ? author.image : author.image && author.image.url;
+	const authorPhoto = authorImageUrl || metaData.fallbackImage;
+
+	const authorImageHash = useContent(
+		authorPhoto ? { source: "signing-service", query: { id: authorPhoto } } : {}
+	);
+
+	const fallbackImageHash = useContent(
+		metaData.fallbackImage
+			? { source: "signing-service", query: { id: metaData.fallbackImage } }
+			: {}
+	);
+
+	const resizedOptions = { smart: true };
+	const imageURL = (src, auth, height) =>
+		formatSrc(
+			resizerURL.concat(encodeURIComponent(src)),
+			{ ...resizedOptions, auth },
+			1200,
+			height
+		);
+
+	const resizedFallbackImage = fallbackImageHash
+		? imageURL(metaData.fallbackImage, fallbackImageHash.hash)
+		: metaData.fallbackImage;
+
 	const getImgURL = (metaType = "og:image") => {
-		const resizedOptions = { smart: true };
-		const imageURL = (src, auth) =>
-			formatSrc(resizerURL.concat(src), { ...resizedOptions, auth }, 1200, 630);
 		if (metaType === "og:image" && resizedOGImage) {
-			return imageURL(encodeURIComponent(metaValue("og:image")), resizedOGImage.hash);
+			return imageURL(metaValue("og:image"), resizedOGImage.hash, 630);
 		}
 		if (metaType === "twitter:image" && resizedTwitterImage) {
-			return imageURL(encodeURIComponent(metaValue("twitter:image")), resizedTwitterImage.hash);
+			return imageURL(metaValue("twitter:image"), resizedTwitterImage.hash, 630);
 		}
 		if (gc?.promo_items?.basic?.url || gc?.promo_items?.lead_art?.type === "image") {
 			const image = getImageFromANS(gc);
 			const auth = image?.auth[RESIZER_TOKEN_VERSION];
-			return imageURL(imageANSToImageSrc(image), auth);
+			return imageURL(imageANSToImageSrc(image), auth, 630);
 		}
 		return null;
 	};
@@ -214,11 +233,11 @@ const MetaData = ({
 				metaValue("title") || (headline && `${headline} – ${websiteName}`) || websiteName;
 			metaData.description = metaValue("description") || description || null;
 			metaData["og:title"] = metaValue("og:title") || headline || websiteName;
-			metaData.ogImage = getImgURL("og:image") || metaData.fallbackImage;
+			metaData.ogImage = getImgURL("og:image") || resizedFallbackImage;
 			metaData.ogImageAlt = getImgAlt("og:image:alt");
 
 			metaData["twitter:title"] = metaValue("twitter:title") || headline || websiteName;
-			metaData.twitterImage = getImgURL("twitter:image") || metaData.fallbackImage;
+			metaData.twitterImage = getImgURL("twitter:image") || resizedFallbackImage;
 			metaData.twitterImageAlt = getImgAlt("twitter:image:alt");
 
 			// Keywords could be comma delimited string or array of string or an array of objects
@@ -240,7 +259,7 @@ const MetaData = ({
 				metaData.keywords = null;
 			}
 
-			storyMetaDataTags = (
+			pageMetaDataTags = (
 				<>
 					{metaData.description && (
 						<>
@@ -271,22 +290,22 @@ const MetaData = ({
 			);
 		}
 	} else if (pageType === "author") {
-		const author = gc && gc.authors && gc.authors.length ? gc.authors[0] : {};
 		const fallbackTitle = (author.byline && `${author.byline} - ${websiteName}`) || websiteName;
 		metaData.description = metaValue("description") || author.bio || null;
 		metaData["og:title"] = metaValue("og:title") || fallbackTitle;
 		metaData["twitter:title"] = metaValue("twitter:title") || fallbackTitle;
 		metaData.title = metaValue("title") || fallbackTitle;
 		const { name: authorName } = author;
-		const authorImageUrl =
-			typeof author.image === "string" ? author.image : author.image && author.image.url;
+		const resizedAuthorImage = authorImageHash?.hash
+			? imageURL(authorPhoto, authorImageHash.hash, 1200)
+			: resizedFallbackImage;
+
 		const authorAltText =
 			typeof author.image === "object" ? author.image.alt_text : author.byline || authorName;
 
-		const authorPhoto = authorImageUrl || metaData.fallbackImage;
 		const authorAlt = authorAltText || authorName || author.byline || websiteName;
 
-		authorMetaDataTags = (
+		pageMetaDataTags = (
 			<>
 				{metaData.description && (
 					<>
@@ -297,11 +316,11 @@ const MetaData = ({
 				)}
 				<meta property="og:title" content={metaData["og:title"]} />
 				<meta name="twitter:title" content={metaData["twitter:title"]} />
-				{authorPhoto && (
+				{resizedAuthorImage && (
 					<>
-						<meta property="og:image" content={authorPhoto} />
+						<meta property="og:image" content={resizedAuthorImage} />
 						<meta property="og:image:alt" content={authorAlt} />
-						<meta name="twitter:image" content={authorPhoto} />
+						<meta name="twitter:image" content={resizedAuthorImage} />
 						<meta name="twitter:image:alt" content={authorAlt} />
 					</>
 				)}
@@ -313,7 +332,7 @@ const MetaData = ({
 		metaData["og:title"] = metaValue("og:title") || fallbackTitle;
 		metaData["twitter:title"] = metaValue("twitter:title") || fallbackTitle;
 
-		searchMetaDataTags = (
+		pageMetaDataTags = (
 			<>
 				<meta property="og:title" content={metaData["og:title"]} />
 				<meta name="twitter:title" content={metaData["twitter:title"]} />
@@ -327,7 +346,7 @@ const MetaData = ({
 		metaData["og:title"] = metaValue("og:title") || fallbackTitle;
 		metaData["twitter:title"] = metaValue("twitter:title") || fallbackTitle;
 
-		tagMetaDataTags = (
+		pageMetaDataTags = (
 			<>
 				{metaData.description && (
 					<>
@@ -338,11 +357,11 @@ const MetaData = ({
 				)}
 				<meta property="og:title" content={metaData["og:title"]} />
 				<meta name="twitter:title" content={metaData["twitter:title"]} />
-				{metaData.fallbackImage && (
+				{resizedFallbackImage && (
 					<>
-						<meta property="og:image" content={metaData.fallbackImage} />
+						<meta property="og:image" content={resizedFallbackImage} />
 						<meta property="og:image:alt" content={metaData["og:title"]} />
-						<meta name="twitter:image" content={metaData.fallbackImage} />
+						<meta name="twitter:image" content={resizedFallbackImage} />
 						<meta name="twitter:image:alt" content={metaData["twitter:title"]} />
 					</>
 				)}
@@ -357,7 +376,7 @@ const MetaData = ({
 		metaData["og:title"] = metaValue("og:title") || fallbackTitle;
 		metaData["twitter:title"] = metaValue("twitter:title") || fallbackTitle;
 
-		sectionMetaDataTags = (
+		pageMetaDataTags = (
 			<>
 				{metaData.description && (
 					<>
@@ -369,26 +388,26 @@ const MetaData = ({
 				<meta property="og:title" content={metaData["og:title"]} />
 				<meta name="twitter:title" content={metaData["twitter:title"]} />
 
-				{metaData.fallbackImage && (
+				{resizedFallbackImage && (
 					<>
-						<meta property="og:image" content={metaData.fallbackImage} />
+						<meta property="og:image" content={resizedFallbackImage} />
 						<meta property="og:image:alt" content={metaData["og:title"]} />
-						<meta name="twitter:image" content={metaData.fallbackImage} />
+						<meta name="twitter:image" content={resizedFallbackImage} />
 						<meta name="twitter:image:alt" content={metaData["twitter:title"]} />
 					</>
 				)}
 			</>
 		);
 	} else if (pageType === "homepage") {
-		homepageMetaDataTags = (
+		pageMetaDataTags = (
 			<>
 				<meta property="og:title" content={metaData["og:title"]} />
 				<meta name="twitter:title" content={metaData["twitter:title"]} />
-				{metaData.fallbackImage && (
+				{resizedFallbackImage && (
 					<>
-						<meta property="og:image" content={metaData.fallbackImage} />
+						<meta property="og:image" content={resizedFallbackImage} />
 						<meta property="og:image:alt" content={websiteName} />
-						<meta name="twitter:image" content={metaData.fallbackImage} />
+						<meta name="twitter:image" content={resizedFallbackImage} />
 						<meta name="twitter:image:alt" content={websiteName} />
 					</>
 				)}
@@ -398,14 +417,14 @@ const MetaData = ({
 		/* Nativo ad integration */
 		/* this kind of page type can not render any social metadata */
 		commonTagsOnPage = false;
-		nativoMetaDataTags = (
+		pageMetaDataTags = (
 			<>
 				<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 				<meta name="robots" content="noindex, nofollow" />
 			</>
 		);
 	} else {
-		sectionMetaDataTags = (
+		pageMetaDataTags = (
 			<>
 				<meta property="og:title" content={metaData["og:title"]} />
 				<meta name="twitter:title" content={metaData["twitter:title"]} />
@@ -444,15 +463,9 @@ const MetaData = ({
 	return (
 		<>
 			<title>{metaData.title}</title>
-			{storyMetaDataTags}
-			{tagMetaDataTags}
-			{sectionMetaDataTags}
-			{homepageMetaDataTags}
-			{authorMetaDataTags}
-			{searchMetaDataTags}
+			{pageMetaDataTags}
 			{customMetaTags}
 			{commonTagsOnPage && twitterTags}
-			{nativoMetaDataTags}
 			{canonicalLink}
 		</>
 	);

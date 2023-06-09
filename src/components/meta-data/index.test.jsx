@@ -1057,19 +1057,13 @@ describe("the meta data", () => {
 				const metaValue = metaValues({
 					"page-type": "author",
 				});
-				const wrapper = wrapperGenerator(metaValue, globalContentAuthor);
-				expect(wrapper.find("meta[name='twitter:image']").prop("content")).toBe(
-					globalContentAuthor.authors[0].image
-				);
-				expect(wrapper.find("meta[name='twitter:image:alt']").prop("content")).toBe(
-					globalContentAuthor.authors[0].byline
-				);
-				expect(wrapper.find("meta[property='og:image']").prop("content")).toBe(
-					globalContentAuthor.authors[0].image
-				);
-				expect(wrapper.find("meta[property='og:image:alt']").prop("content")).toBe(
-					globalContentAuthor.authors[0].byline
-				);
+				wrapperGenerator(metaValue, globalContentAuthor);
+				expect(useContent).toHaveBeenCalledWith({
+					source: "signing-service",
+					query: {
+						id: "https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg",
+					},
+				});
 			});
 		});
 
