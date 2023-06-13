@@ -184,23 +184,22 @@ const MetaData = ({
 
 	const resizedOptions = { smart: true };
 	const imageURL = (src, auth, height) =>
-		formatSrc(
-			resizerURL.concat(encodeURIComponent(src)),
-			{ ...resizedOptions, auth },
-			1200,
-			height
-		);
+		formatSrc(resizerURL.concat(src), { ...resizedOptions, auth }, 1200, height);
 
 	const resizedFallbackImage = fallbackImageHash
-		? imageURL(metaData.fallbackImage, fallbackImageHash.hash)
+		? imageURL(encodeURIComponent(metaData.fallbackImage), fallbackImageHash.hash)
 		: metaData.fallbackImage;
 
 	const getImgURL = (metaType = "og:image") => {
 		if (metaType === "og:image" && resizedOGImage) {
-			return imageURL(metaValue("og:image"), resizedOGImage.hash, 630);
+			return imageURL(encodeURIComponent(metaValue("og:image")), resizedOGImage.hash, 630);
 		}
 		if (metaType === "twitter:image" && resizedTwitterImage) {
-			return imageURL(metaValue("twitter:image"), resizedTwitterImage.hash, 630);
+			return imageURL(
+				encodeURIComponent(metaValue("twitter:image")),
+				resizedTwitterImage.hash,
+				630
+			);
 		}
 		if (gc?.promo_items?.basic?.url || gc?.promo_items?.lead_art?.type === "image") {
 			const image = getImageFromANS(gc);
@@ -297,7 +296,7 @@ const MetaData = ({
 		metaData.title = metaValue("title") || fallbackTitle;
 		const { name: authorName } = author;
 		const resizedAuthorImage = authorImageHash?.hash
-			? imageURL(authorPhoto, authorImageHash.hash, 1200)
+			? imageURL(encodeURIComponent(authorPhoto), authorImageHash.hash, 1200)
 			: resizedFallbackImage;
 
 		const authorAltText =
