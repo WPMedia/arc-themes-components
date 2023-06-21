@@ -211,19 +211,11 @@ const Carousel = ({
 
 	useEffect(() => {
 		const handleFullscreen = () => {
-			if (document.fullscreenEnabled) {
-				if (document.fullScreenElement) {
+			if (document.fullscreenEnabled || document.webkitFullscreenEnabled) {
+				if (document.fullScreenElement || document.webkitFullScreenElement) {
 					setIsFullScreen(true);
 					emitEvent("galleryExpandEnter");
-				} else {
-					setIsFullScreen(false);
-					emitEvent("galleryExpandExit");
-				}
-			} else if (document.webkitFullscreenEnabled) {
-				if (document.webkitFullScreenElement) {
-					setIsFullScreen(true);
-					emitEvent("galleryExpandEnter");
-				} else {
+				} else if (!document.fullScreenElement && !document.webkitFullScreenElement) {
 					setIsFullScreen(false);
 					emitEvent("galleryExpandExit");
 				}
