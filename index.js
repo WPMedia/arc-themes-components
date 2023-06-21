@@ -18,6 +18,7 @@ import Join from "./src/components/join";
 import LazyLoad from "./src/components/lazy-load";
 import Link from "./src/components/link";
 import MediaItem from "./src/components/media-item";
+import MetaData from "./src/components/meta-data";
 import Overline from "./src/components/overline";
 import Paragraph from "./src/components/paragraph";
 import Picture from "./src/components/picture";
@@ -80,6 +81,7 @@ export {
 	localizeDate,
 	localizeDateTime,
 	MediaItem,
+	MetaData,
 	Overline,
 	Paragraph,
 	Picture,
