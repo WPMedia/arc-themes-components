@@ -181,6 +181,14 @@
 					font-size: var(--body-font-size-small),
 					line-height: var(--body-line-height-small),
 				),
+				attribution-link: (
+					color: var(--text-color),
+					cursor: pointer,
+				),
+				attribution-link-hover: (
+					color: var(--text-color-subtle),
+					text-decoration: underline,
+				),
 				badge: (
 					align-self: baseline,
 					border-radius: var(--border-radius-pill),
@@ -301,6 +309,7 @@
 					width: 100%,
 				),
 				date: (
+					color: var(--text-color),
 					font-size: var(--body-font-size-small),
 					line-height: var(--body-line-height-small),
 				),
