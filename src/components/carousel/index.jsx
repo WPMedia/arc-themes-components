@@ -212,7 +212,7 @@ const Carousel = ({
 	useEffect(() => {
 		const handleFullscreen = () => {
 			if (document.fullscreenEnabled || document.webkitFullscreenEnabled) {
-				if (document.fullscreenElement || document.webkitFullScreenElement) {
+				if (document.fullscreenElement || document.webkitFullscreenElement) {
 					setIsFullScreen(true);
 					emitEvent("galleryExpandEnter");
 				} else {
@@ -293,6 +293,8 @@ const Carousel = ({
 			if (document.webkitFullscreenEnabled) {
 				if (!document.webkitFullscreenElement) {
 					fullScreenElement.webkitRequestFullscreen();
+				} else {
+					document.webkitExitFullscreen();
 				}
 			}
 		}
