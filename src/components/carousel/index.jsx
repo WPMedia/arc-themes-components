@@ -392,7 +392,6 @@ const Carousel = ({
 			}}
 			ref={carouselElement}
 		>
-			{console.log(JSON.stringify({ fullScreenEnabledAllowed, isFullScreen }))}
 			<div className={`${COMPONENT_CLASS_NAME}__controls`}>
 				<div className={`${COMPONENT_CLASS_NAME}__expand-autoplay-container`}>
 					{/* only show button at all if enabled on the document */}
