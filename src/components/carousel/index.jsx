@@ -212,10 +212,10 @@ const Carousel = ({
 	useEffect(() => {
 		const handleFullscreen = () => {
 			if (document.fullscreenEnabled || document.webkitFullscreenEnabled) {
-				if (document.fullScreenElement || document.webkitFullScreenElement) {
+				if (document.fullscreenElement || document.webkitFullScreenElement) {
 					setIsFullScreen(true);
 					emitEvent("galleryExpandEnter");
-				} else if (!document.fullScreenElement && !document.webkitFullScreenElement) {
+				} else {
 					setIsFullScreen(false);
 					emitEvent("galleryExpandExit");
 				}
@@ -223,7 +223,7 @@ const Carousel = ({
 		};
 		document.addEventListener("fullscreenchange", handleFullscreen);
 		return () => window.removeEventListener("fullscreenchange", handleFullscreen, false);
-	});
+	}, [emitEvent]);
 
 	if (adElement && adInterstitialClicks) {
 		carouselItems = insertAdsIntoItems(carouselItems, adElement, adInterstitialClicks, slide);
@@ -283,18 +283,16 @@ const Carousel = ({
 
 		if (document.fullscreenEnabled) {
 			if (!document.fullscreenElement) {
-				fullScreenElement.requestFullscreen().then(() => setIsFullScreen(true));
+				fullScreenElement.requestFullscreen();
 			} else {
-				document.exitFullscreen().then(() => setIsFullScreen(false));
+				document.exitFullscreen();
 			}
 		} else {
 			// safari needs prefix
 			// eslint-disable-next-line no-lonely-if
 			if (document.webkitFullscreenEnabled) {
 				if (!document.webkitFullscreenElement) {
-					fullScreenElement.webkitRequestFullscreen().then(() => setIsFullScreen(true));
-				} else {
-					document.webkitExitFullscreen().then(() => setIsFullScreen(false));
+					fullScreenElement.webkitRequestFullscreen();
 				}
 			}
 		}
@@ -355,7 +353,11 @@ const Carousel = ({
 			toggleFullScreen
 		)
 	) : (
-		<DefaultEnterFullScreenButton id={id} onClick={toggleFullScreen} />
+		<DefaultEnterFullScreenButton
+			btnText={isFullScreen ? "Minimize Screen" : "Full Screen"}
+			id={id}
+			onClick={toggleFullScreen}
+		/>
 	);
 
 	const resolvedFullScreenMinimizeButton = fullScreenMinimizeButton ? (
@@ -390,6 +392,7 @@ const Carousel = ({
 			}}
 			ref={carouselElement}
 		>
+			{console.log(JSON.stringify({ fullScreenEnabledAllowed, isFullScreen }))}
 			<div className={`${COMPONENT_CLASS_NAME}__controls`}>
 				<div className={`${COMPONENT_CLASS_NAME}__expand-autoplay-container`}>
 					{/* only show button at all if enabled on the document */}
