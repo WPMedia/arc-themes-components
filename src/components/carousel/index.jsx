@@ -1,4 +1,4 @@
-import { Children, cloneElement, useEffect, useRef, useState } from "react";
+import { Children, cloneElement, useCallback, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { useSwipeable } from "react-swipeable";
 import Icon from "../icon";
@@ -170,6 +170,29 @@ const Carousel = ({
 		Children.map(children, (child) => (child?.type === subcomponentType ? child : null))
 	);
 
+	const childItems = Children.toArray(subComponents);
+
+	let carouselItems = childItems.map((child, index) => {
+		const viewable = index + 1 > slide - slidesToShowInView && index + 1 <= slide;
+		return child.type === Item ? cloneElement(child, { viewable }) : null;
+	});
+
+	const totalSlides = carouselItems.length;
+
+	const emitEvent = useCallback(
+		(eventName, page, options) => {
+			EventEmitter.dispatch(eventName, {
+				eventName,
+				ansGalleryId: id,
+				ansGalleryHeadline: label,
+				orderPosition: page || slide,
+				totalImages: totalSlides,
+				...options,
+			});
+		},
+		[id, label, slide, totalSlides]
+	);
+
 	useEffect(() => {
 		setSlidesToShowInView(getSlidesToShowFromDom(carouselElement.current));
 		setSlide(getSlidesToShowFromDom(carouselElement.current));
@@ -186,29 +209,25 @@ const Carousel = ({
 		return () => window.removeEventListener("resize", resizeFn, false);
 	});
 
-	const childItems = Children.toArray(subComponents);
-
-	let carouselItems = childItems.map((child, index) => {
-		const viewable = index + 1 > slide - slidesToShowInView && index + 1 <= slide;
-		return child.type === Item ? cloneElement(child, { viewable }) : null;
-	});
+	useEffect(() => {
+		const handleFullscreen = () => {
+			if (document.fullscreenEnabled || document.webkitFullscreenEnabled) {
+				if (document.fullscreenElement || document.webkitFullscreenElement) {
+					setIsFullScreen(true);
+					emitEvent("galleryExpandEnter");
+				} else {
+					setIsFullScreen(false);
+					emitEvent("galleryExpandExit");
+				}
+			}
+		};
+		document.addEventListener("fullscreenchange", handleFullscreen);
+		return () => window.removeEventListener("fullscreenchange", handleFullscreen, false);
+	}, [emitEvent]);
 
 	if (adElement && adInterstitialClicks) {
 		carouselItems = insertAdsIntoItems(carouselItems, adElement, adInterstitialClicks, slide);
 	}
-
-	const totalSlides = carouselItems.length;
-
-	const emitEvent = (eventName, page, options) => {
-		EventEmitter.dispatch(eventName, {
-			eventName,
-			ansGalleryId: id,
-			ansGalleryHeadline: label,
-			orderPosition: page || slide,
-			totalImages: totalSlides,
-			...options,
-		});
-	};
 
 	const goToSlide = (newSlideIndex) => {
 		setSlide(newSlideIndex);
@@ -264,22 +283,18 @@ const Carousel = ({
 
 		if (document.fullscreenEnabled) {
 			if (!document.fullscreenElement) {
-				fullScreenElement.requestFullscreen().then(() => setIsFullScreen(true));
-				emitEvent("galleryExpandEnter");
+				fullScreenElement.requestFullscreen();
 			} else {
-				document.exitFullscreen().then(() => setIsFullScreen(false));
-				emitEvent("galleryExpandExit");
+				document.exitFullscreen();
 			}
 		} else {
 			// safari needs prefix
 			// eslint-disable-next-line no-lonely-if
 			if (document.webkitFullscreenEnabled) {
 				if (!document.webkitFullscreenElement) {
-					fullScreenElement.webkitRequestFullscreen().then(() => setIsFullScreen(true));
-					emitEvent("galleryExpandEnter");
+					fullScreenElement.webkitRequestFullscreen();
 				} else {
-					document.webkitExitFullscreen().then(() => setIsFullScreen(false));
-					emitEvent("galleryExpandExit");
+					document.webkitExitFullscreen();
 				}
 			}
 		}
@@ -340,7 +355,11 @@ const Carousel = ({
 			toggleFullScreen
 		)
 	) : (
-		<DefaultEnterFullScreenButton id={id} onClick={toggleFullScreen} />
+		<DefaultEnterFullScreenButton
+			btnText={isFullScreen ? "Minimize Screen" : "Full Screen"}
+			id={id}
+			onClick={toggleFullScreen}
+		/>
 	);
 
 	const resolvedFullScreenMinimizeButton = fullScreenMinimizeButton ? (

@@ -9,5 +9,4 @@ const EventEmitter = {
 		this.events[event].push(callback);
 	},
 };
-
 export default EventEmitter;

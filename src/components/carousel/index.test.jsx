@@ -35,10 +35,6 @@ Object.defineProperty(global.window, "matchMedia", {
 });
 
 describe("Carousel", () => {
-	afterEach(() => {
-		EventEmitter.dispatch.mockClear();
-	});
-
 	it("should render carousel", () => {
 		render(
 			<Carousel id="Carousel-1" label="Carousel Label" slidesToShow={1}>
@@ -303,6 +299,9 @@ describe("Carousel", () => {
 	});
 
 	it("should show full-screen button if full screen option enabled and use custom button", async () => {
+		jest.spyOn(document, "addEventListener").mockImplementationOnce((_, callback) => {
+			callback();
+		});
 		render(
 			<Carousel
 				id="carousel-2"
@@ -321,6 +320,8 @@ describe("Carousel", () => {
 	});
 
 	it("should show full-screen button if full screen option enabled and use default button", async () => {
+		// document.fullscreenEnabled = false;
+		// document.webkitFullscreenEnabled = true;
 		render(
 			<Carousel id="carousel-2" label="Carousel Label" enableFullScreen>
 				<Carousel.Item label="Slide 1 of 5">
