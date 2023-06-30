@@ -5,5 +5,12 @@
 				"max-width": "100%"
 			}
 		}
+	},
+	"image-hover": {
+		"styles": {
+			"default": {
+				"opacity": "1"
+			}
+		}
 	}
 }

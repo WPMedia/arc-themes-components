@@ -10,4 +10,5 @@
 	block-size: auto;
 
 	@include scss.component-properties("image");
+	@include scss.component-with-states("image", [hover]);
 }
