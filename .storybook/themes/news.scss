@@ -256,7 +256,7 @@
 					color: var(--global-white),
 				),
 				button-primary-hover: (
-					background-color: var(--global-neutral-7),
+					background-color: var(--color-primary-hover),
 				),
 				button-primary-reverse: (
 					background-color: transparent,
@@ -264,16 +264,19 @@
 					color: var(--color-primary),
 				),
 				button-primary-reverse-hover: (
-					border-color: var(--global-neutral-7),
-					color: var(--global-neutral-7),
+					border-color: var(--color-primary-hover),
+					color: var(--color-primary-hover),
 				),
 				button-secondary: (
 					background-color: var(--global-white),
-					color: var(--global-black),
+					color: var
+						(
+							--global-black,
+						),
 				),
 				button-secondary-hover: (
-					background-color: var(--global-neutral-7),
-					color: var(--global-white),
+					background-color: var(--global-neutral-2),
+					color: var(--global-neutral-6),
 				),
 				button-secondary-reverse: (
 					background-color: transparent,
@@ -281,8 +284,8 @@
 					color: var(--global-white),
 				),
 				button-secondary-reverse-hover: (
-					border-color: var(--global-neutral-7),
-					color: var(--global-neutral-7),
+					border-color: var(--global-neutral-3),
+					color: var(--global-neutral-3),
 				),
 				carousel: (
 					--slides: 1,
