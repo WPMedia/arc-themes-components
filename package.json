@@ -89,7 +89,7 @@
     "sass-true": "^6.0.1",
     "storybook": "^6.4.19",
     "style-loader": "^2.0.0",
-    "stylelint": "^14.2.0",
+    "stylelint": "^15.10.1",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-recommended": "^6.0.0",
     "stylelint-config-sass-guidelines": "^9.0.1",
