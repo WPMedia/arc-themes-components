@@ -19,16 +19,6 @@
 		@include scss.component-properties("carousel-image-counter");
 	}
 
-	&:fullscreen {
-		@include scss.component-properties("carousel-fullscreen");
-
-		// setting fullscreen status for counter label
-		// overrides counter label styles
-		.c-carousel__image-counter-label {
-			@include scss.component-properties("carousel-fullscreen-image-counter");
-		}
-	}
-
 	&__track {
 		/* stylelint-disable length-zero-no-unit */
 		// Disabled the rule as the px value is needed within the calc below
@@ -72,10 +62,26 @@
 		@include scss.component-properties("carousel-controls");
 	}
 
+	&__icon {
+		&--fullscreen {
+			@include scss.component-properties("carousel-icon-full-screen");
+		}
+
+		@include scss.component-properties("carousel-icon");
+	}
+
 	&__button {
 		cursor: pointer;
 		pointer-events: auto;
 		@include scss.component-properties("carousel-button");
+
+		&--fullscreen {
+			@include scss.component-properties("carousel-button-full-screen");
+
+			&:hover {
+				@include scss.component-properties("carousel-button-full-screen-hover");
+			}
+		}
 
 		&--next {
 			margin-left: auto;
@@ -95,16 +101,12 @@
 			@include scss.component-properties("carousel-button-additional-next");
 		}
 
-		&--enter-full-screen {
-			@include scss.component-properties("carousel-button-enter-full-screen");
-		}
-
 		&--exit-full-screen {
 			@include scss.component-properties("carousel-button-exit-full-screen");
 		}
 
-		&--toggle-auto-play {
-			@include scss.component-properties("carousel-button-toggle-auto-play");
+		&--enter-full-screen {
+			@include scss.component-properties("carousel-button-enter-full-screen");
 		}
 	}
 
@@ -116,6 +118,10 @@
 		display: flex;
 		align-items: center;
 		@include scss.component-properties("carousel-counter-controls-container");
+
+		&--full-screen {
+			@include scss.component-properties("carousel-counter-controls-container-full-screen");
+		}
 	}
 
 	&__expand-autoplay-container {
@@ -152,5 +158,15 @@
 			@include scss.component-properties("carousel-indicator-thumbnail-active");
 		}
 		@include scss.component-properties("carousel-indicator-thumbnail");
+	}
+
+	&:fullscreen {
+		@include scss.component-properties("carousel-fullscreen");
+
+		.c-carousel {
+			&__image-counter-label {
+				@include scss.component-properties("carousel-fullscreen-image-counter");
+			}
+		}
 	}
 }

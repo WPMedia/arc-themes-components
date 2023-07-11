@@ -2,6 +2,9 @@
 	"carousel": {
 		"styles": {
 			"default": {
+				"font-family": "var(--font-family-primary)",
+				"font-size": "var(--body-font-size-tiny)",
+				"line-height": "var(--body-line-height-tiny)",
 				"--slides": 1
 			},
 			"desktop": {
@@ -24,37 +27,62 @@
 	"carousel-button": {
 		"styles": {
 			"default": {
-				"box-shadow": "var(--global-box-shadow-1)",
-				"border-radius": "var(--border-radius)",
-				"background-color": "var(--global-white)",
-				"height": "var(--global-spacing-8)",
-				"width": "auto",
-				"padding": "0 var(--global-spacing-2)",
-				"display": "flex",
 				"align-items": "center",
-				"gap": "var(--global-spacing-2)"
+				"background-color": "transparent",
+				"border": "none",
+				"box-shadow": "none",
+				"display": "flex",
+				"font-size": "var(--body-font-size-tiny)",
+				"gap": "var(--global-spacing-2)",
+				"height": "var(--global-spacing-4)",
+				"line-height": "var(--body-line-height-tiny)",
+				"padding": "0 var(--global-spacing-2)",
+				"width": "auto"
 			}
+		}
+	},
+	"carousel-button-full-screen": {
+		"styles": {
+			"default": {
+				"color": "var(--global-white)"
+			},
+			"desktop": {}
+		}
+	},
+	"carousel-button-full-screen-hover": {
+		"styles": {
+			"default": {
+				"color": "var(--global-neutral-3)"
+			},
+			"desktop": {}
 		}
 	},
 	"carousel-button-previous": {
 		"styles": {
 			"default": {
-				"background-color": "var(--global-white)"
+				"color": "var(--global-white)"
 			}
 		}
 	},
 	"carousel-button-next": {
 		"styles": {
 			"default": {
-				"background-color": "var(--global-white)"
+				"color": "var(--global-white)"
+			}
+		}
+	},
+	"carousel-button-enter-full-screen": {
+		"styles": {
+			"default": {
+				"padding-left": "0"
 			}
 		}
 	},
 	"carousel-track": {
 		"styles": {
 			"default": {
-				"gap": "var(--global-spacing-2)",
-				"max-width": "var(--content-scale-width)",
+				"gap": "initial",
+				"max-width": "initial",
 				"width": "100%"
 			},
 			"desktop": {
@@ -62,11 +90,44 @@
 			}
 		}
 	},
+	"carousel-controls": {
+		"styles": {
+			"default": {
+				"display": "flex",
+				"padding": "0 0 var(--global-spacing-2) 0"
+			},
+			"desktop": {}
+		}
+	},
 	"carousel-additional-controls": {
 		"styles": {
 			"default": {
 				"display": "flex"
+			},
+			"desktop": {
+				"display": "flex",
+				"gap": "var(--global-spacing-2)",
+				"padding": "0 0 0 var(--global-spacing-2)"
 			}
+		}
+	},
+	"carousel-fullscreen": {
+		"styles": {
+			"default": {
+				"color": "var(--global-white)",
+				"padding": "var(--global-spacing-5)"
+			},
+			"desktop": {}
+		}
+	},
+	"carousel-icon": {
+		"styles": {
+			"default": {
+				"fill": "currentColor",
+				"height": "var(--global-spacing-4)",
+				"width": "var(--global-spacing-4)"
+			},
+			"desktop": {}
 		}
 	}
 }
