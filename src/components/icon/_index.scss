@@ -4,10 +4,4 @@
 	display: inline-block;
 
 	@include scss.component-properties("icon");
-
-	&:hover {
-		cursor: pointer;
-
-		@include scss.component-properties("icon-hover");
-	}
 }
