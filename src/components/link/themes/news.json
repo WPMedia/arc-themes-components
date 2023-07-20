@@ -2,7 +2,8 @@
 	"link": {
 		"styles": {
 			"default": {
-				"color": "var(--color-primary)"
+				"color": "var(--text-color)",
+				"font-family": "var(--font-family-primary)"
 			}
 		}
 	},
