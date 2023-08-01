@@ -61,5 +61,12 @@
 				"gap": "var(--global-spacing-6)"
 			}
 		}
+	},
+	"carousel-additional-controls": {
+		"styles": {
+			"default": {
+				"display": "flex"
+			}
+		}
 	}
 }

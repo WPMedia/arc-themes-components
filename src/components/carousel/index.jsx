@@ -301,6 +301,10 @@ const Carousel = ({
 	};
 
 	const toggleAutoplay = () => {
+		if (!isAutoplaying && slide + 1 >= carouselItems.length) {
+			goToSlide(1);
+		}
+
 		emitEvent(isAutoplaying ? "galleryAutoplayStop" : "galleryAutoplayStart");
 		setIsAutoplaying(!isAutoplaying);
 	};
