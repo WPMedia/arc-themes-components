@@ -311,6 +311,9 @@
 					max-width: var(--content-scale-width),
 					width: 100%,
 				),
+				carousel-additional-controls: (
+					display: flex,
+				),
 				date: (
 					color: var(--text-color),
 					font-size: var(--body-font-size-small),
