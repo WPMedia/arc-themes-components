@@ -26,7 +26,7 @@ const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup, ...res
 
 	// If the aspect ratio is passed in (promo blocks do this), then use that instead
 	if (aspectRatio) {
-		console.log("If statement triggered");
+		// console.log("If statement triggered");
 		// const [w, h] = aspectRatio.split(":");
 
 		const [w, h] = aspectRatio ? aspectRatio.split(":") : [16, 9];
@@ -64,16 +64,12 @@ const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup, ...res
 		const embedAspectRatio = parseFloat(searchResult[1]);
 		const videoAspectRatio = truncate(1 / embedAspectRatio);
 
-		console.log(
-			`--- Aspect ratio: ${embedAspectRatio} | VideoAspectRatio: ${videoAspectRatio} ---`
-		);
+		// console.log(`--- Aspect ratio: ${embedAspectRatio} | VideoAspectRatio: ${videoAspectRatio} ---`);
 
 		const embedMarkupWithAspectRatio = embedMarkup;
 
 		// console.log("-----------------------------------------------------------");
-		console.log(
-			`Passed-in aspectRatio: ${aspectRatio} and viewportPercentage: ${viewportPercentage}`
-		);
+		// console.log(`Passed-in aspectRatio: ${aspectRatio} and viewportPercentage: ${viewportPercentage}`);
 		// console.log(`Calculated aspect ratio: ${truncate(w / h)}`);
 		// console.log(`Calculated videoAspectRatio: ${videoAspectRatio}`);
 		// console.log(embedMarkup);
