@@ -21,35 +21,90 @@ const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup, ...res
 
 	const truncate = (num) => Math.trunc(num * 10000) / 10000;
 
-	const [w, h] = aspectRatio ? aspectRatio.split(":") : [16, 9];
-	const videoAspectRatio = truncate(h / w);
+	// console.log(`--- Aspect ratio: ${embedAspectRatio} | VideoAspectRatio: ${videoAspectRatio} ---`);
+	let retVal;
 
-	const embedMarkupWithAspectRatio = formatPowaVideoEmbed(embedMarkup, {
-		"aspect-ratio": videoAspectRatio,
-	});
+	// If the aspect ratio is passed in (promo blocks do this), then use that instead
+	if (aspectRatio) {
+		console.log("If statement triggered");
+		// const [w, h] = aspectRatio.split(":");
 
-	return (
-		<div className={`${COMPONENT_CLASS_NAME}__frame`}>
-			<div
-				{...rest}
-				className={containerClassNames}
-				style={{
-					"--aspect-ratio": truncate(w / h),
-					"--height": viewportPercentage,
-				}}
-			>
-				{shouldRenderVideoContent ? (
-					<EmbedContainer markup={embedMarkupWithAspectRatio}>
-						<div
-							dangerouslySetInnerHTML={{
-								__html: embedMarkupWithAspectRatio,
-							}}
-						/>
-					</EmbedContainer>
-				) : null}
+		const [w, h] = aspectRatio ? aspectRatio.split(":") : [16, 9];
+		const videoAspectRatio = truncate(h / w);
+
+		const embedMarkupWithAspectRatio = formatPowaVideoEmbed(embedMarkup, {
+			"aspect-ratio": videoAspectRatio,
+		});
+
+		retVal = (
+			<div className={`${COMPONENT_CLASS_NAME}__frame`}>
+				<div
+					{...rest}
+					className={containerClassNames}
+					style={{
+						"--aspect-ratio": truncate(w / h),
+						"--height": viewportPercentage,
+					}}
+				>
+					{shouldRenderVideoContent ? (
+						<EmbedContainer markup={embedMarkupWithAspectRatio}>
+							<div
+								dangerouslySetInnerHTML={{
+									__html: embedMarkupWithAspectRatio,
+								}}
+							/>
+						</EmbedContainer>
+					) : null}
+				</div>
 			</div>
-		</div>
-	);
+		);
+	} else {
+		// Extract the aspect ratio from embedMarkup
+		const searchResult = /data-aspect-ratio="([.0-9]+)"/.exec(embedMarkup);
+		const embedAspectRatio = parseFloat(searchResult[1]);
+		const videoAspectRatio = truncate(1 / embedAspectRatio);
+
+		console.log(
+			`--- Aspect ratio: ${embedAspectRatio} | VideoAspectRatio: ${videoAspectRatio} ---`
+		);
+
+		const embedMarkupWithAspectRatio = embedMarkup;
+
+		// console.log("-----------------------------------------------------------");
+		console.log(
+			`Passed-in aspectRatio: ${aspectRatio} and viewportPercentage: ${viewportPercentage}`
+		);
+		// console.log(`Calculated aspect ratio: ${truncate(w / h)}`);
+		// console.log(`Calculated videoAspectRatio: ${videoAspectRatio}`);
+		// console.log(embedMarkup);
+		// console.log(`--- Aspect ratio: ${embedAspectRatio} | VideoAspectRatio: ${videoAspectRatio} ---`);
+		// console.log("-----------------------------------------------------------");
+
+		retVal = (
+			<div className={`${COMPONENT_CLASS_NAME}__frame`}>
+				<div
+					{...rest}
+					className={containerClassNames}
+					style={{
+						"--aspect-ratio": videoAspectRatio,
+						"--height": viewportPercentage,
+					}}
+				>
+					{shouldRenderVideoContent ? (
+						<EmbedContainer markup={embedMarkupWithAspectRatio}>
+							<div
+								dangerouslySetInnerHTML={{
+									__html: embedMarkupWithAspectRatio,
+								}}
+							/>
+						</EmbedContainer>
+					) : null}
+				</div>
+			</div>
+		);
+	}
+
+	return retVal;
 };
 
 Video.propTypes = {
