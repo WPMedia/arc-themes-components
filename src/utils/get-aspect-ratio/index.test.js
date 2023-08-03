@@ -22,21 +22,21 @@ describe("should correctly calculate the aspect ratio given a width and height",
 		expect(aspectRatio).toEqual("4:3");
 	});
 
-	it("does not incorrectly simplify a 1 x 1 content item", () => {
+	it("does not incorrectly simplify a 1 x 1 content item's aspect ratio", () => {
 		const width = 1;
 		const height = 1;
 		const aspectRatio = getAspectRatio(width, height);
 		expect(aspectRatio).toEqual("1:1");
 	});
 
-	it("does not incorrectly simplify a 13 x 5 content item", () => {
+	it("does not incorrectly simplify a 13 x 5 content item's aspect ratio", () => {
 		const width = 13;
 		const height = 5;
 		const aspectRatio = getAspectRatio(width, height);
 		expect(aspectRatio).toEqual("13:5");
 	});
 
-	it("does not incorrectly simplify a 33 x 100 content item", () => {
+	it("does not incorrectly simplify a 33 x 100 content item's aspect ratio", () => {
 		const width = 33;
 		const height = 100;
 		const aspectRatio = getAspectRatio(width, height);
