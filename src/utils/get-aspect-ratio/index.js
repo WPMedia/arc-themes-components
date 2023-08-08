@@ -4,7 +4,7 @@
  * @param valA First integer
  * @param valB Second integer
  *
- * @returns An integer representing the GCD of valA and valB
+ * @returns An integer representing the GCD of `valA` and `valB`
  */
 const gcd = (valA, valB) => {
 	let a = Math.abs(valA);
@@ -26,7 +26,7 @@ const gcd = (valA, valB) => {
  * @param width Content width in pixels
  * @param height Content height in pixels
  *
- * @returns A string of the form /\d+:\d+/ representing the aspect ratio in simplest form
+ * @returns A string of the form `/\d+:\d+/` representing the aspect ratio in simplest form
  */
 const getAspectRatio = (width, height) => {
 	const divisor = gcd(width, height);
