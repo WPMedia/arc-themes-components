@@ -29,6 +29,11 @@ const gcd = (valA, valB) => {
  * @returns A string of the form `/\d+:\d+/` representing the aspect ratio in simplest form
  */
 const getAspectRatio = (width, height) => {
+	// If height is zero, return null
+	if (height === 0) {
+		return null;
+	}
+
 	const divisor = gcd(width, height);
 	const aspectWidth = width / divisor;
 	const aspectHeight = height / divisor;
