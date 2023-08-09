@@ -16,8 +16,8 @@
 		"styles": {
 			"default": {
 				"display": "none",
-				"padding-left": "var(--global-spacing-4)",
-				"padding-right": "var(--global-spacing-4)"
+				"padding-left": "var(--global-spacing-5)",
+				"padding-right": "var(--global-spacing-5)"
 			},
 			"desktop": {
 				"display": "flex"
@@ -114,8 +114,18 @@
 	"carousel-fullscreen": {
 		"styles": {
 			"default": {
-				"color": "var(--global-white)",
-				"padding": "var(--global-spacing-5)"
+				"color": "var(--global-white)"
+			},
+			"desktop": {}
+		}
+	},
+	"carousel-fullscreen-controls": {
+		"styles": {
+			"default": {
+				"padding-top": "var(--global-spacing-5)",
+				"padding-right": "var(--global-spacing-5)",
+				"padding-bottom": "0",
+				"padding-left": "var(--global-spacing-5)"
 			},
 			"desktop": {}
 		}

@@ -164,6 +164,10 @@
 		@include scss.component-properties("carousel-fullscreen");
 
 		.c-carousel {
+			&__controls {
+				@include scss.component-properties("carousel-fullscreen-controls");
+			}
+
 			&__image-counter-label {
 				@include scss.component-properties("carousel-fullscreen-image-counter");
 			}
