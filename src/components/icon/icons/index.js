@@ -7,6 +7,7 @@ export { default as ChevronRight } from "./ChevronRight";
 export { default as ChevronUp } from "./ChevronUp";
 export { default as Close } from "./Close";
 export { default as Envelope } from "./Envelope";
+export { default as EnvelopeOpen } from "./EnvelopeOpen";
 export { default as Facebook } from "./Facebook";
 export { default as Fullscreen } from "./Fullscreen";
 export { default as HamburgerMenu } from "./HamburgerMenu";

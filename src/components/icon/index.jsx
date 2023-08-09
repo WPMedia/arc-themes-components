@@ -65,6 +65,7 @@ Icon.propTypes = {
 		"ChevronUp",
 		"Close",
 		"Envelope",
+		"EnvelopeOpen",
 		"Facebook",
 		"Fullscreen",
 		"HamburgerMenu",
