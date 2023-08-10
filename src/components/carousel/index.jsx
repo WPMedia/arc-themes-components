@@ -204,7 +204,7 @@ const Carousel = ({
 	const [slidesToShowInView, setSlidesToShowInView] = useState(0);
 	const [slide, setSlide] = useState(0);
 	const [position, setPosition] = useState(0);
-	const [isFullScreen, setisFullScreen] = useState(false);
+	const [isFullScreen, setIsFullScreen] = useState(false);
 	const [isAutoplaying, setIsAutoplaying] = useState(false);
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 	const carouselElement = useRef();
@@ -256,10 +256,10 @@ const Carousel = ({
 		const handleFullscreen = () => {
 			if (document.fullscreenEnabled || document.webkitFullscreenEnabled) {
 				if (document.fullscreenElement || document.webkitFullscreenElement) {
-					setisFullScreen(true);
+					setIsFullScreen(true);
 					emitEvent("galleryExpandEnter");
 				} else {
-					setisFullScreen(false);
+					setIsFullScreen(false);
 					emitEvent("galleryExpandExit");
 				}
 			}
