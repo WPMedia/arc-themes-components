@@ -43,10 +43,10 @@ describe("should correctly calculate the aspect ratio given a width and height",
 		expect(aspectRatio).toEqual("33:100");
 	});
 
-	it("returns null if zero is passed in for the height", () => {
+	it("returns undefined if zero is passed in for the height", () => {
 		const width = 21;
 		const height = 0;
 		const aspectRatio = getAspectRatio(width, height);
-		expect(aspectRatio).toEqual(null);
+		expect(aspectRatio).toEqual(undefined);
 	});
 });
