@@ -31,7 +31,7 @@ const gcd = (valA, valB) => {
 const getAspectRatio = (width, height) => {
 	// If height is zero, return null
 	if (height === 0) {
-		return null;
+		return undefined;
 	}
 
 	const divisor = gcd(width, height);
