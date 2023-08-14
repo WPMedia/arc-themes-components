@@ -34,6 +34,7 @@ import formatCredits from "./src/utils/format-credits";
 import formatPowaVideoEmbed from "./src/utils/format-powa-video-embed";
 import formatSocialURL from "./src/utils/format-social-url";
 import formatURL from "./src/utils/format-url";
+import getAspectRatio from "./src/utils/get-aspect-ratio";
 
 // the following are ordered by dependency
 import getImageFromANS from "./src/utils/get-image-from-ans";
@@ -63,6 +64,7 @@ export {
 	formatPowaVideoEmbed,
 	formatSocialURL,
 	formatURL,
+	getAspectRatio,
 	getImageFromANS,
 	getPromoType,
 	getVideoFromANS,
