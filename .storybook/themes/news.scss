@@ -295,8 +295,11 @@
 				),
 				carousel-actions: (
 					display: none,
-					padding-left: var(--global-spacing-4),
-					padding-right: var(--global-spacing-4),
+					padding-left: var(--global-spacing-5),
+					padding-right: var(--global-spacing-5),
+				),
+				carousel-additional-controls: (
+					display: flex,
 				),
 				carousel-button: (
 					align-items: center,
@@ -311,38 +314,43 @@
 					padding: 0 var(--global-spacing-2),
 					width: auto,
 				),
+				carousel-button-enter-full-screen: (
+					padding-left: 0,
+				),
 				carousel-button-full-screen: (
 					color: var(--global-white),
 				),
 				carousel-button-full-screen-hover: (
 					color: var(--global-neutral-3),
 				),
-				carousel-button-previous: (
-					color: var(--global-white),
-				),
 				carousel-button-next: (
 					color: var(--global-white),
 				),
-				carousel-track: (
-					gap: initial,
-					max-width: initial,
-					width: 100%,
+				carousel-button-previous: (
+					color: var(--global-white),
 				),
 				carousel-controls: (
 					display: flex,
 					padding: 0 0 var(--global-spacing-2) 0,
 				),
-				carousel-additional-controls: (
-					display: flex,
-				),
 				carousel-fullscreen: (
 					color: var(--global-white),
-					padding: var(--global-spacing-5),
+				),
+				carousel-fullscreen-controls: (
+					padding-top: var(--global-spacing-5),
+					padding-right: var(--global-spacing-5),
+					padding-bottom: 0,
+					padding-left: var(--global-spacing-5),
 				),
 				carousel-icon: (
 					fill: currentColor,
 					height: var(--global-spacing-4),
 					width: var(--global-spacing-4),
+				),
+				carousel-track: (
+					gap: initial,
+					max-width: initial,
+					width: 100%,
 				),
 				date: (
 					color: var(--text-color),
