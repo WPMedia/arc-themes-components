@@ -288,31 +288,69 @@
 					color: var(--global-neutral-3),
 				),
 				carousel: (
+					font-family: var(--font-family-primary),
+					font-size: var(--body-font-size-tiny),
+					line-height: var(--body-line-height-tiny),
 					--slides: 1,
 				),
 				carousel-actions: (
 					display: none,
-					padding-left: var(--global-spacing-4),
-					padding-right: var(--global-spacing-4),
-				),
-				carousel-button: (
-					box-shadow: var(--global-box-shadow-1),
-					border-radius: var(--border-radius),
-					background-color: var(--global-white),
-					height: var(--global-spacing-8),
-					width: auto,
-					padding: 0 var(--global-spacing-2),
-					display: flex,
-					align-items: center,
-					gap: var(--global-spacing-2),
-				),
-				carousel-track: (
-					gap: var(--global-spacing-2),
-					max-width: var(--content-scale-width),
-					width: 100%,
+					padding-left: var(--global-spacing-5),
+					padding-right: var(--global-spacing-5),
 				),
 				carousel-additional-controls: (
 					display: flex,
+				),
+				carousel-button: (
+					align-items: center,
+					background-color: transparent,
+					border: none,
+					box-shadow: none,
+					display: flex,
+					font-size: var(--body-font-size-tiny),
+					gap: var(--global-spacing-2),
+					height: var(--global-spacing-4),
+					line-height: var(--body-line-height-tiny),
+					padding: 0 var(--global-spacing-2),
+					width: auto,
+				),
+				carousel-button-enter-full-screen: (
+					padding-left: 0,
+				),
+				carousel-button-full-screen: (
+					color: var(--global-white),
+				),
+				carousel-button-full-screen-hover: (
+					color: var(--global-neutral-3),
+				),
+				carousel-button-next: (
+					color: var(--global-white),
+				),
+				carousel-button-previous: (
+					color: var(--global-white),
+				),
+				carousel-controls: (
+					display: flex,
+					padding: 0 0 var(--global-spacing-2) 0,
+				),
+				carousel-fullscreen: (
+					color: var(--global-white),
+				),
+				carousel-fullscreen-controls: (
+					padding-top: var(--global-spacing-5),
+					padding-right: var(--global-spacing-5),
+					padding-bottom: 0,
+					padding-left: var(--global-spacing-5),
+				),
+				carousel-icon: (
+					fill: currentColor,
+					height: var(--global-spacing-4),
+					width: var(--global-spacing-4),
+				),
+				carousel-track: (
+					gap: initial,
+					max-width: initial,
+					width: 100%,
 				),
 				date: (
 					color: var(--text-color),

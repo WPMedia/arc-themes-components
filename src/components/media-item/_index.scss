@@ -5,6 +5,10 @@
 
 	&__fig-caption {
 		@include scss.component-properties("media-item-fig-caption");
+
+		&--fullscreen {
+			@include scss.component-properties("media-item-fig-caption-fullscreen");
+		}
 	}
 
 	&__title {

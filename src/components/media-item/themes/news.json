@@ -18,6 +18,14 @@
 			}
 		}
 	},
+	"media-item-fig-caption-fullscreen": {
+		"styles": {
+			"default": {
+				"padding-left": "var(--global-spacing-5)",
+				"padding-right": "var(--global-spacing-5)"
+			}
+		}
+	},
 	"media-item-title": {
 		"styles": {
 			"default": {

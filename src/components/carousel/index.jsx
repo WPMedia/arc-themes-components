@@ -11,88 +11,123 @@ import DotIndicatorArea from "./_children/DotIndicatorArea";
 import ThumbnailIndicatorArea from "./_children/ThumbnailIndicatorArea";
 
 const COMPONENT_CLASS_NAME = "c-carousel";
+const BUTTON_BASE_CLASS_NAME = `${COMPONENT_CLASS_NAME}__button`;
+const ICON_BASE_CLASS_NAME = `${COMPONENT_CLASS_NAME}__icon`;
 
-const DefaultNextButton = ({ id, onClick }) => (
+const getFullScreenClassName = (className, isFullScreen) =>
+	isFullScreen ? `${className} ${className}--fullscreen` : className;
+
+const DefaultNextButton = ({ id, onClick, isFullScreen }) => (
 	<Button
 		id={id}
 		onClick={onClick}
 		label="Next Slide"
-		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--next`}
+		className={`${getFullScreenClassName(
+			`${BUTTON_BASE_CLASS_NAME}`,
+			isFullScreen
+		)} ${BUTTON_BASE_CLASS_NAME}--next`}
 	>
 		Next
 	</Button>
 );
 
-const DefaultPreviousButton = ({ id, onClick }) => (
+const DefaultPreviousButton = ({ id, onClick, isFullScreen }) => (
 	<Button
 		id={id}
 		onClick={onClick}
 		label="Previous Slide"
-		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--previous`}
+		className={`${getFullScreenClassName(
+			`${BUTTON_BASE_CLASS_NAME}`,
+			isFullScreen
+		)} ${BUTTON_BASE_CLASS_NAME}--previous`}
 	>
 		Previous
 	</Button>
 );
 
-const DefaultAdditionalPreviousButton = ({ id, onClick }) => (
+const resolvedIcon = (element, isFullScreen) =>
+	cloneElement(element, {
+		className: `${getFullScreenClassName(`${ICON_BASE_CLASS_NAME}`, isFullScreen)} ${
+			element?.props?.className || ""
+		}`,
+	});
+
+const DefaultAdditionalPreviousButton = ({ id, onClick, isFullScreen }) => (
 	<Button
 		id={id}
 		onClick={onClick}
 		label="Previous Slide"
-		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--additional-previous`}
+		className={`${getFullScreenClassName(
+			`${BUTTON_BASE_CLASS_NAME}`,
+			isFullScreen
+		)} ${BUTTON_BASE_CLASS_NAME}--additional-previous`}
 	>
-		<Icon name="ChevronLeft" />
+		{resolvedIcon(<Icon name="ChevronLeft" />, isFullScreen)}
 	</Button>
 );
 
-const DefaultAdditionalNextButton = ({ id, onClick }) => (
+const DefaultAdditionalNextButton = ({ id, onClick, isFullScreen }) => (
 	<Button
 		id={id}
 		onClick={onClick}
 		label="Next Slide"
-		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--additional-next`}
+		className={`${getFullScreenClassName(
+			`${BUTTON_BASE_CLASS_NAME}`,
+			isFullScreen
+		)} ${BUTTON_BASE_CLASS_NAME}--additional-next`}
 	>
-		<Icon name="ChevronRight" />
+		{resolvedIcon(<Icon name="ChevronLeft" />, isFullScreen)}
 	</Button>
 );
 
 /* istanbul ignore next  */
-const DefaultExitFullScreenButton = ({ id, onClick }) => (
+const DefaultExitFullScreenButton = ({ id, onClick, isFullScreen }) => (
 	<Button
 		id={id}
 		onClick={onClick}
 		label="Exit full screen mode displaying the carousel"
-		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--exit-full-screen`}
+		className={`${getFullScreenClassName(
+			`${BUTTON_BASE_CLASS_NAME}`,
+			isFullScreen
+		)} ${BUTTON_BASE_CLASS_NAME}--exit-full-screen`}
 	>
 		Minimize Screen
 	</Button>
 );
 
-const DefaultEnterFullScreenButton = ({ id, onClick }) => (
+const DefaultEnterFullScreenButton = ({ id, onClick, isFullScreen }) => (
 	<Button
 		id={id}
 		onClick={onClick}
 		label="Enter full screen mode displaying the carousel"
-		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--enter-full-screen`}
+		className={`${getFullScreenClassName(
+			`${BUTTON_BASE_CLASS_NAME}`,
+			isFullScreen
+		)} ${BUTTON_BASE_CLASS_NAME}--enter-full-screen`}
 	>
 		Full Screen
 	</Button>
 );
 
-const AutoplayButton = ({ id, onClick, iconNode, text, ariaLabel }) => (
+const AutoplayButton = ({ id, onClick, iconNode, text, ariaLabel, isFullScreen }) => (
 	<Button
 		id={id}
 		onClick={onClick}
 		label={ariaLabel}
-		className={`${COMPONENT_CLASS_NAME}__button ${COMPONENT_CLASS_NAME}__button--toggle-auto-play`}
+		className={`${getFullScreenClassName(
+			`${BUTTON_BASE_CLASS_NAME}`,
+			isFullScreen
+		)} ${BUTTON_BASE_CLASS_NAME}--toggle-auto-play`}
 	>
-		{iconNode}
+		{iconNode && resolvedIcon(iconNode, isFullScreen)}
 		{text}
 	</Button>
 );
 
-const resolvedButton = (element, id, className, onClick) =>
-	cloneElement(element, {
+const resolvedButton = (element, id, className, onClick, isFullScreen, cloneIcon = true) => {
+	const { children } = element.props;
+
+	return cloneElement(element, {
 		"aria-controls": id,
 		onClick: (e) => {
 			onClick();
@@ -100,8 +135,16 @@ const resolvedButton = (element, id, className, onClick) =>
 				element.props.onClick(e);
 			}
 		},
-		className: `${COMPONENT_CLASS_NAME}__button ${className} ${element.props?.className || ""}`,
+		className: `${getFullScreenClassName(`${BUTTON_BASE_CLASS_NAME}`, isFullScreen)} ${className} ${
+			element.props?.className || ""
+		}`,
+		children: cloneIcon
+			? Children.map(children, (child) =>
+					child.type === Icon ? resolvedIcon(cloneElement(child), isFullScreen) : child
+			  )
+			: children,
 	});
+};
 
 const getSlidesToShowFromDom = (id) =>
 	parseInt(window?.getComputedStyle(id)?.getPropertyValue("--viewable-slides") || 4, 10);
@@ -318,51 +361,69 @@ const Carousel = ({
 	});
 
 	const resolvedNextButton = nextButton ? (
-		resolvedButton(nextButton, id, `${COMPONENT_CLASS_NAME}__button--next`, nextSlide)
+		resolvedButton(
+			nextButton,
+			id,
+			`${BUTTON_BASE_CLASS_NAME}--next`,
+			nextSlide,
+			isFullScreen,
+			false
+		)
 	) : (
-		<DefaultNextButton id={id} onClick={() => nextSlide()} />
+		<DefaultNextButton id={id} onClick={() => nextSlide()} isFullScreen={isFullScreen} />
 	);
 
 	const resolvedPreviousButton = previousButton ? (
-		resolvedButton(previousButton, id, `${COMPONENT_CLASS_NAME}__button--previous`, previousSlide)
+		resolvedButton(
+			previousButton,
+			id,
+			`${BUTTON_BASE_CLASS_NAME}--previous`,
+			previousSlide,
+			isFullScreen,
+			false
+		)
 	) : (
-		<DefaultPreviousButton id={id} onClick={() => previousSlide()} />
+		<DefaultPreviousButton id={id} onClick={() => previousSlide()} isFullScreen={isFullScreen} />
 	);
 
 	const resolvedAdditionalNextButton = additionalNextButton ? (
 		resolvedButton(
 			additionalNextButton,
 			id,
-			`${COMPONENT_CLASS_NAME}__button--additional-next`,
-			nextSlide
+			`${BUTTON_BASE_CLASS_NAME}--additional-next`,
+			nextSlide,
+			isFullScreen
 		)
 	) : (
-		<DefaultAdditionalNextButton id={id} onClick={nextSlide} />
+		<DefaultAdditionalNextButton id={id} onClick={nextSlide} isFullScreen={isFullScreen} />
 	);
 
 	const resolvedAdditionalPreviousButton = additionalPreviousButton ? (
 		resolvedButton(
 			additionalPreviousButton,
 			id,
-			`${COMPONENT_CLASS_NAME}__button--additional-previous`,
-			previousSlide
+			`${BUTTON_BASE_CLASS_NAME}--additional-previous`,
+			previousSlide,
+			isFullScreen
 		)
 	) : (
-		<DefaultAdditionalPreviousButton id={id} onClick={previousSlide} />
+		<DefaultAdditionalPreviousButton id={id} onClick={previousSlide} isFullScreen={isFullScreen} />
 	);
 
 	const resolvedFullScreenShowButton = fullScreenShowButton ? (
 		resolvedButton(
 			fullScreenShowButton,
 			id,
-			`${COMPONENT_CLASS_NAME}__button--enter-full-screen`,
-			toggleFullScreen
+			`${BUTTON_BASE_CLASS_NAME}--enter-full-screen`,
+			toggleFullScreen,
+			isFullScreen
 		)
 	) : (
 		<DefaultEnterFullScreenButton
 			btnText={isFullScreen ? "Minimize Screen" : "Full Screen"}
 			id={id}
 			onClick={toggleFullScreen}
+			isFullScreen={isFullScreen}
 		/>
 	);
 
@@ -370,11 +431,13 @@ const Carousel = ({
 		resolvedButton(
 			fullScreenMinimizeButton,
 			id,
-			`${COMPONENT_CLASS_NAME}__button--exit-full-screen`,
-			toggleFullScreen
+			`${BUTTON_BASE_CLASS_NAME}--exit-full-screen`,
+			toggleFullScreen,
+			isFullScreen,
+			false
 		)
 	) : (
-		<DefaultExitFullScreenButton id={id} onClick={toggleFullScreen} />
+		<DefaultExitFullScreenButton id={id} onClick={toggleFullScreen} isFullScreen={isFullScreen} />
 	);
 
 	// check to ensure client-side to make sure document is available
@@ -414,6 +477,7 @@ const Carousel = ({
 							text={isAutoplaying ? stopAutoplayText : startAutoplayText}
 							iconNode={isAutoplaying ? stopAutoplayIcon : startAutoplayIcon}
 							ariaLabel={isAutoplaying ? autoplayPhraseLabels.stop : autoplayPhraseLabels.start}
+							isFullScreen={isFullScreen}
 						/>
 					) : null}
 				</div>
