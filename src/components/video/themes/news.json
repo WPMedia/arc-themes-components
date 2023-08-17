@@ -12,5 +12,12 @@
 				"background-color": "var(--global-black)"
 			}
 		}
+	},
+	"mobile-video-frame": {
+		"styles": {
+			"default": {
+				"background-color": "#ffffff"
+			}
+		}
 	}
 }

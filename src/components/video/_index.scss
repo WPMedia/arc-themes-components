@@ -18,6 +18,14 @@
 	max-width: 100%;
 }
 
-.c-video__frame {
-	@include scss.component-properties("video-frame");
+@media all and (min-width: 801px) {
+	.c-video__frame {
+		@include scss.component-properties("video-frame");
+	}
+}
+
+@media all and (max-width: 800px) {
+	.c-video__frame {
+		@include scss.component-properties("mobile-video-frame");
+	}
 }
