@@ -7,7 +7,6 @@ describe("handleRedirect()", () => {
 				data: { type: "story", related_content: { redirect: [{ redirect_url: "google.com" }] } },
 			});
 		} catch (e) {
-			console.log(e);
 			expect(e.status).toEqual(302);
 			expect(e.location).toEqual("google.com");
 		}

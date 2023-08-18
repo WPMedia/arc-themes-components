@@ -14,7 +14,6 @@ const handleRedirect = (response) => {
 	const redirectUrl = get(content, "related_content.redirect[0].redirect_url", null);
 
 	if (contentType && contentType === "story" && redirectUrl) {
-		console.log("this is a redirect");
 		throw RedirectError(redirectUrl);
 	}
 };
