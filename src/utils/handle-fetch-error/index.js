@@ -1,5 +1,14 @@
 const handleFetchError = (error) => {
 	if (error?.response) {
+		if (error.response?.status === "404") {
+			const NotFoundError = (message = "Not Found") => {
+				const err = new Error();
+				err.message = message;
+				err.status = 404;
+				return err;
+			};
+			throw NotFoundError();
+		}
 		throw new Error(
 			`The response from the server was an error with the status code ${error?.response?.status}.`
 		);
