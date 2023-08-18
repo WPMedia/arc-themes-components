@@ -2,7 +2,7 @@
 
 This branch exists as a test/POC of distinct styling for mobile videos.
 
-## Analysis
+## Summary
 
 All changes are in the `Video` component (`src/component/video/*`). I added CSS media queries to change the styling once the page narrows (I chose `800px` so it would be easy to notice the transition, but `500px` would be better for targeting mobile devices). I didn't go crazy with the styling options; I only removed the black bars on the sides of the video container when the page is roughly phone sized.
 
