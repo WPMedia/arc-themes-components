@@ -475,7 +475,7 @@
 					margin: auto,
 				),
 				video-frame: (
-					background-color: var(--global-black),
+					background-color: transparent,
 				),
 			),
 			blocks: (
@@ -1373,6 +1373,9 @@
 				),
 				carousel-track: (
 					gap: var(--global-spacing-6),
+				),
+				video-frame: (
+					background-color: var(--global-black),
 				),
 			),
 			blocks: (
