@@ -9,6 +9,9 @@
 	"video-frame": {
 		"styles": {
 			"default": {
+				"background-color": "transparent"
+			},
+			"desktop": {
 				"background-color": "var(--global-black)"
 			}
 		}
