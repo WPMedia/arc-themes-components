@@ -42,7 +42,6 @@
 	}
 
 	&__actions {
-		display: flex;
 		justify-content: space-between;
 		place-self: center;
 		pointer-events: none;
@@ -174,6 +173,12 @@
 
 			&__image-counter-label {
 				@include scss.component-properties("carousel-fullscreen-image-counter");
+			}
+
+			&__button {
+				&--toggle-auto-play {
+					@include scss.component-properties("carousel-fullscreen-button-toggle-auto-play");
+				}
 			}
 		}
 	}
