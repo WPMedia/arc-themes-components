@@ -27,12 +27,6 @@ section {
 }
 html {
 	min-height: 100vh;
-	&:focus-within {
-		scroll-behavior: smooth;
-		@media (prefers-reduced-motion: reduce) {
-			scroll-behavior: auto;
-		}
-	}
 }
 html,
 body {
