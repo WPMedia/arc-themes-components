@@ -12,6 +12,8 @@ const handleFetchError = (error) => {
 		throw new Error(
 			`The response from the server was an error with the status code ${error?.response?.status}.`
 		);
+	} else if (error?.statusCode === 302) {
+		throw error;
 	} else if (error?.request) {
 		throw new Error("The request to the server failed with no response.");
 	} else {
