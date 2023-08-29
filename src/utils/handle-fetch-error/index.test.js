@@ -9,6 +9,14 @@ describe("handleFetchError()", () => {
 		}
 	});
 
+	it("handles 302 redirects", () => {
+		try {
+			handleFetchError({ location: "test.com", statusCode: 302 });
+		} catch (e) {
+			expect(e).toEqual({ location: "test.com", statusCode: 302 });
+		}
+	});
+
 	it("handles errors with the response", () => {
 		try {
 			handleFetchError({ response: { status: "400" } });
