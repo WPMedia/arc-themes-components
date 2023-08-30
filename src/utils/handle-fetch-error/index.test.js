@@ -3,7 +3,7 @@ import handleFetchError from ".";
 describe("handleFetchError()", () => {
 	it("handles 404 errors", () => {
 		try {
-			handleFetchError({ response: { status: "404" } });
+			handleFetchError({ response: { status: 404 } });
 		} catch (e) {
 			expect(e.message).toEqual("Not Found");
 		}

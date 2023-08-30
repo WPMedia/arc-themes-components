@@ -1,10 +1,10 @@
 const handleFetchError = (error) => {
 	if (error?.response) {
-		if (error.response?.status === "404") {
+		if (error.response?.status === 404) {
 			const NotFoundError = (message = "Not Found") => {
 				const err = new Error();
 				err.message = message;
-				err.status = 404;
+				err.statusCode = 404;
 				return err;
 			};
 			throw NotFoundError();
