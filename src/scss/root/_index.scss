@@ -183,7 +183,7 @@ $component-map: get-all-component-definitions($tokens, $breakpoints);
 			// Alias Tokens
 			@if map.has-key($tokens, "alias") {
 				@each $name, $value in map.get($tokens, "alias") {
-					--#{$name}: #{maintain-quotes(replace-token-reference($global))};
+					--#{$name}: #{maintain-quotes(replace-token-reference($value))};
 				}
 			}
 
