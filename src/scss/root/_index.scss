@@ -164,6 +164,15 @@ $component-map: get-all-component-definitions($tokens, $breakpoints);
 					@if type-of($cValue) != map {
 						$new-value: replace-token-reference($cValue);
 						--#{$prefix}-#{$componentName}-#{$cProperty}: #{maintain-quotes($new-value)};
+					} @else {
+						@if type-of($cValue) == map {
+							@each $property, $value in $cValue {
+								$new-value: replace-token-reference($cValue);
+								--#{$prefix}-#{$componentName}-#{$cProperty}-#{$property}: #{maintain-quotes(
+										$new-value
+									)};
+							}
+						}
 					}
 				}
 			}
