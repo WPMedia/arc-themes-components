@@ -97,6 +97,27 @@ $tokens: (
 		}
 	}
 
+	@include it("it returns only alias tokens") {
+		@include assert {
+			@include output {
+				@include root.root-tokens(
+					(
+						alias: (
+							color: #f00,
+							font-family: "Inter",
+						),
+					)
+				);
+			}
+			@include expect {
+				:root {
+					--color: #f00;
+					--font-family: "Inter";
+				}
+			}
+		}
+	}
+
 	@include it("it returns only component tokens") {
 		@include assert {
 			@include output {
