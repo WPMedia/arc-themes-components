@@ -15,9 +15,11 @@
 	aspect-ratio: var(--aspect-ratio);
 	// convert to vh via * 1vh
 	max-height: calc(var(--height) * 1vh);
-	max-width: 100%;
-}
 
-.c-video__frame {
-	@include scss.component-properties("video-frame");
+	&__frame {
+		@include scss.component-properties("video-frame");
+		&:has(.powa-vertical) {
+			@include scss.component-properties("vertical-video-frame");
+		}
+	}
 }

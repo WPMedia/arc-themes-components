@@ -15,5 +15,12 @@
 				"background-color": "var(--global-black)"
 			}
 		}
+	},
+	"vertical-video-frame": {
+		"styles": {
+			"default": {
+				"background-color": "transparent"
+			}
+		}
 	}
 }
