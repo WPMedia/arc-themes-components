@@ -5,7 +5,14 @@ import formatPowaVideoEmbed from "../../utils/format-powa-video-embed";
 
 const COMPONENT_CLASS_NAME = "c-video";
 
-const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup, ...rest }) => {
+const Video = ({
+	className,
+	aspectRatio,
+	viewportPercentage,
+	embedMarkup,
+	borderRadius,
+	...rest
+}) => {
 	// only render or call powaboot on client-side
 	const shouldRenderVideoContent = embedMarkup && typeof window !== "undefined";
 
@@ -26,6 +33,7 @@ const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup, ...res
 
 	const embedMarkupWithAspectRatio = formatPowaVideoEmbed(embedMarkup, {
 		"aspect-ratio": videoAspectRatio,
+		"border-radius": borderRadius,
 	});
 
 	return (
@@ -59,6 +67,8 @@ Video.propTypes = {
 	aspectRatio: PropTypes.string,
 	/* The vertical percentage of the viewport takes up */
 	viewportPercentage: PropTypes.number,
+	/* The vertical percentage of the viewport takes up */
+	borderRadius: PropTypes.number,
 };
 
 export default Video;
