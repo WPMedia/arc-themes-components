@@ -2,8 +2,11 @@ import { useEffect } from "react";
 import PropTypes from "prop-types";
 import EmbedContainer from "react-oembed-container";
 import formatPowaVideoEmbed from "../../utils/format-powa-video-embed";
+import getAspectRatioFromPowa from "../../utils/get-powa-aspect-ratio";
 
 const COMPONENT_CLASS_NAME = "c-video";
+
+const truncate = (num) => Math.trunc(num * 10000) / 10000;
 
 const Video = ({
 	className,
@@ -26,9 +29,12 @@ const Video = ({
 
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 
-	const truncate = (num) => Math.trunc(num * 10000) / 10000;
+	const validAspectRatio = aspectRatio && aspectRatio !== "--";
 
-	const [w, h] = aspectRatio ? aspectRatio.split(":") : [16, 9];
+	const [w, h] = validAspectRatio
+		? aspectRatio.split(":")
+		: getAspectRatioFromPowa(embedMarkup).split(":");
+
 	const videoAspectRatio = truncate(h / w);
 
 	const updatedEmbedMarkup = formatPowaVideoEmbed(embedMarkup, {
