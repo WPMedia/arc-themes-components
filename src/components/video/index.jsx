@@ -67,8 +67,8 @@ Video.propTypes = {
 	aspectRatio: PropTypes.string,
 	/* The vertical percentage of the viewport takes up */
 	viewportPercentage: PropTypes.number,
-	/* The vertical percentage of the viewport takes up */
-	borderRadius: PropTypes.number,
+	/* The border radius for the corners of the video */
+	borderRadius: PropTypes.bool,
 };
 
 export default Video;
