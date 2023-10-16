@@ -33,7 +33,7 @@ const Video = ({
 
 	const embedMarkupWithAspectRatio = formatPowaVideoEmbed(embedMarkup, {
 		"aspect-ratio": videoAspectRatio,
-		"border-radius": borderRadius,
+		"border-radius": videoAspectRatio > 1 ? borderRadius : 0,
 	});
 
 	return (
@@ -43,7 +43,7 @@ const Video = ({
 				className={containerClassNames}
 				style={{
 					"--aspect-ratio": truncate(w / h),
-					"--height": viewportPercentage,
+					"--height": videoAspectRatio > 1 ? viewportPercentage : "",
 				}}
 			>
 				{shouldRenderVideoContent ? (
