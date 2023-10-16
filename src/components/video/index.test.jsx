@@ -35,9 +35,36 @@ describe("Video", () => {
 		);
 	});
 
-	it("should render container with vertical viewport percentage", () => {
-		const { container } = render(<Video viewportPercentage={50} />);
+	it("should resolve the aspect-ratio from the embed markup if none is provided", () => {
+		window.powaBoot = jest.fn();
+		const { container } = render(
+			<Video embedMarkup="<div class='powa' data-aspect-ratio='0.75'/>" />
+		);
+		expect(window.powaBoot).toHaveBeenCalled();
+		expect(container.querySelector(`.${COMPONENT_CLASS_NAME}`)).toHaveStyle(
+			"--aspect-ratio: 1.3333"
+		);
+	});
+
+	it("should resolve the aspect-ratio from the embed markup if '--' is provided", () => {
+		window.powaBoot = jest.fn();
+		const { container } = render(
+			<Video aspectRatio="--" embedMarkup="<div class='powa' data-aspect-ratio='0.562'/>" />
+		);
+		expect(window.powaBoot).toHaveBeenCalled();
+		expect(container.querySelector(`.${COMPONENT_CLASS_NAME}`)).toHaveStyle(
+			"--aspect-ratio: 1.7777"
+		);
+	});
+
+	it("should render container with custom height when it's a 9:16 video", () => {
+		const { container } = render(<Video viewportPercentage={50} aspectRatio="9:16" />);
 		expect(container.querySelector(`.${COMPONENT_CLASS_NAME}`)).toHaveStyle("--height: 50");
+	});
+
+	it("should render container with default height when it's not a 9:16 video", () => {
+		const { container } = render(<Video viewportPercentage={50} aspectRatio="16:9" />);
+		expect(container.querySelector(`.${COMPONENT_CLASS_NAME}`)).toHaveStyle("--height: 65");
 	});
 
 	it("should initiate video and render markup if not empty", () => {
@@ -57,5 +84,25 @@ describe("Video", () => {
 		expect(window.powaBoot).toHaveBeenCalled();
 		expect(container.querySelector(".powa")).not.toBeNull();
 		expect(container.querySelector(".powa")).toHaveAttribute("data-aspect-ratio", "0.75");
+	});
+
+	it("should attach the border-radius attribute in the embed markup when it's a 9:16 video", () => {
+		window.powaBoot = jest.fn();
+		const { container } = render(
+			<Video borderRadius embedMarkup="<div class='powa' data-aspect-ratio='1.7777'/>" />
+		);
+		expect(window.powaBoot).toHaveBeenCalled();
+		expect(container.querySelector(".powa")).not.toBeNull();
+		expect(container.querySelector(".powa")).toHaveAttribute("data-border-radius", "true");
+	});
+
+	it("should not attach the border-radius attribute in the embed markup when it's a not a 9:16 video", () => {
+		window.powaBoot = jest.fn();
+		const { container } = render(
+			<Video borderRadius embedMarkup="<div class='powa' data-aspect-ratio='0.562'/>" />
+		);
+		expect(window.powaBoot).toHaveBeenCalled();
+		expect(container.querySelector(".powa")).not.toBeNull();
+		expect(container.querySelector(".powa")).not.toHaveAttribute("data-border-radius");
 	});
 });
