@@ -31,7 +31,7 @@ const Video = ({
 	const [w, h] = aspectRatio ? aspectRatio.split(":") : [16, 9];
 	const videoAspectRatio = truncate(h / w);
 
-	const embedMarkupWithAspectRatio = formatPowaVideoEmbed(embedMarkup, {
+	const updatedEmbedMarkup = formatPowaVideoEmbed(embedMarkup, {
 		"aspect-ratio": videoAspectRatio,
 		"border-radius": videoAspectRatio > 1 ? borderRadius : 0,
 	});
@@ -47,10 +47,10 @@ const Video = ({
 				}}
 			>
 				{shouldRenderVideoContent ? (
-					<EmbedContainer markup={embedMarkupWithAspectRatio}>
+					<EmbedContainer markup={updatedEmbedMarkup}>
 						<div
 							dangerouslySetInnerHTML={{
-								__html: embedMarkupWithAspectRatio,
+								__html: updatedEmbedMarkup,
 							}}
 						/>
 					</EmbedContainer>
