@@ -18,6 +18,7 @@
 
 	&__frame {
 		@include scss.component-properties("video-frame");
+		/* stylelint-disable selector-class-pattern */
 		&:has(.powa-vertical) {
 			@include scss.component-properties("vertical-video-frame");
 		}
