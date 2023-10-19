@@ -10,7 +10,9 @@ The `Video` component is a container used to initiate and display a Powa video p
 
 To maximize Core Web Vitals scores, the `aspect-ratio` property can be set to match the `embedMarkup`'s expected data. Please see [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio) and [Google's advice](https://web.dev/aspect-ratio/#maintaining-aspect-ratio-with-aspect-ratio) on this pattern.
 
-The `viewportPercentage` property can be used to set the percentage of the vertical viewport that the video should occupy. The default is `65`. This is designed so that the video's aspect ratio and video container maintain the desired aspect-ratio. For a mobile user, this can be helpful to ensure a vertical video does not take up the entire viewport.
+The `viewportPercentage` property can be used to set the percentage of the vertical viewport that the video should occupy. The default is `65` and this property only applies for videos in `9:16`. This is designed so that the video's aspect ratio and video container maintain the desired aspect-ratio. For a mobile user, this can be helpful to ensure a vertical video does not take up the entire viewport.
+
+The `borderRadius` property can be used to round the corners of the video player. The default is `false` and this property only applies for videos in `9:16`. This property maps the `data-border-radius` property from PoWa; The styling is entirely handled by the PoWa player.
 
 ## Usage
 
@@ -37,7 +39,7 @@ const Feature = () => {
 	<Story name="Video Half Vertical Viewport Loading">
 		<Video
 			viewportPercentage={50}
-			aspectRatio="16:9"
+			aspectRatio="9:16"
 			embedMarkup={
 				'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'
 			}
@@ -51,7 +53,7 @@ const Feature = () => {
 	<Story name="Video Full Vertical Viewport Loading">
 		<Video
 			viewportPercentage={100}
-			aspectRatio="16:9"
+			aspectRatio="9:16"
 			embedMarkup={
 				'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'
 			}
@@ -65,7 +67,7 @@ const Feature = () => {
 	<Story name="Video One Third Vertical Viewport Loading">
 		<Video
 			viewportPercentage={33.33}
-			aspectRatio="16:9"
+			aspectRatio="9:16"
 			embedMarkup={
 				'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'
 			}
@@ -78,15 +80,28 @@ const Feature = () => {
 <Canvas>
 	<Story name="Two videos, different aspect ratios">
 		<Video
-			viewportPercentage={33.33}
 			aspectRatio="4:3"
 			embedMarkup={
 				'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.75" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'
 			}
 		/>
 		<Video
-			viewportPercentage={33.33}
 			aspectRatio="16:9"
+			embedMarkup={
+				'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'
+			}
+		/>
+	</Story>
+</Canvas>
+
+** Vertical video with rounded corners **
+
+<Canvas>
+	<Story name="Vertical video with rounded corners with custom viewport percentage">
+		<Video
+			viewportPercentage={80}
+			aspectRatio="9:16"
+			borderRadius
 			embedMarkup={
 				'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'
 			}
