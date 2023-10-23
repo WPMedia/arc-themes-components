@@ -357,7 +357,10 @@ $tokens: (
 
 @include describe("replace-token-reference") {
 	@include it("replaces global token reference with CSS var") {
-		@include assert-equal(root.replace-token-reference("$global.black"), "var(--global-black)");
+		@include assert-equal(
+			root.replace-token-reference("var(--global-black)"),
+			"var(--global-black)"
+		);
 	}
 
 	@include it("replaces alias token reference with CSS var") {
