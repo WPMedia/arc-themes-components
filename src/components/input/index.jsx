@@ -8,6 +8,7 @@ export const FIELD_TYPES = {
 	EMAIL: "email",
 	PASSWORD: "password",
 	TEXT: "text",
+	SELECT: "select",
 };
 
 const INPUT_SIZE = {
@@ -41,6 +42,9 @@ const Input = ({
 	label,
 	name,
 	onChange,
+	optionLabelKey,
+	options,
+	optionValueKey,
 	placeholder,
 	required,
 	showDefaultError,
@@ -108,16 +112,36 @@ const Input = ({
 			<label className={`${COMPONENT_CLASS_NAME}__label`} htmlFor={inputId}>
 				{label}
 			</label>
-			<input
-				className={`${COMPONENT_CLASS_NAME}__input`}
-				id={inputId}
-				name={name}
-				type={type}
-				onBlur={handleBlur}
-				onChange={handleChange}
-				ref={inputElement}
-				{...fieldParameters}
-			/>
+			{type === FIELD_TYPES.SELECT ? (
+				<select
+					className={`${COMPONENT_CLASS_NAME}__input`}
+					id={inputId}
+					name={name}
+					onBlur={handleBlur}
+					onChange={handleChange}
+					ref={inputElement}
+					{...fieldParameters}
+				>
+					{options &&
+						options.map((option) => (
+							<option key={option[optionValueKey]} value={option[optionValueKey]}>
+								{option[optionLabelKey]}
+							</option>
+						))}
+				</select>
+			) : (
+				<input
+					className={`${COMPONENT_CLASS_NAME}__input`}
+					id={inputId}
+					name={name}
+					type={type}
+					onBlur={handleBlur}
+					onChange={handleChange}
+					ref={inputElement}
+					{...fieldParameters}
+				/>
+			)}
+
 			{tip || !valid ? (
 				<div className={`${COMPONENT_CLASS_NAME}__tip`} id={infoId}>
 					{!valid && inputElement.current?.validationMessage ? (
@@ -145,6 +169,12 @@ Input.propTypes = {
 	name: PropTypes.string.isRequired,
 	/** Callback function for when the input's value changes */
 	onChange: PropTypes.func,
+	/** Label key for the option objects */
+	optionLabelKey: PropTypes.string,
+	/** Array of option objects if type = FIELD_TYPES.SELECT */
+	options: PropTypes.array,
+	/** Value key for the option objects */
+	optionValueKey: PropTypes.string,
 	/** Placeholder text for the input */
 	placeholder: PropTypes.string,
 	/** Whether the input is required */
