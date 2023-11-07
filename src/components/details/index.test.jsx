@@ -15,7 +15,7 @@ describe("Details", () => {
 		const { container } = render(
 			<Details className={ADDITIONAL_CLASSES} summary="Summary">
 				Hello World
-			</Details>
+			</Details>,
 		);
 		const element = container.querySelector("details");
 		expect(element).toHaveClass(ADDITIONAL_CLASSES);
@@ -26,7 +26,7 @@ describe("Details", () => {
 		render(
 			<Details summary="Summary" icon={<>Icon</>} iconPlacement="left">
 				Hello World
-			</Details>
+			</Details>,
 		);
 		expect(screen.queryByText("Summary")).not.toBeNull();
 		expect(screen.queryByText("Hello World")).not.toBeNull();
@@ -38,7 +38,7 @@ describe("Details", () => {
 		const { container } = render(
 			<Details summary="Summary" icon={<>Icon</>} iconPlacement="left" childrenHTML>
 				{childMockHTML}
-			</Details>
+			</Details>,
 		);
 
 		expect(screen.queryByText("Summary")).not.toBeNull();
@@ -46,7 +46,7 @@ describe("Details", () => {
 
 		const element = container.querySelector("details > div");
 		expect(element.outerHTML).toMatchInlineSnapshot(
-			`"<div class=\\"c-details__content\\">Hello<br>World ÷</div>"`
+			`"<div class="c-details__content">Hello<br>World ÷</div>"`,
 		);
 	});
 });

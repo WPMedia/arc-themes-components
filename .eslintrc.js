@@ -4,12 +4,24 @@ module.exports = {
 		es6: true,
 		jest: true,
 	},
-	extends: ["airbnb", "plugin:react/jsx-runtime", "prettier", "plugin:storybook/recommended"],
+	extends: [
+		"airbnb",
+		"plugin:react/jsx-runtime",
+		"plugin:storybook/recommended",
+		"plugin:testing-library/react",
+		"prettier",
+	],
 	globals: {
 		Atomics: "readonly",
 		SharedArrayBuffer: "readonly",
 		Fusion: "readonly",
 	},
+	overrides: [
+		{
+			files: ["**/__tests__/**/*.js(x)*", "**/?(*.)+(test).js(x)*"],
+			extends: ["plugin:testing-library/react"],
+		},
+	],
 	parser: "@babel/eslint-parser",
 	parserOptions: {
 		ecmaFeatures: {
@@ -18,7 +30,15 @@ module.exports = {
 		ecmaVersion: 2020,
 		sourceType: "module",
 	},
-	plugins: ["react", "jest", "jsx-a11y", "react-hooks", "sort-exports"],
+	plugins: [
+		"jest",
+		"jest-dom",
+		"jsx-a11y",
+		"react",
+		"react-hooks",
+		"sort-exports",
+		"testing-library",
+	],
 	rules: {
 		"global-require": "off",
 		"import/no-unresolved": [

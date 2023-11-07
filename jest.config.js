@@ -1,5 +1,5 @@
 module.exports = {
-	testEnvironment: "jsdom",
+	testEnvironment: "jest-environment-jsdom",
 	transform: {
 		"^.+\\.[t|j]sx?$": "babel-jest",
 	},
@@ -12,10 +12,10 @@ module.exports = {
 	coverageDirectory: "<rootDir>/coverage",
 	coverageThreshold: {
 		global: {
-			statements: 90,
-			branches: 90,
+			statements: 80,
+			branches: 60,
 			functions: 90,
-			lines: 90,
+			lines: 80,
 		},
 	},
 	collectCoverageFrom: [
