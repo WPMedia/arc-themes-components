@@ -11,7 +11,7 @@ describe("Paragraph", () => {
       <p
         className="c-paragraph"
         style={
-          Object {
+          {
             "--paragraph-truncation": null,
           }
         }
@@ -34,16 +34,16 @@ describe("Paragraph", () => {
 	it("should apply truncation when specified", () => {
 		const { container } = render(<Paragraph truncationLines={3}>Paragraph Text</Paragraph>);
 		expect(container.querySelector(".c-paragraph").getAttribute("style")).toContain(
-			"--paragraph-truncation: 3;"
+			"--paragraph-truncation: 3;",
 		);
 	});
 
 	it("should apply custom classes in the class attribute", () => {
 		const { container } = render(
-			<Paragraph className="test-class, test-class-2">Paragraph Text</Paragraph>
+			<Paragraph className="test-class, test-class-2">Paragraph Text</Paragraph>,
 		);
 		expect(container.querySelector(".c-paragraph").getAttribute("class")).toContain(
-			"test-class, test-class-2"
+			"test-class, test-class-2",
 		);
 	});
 });
