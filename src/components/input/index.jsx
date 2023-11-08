@@ -197,6 +197,8 @@ Input.defaultProps = {
 	defaultValue: "",
 	hidden: false,
 	onChange: () => {},
+	optionLabelKey: "label",
+	optionValueKey: "value",
 	required: false,
 	showDefaultError: false,
 	size: INPUT_SIZE.LARGE,
