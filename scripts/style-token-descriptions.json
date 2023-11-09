@@ -425,6 +425,9 @@
 		"media-item-fig-caption": {
 			"description": "The styling for the figure caption within the media item component."
 		},
+		"media-item-fig-caption-vertical-video": {
+			"description": "The styling for the figure caption within the media item component when a vertical video is displayed."
+		},
 		"media-item-title": {
 			"description": "The styling for the title text within the media item component."
 		},
@@ -542,6 +545,9 @@
 		},
 		"video-frame": {
 			"description": "The styling for the video frame, which contains the video component and may include controls or other elements."
+		},
+		"vertical-video-frame": {
+			"description": "The styling for the video frame when it's vertical."
 		}
 	}
 }

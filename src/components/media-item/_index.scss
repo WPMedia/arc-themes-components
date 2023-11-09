@@ -10,6 +10,10 @@
 			@include scss.component-properties("media-item-fig-caption-fullscreen");
 		}
 	}
+	/* stylelint-disable selector-class-pattern */
+	.c-video__frame:has(.powa-vertical) ~ &__fig-caption {
+		@include scss.component-properties("media-item-fig-caption-vertical-video");
+	}
 
 	&__title {
 		@include scss.component-properties("media-item-title");

@@ -2,10 +2,20 @@ import { useEffect } from "react";
 import PropTypes from "prop-types";
 import EmbedContainer from "react-oembed-container";
 import formatPowaVideoEmbed from "../../utils/format-powa-video-embed";
+import getAspectRatioFromPowa from "../../utils/get-powa-aspect-ratio";
 
 const COMPONENT_CLASS_NAME = "c-video";
 
-const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup, ...rest }) => {
+const truncate = (num) => Math.trunc(num * 10000) / 10000;
+
+const Video = ({
+	className,
+	aspectRatio,
+	viewportPercentage,
+	embedMarkup,
+	borderRadius,
+	...rest
+}) => {
 	// only render or call powaboot on client-side
 	const shouldRenderVideoContent = embedMarkup && typeof window !== "undefined";
 
@@ -19,13 +29,17 @@ const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup, ...res
 
 	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
 
-	const truncate = (num) => Math.trunc(num * 10000) / 10000;
+	const validAspectRatio = aspectRatio && aspectRatio !== "--";
 
-	const [w, h] = aspectRatio ? aspectRatio.split(":") : [16, 9];
+	const [w, h] = validAspectRatio
+		? aspectRatio.split(":")
+		: getAspectRatioFromPowa(embedMarkup).split(":");
+
 	const videoAspectRatio = truncate(h / w);
 
-	const embedMarkupWithAspectRatio = formatPowaVideoEmbed(embedMarkup, {
+	const updatedEmbedMarkup = formatPowaVideoEmbed(embedMarkup, {
 		"aspect-ratio": videoAspectRatio,
+		"border-radius": videoAspectRatio > 1 ? borderRadius : undefined,
 	});
 
 	return (
@@ -35,14 +49,14 @@ const Video = ({ className, aspectRatio, viewportPercentage, embedMarkup, ...res
 				className={containerClassNames}
 				style={{
 					"--aspect-ratio": truncate(w / h),
-					"--height": viewportPercentage,
+					"--height": videoAspectRatio > 1 ? viewportPercentage : 65,
 				}}
 			>
 				{shouldRenderVideoContent ? (
-					<EmbedContainer markup={embedMarkupWithAspectRatio}>
+					<EmbedContainer markup={updatedEmbedMarkup}>
 						<div
 							dangerouslySetInnerHTML={{
-								__html: embedMarkupWithAspectRatio,
+								__html: updatedEmbedMarkup,
 							}}
 						/>
 					</EmbedContainer>
@@ -59,6 +73,8 @@ Video.propTypes = {
 	aspectRatio: PropTypes.string,
 	/* The vertical percentage of the viewport takes up */
 	viewportPercentage: PropTypes.number,
+	/* The border radius for the corners of the video */
+	borderRadius: PropTypes.bool,
 };
 
 export default Video;

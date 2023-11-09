@@ -18,6 +18,13 @@
 			}
 		}
 	},
+	"media-item-fig-caption-vertical-video": {
+		"styles": {
+			"default": {
+				"text-align": "center"
+			}
+		}
+	},
 	"media-item-fig-caption-fullscreen": {
 		"styles": {
 			"default": {
