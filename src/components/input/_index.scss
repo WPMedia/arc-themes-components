@@ -5,6 +5,10 @@
 
 	.c-input__input {
 		@include scss.component-with-states("input-input", [focus]);
+	
+		&.c-input__dropdown {
+			@include scss.component-with-states("input-dropdown", [focus]);
+		}
 	}
 
 	.c-input__label {
@@ -21,6 +25,10 @@
 
 	.c-input__input {
 		@include scss.component-with-states("input-small-input", [focus]);
+
+		&.c-input__dropdown {
+			@include scss.component-with-states("input-small-dropdown", [focus]);
+		}
 	}
 
 	.c-input__label {
@@ -37,6 +45,10 @@
 
 	.c-input__input {
 		@include scss.component-with-states("input-default-input", [focus]);
+		
+		&.c-input__dropdown {
+			@include scss.component-with-states("input-default-dropdown", [focus]);
+		}
 	}
 
 	.c-input__label {
@@ -53,6 +65,10 @@
 
 	.c-input__input {
 		@include scss.component-with-states("input-error-input", [focus]);
+	
+		&.c-input__dropdown {
+			@include scss.component-with-states("input-error-dropdown", [focus]);
+		}
 	}
 
 	.c-input__label {
@@ -69,6 +85,10 @@
 
 	.c-input__input {
 		@include scss.component-with-states("input-success-input", [focus]);
+
+		&.c-input__dropdown {
+			@include scss.component-with-states("input-success-dropdown", [focus]);
+		}
 	}
 
 	.c-input__label {
@@ -85,6 +105,10 @@
 
 	.c-input__input {
 		@include scss.component-with-states("input-warning-input", [focus]);
+
+		&.c-input__dropdown {
+			@include scss.component-with-states("input-warning-dropdown", [focus]);
+		}
 	}
 
 	.c-input__label {

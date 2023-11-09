@@ -114,7 +114,7 @@ const Input = ({
 			</label>
 			{type === FIELD_TYPES.SELECT ? (
 				<select
-					className={`${COMPONENT_CLASS_NAME}__input`}
+					className={`${COMPONENT_CLASS_NAME}__input ${COMPONENT_CLASS_NAME}__dropdown`}
 					id={inputId}
 					name={name}
 					onBlur={handleBlur}
