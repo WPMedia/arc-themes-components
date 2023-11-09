@@ -24,7 +24,10 @@
 	"input-small-input": {
 		"styles": {
 			"default": {
-				"padding": "var(--global-spacing-1) var(--global-spacing-2)"
+				"padding-block-end": "var(--global-spacing-2)",
+				"padding-block-start": "var(--global-spacing-2)",
+				"padding-inline-end": "var(--global-spacing-2)",
+				"padding-inline-start": "var(--global-spacing-2)"
 			}
 		}
 	},
