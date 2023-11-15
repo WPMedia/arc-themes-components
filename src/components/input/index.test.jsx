@@ -67,4 +67,22 @@ describe("Input", () => {
 		render(<Input name="test" label="label" required />);
 		expect(screen.getByRole("textbox")).toHaveAttribute("required");
 	});
+
+	it("renders a select dropdown", () => {
+		render(
+			<Input
+				defaultValue="option1"
+				name="test"
+				label="label"
+				options={[
+					{ label: 'Option 1', value: 'option1' },
+					{ label: 'Option 2', value: 'option2' },
+				]}
+				type="select"
+			/>
+		);
+		expect(screen.getByRole("combobox")).toBeInTheDocument();
+		expect(screen.getByRole("option", { name: "Option 1" }).selected).toBe(true);
+		expect(screen.getByRole("option", { name: "Option 2" }).selected).toBe(false);
+	});
 });
