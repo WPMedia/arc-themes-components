@@ -95,6 +95,7 @@
     "stylelint-no-unsupported-browser-features": "^7.0.0"
   },
   "dependencies": {
+    "@arc-publishing/sdk-identity": "^1.79.0",
     "@wpmedia/timezone": "^1.1.2",
     "dom-parser": "^0.1.6",
     "lazy-child": "^0.3.1",
