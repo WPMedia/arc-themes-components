@@ -1,6 +1,5 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
 import IdentityObject from "@arc-publishing/sdk-identity";
 import useIdentity from ".";
 
