@@ -42,6 +42,7 @@ import getPromoType from "./src/utils/get-promo-type";
 import getVideoFromANS from "./src/utils/get-video-from-ans";
 import handleFetchError from "./src/utils/handle-fetch-error";
 import handleRedirect from "./src/utils/handle-redirect";
+import useIdentity from "./src/utils/hooks/use-identity";
 import useInterval from "./src/utils/hooks/use-interval";
 import usePhrases from "./src/utils/hooks/use-phrases";
 import imageANSToImageSrc from "./src/utils/image-ans-to-image-src";
@@ -95,6 +96,7 @@ export {
 	serialJoin,
 	signImagesInANSObject,
 	Stack,
+	useIdentity,
 	useInterval,
 	usePhrases,
 	Video,
