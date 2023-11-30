@@ -10,7 +10,7 @@
 	"details-open-summary": {
 		"styles": {
 			"default": {
-				"margin-bottom": "var(--global-spacing-4)"
+				"margin-block-end": "var(--global-spacing-4)"
 			}
 		}
 	},
@@ -38,8 +38,8 @@
 			"default": {
 				"align-items": "center",
 				"display": "flex",
-				"height": "var(--global-spacing-4)",
-				"width": "var(--global-spacing-4)"
+				"block-size": "var(--global-spacing-4)",
+				"inline-size": "var(--global-spacing-4)"
 			}
 		}
 	},

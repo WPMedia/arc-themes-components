@@ -12,7 +12,18 @@
 	"input-input": {
 		"styles": {
 			"default": {
-				"border": "var(--global-border-width-1) var(--global-border-style-1) var(--form-border-color)",
+				"border-block-start-width": "var(--global-border-width-1)",
+				"border-block-end-width": "var(--global-border-width-1)",
+				"border-inline-start-width": "var(--global-border-width-1)",
+				"border-inline-end-width": "var(--global-border-width-1)",
+				"border-block-start-style": "var(--global-border-style-1)",
+				"border-block-end-style": "var(--global-border-style-1)",
+				"border-inline-start-style": "var(--global-border-style-1)",
+				"border-inline-end-style": "var(--global-border-style-1)",
+				"border-block-start-color": "var(--form-border-color)",
+				"border-block-end-color": "var(--form-border-color)",
+				"border-inline-start-color": "var(--form-border-color)",
+				"border-inline-end-color": "var(--form-border-color)",
 				"border-radius": "var(--border-radius)",
 				"padding-block-end": "var(--global-spacing-4)",
 				"padding-block-start": "var(--global-spacing-4)",

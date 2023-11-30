@@ -2,7 +2,10 @@
 	"video": {
 		"styles": {
 			"default": {
-				"margin": "auto"
+				"margin-block-start": "auto",
+				"margin-inline-start": "auto",
+				"margin-block-end": "auto",
+				"margin-inline-end": "auto"
 			}
 		}
 	},
