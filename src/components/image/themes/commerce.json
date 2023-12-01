@@ -2,7 +2,8 @@
 	"image": {
 		"styles": {
 			"default": {
-				"max-width": "100%"
+				"block-size": "auto",
+				"max-inline-size": "100%"
 			}
 		}
 	}
