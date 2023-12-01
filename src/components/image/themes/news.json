@@ -2,6 +2,7 @@
 	"image": {
 		"styles": {
 			"default": {
+				"block-size": "auto",
 				"max-inline-size": "100%"
 			}
 		}
