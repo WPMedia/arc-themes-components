@@ -1,9 +1,3 @@
-// tz docs https://bigeasy.github.io/timezone/
-const tz = require("@wpmedia/timezone")(
-	require("@wpmedia/timezone/zones"),
-	require("@wpmedia/timezone/locales")
-);
-
 function localizeDateHelper(date, targetDateFormat, language, timeZone) {
 	let locale = null;
 	switch (language) {
@@ -38,11 +32,12 @@ function localizeDateHelper(date, targetDateFormat, language, timeZone) {
 			locale = language;
 	}
 
-	// Convert to UTC date
-	// utc time is not region-specific
-	const utc = tz(date);
-
-	return tz(utc, locale, timeZone, targetDateFormat);
+	const dateObj = new Date(date);
+    // convert date format, 'targetDateFormat', into options for Intl.DateTimeFormat.
+	
+	return Intl.DateTimeFormat(locale, {
+		timeZone
+	}).format(dateObj);
 }
 
 export default localizeDateHelper;
