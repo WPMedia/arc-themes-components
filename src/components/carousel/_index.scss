@@ -195,6 +195,7 @@ html[dir="rtl"] {
 		transform: rotate(180deg);
 		@include scss.component-properties("carousel-button-next-rtl");
 	}
+
 	.c-carousel__button--previous {
 		transform: rotate(180deg);
 		@include scss.component-properties("carousel-button-previous-rtl");

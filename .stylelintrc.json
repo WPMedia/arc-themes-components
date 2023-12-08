@@ -11,15 +11,16 @@
 			true,
 			{
 				"ignore": [
-					"css-sticky",
-					"multicolumn",
 					"calc",
 					"css-appearance",
-					"intrinsic-width",
-					"viewport-units",
-					"css3-cursor",
 					"css-initial-value",
+					"css-nesting",
+					"css-sticky",
+					"css3-cursor",
+					"intrinsic-width",
+					"multicolumn",
 					"pointer-events",
+					"viewport-units",
 					"word-break"
 				],
 				"ignorePartialSupport": true,
@@ -50,6 +51,12 @@
 			"c-[a-z]+",
 			{
 				"resolveNestedSelectors": true
+			}
+		],
+		"selector-no-qualifying-type": [
+			true,
+			{
+				"ignore": ["attribute"]
 			}
 		]
 	}
