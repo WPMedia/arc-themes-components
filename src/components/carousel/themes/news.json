@@ -5,6 +5,9 @@
 				"font-family": "var(--font-family-primary)",
 				"font-size": "var(--body-font-size-tiny)",
 				"line-height": "var(--body-line-height-tiny)",
+				"container-name": "c-carousel",
+				"container-type": "inline-size",
+				"max-inline-size": "100cqi",
 				"--slides": 1
 			},
 			"desktop": {
@@ -70,7 +73,22 @@
 	"carousel-button-next": {
 		"styles": {
 			"default": {
-				"color": "var(--global-white)"
+				"color": "var(--global-white)",
+				"margin-inline-start": "auto"
+			}
+		}
+	},
+	"carousel-button-previous-rtl": {
+		"styles": {
+			"default": {
+				"transform": "rotate(180deg)"
+			}
+		}
+	},
+	"carousel-button-next-rtl": {
+		"styles": {
+			"default": {
+				"transform": "rotate(180deg)"
 			}
 		}
 	},
@@ -93,7 +111,7 @@
 		"styles": {
 			"default": {
 				"gap": "initial",
-				"max-inline-size": "initial",
+				"max-inline-size": "100cqi",
 				"inline-size": "100%"
 			},
 			"desktop": {
