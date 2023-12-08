@@ -214,6 +214,13 @@ $component-map: get-all-component-definitions($tokens, $breakpoints);
 		}
 	}
 }
+:root {
+	--text-direction: 1;
+}
+
+html[dir="rtl"] {
+	--text-direction: -1;
+}
 
 body {
 	@include component-properties("body");
