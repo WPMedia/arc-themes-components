@@ -56,7 +56,7 @@
 		"selector-no-qualifying-type": [
 			true,
 			{
-				"ignore": ["attribute"]
+				"severity": "warning"
 			}
 		]
 	}
