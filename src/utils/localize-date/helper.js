@@ -39,15 +39,43 @@ function localizeDateHelper(date, targetDateFormat, language, timeZone) {
 	
     // Build options object for Intl.DateTimeFormat
 	const options = {
-		timeZone
+		timeZone,
 	};
-	if (targetDateFormat === "date" || targetDateFormat === "dateTime") {
-		options.dateStyle = "long";
+	if (targetDateFormat.includes("%a")) {
+		options.weekday = "short";
 	}
-	if (targetDateFormat === "dateTime") {
-		options.timeStyle = "medium";
+	if (targetDateFormat.includes("%A")) {
+		options.weekday = "long";
 	}
-	return Intl.DateTimeFormat(locale, options).format(dateObj);
+	if (targetDateFormat.includes("%b") || targetDateFormat.includes("%h")) {
+		options.month = "short";
+	}
+	if (targetDateFormat.includes("%B")) {
+		options.month = "long";
+	}
+	if (targetDateFormat.includes("%m")) {
+		options.month = "2-digit";
+	}
+	if (targetDateFormat.includes("%H")) {
+		options.hour12 = false;
+		options.hour = "2-digit";
+	}
+	if (targetDateFormat.includes("%I")) {
+		options.hour12 = true;
+		options.hour = "2-digit";
+	}
+	if (targetDateFormat.includes("%k")) {
+		options.hour12 = false;
+		options.hour = "numeric";
+	}
+	if (targetDateFormat.includes("%l")) {
+		options.hour12 = true;
+		options.hour = "numeric";
+	}
+	if (targetDateFormat.includes("%M")) {
+		options.minute = "2-digit";
+	}
+	return Intl.DateTimeFormat("en-US", options).format(dateObj);
 }
 
 export default localizeDateHelper;
