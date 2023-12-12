@@ -56,6 +56,12 @@ function localizeDateHelper(date, targetDateFormat, language, timeZone) {
 	if (targetDateFormat.includes("%m")) {
 		options.month = "2-digit";
 	}
+	if (targetDateFormat.includes("%y")) {
+		options.year = "2-digit";
+	}
+	if (targetDateFormat.includes("%Y")) {
+		options.year = "numeric";
+	}
 	if (targetDateFormat.includes("%H")) {
 		options.hour12 = false;
 		options.hour = "2-digit";
@@ -74,6 +80,18 @@ function localizeDateHelper(date, targetDateFormat, language, timeZone) {
 	}
 	if (targetDateFormat.includes("%M")) {
 		options.minute = "2-digit";
+	}
+	if (targetDateFormat.includes("%S")) {
+		options.second = "2-digit";
+	}
+	if (targetDateFormat.includes("%p")) {
+		options.dayPeriod = "short";
+	}
+	if (targetDateFormat.includes("%Z")) {
+		options.timeZoneName = "short"
+	}
+	if (targetDateFormat.includes("%z")) {
+		options.timeZoneName = "longOffset"
 	}
 	return Intl.DateTimeFormat("en-US", options).format(dateObj);
 }
