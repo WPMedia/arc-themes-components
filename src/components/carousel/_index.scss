@@ -187,7 +187,8 @@
 	}
 }
 
-html[dir="rtl"] {
+// styltlint-ignore selector-no-qualifying-type
+*[dir="rtl"] {
 	.c-carousel__button--next {
 		transform: rotate(180deg);
 		@include scss.component-properties("carousel-button-next-rtl");
