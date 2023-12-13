@@ -9,16 +9,12 @@ const imageANSToImageSrc = (data) => {
 	const { _id: id, auth, url } = data || {};
 	if (url) {
 		if (id) {
-			const urlParts = url.split(".");
-			if (urlParts.length !== 1) {
-				const fileExtension = urlParts.pop();
-				if (fileExtension.includes(id)) {
-					// This can happen when there is no file extension on the image URL.
-					// Return only the ID forced to be a string.
-					return `${id}`;
-				}
-				return `${id}.${fileExtension}`;
+			const fileExtension = url.match(/\.\w{3,4}$/);
+			if (fileExtension) {
+				return `${id}${fileExtension[0]}`;
 			}
+			// Return the id as a string if no file extension is found.
+			return `${id}`
 		} else if (auth) {
 			return encodeURIComponent(url);
 		}
