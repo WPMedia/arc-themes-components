@@ -4,11 +4,8 @@
 	--viewable-slides: var(--slides, 4);
 	--slide-width: var(--carousel-slide-width, 25%);
 
-	container-name: c-carousel;
-	container-type: inline-size;
 	display: grid;
 	grid-template-areas: "controls" "carousel" "indicators";
-	max-inline-size: 100cqi;
 	overflow: hidden;
 	word-break: break-word;
 
