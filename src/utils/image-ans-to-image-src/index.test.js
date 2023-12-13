@@ -7,6 +7,10 @@ describe("imageANSToImageSrc", () => {
 		expect(imageANSToImageSrc({ _id: 321, url: "test.test.jpeg" })).toBe("321.jpeg");
 	});
 
+	it("return image src without ext", () => {
+		expect(imageANSToImageSrc({ _id: 123, url: "http://image.com/123" })).toBe("123");
+	});
+
 	it("return image src as encoded url when no _id but an auth exists", () => {
 		expect(imageANSToImageSrc({ url: "http://image.com/test.jpg", auth: { 1: "123" } })).toBe(
 			encodeURIComponent("http://image.com/test.jpg")
