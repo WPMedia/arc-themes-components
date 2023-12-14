@@ -15,40 +15,57 @@
 		grid-area: carousel;
 	}
 
-	&__image-counter-label {
-		@include scss.component-properties("carousel-image-counter");
-	}
-
-	&__track {
-		/* stylelint-disable length-zero-no-unit */
-		// Disabled the rule as the px value is needed within the calc below
-		--slide-gap: var(--c-carousel-track-gap, 0px);
-		display: flex;
-		justify-self: center;
-		transition: transform 0.4s ease-in;
-		will-change: transform;
-
-		@include scss.component-properties("carousel-track");
-	}
-
-	&__slide {
-		flex: 0 0
-			calc(
-				var(--slide-width) -
-					calc(var(--slide-gap) * calc(var(--viewable-slides) - 1) / var(--viewable-slides))
-			);
-
-		@include scss.component-properties("carousel-slide");
-	}
-
 	&__actions {
 		justify-content: space-between;
 		place-self: center;
 		pointer-events: none;
-		width: 100%;
+		inline-size: 100%;
+		max-inline-size: 100cqi;
 		z-index: 1;
 
 		@include scss.component-properties("carousel-actions");
+	}
+
+	&__button {
+		cursor: pointer;
+		pointer-events: auto;
+		@include scss.component-properties("carousel-button");
+
+		&--additional-next {
+			@include scss.component-properties("carousel-button-additional-next");
+		}
+
+		&--additional-previous {
+			@include scss.component-properties("carousel-button-additional-previous");
+		}
+
+		&--enter-full-screen {
+			@include scss.component-properties("carousel-button-enter-full-screen");
+		}
+
+		&--exit-full-screen {
+			@include scss.component-properties("carousel-button-exit-full-screen");
+		}
+
+		&--fullscreen {
+			@include scss.component-properties("carousel-button-full-screen");
+
+			&:hover {
+				@include scss.component-properties("carousel-button-full-screen-hover");
+			}
+		}
+
+		&--next {
+			@include scss.component-properties("carousel-button-next");
+		}
+
+		&--previous {
+			@include scss.component-properties("carousel-button-previous");
+		}
+
+		&--toggle-auto-play {
+			@include scss.component-properties("carousel-button-toggle-auto-play");
+		}
 	}
 
 	&__controls {
@@ -56,7 +73,8 @@
 		display: flex;
 		justify-content: space-between;
 		place-self: start;
-		width: 100%;
+		inline-size: 100%;
+		max-inline-size: 100cqi;
 
 		@include scss.component-properties("carousel-controls");
 	}
@@ -69,48 +87,32 @@
 		@include scss.component-properties("carousel-icon");
 	}
 
-	&__button {
-		cursor: pointer;
-		pointer-events: auto;
-		@include scss.component-properties("carousel-button");
+	&__image-counter-label {
+		@include scss.component-properties("carousel-image-counter");
+	}
 
-		&--fullscreen {
-			@include scss.component-properties("carousel-button-full-screen");
+	&__slide {
+		flex: 0 0
+			calc(
+				var(--slide-width) - calc(
+						var(--slide-gap) * calc(var(--viewable-slides) - 1) / var(--viewable-slides)
+					)
+			);
+		max-inline-size: 100cqi;
 
-			&:hover {
-				@include scss.component-properties("carousel-button-full-screen-hover");
-			}
-		}
+		@include scss.component-properties("carousel-slide");
+	}
 
-		&--next {
-			margin-left: auto;
+	&__track {
+		/* stylelint-disable length-zero-no-unit */
+		// Disabled the rule as the px value is needed within the calc below
+		--slide-gap: var(--c-carousel-track-gap, 0px);
+		display: flex;
+		justify-self: center;
+		transition: transform 0.4s ease-in;
+		will-change: transform;
 
-			@include scss.component-properties("carousel-button-next");
-		}
-
-		&--previous {
-			@include scss.component-properties("carousel-button-previous");
-		}
-
-		&--additional-previous {
-			@include scss.component-properties("carousel-button-additional-previous");
-		}
-
-		&--additional-next {
-			@include scss.component-properties("carousel-button-additional-next");
-		}
-
-		&--exit-full-screen {
-			@include scss.component-properties("carousel-button-exit-full-screen");
-		}
-
-		&--toggle-auto-play {
-			@include scss.component-properties("carousel-button-toggle-auto-play");
-		}
-
-		&--enter-full-screen {
-			@include scss.component-properties("carousel-button-enter-full-screen");
-		}
+		@include scss.component-properties("carousel-track");
 	}
 
 	&__additional-controls {
@@ -140,7 +142,8 @@
 
 	&__indicator-dots-container {
 		grid-area: indicators;
-		width: 100%;
+		inline-size: 100%;
+		max-inline-size: 100cqi;
 		@include scss.component-properties("carousel-indicator-dots-container");
 	}
 
@@ -181,5 +184,18 @@
 				}
 			}
 		}
+	}
+}
+
+// styltlint-ignore selector-no-qualifying-type
+*[dir="rtl"] {
+	.c-carousel__button--next {
+		transform: rotate(180deg);
+		@include scss.component-properties("carousel-button-next-rtl");
+	}
+
+	.c-carousel__button--previous {
+		transform: rotate(180deg);
+		@include scss.component-properties("carousel-button-previous-rtl");
 	}
 }

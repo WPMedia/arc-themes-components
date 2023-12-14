@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import IdentityObject from "@arc-publishing/sdk-identity";
 import useIdentity from ".";
@@ -19,7 +18,7 @@ jest.mock("fusion:properties", () =>
 				origin: "http://origin/",
 			},
 		},
-	}))
+	})),
 );
 
 jest.mock("fusion:context", () => ({

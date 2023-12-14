@@ -1,25 +1,32 @@
 {
-	"plugins": ["stylelint-no-unsupported-browser-features"],
+	"plugins": ["stylelint-no-unsupported-browser-features", "stylelint-order"],
 	"extends": [
 		"stylelint-config-recommended",
 		"stylelint-config-sass-guidelines",
 		"stylelint-config-prettier"
 	],
 	"rules": {
+		"annotation-no-unknown": [
+			true,
+			{
+				"ignoreAnnotations": ["default"]
+			}
+		],
 		"max-nesting-depth": 5,
 		"plugin/no-unsupported-browser-features": [
 			true,
 			{
 				"ignore": [
-					"css-sticky",
-					"multicolumn",
 					"calc",
 					"css-appearance",
-					"intrinsic-width",
-					"viewport-units",
-					"css3-cursor",
 					"css-initial-value",
+					"css-nesting",
+					"css-sticky",
+					"css3-cursor",
+					"intrinsic-width",
+					"multicolumn",
 					"pointer-events",
+					"viewport-units",
 					"word-break"
 				],
 				"ignorePartialSupport": true,
@@ -27,16 +34,24 @@
 			}
 		],
 		"font-family-no-missing-generic-family-keyword": null,
+		"function-no-unknown": null,
 		"order/properties-alphabetical-order": null,
 		"declaration-property-value-disallowed-list": [
 			{
 				"border": ["none"]
 			}
 		],
+		"media-query-no-invalid": null,
 		"property-no-vendor-prefix": [
 			true,
 			{
-				"ignoreProperties": ["box-orient", "appearance"]
+				"ignoreProperties": ["appearance", "line-clamp"]
+			}
+		],
+		"property-no-unknown": [
+			true,
+			{
+				"ignoreProperties": ["box-orient"]
 			}
 		],
 		"value-no-vendor-prefix": [
@@ -50,6 +65,12 @@
 			"c-[a-z]+",
 			{
 				"resolveNestedSelectors": true
+			}
+		],
+		"selector-no-qualifying-type": [
+			true,
+			{
+				"severity": "warning"
 			}
 		]
 	}

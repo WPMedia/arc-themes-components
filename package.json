@@ -92,12 +92,15 @@
     "stylelint-config-prettier": "^9.0.5",
     "stylelint-config-recommended": "^13.0.0",
     "stylelint-config-sass-guidelines": "^10.0.0",
-    "stylelint-no-unsupported-browser-features": "^7.0.0"
+    "stylelint-no-unsupported-browser-features": "^7.0.0",
+    "stylelint-order": "^6.0.4"
   },
   "dependencies": {
     "@arc-publishing/sdk-identity": "^1.79.0",
+    "@storybook/addon-docs": "^7.6.4",
     "@wpmedia/timezone": "^1.1.2",
     "dom-parser": "^0.1.6",
+    "eslint-plugin-testing-library": "^6.2.0",
     "lazy-child": "^0.3.1",
     "lodash.get": "^4.4.2",
     "react-oembed-container": "^1.0.1",

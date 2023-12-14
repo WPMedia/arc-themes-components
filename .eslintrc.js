@@ -126,5 +126,11 @@ module.exports = {
 				sortExportKindFirst: "type",
 			},
 		],
+		"testing-library/no-container": "warn",
+		"testing-library/no-node-access": "warn",
+		"testing-library/no-wait-for-multiple-assertions": "warn",
+		"testing-library/prefer-presence-queries": "warn",
+		"testing-library/prefer-screen-queries": "warn",
+		"testing-library/render-result-naming-convention": "warn",
 	},
 };
