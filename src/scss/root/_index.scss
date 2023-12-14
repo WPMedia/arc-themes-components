@@ -218,7 +218,7 @@ $component-map: get-all-component-definitions($tokens, $breakpoints);
 	--text-direction: 1;
 }
 
-html[dir="rtl"] {
+*[dir="rtl"] {
 	--text-direction: -1;
 }
 
