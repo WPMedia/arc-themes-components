@@ -3,9 +3,9 @@
 .c-paragraph {
 	--paragraph-truncation: var(--c-paragraph--webkit-line-clamp, "none");
 
-	overflow: hidden;
 	display: -webkit-box;
 	box-orient: block-axis;
+	overflow: hidden;
 	text-overflow: ellipsis;
 
 	@include scss.component-properties("paragraph");
