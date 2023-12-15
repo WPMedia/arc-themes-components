@@ -13,39 +13,38 @@ import getImageFromANS from "../../utils/get-image-from-ans";
 import imageANSToImageSrc from "../../utils/image-ans-to-image-src";
 
 const getCustomMetaData = (metaHTMLString) => {
-	let customMetaData = null;
 	if (typeof window === "undefined") {
 		const DomParser = require("dom-parser");
-		customMetaData = new DomParser()
+		return new DomParser()
 			.parseFromString(metaHTMLString)
 			.getElementsByTagName("META")
 			.map((metaNode) => ({
-				metaName: metaNode.getAttribute("name"),
-				metaValue: metaNode.getAttribute("value") || metaNode.getAttribute("content"),
+				name: metaNode.getAttribute("name"),
+				value: metaNode.getAttribute("value") || metaNode.getAttribute("content"),
 			}));
 	}
-	return customMetaData;
+	return null;
 };
 
-const generateCustomMetaTags = (metaData, MetaTag, MetaTags) => {
-	const metaHTMLString = ReactDOMServer.renderToString(<MetaTags />);
-	const customMetaData = getCustomMetaData(metaHTMLString).filter(
-		(metaObj) => !metaData[metaObj.metaName]
-	);
-	return (
-		<>
-			{customMetaData.length > 0 &&
-				customMetaData.map((metaObj, i) => (
-					<MetaTag
-						// eslint-disable-next-line react/no-array-index-key
-						key={`custom-meta-data-${i}`}
-						name={metaObj.metaName}
-						default={metaObj.metaValue}
-					/>
-				))}
-		</>
-	);
-};
+const convertDelimitedStringToCamelCase = (str) =>
+	str.replaceAll(/[:,-](.)/g, (m, m1) => m1.toUpperCase());
+
+const filterUniqueValuesNotIn =
+	(metaData) =>
+	({ name }) =>
+		!metaData[name] && !metaData[convertDelimitedStringToCamelCase(name)];
+
+const generateCustomMetaTags = (metaData, MetaTag, MetaTags) =>
+	getCustomMetaData(ReactDOMServer.renderToString(<MetaTags />))
+		.filter(filterUniqueValuesNotIn(metaData))
+		.map(({ name, value }, i) => (
+			<MetaTag
+				// eslint-disable-next-line react/no-array-index-key
+				key={`custom-meta-data-${i}`}
+				name={name}
+				default={value}
+			/>
+		));
 
 const buildUrl = (domain, path) => {
 	try {
@@ -58,7 +57,7 @@ const buildUrl = (domain, path) => {
 
 const getUrlParameters = (requestUri = "") => {
 	const matches = Array.from(
-		requestUri.matchAll(/(?:[&?]?([\w\d%\-._~]{1:100})=([\w\d%\-._~]{1:100})){:10}?/gi)
+		requestUri.matchAll(/(?:[&?]?([\w\d%\-._~]{1:100})=([\w\d%\-._~]{1:100})){:10}?/gi),
 	);
 	return matches.reduce((accumulator, [, key, value]) => {
 		if (accumulator[key]) {
@@ -158,13 +157,15 @@ const MetaData = ({
 	};
 
 	const resizedOGImage = useContent(
-		metaValue("og:image") ? { source: "signing-service", query: { id: metaValue("og:image") } } : {}
+		metaValue("og:image")
+			? { source: "signing-service", query: { id: metaValue("og:image") } }
+			: {},
 	);
 
 	const resizedTwitterImage = useContent(
 		metaValue("twitter:image")
 			? { source: "signing-service", query: { id: metaValue("twitter:image") } }
-			: {}
+			: {},
 	);
 
 	const author = gc && gc.authors && gc.authors.length ? gc.authors[0] : {};
@@ -173,21 +174,21 @@ const MetaData = ({
 	const authorPhoto = authorImageUrl || metaData.fallbackImage;
 
 	const authorImageHash = useContent(
-		authorPhoto ? { source: "signing-service", query: { id: authorPhoto } } : {}
+		authorPhoto ? { source: "signing-service", query: { id: authorPhoto } } : {},
 	);
 
 	const fallbackImageHash = useContent(
 		metaData.fallbackImage
 			? { source: "signing-service", query: { id: metaData.fallbackImage } }
-			: {}
+			: {},
 	);
 
-	const resizedOptions = { smart: true };
-	const imageURL = (src, auth, height) =>
-		formatSrc(resizerURL.concat(src), { ...resizedOptions, auth }, 1200, height);
+	const defaultOptions = { smart: true };
+	const imageURL = (src, auth, height, options = defaultOptions) =>
+		formatSrc(resizerURL.concat(src), { ...options, auth }, 1200, height);
 
 	const resizedFallbackImage = fallbackImageHash
-		? imageURL(encodeURIComponent(metaData.fallbackImage), fallbackImageHash.hash)
+		? imageURL(encodeURIComponent(metaData.fallbackImage), fallbackImageHash.hash, undefined, {})
 		: metaData.fallbackImage;
 
 	const getImgURL = (metaType = "og:image") => {
@@ -198,7 +199,7 @@ const MetaData = ({
 			return imageURL(
 				encodeURIComponent(metaValue("twitter:image")),
 				resizedTwitterImage.hash,
-				630
+				630,
 			);
 		}
 		if (gc?.promo_items?.basic?.url || gc?.promo_items?.lead_art?.type === "image") {
@@ -446,7 +447,7 @@ const MetaData = ({
 			pageType,
 			canonicalDomain || websiteDomain,
 			gc,
-			requestUri
+			requestUri,
 		);
 		const canonicalUrl = canonicalResolver
 			? canonicalResolver(pageType, defaultResolution)
