@@ -63,7 +63,7 @@ function buildOptions(targetDateFormat, timeZone) {
 }
 
 function buildDateString(targetDateFormat, dateParts = {}) {
-	const dateString = targetDateFormat.replace(/%([A-z])/g, (match) => {
+	const dateString = targetDateFormat.replace(/%([A-Za-z])/g, (match) => {
 		switch (match) {
 			case "%a":
 			case "%A":
