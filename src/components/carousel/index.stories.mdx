@@ -112,6 +112,66 @@ const Feature = () => (
 	</Story>
 </Canvas>
 
+** Carousel (rtl) **
+
+<Canvas>
+	<Story name="Carousel">
+		<div dir="rtl">
+			<Carousel
+				id="carousel-1"
+				label="Carousel of Images"
+				nextButton={
+					<Carousel.Button id="carousel-1" label="Next Slide">
+						<Icon name="ArrowRight" />
+					</Carousel.Button>
+				}
+				previousButton={
+					<Carousel.Button id="carousel-1" label="Previous Slide">
+						<Icon name="ArrowLeft" />
+					</Carousel.Button>
+				}
+			>
+				<Carousel.Item label="Slide 1 of 6">
+					{({ viewable }) => (
+						<a href="/" aria-hidden={viewable ? null : true} tabIndex={viewable ? null : "-1"}>
+							<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+						</a>
+					)}
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 6">
+					<a href="/">
+						<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+					</a>
+				</Carousel.Item>
+				<Carousel.Item label="Slide 3 of 6">
+					<a href="/">
+						<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+					</a>
+				</Carousel.Item>
+				<Carousel.Item label="Slide 4 of 6">
+					<a href="/">
+						<Image src="/coffee.jpeg" alt="A cup of coffee" />
+					</a>
+				</Carousel.Item>
+				<Carousel.Item label="Slide 5 of 6">
+					{({ viewable }) => (
+						<div>
+							<a href="/" aria-hidden={viewable ? null : true} tabIndex={viewable ? null : "-1"}>
+								<Image src="/computer-user.jpeg" alt="A person sat down using a laptop computer" />
+							</a>
+						</div>
+					)}
+				</Carousel.Item>
+				<Carousel.Item label="Slide 6 of 6">
+					<a href="/">
+						<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+					</a>
+				</Carousel.Item>
+			</Carousel>
+		</div>
+	</Story>
+</Canvas>
+
 ** Single Slide Display **
 
 <Canvas>

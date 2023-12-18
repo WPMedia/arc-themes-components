@@ -2,6 +2,9 @@
 	"carousel": {
 		"styles": {
 			"default": {
+				"container-name": "c-carousel",
+				"container-type": "inline-size",
+				"max-inline-size": "100cqi",
 				"--slides": 1
 			},
 			"desktop": {
@@ -39,11 +42,25 @@
 			}
 		}
 	},
+	"carousel-button-previous-rtl": {
+		"styles": {
+			"default": {
+				"transform": "rotate(180deg)"
+			}
+		}
+	},
+	"carousel-button-next-rtl": {
+		"styles": {
+			"default": {
+				"transform": "rotate(180deg)"
+			}
+		}
+	},
 	"carousel-track": {
 		"styles": {
 			"default": {
 				"gap": "var(--global-spacing-2)",
-				"max-inline-size": "var(--content-scale-width)",
+				"max-inline-size": "100cqi",
 				"inline-size": "100%"
 			},
 			"desktop": {

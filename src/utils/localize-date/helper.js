@@ -60,7 +60,9 @@ function buildOptions(targetDateFormat, timeZone) {
 }
 
 function buildDateString(dateParts = {}, targetDateFormat) {
-	const dateString = targetDateFormat.replace(/%([A-z])(%)/g, (match) => {
+	const dateString = targetDateFormat.replace(/%([A-z])/g, (match) => {
+		console.log('match: ', match);
+		console.log('dateParts: ', dateParts);
 		switch (match) {
 			case "%a":
 			case "%A":
@@ -71,7 +73,7 @@ function buildDateString(dateParts = {}, targetDateFormat) {
 			case "%m":
 				return dateParts.month || '';
 			case "%d":
-				return dateParts.day || '';
+				return `${dateParts.day || ''}${dateParts.dayLiteral || ''}`;
 			case "%y":
 			case "%Y":
 				return dateParts.year || '';
@@ -138,16 +140,20 @@ function localizeDateHelper(date, targetDateFormat, language, timeZone) {
 	locale = locale.replaceAll('_', '-');
 	const dateObj = new Date(date);
 	const options = buildOptions(targetDateFormat, timeZone);
-	console.log('options: ', options);
-	const dateParts = Intl.DateTimeFormat(locale, options)
-		.formatToParts(dateObj)
-		.reduce((acc, part) => (
-			{
-				...acc,
-				[part.type]: part.value,
-			}
-		), {});
-	return buildDateString(dateParts, targetDateFormat);
+	const dateParts = Intl.DateTimeFormat('ja-JP', options)
+		.formatToParts(dateObj);
+	const datePartsObj = dateParts.reduce((acc, part, index) => {
+		let type = part.type;
+		if (type === "literal" && part.value.match(/[\p{L}-]/ug)) {
+			type = `${dateParts[index - 1].type}Literal`;
+		}
+		return {
+			...acc,
+			[type]: part.value,
+		}
+	}, {});
+	console.log('datePartsObj', datePartsObj)
+	return buildDateString(datePartsObj, targetDateFormat);
 }
 
 export default localizeDateHelper;

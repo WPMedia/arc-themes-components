@@ -42,7 +42,7 @@ const localizeDateTime = (
 
 	return localizeDateHelper(
 		date,
-		"%A %m %d, %y at %%%l:%M:%S%p %Z", // validDateFormat,
+		validDateFormat,
 		language,
 		timeZone
 	);
