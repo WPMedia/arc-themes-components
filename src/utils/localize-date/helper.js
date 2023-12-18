@@ -1,5 +1,7 @@
 // Build options object for Intl.DateTimeFormat
 function buildOptions(targetDateFormat, timeZone) {
+	// If we get an unsupported time zone string, default to UTC.
+	// TODO: add check using Intl.supportedValuesOf("timeZone") once Node.js 18 is support in PageBuilder Engine.
 	const options = {
 		timeZone,
 	};
@@ -53,7 +55,8 @@ function buildOptions(targetDateFormat, timeZone) {
 		options.timeZoneName = "short"
 	}
 	if (targetDateFormat.includes("%z")) {
-		options.timeZoneName = "longOffset"
+		// This should be 'longOffset', but that value for this option is unsupported in all versions of Node.js as of 12/18/23.
+		options.timeZoneName = "long"
 	}
 
 	return options;
@@ -61,8 +64,6 @@ function buildOptions(targetDateFormat, timeZone) {
 
 function buildDateString(dateParts = {}, targetDateFormat) {
 	const dateString = targetDateFormat.replace(/%([A-z])/g, (match) => {
-		console.log('match: ', match);
-		console.log('dateParts: ', dateParts);
 		switch (match) {
 			case "%a":
 			case "%A":
@@ -73,7 +74,7 @@ function buildDateString(dateParts = {}, targetDateFormat) {
 			case "%m":
 				return dateParts.month || '';
 			case "%d":
-				return `${dateParts.day || ''}${dateParts.dayLiteral || ''}`;
+				return dateParts.day || '';
 			case "%y":
 			case "%Y":
 				return dateParts.year || '';
@@ -138,22 +139,23 @@ function localizeDateHelper(date, targetDateFormat, language, timeZone) {
 	}
 	// Locales can be stored in Themes settings with an underscore, so it needs to be converted to a hyphen here.
 	locale = locale.replaceAll('_', '-');
+	// If locale is invalid, default to "en-US".
+	try {
+		Intl.DateTimeFormat.supportedLocalesOf(locale)
+	} catch {
+		locale = "en-US"
+	}
 	const dateObj = new Date(date);
 	const options = buildOptions(targetDateFormat, timeZone);
-	const dateParts = Intl.DateTimeFormat('ja-JP', options)
-		.formatToParts(dateObj);
-	const datePartsObj = dateParts.reduce((acc, part, index) => {
-		let type = part.type;
-		if (type === "literal" && part.value.match(/[\p{L}-]/ug)) {
-			type = `${dateParts[index - 1].type}Literal`;
-		}
-		return {
-			...acc,
-			[type]: part.value,
-		}
-	}, {});
-	console.log('datePartsObj', datePartsObj)
-	return buildDateString(datePartsObj, targetDateFormat);
+	const dateParts = Intl.DateTimeFormat(locale, options)
+		.formatToParts(dateObj)
+		.reduce((acc, part, index) => (
+			{
+				...acc,
+				[part.type]: part.value,
+			}
+		), {});
+	return buildDateString(dateParts, targetDateFormat);
 }
 
 export default localizeDateHelper;
