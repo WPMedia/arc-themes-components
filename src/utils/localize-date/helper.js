@@ -62,7 +62,7 @@ function buildOptions(targetDateFormat, timeZone) {
 	return options;
 }
 
-function buildDateString(dateParts = {}, targetDateFormat) {
+function buildDateString(targetDateFormat, dateParts = {}) {
 	const dateString = targetDateFormat.replace(/%([A-z])/g, (match) => {
 		switch (match) {
 			case "%a":
@@ -149,13 +149,13 @@ function localizeDateHelper(date, targetDateFormat, language, timeZone) {
 	const options = buildOptions(targetDateFormat, timeZone);
 	const dateParts = Intl.DateTimeFormat(locale, options)
 		.formatToParts(dateObj)
-		.reduce((acc, part, index) => (
+		.reduce((acc, part) => (
 			{
 				...acc,
 				[part.type]: part.value,
 			}
 		), {});
-	return buildDateString(dateParts, targetDateFormat);
+	return buildDateString(targetDateFormat, dateParts);
 }
 
 export default localizeDateHelper;
