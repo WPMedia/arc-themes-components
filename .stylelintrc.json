@@ -1,10 +1,6 @@
 {
 	"plugins": ["stylelint-no-unsupported-browser-features", "stylelint-order"],
-	"extends": [
-		"stylelint-config-recommended",
-		"stylelint-config-sass-guidelines",
-		"stylelint-config-prettier"
-	],
+	"extends": ["stylelint-config-recommended", "stylelint-config-sass-guidelines"],
 	"rules": {
 		"annotation-no-unknown": [
 			true,
@@ -12,40 +8,23 @@
 				"ignoreAnnotations": ["default"]
 			}
 		],
+		"function-no-unknown": null,
 		"max-nesting-depth": 5,
-		"plugin/no-unsupported-browser-features": [
+		"media-query-no-invalid": null,
+		"no-duplicate-selectors": [
 			true,
 			{
-				"ignore": [
-					"calc",
-					"css-appearance",
-					"css-initial-value",
-					"css-nesting",
-					"css-sticky",
-					"css3-cursor",
-					"intrinsic-width",
-					"multicolumn",
-					"pointer-events",
-					"viewport-units",
-					"word-break"
-				],
-				"ignorePartialSupport": true,
 				"severity": "warning"
 			}
 		],
-		"font-family-no-missing-generic-family-keyword": null,
-		"function-no-unknown": null,
+		"order/order": null,
 		"order/properties-alphabetical-order": null,
-		"declaration-property-value-disallowed-list": [
-			{
-				"border": ["none"]
-			}
-		],
-		"media-query-no-invalid": null,
-		"property-no-vendor-prefix": [
+		"plugin/no-unsupported-browser-features": [
 			true,
 			{
-				"ignoreProperties": ["appearance", "line-clamp"]
+				"ignore": ["css-has", "css-nesting", "css3-cursors", "css-when-else"],
+				"ignorePartialSupport": true,
+				"severity": "warning"
 			}
 		],
 		"property-no-unknown": [
@@ -54,23 +33,22 @@
 				"ignoreProperties": ["box-orient"]
 			}
 		],
-		"value-no-vendor-prefix": [
+		"property-no-vendor-prefix": [
 			true,
 			{
-				"ignoreValues": ["box"]
+				"ignoreProperties": ["appearance"]
 			}
 		],
-		"order/order": null,
 		"selector-class-pattern": [
 			"c-[a-z]+",
 			{
 				"resolveNestedSelectors": true
 			}
 		],
-		"selector-no-qualifying-type": [
+		"value-no-vendor-prefix": [
 			true,
 			{
-				"severity": "warning"
+				"ignoreValues": ["box"]
 			}
 		]
 	}

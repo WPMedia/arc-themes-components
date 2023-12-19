@@ -203,6 +203,7 @@ $component-map: get-all-component-definitions($tokens, $breakpoints);
 	@each $name, $value in $global {
 		--global-#{$name}: #{maintain-quotes($value)};
 	}
+	--text-direction: 1;
 }
 
 @if list.length($tokens) != 0 {
@@ -213,13 +214,6 @@ $component-map: get-all-component-definitions($tokens, $breakpoints);
 			}
 		}
 	}
-}
-:root {
-	--text-direction: 1;
-}
-
-*[dir="rtl"] {
-	--text-direction: -1;
 }
 
 body {
