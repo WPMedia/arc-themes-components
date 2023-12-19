@@ -14,8 +14,9 @@ const imageANSToImageSrc = (data) => {
 				return `${id}${fileExtension[0]}`;
 			}
 			// Return the id as a string if no file extension is found.
-			return `${id}`
-		} else if (auth) {
+			return `${id}`;
+		}
+		if (auth) {
 			return encodeURIComponent(url);
 		}
 	}
