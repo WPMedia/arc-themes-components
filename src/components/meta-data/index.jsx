@@ -170,10 +170,9 @@ const MetaData = ({
 	const author = gc && gc.authors && gc.authors.length ? gc.authors[0] : {};
 	const authorImageUrl =
 		typeof author.image === "string" ? author.image : author.image && author.image.url;
-	const authorPhoto = authorImageUrl || metaData.fallbackImage;
 
 	const authorImageHash = useContent(
-		authorPhoto ? { source: "signing-service", query: { id: authorPhoto } } : {}
+		authorImageUrl ? { source: "signing-service", query: { id: authorImageUrl } } : {}
 	);
 
 	const fallbackImageHash = useContent(
@@ -182,12 +181,12 @@ const MetaData = ({
 			: {}
 	);
 
-	const resizedOptions = { smart: true };
-	const imageURL = (src, auth, height) =>
-		formatSrc(resizerURL.concat(src), { ...resizedOptions, auth }, 1200, height);
+	const defaultOptions = { smart: true };
+	const imageURL = (src, auth, height, options = defaultOptions) =>
+		formatSrc(resizerURL.concat(src), { ...options, auth }, 1200, height);
 
 	const resizedFallbackImage = fallbackImageHash
-		? imageURL(encodeURIComponent(metaData.fallbackImage), fallbackImageHash.hash)
+		? imageURL(encodeURIComponent(metaData.fallbackImage), fallbackImageHash.hash, undefined, {})
 		: metaData.fallbackImage;
 
 	const getImgURL = (metaType = "og:image") => {
@@ -296,7 +295,7 @@ const MetaData = ({
 		metaData.title = metaValue("title") || fallbackTitle;
 		const { name: authorName } = author;
 		const resizedAuthorImage = authorImageHash?.hash
-			? imageURL(encodeURIComponent(authorPhoto), authorImageHash.hash, 1200)
+			? imageURL(encodeURIComponent(authorImageUrl), authorImageHash.hash, 1200)
 			: resizedFallbackImage;
 
 		const authorAltText =
