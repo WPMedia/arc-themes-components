@@ -18,7 +18,12 @@ const localizeDate = (
 		validDateFormat = DATE_FORMAT_FALLBACK;
 	}
 
-	return localizeDateHelper(date, validDateFormat, language, timeZone);
+	return localizeDateHelper(
+		date,
+		validDateFormat,
+		language,
+		timeZone
+	);
 };
 
 const localizeDateTime = (
@@ -37,7 +42,6 @@ const localizeDateTime = (
 
 	return localizeDateHelper(
 		date,
-		// default includes time (see dateTimeFormat property)
 		validDateFormat,
 		language,
 		timeZone

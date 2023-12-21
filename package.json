@@ -30,7 +30,6 @@
     "lint:fix": "npm run lint -- --fix",
     "lint:styles": "stylelint '**/*.scss' --formatter verbose",
     "lint:styles:fix": "stylelint '**/*.scss' --fix",
-    "postinstall": "node scripts/postinstall.js",
     "-ignore-prepare": "husky install",
     "storybook": "start-storybook -p 60003",
     "storybook:build": "build-storybook",
