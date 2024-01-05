@@ -96,7 +96,6 @@
   "dependencies": {
     "@arc-publishing/sdk-identity": "^1.79.0",
     "@storybook/addon-docs": "^7.6.4",
-    "@wpmedia/timezone": "^1.1.2",
     "dom-parser": "^0.1.6",
     "eslint-plugin-testing-library": "^6.2.0",
     "lazy-child": "^0.3.1",
