@@ -171,10 +171,9 @@ const MetaData = ({
 	const author = gc && gc.authors && gc.authors.length ? gc.authors[0] : {};
 	const authorImageUrl =
 		typeof author.image === "string" ? author.image : author.image && author.image.url;
-	const authorPhoto = authorImageUrl || metaData.fallbackImage;
 
 	const authorImageHash = useContent(
-		authorPhoto ? { source: "signing-service", query: { id: authorPhoto } } : {},
+		authorImageUrl ? { source: "signing-service", query: { id: authorImageUrl } } : {},
 	);
 
 	const fallbackImageHash = useContent(
@@ -297,7 +296,7 @@ const MetaData = ({
 		metaData.title = metaValue("title") || fallbackTitle;
 		const { name: authorName } = author;
 		const resizedAuthorImage = authorImageHash?.hash
-			? imageURL(encodeURIComponent(authorPhoto), authorImageHash.hash, 1200)
+			? imageURL(encodeURIComponent(authorImageUrl), authorImageHash.hash, 1200)
 			: resizedFallbackImage;
 
 		const authorAltText =

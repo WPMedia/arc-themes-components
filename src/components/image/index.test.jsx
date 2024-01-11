@@ -282,7 +282,7 @@ describe("Image", () => {
 			<Image
 				ansImage={{
 					_id: "123",
-					url: "test-image.jpg",
+					url: "http://image-host.com/test-image.jpg",
 					auth: {
 						2: "secret",
 					},
