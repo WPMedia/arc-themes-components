@@ -13,37 +13,38 @@ import getImageFromANS from "../../utils/get-image-from-ans";
 import imageANSToImageSrc from "../../utils/image-ans-to-image-src";
 
 const getCustomMetaData = (metaHTMLString) => {
-	let customMetaData = null;
 	if (typeof window === "undefined") {
 		const DomParser = require("dom-parser");
-		customMetaData = new DomParser()
+		return new DomParser()
 			.parseFromString(metaHTMLString)
 			.getElementsByTagName("META")
 			.map((metaNode) => ({
-				metaName: metaNode.getAttribute("name"),
-				metaValue: metaNode.getAttribute("value") || metaNode.getAttribute("content"),
+				name: metaNode.getAttribute("name"),
+				value: metaNode.getAttribute("value") || metaNode.getAttribute("content"),
 			}));
 	}
-	return customMetaData;
+	return null;
 };
 
-const generateCustomMetaTags = (metaData, MetaTag, MetaTags) => {
-	const view = ReactDOMServer.renderToString(<MetaTags />);
-	const customMetaData = getCustomMetaData(view).filter((metaObj) => !metaData[metaObj.metaName]);
-	return (
-		<>
-			{customMetaData.length > 0 &&
-				customMetaData.map((metaObj, i) => (
-					<MetaTag
-						// eslint-disable-next-line react/no-array-index-key
-						key={`custom-meta-data-${i}`}
-						name={metaObj.metaName}
-						default={metaObj.metaValue}
-					/>
-				))}
-		</>
-	);
-};
+const convertDelimitedStringToCamelCase = (str) =>
+	str.replaceAll(/[:,-](.)/g, (m, m1) => m1.toUpperCase());
+
+const filterUniqueValuesNotIn =
+	(metaData) =>
+	({ name }) =>
+		!metaData[name] && !metaData[convertDelimitedStringToCamelCase(name)];
+
+const generateCustomMetaTags = (metaData, MetaTag, MetaTags) =>
+	getCustomMetaData(ReactDOMServer.renderToString(<MetaTags />))
+		.filter(filterUniqueValuesNotIn(metaData))
+		.map(({ name, value }, i) => (
+			<MetaTag
+				// eslint-disable-next-line react/no-array-index-key
+				key={`custom-meta-data-${i}`}
+				name={name}
+				default={value}
+			/>
+		));
 
 const buildUrl = (domain, path) => {
 	try {
