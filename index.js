@@ -37,6 +37,7 @@ import formatURL from "./src/utils/format-url";
 import getAspectRatio from "./src/utils/get-aspect-ratio";
 
 // the following are ordered by dependency
+import getFocalFromANS from "./src/utils/get-focal-from-ans";
 import getImageFromANS from "./src/utils/get-image-from-ans";
 import getPromoType from "./src/utils/get-promo-type";
 import getVideoFromANS from "./src/utils/get-video-from-ans";
@@ -67,6 +68,7 @@ export {
 	formatSocialURL,
 	formatURL,
 	getAspectRatio,
+	getFocalFromANS,
 	getImageFromANS,
 	getPromoType,
 	getVideoFromANS,
