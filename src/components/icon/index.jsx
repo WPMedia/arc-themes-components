@@ -1,4 +1,6 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
+import { useFusionContext } from "fusion:context";
 import additionalSVGProps from "./icons/Helpers";
 
 import * as Icons from "./icons";
@@ -6,27 +8,53 @@ import * as Icons from "./icons";
 const COMPONENT_CLASS_NAME = "c-icon";
 
 const Icon = ({ className, context, description, fill, height, name, title, width, ...rest }) => {
+	const [imageLoaded, setImageLoaded] = useState(true);
+
 	const IconName = Icons[name];
 
+	const { deployment, contextPath } = useFusionContext();
+	const customImagePath = deployment(`${contextPath}/resources/themes/${name}.svg`);
+
+	const style = {};
+	if (width) {
+		style.width = width;
+	}
+	if (height) {
+		style.height = height;
+	}
+	if (fill) {
+		style.color = fill;
+	}
+
+	const handleImageError = () => {
+		setImageLoaded(false);
+	};
+
 	return (
-		<svg
-			{...rest}
-			className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
-			width={width}
-			height={height}
-			xmlns="http://www.w3.org/2000/svg"
-			viewBox="0 0 512 512"
-			fill={fill}
-			{...additionalSVGProps(context)}
-		>
-			{context === "image" ? (
-				<>
-					<title>{title}</title>
-					{description ? <desc>{description}</desc> : null}
-				</>
-			) : null}
-			<IconName />
-		</svg>
+		<div>
+			{imageLoaded ? (
+				<img src={customImagePath} alt={name} style={style} onError={handleImageError} />
+			) : (
+				<svg
+					{...rest}
+					className={className ? `${COMPONENT_CLASS_NAME} ${className}` : `${COMPONENT_CLASS_NAME}`}
+					width={width}
+					height={height}
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 512 512"
+					fill={fill}
+					{...additionalSVGProps(context)}
+				>
+					{context === "image" ? (
+						<>
+							<title>{title}</title>
+							{description ? <desc>{description}</desc> : null}
+						</>
+					) : null}
+					<IconName />
+				</svg>
+			)}
+		</div>
 	);
 };
 
