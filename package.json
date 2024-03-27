@@ -26,7 +26,7 @@
     "format": "prettier --write .",
     "generate:component": "hygen component new",
     "lint": "eslint --ext js --ext jsx src .storybook index.js",
-    "lint:changed-feature-branch": "eslint --max-warnings 0 --no-error-on-unmatched-pattern $(git diff --name-only origin/arc-themes-release-version-2.3.0 | grep -E \"(.js$|.jsx$)\" || echo \"no js/jsx files changed\")",
+    "lint:changed-feature-branch": "eslint --max-warnings 0 --no-error-on-unmatched-pattern $(git diff --name-only origin/arc-themes-release-version-2.3.1 | grep -E \"(.js$|.jsx$)\" || echo \"no js/jsx files changed\")",
     "lint:fix": "npm run lint -- --fix",
     "lint:styles": "stylelint '**/*.scss' --formatter verbose",
     "lint:styles:fix": "stylelint '**/*.scss' --fix",
@@ -35,7 +35,7 @@
     "storybook:build": "build-storybook",
     "stylelint-check": "stylelint-config-prettier-check",
     "test": "jest --coverage",
-    "test:changed-feature-branch": "jest --changedSince=origin/arc-themes-release-version-2.3.0 --coverage --passWithNoTests",
+    "test:changed-feature-branch": "jest --changedSince=origin/arc-themes-release-version-2.3.1 --coverage --passWithNoTests",
     "test:watch": "npm run test -- --watch -o --coverage"
   },
   "lint-staged": {
