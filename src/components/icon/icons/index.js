@@ -1,3 +1,4 @@
+export { default as Apple } from "./Apple"
 export { default as ArrowLeft } from "./ArrowLeft";
 export { default as ArrowRight } from "./ArrowRight";
 export { default as Backward } from "./Backward";
