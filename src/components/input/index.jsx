@@ -146,8 +146,7 @@ const Input = ({
 				<div className={`${COMPONENT_CLASS_NAME}__tip`} id={infoId}>
 					{!valid && inputElement.current?.validationMessage ? (
 						<span role="alert">{`${inputElement.current.validationMessage} `}</span>
-					) : null}
-					{tip ? <span>{tip}</span> : null}
+					) : tip ? <span>{tip}</span> : null}
 				</div>
 			) : null}
 		</div>

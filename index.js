@@ -2,6 +2,7 @@
 // inject imports after this comment and alphabetize them
 import Attribution from "./src/components/attribution";
 import Badge from "./src/components/badge";
+import BotChallengeProtection from "./src/components/bot-challenge-protection";
 import Button from "./src/components/button";
 import Carousel from "./src/components/carousel";
 import Conditional from "./src/components/conditional";
@@ -56,6 +57,7 @@ import signImagesInANSObject from "./src/utils/sign-images-in-ans-object";
 export {
 	Attribution,
 	Badge,
+	BotChallengeProtection,
 	Button,
 	Carousel,
 	Conditional,

@@ -57,6 +57,13 @@
 			}
 		}
 	},
+	"input-tip": {
+		"styles": {
+			"default": {
+				"font-size": "var(--global-font-size-3)"
+			}
+		}
+	},
 	"input-error-input": {
 		"styles": {
 			"default": {
