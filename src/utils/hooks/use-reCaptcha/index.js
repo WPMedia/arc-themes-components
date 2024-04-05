@@ -1,22 +1,23 @@
 import { useState, useMemo } from "react";
-
-import Identity from "@arc-publishing/sdk-identity";
+import fetch from 'node-fetch'
+import useIdentity from "../use-identity";
 import useSales from "../use-sales";
 
-import fetch from 'node-fetch'
+// eslint-disable-next-line
 globalThis.fetch = fetch
 
-export const RECAPTCHA_LOGIN = "signin";
-export const RECAPTCHA_SIGNUP = "signup";
-export const RECAPTCHA_MAGICLINK = "magicLink";
 export const RECAPTCHA_CHECKOUT = "checkout";
+export const RECAPTCHA_LOGIN = "signin";
+export const RECAPTCHA_MAGICLINK = "magicLink";
+export const RECAPTCHA_SIGNUP = "signup";
 
 export const RECAPTCHA_V2 = "V2";
 export const RECAPTCHA_V3 = "V3";
 
 const useRecaptcha = (challengeIn) => {
+	const { Identity } = useIdentity();
 	const { Sales, isInitialized: isSalesInitialized } = useSales();
-
+	
 	const [recaptchaVersion, setRecaptchaVersion] = useState();
 	const [siteKey, setSiteKey] = useState();
 	const [isRecaptchaEnabled, setIsRecaptchaEnabled] = useState(false);

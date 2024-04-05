@@ -113,4 +113,24 @@ describe("Identity useIdentity Hook", () => {
 		render(<Test />);
 		expect(screen.getByText("Facebook")).toBeInTheDocument();
 	});
+
+	it("should return the first identity if multiple identities have the same lastLoginDate", () => {
+		const testUser = {
+			identities: [
+				{
+					lastLoginDate: 1639164734000,
+				},
+				{
+					lastLoginDate: 1639164734000,
+				},
+			],
+		};
+		const Test = () => {
+			const { getSignedInIdentity } = useIdentity();
+			const getCurrent = getSignedInIdentity(testUser);
+			return <div>{getCurrent.lastLoginDate}</div>;
+		};
+		render(<Test />);
+		expect(screen.getByText('1639164734000')).toBeInTheDocument();
+	});
 });

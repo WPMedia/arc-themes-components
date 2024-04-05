@@ -1,11 +1,11 @@
 import { useEffect, useCallback } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
-// eslint-disable-next-line
-import { ARCXP_CAPTCHA } from "./index";
+import { ARCXP_CAPTCHA } from "./constants";
 
 /* istanbul ignore file */
 const RecaptchaV3 = ({ setCaptchaToken, resetRecaptcha }) => {
+
 	const { executeRecaptcha } = useGoogleReCaptcha();
 	const handleReCaptcha3Verify = useCallback(async () => {
 		if (!executeRecaptcha) {

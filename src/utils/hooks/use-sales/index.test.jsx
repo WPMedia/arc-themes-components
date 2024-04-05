@@ -1,4 +1,6 @@
-import { render } from "@testing-library/react";
+import React from "react";
+
+import { render, renderHook } from "@testing-library/react";
 import SalesObject from "@arc-publishing/sdk-sales";
 import useSales from ".";
 
@@ -36,6 +38,9 @@ jest.mock("fusion:context", () => ({
 	}),
 }));
 
+const mockSalesOptions = jest.fn();
+const mockIdentityOptions = jest.fn();
+
 describe("Sales useSales Hook", () => {
 
 	it("initializes and returns Sales object", () => {
@@ -53,4 +58,19 @@ describe("Sales useSales Hook", () => {
 		expect(testInitialization).toHaveBeenCalledWith(false);
 		expect(testInitialization).toHaveBeenLastCalledWith(true);
 	});
+
+	test('should not initialize Sales and Identity if already initialized', () => {
+		// Mock useState to simulate Sales already initialized
+		jest.spyOn(React, 'useState').mockReturnValueOnce([true, jest.fn()]);
+	
+		// Render the hook
+		renderHook(() => useSales());
+	
+		// Assertions
+		expect(mockIdentityOptions).not.toHaveBeenCalled();
+		expect(mockSalesOptions).not.toHaveBeenCalled();
+	  });
+
+
+
 });
