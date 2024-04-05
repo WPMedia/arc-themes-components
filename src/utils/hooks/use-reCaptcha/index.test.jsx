@@ -1,4 +1,4 @@
-import { render, screen, renderHook, waitFor } from "@testing-library/react";
+import { renderHook, waitFor } from "@testing-library/react";
 
 import useIdentity from "../use-identity";
 import useSales from "../use-sales";

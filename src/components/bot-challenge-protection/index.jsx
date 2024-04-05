@@ -9,14 +9,14 @@ import useRecaptcha, { RECAPTCHA_V2, RECAPTCHA_V3 } from "../../utils/hooks/use-
 import RecaptchaV3 from "./reCaptchaV3";
 import { ARCXP_CAPTCHA } from "./constants";
 
+const COMPONENT_CLASS_NAME = "c-reCaptcha";
+
 const BotChallengeProtection = ({
-	className,
 	challengeIn,
 	setCaptchaToken,
 	captchaError,
 	error,
 	setCaptchaError,
-	captchaErrorText,
 	resetRecaptcha,
 }) => {
 	const { isInitialized } = useIdentity();
@@ -44,7 +44,7 @@ const BotChallengeProtection = ({
 			return (
 				/* istanbul ignore next */
 				<section
-					className={`${className}__bot-protection-section`}
+					className={COMPONENT_CLASS_NAME}
 					data-testid="bot-challege-protection-container-V2"
 				>
 					<ReCAPTCHA
@@ -53,7 +53,7 @@ const BotChallengeProtection = ({
 						onChange={onChange}
 						onExpired={() => {}}
 					/>
-					{captchaError && <Paragraph>{captchaErrorText}</Paragraph>}
+					{captchaError && <Paragraph className={`${COMPONENT_CLASS_NAME}--warning`}>{captchaError}</Paragraph>}
 				</section>
 			);
 		}
@@ -75,18 +75,16 @@ const BotChallengeProtection = ({
 };
 
 BotChallengeProtection.propTypes = {
-	/** Class name(s) that get appended to default class name of the component. */
-	className: PropTypes.string,
 	/** Variant where the bothChallenge could appear. */
 	challengeIn: PropTypes.oneOf(["signin", "signup", "magicLink", "checkout"]),
 	/** Function to save the reCaptcha token */
 	setCaptchaToken: PropTypes.func.isRequired,
-	/** Object containing the error details */
-	captchaError: PropTypes.object,
+	/** String value, message when Captcha challenge is not completed */
+	captchaError: PropTypes.string,
+	/** Object with error returned by the BE, BE don't accept the same token more than a single time */
+	error: PropTypes.object,
 	/** Function to set the reCaptcha error */
 	setCaptchaError: PropTypes.func.isRequired,
-	/** The text displayed within the component, if there is a captcha error. */
-	captchaErrorText: PropTypes.string,
 	/** Boolean value, when changing reCaptcha V3 is obtained again */
 	resetRecaptcha: PropTypes.bool.isRequired,
 };
