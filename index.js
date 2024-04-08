@@ -46,6 +46,7 @@ import handleFetchError from "./src/utils/handle-fetch-error";
 import handleRedirect from "./src/utils/handle-redirect";
 import useIdentity from "./src/utils/hooks/use-identity";
 import useInterval from "./src/utils/hooks/use-interval";
+import useRecaptcha from "./src/utils/hooks/use-reCaptcha";
 import usePhrases from "./src/utils/hooks/use-phrases";
 import useSales from "./src/utils/hooks/use-sales";
 import imageANSToImageSrc from "./src/utils/image-ans-to-image-src";
@@ -103,6 +104,7 @@ export {
 	Stack,
 	useIdentity,
 	useInterval,
+	useRecaptcha,
 	usePhrases,
 	useSales,
 	Video,
