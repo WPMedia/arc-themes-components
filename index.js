@@ -47,8 +47,8 @@ import handleRedirect from "./src/utils/handle-redirect";
 import useIdentity from "./src/utils/hooks/use-identity";
 import useInterval from "./src/utils/hooks/use-interval";
 import usePhrases from "./src/utils/hooks/use-phrases";
-import useSales from "./src/utils/hooks/use-sales";
 import useRecaptcha from "./src/utils/hooks/use-reCaptcha";
+import useSales from "./src/utils/hooks/use-sales";
 import imageANSToImageSrc from "./src/utils/image-ans-to-image-src";
 import isServerSide from "./src/utils/is-server-side";
 import { localizeDate, localizeDateTime } from "./src/utils/localize-date";
@@ -105,7 +105,7 @@ export {
 	useIdentity,
 	useInterval,
 	usePhrases,
-	useSales,
 	useRecaptcha,
+	useSales,
 	Video,
 };
