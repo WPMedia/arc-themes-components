@@ -46,9 +46,9 @@ import handleFetchError from "./src/utils/handle-fetch-error";
 import handleRedirect from "./src/utils/handle-redirect";
 import useIdentity from "./src/utils/hooks/use-identity";
 import useInterval from "./src/utils/hooks/use-interval";
-import useRecaptcha from "./src/utils/hooks/use-reCaptcha";
 import usePhrases from "./src/utils/hooks/use-phrases";
 import useSales from "./src/utils/hooks/use-sales";
+import useRecaptcha from "./src/utils/hooks/use-reCaptcha";
 import imageANSToImageSrc from "./src/utils/image-ans-to-image-src";
 import isServerSide from "./src/utils/is-server-side";
 import { localizeDate, localizeDateTime } from "./src/utils/localize-date";
@@ -104,8 +104,8 @@ export {
 	Stack,
 	useIdentity,
 	useInterval,
-	useRecaptcha,
 	usePhrases,
 	useSales,
+	useRecaptcha,
 	Video,
 };

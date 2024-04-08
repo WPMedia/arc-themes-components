@@ -60,13 +60,10 @@ describe("Sales useSales Hook", () => {
 	});
 
 	test('should not initialize Sales and Identity if already initialized', () => {
-		// Mock useState to simulate Sales already initialized
 		jest.spyOn(React, 'useState').mockReturnValueOnce([true, jest.fn()]);
 	
-		// Render the hook
 		renderHook(() => useSales());
-	
-		// Assertions
+
 		expect(mockIdentityOptions).not.toHaveBeenCalled();
 		expect(mockSalesOptions).not.toHaveBeenCalled();
 	  });
