@@ -27,7 +27,7 @@ const BotChallengeProtection = ({
 		if ( isRecaptchaEnabled && (captchaError || error)) {
 			recaptchaRef.current.reset();
 		}
-	}, [resetRecaptcha, captchaError, error, recaptchaRef?.current?.reset, isRecaptchaEnabled]);
+	}, [resetRecaptcha, captchaError, error, recaptchaRef, isRecaptchaEnabled]);
 
 	const onChange = (value) => {
 		setCaptchaToken(value);
