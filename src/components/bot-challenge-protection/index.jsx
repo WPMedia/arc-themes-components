@@ -24,10 +24,10 @@ const BotChallengeProtection = ({
 	const recaptchaRef = React.createRef();
 
 	useEffect(() => {
-		if (captchaError || error) {
+		if ( isRecaptchaEnabled && (captchaError || error)) {
 			recaptchaRef.current.reset();
 		}
-	}, [resetRecaptcha, captchaError, error, recaptchaRef]);
+	}, [resetRecaptcha, captchaError, error, recaptchaRef?.current?.reset, isRecaptchaEnabled]);
 
 	const onChange = (value) => {
 		setCaptchaToken(value);
@@ -81,8 +81,8 @@ BotChallengeProtection.propTypes = {
 	setCaptchaToken: PropTypes.func.isRequired,
 	/** String value, message when Captcha challenge is not completed */
 	captchaError: PropTypes.string,
-	/** Object with error returned by the BE, BE don't accept the same token more than a single time */
-	error: PropTypes.object,
+	/** String value with the error message returned by the BE, BE don't accept the same token more than a single time */
+	error: PropTypes.string,
 	/** Function to set the reCaptcha error */
 	setCaptchaError: PropTypes.func.isRequired,
 	/** Boolean value, when changing reCaptcha V3 is obtained again */
