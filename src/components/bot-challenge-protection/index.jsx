@@ -21,13 +21,15 @@ const BotChallengeProtection = ({
 }) => {
 	const { isInitialized } = useIdentity();
 	const { recaptchaVersion, siteKey, isRecaptchaEnabled } = useRecaptcha(challengeIn);
+
 	const recaptchaRef = React.createRef();
 
 	useEffect(() => {
-		if ( isRecaptchaEnabled && (captchaError || error)) {
+		if ( isRecaptchaEnabled && recaptchaVersion === RECAPTCHA_V2 && (captchaError || error)) {
+			/* eslint-disable-next-line */
 			recaptchaRef.current.reset();
 		}
-	}, [resetRecaptcha, captchaError, error, recaptchaRef, isRecaptchaEnabled]);
+	}, [resetRecaptcha, captchaError, error, isRecaptchaEnabled, recaptchaVersion]);
 
 	const onChange = (value) => {
 		setCaptchaToken(value);
