@@ -2,7 +2,7 @@
   "name": "@wpmedia/arc-themes-components",
   "author": "",
   "license": "CC-BY-NC-ND-4.0",
-  "version": "0.0.4-arc-themes-release-version-2-3-1.0",
+  "version": "0.0.4-arc-themes-release-version-2-3-0.7",
   "description": "The arc-themes-components will be the basis for presentational components and reusable utility functions workflow of themes and client devs. A core tenet of Themes is composability for developers.",
   "homepage": "https://github.com/WPMedia/arc-themes-components#readme",
   "keywords": [
@@ -83,6 +83,8 @@
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-google-recaptcha": "^3.1.0",
+    "react-google-recaptcha-v3": "^1.10.1",
     "react-test-renderer": "^18.2.0",
     "sass": "^1.69.4",
     "sass-loader": "^13.3.2",
@@ -93,7 +95,9 @@
     "stylelint-config-recommended": "^13.0.0",
     "stylelint-config-sass-guidelines": "^10.0.0",
     "stylelint-no-unsupported-browser-features": "^7.0.0",
-    "stylelint-order": "^6.0.4"
+    "stylelint-order": "^6.0.4",
+    "@arc-publishing/sdk-identity": "^1.79.0",
+    "@arc-publishing/sdk-sales": "^1.79.0"
   },
   "dependencies": {
     "@arc-publishing/sdk-identity": "^1.79.0",
@@ -101,6 +105,9 @@
     "dom-parser": "^0.1.6",
     "lazy-child": "^0.3.1",
     "lodash.get": "^4.4.2",
+    "node-fetch": "^2.7.0",
+    "react-google-recaptcha": "^3.1.0",
+    "react-google-recaptcha-v3": "^1.10.1",
     "react-oembed-container": "^1.0.1",
     "react-swipeable": "^7.0.1"
   },

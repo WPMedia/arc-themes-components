@@ -5,7 +5,18 @@ import * as Icons from "./icons";
 
 const COMPONENT_CLASS_NAME = "c-icon";
 
-const Icon = ({ className, context, description, fill, height, name, title, width, ...rest }) => {
+const Icon = ({
+	className,
+	context,
+	description,
+	fill,
+	height,
+	name,
+	title,
+	width,
+	viewBox,
+	...rest
+}) => {
 	const IconName = Icons[name];
 
 	return (
@@ -15,7 +26,7 @@ const Icon = ({ className, context, description, fill, height, name, title, widt
 			width={width}
 			height={height}
 			xmlns="http://www.w3.org/2000/svg"
-			viewBox="0 0 512 512"
+			viewBox={viewBox || "0 0 512 512"}
 			fill={fill}
 			{...additionalSVGProps(context)}
 		>
@@ -56,6 +67,7 @@ Icon.propTypes = {
 	height: PropTypes.number,
 	/** Name of the Icon to render */
 	name: PropTypes.oneOf([
+		"Apple",
 		"ArrowLeft",
 		"ArrowRight",
 		"Backward",
