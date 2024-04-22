@@ -1,15 +1,19 @@
 const path = require("path");
 
 module.exports = {
-	stories: ["../src/**/*.stories.mdx"],
+	stories: ["../src/**/*.@(mdx|stories.@(js|jsx))"],
+
 	addons: [
-		"@etchteam/storybook-addon-css-variables-theme",
 		"@storybook/addon-a11y",
 		"@storybook/addon-docs",
 		"@storybook/addon-links",
 		"@storybook/addon-essentials",
+		"@storybook/addon-styling-webpack",
+		"@storybook/addon-webpack5-compiler-babel",
 	],
+
 	staticDirs: ["../resources"],
+
 	webpackFinal: (config) => ({
 		...config,
 		module: {
@@ -33,5 +37,15 @@ module.exports = {
 				"fusion:environment": path.resolve(__dirname, "./alias/environment.js"),
 			},
 		},
+		externals: /^(fusion:)/,
 	}),
+
+	framework: {
+		name: "@storybook/react-webpack5",
+		options: {},
+	},
+
+	docs: {
+		autodocs: true,
+	},
 };

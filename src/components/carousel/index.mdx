@@ -1,0 +1,214 @@
+import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories.jsx";
+
+import Icon from "../icon";
+import Image from "../image";
+
+import Button from "./_children/Button";
+import Item from "./_children/Item";
+import Carousel from ".";
+
+<Meta of={IndexStories} />
+
+# Carousel
+
+A slideshow component that allows for the ability to display more items than can fit
+on a screen and allow the user to navigate through the items using buttons and/or
+touch interactions.
+
+The slideshow component also allows users to toggle full screen mode. The full-screen functionality uses the Fullscreen API, which all modern browsers [support](https://caniuse.com/fullscreen).
+
+Autoplay functionality that rotates the images within the carousel is also available. The autoplay feature is [accessible](https://www.w3.org/TR/wai-aria-practices-1.2/#carousel) for users who have opted into [`prefer-reduced-motion`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) by not displaying the option, trumping `enableAutoplay`. The feature is customizable by allowing custom block creators to use their own icons, text, and aria-label to indicate the autoplay functionality.
+
+The `indicators` prop allows a viewer to see either `dots` or `thumbnails` to visualize and control the state of the carousel. In essence, the indicator area shows the current slide index and the active slide's place in the list. The prop defaults to `none`. In order to customize the thumbnails shown, the prop `thumbnails` takes in an array of nodes. The first `thumbnails` node will correspond to the first carousel item: if you click the first thumbnail, it will go to the first thumbnail. In addition, if the first featured image is navigated to, the first thumbnail will become active and come into view. `thumbnails` prop is required to work with `indicators` prop when the `indicators` value is opting into using thumbnails.
+
+## Usage
+
+```jsx
+import { Carousel, Image } from "@wpmedia/arc-themes-components";
+
+const Feature = () => (
+	<Carousel id="carousel-1" label="Images of x, y and z">
+		<Carousel.Item label="Slide 1 of 2">
+			<Image src="/camera.jpeg" alt="A camera with photos in front of it" />
+		</Carousel.Item>
+		<Carousel.Item label="Slide 2 of 2">
+			<Image src="/canyon.jpeg" alt="Landscape view of a canyon" />
+		</Carousel.Item>
+	</Carousel>
+);
+```
+
+## Properties
+
+### Carousel
+
+<Controls />
+
+### Carousel.Item
+
+<Controls />
+
+### Carousel.Button
+
+<Controls />
+
+## Stories
+
+\*\* Carousel \*\*
+
+<Canvas>
+	<Story of={IndexStories.DefaultCarousel} />
+</Canvas>
+
+\*\* Carousel (rtl) \*\*
+
+<Canvas>
+	<Story of={IndexStories.RtlCarousel} />
+</Canvas>
+
+\*\* Single Slide Display \*\*
+
+<Canvas>
+	<Story of={IndexStories.SingleSlideDisplay} />
+</Canvas>
+
+\*\* No Additional Slides \*\*
+
+<Canvas>
+	<Story of={IndexStories.NoAdditionalSlides} />
+</Canvas>
+
+\*\* Single Slide \*\*
+
+<Canvas>
+	<Story of={IndexStories.SingleSlide} />
+</Canvas>
+
+\*\* With Label And Multiple Slides \*\*
+
+<Canvas>
+	<Story of={IndexStories.WithLabelAndMultipleSlidesShowingOne} />
+</Canvas>
+
+\*\* Show Full Screen Toggle \*\*
+
+<Canvas>
+	<Story of={IndexStories.ShowFullScreenToggle} />
+</Canvas>
+
+\*\* Show Custom Full Screen Toggle \*\*
+
+<Canvas>
+	<Story of={IndexStories.ShowCustomFullScreenToggle} />
+</Canvas>
+
+\*\* Show Custom Full Screen Toggle With Multiple Slides \*\*
+
+<Canvas>
+	<Story of={IndexStories.ShowCustomFullScreenToggleWithMultipleSlides} />
+</Canvas>
+
+\*\* Show With Label And Full Screen Toggle With Multiple Slides \*\*
+
+<Canvas>
+	<Story of={IndexStories.ShowWithLabelAndFullScreenToggleWithMultipleSlides} />
+</Canvas>
+
+\*\* Show Custom Label Text \*\*
+
+<Canvas>
+	<Story of={IndexStories.ShowCustomLabelText} />
+</Canvas>
+
+\*\* Display autoplay toggle \*\*
+
+<Canvas>
+	<Story of={IndexStories.DisplayAutoplayToggle} />
+</Canvas>
+
+\*\* Display custom autoplay toggle \*\*
+
+<Canvas>
+	<Story of={IndexStories.DisplayCustomAutoplayToggle} />
+</Canvas>
+
+\*\* Show additional controls \*\*
+
+<Canvas>
+	<Story of={IndexStories.ShowAdditionalControls} />
+</Canvas>
+
+\*\* Display autoplay toggle with multiple slides showing and full-screen toggle showing \*\*
+
+<Canvas>
+	<Story
+		of={IndexStories.DisplayAutoplayToggleWithMultipleSlidesShowingAndFullScreenToggleShowing}
+	/>
+</Canvas>
+
+\*\* Display autoplay toggle with multiple slides showing, full-screen toggle showing, show label \*\*
+
+<Canvas>
+	<Story
+		of={IndexStories.DisplayAutoplayToggleWithMultipleSlidesShowingFullScreenToggleShowingShowLabel}
+	/>
+</Canvas>
+
+\*\* Show additional custom controls and show full screen toggle \*\*
+
+<Canvas>
+	<Story of={IndexStories.ShowAdditionalCustomControlsAndShowFullScreenToggle} />
+</Canvas>
+
+\*\* Ad Placement \*\*
+
+<Canvas>
+	<Story of={IndexStories.AdPlacement} />
+</Canvas>
+
+\*\* No additional slide controls will be shown if one slide and opted in to addition slide controls \*\*
+
+<Canvas>
+	<Story
+		of={
+			IndexStories.NoAdditionalSlideControlsWillBeShownIfOneSlideAndOptedInToAdditionSlideControls
+		}
+	/>
+</Canvas>
+
+\*\* Two slides autoplay \*\*
+
+<Canvas>
+	<Story of={IndexStories.TwoSlidesAutoplay} />
+</Canvas>
+
+\*\* Three slides autoplay \*\*
+
+<Canvas>
+	<Story of={IndexStories.ThreeSlidesAutoplay} />
+</Canvas>
+
+\*\* Indicators none \*\*
+
+<Canvas>
+	<Story of={IndexStories.IndicatorsNone} />
+</Canvas>
+
+\*\* Indicators dots \*\*
+
+<Canvas>
+	<Story of={IndexStories.IndicatorsDots} />
+</Canvas>
+
+\*\* Indicators thumbnails \*\*
+
+<Canvas>
+	<Story of={IndexStories.IndicatorsThumbnails} />
+</Canvas>
+
+\*\* Indicators thumbnails with many images \*\*
+
+<Canvas>
+	<Story of={IndexStories.IndicatorsThumbnailsWithManyImages} />
+</Canvas>

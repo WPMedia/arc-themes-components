@@ -1,0 +1,119 @@
+import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import formatSocialURL from ".";
+
+<Meta of={IndexStories} />
+
+# Format Social Media URL
+
+The `formatSocialURL()` function takes in two strings containing the social network type identifier and the
+users social media identifier and returns a URL for the particular social endpoint.
+
+## Usage
+
+```jsx
+import { formatSocialURL, Link } from "@wpmedia/arc-themes-components";
+
+const Feature = () => {
+	const facebookSocialMediaUrl = formatSocialURL("facebook", "mySocialMediaMoniker");
+
+	/*
+		You can also reference the supported type values of the function
+
+		const facebookSocialMediaUrl = formatSocialURL(
+			formatSocialURL.types.Facebook,
+			"mySocialMediaMoniker"
+		);
+	*/
+
+	return <Link href={facebookSocialMediaUrl}>Facebook</Link>;
+};
+```
+
+## Properties
+
+| Name      | Description                                                           | Default |
+| --------- | --------------------------------------------------------------------- | ------- |
+| **type**  | Takes in a string identifier for the social media network in question | -       |
+| **field** | Takes in astring value for the users social media identifier          | -       |
+
+## Stories
+
+\*\* Email \*\*
+
+<Canvas>
+	<Story of={IndexStories.Email} />
+</Canvas>
+
+\*\* Facebook \*\*
+
+<Canvas>
+	<Story of={IndexStories.Facebook} />
+</Canvas>
+
+\*\* Instagram \*\*
+
+<Canvas>
+	<Story of={IndexStories.Instagram} />
+</Canvas>
+
+\*\* LinkedIn \*\*
+
+<Canvas>
+	<Story of={IndexStories.LinkedIn} />
+</Canvas>
+
+\*\* Medium \*\*
+
+<Canvas>
+	<Story of={IndexStories.Medium} />
+</Canvas>
+
+\*\* Pinterest \*\*
+
+<Canvas>
+	<Story of={IndexStories.Pinterest} />
+</Canvas>
+
+\*\* Reddit \*\*
+
+<Canvas>
+	<Story of={IndexStories.Reddit} />
+</Canvas>
+
+\*\* Snapchat \*\*
+
+<Canvas>
+	<Story of={IndexStories.Snapchat} />
+</Canvas>
+
+\*\* SoundCloud \*\*
+
+<Canvas>
+	<Story of={IndexStories.SoundCloud} />
+</Canvas>
+
+\*\* Tumblr \*\*
+
+<Canvas>
+	<Story of={IndexStories.Tumblr} />
+</Canvas>
+
+\*\* Twitter \*\*
+
+<Canvas>
+	<Story of={IndexStories.Twitter} />
+</Canvas>
+
+\*\* WhatsApp \*\*
+
+<Canvas>
+	<Story of={IndexStories.WhatsApp} />
+</Canvas>
+
+\*\* Youtube \*\*
+
+<Canvas>
+	<Story of={IndexStories.Youtube} />
+</Canvas>

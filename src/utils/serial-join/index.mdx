@@ -1,0 +1,71 @@
+import { Meta, Story, Canvas } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import serialJoin from ".";
+
+<Meta of={IndexStories} />
+
+# Serial Join
+
+The `serialJoin()` function takes in an array of values and returns it using the serial comma (Oxford comma) rules. It provides overrides for replacing the delimiter, conjunction, and spacer characters.
+
+## Usage
+
+```jsx
+import serialJoin from "./serialJoin";
+
+const formattedString = serialJoin(["one", "two", "three"]);
+```
+
+## Properties
+
+| Name            | Description                                                                    | Default |
+| --------------- | ------------------------------------------------------------------------------ | ------- |
+| **list**        | An array of values that can be coerced to a string value or an array of nodes. | \[]     |
+| **conjunction** | A set of characters that should be used for the "and".                         | "and"   |
+| **delimiter**   | A set of characters that should be used for the "comma".                       | ","     |
+| **spacer**      | A set of characters that should be used for the inserted spaces.               | " "     |
+
+## Stories
+
+\*\* One item \*\*
+
+<Canvas>
+	<Story of={IndexStories.OneItem} />
+</Canvas>
+
+\*\* Two items \*\*
+
+<Canvas>
+	<Story of={IndexStories.TwoItems} />
+</Canvas>
+
+\*\* Three items \*\*
+
+<Canvas>
+	<Story of={IndexStories.ThreeItems} />
+</Canvas>
+
+\*\* Three items, with a custom conjunction \*\*
+
+<Canvas>
+	<Story of={IndexStories.ThreeItemsWithACustomConjunction} />
+</Canvas>
+
+\*\* Three items, with an empty conjunction and custom delimiter \*\*
+
+<Canvas>
+	<Story of={IndexStories.ThreeItemsWithAnEmptyConjunctionAndCustomDelimiter} />
+</Canvas>
+
+\*\* Three items, with an empty conjunction, custom delimiter, and empty spacer \*\*
+
+<Canvas>
+	<Story of={IndexStories.ThreeItemsWithAnEmptyConjunctionCustomDelimiterAndEmptySpacer} />
+</Canvas>
+
+\*\* Three node items \*\*
+
+<Canvas>
+	<Story of={IndexStories.ThreeNodeItems} />
+</Canvas>

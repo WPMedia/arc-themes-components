@@ -1,0 +1,52 @@
+import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import * as IndexStories from "./index.stories";
+
+import Paragraph from "./";
+
+<Meta of={IndexStories} />
+
+# Paragraph
+
+Outputs a paragraph of text. Allows for plain text as well as text with HTML markup. Provides for truncation as well.
+
+If the text you are trying to output has HTML entities within it you will not be able to
+use the `{children}`. You will need to use `dangerouslySetInnerHTML` to overcome a
+limitation with JSX
+
+## Usage
+
+```jsx
+import { Paragraph } from "@wpmedia/arc-themes-components";
+
+const Feature = () => <Paragraph>Text to output</Paragraph>;
+```
+
+## Properties
+
+<Controls />
+
+## Stories
+
+\*\* Default \*\*
+
+<Canvas>
+	<Story of={IndexStories.Default} />
+</Canvas>
+
+\*\* Output with embedded HTML\*\*
+
+<Canvas>
+	<Story of={IndexStories.OutputWithEmbeddedHtml} />
+</Canvas>
+
+\*\* Truncation at two lines\*\*
+
+<Canvas>
+	<Story of={IndexStories.TruncationAtTwoLines} />
+</Canvas>
+
+\*\* Truncation at three lines\*\*
+
+<Canvas>
+	<Story of={IndexStories.TruncationAtThreeLines} />
+</Canvas>
