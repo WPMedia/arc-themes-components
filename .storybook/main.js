@@ -60,7 +60,9 @@ module.exports = {
 	},
 
 	docs: {
-		autodocs: true,
+		source: {
+			language: "jsx",
+		},
 	},
 
 	babelDefault: {

@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import { Canvas, Controls, Meta, Source, Story } from "@storybook/blocks";
 import * as IndexStories from "./index.stories";
 
 import Badge from ".";
@@ -24,14 +24,10 @@ const Feature = () => <Badge>Badge Component</Badge>;
 
 ## Stories
 
-\*\* Badge \*\*
+### Badge
 
-<Canvas>
-	<Story of={IndexStories.DefaultBadge} />
-</Canvas>
+<Canvas of={IndexStories.DefaultBadge} />
 
-\*\* Badge Variants \*\*
+### Badge Variants
 
-<Canvas>
-	<Story of={IndexStories.BadgeVariants} />
-</Canvas>
+<Canvas of={IndexStories.BadgeVariants} />
