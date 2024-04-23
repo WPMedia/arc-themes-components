@@ -53,7 +53,7 @@ export const AdPlacement = {
 
 export const DefaultCarousel = {
 	render: () => (
-		<div dir="rtl">
+		<div>
 			<Carousel
 				id="carousel-1"
 				label="Carousel of Images"
