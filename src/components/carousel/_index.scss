@@ -6,6 +6,8 @@
 
 	display: grid;
 	grid-template-areas: "controls" "carousel" "indicators";
+	grid-template-columns: 100%;
+	grid-template-rows: min-content;
 	overflow: hidden;
 	word-break: break-word;
 
