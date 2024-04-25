@@ -23,6 +23,7 @@
     "url": "https://github.com/WPMedia/arc-themes-components/issues"
   },
   "scripts": {
+    "build-storybook": "storybook build",
     "format": "prettier --write .",
     "generate:component": "hygen component new",
     "lint": "eslint --ext js --ext jsx src .storybook index.js",
@@ -32,7 +33,6 @@
     "lint:styles:fix": "stylelint '**/*.scss' --fix",
     "-ignore-prepare": "husky install",
     "storybook": "storybook dev -p 6006",
-    "storybook:build": "storybook build",
     "stylelint-check": "stylelint-config-prettier-check",
     "test": "jest --coverage",
     "test:changed-feature-branch": "jest --changedSince=origin/arc-themes-release-version-2.3.1 --coverage --passWithNoTests",
