@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import { Meta, Story, Controls } from "@storybook/blocks";
 import * as IndexStories from "./index.stories";
 
 import Picture from ".";
@@ -69,7 +69,7 @@ const Feature = () => (
 
 ## Stories
 
-\*\* Picture \*\*
+### Picture
 
 `Picture.Source` may be used to target Art Direction requirements for specific viewport widths. The following example displays a `Picture` with three Art Direction variations:
 
@@ -77,14 +77,10 @@ const Feature = () => (
 2. As the viewport widens, the image is displayed as a square.
 3. At the viewport widens further, the image is displayed with a landscape aspect ratio.
 
-<Canvas>
-	<Story of={IndexStories.DefaultPicture} />
-</Canvas>
+<Story of={IndexStories.DefaultPicture} />
 
-\*\* Picture source does not render without a media attribute.\*\*
+### Picture source does not render without a media attribute.
 
 `Picture.Source` requires a `media` attribute. When the attribute is not provided, `Picture.Source` renders as `null`.
 
-<Canvas>
-	<Story of={IndexStories.PictureSourceDoesNotRenderWithoutAMediaAttribute} />
-</Canvas>
+<Story of={IndexStories.PictureSourceDoesNotRenderWithoutAMediaAttribute} />

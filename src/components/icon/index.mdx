@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, Controls, IconGallery, IconItem } from "@storybook/blocks";
+import { Meta, Story, Controls, IconGallery, IconItem } from "@storybook/blocks";
 import * as IndexStories from "./index.stories";
 
 import * as Icons from "./icons";
@@ -40,16 +40,14 @@ const Feature = () => <Icon name="User" />;
 
 ## Stories
 
-\*\* Default \*\*
+### All Icons
 
-<Canvas>
-	<Story of={IndexStories.AllIcons} />
-</Canvas>
+<Story of={IndexStories.AllIcons} />
 
-<Canvas>
-	<Story of={IndexStories.SingleIcon} />
-</Canvas>
+### Single Icon
 
-<Canvas>
-	<Story of={IndexStories.SingleIconWithFill} />
-</Canvas>
+<Story of={IndexStories.SingleIcon} />
+
+### Single Icon with Fill
+
+<Story of={IndexStories.SingleIconWithFill} />

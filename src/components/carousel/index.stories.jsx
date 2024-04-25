@@ -1,11 +1,13 @@
 import Icon from "../icon";
 import Image from "../image";
-
+import Button from "./_children/Button";
+import Item from "./_children/Item";
 import Carousel from ".";
 
 export default {
 	title: "Components/Carousel",
 	component: Carousel,
+	subcomponents: { Button, Item },
 };
 
 export const AdPlacement = {

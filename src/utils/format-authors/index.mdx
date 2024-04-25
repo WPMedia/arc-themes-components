@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas } from "@storybook/blocks";
+import { Meta, Story } from "@storybook/blocks";
 import * as IndexStories from "./index.stories";
 
 import formatAuthors from ".";
@@ -25,26 +25,18 @@ const htmlString = formatAuthors(globalContent.credits.by);
 
 ## Stories
 
-\*\* One item \*\*
+### One item
 
-<Canvas>
-	<Story of={IndexStories.OneItem} />
-</Canvas>
+<Story of={IndexStories.OneItem} />
 
-\*\* Two items \*\*
+### Two items
 
-<Canvas>
-	<Story of={IndexStories.TwoItems} />
-</Canvas>
+<Story of={IndexStories.TwoItems} />
 
-\*\* Three items \*\*
+### Three items
 
-<Canvas>
-	<Story of={IndexStories.ThreeItems} />
-</Canvas>
+<Story of={IndexStories.ThreeItems} />
 
-\*\* Three items, with a custom conjunction \*\*
+### Three items, with a custom conjunction
 
-<Canvas>
-	<Story of={IndexStories.ThreeItemsWithACustomConjunction} />
-</Canvas>
+<Story of={IndexStories.ThreeItemsWithACustomConjunction} />

@@ -16,10 +16,23 @@ export const BadgeVariants = {
 			<Badge variant="danger">Danger</Badge>
 		</>
 	),
+	parameters: {
+		docs: {
+			source: {
+				code: `<Badge>Default</Badge>
+<Badge variant="light">Light</Badge>
+<Badge variant="primary">Primary</Badge>
+<Badge variant="success">Success</Badge>
+<Badge variant="warning">Warning</Badge>
+<Badge variant="danger">Danger</Badge>`,
+			},
+		},
+	},
 };
 
 export const DefaultBadge = {
-	render: () => <Badge>Badge</Badge>,
-
+	args: {
+		children: ["Badge"],
+	},
 	name: "Badge",
 };

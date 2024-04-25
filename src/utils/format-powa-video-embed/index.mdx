@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import { Meta, Story, Controls } from "@storybook/blocks";
 import * as IndexStories from "./index.stories";
 
 import formatPowaVideoEmbed from ".";
@@ -43,14 +43,10 @@ const CustomVideoFeature = () => {
 
 ## Stories
 
-\*\* With no fields set \*\*
+### With no fields set
 
-<Canvas>
-	<Story of={IndexStories.WithNoFieldsSet} />
-</Canvas>
+<Story of={IndexStories.WithNoFieldsSet} />
 
-\*\* With autoplay and muted fields set \*\*
+### With autoplay and muted fields set
 
-<Canvas>
-	<Story of={IndexStories.WithAutoplayAndMutedFieldsSet} />
-</Canvas>
+<Story of={IndexStories.WithAutoplayAndMutedFieldsSet} />

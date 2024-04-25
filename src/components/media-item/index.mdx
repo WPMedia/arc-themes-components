@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import { Meta, Story, Controls } from "@storybook/blocks";
 import * as IndexStories from "./index.stories";
 
 import MediaItem from ".";
@@ -45,50 +45,34 @@ const MediaItemFeature = () => (
 
 ## Stories
 
-\*\* Default \*\*
+### Default
 
-<Canvas>
-	<Story of={IndexStories.Default} />
-</Canvas>
+<Story of={IndexStories.Default} />
 
-\*\* No caption \*\*
+### No caption
 
-<Canvas>
-	<Story of={IndexStories.NoCaption} />
-</Canvas>
+<Story of={IndexStories.NoCaption} />
 
-\*\* No credit \*\*
+### No credit
 
-<Canvas>
-	<Story of={IndexStories.NoCredit} />
-</Canvas>
+<Story of={IndexStories.NoCredit} />
 
-\*\* No title \*\*
+### No title
 
-<Canvas>
-	<Story of={IndexStories.NoTitle} />
-</Canvas>
+<Story of={IndexStories.NoTitle} />
 
-\*\* No title, caption, nor credit \*\*
+### No title, caption, nor credit
 
-<Canvas>
-	<Story of={IndexStories.NoTitleCaptionNorCredit} />
-</Canvas>
+<Story of={IndexStories.NoTitleCaptionNorCredit} />
 
-\*\* Renders html passed into title or caption or credit \*\*
+### Renders html passed into title or caption or credit
 
-<Canvas>
-	<Story of={IndexStories.RendersHtmlPassedIntoTitleOrCaption} />
-</Canvas>
+<Story of={IndexStories.RendersHtmlPassedIntoTitleOrCaption} />
 
-\*\* With image \*\*
+### With image
 
-<Canvas>
-	<Story of={IndexStories.WithImage} />
-</Canvas>
+<Story of={IndexStories.WithImage} />
 
-\*\* With vertical video \*\*
+### With vertical video
 
-<Canvas>
-	<Story of={IndexStories.WithImage} />
-</Canvas>
+<Story of={IndexStories.WithImage} />

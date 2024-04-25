@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import { Meta, Story, Controls } from "@storybook/blocks";
 import * as IndexStories from "./index.stories";
 
 import formatCredits from ".";
@@ -37,38 +37,26 @@ const formattedCredits = formatCredits(credits);
 
 ## Stories
 
-\*\* One creator, one affiliation \*\*
+### One creator, one affiliation
 
-<Canvas>
-	<Story of={IndexStories.OneCreatorOneAffiliation} />
-</Canvas>
+<Story of={IndexStories.OneCreatorOneAffiliation} />
 
-\*\* No credit \*\*
+### No credit
 
-<Canvas>
-	<Story of={IndexStories.NoCredit} />
-</Canvas>
+<Story of={IndexStories.NoCredit} />
 
-\*\* With many name credits \*\*
+### With many name credits
 
-<Canvas>
-	<Story of={IndexStories.WithManyNameCredits} />
-</Canvas>
+<Story of={IndexStories.WithManyNameCredits} />
 
-\*\* With many affiliations \*\*
+### With many affiliations
 
-<Canvas>
-	<Story of={IndexStories.WithManyAffiliations} />
-</Canvas>
+<Story of={IndexStories.WithManyAffiliations} />
 
-\*\* With only affiliation \*\*
+### With only affiliation
 
-<Canvas>
-	<Story of={IndexStories.WithOnlyAffiliation} />
-</Canvas>
+<Story of={IndexStories.WithOnlyAffiliation} />
 
-\*\* With only a name \*\*
+### With only a name
 
-<Canvas>
-	<Story of={IndexStories.WithOnlyAName} />
-</Canvas>
+<Story of={IndexStories.WithOnlyAName} />

@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import { Meta, Story, Controls } from "@storybook/blocks";
 import * as IndexStories from "./index.stories";
 
 import Link from ".";
@@ -31,32 +31,22 @@ const Feature = () => (
 
 ## Stories
 
-\*\* External Link Due To Link Contents \*\*
+### External Link Due To Link Contents
 
-<Canvas>
-	<Story of={IndexStories.ExternalLinkDueToLinkContents} />
-</Canvas>
+<Story of={IndexStories.ExternalLinkDueToLinkContents} />
 
-\*\* Internal Link Due To Link Contents \*\*
+### Internal Link Due To Link Contents
 
-<Canvas>
-	<Story of={IndexStories.InternalLinkDueToLinkContents} />
-</Canvas>
+<Story of={IndexStories.InternalLinkDueToLinkContents} />
 
-\*\* Internal Link Due To Opting Into Same Tab \*\*
+### Internal Link Due To Opting Into Same Tab
 
-<Canvas>
-	<Story of={IndexStories.InternalLinkDueToOptingIntoSameTab} />
-</Canvas>
+<Story of={IndexStories.InternalLinkDueToOptingIntoSameTab} />
 
-\*\* External Link Due To Opting Into New Tab \*\*
+### External Link Due To Opting Into New Tab
 
-<Canvas>
-	<Story of={IndexStories.ExternalLinkDueToOptingIntoNewTab} />
-</Canvas>
+<Story of={IndexStories.ExternalLinkDueToOptingIntoNewTab} />
 
-\*\* Custom accessible text \*\*
+### Custom accessible text
 
-<Canvas>
-	<Story of={IndexStories.CustomAccessibleText} />
-</Canvas>
+<Story of={IndexStories.CustomAccessibleText} />

@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import { Meta, Story, Controls } from "@storybook/blocks";
 import * as IndexStories from "./index.stories";
 
 import Heading from "./heading";
@@ -65,26 +65,18 @@ const SectionBlockFeature = () => (
 
 ## Stories
 
-\*\* Heading \*\*
+### Heading
 
-<Canvas>
-	<Story of={IndexStories.DefaultHeading} />
-</Canvas>
+<Story of={IndexStories.DefaultHeading} />
 
-\*\* Heading With Custom Additional Classes \*\*
+### Heading With Custom Additional Classes
 
-<Canvas>
-	<Story of={IndexStories.HeadingWithCustomAdditionalClasses} />
-</Canvas>
+<Story of={IndexStories.HeadingWithCustomAdditionalClasses} />
 
-\*\* Heading with truncation \*\*
+### Heading with truncation
 
-<Canvas>
-	<Story of={IndexStories.HeadingWithTruncation} />
-</Canvas>
+<Story of={IndexStories.HeadingWithTruncation} />
 
-\*\* Nested Headings \*\*
+### Nested Headings
 
-<Canvas>
-	<Story of={IndexStories.NestedHeadings} />
-</Canvas>
+<Story of={IndexStories.NestedHeadings} />

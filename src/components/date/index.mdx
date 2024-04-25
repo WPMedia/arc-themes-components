@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import { Meta, Story, Controls } from "@storybook/blocks";
 import * as IndexStories from "./index.stories";
 
 import Date from ".";
@@ -25,26 +25,18 @@ const DateFeature = () => <Date dateTime="2018-03-05" dateString="March 5" />;
 
 ## Stories
 
-\*\* Date \*\*
+### Date
 
-<Canvas>
-	<Story of={IndexStories.DateOnly} />
-</Canvas>
+<Story of={IndexStories.DateOnly} />
 
-\*\* Date and Time \*\*
+### Date and Time
 
-<Canvas>
-	<Story of={IndexStories.DateAndTime} />
-</Canvas>
+<Story of={IndexStories.DateAndTime} />
 
-\*\* Time Only \*\*
+### Time Only
 
-<Canvas>
-	<Story of={IndexStories.TimeOnly} />
-</Canvas>
+<Story of={IndexStories.TimeOnly} />
 
-\*\* Date and Time with no timezone \*\*
+### Date and Time with no timezone
 
-<Canvas>
-	<Story of={IndexStories.DateAndTimeWithNoTimezone} />
-</Canvas>
+<Story of={IndexStories.DateAndTimeWithNoTimezone} />

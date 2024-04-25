@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import { Meta, Story, Controls } from "@storybook/blocks";
 import * as IndexStories from "./index.stories";
 
 import List from "./_children/List";
@@ -38,20 +38,14 @@ const Feature = () => (
 
 ## Stories
 
-\*\* Price \*\*
+### Price
 
-<Canvas>
-	<Story of={IndexStories.DefaultPrice} />
-</Canvas>
+<Story of={IndexStories.DefaultPrice} />
 
-\*\* Sale Price \*\*
+### Sale Price
 
-<Canvas>
-	<Story of={IndexStories.SalePrice} />
-</Canvas>
+<Story of={IndexStories.SalePrice} />
 
-\*\* List Price \*\*
+### List Price
 
-<Canvas>
-	<Story of={IndexStories.ListPrice} />
-</Canvas>
+<Story of={IndexStories.ListPrice} />

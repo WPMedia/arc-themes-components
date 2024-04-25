@@ -1,8 +1,8 @@
-import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
-
+import { Controls, Meta, Story } from "@storybook/addon-docs";
+import * as IndexStories from "./index.stories";
 import Pill from ".";
 
-<Meta title="Components/Pill" component={Pill} />
+<Meta of={IndexStories} />
 
 # Pill
 
@@ -38,33 +38,18 @@ const Feature = () => {
 
 ## Properties
 
-<ArgsTable of={Pill} />
+<Controls />
 
 ## Stories
 
-** Default **
+### Default
 
-<Canvas>
-	<Story name="Default">
-		<Pill>Pill Text</Pill>
-	</Story>
-</Canvas>
+<Story of={IndexStories.DefaultPill} />
 
-** Pill as a Hyperlink **
+### Pill as a Hyperlink
 
-<Canvas>
-	<Story name="Pill Hyperlink">
-		<Pill href="./">Pill Text as a Hyperlink</Pill>
-	</Story>
-</Canvas>
+<Story of={IndexStories.PillAsHyperlink} />
 
-** Many Pills **
+### Many Pills
 
-<Canvas>
-	<Story name="Many Pills">
-		<Pill>Pill 1 💊</Pill>
-		<Pill>Pill 2 💊</Pill>
-		<Pill>Pill 3 💊</Pill>
-		<Pill>Pill 4 💊</Pill>
-	</Story>
-</Canvas>
+<Story of={IndexStories.ManyPills} />

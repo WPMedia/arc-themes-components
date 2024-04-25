@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import { Meta, Story, Controls } from "@storybook/blocks";
 import * as IndexStories from "./index.stories";
 
 import Paragraph from "./";
@@ -27,26 +27,18 @@ const Feature = () => <Paragraph>Text to output</Paragraph>;
 
 ## Stories
 
-\*\* Default \*\*
+### Default
 
-<Canvas>
-	<Story of={IndexStories.Default} />
-</Canvas>
+<Story of={IndexStories.Default} />
 
-\*\* Output with embedded HTML\*\*
+### Output with embedded HTML\*\*
 
-<Canvas>
-	<Story of={IndexStories.OutputWithEmbeddedHtml} />
-</Canvas>
+<Story of={IndexStories.OutputWithEmbeddedHtml} />
 
-\*\* Truncation at two lines\*\*
+### Truncation at two lines\*\*
 
-<Canvas>
-	<Story of={IndexStories.TruncationAtTwoLines} />
-</Canvas>
+<Story of={IndexStories.TruncationAtTwoLines} />
 
-\*\* Truncation at three lines\*\*
+### Truncation at three lines\*\*
 
-<Canvas>
-	<Story of={IndexStories.TruncationAtThreeLines} />
-</Canvas>
+<Story of={IndexStories.TruncationAtThreeLines} />

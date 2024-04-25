@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import { Meta, Story, Controls } from "@storybook/blocks";
 import * as IndexStories from "./index.stories";
 
 import Overline from ".";
@@ -43,14 +43,10 @@ const Feature = () => {
 
 ## Stories
 
-\*\* Overline \*\*
+### Overline
 
-<Canvas>
-	<Story of={IndexStories.DefaultOverline} />
-</Canvas>
+<Story of={IndexStories.DefaultOverline} />
 
-\*\* Overline as a Hyperlink \*\*
+### Overline as a Hyperlink
 
-<Canvas>
-	<Story of={IndexStories.OverlineHyperlink} />
-</Canvas>
+<Story of={IndexStories.OverlineHyperlink} />

@@ -1,5 +1,5 @@
 import LazyLoad from ".";
-import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import { Meta, Story, Controls } from "@storybook/blocks";
 import * as IndexStories from "./index.stories";
 
 <Meta of={IndexStories} />
@@ -47,14 +47,10 @@ const ChildComponent = () => <div id="test-child-component" />;
 
 ## Stories
 
-### **Basic**
+### Basic
 
-<Canvas>
-	<Story of={IndexStories.Basic} />
-</Canvas>
+<Story of={IndexStories.Basic} />
 
-### **With custom fields**
+### With custom fields
 
-<Canvas>
-	<Story of={IndexStories.WithCustomFields} />
-</Canvas>
+<Story of={IndexStories.WithCustomFields} />

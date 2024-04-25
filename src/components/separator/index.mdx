@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import { Meta, Story, Controls } from "@storybook/blocks";
 import * as IndexStories from "./index.stories";
 
 import Separator from ".";
@@ -29,20 +29,14 @@ const Feature = () => (
 
 ## Stories
 
-\*\* Default \*\*
+### Default
 
-<Canvas>
-	<Story of={IndexStories.Default} />
-</Canvas>
+<Story of={IndexStories.Default} />
 
-\*\* Custom string \*\*
+### Custom string
 
-<Canvas>
-	<Story of={IndexStories.CustomString} />
-</Canvas>
+<Story of={IndexStories.CustomString} />
 
-\*\* Custom string with emoji \*\*
+### Custom string with emoji
 
-<Canvas>
-	<Story of={IndexStories.CustomStringWithEmoji} />
-</Canvas>
+<Story of={IndexStories.CustomStringWithEmoji} />

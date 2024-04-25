@@ -1,11 +1,9 @@
-import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import { Meta, Story, Controls } from "@storybook/blocks";
 import * as IndexStories from "./index.stories.jsx";
 
 import Icon from "../icon";
 import Image from "../image";
 
-import Button from "./_children/Button";
-import Item from "./_children/Item";
 import Carousel from ".";
 
 <Meta of={IndexStories} />
@@ -45,170 +43,108 @@ const Feature = () => (
 
 <Controls />
 
-### Carousel.Item
-
-<Controls />
-
-### Carousel.Button
-
-<Controls />
-
 ## Stories
 
-\*\* Carousel \*\*
+### Carousel
 
-<Canvas>
-	<Story of={IndexStories.DefaultCarousel} />
-</Canvas>
+<Story of={IndexStories.DefaultCarousel} />
 
-\*\* Carousel (rtl) \*\*
+### Carousel (rtl)
 
-<Canvas>
-	<Story of={IndexStories.RtlCarousel} />
-</Canvas>
+<Story of={IndexStories.RtlCarousel} />
 
-\*\* Single Slide Display \*\*
+### Single Slide Display
 
-<Canvas>
-	<Story of={IndexStories.SingleSlideDisplay} />
-</Canvas>
+<Story of={IndexStories.SingleSlideDisplay} />
 
-\*\* No Additional Slides \*\*
+### No Additional Slides
 
-<Canvas>
-	<Story of={IndexStories.NoAdditionalSlides} />
-</Canvas>
+<Story of={IndexStories.NoAdditionalSlides} />
 
-\*\* Single Slide \*\*
+### Single Slide
 
-<Canvas>
-	<Story of={IndexStories.SingleSlide} />
-</Canvas>
+<Story of={IndexStories.SingleSlide} />
 
-\*\* With Label And Multiple Slides \*\*
+### With Label And Multiple Slides
 
-<Canvas>
-	<Story of={IndexStories.WithLabelAndMultipleSlidesShowingOne} />
-</Canvas>
+<Story of={IndexStories.WithLabelAndMultipleSlidesShowingOne} />
 
-\*\* Show Full Screen Toggle \*\*
+### Show Full Screen Toggle
 
-<Canvas>
-	<Story of={IndexStories.ShowFullScreenToggle} />
-</Canvas>
+<Story of={IndexStories.ShowFullScreenToggle} />
 
-\*\* Show Custom Full Screen Toggle \*\*
+### Show Custom Full Screen Toggle
 
-<Canvas>
-	<Story of={IndexStories.ShowCustomFullScreenToggle} />
-</Canvas>
+<Story of={IndexStories.ShowCustomFullScreenToggle} />
 
-\*\* Show Custom Full Screen Toggle With Multiple Slides \*\*
+### Show Custom Full Screen Toggle With Multiple Slides
 
-<Canvas>
-	<Story of={IndexStories.ShowCustomFullScreenToggleWithMultipleSlides} />
-</Canvas>
+<Story of={IndexStories.ShowCustomFullScreenToggleWithMultipleSlides} />
 
-\*\* Show With Label And Full Screen Toggle With Multiple Slides \*\*
+### Show With Label And Full Screen Toggle With Multiple Slides
 
-<Canvas>
-	<Story of={IndexStories.ShowWithLabelAndFullScreenToggleWithMultipleSlides} />
-</Canvas>
+<Story of={IndexStories.ShowWithLabelAndFullScreenToggleWithMultipleSlides} />
 
-\*\* Show Custom Label Text \*\*
+### Show Custom Label Text
 
-<Canvas>
-	<Story of={IndexStories.ShowCustomLabelText} />
-</Canvas>
+<Story of={IndexStories.ShowCustomLabelText} />
 
-\*\* Display autoplay toggle \*\*
+### Display autoplay toggle
 
-<Canvas>
-	<Story of={IndexStories.DisplayAutoplayToggle} />
-</Canvas>
+<Story of={IndexStories.DisplayAutoplayToggle} />
 
-\*\* Display custom autoplay toggle \*\*
+### Display custom autoplay toggle
 
-<Canvas>
-	<Story of={IndexStories.DisplayCustomAutoplayToggle} />
-</Canvas>
+<Story of={IndexStories.DisplayCustomAutoplayToggle} />
 
-\*\* Show additional controls \*\*
+### Show additional controls
 
-<Canvas>
-	<Story of={IndexStories.ShowAdditionalControls} />
-</Canvas>
+<Story of={IndexStories.ShowAdditionalControls} />
 
-\*\* Display autoplay toggle with multiple slides showing and full-screen toggle showing \*\*
+### Display autoplay toggle with multiple slides showing and full-screen toggle showing
 
-<Canvas>
-	<Story
-		of={IndexStories.DisplayAutoplayToggleWithMultipleSlidesShowingAndFullScreenToggleShowing}
-	/>
-</Canvas>
+<Story of={IndexStories.DisplayAutoplayToggleWithMultipleSlidesShowingAndFullScreenToggleShowing} />
 
-\*\* Display autoplay toggle with multiple slides showing, full-screen toggle showing, show label \*\*
+### Display autoplay toggle with multiple slides showing, full-screen toggle showing, show label
 
-<Canvas>
-	<Story
-		of={IndexStories.DisplayAutoplayToggleWithMultipleSlidesShowingFullScreenToggleShowingShowLabel}
-	/>
-</Canvas>
+<Story
+	of={IndexStories.DisplayAutoplayToggleWithMultipleSlidesShowingFullScreenToggleShowingShowLabel}
+/>
 
-\*\* Show additional custom controls and show full screen toggle \*\*
+### Show additional custom controls and show full screen toggle
 
-<Canvas>
-	<Story of={IndexStories.ShowAdditionalCustomControlsAndShowFullScreenToggle} />
-</Canvas>
+<Story of={IndexStories.ShowAdditionalCustomControlsAndShowFullScreenToggle} />
 
-\*\* Ad Placement \*\*
+### Ad Placement
 
-<Canvas>
-	<Story of={IndexStories.AdPlacement} />
-</Canvas>
+<Story of={IndexStories.AdPlacement} />
 
-\*\* No additional slide controls will be shown if one slide and opted in to addition slide controls \*\*
+### No additional slide controls will be shown if one slide and opted in to addition slide controls
 
-<Canvas>
-	<Story
-		of={
-			IndexStories.NoAdditionalSlideControlsWillBeShownIfOneSlideAndOptedInToAdditionSlideControls
-		}
-	/>
-</Canvas>
+<Story
+	of={IndexStories.NoAdditionalSlideControlsWillBeShownIfOneSlideAndOptedInToAdditionSlideControls}
+/>
 
-\*\* Two slides autoplay \*\*
+### Two slides autoplay
 
-<Canvas>
-	<Story of={IndexStories.TwoSlidesAutoplay} />
-</Canvas>
+<Story of={IndexStories.TwoSlidesAutoplay} />
 
-\*\* Three slides autoplay \*\*
+### Three slides autoplay
 
-<Canvas>
-	<Story of={IndexStories.ThreeSlidesAutoplay} />
-</Canvas>
+<Story of={IndexStories.ThreeSlidesAutoplay} />
 
-\*\* Indicators none \*\*
+### Indicators none
 
-<Canvas>
-	<Story of={IndexStories.IndicatorsNone} />
-</Canvas>
+<Story of={IndexStories.IndicatorsNone} />
 
-\*\* Indicators dots \*\*
+### Indicators dots
 
-<Canvas>
-	<Story of={IndexStories.IndicatorsDots} />
-</Canvas>
+<Story of={IndexStories.IndicatorsDots} />
 
-\*\* Indicators thumbnails \*\*
+### Indicators thumbnails
 
-<Canvas>
-	<Story of={IndexStories.IndicatorsThumbnails} />
-</Canvas>
+<Story of={IndexStories.IndicatorsThumbnails} />
 
-\*\* Indicators thumbnails with many images \*\*
+### Indicators thumbnails with many images
 
-<Canvas>
-	<Story of={IndexStories.IndicatorsThumbnailsWithManyImages} />
-</Canvas>
+<Story of={IndexStories.IndicatorsThumbnailsWithManyImages} />

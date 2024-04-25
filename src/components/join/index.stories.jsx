@@ -10,9 +10,9 @@ export default {
 export const JoinWithMultipleChildren = {
 	render: () => (
 		<Join separator={Separator}>
-			<li>List Item 1</li>
-			<li>List Item 2</li>
-			<li>List Item 3</li>
+			<span>List Item 1</span>
+			<span>List Item 2</span>
+			<span>List Item 3</span>
 		</Join>
 	),
 };
@@ -20,7 +20,7 @@ export const JoinWithMultipleChildren = {
 export const JoinWithOnlyOneItem = {
 	render: () => (
 		<Join separator={Separator}>
-			<li>List Item 1</li>
+			<span>List Item 1</span>
 		</Join>
 	),
 };

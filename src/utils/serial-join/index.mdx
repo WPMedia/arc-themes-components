@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas } from "@storybook/blocks";
+import { Meta, Story } from "@storybook/blocks";
 import * as IndexStories from "./index.stories";
 
 import serialJoin from ".";
@@ -28,44 +28,30 @@ const formattedString = serialJoin(["one", "two", "three"]);
 
 ## Stories
 
-\*\* One item \*\*
+### One item
 
-<Canvas>
-	<Story of={IndexStories.OneItem} />
-</Canvas>
+<Story of={IndexStories.OneItem} />
 
-\*\* Two items \*\*
+### Two items
 
-<Canvas>
-	<Story of={IndexStories.TwoItems} />
-</Canvas>
+<Story of={IndexStories.TwoItems} />
 
-\*\* Three items \*\*
+### Three items
 
-<Canvas>
-	<Story of={IndexStories.ThreeItems} />
-</Canvas>
+<Story of={IndexStories.ThreeItems} />
 
-\*\* Three items, with a custom conjunction \*\*
+### Three items, with a custom conjunction
 
-<Canvas>
-	<Story of={IndexStories.ThreeItemsWithACustomConjunction} />
-</Canvas>
+<Story of={IndexStories.ThreeItemsWithACustomConjunction} />
 
-\*\* Three items, with an empty conjunction and custom delimiter \*\*
+### Three items, with an empty conjunction and custom delimiter
 
-<Canvas>
-	<Story of={IndexStories.ThreeItemsWithAnEmptyConjunctionAndCustomDelimiter} />
-</Canvas>
+<Story of={IndexStories.ThreeItemsWithAnEmptyConjunctionAndCustomDelimiter} />
 
-\*\* Three items, with an empty conjunction, custom delimiter, and empty spacer \*\*
+### Three items, with an empty conjunction, custom delimiter, and empty spacer
 
-<Canvas>
-	<Story of={IndexStories.ThreeItemsWithAnEmptyConjunctionCustomDelimiterAndEmptySpacer} />
-</Canvas>
+<Story of={IndexStories.ThreeItemsWithAnEmptyConjunctionCustomDelimiterAndEmptySpacer} />
 
-\*\* Three node items \*\*
+### Three node items
 
-<Canvas>
-	<Story of={IndexStories.ThreeNodeItems} />
-</Canvas>
+<Story of={IndexStories.ThreeNodeItems} />

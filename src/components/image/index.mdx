@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import { Meta, Story, Controls } from "@storybook/blocks";
 import * as IndexStories from "./index.stories";
 
 import Image from ".";
@@ -55,76 +55,52 @@ const Feature = () => (
 
 ## Stories
 
-\*\* Default \*\*
+### Default
 
-<Canvas>
-	<Story of={IndexStories.Default} />
-</Canvas>
+<Story of={IndexStories.Default} />
 
-\*\* Image not found \*\*
+### Image not found
 
-<Canvas>
-	<Story of={IndexStories.ImageNotFound} />
-</Canvas>
+<Story of={IndexStories.ImageNotFound} />
 
-\*\* Only width \*\*
+### Only width
 
-<Canvas>
-	<Story of={IndexStories.OnlyWidth} />
-</Canvas>
+<Story of={IndexStories.OnlyWidth} />
 
-\*\* Only height \*\*
+### Only height
 
-<Canvas>
-	<Story of={IndexStories.OnlyHeight} />
-</Canvas>
+<Story of={IndexStories.OnlyHeight} />
 
-\*\* Width and height \*\*
+### Width and height
 
-<Canvas>
-	<Story of={IndexStories.WidthAndHeight} />
-</Canvas>
+<Story of={IndexStories.WidthAndHeight} />
 
-\*\* Width and height and many responsive images \*\*
+### Width and height and many responsive images
 
-<Canvas>
-	<Story of={IndexStories.WidthAndHeightAndManyResponsiveImages} />
-</Canvas>
+<Story of={IndexStories.WidthAndHeightAndManyResponsiveImages} />
 
-\*\* Width and height and many responsive images without sizes default \*\*
+### Width and height and many responsive images without sizes default
 
-<Canvas>
-	<Story of={IndexStories.WidthAndHeightAndManyResponsiveImagesWithoutSizesDefault} />
-</Canvas>
+<Story of={IndexStories.WidthAndHeightAndManyResponsiveImagesWithoutSizesDefault} />
 
-\*\* Responsive images without height and width \*\*
+### Responsive images without height and width
 
-<Canvas>
-	<Story of={IndexStories.ResponsiveImagesWithoutHeightAndWidth} />
-</Canvas>
+<Story of={IndexStories.ResponsiveImagesWithoutHeightAndWidth} />
 
-\*\* Responsive image with in resized options like lowered quality \*\*
+### Responsive image with in resized options like lowered quality
 
-<Canvas>
-	<Story of={IndexStories.ResponsiveImageWithResizedOptionsLikeLoweredQuality} />
-</Canvas>
+<Story of={IndexStories.ResponsiveImageWithResizedOptionsLikeLoweredQuality} />
 
-\*\* Responsive image with viewport width sizes, filling about half the screen with vw on desktop \*\*
+### Responsive image with viewport width sizes, filling about half the screen with vw on desktop
 
-<Canvas>
-	<Story
-		of={IndexStories.ResponsiveImageWithViewportWidthSizesFillingAboutHalfTheScreenWithVwOnDesktop}
-	/>
-</Canvas>
+<Story
+	of={IndexStories.ResponsiveImageWithViewportWidthSizesFillingAboutHalfTheScreenWithVwOnDesktop}
+/>
 
-\*\* Without auth token renders src raw \*\*
+### Without auth token renders src raw
 
-<Canvas>
-	<Story of={IndexStories.WithoutAuthTokenRendersSrcRaw} />
-</Canvas>
+<Story of={IndexStories.WithoutAuthTokenRendersSrcRaw} />
 
-\*\* External url \*\*
+### External url
 
-<Canvas>
-	<Story of={IndexStories.ExternalUrl} />
-</Canvas>
+<Story of={IndexStories.ExternalUrl} />

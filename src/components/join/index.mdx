@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import { Meta, Story, Controls } from "@storybook/blocks";
 import * as IndexStories from "./index.stories";
 
 import Join from ".";
@@ -32,14 +32,10 @@ const List = () => (
 
 ## Stories
 
-\*\* Join With Only One Item \*\*
+### Join With Only One Item
 
-<Canvas>
-	<Story of={IndexStories.JoinWithOnlyOneItem} />
-</Canvas>
+<Story of={IndexStories.JoinWithOnlyOneItem} />
 
-\*\* Join With Multiple Children \*\*
+### Join With Multiple Children
 
-<Canvas>
-	<Story of={IndexStories.JoinWithMultipleChildren} />
-</Canvas>
+<Story of={IndexStories.JoinWithMultipleChildren} />
