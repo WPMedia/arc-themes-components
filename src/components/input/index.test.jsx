@@ -6,9 +6,9 @@ describe("Input", () => {
 	it("should render original and additional classes", () => {
 		const ORIGINAL_CLASS = "c-input";
 		const ADDITIONAL_CLASS = "additionalClass1";
-		const { container } = render(<Input label="label" name="name" className={ADDITIONAL_CLASS} />);
-		expect(container.querySelector(`.${ORIGINAL_CLASS}`)).not.toBeNull();
-		expect(container.querySelector(`.${ADDITIONAL_CLASS}`)).not.toBeNull();
+		render(<Input label="label" name="name" className={ADDITIONAL_CLASS} />);
+		expect(screen.getByTestId("label-container")).toHaveClass(ORIGINAL_CLASS);
+		expect(screen.getByTestId("label-container")).toHaveClass(ADDITIONAL_CLASS);
 	});
 
 	it("renders with a label", () => {
@@ -34,7 +34,7 @@ describe("Input", () => {
 				label="input-label"
 				validationErrorMessage="There has been an error"
 				validationPattern="^valid$"
-			/>
+			/>,
 		);
 		fireEvent.change(screen.getByRole("textbox"), { target: { value: "f" } });
 		expect(screen.getByText("There has been an error")).toBeInTheDocument();
@@ -49,8 +49,8 @@ describe("Input", () => {
 	});
 
 	it("shows hidden class if hidden true", () => {
-		const { container } = render(<Input name="test" label="label" hidden />);
-		expect(container.querySelector(".c-input--hidden")).not.toBeNull();
+		render(<Input name="test" label="label" hidden />);
+		expect(screen.getByTestId("label-container")).toHaveClass("c-input--hidden");
 	});
 
 	it("renders autocomplete property", () => {
@@ -75,11 +75,11 @@ describe("Input", () => {
 				name="test"
 				label="label"
 				options={[
-					{ label: 'Option 1', value: 'option1' },
-					{ label: 'Option 2', value: 'option2' },
+					{ label: "Option 1", value: "option1" },
+					{ label: "Option 2", value: "option2" },
 				]}
 				type="select"
-			/>
+			/>,
 		);
 		expect(screen.getByRole("combobox")).toBeInTheDocument();
 		expect(screen.getByRole("option", { name: "Option 1" }).selected).toBe(true);
