@@ -5,7 +5,7 @@
 
 	.c-input__input {
 		@include scss.component-with-states("input-input", [focus]);
-	
+
 		&.c-input__dropdown {
 			@include scss.component-with-states("input-dropdown", [focus]);
 		}
@@ -17,6 +17,18 @@
 
 	.c-input__tip {
 		@include scss.component-properties("input-tip");
+	}
+}
+
+.c-input__radio {
+	@include scss.component-properties("input-radio");
+
+	input[type="radio"] {
+		@include scss.component-properties("input-radio-type");
+
+		&:checked {
+			@include scss.component-properties("input-radio-type-checked");
+		}
 	}
 }
 
@@ -45,7 +57,7 @@
 
 	.c-input__input {
 		@include scss.component-with-states("input-default-input", [focus]);
-		
+
 		&.c-input__dropdown {
 			@include scss.component-with-states("input-default-dropdown", [focus]);
 		}
@@ -65,7 +77,7 @@
 
 	.c-input__input {
 		@include scss.component-with-states("input-error-input", [focus]);
-	
+
 		&.c-input__dropdown {
 			@include scss.component-with-states("input-error-dropdown", [focus]);
 		}

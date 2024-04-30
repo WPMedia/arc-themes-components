@@ -9,6 +9,7 @@ export const FIELD_TYPES = {
 	PASSWORD: "password",
 	TEXT: "text",
 	SELECT: "select",
+	RADIO: "radio",
 };
 
 const INPUT_SIZE = {
@@ -42,6 +43,7 @@ const Input = ({
 	label,
 	name,
 	onChange,
+	checked,
 	optionLabelKey,
 	options,
 	optionValueKey,
@@ -107,6 +109,28 @@ const Input = ({
 	]
 		.filter((classString) => classString)
 		.join(" ");
+
+	if (type === FIELD_TYPES.RADIO) {
+		return (
+			<div className={`${containerClassNames} c-input__radio`}>
+				<input
+					className={`${COMPONENT_CLASS_NAME}__input ${COMPONENT_CLASS_NAME}__radio`}
+					key={`radioButton${optionValueKey}`}
+					name={name}
+					id={optionValueKey}
+					type={type}
+					checked={checked}
+					onChange={handleChange}
+					ref={inputElement}
+					{...fieldParameters}
+				/>
+				<label className={`${COMPONENT_CLASS_NAME}__label`} htmlFor={inputId}>
+					{label}
+				</label>
+			</div>
+		);
+	}
+
 	return (
 		<div className={containerClassNames}>
 			<label className={`${COMPONENT_CLASS_NAME}__label`} htmlFor={inputId}>
@@ -175,6 +199,8 @@ Input.propTypes = {
 	options: PropTypes.array,
 	/** Value key for the option objects */
 	optionValueKey: PropTypes.string,
+	/** Check status for radioButton */
+	checked: PropTypes.bool,
 	/** Placeholder text for the input */
 	placeholder: PropTypes.string,
 	/** Whether the input is required */
