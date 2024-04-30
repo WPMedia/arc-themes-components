@@ -9,8 +9,6 @@
 	overflow: hidden;
 	word-break: break-word;
 
-	@include scss.component-properties("carousel");
-
 	> * {
 		grid-area: carousel;
 	}
@@ -29,7 +27,6 @@
 	&__button {
 		cursor: pointer;
 		pointer-events: auto;
-		@include scss.component-properties("carousel-button");
 
 		&--additional-next {
 			@include scss.component-properties("carousel-button-additional-next");
@@ -48,11 +45,11 @@
 		}
 
 		&--fullscreen {
-			@include scss.component-properties("carousel-button-full-screen");
-
 			&:hover {
 				@include scss.component-properties("carousel-button-full-screen-hover");
 			}
+
+			@include scss.component-properties("carousel-button-full-screen");
 		}
 
 		&--next {
@@ -66,6 +63,8 @@
 		&--toggle-auto-play {
 			@include scss.component-properties("carousel-button-toggle-auto-play");
 		}
+
+		@include scss.component-properties("carousel-button");
 	}
 
 	&__controls {
@@ -122,11 +121,12 @@
 	&__counter-controls-container {
 		display: flex;
 		align-items: center;
-		@include scss.component-properties("carousel-counter-controls-container");
 
 		&--full-screen {
 			@include scss.component-properties("carousel-counter-controls-container-full-screen");
 		}
+
+		@include scss.component-properties("carousel-counter-controls-container");
 	}
 
 	&__expand-autoplay-container {
@@ -167,8 +167,6 @@
 	}
 
 	&:fullscreen {
-		@include scss.component-properties("carousel-fullscreen");
-
 		.c-carousel {
 			&__controls {
 				@include scss.component-properties("carousel-fullscreen-controls");
@@ -184,7 +182,11 @@
 				}
 			}
 		}
+
+		@include scss.component-properties("carousel-fullscreen");
 	}
+
+	@include scss.component-properties("carousel");
 }
 
 // styltlint-ignore selector-no-qualifying-type
