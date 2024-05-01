@@ -7,6 +7,12 @@
 	"extends": ["stylelint-config-recommended", "stylelint-config-sass-guidelines"],
 	"ignoreFiles": ["**/*.js", "**/*.jsx"],
 	"rules": {
+		"annotation-no-unknown": [
+			true,
+			{
+				"ignoreAnnotations": ["default"]
+			}
+		],
 		"csstools/use-logical": "always",
 		"max-nesting-depth": 5,
 		"plugin/no-unsupported-browser-features": [
@@ -29,6 +35,7 @@
 			}
 		],
 		"font-family-no-missing-generic-family-keyword": null,
+		"function-no-unknown": null,
 		"order/properties-alphabetical-order": null,
 		"declaration-property-value-disallowed-list": [
 			{
@@ -48,6 +55,7 @@
 				"ignoreMediaFeatureNames": ["max-width"]
 			}
 		],
+		"media-query-no-invalid": null,
 		"order/order": [
 			"declarations",
 			"rules",
