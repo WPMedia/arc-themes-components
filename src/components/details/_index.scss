@@ -15,13 +15,13 @@
 
 	&--with-icon {
 		summary {
+			align-items: center;
+			display: flex;
 			// Safari will display default marker with icon if not explicitly stated to remove it
 			&::-webkit-details-marker {
 				display: none;
 			}
 
-			align-items: center;
-			display: flex;
 			@include scss.component-properties("details-with-icon-summary");
 		}
 

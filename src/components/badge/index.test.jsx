@@ -6,7 +6,7 @@ const BADGE_TEXT = "Hello World";
 describe("Badge", () => {
 	it("Should render string child.", () => {
 		render(<Badge>{BADGE_TEXT}</Badge>);
-		expect(screen.queryByText(BADGE_TEXT)).not.toBeNull();
+		expect(screen.getByText(BADGE_TEXT)).not.toBeNull();
 	});
 
 	it("should allow pass through of props", () => {

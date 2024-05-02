@@ -1,12 +1,10 @@
 @use "../../scss";
 
 .c-button {
-	-webkit-appearance: none;
+	appearance: none;
 	align-items: center;
 	display: inline-flex;
-	height: max-content;
-
-	@include scss.component-properties("button");
+	block-size: max-content;
 
 	&:hover {
 		cursor: pointer;
@@ -34,7 +32,7 @@
 
 	&--full-width {
 		justify-content: center;
-		width: 100%;
+		inline-size: 100%;
 
 		@include scss.component-properties("button-full-width");
 	}
@@ -70,4 +68,6 @@
 	&--large {
 		@include scss.component-with-states("button-large", [hover, active]);
 	}
+
+	@include scss.component-properties("button");
 }

@@ -112,7 +112,7 @@ const Input = ({
 		.join(" ");
 
 	return (
-		<div className={containerClassNames}>
+		<div className={containerClassNames} data-testid="label-container">
 			{type !== FIELD_TYPES.RADIO && (
 				<label className={`${COMPONENT_CLASS_NAME}__label`} htmlFor={inputId}>
 					{label}
