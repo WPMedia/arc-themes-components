@@ -3,7 +3,6 @@ import signImagesInANSObject from ".";
 const data = {
 	_id: "43UU6MCQERAMRPTD23B3CEXE7E",
 	type: "story",
-	undefinedValue: undefined,
 	content_elements: [
 		{
 			_id: "LJJSIEXMZ5FTDBP7PFHXI5A4XY",
@@ -71,9 +70,12 @@ const idAuthMap = {
 	},
 };
 
-const fetcher = jest.fn((id) => idAuthMap[id]);
+const fetcher = jest.fn((id) => Promise.resolve(idAuthMap[id]));
 const cachedCall = jest.fn((cacheId, fetchMethod, options) =>
-	Promise.resolve(fetchMethod(options.query.id))
+	Promise.resolve(fetchMethod(options.query.id)),
+);
+const failingCachedCall = jest.fn((cacheId, fetchMethod, options) =>
+	Promise.reject(fetchMethod(options.query.id)),
 );
 
 describe("Sign Images In ANS Object", () => {
@@ -94,7 +96,7 @@ describe("Sign Images In ANS Object", () => {
 				query: { id: "LJJSIEXMZ5FTDBP7PFHXI5A4XY" },
 				ttl: 31536000,
 				independent: true,
-			})
+			}),
 		);
 		expect(cachedCall).toHaveBeenCalledWith(
 			"image-token-LJJSIEXMZ5FTDBP7PFHXI5A4XZ",
@@ -103,7 +105,7 @@ describe("Sign Images In ANS Object", () => {
 				query: { id: "LJJSIEXMZ5FTDBP7PFHXI5A4XZ" },
 				ttl: 31536000,
 				independent: true,
-			})
+			}),
 		);
 		expect(cachedCall).toHaveBeenCalledWith(
 			"image-token-OYRQQIJJLNBVNN4QLERLG2FZZ4",
@@ -112,7 +114,7 @@ describe("Sign Images In ANS Object", () => {
 				query: { id: "OYRQQIJJLNBVNN4QLERLG2FZZ4" },
 				ttl: 31536000,
 				independent: true,
-			})
+			}),
 		);
 		expect(cachedCall).not.toHaveBeenCalledWith(
 			"image-token-LJJSIEXMZ5FTDBP7PFHXI5A4X2",
@@ -121,20 +123,20 @@ describe("Sign Images In ANS Object", () => {
 				query: { id: "LJJSIEXMZ5FTDBP7PFHXI5A4X2" },
 				ttl: 31536000,
 				independent: true,
-			})
+			}),
 		);
 		expect(cachedCall).toHaveBeenCalledTimes(3);
 		expect(signedData.promo_items.basic.auth[2]).toBe(
-			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e40"
+			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e40",
 		);
 		expect(signedData.content_elements[0].auth[2]).toBe(
-			"40b3b900866998ec98c4a286eef727080a10ac968d5eed7bd4a6a084511db6cy"
+			"40b3b900866998ec98c4a286eef727080a10ac968d5eed7bd4a6a084511db6cy",
 		);
 		expect(signedData.content_elements[1].auth[2]).toBe(
-			"40b3b900866998ec98c4a286eef727080a10ac968d5eed7bd4a6a084511db6cy"
+			"40b3b900866998ec98c4a286eef727080a10ac968d5eed7bd4a6a084511db6cy",
 		);
 		expect(signedData.content_elements[2].auth[2]).toBe(
-			"40b3b900866998ec98c4a286eef727080a10ac968d5eed7bd4a6a084511db6cz"
+			"40b3b900866998ec98c4a286eef727080a10ac968d5eed7bd4a6a084511db6cz",
 		);
 	});
 
@@ -150,13 +152,23 @@ describe("Sign Images In ANS Object", () => {
 				query: { id: "https://test.img/filename.jpg" },
 				ttl: 31536000,
 				independent: true,
-			})
+			}),
 		);
 
 		expect(cachedCall).toHaveBeenCalledTimes(1);
 
 		expect(signedData.promo_items.lead_art.promo_items.basic.auth[2]).toBe(
-			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e41"
+			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e41",
 		);
+	});
+
+	it("returns unmodified data for a failing fetch service", async () => {
+		const signIt = signImagesInANSObject(failingCachedCall, fetcher, 2);
+
+		const { data: signedData } = await signIt({ data });
+
+		expect(failingCachedCall).toHaveBeenCalledTimes(3);
+
+		expect(signedData).toMatchObject(data);
 	});
 });
