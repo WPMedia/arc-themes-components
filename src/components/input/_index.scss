@@ -10,8 +10,6 @@
 	}
 
 	&.c-input__radio {
-		@include scss.component-properties("input-radio");
-
 		input[type="radio"] {
 			@include scss.component-properties("input-radio-type");
 	
@@ -19,6 +17,7 @@
 				@include scss.component-properties("input-radio-type-checked");
 			}
 		}
+		@include scss.component-properties("input-radio");
 	}
 
 	.c-input__label {
