@@ -54,26 +54,11 @@
 
 .c-input--default {
 	.c-input__input {
-<<<<<<< HEAD
-		@include scss.component-with-states("input-default-input", [focus]);
-
-=======
->>>>>>> arc-themes-release-version-2.3.1
 		&.c-input__dropdown {
 			@include scss.component-with-states("input-default-dropdown", [focus]);
 		}
 
-<<<<<<< HEAD
-		&.c-input__radio {
-			@include scss.component-properties("input-radio");
-
-			&:checked {
-				@include scss.component-properties("input-radio-type-checked");
-			}
-		}
-=======
 		@include scss.component-with-states("input-default-input", [focus]);
->>>>>>> arc-themes-release-version-2.3.1
 	}
 
 	.c-input__label {
@@ -89,11 +74,6 @@
 
 .c-input--error {
 	.c-input__input {
-<<<<<<< HEAD
-		@include scss.component-with-states("input-error-input", [focus]);
-
-=======
->>>>>>> arc-themes-release-version-2.3.1
 		&.c-input__dropdown {
 			@include scss.component-with-states("input-error-dropdown", [focus]);
 		}

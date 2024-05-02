@@ -75,6 +75,7 @@ const BotChallengeProtection = ({
 		return null;
 	}
 
+	return null;
 };
 
 BotChallengeProtection.propTypes = {
