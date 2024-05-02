@@ -13,9 +13,10 @@ describe("Input", () => {
 
 	it("should render original and radio classes if type === radio", () => {
 		const ORIGINAL_CLASS = "c-input";
-		const { container } = render(<Input label="label" type='radio' name="name" />);
-		expect(container.querySelector(`.${ORIGINAL_CLASS}`)).not.toBeNull();
-		expect(container.querySelector(`.c-input__radio`)).not.toBeNull();
+		const ADDITIONAL_CLASS = "additionalClass1";
+		render(<Input label="label" type="radio" name="name" className={ADDITIONAL_CLASS} />);
+		expect(screen.getByTestId("label-container")).toHaveClass(ORIGINAL_CLASS);
+		expect(screen.getByTestId("label-container")).toHaveClass('c-input__radio');
 	});
 
 	it("renders with a label", () => {
