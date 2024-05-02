@@ -11,24 +11,24 @@
 		}
 	}
 
+	&.c-input__radio {
+		@include scss.component-properties("input-radio");
+
+		input[type="radio"] {
+			@include scss.component-properties("input-radio-type");
+	
+			&:checked {
+				@include scss.component-properties("input-radio-type-checked");
+			}
+		}
+	}
+
 	.c-input__label {
 		@include scss.component-properties("input-label");
 	}
 
 	.c-input__tip {
 		@include scss.component-properties("input-tip");
-	}
-}
-
-.c-input__radio {
-	@include scss.component-properties("input-radio");
-
-	input[type="radio"] {
-		@include scss.component-properties("input-radio-type");
-
-		&:checked {
-			@include scss.component-properties("input-radio-type-checked");
-		}
 	}
 }
 
@@ -60,6 +60,14 @@
 
 		&.c-input__dropdown {
 			@include scss.component-with-states("input-default-dropdown", [focus]);
+		}
+
+		&.c-input__radio {
+			@include scss.component-properties("input-radio");
+
+			&:checked {
+				@include scss.component-properties("input-radio-type-checked");
+			}
 		}
 	}
 

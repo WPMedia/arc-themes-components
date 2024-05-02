@@ -106,36 +106,18 @@ const Input = ({
 		`${COMPONENT_CLASS_NAME}--${size}`,
 		// hidden overrides input state
 		hidden ? `${COMPONENT_CLASS_NAME}--hidden` : `${COMPONENT_CLASS_NAME}--${derivedInputState}`,
+		type === FIELD_TYPES.RADIO ? `${COMPONENT_CLASS_NAME}__radio` : undefined
 	]
 		.filter((classString) => classString)
 		.join(" ");
 
-	if (type === FIELD_TYPES.RADIO) {
-		return (
-			<div className={`${containerClassNames} c-input__radio`}>
-				<input
-					className={`${COMPONENT_CLASS_NAME}__input ${COMPONENT_CLASS_NAME}__radio`}
-					key={`radioButton${optionValueKey}`}
-					name={name}
-					id={optionValueKey}
-					type={type}
-					checked={checked}
-					onChange={handleChange}
-					ref={inputElement}
-					{...fieldParameters}
-				/>
+	return (
+		<div className={containerClassNames}>
+			{type !== FIELD_TYPES.RADIO && (
 				<label className={`${COMPONENT_CLASS_NAME}__label`} htmlFor={inputId}>
 					{label}
 				</label>
-			</div>
-		);
-	}
-
-	return (
-		<div className={containerClassNames}>
-			<label className={`${COMPONENT_CLASS_NAME}__label`} htmlFor={inputId}>
-				{label}
-			</label>
+			)}
 			{type === FIELD_TYPES.SELECT ? (
 				<select
 					className={`${COMPONENT_CLASS_NAME}__input ${COMPONENT_CLASS_NAME}__dropdown`}
@@ -156,16 +138,22 @@ const Input = ({
 			) : (
 				<input
 					className={`${COMPONENT_CLASS_NAME}__input`}
+					key={optionValueKey}
 					id={inputId}
 					name={name}
 					type={type}
 					onBlur={handleBlur}
+					checked={checked}
 					onChange={handleChange}
 					ref={inputElement}
 					{...fieldParameters}
 				/>
 			)}
-
+			{type === FIELD_TYPES.RADIO && (
+				<label className={`${COMPONENT_CLASS_NAME}__label`} htmlFor={inputId}>
+					{label}
+				</label>
+			)}
 			{tip || !valid ? (
 				<div className={`${COMPONENT_CLASS_NAME}__tip`} id={infoId}>
 					{!valid && inputElement.current?.validationMessage && (
