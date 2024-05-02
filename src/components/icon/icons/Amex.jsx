@@ -1,4 +1,4 @@
-const AppleIcon = () => (
+const AmexIcon = () => (
 	<>
 		<g fill="none" fill-rule="evenodd">
 			<rect fill="#016fd0" height="16" rx="2" width="24" />
@@ -26,4 +26,4 @@ const AppleIcon = () => (
 	</>
 );
 
-export default AppleIcon;
+export default AmexIcon;
