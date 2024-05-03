@@ -5,12 +5,12 @@ import Attribution from ".";
 describe("Attribution", () => {
 	it("should render string child", () => {
 		render(<Attribution>Hello World</Attribution>);
-		expect(screen.queryByText("Hello World")).not.toBeNull();
+		expect(screen.getByText("Hello World")).not.toBeNull();
 	});
 
 	it("should allow pass through of props", () => {
-		const { container } = render(<Attribution id="custom-id">Hello World</Attribution>);
-		expect(container.querySelector(".c-attribution")).toHaveAttribute("id", "custom-id");
+		render(<Attribution id="custom-id">Hello World</Attribution>);
+		expect(screen.getByText("Hello World")).toHaveAttribute("id", "custom-id");
 	});
 
 	it("should render additional classes", () => {

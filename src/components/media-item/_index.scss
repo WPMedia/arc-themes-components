@@ -1,14 +1,12 @@
 @use "../../scss";
 
 .c-media-item {
-	@include scss.component-properties("media-item");
-
 	&__fig-caption {
-		@include scss.component-properties("media-item-fig-caption");
-
 		&--fullscreen {
 			@include scss.component-properties("media-item-fig-caption-fullscreen");
 		}
+
+		@include scss.component-properties("media-item-fig-caption");
 	}
 	/* stylelint-disable selector-class-pattern */
 	.c-video__frame:has(.powa-vertical) ~ &__fig-caption {
@@ -26,4 +24,6 @@
 	&__credit {
 		@include scss.component-properties("media-item-credit");
 	}
+
+	@include scss.component-properties("media-item");
 }

@@ -5,6 +5,7 @@
 		"stylelint-use-logical"
 	],
 	"extends": ["stylelint-config-recommended", "stylelint-config-sass-guidelines"],
+	"ignoreFiles": ["**/*.js", "**/*.jsx"],
 	"rules": {
 		"annotation-no-unknown": [
 			true,
@@ -12,48 +13,60 @@
 				"ignoreAnnotations": ["default"]
 			}
 		],
-		"function-no-unknown": null,
+		"csstools/use-logical": "always",
 		"max-nesting-depth": 5,
-		"media-query-no-invalid": null,
-		"no-duplicate-selectors": [
-			true,
-			{
-				"severity": "warning"
-			}
-		],
-		"order/order": null,
-		"order/properties-alphabetical-order": null,
 		"plugin/no-unsupported-browser-features": [
 			true,
 			{
-				"ignore": ["css-has", "css-nesting", "css3-cursors", "css-when-else"],
-				"ignorePartialSupport": true,
+				"ignore": [
+					"calc",
+					"css-appearance",
+					"css-clip-path",
+					"css-initial-value",
+					"css-masks",
+					"css-nesting",
+					"css-sticky",
+					"css-when-else",
+					"css3-cursors",
+					"fullscreen",
+					"intrinsic-width",
+					"multicolumn",
+					"pointer-events",
+					"viewport-units"
+				],
 				"severity": "warning"
 			}
 		],
-		"property-no-unknown": [
+		"font-family-no-missing-generic-family-keyword": null,
+		"function-no-unknown": null,
+		"order/properties-alphabetical-order": null,
+		"declaration-property-value-disallowed-list": [
+			{
+				"border": ["none"]
+			}
+		],
+		"value-no-vendor-prefix": true,
+		"property-no-vendor-prefix": [
 			true,
 			{
 				"ignoreProperties": ["box-orient"]
 			}
 		],
-		"property-no-vendor-prefix": [
+		"media-feature-name-no-unknown": [
 			true,
 			{
-				"ignoreProperties": ["appearance"]
+				"ignoreMediaFeatureNames": ["max-width"]
 			}
 		],
-		"selector-class-pattern": [
-			"c-[a-z]+",
+		"media-query-no-invalid": null,
+		"order/order": [
+			"declarations",
+			"rules",
 			{
-				"resolveNestedSelectors": true
+				"type": "at-rule",
+				"name": "include"
 			}
 		],
-		"value-no-vendor-prefix": [
-			true,
-			{
-				"ignoreValues": ["box"]
-			}
-		]
+		"selector-class-pattern": null
 	}
 }

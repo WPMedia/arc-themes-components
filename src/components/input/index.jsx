@@ -108,7 +108,7 @@ const Input = ({
 		.filter((classString) => classString)
 		.join(" ");
 	return (
-		<div className={containerClassNames}>
+		<div className={containerClassNames} data-testid="label-container">
 			<label className={`${COMPONENT_CLASS_NAME}__label`} htmlFor={inputId}>
 				{label}
 			</label>

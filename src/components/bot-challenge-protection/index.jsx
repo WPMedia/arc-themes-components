@@ -29,7 +29,7 @@ const BotChallengeProtection = ({
 			/* eslint-disable-next-line */
 			recaptchaRef.current.reset();
 		}
-	}, [resetRecaptcha, captchaError, error, isRecaptchaEnabled, recaptchaVersion]);
+	}, [captchaError, error, isRecaptchaEnabled, recaptchaRef, recaptchaVersion, resetRecaptcha]);
 
 	const onChange = (value) => {
 		setCaptchaToken(value);

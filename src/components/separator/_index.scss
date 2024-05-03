@@ -6,7 +6,7 @@
 }
 
 .c-separator::after {
-	@include scss.component-properties("separator");
-
 	content: var(--separator-content);
+
+	@include scss.component-properties("separator");
 }

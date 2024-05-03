@@ -1,8 +1,8 @@
 @use "../../scss";
 
 .c-stack {
-	@include scss.component-properties("stack");
 	display: flex;
+	@include scss.component-properties("stack");
 }
 
 .c-stack[data-style-inline="true"] {
