@@ -51,6 +51,30 @@ const noIDImageData = {
 			type: "video",
 		},
 	},
+	credits: {
+		"by": [
+			{
+				"_id": "4CKUFSJJ2RNSNP5JQRBTTPN2CM",
+				"type": "author",
+				"version": "0.5.8",
+				"name": "Sample Author A",
+				"image": {
+					"url": "https://s3.amazonaws.com/arc-authors/themes/author-a-1-2-3-4-5.jpg",
+					"version": "0.5.8",
+				},
+			},
+			{
+				"_id": "4CKUFSJJ2RNSNP5JQRBTTPN2CM",
+				"type": "author",
+				"version": "0.5.8",
+				"name": "Sample Author B",
+				"image": {
+					"url": "https://s3.amazonaws.com/arc-authors/themes/author-b-1-2-3-4-5.jpg",
+					"version": "0.5.8",
+				},
+			}
+		]
+	}
 };
 
 const idAuthMap = {
@@ -68,6 +92,12 @@ const idAuthMap = {
 	},
 	"https://test.img/filename.jpg": {
 		hash: "545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e41",
+	},
+	"https://s3.amazonaws.com/arc-authors/themes/author-a-1-2-3-4-5.jpg": {
+		hash: "545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e42",
+	},
+	"https://s3.amazonaws.com/arc-authors/themes/author-b-1-2-3-4-5.jpg": {
+		hash: "545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e43",
 	},
 };
 
@@ -153,10 +183,16 @@ describe("Sign Images In ANS Object", () => {
 			})
 		);
 
-		expect(cachedCall).toHaveBeenCalledTimes(1);
+		expect(cachedCall).toHaveBeenCalledTimes(3);
 
 		expect(signedData.promo_items.lead_art.promo_items.basic.auth[2]).toBe(
 			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e41"
+		);
+		expect(signedData.credits.by[0].image.auth[2]).toBe(
+			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e42"
+		);
+		expect(signedData.credits.by[1].image.auth[2]).toBe(
+			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e43"
 		);
 	});
 });

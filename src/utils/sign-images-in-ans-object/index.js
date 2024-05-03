@@ -18,6 +18,21 @@ const signImagesInANSObject =
 					},
 				};
 			}
+			const { image } = value;
+			if (!auth?.[resizerAppVersion] && type === "author" && image?.url) {
+				replacements.add(image.url);
+				return {
+					...value,
+					image: {
+						...image,
+						type: "image",
+						auth: {
+							...value.auth,
+							[resizerAppVersion]: `__replaceMe${image.url}__`,
+						},
+					}
+				};
+			}
 			return value;
 		});
 
