@@ -14,16 +14,14 @@ const transformAuthorImages = (value) => {
 	if (authors.length > 0 && typeof authors[0].image === "string") {
 		return {
 			...value,
-			authors: authors.map((author) => {
-				return {
-					...author,
-					ansImage: {
-						...image,
-						type: "image",
-						url: author.image,
-					},
-				};
-			}),
+			authors: authors.map((author) => ({
+				...author,
+				ansImage: {
+					...image,
+					type: "image",
+					url: author.image,
+				},
+			})),
 		};
 	}
 
