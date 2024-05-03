@@ -8,7 +8,6 @@ const signImagesInANSObject =
 				return value;
 			}
 			const { _id, type, auth, url } = value;
-			console.log(value)
 			if (!auth?.[resizerAppVersion] && type === "image") {
 				replacements.add(_id || url);
 				return {
