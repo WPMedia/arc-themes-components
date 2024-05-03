@@ -7,7 +7,6 @@ const transformAuthorImages = (value) => {
 			image: {
 				...image,
 				type: "image",
-				url: image.url,
 			},
 		};
 	}
