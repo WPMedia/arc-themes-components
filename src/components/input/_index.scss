@@ -6,19 +6,15 @@
 			@include scss.component-with-states("input-dropdown", [focus]);
 		}
 
+		&:checked {
+			@include scss.component-properties("input-checked");
+		}
+
 		@include scss.component-with-states("input-input", [focus]);
 	}
 
 	&.c-input__radio {
-		input[type="radio"] {
-			&:checked {
-				@include scss.component-properties("input-radio-type-checked");
-			}
-
-			@include scss.component-properties("input-radio-type");
-		}
-		
-		@include scss.component-properties("input-radio");
+			@include scss.component-properties("input-radio");		
 	}
 
 	.c-input__label {
