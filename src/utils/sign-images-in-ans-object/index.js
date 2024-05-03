@@ -8,6 +8,7 @@ const signImagesInANSObject =
 				return value;
 			}
 			const { _id, type, auth, url } = value;
+			console.log(value)
 			if (!auth?.[resizerAppVersion] && type === "image") {
 				replacements.add(_id || url);
 				return {
@@ -18,8 +19,10 @@ const signImagesInANSObject =
 					},
 				};
 			}
+
+			// Handle credits.by author images
 			const { image } = value;
-			if (!auth?.[resizerAppVersion] && type === "author" && image?.url) {
+			if (type === "author" && image?.url && !image?.auth?.[resizerAppVersion]) {
 				replacements.add(image.url);
 				return {
 					...value,
@@ -32,6 +35,29 @@ const signImagesInANSObject =
 						},
 					}
 				};
+			}
+
+			// Handle author-api author images
+			const { authors = [] } = value;
+			if (authors.length > 0 && typeof authors[0].image === "string") {
+				return {
+					...value,
+					authors: authors.map((author) => {
+						replacements.add(author.image);
+						return {
+							...author,
+							ansImage: {
+								...image,
+								type: "image",
+								url: author.image,
+								auth: {
+									...value.auth,
+									[resizerAppVersion]: `__replaceMe${author.image}__`,
+								},
+							}
+						};
+					})
+				}
 			}
 			return value;
 		});

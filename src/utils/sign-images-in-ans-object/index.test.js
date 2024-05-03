@@ -77,6 +77,73 @@ const noIDImageData = {
 	}
 };
 
+const authorApiData = {
+	"authors": [
+	  {
+		"_id": "authorFirst.authorLast",
+		"firstName": "authorFirst",
+		"lastName": "authorLast",
+		"byline": "authorFirst authorLast",
+		"role": "QA Engineer",
+		"image": "https://s3.amazonaws.com/arc-authors/themesinternal/author-image.png",
+		"email": "authorFirst.authorLast@washpost.com",
+		"affiliations": "",
+		"education": [],
+		"awards": [],
+		"books": [],
+		"podcasts": [],
+		"facebook": "authorFirst authorLast",
+		"bio_page": "/author/authorFirst-authorLast/",
+		"location": "Algonquin, IL",
+		"bio": "For the test, authorFirst authorLast. QA Engineer this is a short bio\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n",
+		"longBio": "For the test, authorFirst authorLast. QA Engineer for Arc Publishing. This is a full bio.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+		"slug": "authorFirst-authorLast",
+		"instagram": "authorFirst authorLast",
+		"native_app_rendering": false,
+		"fuzzy_match": false,
+		"contributor": false,
+		"status": true,
+		"expertise": "QA Manual ",
+		"last_updated_date": "2024-01-16T21:41:07.536Z",
+		"snapchat": "authorFirst authorLast",
+		"twitter": "twitter",
+		"youtube": "authorFirst",
+	  },
+	  {
+		"_id": "authorFirst.authorLast",
+		"firstName": "authorFirst",
+		"lastName": "authorLast",
+		"byline": "authorFirst authorLast",
+		"role": "QA Engineer",
+		"image": "https://s3.amazonaws.com/arc-authors/themesinternal/author-image-two.png",
+		"email": "authorFirst.authorLast@washpost.com",
+		"affiliations": "",
+		"education": [],
+		"awards": [],
+		"books": [],
+		"podcasts": [],
+		"facebook": "authorFirst authorLast",
+		"bio_page": "/author/authorFirst-authorLast/",
+		"location": "Algonquin, IL",
+		"bio": "For the test, authorFirst authorLast. QA Engineer this is a short bio\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n",
+		"longBio": "For the test, authorFirst authorLast. QA Engineer for Arc Publishing. This is a full bio.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+		"slug": "authorFirst-authorLast",
+		"instagram": "authorFirst authorLast",
+		"native_app_rendering": false,
+		"fuzzy_match": false,
+		"contributor": false,
+		"status": true,
+		"expertise": "QA Manual ",
+		"last_updated_date": "2024-01-16T21:41:07.536Z",
+		"snapchat": "authorFirst authorLast",
+		"twitter": "twitter",
+		"youtube": "authorFirst",
+	  }
+	],
+	"more": false,
+	"_id": "456d30ab534a4852f1112a7d5956fa18903c5c8f5ff37b2ae54912d4aa8091d2"
+};
+
 const idAuthMap = {
 	LJJSIEXMZ5FTDBP7PFHXI5A4XY: {
 		hash: "40b3b900866998ec98c4a286eef727080a10ac968d5eed7bd4a6a084511db6cy",
@@ -98,6 +165,12 @@ const idAuthMap = {
 	},
 	"https://s3.amazonaws.com/arc-authors/themes/author-b-1-2-3-4-5.jpg": {
 		hash: "545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e43",
+	},
+	"https://s3.amazonaws.com/arc-authors/themesinternal/author-image.png": {
+		hash: "545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e44",
+	},
+	"https://s3.amazonaws.com/arc-authors/themesinternal/author-image-two.png": {
+		hash: "545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e45",
 	},
 };
 
@@ -193,6 +266,31 @@ describe("Sign Images In ANS Object", () => {
 		);
 		expect(signedData.credits.by[1].image.auth[2]).toBe(
 			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e43"
+		);
+	});
+
+	it("returns the correct auth key author-api data", async () => {
+		const signIt = signImagesInANSObject(cachedCall, fetcher, 2);
+
+		const { data: signedData } = await signIt({ data: authorApiData });
+
+		expect(cachedCall).toHaveBeenCalledWith(
+			"image-token-https://s3.amazonaws.com/arc-authors/themesinternal/author-image.png",
+			fetcher,
+			expect.objectContaining({
+				query: { id: "https://s3.amazonaws.com/arc-authors/themesinternal/author-image.png" },
+				ttl: 31536000,
+				independent: true,
+			})
+		);
+
+		expect(cachedCall).toHaveBeenCalledTimes(2);
+
+		expect(signedData.authors[0].ansImage.auth[2]).toBe(
+			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e44"
+		);
+		expect(signedData.authors[1].ansImage.auth[2]).toBe(
+			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e45"
 		);
 	});
 });
