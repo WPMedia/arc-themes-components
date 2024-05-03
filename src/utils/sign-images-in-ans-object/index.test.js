@@ -226,8 +226,6 @@ describe("Sign Images In ANS Object", () => {
 
 		const { data: signedData } = await signIt({ data: authorApiData });
 
-		console.log(JSON.stringify(signedData));
-
 		expect(cachedCall).toHaveBeenCalledWith(
 			"image-token-https://s3.amazonaws.com/arc-authors/themesinternal/author-image.png",
 			fetcher,
