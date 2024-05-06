@@ -37,6 +37,10 @@
 	justify-content: flex-end;
 }
 
+.c-stack[data-style-justification="space-between"] {
+	justify-content: space-between;
+}
+
 .c-stack[data-style-alignment="start"] {
 	align-items: flex-start;
 }

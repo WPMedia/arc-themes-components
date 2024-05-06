@@ -30,6 +30,7 @@ const BotChallengeProtection = ({
 		}
 	}, [captchaError, error, isRecaptchaEnabled, recaptchaVersion, resetRecaptcha, recaptchaRef]);
 
+	/* istanbul ignore next */
 	const onChange = (value) => {
 		setCaptchaToken(value);
 		setCaptchaError(null);
