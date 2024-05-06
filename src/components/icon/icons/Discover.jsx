@@ -1,3 +1,4 @@
+/* eslint-disable */
 const DinersIcon = () => (
 	<g id="319" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 		<g id="New-Icons" transform="translate(-280.000000, -280.000000)" fill-rule="nonzero">

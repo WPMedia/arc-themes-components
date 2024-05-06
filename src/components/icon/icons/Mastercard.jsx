@@ -1,3 +1,4 @@
+/* eslint-disable */
 const MastercardIcon = () => (
 	<g fill="none" fill-rule="evenodd">
 		<rect fill="#252525" height="16" rx="2" width="24" />

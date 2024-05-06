@@ -1,3 +1,4 @@
+/* eslint-disable */
 const AmexIcon = () => (
 	<g fill="none" fill-rule="evenodd">
 		<rect fill="#016fd0" height="16" rx="2" width="24" />
