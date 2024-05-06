@@ -24,6 +24,7 @@ module.exports = {
 		"!**/vendor/**",
 		"!**/images/*.svg",
 		"!**/mock*.js",
+		"!**/*.stories.jsx",
 		"!**/*.story*.jsx",
 		"!**/*.(config).*",
 		"!**/.storybook/**",

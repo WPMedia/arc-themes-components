@@ -10,17 +10,17 @@
 	// default of 65 from engine-theme-sdk
 	--height: var(--c-video-height, 65);
 
-	@include scss.component-properties("video");
-
 	aspect-ratio: var(--aspect-ratio);
 	// convert to vh via * 1vh
-	max-height: calc(var(--height) * 1vh);
+	max-block-size: calc(var(--height) * 1vh);
 
 	&__frame {
-		@include scss.component-properties("video-frame");
-		/* stylelint-disable selector-class-pattern */
 		&:has(.powa-vertical) {
 			@include scss.component-properties("vertical-video-frame");
 		}
+
+		@include scss.component-properties("video-frame");
 	}
+
+	@include scss.component-properties("video");
 }

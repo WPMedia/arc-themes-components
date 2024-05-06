@@ -7,34 +7,34 @@ describe("Carousel.Item", () => {
 		render(
 			<Item label="Carousel Label" viewable>
 				<div />
-			</Item>
+			</Item>,
 		);
 		expect(screen.getByRole("group")).not.toBeNull();
 	});
 
 	it("should allow pass through of props", () => {
-		const { container } = render(
+		render(
 			<Item label="Carousel Label" data-id="custom-id">
 				<div />
-			</Item>
+			</Item>,
 		);
-		expect(container.querySelector(".c-carousel__slide")).toHaveAttribute("data-id", "custom-id");
+		expect(screen.getByLabelText("Carousel Label")).toHaveAttribute("data-id", "custom-id");
 	});
 
 	it("should allow pass through of className", () => {
-		const { container } = render(
+		render(
 			<Item label="Carousel Label" className="custom-class">
 				<div />
-			</Item>
+			</Item>,
 		);
-		expect(container.querySelector(".c-carousel__slide")).toHaveClass("custom-class");
+		expect(screen.getByLabelText("Carousel Label")).toHaveClass("custom-class");
 	});
 
 	it("should render function children", () => {
 		render(
 			<Item label="Carousel Label" viewable>
 				{() => <button type="button">Button</button>}
-			</Item>
+			</Item>,
 		);
 		expect(screen.getByRole("group")).not.toBeNull();
 		expect(screen.getByRole("button")).not.toBeNull();
@@ -44,7 +44,7 @@ describe("Carousel.Item", () => {
 		render(
 			<Item label="Carousel Label" viewable>
 				<div />
-			</Item>
+			</Item>,
 		);
 		expect(screen.getByRole("group", { name: "Carousel Label" })).not.toBeNull();
 	});
@@ -53,7 +53,7 @@ describe("Carousel.Item", () => {
 		render(
 			<Item label="Carousel Label" viewable={false}>
 				<div />
-			</Item>
+			</Item>,
 		);
 		expect(screen.getByRole("group", { hidden: true })).not.toBeNull();
 	});
