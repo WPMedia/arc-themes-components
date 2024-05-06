@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import PropTypes from "prop-types";
@@ -21,22 +21,11 @@ const BotChallengeProtection = ({
 }) => {
 	const { isInitialized } = useIdentity();
 	const { recaptchaVersion, siteKey, isRecaptchaEnabled } = useRecaptcha(challengeIn);
-	//const [ currentRecapctha, setCurrentRecaptcha ] = useState();
 
 	const recaptchaRef = useRef();
-	console.log("reCaptchaRef")
-	console.log(recaptchaRef);
-	//const recaptchaRef = React.createRef();
-
-	// useEffect(()=>{
-	// 	const {current} = recaptchaRef;
-	// 	setCurrentRecaptcha(current);
-
-	// },[recaptchaRef]);
 
 	useEffect(() => {
 		if (isRecaptchaEnabled && recaptchaVersion === RECAPTCHA_V2 && (captchaError || error)) {
-			console.log("Entro....!!!")
 			recaptchaRef.current.reset();
 		}
 	}, [captchaError, error, isRecaptchaEnabled, recaptchaVersion, resetRecaptcha, recaptchaRef]);
