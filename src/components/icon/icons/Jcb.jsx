@@ -1,4 +1,3 @@
-/* eslint-disable */
 const JcbIcon = () => (
 		<g fill="none">
 			<path

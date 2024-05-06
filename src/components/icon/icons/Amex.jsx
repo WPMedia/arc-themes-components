@@ -1,6 +1,5 @@
-/* eslint-disable */
 const AmexIcon = () => (
-	<g fill="none" fill-rule="evenodd">
+	<g fill="none" fillRule="evenodd">
 		<rect fill="#016fd0" height="16" rx="2" width="24" />
 		<path
 			d="m13.7640663 13.3938564v-5.70139231l10.1475359.00910497v1.57489503l-1.1728619 1.25339231 1.1728619 1.2648839v1.6083094h-1.8726188l-.9951823-1.0981657-.9881105 1.1023204z"
