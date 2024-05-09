@@ -1,7 +1,27 @@
 @use "../../scss";
 
 .c-input {
-	&--small {
+	.c-input__input {
+		&.c-input__dropdown {
+			@include scss.component-with-states("input-dropdown", [focus]);
+		}
+
+		&:checked {
+			@include scss.component-properties("input-checked");
+		}
+
+		@include scss.component-with-states("input-input", [focus]);
+	}
+
+	.c-input__label {
+		@include scss.component-properties("input-label");
+	}
+
+	.c-input__tip {
+		@include scss.component-properties("input-tip");
+	}
+
+	&.c-input--small {
 		.c-input__input {
 			&.c-input__dropdown {
 				@include scss.component-with-states("input-small-dropdown", [focus]);
@@ -21,7 +41,7 @@
 		@include scss.component-properties("input-small");
 	}
 
-	&--default {
+	&.c-input--default {
 		.c-input__input {
 			&.c-input__dropdown {
 				@include scss.component-with-states("input-default-dropdown", [focus]);
@@ -41,7 +61,7 @@
 		@include scss.component-properties("input-default");
 	}
 
-	&--error {
+	&.c-input--error {
 		.c-input__input {
 			&.c-input__dropdown {
 				@include scss.component-with-states("input-error-dropdown", [focus]);
@@ -61,7 +81,7 @@
 		@include scss.component-properties("input-error");
 	}
 
-	&--success {
+	&.c-input--success {
 		.c-input__input {
 			&.c-input__dropdown {
 				@include scss.component-with-states("input-success-dropdown", [focus]);
@@ -81,7 +101,7 @@
 		@include scss.component-properties("input-success");
 	}
 
-	&--warning {
+	&.c-input--warning {
 		.c-input__input {
 			&.c-input__dropdown {
 				@include scss.component-with-states("input-warning-dropdown", [focus]);
@@ -101,28 +121,8 @@
 		@include scss.component-properties("input-warning");
 	}
 
-	.c-input__input {
-		&.c-input__dropdown {
-			@include scss.component-with-states("input-dropdown", [focus]);
-		}
-
-		&:checked {
-			@include scss.component-properties("input-checked");
-		}
-
-		@include scss.component-with-states("input-input", [focus]);
-	}
-
 	&.c-input__radio {
 		@include scss.component-properties("input-radio");
-	}
-
-	.c-input__label {
-		@include scss.component-properties("input-label");
-	}
-
-	.c-input__tip {
-		@include scss.component-properties("input-tip");
 	}
 
 	@include scss.component-properties("input");
