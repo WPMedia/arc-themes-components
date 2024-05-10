@@ -245,4 +245,19 @@ describe("Sign Images In ANS Object", () => {
 			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e45",
 		);
 	});
+
+	it("returns the correct ansImage format for authors with image url strings", async () => {
+		const signIt = signImagesInANSObject(cachedCall, fetcher, 2);
+
+		const { data: signedData } = await signIt({
+			data: {
+				image: "https://s3.amazonaws.com/arc-authors/themesinternal/author-image.png",
+				type: "author",
+			},
+		});
+
+		expect(signedData.ansImage.auth[2]).toBe(
+			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e44",
+		);
+	});
 });
