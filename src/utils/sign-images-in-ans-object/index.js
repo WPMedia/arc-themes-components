@@ -11,7 +11,7 @@ const transformAuthorImages = (value) => {
 		};
 	}
 
-	if (type === "author" && image?.match(/^https?:\/\/(?:[\w\d_\-]+\.?)+\/?.*$/i)) {
+	if (type === "author" && image?.match(/^https?:\/\/(?:[\w\d_-]+\.?)+\/?.*$/i)) {
 		return {
 			...value,
 			ansImage: {
