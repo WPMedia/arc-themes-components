@@ -1,3 +1,12 @@
+const isValidHttpUrl = (urlString) => {
+	try {
+		const url = new URL(urlString);
+		return url.protocol === "http:" || url.protocol === "https:";
+	} catch {
+		return false;
+	}
+};
+
 const transformAuthorImages = (value) => {
 	const { authors = [], image, type } = value;
 
@@ -11,7 +20,7 @@ const transformAuthorImages = (value) => {
 		};
 	}
 
-	if (type === "author" && image?.match(/^https?:\/\/(-\.)?([^\s\/?\.#-]+\.?)+(\/[^\s]*)?$\/i)) {
+	if (type === "author" && isValidHttpUrl(image)) {
 		return {
 			...value,
 			ansImage: {

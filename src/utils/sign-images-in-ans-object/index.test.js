@@ -260,4 +260,17 @@ describe("Sign Images In ANS Object", () => {
 			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e44",
 		);
 	});
+
+	it("ignores author images that are not valid urls", async () => {
+		const signIt = signImagesInANSObject(cachedCall, fetcher, 2);
+
+		const { data: signedData } = await signIt({
+			data: {
+				image: "I'm not real!",
+				type: "author",
+			},
+		});
+
+		expect(signedData.ansImage).toBeUndefined();
+	});
 });
