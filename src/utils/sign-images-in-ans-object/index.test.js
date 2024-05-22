@@ -215,6 +215,9 @@ describe("Sign Images In ANS Object", () => {
 		expect(signedData.promo_items.lead_art.promo_items.basic.auth[2]).toBe(
 			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e41",
 		);
+		expect(signedData.credits.by[0].image.auth[2]).toBe(
+			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e42",
+		);
 		expect(signedData.credits.by[1].image.auth[2]).toBe(
 			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e43",
 		);
