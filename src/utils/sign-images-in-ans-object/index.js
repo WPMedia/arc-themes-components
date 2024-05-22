@@ -1,3 +1,52 @@
+const isValidHttpUrl = (urlString) => {
+	try {
+		const url = new URL(urlString);
+		return url.protocol === "http:" || url.protocol === "https:";
+	} catch {
+		return false;
+	}
+};
+
+const transformAuthorImages = (value) => {
+	const { authors = [], image, type } = value;
+
+	if (type === "author" && image?.url) {
+		return {
+			...value,
+			image: {
+				...image,
+				type: "image",
+			},
+		};
+	}
+
+	if (type === "author" && isValidHttpUrl(image)) {
+		return {
+			...value,
+			ansImage: {
+				type: "image",
+				url: image,
+			},
+		};
+	}
+
+	if (authors.length > 0 && typeof authors[0].image === "string") {
+		return {
+			...value,
+			authors: authors.map((author) => ({
+				...author,
+				ansImage: {
+					...image,
+					type: "image",
+					url: author.image,
+				},
+			})),
+		};
+	}
+
+	return value;
+};
+
 const signImagesInANSObject =
 	(cachedCall, fetcher, resizerAppVersion, cacheKey = "image-token") =>
 	({ data, ...rest }) => {
@@ -15,7 +64,8 @@ const signImagesInANSObject =
 					},
 				};
 			}
-			return value;
+
+			return transformAuthorImages(value);
 		});
 
 		return Promise.all(

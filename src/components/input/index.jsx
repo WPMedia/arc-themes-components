@@ -9,6 +9,7 @@ export const FIELD_TYPES = {
 	PASSWORD: "password",
 	TEXT: "text",
 	SELECT: "select",
+	RADIO: "radio",
 };
 
 const INPUT_SIZE = {
@@ -42,6 +43,7 @@ const Input = ({
 	label,
 	name,
 	onChange,
+	checked,
 	optionLabelKey,
 	options,
 	optionValueKey,
@@ -104,14 +106,18 @@ const Input = ({
 		`${COMPONENT_CLASS_NAME}--${size}`,
 		// hidden overrides input state
 		hidden ? `${COMPONENT_CLASS_NAME}--hidden` : `${COMPONENT_CLASS_NAME}--${derivedInputState}`,
+		type === FIELD_TYPES.RADIO ? `${COMPONENT_CLASS_NAME}__radio` : undefined
 	]
 		.filter((classString) => classString)
 		.join(" ");
+
 	return (
 		<div className={containerClassNames} data-testid="label-container">
-			<label className={`${COMPONENT_CLASS_NAME}__label`} htmlFor={inputId}>
-				{label}
-			</label>
+			{type !== FIELD_TYPES.RADIO && (
+				<label className={`${COMPONENT_CLASS_NAME}__label`} htmlFor={inputId}>
+					{label}
+				</label>
+			)}
 			{type === FIELD_TYPES.SELECT ? (
 				<select
 					className={`${COMPONENT_CLASS_NAME}__input ${COMPONENT_CLASS_NAME}__dropdown`}
@@ -132,16 +138,22 @@ const Input = ({
 			) : (
 				<input
 					className={`${COMPONENT_CLASS_NAME}__input`}
+					key={optionValueKey}
 					id={inputId}
 					name={name}
 					type={type}
 					onBlur={handleBlur}
+					checked={checked}
 					onChange={handleChange}
 					ref={inputElement}
 					{...fieldParameters}
 				/>
 			)}
-
+			{type === FIELD_TYPES.RADIO && (
+				<label className={`${COMPONENT_CLASS_NAME}__label`} htmlFor={inputId}>
+					{label}
+				</label>
+			)}
 			{tip || !valid ? (
 				<div className={`${COMPONENT_CLASS_NAME}__tip`} id={infoId}>
 					{!valid && inputElement.current?.validationMessage && (
@@ -175,6 +187,8 @@ Input.propTypes = {
 	options: PropTypes.array,
 	/** Value key for the option objects */
 	optionValueKey: PropTypes.string,
+	/** Check status for radioButton */
+	checked: PropTypes.bool,
 	/** Placeholder text for the input */
 	placeholder: PropTypes.string,
 	/** Whether the input is required */

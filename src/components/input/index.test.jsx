@@ -11,6 +11,14 @@ describe("Input", () => {
 		expect(screen.getByTestId("label-container")).toHaveClass(ADDITIONAL_CLASS);
 	});
 
+	it("should render original and radio classes if type === radio", () => {
+		const ORIGINAL_CLASS = "c-input";
+		const ADDITIONAL_CLASS = "additionalClass1";
+		render(<Input label="label" type="radio" name="name" className={ADDITIONAL_CLASS} />);
+		expect(screen.getByTestId("label-container")).toHaveClass(ORIGINAL_CLASS);
+		expect(screen.getByTestId("label-container")).toHaveClass('c-input__radio');
+	});
+
 	it("renders with a label", () => {
 		render(<Input name="test" label="label text" />);
 		expect(screen.getByText("label text")).toBeInTheDocument();

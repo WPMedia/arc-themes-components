@@ -50,6 +50,49 @@ const noIDImageData = {
 			type: "video",
 		},
 	},
+	credits: {
+		by: [
+			{
+				_id: "4CKUFSJJ2RNSNP5JQRBTTPN2CM",
+				type: "author",
+				version: "0.5.8",
+				name: "Sample Author A",
+				image: {
+					url: "https://s3.amazonaws.com/arc-authors/themes/author-a-1-2-3-4-5.jpg",
+					version: "0.5.8",
+				},
+			},
+			{
+				_id: "4CKUFSJJ2RNSNP5JQRBTTPN2CM",
+				type: "author",
+				version: "0.5.8",
+				name: "Sample Author B",
+				image: {
+					url: "https://s3.amazonaws.com/arc-authors/themes/author-b-1-2-3-4-5.jpg",
+					version: "0.5.8",
+				},
+			},
+		],
+	},
+};
+
+const authorApiData = {
+	authors: [
+		{
+			_id: "authorFirst.authorLast",
+			firstName: "authorFirst",
+			lastName: "authorLast",
+			image: "https://s3.amazonaws.com/arc-authors/themesinternal/author-image.png",
+		},
+		{
+			_id: "authorFirst.authorLast",
+			firstName: "authorFirst",
+			lastName: "authorLast",
+			image: "https://s3.amazonaws.com/arc-authors/themesinternal/author-image-two.png",
+		},
+	],
+	more: false,
+	_id: "456d30ab534a4852f1112a7d5956fa18903c5c8f5ff37b2ae54912d4aa8091d2",
 };
 
 const idAuthMap = {
@@ -67,6 +110,18 @@ const idAuthMap = {
 	},
 	"https://test.img/filename.jpg": {
 		hash: "545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e41",
+	},
+	"https://s3.amazonaws.com/arc-authors/themes/author-a-1-2-3-4-5.jpg": {
+		hash: "545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e42",
+	},
+	"https://s3.amazonaws.com/arc-authors/themes/author-b-1-2-3-4-5.jpg": {
+		hash: "545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e43",
+	},
+	"https://s3.amazonaws.com/arc-authors/themesinternal/author-image.png": {
+		hash: "545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e44",
+	},
+	"https://s3.amazonaws.com/arc-authors/themesinternal/author-image-two.png": {
+		hash: "545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e45",
 	},
 };
 
@@ -155,11 +210,67 @@ describe("Sign Images In ANS Object", () => {
 			}),
 		);
 
-		expect(cachedCall).toHaveBeenCalledTimes(1);
+		expect(cachedCall).toHaveBeenCalledTimes(3);
 
 		expect(signedData.promo_items.lead_art.promo_items.basic.auth[2]).toBe(
 			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e41",
 		);
+		expect(signedData.credits.by[1].image.auth[2]).toBe(
+			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e43",
+		);
+	});
+
+	it("returns the correct auth key author-api data", async () => {
+		const signIt = signImagesInANSObject(cachedCall, fetcher, 2);
+
+		const { data: signedData } = await signIt({ data: authorApiData });
+
+		expect(cachedCall).toHaveBeenCalledWith(
+			"image-token-https://s3.amazonaws.com/arc-authors/themesinternal/author-image.png",
+			fetcher,
+			expect.objectContaining({
+				query: { id: "https://s3.amazonaws.com/arc-authors/themesinternal/author-image.png" },
+				ttl: 31536000,
+				independent: true,
+			}),
+		);
+
+		expect(cachedCall).toHaveBeenCalledTimes(2);
+
+		expect(signedData.authors[0].ansImage.auth[2]).toBe(
+			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e44",
+		);
+		expect(signedData.authors[1].ansImage.auth[2]).toBe(
+			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e45",
+		);
+	});
+
+	it("returns the correct ansImage format for authors with image url strings", async () => {
+		const signIt = signImagesInANSObject(cachedCall, fetcher, 2);
+
+		const { data: signedData } = await signIt({
+			data: {
+				image: "https://s3.amazonaws.com/arc-authors/themesinternal/author-image.png",
+				type: "author",
+			},
+		});
+
+		expect(signedData.ansImage.auth[2]).toBe(
+			"545c018dbf2bbc8e4488c7546167e6afacc259cf4fe0b2f28c8043990f689e44",
+		);
+	});
+
+	it("ignores author images that are not valid urls", async () => {
+		const signIt = signImagesInANSObject(cachedCall, fetcher, 2);
+
+		const { data: signedData } = await signIt({
+			data: {
+				image: "I'm not real!",
+				type: "author",
+			},
+		});
+
+		expect(signedData.ansImage).toBeUndefined();
 	});
 
 	it("returns unmodified data for a failing fetch service", async () => {

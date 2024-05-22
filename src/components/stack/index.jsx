@@ -70,7 +70,7 @@ Stack.propTypes = {
 	inline: PropTypes.bool,
 	/** The justification of the elements within the component.
 	    Relates to CSS Flex's `justify-content` */
-	justification: PropTypes.oneOf(["start", "center", "end"]),
+	justification: PropTypes.oneOf(["start", "center", "end", "space-between"]),
 	/** The gap (or gutter) spacing of the elements within the component
 	    Example: `'5px'`,  `'1.5rem'`, etc. */
 	gap: PropTypes.string,

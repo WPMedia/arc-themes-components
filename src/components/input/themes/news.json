@@ -32,6 +32,38 @@
 			}
 		}
 	},
+	"input-radio": {
+		"styles": {
+			"default": {
+				"flex-direction": "row",
+				"align-items": "center",
+				"components": {
+					"input": {
+						"margin-block-end": "var(--global-spacing-5)"
+					}
+				}
+			}
+		}
+	},
+	"input-checked": {
+		"styles": {
+			"default": {
+				"appearance": "none",
+				"-webkit-appearance": "none",
+				"-moz-appearance": "none",
+				"width": "16px",
+				"height": "16px",
+				"border": "5px solid var(--global-blue-5)",
+				"border-radius": "50%",
+				"cursor": "pointer",
+				"position": "relative",
+				"outline": "none",
+				"box-sizing": "border-box",
+				"padding": 0,
+				"border-color": "var(--global-blue-5)"
+			}
+		}
+	},
 	"input-small-input": {
 		"styles": {
 			"default": {
