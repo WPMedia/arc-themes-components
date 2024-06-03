@@ -40,6 +40,7 @@ import getAspectRatio from "./src/utils/get-aspect-ratio";
 // the following are ordered by dependency
 import getFocalFromANS from "./src/utils/get-focal-from-ans";
 import getImageFromANS from "./src/utils/get-image-from-ans";
+import getManualImageID from "./src/utils/get-manual-image-id";
 import getPromoType from "./src/utils/get-promo-type";
 import getVideoFromANS from "./src/utils/get-video-from-ans";
 import handleFetchError from "./src/utils/handle-fetch-error";
@@ -74,6 +75,7 @@ export {
 	getAspectRatio,
 	getFocalFromANS,
 	getImageFromANS,
+	getManualImageID,
 	getPromoType,
 	getVideoFromANS,
 	Grid,
