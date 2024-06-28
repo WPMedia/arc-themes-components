@@ -1,11 +1,14 @@
 const formatPowaVideoEmbed = (embedMarkup, powaFields = {}) => {
+	if (typeof window === "undefined" || typeof document === "undefined") {
+		return ""; // disable this function for server-side rendering
+	}
 	if (embedMarkup) {
 		// get markup as node to set properties
 		const parser = new DOMParser();
 		const doc = parser.parseFromString(embedMarkup, "text/html");
 		const embedHTMLWithPlayStatus = doc.body;
 		const powaFieldEntries = Object.entries(powaFields).filter(
-			([, value]) => typeof value !== "undefined"
+			([, value]) => typeof value !== "undefined",
 		);
 
 		// set the rest of powa fields

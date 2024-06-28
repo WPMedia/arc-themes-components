@@ -39,6 +39,9 @@ function resolveAspectRatio(aspectRatio) {
  * @returns A string of the form `/\d+:\d+/` representing the aspect ratio in simplest form
  */
 const getAspectRatioFromPowa = (embedHTML) => {
+	if (typeof window === "undefined" || typeof document === "undefined") {
+		return ""; // disable this function for server-side rendering
+	}
 	if (embedHTML) {
 		const parser = new DOMParser();
 		const doc = parser.parseFromString(embedHTML, "text/html");
