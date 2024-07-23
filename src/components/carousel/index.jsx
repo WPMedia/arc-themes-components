@@ -1,21 +1,22 @@
-import { Children, cloneElement, useCallback, useEffect, useRef, useState } from "react";
-import PropTypes from "prop-types";
-import { useSwipeable } from "react-swipeable";
-import Icon from "../icon";
-import Button from "./_children/Button";
-import Item from "./_children/Item";
-import EventEmitter from "../../utils/event-emitter";
-import useInterval from "../../utils/hooks/use-interval";
-import isServerSide from "../../utils/is-server-side";
-import DotIndicatorArea from "./_children/DotIndicatorArea";
-import ThumbnailIndicatorArea from "./_children/ThumbnailIndicatorArea";
+/* eslint-disable no-tabs */
+import { Children, cloneElement, useCallback, useEffect, useRef, useState } from "react"
+import PropTypes from "prop-types"
+import { useSwipeable } from "react-swipeable"
+import Icon from "../icon"
+import Button from "./_children/Button"
+import Item from "./_children/Item"
+import EventEmitter from "../../utils/event-emitter"
+import useInterval from "../../utils/hooks/use-interval"
+import isServerSide from "../../utils/is-server-side"
+import DotIndicatorArea from "./_children/DotIndicatorArea"
+import ThumbnailIndicatorArea from "./_children/ThumbnailIndicatorArea"
 
-const COMPONENT_CLASS_NAME = "c-carousel";
-const BUTTON_BASE_CLASS_NAME = `${COMPONENT_CLASS_NAME}__button`;
-const ICON_BASE_CLASS_NAME = `${COMPONENT_CLASS_NAME}__icon`;
+const COMPONENT_CLASS_NAME = "c-carousel"
+const BUTTON_BASE_CLASS_NAME = `${COMPONENT_CLASS_NAME}__button`
+const ICON_BASE_CLASS_NAME = `${COMPONENT_CLASS_NAME}__icon`
 
 const getFullScreenClassName = (className, isFullScreen) =>
-	isFullScreen ? `${className} ${className}--fullscreen` : className;
+	isFullScreen ? `${className} ${className}--fullscreen` : className
 
 const DefaultNextButton = ({ id, onClick, isFullScreen }) => (
 	<Button
@@ -29,7 +30,7 @@ const DefaultNextButton = ({ id, onClick, isFullScreen }) => (
 	>
 		Next
 	</Button>
-);
+)
 
 const DefaultPreviousButton = ({ id, onClick, isFullScreen }) => (
 	<Button
@@ -43,14 +44,13 @@ const DefaultPreviousButton = ({ id, onClick, isFullScreen }) => (
 	>
 		Previous
 	</Button>
-);
+)
 
 const resolvedIcon = (element, isFullScreen) =>
 	cloneElement(element, {
-		className: `${getFullScreenClassName(`${ICON_BASE_CLASS_NAME}`, isFullScreen)} ${
-			element?.props?.className || ""
-		}`,
-	});
+		className: `${getFullScreenClassName(`${ICON_BASE_CLASS_NAME}`, isFullScreen)} ${element?.props?.className || ""
+			}`,
+	})
 
 const DefaultAdditionalPreviousButton = ({ id, onClick, isFullScreen }) => (
 	<Button
@@ -64,7 +64,7 @@ const DefaultAdditionalPreviousButton = ({ id, onClick, isFullScreen }) => (
 	>
 		{resolvedIcon(<Icon name="ChevronLeft" />, isFullScreen)}
 	</Button>
-);
+)
 
 const DefaultAdditionalNextButton = ({ id, onClick, isFullScreen }) => (
 	<Button
@@ -78,7 +78,7 @@ const DefaultAdditionalNextButton = ({ id, onClick, isFullScreen }) => (
 	>
 		{resolvedIcon(<Icon name="ChevronLeft" />, isFullScreen)}
 	</Button>
-);
+)
 
 /* istanbul ignore next  */
 const DefaultExitFullScreenButton = ({ id, onClick, isFullScreen }) => (
@@ -93,7 +93,7 @@ const DefaultExitFullScreenButton = ({ id, onClick, isFullScreen }) => (
 	>
 		Minimize Screen
 	</Button>
-);
+)
 
 const DefaultEnterFullScreenButton = ({ id, onClick, isFullScreen }) => (
 	<Button
@@ -107,7 +107,7 @@ const DefaultEnterFullScreenButton = ({ id, onClick, isFullScreen }) => (
 	>
 		Full Screen
 	</Button>
-);
+)
 
 const AutoplayButton = ({ id, onClick, iconNode, text, ariaLabel, isFullScreen }) => (
 	<Button
@@ -122,32 +122,31 @@ const AutoplayButton = ({ id, onClick, iconNode, text, ariaLabel, isFullScreen }
 		{iconNode && resolvedIcon(iconNode, isFullScreen)}
 		{text}
 	</Button>
-);
+)
 
 const resolvedButton = (element, id, className, onClick, isFullScreen, cloneIcon = true) => {
-	const { children } = element.props;
+	const { children } = element.props
 
 	return cloneElement(element, {
 		"aria-controls": id,
 		onClick: (e) => {
-			onClick();
+			onClick()
 			if (element.props?.onClick) {
-				element.props.onClick(e);
+				element.props.onClick(e)
 			}
 		},
-		className: `${getFullScreenClassName(`${BUTTON_BASE_CLASS_NAME}`, isFullScreen)} ${className} ${
-			element.props?.className || ""
-		}`,
+		className: `${getFullScreenClassName(`${BUTTON_BASE_CLASS_NAME}`, isFullScreen)} ${className} ${element.props?.className || ""
+			}`,
 		children: cloneIcon
 			? Children.map(children, (child) =>
-					child.type === Icon ? resolvedIcon(cloneElement(child), isFullScreen) : child
-			  )
+				child.type === Icon ? resolvedIcon(cloneElement(child), isFullScreen) : child
+			)
 			: children,
-	});
-};
+	})
+}
 
 const getSlidesToShowFromDom = (id) =>
-	parseInt(window?.getComputedStyle(id)?.getPropertyValue("--viewable-slides") || 4, 10);
+	parseInt(window?.getComputedStyle(id)?.getPropertyValue("--viewable-slides") || 4, 10)
 
 const insertAdsIntoItems = (carouselItems, adElement, adInterstitialClicks, slide) => {
 	for (
@@ -166,11 +165,11 @@ const insertAdsIntoItems = (carouselItems, adElement, adInterstitialClicks, slid
 			) : (
 				<div className={`${COMPONENT_CLASS_NAME}__slide`} key={`ad-placeholder-${itemIndex}`} />
 			)
-		);
+		)
 	}
 
-	return carouselItems;
-};
+	return carouselItems
+}
 
 const Carousel = ({
 	additionalNextButton,
@@ -201,26 +200,26 @@ const Carousel = ({
 	thumbnails,
 	...rest
 }) => {
-	const [slidesToShowInView, setSlidesToShowInView] = useState(0);
-	const [slide, setSlide] = useState(0);
-	const [position, setPosition] = useState(0);
-	const [isFullScreen, setIsFullScreen] = useState(false);
-	const [isAutoplaying, setIsAutoplaying] = useState(false);
-	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ");
-	const carouselElement = useRef();
+	const [slidesToShowInView, setSlidesToShowInView] = useState(0)
+	const [slide, setSlide] = useState(0)
+	const [position, setPosition] = useState(0)
+	const [isFullScreen, setIsFullScreen] = useState(false)
+	const [isAutoplaying, setIsAutoplaying] = useState(false)
+	const containerClassNames = [COMPONENT_CLASS_NAME, className].filter((i) => i).join(" ")
+	const carouselElement = useRef()
 
 	const subComponents = Object.values(Carousel).map((subcomponentType) =>
 		Children.map(children, (child) => (child?.type === subcomponentType ? child : null))
-	);
+	)
 
-	const childItems = Children.toArray(subComponents);
+	const childItems = Children.toArray(subComponents)
 
 	let carouselItems = childItems.map((child, index) => {
-		const viewable = index + 1 > slide - slidesToShowInView && index + 1 <= slide;
-		return child.type === Item ? cloneElement(child, { viewable }) : null;
-	});
+		const viewable = index + 1 > slide - slidesToShowInView && index + 1 <= slide
+		return child.type === Item ? cloneElement(child, { viewable }) : null
+	})
 
-	const totalSlides = carouselItems.length;
+	const totalSlides = carouselItems.length
 
 	const emitEvent = useCallback(
 		(eventName, page, options) => {
@@ -231,126 +230,153 @@ const Carousel = ({
 				orderPosition: page || slide,
 				totalImages: totalSlides,
 				...options,
-			});
+			})
 		},
 		[id, label, slide, totalSlides]
-	);
+	)
 
 	useEffect(() => {
-		setSlidesToShowInView(getSlidesToShowFromDom(carouselElement.current));
-		setSlide(getSlidesToShowFromDom(carouselElement.current));
-	}, [carouselElement]);
+		setSlidesToShowInView(getSlidesToShowFromDom(carouselElement.current))
+		setSlide(getSlidesToShowFromDom(carouselElement.current))
+	}, [carouselElement])
 
+	// useEffect(() => {
+	// 	const resizeFn = () => {
+	// 		const slideOffset =
+	// 			carouselElement.current.querySelector(`.c-carousel__slide:nth-of-type(${slide})`)
+	// 				?.offsetLeft || 0
+	// 		setPosition(-slideOffset)
+	// 	}
+	// 	window.addEventListener("resize", resizeFn, false)
+	// 	return () => window.removeEventListener("resize", resizeFn, false)
+	// })
 	useEffect(() => {
 		const resizeFn = () => {
-			const slideOffset =
-				carouselElement.current.querySelector(`.c-carousel__slide:nth-of-type(${slide})`)
-					?.offsetLeft || 0;
-			setPosition(-slideOffset);
-		};
-		window.addEventListener("resize", resizeFn, false);
-		return () => window.removeEventListener("resize", resizeFn, false);
-	});
+			const slideOffset = carouselElement.current.querySelector(`.c-carousel__slide:nth-of-type(${slide})`)?.offsetLeft || 0
+			setPosition(-slideOffset)
+		}
+		window.addEventListener("resize", resizeFn, false)
+		return () => window.removeEventListener("resize", resizeFn, false)
+	}, [slide])
 
+	// useEffect(() => {
+	// 	const handleFullscreen = () => {
+	// 		if (document.fullscreenEnabled || document.webkitFullscreenEnabled) {
+	// 			if (document.fullscreenElement || document.webkitFullscreenElement) {
+	// 				setIsFullScreen(true)
+	// 				emitEvent("galleryExpandEnter")
+	// 			} else {
+	// 				setIsFullScreen(false)
+	// 				emitEvent("galleryExpandExit")
+	// 			}
+	// 		}
+	// 	}
+	// 	document.addEventListener("fullscreenchange", handleFullscreen)
+	// 	return () => window.removeEventListener("fullscreenchange", handleFullscreen, false)
+	// }, [emitEvent])
 	useEffect(() => {
 		const handleFullscreen = () => {
 			if (document.fullscreenEnabled || document.webkitFullscreenEnabled) {
 				if (document.fullscreenElement || document.webkitFullscreenElement) {
-					setIsFullScreen(true);
-					emitEvent("galleryExpandEnter");
+					setIsFullScreen(true)
+					emitEvent("galleryExpandEnter")
 				} else {
-					setIsFullScreen(false);
-					emitEvent("galleryExpandExit");
+					setIsFullScreen(false)
+					emitEvent("galleryExpandExit")
 				}
+				// Recalculate the position when entering or exiting full screen
+				const slideOffset = carouselElement.current.querySelector(`.c-carousel__slide:nth-of-type(${slide})`)?.offsetLeft || 0
+				setPosition(-slideOffset)
 			}
-		};
-		document.addEventListener("fullscreenchange", handleFullscreen);
-		return () => window.removeEventListener("fullscreenchange", handleFullscreen, false);
-	}, [emitEvent]);
+		}
+		document.addEventListener("fullscreenchange", handleFullscreen)
+		return () => window.removeEventListener("fullscreenchange", handleFullscreen, false)
+	}, [emitEvent, slide])
+
 
 	if (adElement && adInterstitialClicks) {
-		carouselItems = insertAdsIntoItems(carouselItems, adElement, adInterstitialClicks, slide);
+		carouselItems = insertAdsIntoItems(carouselItems, adElement, adInterstitialClicks, slide)
 	}
 
 	const goToSlide = (newSlideIndex) => {
-		setSlide(newSlideIndex);
+		setSlide(newSlideIndex)
 		const slideOffset =
-			carouselElement.current.querySelector(".c-carousel__slide:nth-of-type(2)")?.offsetLeft || 0;
+			carouselElement.current.querySelector(".c-carousel__slide:nth-of-type(2)")?.offsetLeft || 0
 
 		// find the difference between the current position and the new one
 		// then multiple that difference by slide offset to get the new position
 		// add the current position to the new position adjustment to get the new position
-		const newPosition = position + (slide - newSlideIndex) * slideOffset;
-		setPosition(newPosition);
+		const newPosition = position + (slide - newSlideIndex) * slideOffset
+		setPosition(newPosition)
 		emitEvent(slide > newSlideIndex ? "galleryImagePrevious" : "galleryImageNext", newSlideIndex, {
 			autoplay: isAutoplaying,
-		});
-	};
+		})
+	}
 
 	const previousSlide = () => {
 		/* istanbul ignore next */
 		if (slide - 1 < slidesToShowInView) {
-			return;
+			return
 		}
-		goToSlide(slide - 1);
-	};
+		goToSlide(slide - 1)
+	}
 
 	const nextSlide = () => {
 		/* istanbul ignore next */
 		if (slide + 1 > carouselItems.length) {
-			return;
+			return
 		}
-		goToSlide(slide + 1);
-	};
+		goToSlide(slide + 1)
+	}
 
 	const autoplayNextSlide = () => {
 		/* istanbul ignore next */
 		if (slide + 1 > carouselItems.length) {
-			setIsAutoplaying(false);
+			setIsAutoplaying(false)
 		} else {
-			goToSlide(slide + 1);
+			goToSlide(slide + 1)
 		}
-	};
+	}
 
 	// a prefers-reduced-motion user setting must always override Autoplay
 	const autoplayEnabledAndAllowed =
-		enableAutoplay && !isServerSide() && !!window.matchMedia("'(prefers-reduced-motion: reduce)");
+		enableAutoplay && !isServerSide() && !!window.matchMedia("'(prefers-reduced-motion: reduce)")
 
-	useInterval(autoplayNextSlide, autoplayEnabledAndAllowed && isAutoplaying ? 4000 : null);
+	useInterval(autoplayNextSlide, autoplayEnabledAndAllowed && isAutoplaying ? 4000 : null)
 
 	/* istanbul ignore next  */
 	const toggleFullScreen = () => {
 		// id is the carousel id
 		// the full screen element is the whole carousel
-		const fullScreenElement = document.getElementById(id);
+		const fullScreenElement = document.getElementById(id)
 
 		if (document.fullscreenEnabled) {
 			if (!document.fullscreenElement) {
-				fullScreenElement.requestFullscreen();
+				fullScreenElement.requestFullscreen()
 			} else {
-				document.exitFullscreen();
+				document.exitFullscreen()
 			}
 		} else {
 			// safari needs prefix
 			// eslint-disable-next-line no-lonely-if
 			if (document.webkitFullscreenEnabled) {
 				if (!document.webkitFullscreenElement) {
-					fullScreenElement.webkitRequestFullscreen();
+					fullScreenElement.webkitRequestFullscreen()
 				} else {
-					document.webkitExitFullscreen();
+					document.webkitExitFullscreen()
 				}
 			}
 		}
-	};
+	}
 
 	const toggleAutoplay = () => {
 		if (!isAutoplaying && slide + 1 >= carouselItems.length) {
-			goToSlide(1);
+			goToSlide(1)
 		}
 
-		emitEvent(isAutoplaying ? "galleryAutoplayStop" : "galleryAutoplayStart");
-		setIsAutoplaying(!isAutoplaying);
-	};
+		emitEvent(isAutoplaying ? "galleryAutoplayStop" : "galleryAutoplayStart")
+		setIsAutoplaying(!isAutoplaying)
+	}
 
 	/* istanbul ignore next */
 	const handlers = useSwipeable({
@@ -358,7 +384,7 @@ const Carousel = ({
 		onSwipedRight: () => previousSlide(),
 		preventDefaultTouchmoveEvent: true,
 		trackMouse: true,
-	});
+	})
 
 	const resolvedNextButton = nextButton ? (
 		resolvedButton(
@@ -371,7 +397,7 @@ const Carousel = ({
 		)
 	) : (
 		<DefaultNextButton id={id} onClick={() => nextSlide()} isFullScreen={isFullScreen} />
-	);
+	)
 
 	const resolvedPreviousButton = previousButton ? (
 		resolvedButton(
@@ -384,7 +410,7 @@ const Carousel = ({
 		)
 	) : (
 		<DefaultPreviousButton id={id} onClick={() => previousSlide()} isFullScreen={isFullScreen} />
-	);
+	)
 
 	const resolvedAdditionalNextButton = additionalNextButton ? (
 		resolvedButton(
@@ -396,7 +422,7 @@ const Carousel = ({
 		)
 	) : (
 		<DefaultAdditionalNextButton id={id} onClick={nextSlide} isFullScreen={isFullScreen} />
-	);
+	)
 
 	const resolvedAdditionalPreviousButton = additionalPreviousButton ? (
 		resolvedButton(
@@ -408,7 +434,7 @@ const Carousel = ({
 		)
 	) : (
 		<DefaultAdditionalPreviousButton id={id} onClick={previousSlide} isFullScreen={isFullScreen} />
-	);
+	)
 
 	const resolvedFullScreenShowButton = fullScreenShowButton ? (
 		resolvedButton(
@@ -425,7 +451,7 @@ const Carousel = ({
 			onClick={toggleFullScreen}
 			isFullScreen={isFullScreen}
 		/>
-	);
+	)
 
 	const resolvedFullScreenMinimizeButton = fullScreenMinimizeButton ? (
 		resolvedButton(
@@ -438,14 +464,14 @@ const Carousel = ({
 		)
 	) : (
 		<DefaultExitFullScreenButton id={id} onClick={toggleFullScreen} isFullScreen={isFullScreen} />
-	);
+	)
 
 	// check to ensure client-side to make sure document is available
 	/* istanbul ignore next  */
 	const fullScreenEnabledAllowed =
 		!isServerSide() &&
 		(document.fullscreenEnabled || document.webkitFullscreenEnabled) &&
-		enableFullScreen;
+		enableFullScreen
 
 	return (
 		<div
@@ -532,11 +558,11 @@ const Carousel = ({
 				/>
 			) : null}
 		</div>
-	);
-};
+	)
+}
 
-Carousel.Button = Button;
-Carousel.Item = Item;
+Carousel.Button = Button
+Carousel.Item = Item
 
 Carousel.defaultProps = {
 	autoplayPhraseLabels: {
@@ -546,11 +572,11 @@ Carousel.defaultProps = {
 	enableAutoplay: false,
 	indicators: "none",
 	goToSlidePhrase: /* istanbul ignore next  */ (targetSlide) => `Go to slide ${targetSlide}`,
-	pageCountPhrase: () => {},
+	pageCountPhrase: () => { },
 	showLabel: false,
 	startAutoplayText: "Start Autoplay",
 	stopAutoplayText: "Stop Autoplay",
-};
+}
 
 Carousel.propTypes = {
 	/** Used to set a custom additional next button, a cloned Carousel.Button element */
@@ -608,6 +634,6 @@ Carousel.propTypes = {
 	stopAutoplayText: PropTypes.string,
 	/** Array of thumbnails to show in the thumbnail indicator area */
 	thumbnails: PropTypes.arrayOf(PropTypes.node),
-};
+}
 
-export default Carousel;
+export default Carousel
