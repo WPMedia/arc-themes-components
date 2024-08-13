@@ -16,9 +16,9 @@
 			"default": {
 				"font-size": "var(--body-font-size-small)",
 				"line-height": "var(--body-line-height-small)",
-				"padding-block-start": "var(--global-spacing-1)",
+				"padding-block-start": "var(--global-spacing-2)",
 				"padding-inline-start": "var(--global-spacing-4)",
-				"padding-block-end": "var(--global-spacing-1)",
+				"padding-block-end": "var(--global-spacing-2)",
 				"padding-inline-end": "var(--global-spacing-4)"
 			}
 		}
@@ -68,7 +68,8 @@
 	"button-primary-hover": {
 		"styles": {
 			"default": {
-				"background-color": "var(--color-primary-hover)"
+				"background-color": "var(--color-primary-hover)",
+				"color": "var(--global-white)"
 			}
 		}
 	},
@@ -100,8 +101,8 @@
 	"button-secondary-hover": {
 		"styles": {
 			"default": {
-				"background-color": "var(--global-neutral-2)",
-				"color": "var(--global-neutral-6)"
+				"background-color": "var(--color-primary-hover)",
+				"color": "var(--global-white)"
 			}
 		}
 	},
@@ -117,8 +118,8 @@
 	"button-secondary-reverse-hover": {
 		"styles": {
 			"default": {
-				"border-color": "var(--global-neutral-3)",
-				"color": "var(--global-neutral-3)"
+				"border-color": "var(--color-primary-hover)",
+				"color": "var(--color-primary-hover)"
 			}
 		}
 	}
