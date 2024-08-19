@@ -101,7 +101,7 @@
 		"styles": {
 			"default": {
 				"background-color": "var(--global-white)",
-				"color": "var (--global-black)"
+				"color": "var (--text-color)"
 			}
 		}
 	},
