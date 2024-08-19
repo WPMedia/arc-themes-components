@@ -1,4 +1,4 @@
-@use "../../scss.scss" with (
+@use "../../scss" with (
 	$breakpoints: (
 		"default": "min-width: 0",
 		"desktop": "min-width: 48rem",
@@ -4460,9 +4460,12 @@
 				),
 				"button-default": (
 					"background-color": var(--global-white),
-					"border-color": var(--global-neutral-7),
+					"border-color": var(--text-color),
 					"border-width": var(--global-border-width-1),
-					"color": var(--global-neutral-7),
+					"color": var(--text-color),
+				),
+				"button-default-hover": (
+					"color": var(--color-primary-hover),
 				),
 				"button-large": (
 					"font-size": var(--body-font-size),

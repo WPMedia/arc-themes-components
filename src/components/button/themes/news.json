@@ -51,9 +51,16 @@
 		"styles": {
 			"default": {
 				"background-color": "var(--global-white)",
-				"border-color": "var(--global-neutral-7)",
+				"border-color": "var(--text-color)",
 				"border-width": "var(--global-border-width-1)",
-				"color": "var(--global-neutral-7)"
+				"color": "var(--text-color)"
+			}
+		}
+	},
+	"button-default-hover": {
+		"styles": {
+			"default": {
+				"color": "var(--color-primary-hover)"
 			}
 		}
 	},
