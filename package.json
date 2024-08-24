@@ -42,8 +42,8 @@
     "*": "prettier --write --ignore-unknown"
   },
   "devDependencies": {
-    "@arc-publishing/sdk-identity": "^1.79.0",
-    "@arc-publishing/sdk-sales": "^1.79.0",
+    "@arc-publishing/sdk-identity": "^1.89.0",
+    "@arc-publishing/sdk-sales": "^1.89.0",
     "@babel/core": "^7.23.2",
     "@babel/eslint-parser": "^7.22.15",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
@@ -111,8 +111,8 @@
     "stylelint-use-logical": "^2.1.2xs"
   },
   "dependencies": {
-    "@arc-publishing/sdk-identity": "^1.79.0",
-    "@arc-publishing/sdk-sales": "^1.79.0",
+    "@arc-publishing/sdk-identity": "^1.89.0",
+    "@arc-publishing/sdk-sales": "^1.89.0",
     "dom-parser": "^0.1.6",
     "lazy-child": "^0.3.1",
     "lodash.get": "^4.4.2",
