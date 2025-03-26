@@ -275,12 +275,10 @@ const Carousel = ({
 	const goToSlide = (newSlideIndex) => {
 		setSlide(newSlideIndex);
 		const slideOffset =
-			carouselElement.current.querySelector(".c-carousel__slide:nth-of-type(2)")?.offsetLeft || 0;
+			carouselElement.current.querySelector(`.c-carousel__slide:nth-of-type(${newSlideIndex})`)?.offsetLeft || 0;
 
-		// find the difference between the current position and the new one
-		// then multiple that difference by slide offset to get the new position
-		// add the current position to the new position adjustment to get the new position
-		const newPosition = position + (slide - newSlideIndex) * slideOffset;
+		// Calculate the new position based on the target slide's offset
+		const newPosition = -slideOffset;
 		setPosition(newPosition);
 		emitEvent(slide > newSlideIndex ? "galleryImagePrevious" : "galleryImageNext", newSlideIndex, {
 			autoplay: isAutoplaying,
