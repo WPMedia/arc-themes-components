@@ -47,10 +47,10 @@ jobs:
         run: sudo chown -R root:root $GITHUB_WORKSPACE
 
       - name: stylelint
-        uses: reviewdog/action-stylelint@v1
+        uses: reviewdog/action-stylelint@v1.25.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          fail_level: "error"
+          fail_on_error: true
           reporter: github-pr-review
           filter_mode: "diff_context"
           stylelint_config: ".stylelintrc.json"
