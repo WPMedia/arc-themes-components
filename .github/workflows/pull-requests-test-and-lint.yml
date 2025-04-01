@@ -11,19 +11,19 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           # 0 indicates all history for all branches and tags
           fetch-depth: 0
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version-file: .nvmrc
           registry-url: "https://npm.pkg.github.com"
 
       - name: Cache Node files
-        uses: actions/cache@v4
+        uses: actions/cache@v3
         id: cache
         with:
           path: node_modules
@@ -46,12 +46,5 @@ jobs:
       - name: Stylelint Owner Fix
         run: sudo chown -R root:root $GITHUB_WORKSPACE
 
-      - name: stylelint
-        uses: reviewdog/action-stylelint@dd2b435cc6a7c82705307a9dee740c9bbaa10411
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          fail_level: "error"
-          reporter: github-pr-review
-          filter_mode: "diff_context"
-          stylelint_config: ".stylelintrc.json"
-          stylelint_input: "**/*.scss"
+      - name: Run stylelint
+        run: npx stylelint "**/*.scss" --formatter verbose
