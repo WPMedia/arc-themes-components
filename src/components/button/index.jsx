@@ -55,6 +55,7 @@ const Button = forwardRef((props, ref) => {
 	if (href) {
 		return (
 			<a {...defaultProps} href={href}>
+				{accessibilityLabel && <span className="visually-hidden">{accessibilityLabel}</span>}
 				{buttonContents}
 			</a>
 		);
