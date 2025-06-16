@@ -62,6 +62,7 @@ const Button = forwardRef((props, ref) => {
 	}
 	return (
 		<button {...defaultProps} type={type} aria-disabled={disabled}>
+			{accessibilityLabel && <span className="visually-hidden">{accessibilityLabel}</span>}
 			{buttonContents}
 		</button>
 	);
