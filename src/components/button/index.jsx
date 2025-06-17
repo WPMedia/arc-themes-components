@@ -55,12 +55,14 @@ const Button = forwardRef((props, ref) => {
 	if (href) {
 		return (
 			<a {...defaultProps} href={href}>
+				{accessibilityLabel && <span className="visually-hidden">{accessibilityLabel}</span>}
 				{buttonContents}
 			</a>
 		);
 	}
 	return (
 		<button {...defaultProps} type={type} aria-disabled={disabled}>
+			{accessibilityLabel && <span className="visually-hidden">{accessibilityLabel}</span>}
 			{buttonContents}
 		</button>
 	);
