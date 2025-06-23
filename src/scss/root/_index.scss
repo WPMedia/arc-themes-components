@@ -121,31 +121,6 @@ $component-map: get-all-component-definitions($tokens, $breakpoints);
 		}
 	}
 }
-// @mixin block-components($blockName) {
-// 	@each $breakpoint, $breakpointValue in $breakpoints {
-// 		// All declarations must be outside of any nested rules
-// 		@if map.has-key($tokens, $breakpoint, "blocks", $blockName, "components") {
-// 			@each $name, $value in map.get($tokens, $breakpoint, "blocks", $blockName, "components") {
-// 				@if meta.type-of($value) == map {
-// 					@each $bName, $bValue in $value {
-// 						$new-value: replace-token-reference($bValue);
-
-// 						& {
-// 							--c-#{$name}-#{$bName}: #{maintain-quotes($new-value)};
-// 						}
-// 					}
-// 				}
-// 			}
-// 		}
-
-// 		// Nested rules after declarations
-// 		@media ($breakpointValue) {
-// 			@if list.length(map.get($tokens, $breakpoint, "blocks", $blockName, "components")) >= 0 {
-// 				// Nested rules only
-// 			}
-// 		}
-// 	}
-// }
 
 @mixin block-properties($blockName) {
 	// All declarations must be within a style rule and before any nested rules
