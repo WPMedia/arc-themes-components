@@ -24,7 +24,7 @@ const DefaultNextButton = ({ id, onClick, isFullScreen }) => (
 		label="Next Slide"
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen,
+			isFullScreen
 		)} ${BUTTON_BASE_CLASS_NAME}--next`}
 	>
 		Next
@@ -38,7 +38,7 @@ const DefaultPreviousButton = ({ id, onClick, isFullScreen }) => (
 		label="Previous Slide"
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen,
+			isFullScreen
 		)} ${BUTTON_BASE_CLASS_NAME}--previous`}
 	>
 		Previous
@@ -59,7 +59,7 @@ const DefaultAdditionalPreviousButton = ({ id, onClick, isFullScreen }) => (
 		label="Previous Slide"
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen,
+			isFullScreen
 		)} ${BUTTON_BASE_CLASS_NAME}--additional-previous`}
 	>
 		{resolvedIcon(<Icon name="ChevronLeft" />, isFullScreen)}
@@ -73,7 +73,7 @@ const DefaultAdditionalNextButton = ({ id, onClick, isFullScreen }) => (
 		label="Next Slide"
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen,
+			isFullScreen
 		)} ${BUTTON_BASE_CLASS_NAME}--additional-next`}
 	>
 		{resolvedIcon(<Icon name="ChevronLeft" />, isFullScreen)}
@@ -88,7 +88,7 @@ const DefaultExitFullScreenButton = ({ id, onClick, isFullScreen }) => (
 		label="Exit full screen mode displaying the carousel"
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen,
+			isFullScreen
 		)} ${BUTTON_BASE_CLASS_NAME}--exit-full-screen`}
 	>
 		Minimize Screen
@@ -102,7 +102,7 @@ const DefaultEnterFullScreenButton = ({ id, onClick, isFullScreen }) => (
 		label="Enter full screen mode displaying the carousel"
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen,
+			isFullScreen
 		)} ${BUTTON_BASE_CLASS_NAME}--enter-full-screen`}
 	>
 		Full Screen
@@ -116,7 +116,7 @@ const AutoplayButton = ({ id, onClick, iconNode, text, ariaLabel, isFullScreen }
 		label={ariaLabel}
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen,
+			isFullScreen
 		)} ${BUTTON_BASE_CLASS_NAME}--toggle-auto-play`}
 	>
 		{iconNode && resolvedIcon(iconNode, isFullScreen)}
