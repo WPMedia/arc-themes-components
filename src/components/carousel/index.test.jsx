@@ -18,7 +18,7 @@ jest.mock(
 	() =>
 		function MockDotIndicator() {
 			return <div data-testid="dot-indicator-area" />;
-		}
+		},
 );
 
 jest.mock(
@@ -26,7 +26,7 @@ jest.mock(
 	() =>
 		function MockThumbnailIndicator() {
 			return <div data-testid="thumbnail-indicator-area" />;
-		}
+		},
 );
 
 // mock accessibility to ensure that the carousel renders match media for reduce motion
@@ -44,7 +44,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 2 of 2">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 		expect(screen.getByRole("region")).not.toBeNull();
 	});
@@ -58,7 +58,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 2 of 2">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 
 		// Change the viewport to 500px.
@@ -67,6 +67,59 @@ describe("Carousel", () => {
 		// Trigger the window resize event.
 		await global.dispatchEvent(new Event("resize"));
 		expect(screen.getByRole("region")).not.toBeNull();
+	});
+
+	it("should not show whitespace at the start or end when resized", async () => {
+		render(
+			<Carousel id="carousel-resize" label="Carousel Label" slidesToShow={2}>
+				<Carousel.Item label="Slide 1 of 4">
+					<div style={{ width: 100, height: 100, background: "red" }} />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 4">
+					<div style={{ width: 100, height: 100, background: "green" }} />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 3 of 4">
+					<div style={{ width: 100, height: 100, background: "blue" }} />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 4 of 4">
+					<div style={{ width: 100, height: 100, background: "yellow" }} />
+				</Carousel.Item>
+			</Carousel>,
+		);
+
+		// Simulate a resize event
+		global.innerWidth = 800;
+		await global.dispatchEvent(new Event("resize"));
+
+		// Wait for the track to appear in the DOM
+		await waitFor(() => {
+			expect(screen.getByTestId("carousel-track")).toBeInTheDocument();
+		});
+		const trackStart = screen.getByTestId("carousel-track");
+		const { transform: transformStart } = trackStart.style;
+		const matchStart = /translate3d\((-?\d+)px/.exec(transformStart);
+		const offsetStart = matchStart ? parseInt(matchStart[1], 10) : 0;
+		expect(offsetStart).toBeLessThanOrEqual(0);
+
+		// Move to the last slide and resize again
+		const nextButton = screen.queryByRole("button", { name: /next/i });
+		if (nextButton) {
+			await userEvent.click(nextButton);
+			await userEvent.click(nextButton);
+		}
+
+		global.innerWidth = 600;
+		await global.dispatchEvent(new Event("resize"));
+
+		// Wait for the track to appear in the DOM after resize
+		await waitFor(() => {
+			expect(screen.getByTestId("carousel-track")).toBeInTheDocument();
+		});
+		const trackEnd = screen.getByTestId("carousel-track");
+		const { transform: transformEnd } = trackEnd.style;
+		const matchEnd = /translate3d\((-?\d+)px/.exec(transformEnd);
+		const offsetEnd = matchEnd ? parseInt(matchEnd[1], 10) : 0;
+		expect(offsetEnd).toBeLessThanOrEqual(0);
 	});
 
 	it("should only render Carousel.Item children", () => {
@@ -79,7 +132,7 @@ describe("Carousel", () => {
 					<div />
 				</Carousel.Item>
 				<Carousel.Button id="a">Button</Carousel.Button>
-			</Carousel>
+			</Carousel>,
 		);
 		expect(screen.getByRole("region")).not.toBeNull();
 		expect(screen.queryAllByText("Button")).toHaveLength(0);
@@ -89,7 +142,7 @@ describe("Carousel", () => {
 		const { container } = render(
 			<Carousel id="carousel-2" label="Carousel Label" data-id="custom-id">
 				<div />
-			</Carousel>
+			</Carousel>,
 		);
 		expect(container.querySelector(".c-carousel")).toHaveAttribute("data-id", "custom-id");
 	});
@@ -100,7 +153,7 @@ describe("Carousel", () => {
 		render(
 			<Carousel id="carousel-2" label="Carousel Label" className={ADDITIONAL_CLASSES}>
 				<div />
-			</Carousel>
+			</Carousel>,
 		);
 
 		const element = screen.getByRole("region");
@@ -117,7 +170,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 2 of 2">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 
 		expect(screen.getByRole("region", { name: "Carousel Label" })).not.toBeNull();
@@ -131,7 +184,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 1 of 2">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 
 		expect(screen.getByRole("region", { name: "Carousel Label" })).not.toBeNull();
@@ -156,7 +209,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 5 of 5">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 
 		expect(screen.getByRole("region", { name: "Carousel Label" })).not.toBeNull();
@@ -187,7 +240,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 5 of 5">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 
 		expect(screen.getByRole("region", { name: "Carousel Label" })).not.toBeNull();
@@ -218,7 +271,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 5 of 5">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 
 		expect(screen.getByRole("region", { name: "Carousel Label" })).not.toBeNull();
@@ -256,7 +309,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 5 of 5">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 
 		expect(screen.queryAllByText("Next")).toHaveLength(1);
@@ -289,7 +342,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 2 of 5">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 
 		await userEvent.click(screen.getByRole("button", { name: "Next" }));
@@ -313,7 +366,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 1 of 5">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 
 		expect(screen.queryAllByText("Show Custom Full Screen")).toHaveLength(1);
@@ -327,7 +380,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 1 of 5">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 
 		expect(screen.queryAllByText("Full Screen")).toHaveLength(1);
@@ -339,7 +392,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 1 of 5">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 
 		expect(screen.queryAllByText("Full Screen")).toHaveLength(0);
@@ -354,7 +407,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 2 of 5">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 		// query by text returns null if not found
 		const foundLabel = screen.queryByText("1 of 2");
@@ -370,7 +423,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 2 of 5">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 		// query by text returns null if not found
 		const foundLabel = screen.queryByText("1 of 2");
@@ -394,7 +447,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 2 of 5">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 		// query by text returns null if not found
 		const foundLabel = screen.queryByText("1 of 2 super cool images");
@@ -410,7 +463,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 2 of 2">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 		// query by text returns null if not found
 		const foundLabel = screen.queryByText("Start Autoplay");
@@ -426,7 +479,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 2 of 2">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 		// query by text returns null if not found
 		const foundLabel = screen.queryByText("Start Autoplay");
@@ -442,7 +495,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 2 of 2">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 
 		const controlsArea = container.querySelector(".c-carousel__counter-controls-container");
@@ -455,7 +508,7 @@ describe("Carousel", () => {
 
 		// previous button not visible yet on first render
 		expect(controlsArea.querySelectorAll(".c-carousel__button--additional-previous")).toHaveLength(
-			0
+			0,
 		);
 
 		// click top next button
@@ -463,21 +516,21 @@ describe("Carousel", () => {
 
 		await waitFor(() => {
 			const updatedControlsArea = container.querySelector(
-				".c-carousel__counter-controls-container"
+				".c-carousel__counter-controls-container",
 			);
 
 			// next button no longer visible as it's the last slide
 			expect(
-				updatedControlsArea.querySelectorAll(".c-carousel__button--additional-next")
+				updatedControlsArea.querySelectorAll(".c-carousel__button--additional-next"),
 			).toHaveLength(0);
 
 			// show default previous button
 			expect(
-				updatedControlsArea.querySelectorAll(".c-carousel__button--additional-previous")
+				updatedControlsArea.querySelectorAll(".c-carousel__button--additional-previous"),
 			).toHaveLength(1);
 			// show svg within controls area additional previous button
 			expect(
-				controlsArea.querySelector(".c-carousel__button--additional-previous svg")
+				controlsArea.querySelector(".c-carousel__button--additional-previous svg"),
 			).not.toBeNull();
 		});
 	});
@@ -488,14 +541,14 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 1 of 1">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 
 		const controlsArea = container.querySelector(".c-carousel__counter-controls-container");
 
 		// hide previous button
 		expect(controlsArea.querySelectorAll(".c-carousel__button--additional-previous")).toHaveLength(
-			0
+			0,
 		);
 	});
 
@@ -520,7 +573,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 2 of 2">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 
 		// query by text returns null if not found
@@ -559,7 +612,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 2 of 2">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 
 		// previous button not visible yet on first render
@@ -595,7 +648,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 2 of 2">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 		expect(screen.getByRole("region")).not.toBeNull();
 		expect(screen.queryAllByText("Ad Placement")).toHaveLength(0);
@@ -624,11 +677,11 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 2 of 2">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 
 		expect(
-			container.querySelector(".c-carousel__image-counter-label").innerHTML
+			container.querySelector(".c-carousel__image-counter-label").innerHTML,
 		).toMatchInlineSnapshot(`"‣1 / 2"`);
 	});
 
@@ -641,7 +694,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 2 of 2">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 		expect(screen.queryByTestId("indicator-area")).toBeNull();
 	});
@@ -655,7 +708,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 2 of 2">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 		expect(screen.queryByTestId("dot-indicator-area")).toBeNull();
 		expect(screen.queryByTestId("thumbnail-indicator-area")).toBeNull();
@@ -670,7 +723,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 2 of 2">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 		expect(screen.queryByTestId("dot-indicator-area")).not.toBeNull();
 		expect(screen.queryByTestId("thumbnail-indicator-area")).toBeNull();
@@ -685,7 +738,7 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 2 of 2">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 		expect(screen.queryByTestId("dot-indicator-area")).toBeNull();
 		expect(screen.queryByTestId("thumbnail-indicator-area")).not.toBeNull();
@@ -706,27 +759,27 @@ describe("Carousel", () => {
 				<Carousel.Item label="Slide 2 of 2">
 					<div />
 				</Carousel.Item>
-			</Carousel>
+			</Carousel>,
 		);
 		await userEvent.click(screen.getByRole("button", { name: "Next Slide" }));
 		expect(EventEmitter.dispatch).toHaveBeenLastCalledWith(
 			"galleryImageNext",
-			expect.objectContaining({ autoplay: false })
+			expect.objectContaining({ autoplay: false }),
 		);
 		await userEvent.click(screen.getByRole("button", { name: "Previous Slide" }));
 		expect(EventEmitter.dispatch).toHaveBeenLastCalledWith(
 			"galleryImagePrevious",
-			expect.objectContaining({ autoplay: false })
+			expect.objectContaining({ autoplay: false }),
 		);
 		await userEvent.click(screen.getByRole("button", { name: "Start automatic slide show" }));
 		expect(EventEmitter.dispatch).toHaveBeenLastCalledWith(
 			"galleryAutoplayStart",
-			expect.any(Object)
+			expect.any(Object),
 		);
 		await userEvent.click(screen.getByRole("button", { name: "Stop automatic slide show" }));
 		expect(EventEmitter.dispatch).toHaveBeenLastCalledWith(
 			"galleryAutoplayStop",
-			expect.any(Object)
+			expect.any(Object),
 		);
 	});
 });

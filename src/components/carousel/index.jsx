@@ -24,7 +24,7 @@ const DefaultNextButton = ({ id, onClick, isFullScreen }) => (
 		label="Next Slide"
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen
+			isFullScreen,
 		)} ${BUTTON_BASE_CLASS_NAME}--next`}
 	>
 		Next
@@ -38,7 +38,7 @@ const DefaultPreviousButton = ({ id, onClick, isFullScreen }) => (
 		label="Previous Slide"
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen
+			isFullScreen,
 		)} ${BUTTON_BASE_CLASS_NAME}--previous`}
 	>
 		Previous
@@ -59,7 +59,7 @@ const DefaultAdditionalPreviousButton = ({ id, onClick, isFullScreen }) => (
 		label="Previous Slide"
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen
+			isFullScreen,
 		)} ${BUTTON_BASE_CLASS_NAME}--additional-previous`}
 	>
 		{resolvedIcon(<Icon name="ChevronLeft" />, isFullScreen)}
@@ -73,7 +73,7 @@ const DefaultAdditionalNextButton = ({ id, onClick, isFullScreen }) => (
 		label="Next Slide"
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen
+			isFullScreen,
 		)} ${BUTTON_BASE_CLASS_NAME}--additional-next`}
 	>
 		{resolvedIcon(<Icon name="ChevronLeft" />, isFullScreen)}
@@ -88,7 +88,7 @@ const DefaultExitFullScreenButton = ({ id, onClick, isFullScreen }) => (
 		label="Exit full screen mode displaying the carousel"
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen
+			isFullScreen,
 		)} ${BUTTON_BASE_CLASS_NAME}--exit-full-screen`}
 	>
 		Minimize Screen
@@ -102,7 +102,7 @@ const DefaultEnterFullScreenButton = ({ id, onClick, isFullScreen }) => (
 		label="Enter full screen mode displaying the carousel"
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen
+			isFullScreen,
 		)} ${BUTTON_BASE_CLASS_NAME}--enter-full-screen`}
 	>
 		Full Screen
@@ -116,7 +116,7 @@ const AutoplayButton = ({ id, onClick, iconNode, text, ariaLabel, isFullScreen }
 		label={ariaLabel}
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen
+			isFullScreen,
 		)} ${BUTTON_BASE_CLASS_NAME}--toggle-auto-play`}
 	>
 		{iconNode && resolvedIcon(iconNode, isFullScreen)}
@@ -140,7 +140,7 @@ const resolvedButton = (element, id, className, onClick, isFullScreen, cloneIcon
 		}`,
 		children: cloneIcon
 			? Children.map(children, (child) =>
-					child.type === Icon ? resolvedIcon(cloneElement(child), isFullScreen) : child
+					child.type === Icon ? resolvedIcon(cloneElement(child), isFullScreen) : child,
 			  )
 			: children,
 	});
@@ -165,7 +165,7 @@ const insertAdsIntoItems = (carouselItems, adElement, adInterstitialClicks, slid
 				})
 			) : (
 				<div className={`${COMPONENT_CLASS_NAME}__slide`} key={`ad-placeholder-${itemIndex}`} />
-			)
+			),
 		);
 	}
 
@@ -210,7 +210,7 @@ const Carousel = ({
 	const carouselElement = useRef();
 
 	const subComponents = Object.values(Carousel).map((subcomponentType) =>
-		Children.map(children, (child) => (child?.type === subcomponentType ? child : null))
+		Children.map(children, (child) => (child?.type === subcomponentType ? child : null)),
 	);
 
 	const childItems = Children.toArray(subComponents);
@@ -233,24 +233,40 @@ const Carousel = ({
 				...options,
 			});
 		},
-		[id, label, slide, totalSlides]
+		[id, label, slide, totalSlides],
 	);
 
 	useEffect(() => {
-		setSlidesToShowInView(getSlidesToShowFromDom(carouselElement.current));
-		setSlide(getSlidesToShowFromDom(carouselElement.current));
+		const slidesToShowFromDom = getSlidesToShowFromDom(carouselElement.current);
+		setSlidesToShowInView(slidesToShowFromDom);
+		setSlide(slidesToShowFromDom);
 	}, [carouselElement]);
 
 	useEffect(() => {
 		const resizeFn = () => {
-			const slideOffset =
-				carouselElement.current.querySelector(`.c-carousel__slide:nth-of-type(${slide})`)
-					?.offsetLeft || 0;
+			const newSlidesToShow = getSlidesToShowFromDom(carouselElement.current);
+			setSlidesToShowInView(newSlidesToShow);
+
+			const slides = carouselElement.current.querySelectorAll(".c-carousel__slide");
+			const maxSlide = Math.max(slides.length, 1);
+
+			let newSlide = slide;
+			// Only clamp if slide is out of bounds (greater than total slides)
+			if (slide > maxSlide) {
+				newSlide = maxSlide;
+				setSlide(newSlide);
+			}
+
+			// Always recalculate the offset for the current slide
+			const visibleSlides = newSlidesToShow || 1;
+			const firstVisibleIndex = Math.max(newSlide - visibleSlides, 0);
+			const slideNode = slides[firstVisibleIndex];
+			const slideOffset = slideNode?.offsetLeft || 0;
 			setPosition(-slideOffset);
 		};
 		window.addEventListener("resize", resizeFn, false);
 		return () => window.removeEventListener("resize", resizeFn, false);
-	});
+	}, [slide]);
 
 	useEffect(() => {
 		const handleFullscreen = () => {
@@ -274,27 +290,47 @@ const Carousel = ({
 
 	const goToSlide = (newSlideIndex) => {
 		setSlide(newSlideIndex);
-		const slideOffset =
-			carouselElement.current.querySelector(`.c-carousel__slide:nth-of-type(${newSlideIndex})`)?.offsetLeft || 0;
 
-		// Calculate the new position based on the target slide's offset
+		const track = carouselElement.current;
+		const slides = track.querySelectorAll(".c-carousel__slide");
+		const visibleSlides = slidesToShowInView || slidesToShow || 1;
+
+		// Calculate the first visible slide index (0-based)
+		const firstVisibleIndex = Math.max(newSlideIndex - visibleSlides, 0);
+		const slideNode = slides[firstVisibleIndex];
+
+		let slideOffset = slideNode?.offsetLeft || 0;
+
+		// Calculate the maximum offset so the last slides are flush with the right edge
+		const allSlides = slides.length;
+		const lastVisibleIndex = allSlides - visibleSlides;
+		const maxOffset = lastVisibleIndex >= 0 ? slides[lastVisibleIndex]?.offsetLeft || 0 : 0;
+
+		// Clamp the offset so you can't scroll past the last group
+		if (slideOffset > maxOffset) {
+			slideOffset = maxOffset;
+		}
+
 		const newPosition = -slideOffset;
 		setPosition(newPosition);
+
 		emitEvent(slide > newSlideIndex ? "galleryImagePrevious" : "galleryImageNext", newSlideIndex, {
 			autoplay: isAutoplaying,
 		});
 	};
 
 	const previousSlide = () => {
-		/* istanbul ignore next */
-		if (slide - 1 < slidesToShowInView) {
-			return;
+		const slidesToMove = slidesToShowInView || slidesToShow || 1;
+		const minSlide = slidesToMove;
+		let newSlide = slide - slidesToMove;
+		if (newSlide < minSlide) {
+			newSlide = minSlide;
 		}
-		goToSlide(slide - 1);
+		goToSlide(newSlide);
 	};
 
 	const nextSlide = () => {
-		/* istanbul ignore next */
+		// /* istanbul ignore next */
 		if (slide + 1 > carouselItems.length) {
 			return;
 		}
@@ -365,7 +401,7 @@ const Carousel = ({
 			`${BUTTON_BASE_CLASS_NAME}--next`,
 			nextSlide,
 			isFullScreen,
-			false
+			false,
 		)
 	) : (
 		<DefaultNextButton id={id} onClick={() => nextSlide()} isFullScreen={isFullScreen} />
@@ -378,7 +414,7 @@ const Carousel = ({
 			`${BUTTON_BASE_CLASS_NAME}--previous`,
 			previousSlide,
 			isFullScreen,
-			false
+			false,
 		)
 	) : (
 		<DefaultPreviousButton id={id} onClick={() => previousSlide()} isFullScreen={isFullScreen} />
@@ -390,7 +426,7 @@ const Carousel = ({
 			id,
 			`${BUTTON_BASE_CLASS_NAME}--additional-next`,
 			nextSlide,
-			isFullScreen
+			isFullScreen,
 		)
 	) : (
 		<DefaultAdditionalNextButton id={id} onClick={nextSlide} isFullScreen={isFullScreen} />
@@ -402,7 +438,7 @@ const Carousel = ({
 			id,
 			`${BUTTON_BASE_CLASS_NAME}--additional-previous`,
 			previousSlide,
-			isFullScreen
+			isFullScreen,
 		)
 	) : (
 		<DefaultAdditionalPreviousButton id={id} onClick={previousSlide} isFullScreen={isFullScreen} />
@@ -414,7 +450,7 @@ const Carousel = ({
 			id,
 			`${BUTTON_BASE_CLASS_NAME}--enter-full-screen`,
 			toggleFullScreen,
-			isFullScreen
+			isFullScreen,
 		)
 	) : (
 		<DefaultEnterFullScreenButton
@@ -432,7 +468,7 @@ const Carousel = ({
 			`${BUTTON_BASE_CLASS_NAME}--exit-full-screen`,
 			toggleFullScreen,
 			isFullScreen,
-			false
+			false,
 		)
 	) : (
 		<DefaultExitFullScreenButton id={id} onClick={toggleFullScreen} isFullScreen={isFullScreen} />
@@ -500,6 +536,7 @@ const Carousel = ({
 			</div>
 			<div
 				className={`${COMPONENT_CLASS_NAME}__track`}
+				data-testid="carousel-track"
 				style={{ transform: `translate3d(${position}px, 0px, 0px)` }}
 				aria-live={isAutoplaying ? "off" : "polite"}
 				{...handlers}
@@ -509,7 +546,7 @@ const Carousel = ({
 
 			<div className={`${COMPONENT_CLASS_NAME}__actions`}>
 				{slide !== slidesToShowInView ? resolvedPreviousButton : null}
-				{slide !== carouselItems.length && carouselItems.length > 1 ? resolvedNextButton : null}
+				{slide < carouselItems.length ? resolvedNextButton : null}
 			</div>
 
 			{indicators === "thumbnails" ? (
