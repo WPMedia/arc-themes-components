@@ -69,6 +69,42 @@ describe("Carousel", () => {
 		expect(screen.getByRole("region")).not.toBeNull();
 	});
 
+	it("should clamp slide to maxSlide if slide is out of bounds after resize", async () => {
+		render(
+			<Carousel id="carousel-clamp" label="Clamp Test" slidesToShow={1}>
+				<Carousel.Item label="Slide 1">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 3">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+
+		// Move to the last slide
+		const nextButton = screen.getByRole("button", { name: /next/i });
+		await userEvent.click(nextButton);
+		await userEvent.click(nextButton);
+
+		// Now simulate a resize that would reduce the number of slides (simulate getSlidesToShowFromDom returning 1)
+		jest.spyOn(window, "getComputedStyle").mockImplementation(() => ({
+			getPropertyValue: () => "1"
+		}));
+
+		global.innerWidth = 500;
+		await global.dispatchEvent(new Event("resize"));
+
+		// Wait for the carousel to update, then check that the next button is not present
+		await waitFor(() => {
+			expect(screen.queryByRole("button", { name: /next/i })).not.toBeInTheDocument();
+		});
+
+		window.getComputedStyle.mockRestore();
+	});
+
 	it("should not show whitespace at the start or end when resized", async () => {
 		render(
 			<Carousel id="carousel-resize" label="Carousel Label" slidesToShow={2}>
