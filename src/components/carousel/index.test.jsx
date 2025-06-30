@@ -69,8 +69,9 @@ describe("Carousel", () => {
 		expect(screen.getByRole("region")).not.toBeNull();
 	});
 
-	it("should clamp slide to maxSlide if slide is out of bounds after resize", async () => {
-		render(
+	it("clamps the slide to maxSlide if slide is out of bounds after slides are removed and resized", async () => {
+		// Start with 3 slides
+		const { rerender } = render(
 			<Carousel id="carousel-clamp" label="Clamp Test" slidesToShow={1}>
 				<Carousel.Item label="Slide 1">
 					<div />
@@ -84,25 +85,57 @@ describe("Carousel", () => {
 			</Carousel>
 		);
 
-		// Move to the last slide
-		const nextButton = screen.getByRole("button", { name: /next/i });
+		// Move to the last slide (slide = 3)
+		let nextButton = screen.getByRole("button", { name: /next/i });
 		await userEvent.click(nextButton);
+		nextButton = screen.getByRole("button", { name: /next/i });
 		await userEvent.click(nextButton);
 
-		// Now simulate a resize that would reduce the number of slides (simulate getSlidesToShowFromDom returning 1)
-		jest.spyOn(window, "getComputedStyle").mockImplementation(() => ({
-			getPropertyValue: () => "1"
-		}));
+		// Now remove a slide so maxSlide is 2, but slide is still 3 (out of bounds)
+		rerender(
+			<Carousel id="carousel-clamp" label="Clamp Test" slidesToShow={1}>
+				<Carousel.Item label="Slide 1">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
 
+		// Trigger resize to invoke the clamp logic
 		global.innerWidth = 500;
 		await global.dispatchEvent(new Event("resize"));
 
-		// Wait for the carousel to update, then check that the next button is not present
+		// Wait for the carousel to update, then check that the next button is not present (slide was clamped)
 		await waitFor(() => {
 			expect(screen.queryByRole("button", { name: /next/i })).not.toBeInTheDocument();
 		});
+	});
 
-		window.getComputedStyle.mockRestore();
+	it("should not render the next button when at the last slide", async () => {
+		render(
+			<Carousel id="carousel-last-slide" label="Last Slide Test" slidesToShow={1}>
+				<Carousel.Item label="Slide 1">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 3">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+
+		// Move to the last slide
+		let nextButton = screen.getByRole("button", { name: /next/i });
+		await userEvent.click(nextButton);
+		nextButton = screen.getByRole("button", { name: /next/i });
+		await userEvent.click(nextButton);
+
+		// Now we should be at the last slide, and the next button should not be rendered
+		expect(screen.queryByRole("button", { name: /next/i })).not.toBeInTheDocument();
 	});
 
 	it("should not show whitespace at the start or end when resized", async () => {
