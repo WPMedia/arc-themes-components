@@ -49,7 +49,7 @@ const resolvedIcon = (element, isFullScreen) =>
 	cloneElement(element, {
 		className: `${getFullScreenClassName(`${ICON_BASE_CLASS_NAME}`, isFullScreen)} ${
 			element?.props?.className || ""
-		}`,
+		}`
 	});
 
 const DefaultAdditionalPreviousButton = ({ id, onClick, isFullScreen }) => (
@@ -142,7 +142,7 @@ const resolvedButton = (element, id, className, onClick, isFullScreen, cloneIcon
 			? Children.map(children, (child) =>
 					child.type === Icon ? resolvedIcon(cloneElement(child), isFullScreen) : child
 			  )
-			: children,
+			: children
 	});
 };
 
@@ -161,7 +161,7 @@ const insertAdsIntoItems = (carouselItems, adElement, adInterstitialClicks, slid
 			slide === itemIndex + 1 ? (
 				cloneElement(adElement, {
 					className: `${COMPONENT_CLASS_NAME}__slide`,
-					key: `ad-${itemIndex}`,
+					key: `ad-${itemIndex}`
 				})
 			) : (
 				<div className={`${COMPONENT_CLASS_NAME}__slide`} key={`ad-placeholder-${itemIndex}`} />
@@ -230,27 +230,43 @@ const Carousel = ({
 				ansGalleryHeadline: label,
 				orderPosition: page || slide,
 				totalImages: totalSlides,
-				...options,
+				...options
 			});
 		},
 		[id, label, slide, totalSlides]
 	);
 
 	useEffect(() => {
-		setSlidesToShowInView(getSlidesToShowFromDom(carouselElement.current));
-		setSlide(getSlidesToShowFromDom(carouselElement.current));
+		const slidesToShowFromDom = getSlidesToShowFromDom(carouselElement.current);
+		setSlidesToShowInView(slidesToShowFromDom);
+		setSlide(slidesToShowFromDom);
 	}, [carouselElement]);
 
 	useEffect(() => {
 		const resizeFn = () => {
-			const slideOffset =
-				carouselElement.current.querySelector(`.c-carousel__slide:nth-of-type(${slide})`)
-					?.offsetLeft || 0;
+			const newSlidesToShow = getSlidesToShowFromDom(carouselElement.current);
+			setSlidesToShowInView(newSlidesToShow);
+
+			const slides = carouselElement.current.querySelectorAll(".c-carousel__slide");
+			const maxSlide = Math.max(slides.length, 1);
+
+			let newSlide = slide;
+			// Only clamp if slide is out of bounds (greater than total slides)
+			if (slide > maxSlide) {
+				newSlide = maxSlide;
+				setSlide(newSlide);
+			}
+
+			// Always recalculate the offset for the current slide
+			const visibleSlides = newSlidesToShow || 1;
+			const firstVisibleIndex = Math.max(newSlide - visibleSlides, 0);
+			const slideNode = slides[firstVisibleIndex];
+			const slideOffset = slideNode?.offsetLeft || 0;
 			setPosition(-slideOffset);
 		};
 		window.addEventListener("resize", resizeFn, false);
 		return () => window.removeEventListener("resize", resizeFn, false);
-	});
+	}, [slide]);
 
 	useEffect(() => {
 		const handleFullscreen = () => {
@@ -274,27 +290,47 @@ const Carousel = ({
 
 	const goToSlide = (newSlideIndex) => {
 		setSlide(newSlideIndex);
-		const slideOffset =
-			carouselElement.current.querySelector(`.c-carousel__slide:nth-of-type(${newSlideIndex})`)?.offsetLeft || 0;
 
-		// Calculate the new position based on the target slide's offset
+		const track = carouselElement.current;
+		const slides = track.querySelectorAll(".c-carousel__slide");
+		const visibleSlides = slidesToShowInView || slidesToShow || 1;
+
+		// Calculate the first visible slide index (0-based)
+		const firstVisibleIndex = Math.max(newSlideIndex - visibleSlides, 0);
+		const slideNode = slides[firstVisibleIndex];
+
+		let slideOffset = slideNode?.offsetLeft || 0;
+
+		// Calculate the maximum offset so the last slides are flush with the right edge
+		const allSlides = slides.length;
+		const lastVisibleIndex = allSlides - visibleSlides;
+		const maxOffset = lastVisibleIndex >= 0 ? slides[lastVisibleIndex]?.offsetLeft || 0 : 0;
+
+		// Clamp the offset so you can't scroll past the last group
+		if (slideOffset > maxOffset) {
+			slideOffset = maxOffset;
+		}
+
 		const newPosition = -slideOffset;
 		setPosition(newPosition);
+
 		emitEvent(slide > newSlideIndex ? "galleryImagePrevious" : "galleryImageNext", newSlideIndex, {
-			autoplay: isAutoplaying,
+			autoplay: isAutoplaying
 		});
 	};
 
 	const previousSlide = () => {
-		/* istanbul ignore next */
-		if (slide - 1 < slidesToShowInView) {
-			return;
+		const slidesToMove = slidesToShowInView || slidesToShow || 1;
+		const minSlide = slidesToMove;
+		let newSlide = slide - slidesToMove;
+		if (newSlide < minSlide) {
+			newSlide = minSlide;
 		}
-		goToSlide(slide - 1);
+		goToSlide(newSlide);
 	};
 
 	const nextSlide = () => {
-		/* istanbul ignore next */
+		// /* istanbul ignore next */
 		if (slide + 1 > carouselItems.length) {
 			return;
 		}
@@ -355,7 +391,7 @@ const Carousel = ({
 		onSwipedLeft: () => nextSlide(),
 		onSwipedRight: () => previousSlide(),
 		preventDefaultTouchmoveEvent: true,
-		trackMouse: true,
+		trackMouse: true
 	});
 
 	const resolvedNextButton = nextButton ? (
@@ -455,7 +491,7 @@ const Carousel = ({
 			aria-roledescription="carousel"
 			style={{
 				"--carousel-slide-width": `${100 / (slidesToShowInView || slidesToShow)}%`,
-				"--viewable-slides": slidesToShow,
+				"--viewable-slides": slidesToShow
 			}}
 			ref={carouselElement}
 		>
@@ -484,7 +520,7 @@ const Carousel = ({
 						<p
 							className={`${COMPONENT_CLASS_NAME}__image-counter-label`}
 							dangerouslySetInnerHTML={{
-								__html: pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`,
+								__html: pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`
 							}}
 						/>
 					) : null}
@@ -500,6 +536,7 @@ const Carousel = ({
 			</div>
 			<div
 				className={`${COMPONENT_CLASS_NAME}__track`}
+				data-testid="carousel-track"
 				style={{ transform: `translate3d(${position}px, 0px, 0px)` }}
 				aria-live={isAutoplaying ? "off" : "polite"}
 				{...handlers}
@@ -509,7 +546,7 @@ const Carousel = ({
 
 			<div className={`${COMPONENT_CLASS_NAME}__actions`}>
 				{slide !== slidesToShowInView ? resolvedPreviousButton : null}
-				{slide !== carouselItems.length && carouselItems.length > 1 ? resolvedNextButton : null}
+				{slide < carouselItems.length ? resolvedNextButton : null}
 			</div>
 
 			{indicators === "thumbnails" ? (
@@ -539,7 +576,7 @@ Carousel.Item = Item;
 Carousel.defaultProps = {
 	autoplayPhraseLabels: {
 		start: "Start automatic slide show",
-		stop: "Stop automatic slide show",
+		stop: "Stop automatic slide show"
 	},
 	enableAutoplay: false,
 	indicators: "none",
@@ -547,7 +584,7 @@ Carousel.defaultProps = {
 	pageCountPhrase: () => {},
 	showLabel: false,
 	startAutoplayText: "Start Autoplay",
-	stopAutoplayText: "Stop Autoplay",
+	stopAutoplayText: "Stop Autoplay"
 };
 
 Carousel.propTypes = {
@@ -562,7 +599,7 @@ Carousel.propTypes = {
 	/** Object of phases for stop and start labels of Autoplay button */
 	autoplayPhraseLabels: PropTypes.shape({
 		start: PropTypes.string,
-		stop: PropTypes.string,
+		stop: PropTypes.string
 	}),
 	/** Class name(s) that get appended to default class name of the component */
 	className: PropTypes.string,
@@ -605,7 +642,7 @@ Carousel.propTypes = {
 	/** Text to display to stop autoplaying the slides if the button is enabled and slideshow is autoplaying */
 	stopAutoplayText: PropTypes.string,
 	/** Array of thumbnails to show in the thumbnail indicator area */
-	thumbnails: PropTypes.arrayOf(PropTypes.node),
+	thumbnails: PropTypes.arrayOf(PropTypes.node)
 };
 
 export default Carousel;

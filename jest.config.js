@@ -1,12 +1,12 @@
 module.exports = {
 	testEnvironment: "jsdom",
 	transform: {
-		"^.+\\.[t|j]sx?$": "babel-jest",
+		"^.+\\.[t|j]sx?$": "babel-jest"
 	},
 	setupFilesAfterEnv: ["./jest/testSetupFile.js"],
 	verbose: true,
 	moduleNameMapper: {
-		"^.+\\.(scss)$": "identity-obj-proxy",
+		"^.+\\.(scss)$": "identity-obj-proxy"
 	},
 	transformIgnorePatterns: ["/node_modules/(?!@wpmedia)"],
 	coverageDirectory: "<rootDir>/coverage",
@@ -15,9 +15,10 @@ module.exports = {
 			statements: 80,
 			branches: 60,
 			functions: 90,
-			lines: 80,
-		},
+			lines: 80
+		}
 	},
+	coveragePathIgnorePatterns: ["/storybook-static/"],
 	collectCoverageFrom: [
 		"**/**/*.{js,jsx}",
 		"!**/node_modules/**",
@@ -34,6 +35,6 @@ module.exports = {
 		"!.*.js",
 		"!__tests__/scss.test.js",
 		"!_templates/**",
-		"!**/scripts/**",
-	],
+		"!**/scripts/**"
+	]
 };

@@ -6,11 +6,11 @@ import Carousel from ".";
 
 // define full screen like in browsers that support full screen api
 Object.defineProperty(global.document, "fullscreenEnabled", {
-	value: true,
+	value: true
 });
 
 jest.mock("../../utils/event-emitter", () => ({
-	dispatch: jest.fn(),
+	dispatch: jest.fn()
 }));
 
 jest.mock(
@@ -31,7 +31,7 @@ jest.mock(
 
 // mock accessibility to ensure that the carousel renders match media for reduce motion
 Object.defineProperty(global.window, "matchMedia", {
-	value: () => true,
+	value: () => true
 });
 
 describe("Carousel", () => {
@@ -67,6 +67,128 @@ describe("Carousel", () => {
 		// Trigger the window resize event.
 		await global.dispatchEvent(new Event("resize"));
 		expect(screen.getByRole("region")).not.toBeNull();
+	});
+
+	it("clamps the slide to maxSlide if slide is out of bounds after slides are removed and resized", async () => {
+		// Start with 3 slides
+		const { rerender } = render(
+			<Carousel id="carousel-clamp" label="Clamp Test" slidesToShow={1}>
+				<Carousel.Item label="Slide 1">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 3">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+
+		// Move to the last slide (slide = 3)
+		let nextButton = screen.getByRole("button", { name: /next/i });
+		await userEvent.click(nextButton);
+		nextButton = screen.getByRole("button", { name: /next/i });
+		await userEvent.click(nextButton);
+
+		// Now remove a slide so maxSlide is 2, but slide is still 3 (out of bounds)
+		rerender(
+			<Carousel id="carousel-clamp" label="Clamp Test" slidesToShow={1}>
+				<Carousel.Item label="Slide 1">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+
+		// Trigger resize to invoke the clamp logic
+		global.innerWidth = 500;
+		await global.dispatchEvent(new Event("resize"));
+
+		// Wait for the carousel to update, then check that the next button is not present (slide was clamped)
+		await waitFor(() => {
+			expect(screen.queryByRole("button", { name: /next/i })).not.toBeInTheDocument();
+		});
+	});
+
+	it("should not render the next button when at the last slide", async () => {
+		render(
+			<Carousel id="carousel-last-slide" label="Last Slide Test" slidesToShow={1}>
+				<Carousel.Item label="Slide 1">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2">
+					<div />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 3">
+					<div />
+				</Carousel.Item>
+			</Carousel>
+		);
+
+		// Move to the last slide
+		let nextButton = screen.getByRole("button", { name: /next/i });
+		await userEvent.click(nextButton);
+		nextButton = screen.getByRole("button", { name: /next/i });
+		await userEvent.click(nextButton);
+
+		// Now we should be at the last slide, and the next button should not be rendered
+		expect(screen.queryByRole("button", { name: /next/i })).not.toBeInTheDocument();
+	});
+
+	it("should not show whitespace at the start or end when resized", async () => {
+		render(
+			<Carousel id="carousel-resize" label="Carousel Label" slidesToShow={2}>
+				<Carousel.Item label="Slide 1 of 4">
+					<div style={{ width: 100, height: 100, background: "red" }} />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 2 of 4">
+					<div style={{ width: 100, height: 100, background: "green" }} />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 3 of 4">
+					<div style={{ width: 100, height: 100, background: "blue" }} />
+				</Carousel.Item>
+				<Carousel.Item label="Slide 4 of 4">
+					<div style={{ width: 100, height: 100, background: "yellow" }} />
+				</Carousel.Item>
+			</Carousel>
+		);
+
+		// Simulate a resize event
+		global.innerWidth = 800;
+		await global.dispatchEvent(new Event("resize"));
+
+		// Wait for the track to appear in the DOM
+		await waitFor(() => {
+			expect(screen.getByTestId("carousel-track")).toBeInTheDocument();
+		});
+		const trackStart = screen.getByTestId("carousel-track");
+		const { transform: transformStart } = trackStart.style;
+		const matchStart = /translate3d\((-?\d+)px/.exec(transformStart);
+		const offsetStart = matchStart ? parseInt(matchStart[1], 10) : 0;
+		expect(offsetStart).toBeLessThanOrEqual(0);
+
+		// Move to the last slide and resize again
+		const nextButton = screen.queryByRole("button", { name: /next/i });
+		if (nextButton) {
+			await userEvent.click(nextButton);
+			await userEvent.click(nextButton);
+		}
+
+		global.innerWidth = 600;
+		await global.dispatchEvent(new Event("resize"));
+
+		// Wait for the track to appear in the DOM after resize
+		await waitFor(() => {
+			expect(screen.getByTestId("carousel-track")).toBeInTheDocument();
+		});
+		const trackEnd = screen.getByTestId("carousel-track");
+		const { transform: transformEnd } = trackEnd.style;
+		const matchEnd = /translate3d\((-?\d+)px/.exec(transformEnd);
+		const offsetEnd = matchEnd ? parseInt(matchEnd[1], 10) : 0;
+		expect(offsetEnd).toBeLessThanOrEqual(0);
 	});
 
 	it("should only render Carousel.Item children", () => {
