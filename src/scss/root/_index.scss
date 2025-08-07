@@ -1,6 +1,9 @@
+/* stylelint-disable scss/selector-no-redundant-nesting-selector */
+
 @use "sass:list";
 @use "sass:map";
 @use "sass:meta";
+@use "sass:string";
 
 @use "reset";
 @use "a11y";
@@ -39,7 +42,7 @@ $tokens: () !default;
 @function get-all-component-definitions($allTokens: (), $breakpoints: ()) {
 	$component-map: ();
 
-	@if type-of($allTokens) != map {
+	@if meta.type-of($allTokens) != map {
 		@return $component-map;
 	}
 
@@ -52,7 +55,7 @@ $tokens: () !default;
 	/* stylelint-disable max-nesting-depth */
 	@each $breakpoint, $breakpointValue in $breakpoints {
 		@each $blockName, $blockValue in map.get($allTokens, $breakpoint, "blocks") {
-			@if type-of($blockValue) == map {
+			@if meta.type-of($blockValue) == map {
 				@if list.length(map.get($blockValue, "components")) >= 0 {
 					@each $name, $value in map.get($blockValue, "components") {
 						@each $cName, $cValue in $value {
@@ -70,21 +73,21 @@ $tokens: () !default;
 }
 
 @function get-value-name-from-reference($value) {
-	@return str-slice($value, str-index($value, ".") + 1);
+	@return string.slice($value, string.index($value, ".") + 1);
 }
 
 // Replaces the $global and $alias references in a property value.
 @function replace-token-reference($value) {
 	$new-value: $value;
-	@if type-of($value) == string {
+	@if meta.type-of($value) == string {
 		// Handle $global
-		@if str-index($value, "$global.") {
+		@if string.index($value, "$global.") {
 			$global-var: get-value-name-from-reference($value);
 			$new-value: var(--global-#{$global-var});
 		}
 
 		// Handle $alias
-		@if str-index($value, "$alias.") {
+		@if string.index($value, "$alias.") {
 			$alias-var: get-value-name-from-reference($value);
 			$new-value: var(--#{$alias-var});
 		}
@@ -101,13 +104,16 @@ $component-map: get-all-component-definitions($tokens, $breakpoints);
 //
 @mixin block-components($blockName) {
 	@each $breakpoint, $breakpointValue in $breakpoints {
-		@media ($breakpointValue) {
-			@if list.length(map.get($tokens, $breakpoint, "blocks", $blockName, "components")) >= 0 {
+		@if map.has-key($tokens, $breakpoint, "blocks", $blockName, "components") {
+			@media (#{$breakpointValue}) {
 				@each $name, $value in map.get($tokens, $breakpoint, "blocks", $blockName, "components") {
-					@if type-of($value) == map {
+					@if meta.type-of($value) == map {
 						@each $bName, $bValue in $value {
 							$new-value: replace-token-reference($bValue);
-							--c-#{$name}-#{$bName}: #{maintain-quotes($new-value)};
+
+							& {
+								--c-#{$name}-#{$bName}: #{maintain-quotes($new-value)};
+							}
 						}
 					}
 				}
@@ -117,10 +123,13 @@ $component-map: get-all-component-definitions($tokens, $breakpoints);
 }
 
 @mixin block-properties($blockName) {
-	@each $name, $value in map.get($tokens, "default", "blocks", $blockName) {
+	// All declarations must be within a style rule and before any nested rules
+	& {
 		@if map.has-key($tokens, "default", "blocks", $blockName) {
-			@if type-of($value) != map {
-				#{$name}: block-var($blockName, $name);
+			@each $name, $value in map.get($tokens, "default", "blocks", $blockName) {
+				@if meta.type-of($value) != map {
+					#{$name}: block-var($blockName, $name);
+				}
 			}
 		}
 	}
@@ -159,9 +168,9 @@ $component-map: get-all-component-definitions($tokens, $breakpoints);
 		@if list.length($componentItem) == 0 {
 			@warn '#{$name} "#{$componentName}" is configured with no options';
 		} @else {
-			@if type-of($componentItem) == map {
+			@if meta.type-of($componentItem) == map {
 				@each $cProperty, $cValue in $componentItem {
-					@if type-of($cValue) != map {
+					@if meta.type-of($cValue) != map {
 						$new-value: replace-token-reference($cValue);
 						--#{$prefix}-#{$componentName}-#{$cProperty}: #{maintain-quotes($new-value)};
 					}
