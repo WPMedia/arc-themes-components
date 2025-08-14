@@ -4,8 +4,9 @@
 
 import ReactDOMServer from "react-dom/server";
 import PropTypes from "prop-types";
-import { RESIZER_TOKEN_VERSION } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION, ENVIRONMENT } from "fusion:environment";
 import { useContent } from "fusion:content";
+import getProperties from "fusion:properties";
 import { URL } from "url";
 import formatURL from "../../utils/format-url";
 import formatSrc from "../../utils/format-image-resizer-src";
@@ -182,8 +183,11 @@ const MetaData = ({
 	);
 
 	const defaultOptions = { smart: true };
+	// Derive resizer URL from props or site properties (environment-specific) as fallback.
+	const { resizerURL: defaultResizerURL, resizerURLs } = getProperties(arcSite) || {};
+	const resizerURLToUse = resizerURL || resizerURLs?.[ENVIRONMENT] || defaultResizerURL || "";
 	const imageURL = (src, auth, height, options = defaultOptions) =>
-		formatSrc(resizerURL.concat(src), { ...options, auth }, 1200, height);
+		formatSrc(resizerURLToUse.concat(src), { ...options, auth }, 1200, height);
 
 	const resizedFallbackImage = fallbackImageHash
 		? imageURL(encodeURIComponent(metaData.fallbackImage), fallbackImageHash.hash, undefined, {})

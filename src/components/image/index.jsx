@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useFusionContext } from "fusion:context";
-import { RESIZER_TOKEN_VERSION } from "fusion:environment";
+import { RESIZER_TOKEN_VERSION, ENVIRONMENT } from "fusion:environment";
 import getProperties from "fusion:properties";
 import formatSrc from "../../utils/format-image-resizer-src";
 import imageANSToImageSrc from "../../utils/image-ans-to-image-src";
@@ -26,8 +26,8 @@ const Image = ({
 	const auth = ansImage ? ansImage.auth[RESIZER_TOKEN_VERSION] : resizedOptions?.auth;
 	const formattedSrc = ansImage ? imageANSToImageSrc(ansImage) : src;
 	const { arcSite } = useFusionContext();
-	const { resizerURL: defaultResizerURL } = getProperties(arcSite);
-	const resizerURLToUse = resizerURL || defaultResizerURL;
+	const { resizerURL: defaultResizerURL, resizerURLs } = getProperties(arcSite);
+	const resizerURLToUse = resizerURL || resizerURLs?.[ENVIRONMENT] || defaultResizerURL;
 	const componentClassNames = className
 		? `${COMPONENT_CLASS_NAME} ${className}`
 		: COMPONENT_CLASS_NAME;
@@ -47,21 +47,22 @@ const Image = ({
 		resizerURLToUse.concat(formattedSrc),
 		{ ...resizedOptions, auth },
 		imageWidthAndHeight.width,
-		imageWidthAndHeight.height
+		imageWidthAndHeight.height,
 	);
 
 	const responsiveSrcSet =
 		responsiveImages
 			.filter(
-				(responsiveImageWidth) => Number.isInteger(responsiveImageWidth) && responsiveImageWidth > 0
+				(responsiveImageWidth) =>
+					Number.isInteger(responsiveImageWidth) && responsiveImageWidth > 0,
 			)
 			.map((responsiveImageWidth) =>
 				formatSrc(
 					resizerURLToUse.concat(formattedSrc),
 					{ ...resizedOptions, auth },
 					responsiveImageWidth,
-					imageAspectRatio !== 0 ? responsiveImageWidth / imageAspectRatio : undefined
-				).concat(` ${responsiveImageWidth}w`)
+					imageAspectRatio !== 0 ? responsiveImageWidth / imageAspectRatio : undefined,
+				).concat(` ${responsiveImageWidth}w`),
 			)
 			.join(", ") || null;
 
@@ -71,7 +72,7 @@ const Image = ({
 					.filter(({ isDefault }) => !isDefault)
 					.map(({ mediaCondition, sourceSizeValue }) => `${mediaCondition} ${sourceSizeValue}`)
 					.concat(
-						sizes.find((currentSizeObject) => currentSizeObject.isDefault)?.sourceSizeValue || []
+						sizes.find((currentSizeObject) => currentSizeObject.isDefault)?.sourceSizeValue || [],
 					)
 					.join(", ")
 			: null;
@@ -131,7 +132,7 @@ Image.propTypes = {
 			sourceSizeValue: PropTypes.string,
 			/** Media condition to render the corresponding source size value */
 			mediaCondition: PropTypes.string,
-		})
+		}),
 	),
 	/** The intrinsic width of the image in pixels */
 	width: PropTypes.number,
