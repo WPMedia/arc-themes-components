@@ -185,7 +185,7 @@ const MetaData = ({
 	const defaultOptions = { smart: true };
 	// Derive resizer URL from props or site properties (environment-specific) as fallback.
 	const { resizerURL: defaultResizerURL, resizerURLs } = getProperties(arcSite) || {};
-	const resizerURLToUse = resizerURL || resizerURLs?.[ENVIRONMENT] || defaultResizerURL || "";
+	const resizerURLToUse = resizerURL || resizerURLs?.[ENVIRONMENT] || defaultResizerURL;
 	const imageURL = (src, auth, height, options = defaultOptions) =>
 		formatSrc(resizerURLToUse.concat(src), { ...options, auth }, 1200, height);
 
