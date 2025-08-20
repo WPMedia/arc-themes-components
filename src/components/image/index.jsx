@@ -27,6 +27,10 @@ const Image = ({
 	const formattedSrc = ansImage ? imageANSToImageSrc(ansImage) : src;
 	const { arcSite } = useFusionContext();
 	const { resizerURL: defaultResizerURL, resizerURLs } = getProperties(arcSite);
+	console.log("passed prop resizerURL", resizerURL);
+	console.log("resizerurls", resizerURLs);
+	console.log("ENVIRONMENT", ENVIRONMENT);
+	console.log("default resizer url", defaultResizerURL);
 	const resizerURLToUse = resizerURL || resizerURLs?.[ENVIRONMENT] || defaultResizerURL;
 	const componentClassNames = className
 		? `${COMPONENT_CLASS_NAME} ${className}`
