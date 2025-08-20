@@ -28,7 +28,7 @@ describe("Image", () => {
 				className={ADDITIONAL_CLASSES}
 				resizedOptions={{ auth: "secret" }}
 				src="test-image.jpg"
-			/>
+			/>,
 		);
 
 		const element = screen.getByRole("img");
@@ -49,7 +49,7 @@ describe("Image", () => {
 				src="test-image.jpg"
 				resizerURL="https://resizer.example.com/"
 				resizedOptions={{ filter: 70 }}
-			/>
+			/>,
 		);
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute("src", "test-image.jpg");
@@ -69,7 +69,7 @@ describe("Image", () => {
 				resizedOptions={{ auth: "secret" }}
 				width={100}
 				height={100}
-			/>
+			/>,
 		);
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute("height", "100");
@@ -89,12 +89,12 @@ describe("Image", () => {
 				src="test-image.jpg"
 				resizerURL="https://resizer.example.com/"
 				resizedOptions={{ filter: 70, auth: "secret" }}
-			/>
+			/>,
 		);
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute(
 			"src",
-			"https://resizer.example.com/test-image.jpg?filter=70&auth=secret"
+			"https://resizer.example.com/test-image.jpg?filter=70&auth=secret",
 		);
 	});
 
@@ -104,12 +104,12 @@ describe("Image", () => {
 				src="test-image.jpg"
 				resizerURL="https://resizer.example.com/"
 				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
-			/>
+			/>,
 		);
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute(
 			"src",
-			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret"
+			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret",
 		);
 	});
 
@@ -119,12 +119,12 @@ describe("Image", () => {
 				src="test-image.jpg"
 				resizerURL="https://resizer.example.com/"
 				resizedOptions={{ filter: true, fancy: false, auth: "secret" }}
-			/>
+			/>,
 		);
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute(
 			"src",
-			"https://resizer.example.com/test-image.jpg?filter=true&fancy=false&auth=secret"
+			"https://resizer.example.com/test-image.jpg?filter=true&fancy=false&auth=secret",
 		);
 	});
 
@@ -134,12 +134,12 @@ describe("Image", () => {
 				src="test-image.jpg"
 				resizerURL="https://resizer.example.com/"
 				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
-			/>
+			/>,
 		);
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute(
 			"src",
-			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret"
+			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret",
 		);
 	});
 
@@ -152,12 +152,12 @@ describe("Image", () => {
 				responsiveImages={[100, 200, 300]}
 				height={50}
 				width={100}
-			/>
+			/>,
 		);
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute(
 			"srcset",
-			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=100&height=50 100w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=200&height=100 200w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=300&height=150 300w"
+			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=100&height=50 100w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=200&height=100 200w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=300&height=150 300w",
 		);
 	});
 
@@ -168,12 +168,12 @@ describe("Image", () => {
 				resizerURL="https://resizer.example.com/"
 				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
 				responsiveImages={[100, 200, 300]}
-			/>
+			/>,
 		);
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute(
 			"srcset",
-			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=100 100w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=200 200w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=300 300w"
+			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=100 100w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=200 200w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=300 300w",
 		);
 	});
 
@@ -184,13 +184,13 @@ describe("Image", () => {
 				resizerURL="https://resizer.example.com/"
 				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
 				responsiveImages={[100, 200, 300, -100, "yes", true]}
-			/>
+			/>,
 		);
 
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute(
 			"srcset",
-			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=100 100w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=200 200w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=300 300w"
+			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=100 100w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=200 200w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=300 300w",
 		);
 	});
 
@@ -203,12 +203,12 @@ describe("Image", () => {
 				width={50}
 				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
 				responsiveImages={[100, 200, 300, -100, "yes", true]}
-			/>
+			/>,
 		);
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute(
 			"srcset",
-			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=100&height=200 100w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=200&height=400 200w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=300&height=600 300w"
+			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=100&height=200 100w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=200&height=400 200w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=300&height=600 300w",
 		);
 	});
 	it("passes in sizes array of object string default rendered", () => {
@@ -219,7 +219,7 @@ describe("Image", () => {
 				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
 				responsiveImages={[100, 200, 300]}
 				sizes={[{ isDefault: true, sourceSizeValue: "50vw" }]}
-			/>
+			/>,
 		);
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute("sizes", "50vw");
@@ -237,12 +237,12 @@ describe("Image", () => {
 					{ sourceSizeValue: "75vw", mediaCondition: "(min-width: 600px)" },
 					{ sourceSizeValue: "100vw", mediaCondition: "(min-width: 500px)" },
 				]}
-			/>
+			/>,
 		);
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute(
 			"sizes",
-			"(min-width: 600px) 75vw, (min-width: 500px) 100vw, 50vw"
+			"(min-width: 600px) 75vw, (min-width: 500px) 100vw, 50vw",
 		);
 	});
 
@@ -257,7 +257,7 @@ describe("Image", () => {
 					{ sourceSizeValue: "50vw", isDefault: true },
 					{ sourceSizeValue: "75vw", isDefault: true },
 				]}
-			/>
+			/>,
 		);
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute("sizes", "50vw");
@@ -271,7 +271,7 @@ describe("Image", () => {
 				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
 				responsiveImages={[100, 200, 300]}
 				sizes={[{ sourceSizeValue: "50vw", mediaCondition: "(min-width: 600px)" }]}
-			/>
+			/>,
 		);
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute("sizes", "(min-width: 600px) 50vw");
@@ -289,12 +289,104 @@ describe("Image", () => {
 				}}
 				resizerURL="https://resizer.example.com/"
 				resizedOptions={{ filter: 70, quality: 50 }}
-			/>
+			/>,
 		);
 		const element = screen.getByRole("img");
 		expect(element).toHaveAttribute(
 			"src",
-			"https://resizer.example.com/123.jpg?filter=70&quality=50&auth=secret"
+			"https://resizer.example.com/123.jpg?filter=70&quality=50&auth=secret",
+		);
+	});
+
+	it("should use resizerURLs sub environment value when resizerURL prop is not passed", () => {
+		const ENVIRONMENT = "sandbox";
+		const arcSite = "the-site";
+		const resizerURLs = {
+			sandbox: "https://sandbox-resizer.example.com/",
+		};
+		// Mock useFusionContext and getProperties
+		jest.mock("fusion:context", () => ({ useFusionContext: () => ({ arcSite }) }));
+		jest.mock("fusion:environment", () => ({ ENVIRONMENT }));
+		jest.mock("fusion:properties", () => () => ({ resizerURLs }));
+
+		require.cache[require.resolve(".")] = undefined;
+		const ImageWithMocks = require(".").default;
+
+		render(<ImageWithMocks src="test-image.jpg" resizedOptions={{ auth: "secret" }} />);
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute(
+			"src",
+			"https://sandbox-resizer.example.com/test-image.jpg?auth=secret",
+		);
+	});
+
+	it("should use resizerURL from getProperties when no resizerURL prop and no resizerURLs object", () => {
+		const arcSite = "the-site";
+		const defaultResizerURL = "https://default-resizer.example.com/";
+		// Mock useFusionContext and getProperties
+		jest.mock("fusion:context", () => ({ useFusionContext: () => ({ arcSite }) }));
+		jest.mock("fusion:properties", () => () => ({ resizerURL: defaultResizerURL }));
+		jest.mock("fusion:environment", () => ({ ENVIRONMENT: "sandbox" }));
+
+		require.cache[require.resolve(".")] = undefined;
+		const ImageWithMocks = require(".").default;
+
+		render(<ImageWithMocks src="test-image.jpg" resizedOptions={{ auth: "secret" }} />);
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute(
+			"src",
+			"https://default-resizer.example.com/test-image.jpg?auth=secret",
+		);
+	});
+
+	it("should use the passed resizerURL prop when all sources exist", () => {
+		const arcSite = "the-site";
+		const defaultResizerURL = "https://default-resizer.example.com/";
+		const resizerURLs = {
+			sandbox: "https://sandbox-resizer.example.com/",
+		};
+		const passedResizerURL = "https://passed-resizer.example.com/";
+		// Mock useFusionContext and getProperties
+		jest.mock("fusion:context", () => ({ useFusionContext: () => ({ arcSite }) }));
+		jest.mock("fusion:properties", () => () => ({ resizerURL: defaultResizerURL, resizerURLs }));
+		jest.mock("fusion:environment", () => ({ ENVIRONMENT: "sandbox" }));
+
+		require.cache[require.resolve(".")] = undefined;
+		const ImageWithMocks = require(".").default;
+
+		render(
+			<ImageWithMocks
+				src="test-image.jpg"
+				resizerURL={passedResizerURL}
+				resizedOptions={{ auth: "secret" }}
+			/>,
+		);
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute(
+			"src",
+			"https://passed-resizer.example.com/test-image.jpg?auth=secret",
+		);
+	});
+
+	it("should use resizerURLs object when no resizerURL prop is passed but both resizerURL and resizerURLs exist", () => {
+		const arcSite = "the-site";
+		const defaultResizerURL = "https://default-resizer.example.com/";
+		const resizerURLs = {
+			sandbox: "https://sandbox-resizer.example.com/",
+		};
+		// Mock useFusionContext and getProperties
+		jest.mock("fusion:context", () => ({ useFusionContext: () => ({ arcSite }) }));
+		jest.mock("fusion:properties", () => () => ({ resizerURL: defaultResizerURL, resizerURLs }));
+		jest.mock("fusion:environment", () => ({ ENVIRONMENT: "sandbox" }));
+
+		require.cache[require.resolve(".")] = undefined;
+		const ImageWithMocks = require(".").default;
+
+		render(<ImageWithMocks src="test-image.jpg" resizedOptions={{ auth: "secret" }} />);
+		const element = screen.getByRole("img");
+		expect(element).toHaveAttribute(
+			"src",
+			"https://sandbox-resizer.example.com/test-image.jpg?auth=secret",
 		);
 	});
 });
