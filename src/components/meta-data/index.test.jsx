@@ -13,7 +13,7 @@ afterEach(() => {
 });
 
 describe("MetaData (server-side)", () => {
-	it("uses globalContent.external_canonical_url for canonical link if present", () => {
+	it("uses globalContent.canonical_url_external for canonical link if present", () => {
 		useContent.mockReturnValue(null); // simplify
 		const metaValue = (key) => (key === "page-type" ? "article" : null);
 		const view = renderSSR(
@@ -28,7 +28,7 @@ describe("MetaData (server-side)", () => {
 				MetaTags={() => null}
 				globalContent={{
 					canonical_url: "/story/slug/",
-					external_canonical_url: "https://external.example.com/story/override/",
+					canonical_url_external: "https://external.example.com/story/override/",
 					websites: { "test-site": { website_url: "/story/slug/" } },
 				}}
 				resizerURL="https://resizer.example.com/"

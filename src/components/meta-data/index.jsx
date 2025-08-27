@@ -445,7 +445,7 @@ const MetaData = ({
 	);
 
 	if (outputCanonicalLink) {
-		const externalCanonicalUrl = gc && gc.external_canonical_url;
+		const externalCanonicalUrl = gc && gc.canonical_url_external;
 		if (externalCanonicalUrl) {
 			canonicalLink = <link rel="canonical" href={externalCanonicalUrl} />;
 		} else {
