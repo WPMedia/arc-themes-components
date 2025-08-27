@@ -445,18 +445,23 @@ const MetaData = ({
 	);
 
 	if (outputCanonicalLink) {
-		const defaultResolution = getPageCanonicalUrl(
-			pageType,
-			canonicalDomain || websiteDomain,
-			gc,
-			requestUri,
-		);
-		const canonicalUrl = canonicalResolver
-			? canonicalResolver(pageType, defaultResolution)
-			: defaultResolution;
+		const externalCanonicalUrl = gc && gc.external_canonical_url;
+		if (externalCanonicalUrl) {
+			canonicalLink = <link rel="canonical" href={externalCanonicalUrl} />;
+		} else {
+			const defaultResolution = getPageCanonicalUrl(
+				pageType,
+				canonicalDomain || websiteDomain,
+				gc,
+				requestUri,
+			);
+			const canonicalUrl = canonicalResolver
+				? canonicalResolver(pageType, defaultResolution)
+				: defaultResolution;
 
-		if (canonicalUrl) {
-			canonicalLink = <link rel="canonical" href={canonicalUrl} />;
+			if (canonicalUrl) {
+				canonicalLink = <link rel="canonical" href={canonicalUrl} />;
+			}
 		}
 	}
 
