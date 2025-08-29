@@ -13,6 +13,35 @@ afterEach(() => {
 });
 
 describe("MetaData (server-side)", () => {
+	it("uses globalContent.canonical_url_external for canonical link if present", () => {
+		useContent.mockReturnValue(null); // simplify
+		const metaValue = (key) => (key === "page-type" ? "article" : null);
+		const view = renderSSR(
+			<MetaData
+				arcSite="test-site"
+				websiteName="SiteName"
+				websiteDomain="https://example.com"
+				canonicalDomain="https://canonical.example.com"
+				outputCanonicalLink
+				metaValue={metaValue}
+				MetaTag={() => null}
+				MetaTags={() => null}
+				globalContent={{
+					canonical_url: "/story/slug/",
+					canonical_url_external: "https://external.example.com/story/override/",
+					websites: { "test-site": { website_url: "/story/slug/" } },
+				}}
+				resizerURL="https://resizer.example.com/"
+			/>,
+		);
+		expect(view).toContain(
+			'<link rel="canonical" href="https://external.example.com/story/override/"',
+		);
+		// Should NOT contain the fallback canonical
+		expect(view).not.toContain(
+			'<link rel="canonical" href="https://canonical.example.com/story/slug/"',
+		);
+	});
 	it("renders with minimal required props without throwing", () => {
 		const metaValue = (key) => (key === "page-type" ? "homepage" : null);
 		expect(() =>
