@@ -1,0 +1,1 @@
+git fetch -a --depth 100 && npm run lint:changed-feature-branch && npm run lint:styles && npm run test:changed-feature-branch

@@ -1,0 +1,72 @@
+{
+	"plugins": [
+		"stylelint-no-unsupported-browser-features",
+		"stylelint-order",
+		"stylelint-use-logical"
+	],
+	"extends": ["stylelint-config-recommended", "stylelint-config-sass-guidelines"],
+	"ignoreFiles": ["**/*.js", "**/*.jsx"],
+	"rules": {
+		"annotation-no-unknown": [
+			true,
+			{
+				"ignoreAnnotations": ["default"]
+			}
+		],
+		"csstools/use-logical": "always",
+		"max-nesting-depth": 5,
+		"plugin/no-unsupported-browser-features": [
+			true,
+			{
+				"ignore": [
+					"calc",
+					"css-appearance",
+					"css-clip-path",
+					"css-initial-value",
+					"css-masks",
+					"css-nesting",
+					"css-sticky",
+					"css-when-else",
+					"css3-cursors",
+					"fullscreen",
+					"intrinsic-width",
+					"multicolumn",
+					"pointer-events",
+					"viewport-units"
+				],
+				"severity": "warning"
+			}
+		],
+		"font-family-no-missing-generic-family-keyword": null,
+		"function-no-unknown": null,
+		"order/properties-alphabetical-order": null,
+		"declaration-property-value-disallowed-list": [
+			{
+				"border": ["none"]
+			}
+		],
+		"value-no-vendor-prefix": true,
+		"property-no-vendor-prefix": [
+			true,
+			{
+				"ignoreProperties": ["box-orient"]
+			}
+		],
+		"media-feature-name-no-unknown": [
+			true,
+			{
+				"ignoreMediaFeatureNames": ["max-width"]
+			}
+		],
+		"media-query-no-invalid": null,
+		"order/order": [
+			"declarations",
+			"rules",
+			{
+				"type": "at-rule",
+				"name": "include"
+			}
+		],
+		"selector-class-pattern": null
+	}
+}
