@@ -1,9 +1,0 @@
-@use "../../scss";
-
-.c-reCaptcha {
-	&--warning {
-		@include scss.component-properties("reCaptcha-warning");
-	}
-
-	@include scss.component-properties("reCaptcha");
-}

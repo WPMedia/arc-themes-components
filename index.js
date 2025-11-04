@@ -2,7 +2,6 @@
 // inject imports after this comment and alphabetize them
 import Attribution from "./src/components/attribution";
 import Badge from "./src/components/badge";
-import BotChallengeProtection from "./src/components/bot-challenge-protection";
 import Button from "./src/components/button";
 import Carousel from "./src/components/carousel";
 import Conditional from "./src/components/conditional";
@@ -27,7 +26,6 @@ import Pill from "./src/components/pill";
 import Price from "./src/components/price";
 import Separator from "./src/components/separator";
 import Stack from "./src/components/stack";
-import Video from "./src/components/video";
 
 import EventEmitter from "./src/utils/event-emitter";
 import formatAuthors from "./src/utils/format-authors";
@@ -48,7 +46,6 @@ import handleRedirect from "./src/utils/handle-redirect";
 import useIdentity from "./src/utils/hooks/use-identity";
 import useInterval from "./src/utils/hooks/use-interval";
 import usePhrases from "./src/utils/hooks/use-phrases";
-import useRecaptcha from "./src/utils/hooks/use-reCaptcha";
 import useSales from "./src/utils/hooks/use-sales";
 import imageANSToImageSrc from "./src/utils/image-ans-to-image-src";
 import isServerSide from "./src/utils/is-server-side";
@@ -59,7 +56,6 @@ import signImagesInANSObject from "./src/utils/sign-images-in-ans-object";
 export {
 	Attribution,
 	Badge,
-	BotChallengeProtection,
 	Button,
 	Carousel,
 	Conditional,
@@ -107,7 +103,5 @@ export {
 	useIdentity,
 	useInterval,
 	usePhrases,
-	useRecaptcha,
 	useSales,
-	Video,
 };
