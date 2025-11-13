@@ -26,6 +26,7 @@ import Pill from "./src/components/pill";
 import Price from "./src/components/price";
 import Separator from "./src/components/separator";
 import Stack from "./src/components/stack";
+import Video from "./src/components/video";
 
 import EventEmitter from "./src/utils/event-emitter";
 import formatAuthors from "./src/utils/format-authors";
@@ -104,4 +105,5 @@ export {
 	useInterval,
 	usePhrases,
 	useSales,
+	Video,
 };
