@@ -96,7 +96,7 @@
     "react": "19.1.1",
     "react-dom": "19.1.1",
     "react-test-renderer": "19.1.1",
-    "sass": "^1.69.4",
+    "sass": "1.85.1",
     "sass-loader": "^13.3.2",
     "sass-true": "^7.0.0",
     "storybook": "^8.0.8",

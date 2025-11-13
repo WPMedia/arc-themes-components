@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const COMPONENT_CLASS_NAME = "c-paragraph";
 
-const Paragraph = ({ children, className, truncationLines, ...rest }) => (
+const Paragraph = ({ children, className = "", truncationLines = 0, ...rest }) => (
 	<p
 		{...rest}
 		style={{ "--paragraph-truncation": truncationLines > 0 ? truncationLines : null }}
@@ -11,11 +11,6 @@ const Paragraph = ({ children, className, truncationLines, ...rest }) => (
 		{children}
 	</p>
 );
-
-Paragraph.defaultProps = {
-	className: "",
-	truncationLines: 0,
-};
 
 Paragraph.propTypes = {
 	/** Elements that will be displayed within the component. */

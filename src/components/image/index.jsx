@@ -9,18 +9,18 @@ import calculateWidthAndHeight from "./calculate-width-height";
 const COMPONENT_CLASS_NAME = "c-image";
 
 const Image = ({
-	alt,
+	alt = "",
 	ansImage,
 	aspectRatio,
 	className,
-	loading,
+	loading = "lazy",
 	src,
-	resizedOptions,
+	resizedOptions = {},
 	resizerURL,
 	responsiveImages,
 	width,
 	height,
-	sizes,
+	sizes = [],
 	...rest
 }) => {
 	const auth = ansImage ? ansImage.auth[RESIZER_TOKEN_VERSION] : resizedOptions?.auth;
@@ -90,14 +90,6 @@ const Image = ({
 			{...imageWidthAndHeight}
 		/>
 	);
-};
-
-Image.defaultProps = {
-	alt: "",
-	loading: "lazy",
-	resizedOptions: {},
-	responsiveImages: [],
-	sizes: [],
 };
 
 Image.propTypes = {

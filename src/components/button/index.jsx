@@ -16,13 +16,13 @@ const Button = forwardRef((props, ref) => {
 		children,
 		className,
 		disabled,
-		fullWidth,
+		fullWidth = false,
 		href,
 		iconLeft,
 		iconRight,
-		size,
-		type,
-		variant,
+		size = "medium",
+		type = "button",
+		variant = "default",
 		...rest
 	} = props;
 
@@ -67,13 +67,6 @@ const Button = forwardRef((props, ref) => {
 		</button>
 	);
 });
-
-Button.defaultProps = {
-	fullWidth: false,
-	size: "medium",
-	type: "button",
-	variant: "default",
-};
 
 Button.propTypes = {
 	/** Provide an accessible name to the button - use only when the button itself does not have meaningful text content */
