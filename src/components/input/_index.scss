@@ -1,6 +1,8 @@
 @use "../../scss";
 
 .c-input {
+	@include scss.component-properties("input");
+
 	.c-input__input {
 		&.c-input__dropdown {
 			@include scss.component-with-states("input-dropdown", [focus]);
@@ -124,6 +126,4 @@
 	&.c-input__radio {
 		@include scss.component-properties("input-radio");
 	}
-
-	@include scss.component-properties("input");
 }

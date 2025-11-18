@@ -10,6 +10,8 @@
 	overflow: hidden;
 	word-break: break-word;
 
+	@include scss.component-properties("carousel");
+
 	> * {
 		grid-area: carousel;
 	}
@@ -186,8 +188,6 @@
 
 		@include scss.component-properties("carousel-fullscreen");
 	}
-
-	@include scss.component-properties("carousel");
 }
 
 // styltlint-ignore selector-no-qualifying-type

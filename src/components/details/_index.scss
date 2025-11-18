@@ -1,6 +1,8 @@
 @use "../../scss";
 
 .c-details {
+	@include scss.component-properties("details");
+
 	summary {
 		@include scss.component-properties("details-summary");
 	}
@@ -67,6 +69,4 @@
 	&__content {
 		@include scss.component-properties("details-content");
 	}
-
-	@include scss.component-properties("details");
 }
