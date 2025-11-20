@@ -26,7 +26,7 @@ const Button = forwardRef((props, ref) => {
 		...rest
 	} = props;
 
-	const defaultProps = {
+	const baseProps = {
 		...rest,
 		ref,
 		"aria-label": accessibilityLabel,
@@ -54,14 +54,14 @@ const Button = forwardRef((props, ref) => {
 
 	if (href) {
 		return (
-			<a {...defaultProps} href={href}>
+			<a {...baseProps} href={href}>
 				{accessibilityLabel && <span className="visually-hidden">{accessibilityLabel}</span>}
 				{buttonContents}
 			</a>
 		);
 	}
 	return (
-		<button {...defaultProps} type={type} aria-disabled={disabled}>
+		<button {...baseProps} type={type} aria-disabled={disabled}>
 			{accessibilityLabel && <span className="visually-hidden">{accessibilityLabel}</span>}
 			{buttonContents}
 		</button>
