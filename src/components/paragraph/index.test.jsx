@@ -1,20 +1,13 @@
-import renderer from "react-test-renderer";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Paragraph from ".";
 
 describe("Paragraph", () => {
 	it("should render", () => {
-		const tree = renderer.create(<Paragraph>Paragraph Text</Paragraph>).toJSON();
-
-		expect(tree).toMatchInlineSnapshot(`
+		const { container } = render(<Paragraph>Paragraph Text</Paragraph>);
+		expect(container.firstChild).toMatchInlineSnapshot(`
       <p
-        className="c-paragraph"
-        style={
-          {
-            "--paragraph-truncation": null,
-          }
-        }
+        class="c-paragraph"
       >
         Paragraph Text
       </p>

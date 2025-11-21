@@ -17,7 +17,7 @@ const Image = ({
 	src,
 	resizedOptions = {},
 	resizerURL,
-	responsiveImages,
+	responsiveImages = [],
 	width,
 	height,
 	sizes = [],
