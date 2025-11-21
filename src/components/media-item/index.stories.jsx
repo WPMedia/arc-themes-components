@@ -2,6 +2,9 @@ import MediaItem from ".";
 import Image from "../image";
 import Video from "../video";
 
+const POWA_EMBED_9_16 =
+	'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
+
 export default {
 	title: "Components/Media Item",
 	component: MediaItem,
@@ -68,13 +71,7 @@ export const RendersHtmlPassedIntoTitleOrCaption = {
 export const WithImage = {
 	render: () => (
 		<MediaItem credit="John Doe (Stock Photo)" title="Person Sitting">
-			<Video
-				borderRadius
-				aspectRatio="9:16"
-				embedMarkup={
-					'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>'
-				}
-			/>
+			<Video borderRadius aspectRatio="9:16" embedMarkup={POWA_EMBED_9_16} />
 		</MediaItem>
 	),
 
