@@ -59,14 +59,25 @@
 			}
 		],
 		"media-query-no-invalid": null,
+
 		"order/order": [
-			"declarations",
-			"rules",
-			{
-				"type": "at-rule",
-				"name": "include"
-			}
+			[
+				"custom-properties",
+				"dollar-variables",
+				{
+					"type": "at-rule",
+					"name": "use"
+				},
+				"declarations",
+				{
+					"type": "at-rule",
+					"name": "include",
+					"hasBlock": false
+				},
+				"rules"
+			]
 		],
+
 		"selector-class-pattern": null
 	}
 }
