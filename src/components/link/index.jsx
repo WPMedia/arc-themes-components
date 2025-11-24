@@ -16,12 +16,12 @@ function determineVisuallyHiddenText(supplementalText, opensInNewTab) {
 }
 
 const Link = ({
-	assistiveHidden,
+	assistiveHidden = false,
 	children,
-	className,
+	className = "",
 	href,
 	openInNewTab,
-	supplementalText,
+	supplementalText = "",
 	...rest
 }) => {
 	// openInNewTab is undefined by default
@@ -63,13 +63,6 @@ Link.propTypes = {
 	 indicating a new tab in English by default if external link or opting into a new tab
 	*/
 	supplementalText: PropTypes.string,
-};
-
-Link.defaultProps = {
-	className: "",
-	assistiveHidden: false,
-	openInNewTab: undefined,
-	supplementalText: "",
 };
 
 export default Link;

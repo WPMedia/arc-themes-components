@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const COMPONENT_CLASS_NAME = "c-badge";
 
-const Badge = ({ children, className, variant, ...rest }) => (
+const Badge = ({ children, className, variant = "default", ...rest }) => (
 	<span
 		{...rest}
 		className={[COMPONENT_CLASS_NAME, variant && `${COMPONENT_CLASS_NAME}--${variant}`, className]
@@ -12,10 +12,6 @@ const Badge = ({ children, className, variant, ...rest }) => (
 		{children}
 	</span>
 );
-
-Badge.defaultProps = {
-	variant: "default",
-};
 
 Badge.propTypes = {
 	/** Class name(s) that get appended to default class name of the component. */

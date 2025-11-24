@@ -1,9 +1,0 @@
-{
-	"reCaptcha-warning": {
-		"styles": {
-			"default": {
-				"color": "var(--status-color-danger)"
-			}
-		}
-	}
-}
