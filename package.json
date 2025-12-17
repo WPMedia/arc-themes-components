@@ -93,11 +93,11 @@
     "lint-staged": "^15.2.2",
     "prettier": "3.0.3",
     "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "react-google-recaptcha": "^3.1.0",
     "react-google-recaptcha-v3": "1.11.0",
-    "react-test-renderer": "^18.2.0",
+    "react-test-renderer": "^19.2.3",
     "sass": "^1.69.4",
     "sass-loader": "^13.3.2",
     "sass-true": "^7.0.0",
@@ -124,9 +124,7 @@
     "react-swipeable": "^7.0.1"
   },
   "overrides": {
-    "react-oembed-container": {
-      "react": "$react",
-      "react-dom": "$react-dom"
-    }
+    "react": "$react",
+    "react-dom": "$react-dom"
   }
 }
