@@ -192,7 +192,7 @@ const Carousel = ({
 	goToSlidePhrase = /* istanbul ignore next  */ (targetSlide) => `Go to slide ${targetSlide}`,
 	label,
 	nextButton,
-	pageCountPhrase = () => {},
+	pageCountPhrase = (current, total) => `${current} of ${total}`,
 	previousButton,
 	showAdditionalSlideControls,
 	showLabel = false,
