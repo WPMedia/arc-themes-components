@@ -523,7 +523,10 @@ const Carousel = ({
 						<p
 							className={`${COMPONENT_CLASS_NAME}__image-counter-label`}
 							dangerouslySetInnerHTML={{
-								__html: pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`,
+								__html:
+									typeof pageCountPhrase === "function"
+										? pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`
+										: `${slide} of ${totalSlides}`,
 							}}
 						/>
 					) : null}
