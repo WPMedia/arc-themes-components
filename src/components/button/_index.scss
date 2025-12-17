@@ -6,6 +6,8 @@
 	display: inline-flex;
 	block-size: max-content;
 
+	@include scss.component-properties("button");
+
 	&:hover {
 		cursor: pointer;
 
@@ -68,6 +70,4 @@
 	&--large {
 		@include scss.component-with-states("button-large", [hover, active]);
 	}
-
-	@include scss.component-properties("button");
 }

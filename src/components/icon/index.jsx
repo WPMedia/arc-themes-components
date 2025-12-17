@@ -7,13 +7,13 @@ const COMPONENT_CLASS_NAME = "c-icon";
 
 const Icon = ({
 	className,
-	context,
+	context = "presentational",
 	description,
-	fill,
-	height,
+	fill = "currentColor",
+	height = 48,
 	name,
 	title,
-	width,
+	width = 48,
 	viewBox,
 	...rest
 }) => {
@@ -39,13 +39,6 @@ const Icon = ({
 			<IconName />
 		</svg>
 	);
-};
-
-Icon.defaultProps = {
-	context: "presentational",
-	fill: "currentColor",
-	height: 48,
-	width: 48,
 };
 
 Icon.propTypes = {

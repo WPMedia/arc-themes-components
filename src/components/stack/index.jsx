@@ -2,16 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Stack = ({
-	as,
-	className,
-	alignment,
+	as = "div",
+	className = "",
+	alignment = "unset",
 	children,
-	direction,
-	divider,
-	inline,
-	justification,
+	direction = "vertical",
+	divider = false,
+	inline = false,
+	justification = "start",
 	gap,
-	wrap,
+	wrap = "nowrap",
 	...rest
 }) => {
 	const childCount = React.Children.count(children);
@@ -35,17 +35,6 @@ const Stack = ({
 			))}
 		</Element>
 	);
-};
-
-Stack.defaultProps = {
-	as: "div",
-	className: "",
-	alignment: "unset",
-	direction: "vertical",
-	divider: false,
-	inline: false,
-	justification: "start",
-	wrap: "nowrap",
 };
 
 Stack.propTypes = {

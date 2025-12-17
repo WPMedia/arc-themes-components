@@ -4,11 +4,11 @@ const COMPONENT_CLASS_NAME = "c-details";
 
 const Details = ({
 	children,
-	childrenHTML,
+	childrenHTML = false,
 	className,
 	icon,
-	iconPlacement,
-	open,
+	iconPlacement = "right",
+	open = false,
 	summary,
 	...rest
 }) => {
@@ -36,11 +36,7 @@ const Details = ({
 	);
 };
 
-Details.defaultProps = {
-	childrenHTML: false,
-	iconPlacement: "right",
-	open: false,
-};
+/* defaultProps removed for React 19 compatibility */
 
 Details.propTypes = {
 	/** Class name(s) that get appended to default class name of the component */

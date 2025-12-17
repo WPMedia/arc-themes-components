@@ -5,7 +5,7 @@ import Image from ".";
 describe("Image", () => {
 	it("should render string child", () => {
 		render(<Image src="test-image.jpg" />);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute("src", "test-image.jpg");
 		expect(element).toHaveAttribute("alt", "");
 	});
@@ -15,7 +15,7 @@ describe("Image", () => {
 		const ADDITIONAL_CLASSES = "additionalClass1 additionalClass2";
 		render(<Image className={ADDITIONAL_CLASSES} src="test-image.jpg" />);
 
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveClass(ADDITIONAL_CLASSES);
 		expect(element).toHaveClass(ORIGINAL_CLASSES);
 	});
@@ -31,14 +31,14 @@ describe("Image", () => {
 			/>,
 		);
 
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveClass(ADDITIONAL_CLASSES);
 		expect(element).toHaveClass(ORIGINAL_CLASSES);
 	});
 
 	it("should render no height and no width if no height and width", () => {
 		render(<Image src="test-image.jpg" />);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).not.toHaveAttribute("height");
 		expect(element).not.toHaveAttribute("width");
 	});
@@ -51,13 +51,13 @@ describe("Image", () => {
 				resizedOptions={{ filter: 70 }}
 			/>,
 		);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute("src", "test-image.jpg");
 	});
 
 	it("should use src if no resizerURL and no Auth", () => {
 		render(<Image src="test-image.jpg" resizedOptions={{ filter: 70 }} />);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute("src", "test-image.jpg");
 	});
 
@@ -71,14 +71,14 @@ describe("Image", () => {
 				height={100}
 			/>,
 		);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute("height", "100");
 		expect(element).toHaveAttribute("width", "100");
 	});
 
 	it("should render only height if height and no width", () => {
 		render(<Image src="test-image.jpg" resizedOptions={{ auth: "secret" }} height={100} />);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute("height", "100");
 		expect(element).not.toHaveAttribute("width");
 	});
@@ -91,7 +91,7 @@ describe("Image", () => {
 				resizedOptions={{ filter: 70, auth: "secret" }}
 			/>,
 		);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute(
 			"src",
 			"https://resizer.example.com/test-image.jpg?filter=70&auth=secret",
@@ -106,7 +106,7 @@ describe("Image", () => {
 				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
 			/>,
 		);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute(
 			"src",
 			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret",
@@ -121,7 +121,7 @@ describe("Image", () => {
 				resizedOptions={{ filter: true, fancy: false, auth: "secret" }}
 			/>,
 		);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute(
 			"src",
 			"https://resizer.example.com/test-image.jpg?filter=true&fancy=false&auth=secret",
@@ -136,7 +136,7 @@ describe("Image", () => {
 				resizedOptions={{ filter: 70, quality: 50, auth: "secret" }}
 			/>,
 		);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute(
 			"src",
 			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret",
@@ -154,7 +154,7 @@ describe("Image", () => {
 				width={100}
 			/>,
 		);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute(
 			"srcset",
 			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=100&height=50 100w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=200&height=100 200w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=300&height=150 300w",
@@ -170,7 +170,7 @@ describe("Image", () => {
 				responsiveImages={[100, 200, 300]}
 			/>,
 		);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute(
 			"srcset",
 			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=100 100w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=200 200w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=300 300w",
@@ -187,7 +187,7 @@ describe("Image", () => {
 			/>,
 		);
 
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute(
 			"srcset",
 			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=100 100w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=200 200w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=300 300w",
@@ -205,7 +205,7 @@ describe("Image", () => {
 				responsiveImages={[100, 200, 300, -100, "yes", true]}
 			/>,
 		);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute(
 			"srcset",
 			"https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=100&height=200 100w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=200&height=400 200w, https://resizer.example.com/test-image.jpg?filter=70&quality=50&auth=secret&width=300&height=600 300w",
@@ -221,7 +221,7 @@ describe("Image", () => {
 				sizes={[{ isDefault: true, sourceSizeValue: "50vw" }]}
 			/>,
 		);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute("sizes", "50vw");
 	});
 
@@ -239,7 +239,7 @@ describe("Image", () => {
 				]}
 			/>,
 		);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute(
 			"sizes",
 			"(min-width: 600px) 75vw, (min-width: 500px) 100vw, 50vw",
@@ -259,7 +259,7 @@ describe("Image", () => {
 				]}
 			/>,
 		);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute("sizes", "50vw");
 	});
 
@@ -273,7 +273,7 @@ describe("Image", () => {
 				sizes={[{ sourceSizeValue: "50vw", mediaCondition: "(min-width: 600px)" }]}
 			/>,
 		);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute("sizes", "(min-width: 600px) 50vw");
 	});
 
@@ -291,7 +291,7 @@ describe("Image", () => {
 				resizedOptions={{ filter: 70, quality: 50 }}
 			/>,
 		);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute(
 			"src",
 			"https://resizer.example.com/123.jpg?filter=70&quality=50&auth=secret",
@@ -313,7 +313,7 @@ describe("Image", () => {
 		const ImageWithMocks = require(".").default;
 
 		render(<ImageWithMocks src="test-image.jpg" resizedOptions={{ auth: "secret" }} />);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute(
 			"src",
 			"https://sandbox-resizer.example.com/test-image.jpg?auth=secret",
@@ -332,7 +332,7 @@ describe("Image", () => {
 		const ImageWithMocks = require(".").default;
 
 		render(<ImageWithMocks src="test-image.jpg" resizedOptions={{ auth: "secret" }} />);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute(
 			"src",
 			"https://default-resizer.example.com/test-image.jpg?auth=secret",
@@ -361,7 +361,7 @@ describe("Image", () => {
 				resizedOptions={{ auth: "secret" }}
 			/>,
 		);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute(
 			"src",
 			"https://passed-resizer.example.com/test-image.jpg?auth=secret",
@@ -383,7 +383,7 @@ describe("Image", () => {
 		const ImageWithMocks = require(".").default;
 
 		render(<ImageWithMocks src="test-image.jpg" resizedOptions={{ auth: "secret" }} />);
-		const element = screen.getByRole("img");
+		const element = screen.getByAltText("");
 		expect(element).toHaveAttribute(
 			"src",
 			"https://sandbox-resizer.example.com/test-image.jpg?auth=secret",

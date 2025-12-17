@@ -24,7 +24,7 @@ const DefaultNextButton = ({ id, onClick, isFullScreen }) => (
 		label="Next Slide"
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen
+			isFullScreen,
 		)} ${BUTTON_BASE_CLASS_NAME}--next`}
 	>
 		Next
@@ -38,7 +38,7 @@ const DefaultPreviousButton = ({ id, onClick, isFullScreen }) => (
 		label="Previous Slide"
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen
+			isFullScreen,
 		)} ${BUTTON_BASE_CLASS_NAME}--previous`}
 	>
 		Previous
@@ -49,7 +49,7 @@ const resolvedIcon = (element, isFullScreen) =>
 	cloneElement(element, {
 		className: `${getFullScreenClassName(`${ICON_BASE_CLASS_NAME}`, isFullScreen)} ${
 			element?.props?.className || ""
-		}`
+		}`,
 	});
 
 const DefaultAdditionalPreviousButton = ({ id, onClick, isFullScreen }) => (
@@ -59,7 +59,7 @@ const DefaultAdditionalPreviousButton = ({ id, onClick, isFullScreen }) => (
 		label="Previous Slide"
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen
+			isFullScreen,
 		)} ${BUTTON_BASE_CLASS_NAME}--additional-previous`}
 	>
 		{resolvedIcon(<Icon name="ChevronLeft" />, isFullScreen)}
@@ -73,7 +73,7 @@ const DefaultAdditionalNextButton = ({ id, onClick, isFullScreen }) => (
 		label="Next Slide"
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen
+			isFullScreen,
 		)} ${BUTTON_BASE_CLASS_NAME}--additional-next`}
 	>
 		{resolvedIcon(<Icon name="ChevronLeft" />, isFullScreen)}
@@ -88,7 +88,7 @@ const DefaultExitFullScreenButton = ({ id, onClick, isFullScreen }) => (
 		label="Exit full screen mode displaying the carousel"
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen
+			isFullScreen,
 		)} ${BUTTON_BASE_CLASS_NAME}--exit-full-screen`}
 	>
 		Minimize Screen
@@ -102,7 +102,7 @@ const DefaultEnterFullScreenButton = ({ id, onClick, isFullScreen }) => (
 		label="Enter full screen mode displaying the carousel"
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen
+			isFullScreen,
 		)} ${BUTTON_BASE_CLASS_NAME}--enter-full-screen`}
 	>
 		Full Screen
@@ -116,7 +116,7 @@ const AutoplayButton = ({ id, onClick, iconNode, text, ariaLabel, isFullScreen }
 		label={ariaLabel}
 		className={`${getFullScreenClassName(
 			`${BUTTON_BASE_CLASS_NAME}`,
-			isFullScreen
+			isFullScreen,
 		)} ${BUTTON_BASE_CLASS_NAME}--toggle-auto-play`}
 	>
 		{iconNode && resolvedIcon(iconNode, isFullScreen)}
@@ -140,9 +140,9 @@ const resolvedButton = (element, id, className, onClick, isFullScreen, cloneIcon
 		}`,
 		children: cloneIcon
 			? Children.map(children, (child) =>
-					child.type === Icon ? resolvedIcon(cloneElement(child), isFullScreen) : child
+					child.type === Icon ? resolvedIcon(cloneElement(child), isFullScreen) : child,
 			  )
-			: children
+			: children,
 	});
 };
 
@@ -161,11 +161,11 @@ const insertAdsIntoItems = (carouselItems, adElement, adInterstitialClicks, slid
 			slide === itemIndex + 1 ? (
 				cloneElement(adElement, {
 					className: `${COMPONENT_CLASS_NAME}__slide`,
-					key: `ad-${itemIndex}`
+					key: `ad-${itemIndex}`,
 				})
 			) : (
 				<div className={`${COMPONENT_CLASS_NAME}__slide`} key={`ad-placeholder-${itemIndex}`} />
-			)
+			),
 		);
 	}
 
@@ -177,27 +177,30 @@ const Carousel = ({
 	additionalPreviousButton,
 	adElement,
 	adInterstitialClicks,
-	autoplayPhraseLabels,
+	autoplayPhraseLabels = {
+		start: "Start automatic slide show",
+		stop: "Stop automatic slide show",
+	},
 	children,
 	className,
-	enableAutoplay,
+	enableAutoplay = false,
 	enableFullScreen,
 	fullScreenMinimizeButton,
 	fullScreenShowButton,
 	id,
-	indicators,
-	goToSlidePhrase,
+	indicators = "none",
+	goToSlidePhrase = /* istanbul ignore next  */ (targetSlide) => `Go to slide ${targetSlide}`,
 	label,
 	nextButton,
-	pageCountPhrase,
+	pageCountPhrase = () => {},
 	previousButton,
 	showAdditionalSlideControls,
-	showLabel,
+	showLabel = false,
 	slidesToShow,
 	startAutoplayIcon,
-	startAutoplayText,
+	startAutoplayText = "Start Autoplay",
 	stopAutoplayIcon,
-	stopAutoplayText,
+	stopAutoplayText = "Stop Autoplay",
 	thumbnails,
 	...rest
 }) => {
@@ -210,7 +213,7 @@ const Carousel = ({
 	const carouselElement = useRef();
 
 	const subComponents = Object.values(Carousel).map((subcomponentType) =>
-		Children.map(children, (child) => (child?.type === subcomponentType ? child : null))
+		Children.map(children, (child) => (child?.type === subcomponentType ? child : null)),
 	);
 
 	const childItems = Children.toArray(subComponents);
@@ -230,10 +233,10 @@ const Carousel = ({
 				ansGalleryHeadline: label,
 				orderPosition: page || slide,
 				totalImages: totalSlides,
-				...options
+				...options,
 			});
 		},
-		[id, label, slide, totalSlides]
+		[id, label, slide, totalSlides],
 	);
 
 	useEffect(() => {
@@ -315,7 +318,7 @@ const Carousel = ({
 		setPosition(newPosition);
 
 		emitEvent(slide > newSlideIndex ? "galleryImagePrevious" : "galleryImageNext", newSlideIndex, {
-			autoplay: isAutoplaying
+			autoplay: isAutoplaying,
 		});
 	};
 
@@ -391,7 +394,7 @@ const Carousel = ({
 		onSwipedLeft: () => nextSlide(),
 		onSwipedRight: () => previousSlide(),
 		preventDefaultTouchmoveEvent: true,
-		trackMouse: true
+		trackMouse: true,
 	});
 
 	const resolvedNextButton = nextButton ? (
@@ -401,7 +404,7 @@ const Carousel = ({
 			`${BUTTON_BASE_CLASS_NAME}--next`,
 			nextSlide,
 			isFullScreen,
-			false
+			false,
 		)
 	) : (
 		<DefaultNextButton id={id} onClick={() => nextSlide()} isFullScreen={isFullScreen} />
@@ -414,7 +417,7 @@ const Carousel = ({
 			`${BUTTON_BASE_CLASS_NAME}--previous`,
 			previousSlide,
 			isFullScreen,
-			false
+			false,
 		)
 	) : (
 		<DefaultPreviousButton id={id} onClick={() => previousSlide()} isFullScreen={isFullScreen} />
@@ -426,7 +429,7 @@ const Carousel = ({
 			id,
 			`${BUTTON_BASE_CLASS_NAME}--additional-next`,
 			nextSlide,
-			isFullScreen
+			isFullScreen,
 		)
 	) : (
 		<DefaultAdditionalNextButton id={id} onClick={nextSlide} isFullScreen={isFullScreen} />
@@ -438,7 +441,7 @@ const Carousel = ({
 			id,
 			`${BUTTON_BASE_CLASS_NAME}--additional-previous`,
 			previousSlide,
-			isFullScreen
+			isFullScreen,
 		)
 	) : (
 		<DefaultAdditionalPreviousButton id={id} onClick={previousSlide} isFullScreen={isFullScreen} />
@@ -450,7 +453,7 @@ const Carousel = ({
 			id,
 			`${BUTTON_BASE_CLASS_NAME}--enter-full-screen`,
 			toggleFullScreen,
-			isFullScreen
+			isFullScreen,
 		)
 	) : (
 		<DefaultEnterFullScreenButton
@@ -468,7 +471,7 @@ const Carousel = ({
 			`${BUTTON_BASE_CLASS_NAME}--exit-full-screen`,
 			toggleFullScreen,
 			isFullScreen,
-			false
+			false,
 		)
 	) : (
 		<DefaultExitFullScreenButton id={id} onClick={toggleFullScreen} isFullScreen={isFullScreen} />
@@ -491,7 +494,7 @@ const Carousel = ({
 			aria-roledescription="carousel"
 			style={{
 				"--carousel-slide-width": `${100 / (slidesToShowInView || slidesToShow)}%`,
-				"--viewable-slides": slidesToShow
+				"--viewable-slides": slidesToShow,
 			}}
 			ref={carouselElement}
 		>
@@ -520,7 +523,7 @@ const Carousel = ({
 						<p
 							className={`${COMPONENT_CLASS_NAME}__image-counter-label`}
 							dangerouslySetInnerHTML={{
-								__html: pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`
+								__html: pageCountPhrase(slide, totalSlides) || `${slide} of ${totalSlides}`,
 							}}
 						/>
 					) : null}
@@ -573,20 +576,6 @@ const Carousel = ({
 Carousel.Button = Button;
 Carousel.Item = Item;
 
-Carousel.defaultProps = {
-	autoplayPhraseLabels: {
-		start: "Start automatic slide show",
-		stop: "Stop automatic slide show"
-	},
-	enableAutoplay: false,
-	indicators: "none",
-	goToSlidePhrase: /* istanbul ignore next  */ (targetSlide) => `Go to slide ${targetSlide}`,
-	pageCountPhrase: () => {},
-	showLabel: false,
-	startAutoplayText: "Start Autoplay",
-	stopAutoplayText: "Stop Autoplay"
-};
-
 Carousel.propTypes = {
 	/** Used to set a custom additional next button, a cloned Carousel.Button element */
 	additionalNextButton: PropTypes.node,
@@ -599,7 +588,7 @@ Carousel.propTypes = {
 	/** Object of phases for stop and start labels of Autoplay button */
 	autoplayPhraseLabels: PropTypes.shape({
 		start: PropTypes.string,
-		stop: PropTypes.string
+		stop: PropTypes.string,
 	}),
 	/** Class name(s) that get appended to default class name of the component */
 	className: PropTypes.string,
@@ -642,7 +631,7 @@ Carousel.propTypes = {
 	/** Text to display to stop autoplaying the slides if the button is enabled and slideshow is autoplaying */
 	stopAutoplayText: PropTypes.string,
 	/** Array of thumbnails to show in the thumbnail indicator area */
-	thumbnails: PropTypes.arrayOf(PropTypes.node)
+	thumbnails: PropTypes.arrayOf(PropTypes.node),
 };
 
 export default Carousel;

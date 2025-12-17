@@ -16,17 +16,17 @@ const Button = forwardRef((props, ref) => {
 		children,
 		className,
 		disabled,
-		fullWidth,
+		fullWidth = false,
 		href,
 		iconLeft,
 		iconRight,
-		size,
-		type,
-		variant,
+		size = "medium",
+		type = "button",
+		variant = "default",
 		...rest
 	} = props;
 
-	const defaultProps = {
+	const baseProps = {
 		...rest,
 		ref,
 		"aria-label": accessibilityLabel,
@@ -54,26 +54,19 @@ const Button = forwardRef((props, ref) => {
 
 	if (href) {
 		return (
-			<a {...defaultProps} href={href}>
+			<a {...baseProps} href={href}>
 				{accessibilityLabel && <span className="visually-hidden">{accessibilityLabel}</span>}
 				{buttonContents}
 			</a>
 		);
 	}
 	return (
-		<button {...defaultProps} type={type} aria-disabled={disabled}>
+		<button {...baseProps} type={type} aria-disabled={disabled}>
 			{accessibilityLabel && <span className="visually-hidden">{accessibilityLabel}</span>}
 			{buttonContents}
 		</button>
 	);
 });
-
-Button.defaultProps = {
-	fullWidth: false,
-	size: "medium",
-	type: "button",
-	variant: "default",
-};
 
 Button.propTypes = {
 	/** Provide an accessible name to the button - use only when the button itself does not have meaningful text content */

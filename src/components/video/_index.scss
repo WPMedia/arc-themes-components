@@ -14,6 +14,8 @@
 	// convert to vh via * 1vh
 	max-block-size: calc(var(--height) * 1vh);
 
+	@include scss.component-properties("video");
+
 	&__frame {
 		&:has(.powa-vertical) {
 			@include scss.component-properties("vertical-video-frame");
@@ -21,6 +23,4 @@
 
 		@include scss.component-properties("video-frame");
 	}
-
-	@include scss.component-properties("video");
 }

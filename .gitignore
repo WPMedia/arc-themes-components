@@ -3,3 +3,5 @@ coverage
 .npmrc
 .DS_Store
 storybook-static
+.npm-cache/
+**/.npm-cache/**
