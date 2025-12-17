@@ -1,63 +1,56 @@
 import { render, screen } from "@testing-library/react";
-import renderer from "react-test-renderer";
 
 import Price from ".";
 
 describe("Price", () => {
 	it("should render in order passed in", () => {
-		const tree = renderer
-			.create(
-				<Price>
-					<Price.Sale>$100</Price.Sale>
-					<Price.List>$200</Price.List>
-				</Price>
-			)
-			.toJSON();
+		const { container } = render(
+			<Price>
+				<Price.Sale>$100</Price.Sale>
+				<Price.List>$200</Price.List>
+			</Price>,
+		);
+		expect(container.firstChild).toMatchInlineSnapshot(`
+      <div
+        class="c-price"
+        data-testid="price"
+      >
+        <div
+          class="c-price__sale"
+        >
+          $100
+        </div>
+        <div
+          class="c-price__list"
+        >
+          $200
+        </div>
+      </div>
+    `);
 
-		expect(tree).toMatchInlineSnapshot(`
-		<div
-		  className="c-price"
-		  data-testid="price"
-		>
-		  <div
-		    className="c-price__sale"
-		  >
-		    $100
-		  </div>
-		  <div
-		    className="c-price__list"
-		  >
-		    $200
-		  </div>
-		</div>
-	`);
-
-		const treeAlt = renderer
-			.create(
-				<Price>
-					<Price.List>$200</Price.List>
-					<Price.Sale>$100</Price.Sale>
-				</Price>
-			)
-			.toJSON();
-
-		expect(treeAlt).toMatchInlineSnapshot(`
-		<div
-		  className="c-price"
-		  data-testid="price"
-		>
-		  <div
-		    className="c-price__list"
-		  >
-		    $200
-		  </div>
-		  <div
-		    className="c-price__sale"
-		  >
-		    $100
-		  </div>
-		</div>
-	`);
+		const { container: containerAlt } = render(
+			<Price>
+				<Price.List>$200</Price.List>
+				<Price.Sale>$100</Price.Sale>
+			</Price>,
+		);
+		expect(containerAlt.firstChild).toMatchInlineSnapshot(`
+      <div
+        class="c-price"
+        data-testid="price"
+      >
+        <div
+          class="c-price__list"
+        >
+          $200
+        </div>
+        <div
+          class="c-price__sale"
+        >
+          $100
+        </div>
+      </div>
+    `);
 	});
 
 	it("should render sub components", () => {
@@ -65,7 +58,7 @@ describe("Price", () => {
 			<Price>
 				<Price.Sale>$100</Price.Sale>
 				<Price.List>$200</Price.List>
-			</Price>
+			</Price>,
 		);
 		expect(screen.queryByText("$100")).not.toBeNull();
 	});
@@ -76,7 +69,7 @@ describe("Price", () => {
 				<Price.Sale>$100</Price.Sale>
 				<Price.List>$200</Price.List>
 				<div>Other</div>
-			</Price>
+			</Price>,
 		);
 		expect(screen.queryByText("Other")).toBeNull();
 	});
@@ -87,7 +80,7 @@ describe("Price", () => {
 		render(
 			<Price className={ADDITIONAL_CLASSES}>
 				<div />
-			</Price>
+			</Price>,
 		);
 		const element = screen.getByTestId("price");
 		expect(element).toHaveClass(ADDITIONAL_CLASSES);
@@ -100,7 +93,7 @@ describe("Price", () => {
 		render(
 			<Price>
 				<Price.Sale className={ADDITIONAL_CLASSES}>$100</Price.Sale>
-			</Price>
+			</Price>,
 		);
 		const element = screen.queryByText("$100");
 		expect(element).toHaveClass(ADDITIONAL_CLASSES);
@@ -113,7 +106,7 @@ describe("Price", () => {
 		render(
 			<Price>
 				<Price.List className={ADDITIONAL_CLASSES}>$100</Price.List>
-			</Price>
+			</Price>,
 		);
 		const element = screen.queryByText("$100");
 		expect(element).toHaveClass(ADDITIONAL_CLASSES);

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const COMPONENT_CLASS_NAME = "c-separator";
 
-const Separator = ({ className, separatorString, ...rest }) => {
+const Separator = ({ className, separatorString = "", ...rest }) => {
 	const isCustomSeparator = separatorString !== "";
 	const classNames = [COMPONENT_CLASS_NAME, className]
 		.filter((classString) => classString)
@@ -26,10 +26,6 @@ Separator.propTypes = {
 	className: PropTypes.string,
 	/** Custom separator string */
 	separatorString: PropTypes.string,
-};
-
-Separator.defaultProps = {
-	separatorString: "",
 };
 
 export default Separator;

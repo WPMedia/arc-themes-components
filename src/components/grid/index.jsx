@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const COMPONENT_CLASS_NAME = "c-grid";
 
-const Grid = ({ as, children, className, ...rest }) => {
+const Grid = ({ as = "div", children, className, ...rest }) => {
 	const Element = `${as}`;
 	return (
 		<Element
@@ -12,10 +12,6 @@ const Grid = ({ as, children, className, ...rest }) => {
 			{children}
 		</Element>
 	);
-};
-
-Grid.defaultProps = {
-	as: "div",
 };
 
 Grid.propTypes = {

@@ -37,22 +37,22 @@ const getDerivedInputState = ({ valid, inputState }) => {
 const Input = ({
 	autoComplete,
 	className,
-	defaultValue,
-	hidden,
+	defaultValue = "",
+	hidden = false,
 	inputState,
 	label,
 	name,
-	onChange,
+	onChange = () => {},
 	checked,
-	optionLabelKey,
+	optionLabelKey = "label",
 	options,
-	optionValueKey,
+	optionValueKey = "value",
 	placeholder,
-	required,
-	showDefaultError,
-	size,
+	required = false,
+	showDefaultError = false,
+	size = INPUT_SIZE.LARGE,
 	tip,
-	type,
+	type = FIELD_TYPES.TEXT,
 	validationErrorMessage,
 	validationPattern,
 }) => {
@@ -106,7 +106,7 @@ const Input = ({
 		`${COMPONENT_CLASS_NAME}--${size}`,
 		// hidden overrides input state
 		hidden ? `${COMPONENT_CLASS_NAME}--hidden` : `${COMPONENT_CLASS_NAME}--${derivedInputState}`,
-		type === FIELD_TYPES.RADIO ? `${COMPONENT_CLASS_NAME}__radio` : undefined
+		type === FIELD_TYPES.RADIO ? `${COMPONENT_CLASS_NAME}__radio` : undefined,
 	]
 		.filter((classString) => classString)
 		.join(" ");
@@ -205,18 +205,6 @@ Input.propTypes = {
 	validationErrorMessage: PropTypes.string,
 	/** Validation Pattern is a regex pattern for handling errors */
 	validationPattern: PropTypes.string,
-};
-
-Input.defaultProps = {
-	defaultValue: "",
-	hidden: false,
-	onChange: () => {},
-	optionLabelKey: "label",
-	optionValueKey: "value",
-	required: false,
-	showDefaultError: false,
-	size: INPUT_SIZE.LARGE,
-	type: FIELD_TYPES.TEXT,
 };
 
 export default Input;

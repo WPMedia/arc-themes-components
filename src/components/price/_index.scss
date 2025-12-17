@@ -2,6 +2,7 @@
 
 .c-price {
 	display: flex;
+	@include scss.component-properties("price");
 
 	&__list {
 		@include scss.component-properties("price-list");
@@ -10,6 +11,4 @@
 	&__sale {
 		@include scss.component-properties("price-sale");
 	}
-
-	@include scss.component-properties("price");
 }

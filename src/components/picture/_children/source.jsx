@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import formatSrc from "../../../utils/format-image-resizer-src";
 
-const Source = ({ height, media, resizedOptions, resizerURL, src, width, ...rest }) => {
+const Source = ({ height, media, resizedOptions = {}, resizerURL = "", src, width, ...rest }) => {
 	if (media && src) {
 		return (
 			<source
@@ -18,11 +18,6 @@ const Source = ({ height, media, resizedOptions, resizerURL, src, width, ...rest
 		);
 	}
 	return null;
-};
-
-Source.defaultProps = {
-	resizedOptions: {},
-	resizerURL: "",
 };
 
 Source.propTypes = {
