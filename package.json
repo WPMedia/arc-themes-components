@@ -95,8 +95,6 @@
     "prop-types": "^15.8.1",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "react-google-recaptcha": "^3.1.0",
-    "react-google-recaptcha-v3": "1.11.0",
     "react-test-renderer": "19.2.3",
     "sass": "1.85.1",
     "sass-loader": "^13.3.2",
@@ -119,7 +117,7 @@
     "lodash.get": "^4.4.2",
     "node-fetch": "^2.7.0",
     "react-google-recaptcha": "^3.1.0",
-    "react-google-recaptcha-v3": "^1.11.0",
+    "react-google-recaptcha-v3": "1.11.0",
     "react-oembed-container": "^1.0.1",
     "react-swipeable": "^7.0.1"
   },
