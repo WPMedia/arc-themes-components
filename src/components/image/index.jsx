@@ -36,7 +36,7 @@ const Image = ({
 		console.error("No auth token provided for resizer");
 
 		return (
-			<img alt={alt} className={componentClassNames} src={src} width={width} height={height} />
+			<img alt={alt} className={componentClassNames} loading={loading} src={src} width={width} height={height} />
 		);
 	}
 
