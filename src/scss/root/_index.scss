@@ -1,5 +1,3 @@
-/* stylelint-disable scss/selector-no-redundant-nesting-selector */
-
 @use "sass:list";
 @use "sass:map";
 @use "sass:meta";
@@ -110,10 +108,7 @@ $component-map: get-all-component-definitions($tokens, $breakpoints);
 					@if meta.type-of($value) == map {
 						@each $bName, $bValue in $value {
 							$new-value: replace-token-reference($bValue);
-
-							& {
-								--c-#{$name}-#{$bName}: #{maintain-quotes($new-value)};
-							}
+							--c-#{$name}-#{$bName}: #{maintain-quotes($new-value)};
 						}
 					}
 				}
@@ -123,13 +118,10 @@ $component-map: get-all-component-definitions($tokens, $breakpoints);
 }
 
 @mixin block-properties($blockName) {
-	// All declarations must be within a style rule and before any nested rules
-	& {
-		@if map.has-key($tokens, "default", "blocks", $blockName) {
-			@each $name, $value in map.get($tokens, "default", "blocks", $blockName) {
-				@if meta.type-of($value) != map {
-					#{$name}: block-var($blockName, $name);
-				}
+	@if map.has-key($tokens, "default", "blocks", $blockName) {
+		@each $name, $value in map.get($tokens, "default", "blocks", $blockName) {
+			@if meta.type-of($value) != map {
+				#{$name}: block-var($blockName, $name);
 			}
 		}
 	}
