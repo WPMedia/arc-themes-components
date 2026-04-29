@@ -31,6 +31,8 @@
 		cursor: pointer;
 		pointer-events: auto;
 
+		@include scss.component-properties("carousel-button");
+
 		&--additional-next {
 			@include scss.component-properties("carousel-button-additional-next");
 		}
@@ -48,11 +50,11 @@
 		}
 
 		&--fullscreen {
+			@include scss.component-properties("carousel-button-full-screen");
+
 			&:hover {
 				@include scss.component-properties("carousel-button-full-screen-hover");
 			}
-
-			@include scss.component-properties("carousel-button-full-screen");
 		}
 
 		&--next {
@@ -66,8 +68,6 @@
 		&--toggle-auto-play {
 			@include scss.component-properties("carousel-button-toggle-auto-play");
 		}
-
-		@include scss.component-properties("carousel-button");
 	}
 
 	&__controls {
@@ -82,11 +82,11 @@
 	}
 
 	&__icon {
+		@include scss.component-properties("carousel-icon");
+
 		&--fullscreen {
 			@include scss.component-properties("carousel-icon-full-screen");
 		}
-
-		@include scss.component-properties("carousel-icon");
 	}
 
 	&__image-counter-label {
@@ -125,11 +125,11 @@
 		display: flex;
 		align-items: center;
 
+		@include scss.component-properties("carousel-counter-controls-container");
+
 		&--full-screen {
 			@include scss.component-properties("carousel-counter-controls-container-full-screen");
 		}
-
-		@include scss.component-properties("carousel-counter-controls-container");
 	}
 
 	&__expand-autoplay-container {
@@ -151,10 +151,11 @@
 	}
 
 	&__indicator-dot {
+		@include scss.component-properties("carousel-indicator-dot");
+
 		&--active {
 			@include scss.component-properties("carousel-indicator-dot-active");
 		}
-		@include scss.component-properties("carousel-indicator-dot");
 	}
 
 	&__indicator-thumbnails-container {
@@ -163,10 +164,11 @@
 	}
 
 	&__indicator-thumbnail {
+		@include scss.component-properties("carousel-indicator-thumbnail");
+
 		&--active {
 			@include scss.component-properties("carousel-indicator-thumbnail-active");
 		}
-		@include scss.component-properties("carousel-indicator-thumbnail");
 	}
 
 	&:fullscreen {

@@ -16,6 +16,8 @@
 	}
 
 	&--with-icon {
+		@include scss.component-properties("details-with-icon");
+
 		summary {
 			align-items: center;
 			display: flex;
@@ -46,8 +48,6 @@
 		&[open] .c-details__summary-icon {
 			@include scss.component-properties("details-with-icon-open-summary-icon");
 		}
-
-		@include scss.component-properties("details-with-icon");
 	}
 
 	&[open] {

@@ -17,10 +17,10 @@
 	@include scss.component-properties("video");
 
 	&__frame {
+		@include scss.component-properties("video-frame");
+
 		&:has(.powa-vertical) {
 			@include scss.component-properties("vertical-video-frame");
 		}
-
-		@include scss.component-properties("video-frame");
 	}
 }
