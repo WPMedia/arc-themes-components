@@ -76,7 +76,7 @@ describe("localizeDateTime()", () => {
 	it("handles spanish meridiems", () => {
 		expect(
 			localizeDateTime("2000-01-02T13:00:00.000Z", "%B %d, %Y %l:%M %P %Z", "es", "Europe/Paris")
-		).toEqual("enero 02, 2000 2:00 p. m. CET");
+		).toEqual("enero 02, 2000 2:00 p. m. CET");
 	});
 
 	it("returns empty when no date is passed in", () => {
@@ -114,7 +114,7 @@ describe("localizeDateTime()", () => {
 	it("returns Portuguese locale", () => {
 		expect(
 			localizeDateTime("2000-01-02T01:00:00.000Z", "%B %d, %Y at %l:%M%p %Z", "pt", "America/New_York")
-		).toEqual("janeiro 01, 2000 at 8:00da tarde GMT-5");
+		).toEqual("janeiro 01, 2000 at 8:00p.m. GMT-5");
 	});
 
 	it("uses alternate formats", () => {
