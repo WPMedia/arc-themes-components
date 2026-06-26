@@ -121,12 +121,10 @@
     "react-oembed-container": "^1.0.1",
     "react-swipeable": "^7.0.1"
   },
-  "peerDependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
   "overrides": {
-    "react": "$react",
-    "react-dom": "$react-dom"
+    "react-oembed-container": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
   }
 }
