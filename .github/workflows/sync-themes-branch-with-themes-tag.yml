@@ -1,6 +1,9 @@
 name: Publish to themes target tag on merge to main
 
 on:
+  # Allow manual publishing of the current themesVersion (e.g. to re-run after a
+  # failed publish, since workflow-only changes don't match the paths filter below).
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -25,9 +28,6 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Pull tags
-        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
       - name: Read themesVersion from package.json
         id: themes-version
