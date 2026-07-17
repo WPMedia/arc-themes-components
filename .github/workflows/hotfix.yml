@@ -27,9 +27,6 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Pull tags
-        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-
       - name: Extract version from branch name
         id: hotfix-version
         run: |
