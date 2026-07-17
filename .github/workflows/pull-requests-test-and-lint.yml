@@ -4,6 +4,8 @@ on:
   pull_request:
     # synchronize commit(s) pushed to the pull request
     types: [synchronize, opened]
+    branches:
+      - main
 
 jobs:
   ensure_minimum_test_coverage_and_lint_all_files:
@@ -11,20 +13,20 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           # 0 indicates all history for all branches and tags
           fetch-depth: 0
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           registry-url: "https://npm.pkg.github.com"
           scope: "@arc-publishing"
 
       - name: Cache Node files
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: cache
         with:
           path: node_modules

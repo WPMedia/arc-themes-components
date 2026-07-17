@@ -1,0 +1,71 @@
+name: Publish hotfix for previous themes version
+# Usage:
+#   1. Find the tag for the version to hotfix: git tag -l "themes-v*"
+#   2. Create a hotfix branch from that tag: git checkout -b hotfix/4.0.1 themes-v4.0.1
+#   3. Make your fix, commit, and push the branch
+#   4. This workflow runs automatically and publishes under the original dist-tag
+
+on:
+  push:
+    branches:
+      - "hotfix/[0-9]+.[0-9]+"
+      - "hotfix/[0-9]+.[0-9]+.[0-9]+"
+    paths:
+      - "**.js"
+      - "**.jsx"
+      - "**.json"
+      - "**.scss"
+      - "**/README.md"
+
+jobs:
+  publish-hotfix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull tags
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
+      - name: Extract version from branch name
+        id: hotfix-version
+        run: |
+          # Branch name is hotfix/X.Y.Z — extract the version part
+          VERSION="${GITHUB_REF_NAME#hotfix/}"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "dist_tag=arc-themes-release-version-${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "preid=arc-themes-release-version-${VERSION//./-}" >> "$GITHUB_OUTPUT"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          registry-url: "https://npm.pkg.github.com"
+
+      - name: Cache Node files
+        uses: actions/cache@v4
+        id: cache
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Clean install (CI) dependencies if lockfile (above) changed
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run all tests
+        run: npm run test
+
+      - name: Publish hotfix to target tag
+        run: |
+          BASE=$(node -p "require('./package.json').version.split('-')[0]")
+          NEW_VERSION="${BASE}-${{ steps.hotfix-version.outputs.preid }}.${GITHUB_RUN_NUMBER}"
+          npm version "$NEW_VERSION" --no-git-tag-version --allow-same-version
+          npm publish --tag ${{ steps.hotfix-version.outputs.dist_tag }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
