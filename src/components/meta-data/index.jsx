@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 import { RESIZER_TOKEN_VERSION, ENVIRONMENT } from "fusion:environment";
 import { useContent } from "fusion:content";
 import getProperties from "fusion:properties";
-import { URL } from "url";
 import formatURL from "../../utils/format-url";
 import formatSrc from "../../utils/format-image-resizer-src";
 import getImageFromANS from "../../utils/get-image-from-ans";
